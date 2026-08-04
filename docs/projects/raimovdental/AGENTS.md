@@ -37,7 +37,7 @@ Founder decisions may be recorded in `docs/founder-notes/` when explicitly autho
 ## Cursor Agents satellite (DEC-783)
 
 - Agents GitHub project: `zaomir/raimovdental` (local `/var/www/raimovdental`)
-- Production remains this monorepo — sync with `bash scripts/raimov/sync-from-agents-repo.sh --apply`
+- Bidirectional sync (DEC-784): `bash scripts/raimov/sync-agents-bidirectional.sh --apply`
 - Do not deploy from the Agents satellite
 
 ## Commands

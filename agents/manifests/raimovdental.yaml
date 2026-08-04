@@ -50,8 +50,9 @@ test_heuristic:
 
 commands:
   sync: cd /var/www/grainee-v2 && git pull --ff-only origin main
-  sync_from_agents: bash scripts/raimov/sync-from-agents-repo.sh --apply
-  seed_agents: bash scripts/raimov/seed-agents-repo.sh --apply
+  sync_from_agents: bash scripts/raimov/sync-agents-bidirectional.sh --apply
+  seed_agents: bash scripts/raimov/sync-agents-bidirectional.sh --apply
+  sync_bidirectional: bash scripts/raimov/sync-agents-bidirectional.sh --apply --commit --push
   build: node scripts/build-raimovdental.mjs
   deploy: DEPLOY_ASSUME_YES=1 bash scripts/deploy-static-all.sh
   smoke: curl -fsS -o /dev/null -w '%{http_code}' https://raimovdental.com/
@@ -61,8 +62,8 @@ deploy_target: raimovdental
 
 agents_satellite_repo: zaomir/raimovdental
 agents_satellite_path: /var/www/raimovdental
-agents_sync: bash scripts/raimov/sync-from-agents-repo.sh --apply --commit --push
-agents_seed: bash scripts/raimov/seed-agents-repo.sh --apply --push
+agents_sync: bash scripts/raimov/sync-agents-bidirectional.sh --apply --commit --push
+agents_seed: bash scripts/raimov/sync-agents-bidirectional.sh --apply --commit --push
 
 
 definition_of_done:

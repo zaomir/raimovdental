@@ -228,8 +228,7 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 
 - **Agents project (Mobile/Cloud):** [`zaomir/raimovdental`](https://github.com/zaomir/raimovdental) — open this repo in Cursor Agents for clinic-only chats.
 - **Production SSOT / deploy:** this monorepo (`zaomir/grainee-v2`).
-- **Sync into monorepo:** `bash scripts/raimov/sync-from-agents-repo.sh --apply --commit --push`
-- **Re-seed Agents from monorepo:** `bash scripts/raimov/seed-agents-repo.sh --apply --push`
+- **Bidirectional sync (DEC-784):** `bash scripts/raimov/sync-agents-bidirectional.sh --apply --commit --push` (also auto every 10 min on VDS)
 - Desktop IDE isolation: `raimovdental.code-workspace`
 - Ops note: [`docs/raimov/AGENTS_SATELLITE.md`](docs/raimov/AGENTS_SATELLITE.md)
 
