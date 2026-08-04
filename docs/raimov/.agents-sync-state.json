@@ -55,7 +55,8 @@
     "docs/projects/healthcare-ecosystem/technology/README.md": "d59c75e0ce251860e81a16f5b379abb63c9d5f38b38bec91c4e5b2f019c6d253",
     "docs/projects/raimovdental/AGENTS.md": "d1885c3844ecfc8b124358946dbed5d372014994450ee507da8e2f1c80d904b7",
     "docs/projects/raimovdental/ROUTER.md": "e85af4d123708b695a9a981c0d65a88752d2a8223188670c1fa9e83fe47afd14",
-    "docs/projects/raimovdental/tilda/README.md": "02e153e3fe36788f13f7c328204c860e41692f1b863431f6298174c44eb82537",
+    "docs/projects/raimovdental/tilda/PRICE_SECTION_TILDA_AI_PROMPT.md": "4b29359e91fe573c2bf790948525fbe99ecf504181d9afec86f1b917be3b7a3d",
+    "docs/projects/raimovdental/tilda/README.md": "c48380e917984880a8b641a982e20922104f49f277735cf176dc3b330007e66f",
     "docs/projects/raimovdental/tilda/homepage-zero-block.html": "4f78a56f61af9fb018d25555e404d49a61840e077c08f5d2a93a0eec53a26010",
     "docs/projects/raimovdental/tilda/price-table-zero-block.html": "271dc1c9b408fa21e1afdcdc329245f146bd0e7f957e845a4e1f343f3217f622",
     "docs/raimov/AGENTS_SATELLITE.md": "ad1ba242f6920bb870881883b7a2c97bcfffbd5aec2db80e524942902efe8319",
@@ -412,6 +413,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-04T20:40:04Z",
+  "updated_at_utc": "2026-08-04T20:50:06Z",
   "version": 1
 }

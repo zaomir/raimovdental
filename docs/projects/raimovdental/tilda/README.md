@@ -6,6 +6,7 @@
 |------|---------|
 | `homepage-zero-block.html` | Канон главной (HTML+CSS+JS) для вставки в Tilda |
 | `price-table-zero-block.html` | Таблица прайса для `/price` (направление · услуга · цена) |
+| `PRICE_SECTION_TILDA_AI_PROMPT.md` | Промпт для ИИ Tilda: 2 категории врачей + подписка (0 / −20%) |
 
 ## Прайс `/price` (2026-08-04)
 
