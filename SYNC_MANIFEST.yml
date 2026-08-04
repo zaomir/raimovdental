@@ -2,7 +2,7 @@
 version: 1
 source_repo: zaomir/raimovdental
 target_repo: zaomir/grainee-v2
-direction: agents_to_monorepo
+direction: bidirectional  # DEC-784
 trees:
   - site-raimovdental
   - research/raimov-profile

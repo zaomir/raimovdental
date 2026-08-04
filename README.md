@@ -11,20 +11,15 @@ Deploy, DNS, forms and live site always ship from **grainee-v2** `main`.
 Cursor Agents (this repo)  --sync-->  grainee-v2  --deploy-->  raimovdental.com
 ```
 
-One-way sync script (runs on VDS inside grainee-v2):
+Bidirectional sync (DEC-784) — runs on VDS (cron every 10 min) or manually:
 
 ```bash
 cd /var/www/grainee-v2
-bash scripts/raimov/sync-from-agents-repo.sh          # dry preview
-bash scripts/raimov/sync-from-agents-repo.sh --apply  # copy into monorepo
-bash scripts/raimov/sync-from-agents-repo.sh --apply --commit --push
+bash scripts/raimov/sync-agents-bidirectional.sh                 # dry-run
+bash scripts/raimov/sync-agents-bidirectional.sh --apply --commit --push
 ```
 
-Re-seed this satellite from monorepo (when grainee is ahead):
-
-```bash
-bash scripts/raimov/seed-agents-repo.sh --apply --push
-```
+Edits in **either** repo sync to the other. Deploy still only from grainee-v2.
 
 ## Layout
 
