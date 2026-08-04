@@ -1,0 +1,887 @@
+{
+  "language": "en",
+  "home": {
+    "meta": {
+      "title": "RAIMOV — dentistry, system and academy",
+      "description": "Atabek Raimov's ecosystem: RAIMOV DENTAL, Raimov System, Raimov Academy and comprehensive dentistry in Bishkek."
+    },
+    "hero": {
+      "eyebrow": "The Atabek Raimov ecosystem",
+      "title": "Complex dentistry becomes easier to understand when every decision belongs to one system.",
+      "lead": "RAIMOV connects a clinical practice, a treatment-planning methodology, professional education and a developing community around one goal: turning disconnected procedures into an explainable and manageable treatment pathway.",
+      "primaryCta": {
+        "label": "Discuss my case",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Explore the ecosystem",
+        "href": "/en/ecosystem/"
+      }
+    },
+    "ecosystem": {
+      "eyebrow": "One logic — four directions",
+      "title": "More than a clinic: an environment where the method is developed, tested and taught.",
+      "lead": "Each part has a distinct role, but none of them is intended to operate in isolation.",
+      "items": [
+        {
+          "kicker": "01",
+          "title": "RAIMOV DENTAL",
+          "text": "The flagship clinic and clinical foundation of the ecosystem. Complex requests are translated into diagnostics, a master plan, treatment sequence and follow-up.",
+          "href": "/en/about/"
+        },
+        {
+          "kicker": "02",
+          "title": "Raimov System",
+          "text": "A methodology for comprehensive planning that connects aesthetics, function, orthodontics, implants, communication and decision control.",
+          "href": "/en/raimov-system/"
+        },
+        {
+          "kicker": "03",
+          "title": "Raimov Academy",
+          "text": "The educational layer for dentists. Its purpose is to teach case thinking, planning and patient communication rather than a collection of isolated techniques.",
+          "href": "/en/academy/"
+        },
+        {
+          "kicker": "04",
+          "title": "Professional community",
+          "text": "The next layer of development: clinicians and practices using a shared language for diagnostics, documentation, planning and case review.",
+          "href": "/en/ecosystem/"
+        }
+      ]
+    },
+    "audiences": {
+      "title": "Two entry points into one ecosystem",
+      "items": [
+        {
+          "title": "For patients",
+          "text": "When opinions conflict, treatment has become fragmented or a full reconstruction is being considered, another price list is not enough. The patient needs a clear route.",
+          "links": [
+            {
+              "label": "Start with diagnostics",
+              "href": "/en/comprehensive-diagnostics/"
+            },
+            {
+              "label": "Request a second opinion",
+              "href": "/en/comprehensive-diagnostics/#lead-form"
+            },
+            {
+              "label": "Choose a clinical direction",
+              "href": "#patient-services"
+            }
+          ]
+        },
+        {
+          "title": "For dentists and practice leaders",
+          "text": "When individual skills are already present, but the team lacks a system for diagnostics, case conferences, plan presentation and quality control.",
+          "links": [
+            {
+              "label": "Raimov Academy",
+              "href": "/en/academy/"
+            },
+            {
+              "label": "Explore Raimov System",
+              "href": "/en/raimov-system/"
+            },
+            {
+              "label": "Ecosystem architecture",
+              "href": "/en/ecosystem/"
+            }
+          ]
+        }
+      ]
+    },
+    "proof": {
+      "eyebrow": "Evidence discipline, not promises",
+      "title": "What the ecosystem must be able to demonstrate",
+      "lead": "Premium dentistry is built less on grand claims than on the ability to show the reasoning behind important decisions.",
+      "items": [
+        {
+          "kicker": "A",
+          "title": "Starting point",
+          "text": "What concerned the patient, which constraints were identified and why the case could not be reduced to one procedure."
+        },
+        {
+          "kicker": "B",
+          "title": "Planning logic",
+          "text": "Why stages were placed in this order, which alternatives were considered and where compromises exist."
+        },
+        {
+          "kicker": "C",
+          "title": "Quality gates",
+          "text": "What is checked before the next stage: tissues, function, bite, aesthetics and patient adaptation."
+        },
+        {
+          "kicker": "D",
+          "title": "Follow-up",
+          "text": "What happens after active treatment and how the result is supported over time."
+        }
+      ]
+    },
+    "academy": {
+      "eyebrow": "Professional education",
+      "title": "Raimov Academy: learning to manage a complex case, not simply perform a procedure",
+      "lead": "The Academy connects clinical reasoning, planning, communication and treatment economics. The clinic supplies real questions, the system supplies a language for decisions, and education transfers that logic to other teams.",
+      "cta": "Open Raimov Academy"
+    }
+  },
+  "pages": {
+    "doctor": {
+      "eyebrow": "The public face and author of the ecosystem",
+      "title": "Atabek Raimov: building a system around the complex case",
+      "lead": "Atabek Raimov's role extends beyond a single procedure. It is to connect clinical reasoning, result design, team coordination and clear communication with the patient.",
+      "thesis": "The personal brand is not a decorative layer. It represents public accountability for the method, its standards and the direction of RAIMOV.",
+      "meta": {
+        "title": "Atabek Raimov — clinician and author of the RAIMOV ecosystem",
+        "description": "Atabek Raimov's role as a clinical integrator, author of Raimov System and leader of an educational ecosystem."
+      },
+      "sections": [
+        {
+          "id": "official-role-clinic-confirmed",
+          "type": "narrative",
+          "title": "Official role",
+          "body": [
+            "Orthodontist-gnathologist, functional dentist · founder of RAIMOV DENTAL. Specializations: orthodontics, gnathology, functional dentistry."
+          ]
+        },
+        {
+          "type": "narrative",
+          "title": "From procedure provider to clinical integrator",
+          "body": [
+            "Complex dentistry is not solved by performing one stage well. The clinician must understand dependencies between specialties and anticipate how today's decision changes tomorrow's options.",
+            "A clinical integrator defines the overall problem, brings specialists into one discussion, protects the logic of the master plan and explains why decisions are made in a particular order."
+          ]
+        },
+        {
+          "type": "index",
+          "title": "Four roles within the ecosystem",
+          "items": [
+            {
+              "kicker": "01",
+              "title": "Clinician",
+              "text": "Frames complex aesthetic and functional requests and helps identify the underlying clinical task."
+            },
+            {
+              "kicker": "02",
+              "title": "Plan architect",
+              "text": "Connects diagnostics, treatment sequence, the team and quality gates into one pathway."
+            },
+            {
+              "kicker": "03",
+              "title": "Author of Raimov System",
+              "text": "Formalises the approach so that quality is supported by reproducible logic, not only individual intuition."
+            },
+            {
+              "kicker": "04",
+              "title": "Educator",
+              "text": "Transfers the reasoning model to clinicians and supports a culture of transparent case discussion."
+            }
+          ]
+        },
+        {
+          "type": "manifesto",
+          "title": "A clinician's position in front of the patient",
+          "body": [
+            "Do not promise an outcome before diagnostics.",
+            "Do not sell a procedure when the problem requires a different order of action.",
+            "Present alternatives and trade-offs rather than replacing the patient's decision.",
+            "Document key decisions and preserve continuity between clinicians."
+          ]
+        },
+        {
+          "type": "split",
+          "title": "The personal brand works in two directions",
+          "items": [
+            {
+              "title": "For the patient",
+              "text": "It reduces uncertainty: who protects the overall logic, how decisions are made and who remains accountable when the plan changes."
+            },
+            {
+              "title": "For the clinician",
+              "text": "It provides a language and framework for case analysis, team education and professional development."
+            }
+          ]
+        },
+        {
+          "type": "links",
+          "title": "The ecosystem around the clinician",
+          "items": [
+            {
+              "title": "RAIMOV DENTAL",
+              "text": "Clinical practice and patient care.",
+              "href": "/en/about/"
+            },
+            {
+              "title": "Raimov System",
+              "text": "A formal planning framework.",
+              "href": "/en/raimov-system/"
+            },
+            {
+              "title": "Raimov Academy",
+              "text": "Transferring the method to clinicians.",
+              "href": "/en/academy/"
+            },
+            {
+              "title": "RAIMOV ecosystem",
+              "text": "The relationship between practice, method, education and community.",
+              "href": "/en/ecosystem/"
+            }
+          ]
+        },
+        {
+          "id": "speaking-demmed",
+          "type": "narrative",
+          "title": "Public speaking",
+          "body": [
+            "Speaker at the DemMed Dental Congress (Osh 16 Mar 2024 / Bishkek 30 Mar 2024), topic: “Microimplants in orthodontics (miniscrews)”."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Discuss my case",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Explore Raimov System",
+        "href": "/en/raimov-system/"
+      },
+      "showPatientForm": true
+    },
+    "system": {
+      "eyebrow": "The methodology of the ecosystem",
+      "title": "Raimov System — an operating system for complex dentistry",
+      "lead": "It is not the name of one procedure and not a marketing wrapper for a standard appointment. It describes how a team collects information, makes decisions, explains the plan and controls movement between stages.",
+      "thesis": "The system becomes valuable when quality depends on the coordination of many decisions over time.",
+      "meta": {
+        "title": "Raimov System — comprehensive treatment planning",
+        "description": "Diagnostics, interdisciplinary review, master planning, staged budgets, quality gates and follow-up."
+      },
+      "sections": [
+        {
+          "type": "split",
+          "title": "Three layers of the system",
+          "items": [
+            {
+              "title": "Clinical",
+              "text": "Diagnostics, problem definition, scenario comparison, treatment sequence and outcome control."
+            },
+            {
+              "title": "Team",
+              "text": "Roles, information transfer, case conferences, accountability and one master plan."
+            },
+            {
+              "title": "Patient",
+              "text": "Clear explanations, informed choice, a staged budget and long-term follow-up."
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "title": "Eight stages of Raimov System",
+          "items": [
+            {
+              "title": "Data collection",
+              "text": "The starting point, concerns, constraints and risks are recorded."
+            },
+            {
+              "title": "Problem definition",
+              "text": "The team defines the problem the plan must solve, not the procedure that is easiest to deliver."
+            },
+            {
+              "title": "Outcome design",
+              "text": "Target function and aesthetics are defined well enough to compare possible routes."
+            },
+            {
+              "title": "Interdisciplinary review",
+              "text": "Clinicians test dependencies and contradictions between their stages."
+            },
+            {
+              "title": "Master plan",
+              "text": "Sequence, quality gates and acceptable alternatives are documented."
+            },
+            {
+              "title": "Staged budget",
+              "text": "Cost is linked to decisions and stages rather than one abstract total."
+            },
+            {
+              "title": "Quality control",
+              "text": "The current stage is checked before the team moves forward."
+            },
+            {
+              "title": "Follow-up",
+              "text": "The system continues through maintenance and monitoring after active treatment."
+            }
+          ]
+        },
+        {
+          "type": "index",
+          "title": "What the system produces",
+          "items": [
+            {
+              "kicker": "A",
+              "title": "Problem map",
+              "text": "A map of diagnoses and the dependencies between them."
+            },
+            {
+              "kicker": "B",
+              "title": "Treatment scenarios",
+              "text": "A primary route, alternatives and a clear description of trade-offs."
+            },
+            {
+              "kicker": "C",
+              "title": "Sequence",
+              "text": "Stages, responsible clinicians and conditions for progression."
+            },
+            {
+              "kicker": "D",
+              "title": "Communication plan",
+              "text": "What the patient needs to understand and decide at each major point."
+            }
+          ]
+        },
+        {
+          "type": "manifesto",
+          "title": "What Raimov System is not",
+          "body": [
+            "It does not guarantee the same outcome for every patient.",
+            "It does not replace the competence of an individual clinician.",
+            "It does not turn a complex case into an automatic template.",
+            "It creates a discipline in which individual decisions become explainable and reviewable."
+          ]
+        },
+        {
+          "type": "links",
+          "title": "How the system is transferred",
+          "items": [
+            {
+              "title": "Through the clinic",
+              "text": "The method is tested in real clinical processes.",
+              "href": "/en/about/"
+            },
+            {
+              "title": "Through the Academy",
+              "text": "Clinicians learn to apply the logic to their own cases.",
+              "href": "/en/academy/"
+            },
+            {
+              "title": "Through the community",
+              "text": "Case review and feedback develop a shared standard of reasoning.",
+              "href": "/en/ecosystem/"
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Start with diagnostics",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Raimov Academy",
+        "href": "/en/academy/"
+      },
+      "showPatientForm": true
+    },
+    "ecosystem": {
+      "eyebrow": "RAIMOV strategy",
+      "title": "An ecosystem where clinical experience becomes a method, education and a standard",
+      "lead": "RAIMOV is not designed as a collection of disconnected brands. The clinic creates practical experience, Raimov System formalises it, the Academy teaches it and a professional community returns new questions to the system.",
+      "thesis": "Practice → method → education → application → feedback → better practice.",
+      "meta": {
+        "title": "The RAIMOV ecosystem: clinic, system and academy",
+        "description": "The architecture of Atabek Raimov's ecosystem: RAIMOV DENTAL, Raimov System, Academy and a developing professional community."
+      },
+      "sections": [
+        {
+          "type": "index",
+          "title": "Ecosystem architecture",
+          "items": [
+            {
+              "kicker": "01",
+              "title": "RAIMOV DENTAL",
+              "text": "The flagship clinical centre: patient care, complex planning, documentation and process testing.",
+              "href": "/en/about/"
+            },
+            {
+              "kicker": "02",
+              "title": "Raimov System",
+              "text": "The intellectual core: a shared logic for diagnostics, planning, communication and control.",
+              "href": "/en/raimov-system/"
+            },
+            {
+              "kicker": "03",
+              "title": "Raimov Academy",
+              "text": "The educational engine: translating the system into learning, case review and team tools.",
+              "href": "/en/academy/"
+            },
+            {
+              "kicker": "04",
+              "title": "Professional Network",
+              "text": "A developing layer of clinicians and practices able to work with a shared language of quality."
+            }
+          ]
+        },
+        {
+          "type": "split",
+          "title": "Value for both sides",
+          "items": [
+            {
+              "title": "The patient receives",
+              "text": "A clearer route, fewer gaps between clinicians, access to a second opinion and accountability for the overall case logic."
+            },
+            {
+              "title": "The clinician receives",
+              "text": "A reasoning structure, tools for plan presentation, a case-review environment and a path for professional growth."
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "title": "How the development loop works",
+          "items": [
+            {
+              "title": "The clinic accumulates questions",
+              "text": "Real cases reveal where processes are unclear and where continuity is lost."
+            },
+            {
+              "title": "The system formalises solutions",
+              "text": "Recurring principles become algorithms, checklists and quality gates."
+            },
+            {
+              "title": "The Academy transfers the method",
+              "text": "Clinicians learn a way to analyse their own cases rather than memorise finished answers."
+            },
+            {
+              "title": "The community returns feedback",
+              "text": "New contexts show what works and which tools need to be developed next."
+            }
+          ]
+        },
+        {
+          "type": "narrative",
+          "title": "What is core today and what remains a direction of development",
+          "body": [
+            "The clinic, the clinician's public leadership and Raimov System form the visible core of the ecosystem.",
+            "Raimov Academy is developing as the educational layer. Programmes and dates will be published only after the academic plan is approved.",
+            "A professional network and a competency-validation standard are a future stage, not a claim that a franchise or certification scheme already exists."
+          ]
+        },
+        {
+          "type": "manifesto",
+          "title": "Principles of growth",
+          "body": [
+            "Method quality before scale.",
+            "Evidence before bold claims.",
+            "A shared team language before a network.",
+            "Value for patients and clinicians before new products."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Start with diagnostics",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Open Raimov Academy",
+        "href": "/en/academy/"
+      },
+      "showPatientForm": false
+    },
+    "academy": {
+      "eyebrow": "Education for clinicians",
+      "title": "Raimov Academy: a school of clinical reasoning, not a catalogue of isolated techniques",
+      "lead": "A clinician may learn many procedures and still struggle with a complex case: what matters most, who should be involved, what comes first and how a large plan should be explained to the patient.",
+      "thesis": "The Academy addresses the gap between technical skill and the management of comprehensive care.",
+      "meta": {
+        "title": "Raimov Academy — education for clinicians and practices",
+        "description": "Clinical reasoning, treatment architecture, patient communication and team delivery for complex dental cases."
+      },
+      "sections": [
+        {
+          "type": "narrative",
+          "title": "The problem the Academy is designed to solve",
+          "body": [
+            "Education is commonly divided by specialty, while a real patient arrives with a problem that crosses those boundaries.",
+            "A clinician learns orthodontics, implants, aesthetics and communication in different places, then has to assemble a coherent system alone.",
+            "The Academy is being built around the complete case as the central object of learning."
+          ]
+        },
+        {
+          "type": "index",
+          "title": "Four learning directions",
+          "items": [
+            {
+              "kicker": "01",
+              "title": "Diagnostic reasoning",
+              "text": "Separating symptoms from causes, defining the task and seeing dependencies between specialties."
+            },
+            {
+              "kicker": "02",
+              "title": "Treatment architecture",
+              "text": "Comparing scenarios, selecting a sequence and documenting quality gates."
+            },
+            {
+              "kicker": "03",
+              "title": "Patient communication",
+              "text": "Explaining complexity without pressure, presenting alternatives and discussing a significant budget clearly."
+            },
+            {
+              "kicker": "04",
+              "title": "Team delivery",
+              "text": "Assigning roles, running case conferences and preserving shared accountability."
+            }
+          ]
+        },
+        {
+          "type": "split",
+          "title": "Who the Academy is for",
+          "items": [
+            {
+              "title": "Clinicians",
+              "text": "Those who want to progress from delivering individual procedures to managing comprehensive cases."
+            },
+            {
+              "title": "Practice leaders",
+              "text": "Those who need a shared operating logic for clinicians, coordinators and front-desk teams."
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "title": "Educational model",
+          "items": [
+            {
+              "title": "Conceptual modules",
+              "text": "Raimov System principles, diagnostics, planning, presentation and control."
+            },
+            {
+              "title": "Case review",
+              "text": "Starting data, alternatives and reasoning errors — not only the attractive final image."
+            },
+            {
+              "title": "Practical tools",
+              "text": "Case-conference structures, plan templates, handover tools and self-review questions."
+            },
+            {
+              "title": "Feedback",
+              "text": "Reviewing how the clinician applies the method to their own cases and team."
+            }
+          ]
+        },
+        {
+          "type": "manifesto",
+          "title": "What the Academy should not teach",
+          "body": [
+            "Copying one plan across different patients.",
+            "Selling expensive treatment through pressure.",
+            "Replacing fundamental training with a short marketing certificate.",
+            "Showing only ideal outcomes without examining risk and compromise."
+          ]
+        },
+        {
+          "type": "narrative",
+          "title": "Programme status",
+          "body": [
+            "Specific programmes, faculty, dates, duration and participation terms will be published after the academic plan is approved.",
+            "Until then, this page defines the direction and content standard rather than pretending that a complete course catalogue is already running."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Ask about the Academy",
+        "href": "/en/contact/"
+      },
+      "secondaryCta": {
+        "label": "Explore Raimov System",
+        "href": "/en/raimov-system/"
+      },
+      "showPatientForm": false
+    },
+    "about": {
+      "eyebrow": "The flagship clinical centre",
+      "title": "RAIMOV DENTAL is where the ecosystem meets a real patient",
+      "lead": "The clinic is not a brand showroom. It is the practical foundation of the system: the place where methodology must help a team make decisions and help a patient understand the route ahead.",
+      "thesis": "The value of the clinic is measured less by the number of listed services than by the quality of the transition from uncertainty to an agreed plan.",
+      "meta": {
+        "title": "About RAIMOV DENTAL — the clinical foundation of the ecosystem",
+        "description": "The clinic's role in patient care, testing Raimov System, documenting decisions and supporting professional education."
+      },
+      "sections": [
+        {
+          "type": "index",
+          "title": "The clinic's role in the ecosystem",
+          "items": [
+            {
+              "kicker": "01",
+              "title": "Clinical care",
+              "text": "Diagnostics, treatment and follow-up for complex aesthetic and functional problems."
+            },
+            {
+              "kicker": "02",
+              "title": "Method testing",
+              "text": "Raimov System must work in everyday handovers, case conferences and treatment-stage control."
+            },
+            {
+              "kicker": "03",
+              "title": "Documentation",
+              "text": "Case structure and recorded decisions provide a foundation for education and process improvement."
+            },
+            {
+              "kicker": "04",
+              "title": "Educational foundation",
+              "text": "Real questions from the clinic shape Academy topics and separate useful tools from abstract theory."
+            }
+          ]
+        },
+        {
+          "type": "split",
+          "title": "How the clinic should feel",
+          "items": [
+            {
+              "title": "For the patient",
+              "text": "Not a series of unrelated rooms, but one pathway with visible responsibility and clear next steps."
+            },
+            {
+              "title": "For the team",
+              "text": "Not passing the patient around, but collaborating inside one master plan."
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "title": "The patient pathway standard",
+          "items": [
+            {
+              "title": "Understand the request",
+              "text": "Clarify what the patient wants to change and why previous solutions were unsatisfactory."
+            },
+            {
+              "title": "Build the picture",
+              "text": "Review clinical information, constraints, risk and the relationship between problems."
+            },
+            {
+              "title": "Explain the options",
+              "text": "Show how scenarios differ rather than merely recommend a bundle of procedures."
+            },
+            {
+              "title": "Agree the stages",
+              "text": "Connect the clinical route to realistic time, budget and patient capacity."
+            },
+            {
+              "title": "Maintain continuity",
+              "text": "Preserve the plan across clinicians and after the main treatment stages."
+            }
+          ]
+        },
+        {
+          "type": "narrative",
+          "title": "Transparency instead of decorative luxury",
+          "body": [
+            "Interior design, technology and visual identity matter, but they cannot replace substance.",
+            "RAIMOV DENTAL should express premium care through diagnostic depth, clarity of explanation, respect for patient choice and team discipline."
+          ]
+        },
+        {
+          "type": "links",
+          "title": "Continue exploring",
+          "items": [
+            {
+              "title": "Atabek Raimov",
+              "text": "The public face and author of the ecosystem.",
+              "href": "/en/atabek-raimov/"
+            },
+            {
+              "title": "Raimov System",
+              "text": "How treatment logic is organised.",
+              "href": "/en/raimov-system/"
+            },
+            {
+              "title": "Patient care",
+              "text": "Where a patient should begin.",
+              "href": "/en/comprehensive-diagnostics/"
+            },
+            {
+              "title": "Raimov Academy",
+              "text": "How the method is transferred to clinicians.",
+              "href": "/en/academy/"
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Start with diagnostics",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Ecosystem architecture",
+        "href": "/en/ecosystem/"
+      },
+      "showPatientForm": true
+    },
+    "international": {
+      "eyebrow": "For patients travelling to Bishkek",
+      "title": "Understand the case before planning the trip",
+      "lead": "An international patient faces additional uncertainty: how many visits may be required, what can be prepared remotely and which decisions cannot be made without an examination.",
+      "thesis": "The first step is not a promise of treatment in one trip. It is the organisation of information and a realistic route.",
+      "meta": {
+        "title": "International patients | RAIMOV DENTAL Bishkek",
+        "description": "Remote preparation, diagnostics, private document transfer, visit planning and the limits of one-trip treatment."
+      },
+      "sections": [
+        {
+          "type": "steps",
+          "title": "How to begin",
+          "items": [
+            {
+              "title": "Describe the problem briefly",
+              "text": "What concerns you, what treatment has already been completed and what you hope to change."
+            },
+            {
+              "title": "Share practical constraints",
+              "text": "Country, possible travel dates, length of stay and language-support needs."
+            },
+            {
+              "title": "Transfer documents privately",
+              "text": "Images and medical records are not uploaded to the website. They may be shared with the coordinator in a private WhatsApp conversation."
+            },
+            {
+              "title": "Agree the first-visit format",
+              "text": "The clinic explains what may be reviewed in advance and what requires in-person diagnostics."
+            }
+          ]
+        },
+        {
+          "type": "split",
+          "title": "What can be done remotely — and what cannot",
+          "items": [
+            {
+              "title": "Possible",
+              "text": "Clarify the request, check which materials are available, discuss the visit structure and address practical questions."
+            },
+            {
+              "title": "Not reliable remotely",
+              "text": "Approve a final diagnosis, guarantee treatment volume, provide a final price or promise a fixed number of visits."
+            }
+          ]
+        },
+        {
+          "type": "index",
+          "title": "Travel scenarios",
+          "items": [
+            {
+              "kicker": "01",
+              "title": "Diagnostics-only visit",
+              "text": "Useful when the first goal is a master plan without an obligation to begin treatment immediately."
+            },
+            {
+              "kicker": "02",
+              "title": "Diagnostics and first stage",
+              "text": "Possible when preliminary information supports preparation, with final confirmation in person."
+            },
+            {
+              "kicker": "03",
+              "title": "Multiple visits",
+              "text": "Often required for orthodontics, implant healing and complex restorative work."
+            },
+            {
+              "kicker": "04",
+              "title": "Follow-up after returning home",
+              "text": "Before treatment starts, the patient should understand which checks may be remote and which must be in person."
+            }
+          ]
+        },
+        {
+          "type": "faq",
+          "title": "Common questions",
+          "items": [
+            {
+              "question": "Can comprehensive treatment be completed in one trip?",
+              "answer": "Some stages may be combined, but biological healing, adaptation and quality control can require more than one visit."
+            },
+            {
+              "question": "Can I receive an exact price in advance?",
+              "answer": "The structure of likely expenses may be discussed. The final price depends on in-person diagnostics and confirmed treatment volume."
+            },
+            {
+              "question": "Which language will be used?",
+              "answer": "Available language support is confirmed by the coordinator. Travel should not be planned until this point is agreed."
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Prepare my request",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Write on WhatsApp",
+        "href": "https://wa.me/996555255455"
+      },
+      "showPatientForm": true
+    },
+    "contact": {
+      "eyebrow": "Contact RAIMOV",
+      "title": "Choose the correct entry point: patient or professional",
+      "lead": "A single phone number should not turn different requests into one undifferentiated queue. Tell us whether your question concerns treatment, a second opinion, international travel, education or professional collaboration.",
+      "thesis": "The more clearly the request is framed, the easier it is to identify the correct next step.",
+      "meta": {
+        "title": "Contact RAIMOV DENTAL and Raimov Academy",
+        "description": "Patient enquiries, second opinions, international visits, Academy questions and professional collaboration."
+      },
+      "sections": [
+        {
+          "type": "split",
+          "title": "Patient enquiries",
+          "items": [
+            {
+              "title": "A new treatment plan",
+              "text": "Describe the main problem, your city and the preferred contact channel. Share documents only in a private conversation after the coordinator replies."
+            },
+            {
+              "title": "A second opinion",
+              "text": "State that you already have a plan or estimate. There is no need to describe detailed medical information in the public form."
+            }
+          ]
+        },
+        {
+          "type": "split",
+          "title": "Professional enquiries",
+          "items": [
+            {
+              "title": "Raimov Academy",
+              "text": "Include your specialty, experience level and topic of interest: planning, case conference, plan presentation or team implementation."
+            },
+            {
+              "title": "Partnerships and media",
+              "text": "Briefly identify the organisation, the proposed format and the intended outcome of the conversation."
+            }
+          ]
+        },
+        {
+          "type": "narrative",
+          "title": "What to prepare",
+          "body": [
+            "Patients: the main goal, a short history of previous treatment and possible visit dates.",
+            "Clinicians: practice context and one specific problem you want to learn to solve.",
+            "Practices: the current model for complex cases and the point where continuity is lost."
+          ]
+        },
+        {
+          "type": "manifesto",
+          "title": "Privacy",
+          "body": [
+            "Do not send medical images, passport data or detailed medical history through the website form.",
+            "Share such information only after a private communication channel with the clinic has been established."
+          ]
+        }
+      ],
+      "cta": {
+        "label": "Book diagnostics",
+        "href": "/en/comprehensive-diagnostics/#lead-form"
+      },
+      "secondaryCta": {
+        "label": "Ecosystem architecture",
+        "href": "/en/ecosystem/"
+      },
+      "showPatientForm": false
+    }
+  }
+}

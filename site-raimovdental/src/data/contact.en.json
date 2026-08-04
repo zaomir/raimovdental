@@ -1,0 +1,76 @@
+{
+  "language": "en",
+  "path": "/en/contact/",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Contact | RAIMOV DENTAL",
+    "description": "Contact RAIMOV DENTAL in Bishkek — phone, messengers, address and map."
+  },
+  "contacts": {
+    "phone": {
+      "value": "+996555255455",
+      "display": "+996 555 255 455",
+      "status": "clinic_confirmed",
+      "publishable": true
+    },
+    "whatsapp": {
+      "value": "+996555255455",
+      "display": "+996 555 255 455",
+      "href": "https://wa.me/996555255455",
+      "status": "clinic_confirmed",
+      "publishable": true
+    },
+    "telegram": {
+      "deepLink": "https://t.me/doctor_raimov",
+      "display": "@doctor_raimov",
+      "status": "clinic_confirmed",
+      "publishable": true,
+      "note": "Clinic-attested handle; also linked from expertdental.kg"
+    },
+    "email": {
+      "value": null,
+      "display": null,
+      "status": "clinic_confirmed_pending_extract",
+      "publishable": false
+    },
+    "instagramClinic": {
+      "url": "https://www.instagram.com/expert_dental_studio/",
+      "handle": "@expert_dental_studio",
+      "status": "clinic_confirmed",
+      "publishable": true
+    },
+    "relatedClinicSite": {
+      "url": "https://www.expertdental.kg",
+      "label": "Expert Dental Studio",
+      "status": "clinic_confirmed",
+      "publishable": true,
+      "note": "Related public clinic brand; patient brand remains RAIMOV DENTAL"
+    }
+  },
+  "address": {
+    "line1": "88 Kyivskaya St (near Erkindik Blvd)",
+    "city": "Bishkek",
+    "country": "Kyrgyzstan",
+    "postalCode": "720040",
+    "status": "clinic_confirmed",
+    "publishable": true
+  },
+  "hours": {
+    "status": "clinic_confirmed",
+    "schedule": [
+      "By appointment"
+    ],
+    "publishable": true
+  },
+  "maps": {
+    "google": "https://maps.google.com/?q=Expert+Dental+Studio+Kyivskaya+88+Bishkek",
+    "twoGis": "https://2gis.kg/bishkek/firm/70000001089655879",
+    "yandex": "https://yandex.com/maps/10309/bishkek/house/Y00YcAdnTEQHQFpofXR2dX9qZA%3D%3D/",
+    "status": "clinic_confirmed",
+    "publishable": true
+  },
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/"
+  }
+}

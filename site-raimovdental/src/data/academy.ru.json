@@ -1,0 +1,32 @@
+{
+  "language": "ru",
+  "path": "/ru/academy/",
+  "brand": "Raimov Academy",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Raimov Academy | RAIMOV DENTAL",
+    "description": "Образовательное направление для врачей — высокоуровневое позиционирование без выдуманных программ.",
+    "medicalReviewRequired": false,
+    "author": "Раимов Атабек Саидович",
+    "publishedAt": null,
+    "reviewedAt": null
+  },
+  "intro": {
+    "heading": "Raimov Academy",
+    "body": "Образовательное направление для врачей. Программы, даты и форматы публикуются после утверждения — сейчас открыт интерес врачей без обещания ближайшего набора."
+  },
+  "programs": {
+    "status": "not_published",
+    "items": []
+  },
+  "audience": {
+    "status": "direction_only",
+    "description": "Для врачей и руководителей клиник, которым нужна логика ведения сложных случаев. Пациентские услуги — в разделе диагностики и направлений."
+  },
+  "contact": {
+    "email": null,
+    "telegram": null,
+    "status": "via_contacts"
+  },
+  "note": "High-level positioning only. No franchise content. No invented program schedule."
+}

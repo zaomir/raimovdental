@@ -1,0 +1,173 @@
+{
+  "route": "/stage-a/",
+  "checkedAt": "2026-07-24T15:09:47.289Z",
+  "assertions": [
+    {
+      "name": "route-smoke",
+      "status": "pass",
+      "detail": "HTTP 200"
+    },
+    {
+      "name": "unique-title",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "noindex-policy",
+      "status": "pass",
+      "detail": "noindex,nofollow,noarchive,nosnippet"
+    },
+    {
+      "name": "semantic-landmarks",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "no-public-form",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "strategic-h1",
+      "status": "pass",
+      "detail": "От действующей практики — к системе, которая работает шире одного врача."
+    },
+    {
+      "name": "truth-status-language",
+      "status": "pass",
+      "detail": [
+        "Сегодня",
+        "Формируется",
+        "Следующая фаза",
+        "Пятилетняя перспектива",
+        "Raimov System",
+        "Raimov Academy",
+        "Собственные клиники RAIMOV DENTAL",
+        "Международный экспертный контур",
+        "Автор и презентующий:"
+      ]
+    },
+    {
+      "name": "no-external-marketing-links",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "portrait-loaded",
+      "status": "pass",
+      "detail": {
+        "complete": true,
+        "naturalWidth": 824,
+        "naturalHeight": 1024
+      }
+    },
+    {
+      "name": "keyboard-skip-link",
+      "status": "pass",
+      "detail": {
+        "className": "skip-link",
+        "outlineWidth": "3px",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+        "top": 12,
+        "left": 12
+      }
+    },
+    {
+      "name": "axe-wcag22-aa",
+      "status": "pass",
+      "detail": {
+        "totalViolations": 0,
+        "blocking": 0
+      }
+    },
+    {
+      "name": "cls-budget",
+      "status": "pass",
+      "detail": 0.047808092316393096
+    },
+    {
+      "name": "zero-client-js",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "zero-third-party-requests",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "css-budget",
+      "status": "pass",
+      "detail": 22711
+    },
+    {
+      "name": "source-transfer-budget",
+      "status": "pass",
+      "detail": 162028
+    },
+    {
+      "name": "desktop-screenshot",
+      "status": "pass",
+      "detail": null
+    },
+    {
+      "name": "390px-reflow",
+      "status": "pass",
+      "detail": {
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "bodyScrollWidth": 390,
+        "reachableScrollLeft": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "320px-reflow",
+      "status": "pass",
+      "detail": {
+        "clientWidth": 320,
+        "scrollWidth": 329,
+        "bodyScrollWidth": 329,
+        "reachableScrollLeft": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "200-percent-zoom-equivalent",
+      "status": "pass",
+      "detail": {
+        "clientWidth": 360,
+        "scrollWidth": 360,
+        "bodyScrollWidth": 360,
+        "reachableScrollLeft": 0,
+        "offenders": []
+      }
+    },
+    {
+      "name": "reduced-motion",
+      "status": "pass",
+      "detail": {
+        "matches": true,
+        "scrollBehavior": "auto",
+        "h1Visible": true
+      }
+    }
+  ],
+  "measurements": {
+    "cls": 0.047808092316393096,
+    "cssBytes": 22711,
+    "portraitBytes": 117540,
+    "htmlBytes": 21777,
+    "sourceTotalBytes": 162028,
+    "browserTransferBytes": 255844
+  },
+  "axe": {
+    "violations": [],
+    "blocking": 0
+  },
+  "screenshots": {
+    "desktop": "/home/runner/work/grainee-v2/grainee-v2/artifacts/raimov-stage-a/stage-a-desktop.png",
+    "mobile": "/home/runner/work/grainee-v2/grainee-v2/artifacts/raimov-stage-a/stage-a-mobile.png"
+  },
+  "status": "pass"
+}

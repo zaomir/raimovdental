@@ -1,0 +1,137 @@
+/* Lead form — Lane C (tokens only) */
+.lead-form {
+  width: 100%;
+  max-width: 36rem;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.lead-form__progress {
+  display: flex;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-6);
+}
+
+.lead-form__progress-step {
+  flex: 1;
+  height: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--border);
+}
+
+.lead-form__progress-step.is-active,
+.lead-form__progress-step.is-done {
+  background: var(--green);
+}
+
+.lead-form__step[hidden] {
+  display: none;
+}
+
+.lead-form__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: var(--sp-4);
+  color: var(--text);
+}
+
+.lead-form__hint {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: var(--sp-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.field label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.input,
+.lead-form select,
+.lead-form textarea {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.input:focus,
+.lead-form select:focus,
+.lead-form textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--green) 35%, transparent);
+  outline-offset: 1px;
+}
+
+.input.is-error,
+.lead-form select.is-error {
+  border-color: var(--destructive);
+}
+
+.field--choice {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-3) var(--sp-4);
+  cursor: pointer;
+  background: var(--surface);
+}
+
+.field--choice:has(input:checked) {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 6%, var(--surface));
+}
+
+.field--choice input {
+  margin-right: var(--sp-2);
+}
+
+.field--checkbox {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.field--checkbox input {
+  margin-top: 0.2rem;
+}
+
+.lead-form__actions {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: var(--sp-6);
+}
+
+.lead-form__message {
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+}
+
+.lead-form__message--error {
+  background: color-mix(in srgb, var(--destructive) 10%, var(--surface));
+  color: var(--destructive);
+}
+
+.lead-form__message--success {
+  background: color-mix(in srgb, var(--green) 10%, var(--surface));
+  color: var(--green);
+}
+
+.lead-form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

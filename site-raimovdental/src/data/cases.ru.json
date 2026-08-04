@@ -1,0 +1,112 @@
+{
+  "language": "ru",
+  "indexPath": "/ru/rezultaty/",
+  "meta": {
+    "title": "Результаты лечения | RAIMOV DENTAL",
+    "description": "Клинические кейсы RAIMOV DENTAL — с согласием и медицинской проверкой.",
+    "medicalReviewRequired": true
+  },
+  "intro": {
+    "heading": "Результаты лечения",
+    "body": "Публикуем только кейсы с согласием на анонимизированные материалы и медицинской проверкой. Без выдуманных «до/после» пар."
+  },
+  "cases": [
+    {
+      "slug": "adult-ortho-pathway",
+      "title": "Ортодонтия для взрослых: путь от скученности к плану",
+      "jtbd": "aesthetics_bite",
+      "problem": "Взрослый пациент с скученностью и нарушением прикуса. Нужен понятный план, а не «сразу поставить брекеты».",
+      "solution": "Комплексная диагностика, оценка функции и эстетики, поэтапный ортодонтический план с промежуточным контролем.",
+      "stages": [
+        "Диагностика и фотопротокол",
+        "Согласование этапов и сроков",
+        "Ортодонтическое лечение с контрольными визитами",
+        "Стабилизация и наблюдение"
+      ],
+      "durationRange": "Индивидуально — после диагностики",
+      "result": "Контролируемое выравнивание по согласованному плану. Итог фиксируется только после клинической оценки.",
+      "beforeImages": [
+        {
+          "src": "/assets/img/cases/ortho-stage-anonymized.jpg",
+          "alt": "Анонимизированный клинический этап ортодонтии (без идентификации пациента)",
+          "caption": "Клинический этап (анонимизировано)"
+        }
+      ],
+      "afterImages": [],
+      "consentReference": "founder_media_grant_2026-07-21 + anonymized_clinical_archive",
+      "medicalReviewer": "clinic_attested_founder_2026-07-21",
+      "reviewedAt": "2026-07-21",
+      "relatedServices": [
+        "adult-orthodontics"
+      ],
+      "status": "verified",
+      "publishable": true
+    },
+    {
+      "slug": "aesthetic-smile-pathway",
+      "title": "Эстетика улыбки: диагностика → план → результат",
+      "jtbd": "aesthetics",
+      "problem": "Пациент хочет изменить форму и цвет зубов. Без диагностики нельзя обещать конкретный протокол.",
+      "solution": "Диагностика, обсуждение виниров/реставраций/ортодонтии как вариантов, поэтапное выполнение после согласия с планом.",
+      "stages": [
+        "Комплексная диагностика и фотопротокол",
+        "Выбор протокола (ортодонтия / реставрации / виниры)",
+        "Этапное лечение",
+        "Контроль результата"
+      ],
+      "durationRange": "Индивидуально — после диагностики",
+      "result": "Эстетический результат по согласованному плану. На сайте — анонимизированная иллюстрация результата из клинического архива.",
+      "beforeImages": [],
+      "afterImages": [
+        {
+          "src": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+          "alt": "Анонимизированный эстетический результат (без идентификации пациента)",
+          "caption": "Результат (анонимизировано)"
+        }
+      ],
+      "consentReference": "founder_media_grant_2026-07-21 + anonymized_clinical_archive",
+      "medicalReviewer": "clinic_attested_founder_2026-07-21",
+      "reviewedAt": "2026-07-21",
+      "relatedServices": [
+        "veneers"
+      ],
+      "status": "verified",
+      "publishable": true
+    },
+    {
+      "slug": "implant-full-pathway",
+      "title": "Имплантация и полное восстановление: междисциплинарный путь",
+      "jtbd": "implants_full",
+      "problem": "Частичная или полная потеря зубов. Нужна согласованная работа хирурга, ортопеда и (при необходимости) ортодонта.",
+      "solution": "Диагностика, план имплантации/протезирования, этапы хирургии и ортопедии с контролем приживления и нагрузки.",
+      "stages": [
+        "Диагностика и 3D-планирование (по показаниям)",
+        "Хирургический этап",
+        "Ортопедический этап",
+        "Наблюдение"
+      ],
+      "durationRange": "Индивидуально — после диагностики",
+      "result": "Восстановление жевательной функции и эстетики по плану, согласованному на консилиуме. Без обещания сроков до осмотра.",
+      "beforeImages": [],
+      "afterImages": [],
+      "consentReference": "founder_publish_confirm_2026-07-21_pathway_case_no_patient_photo",
+      "medicalReviewer": "clinic_attested_founder_2026-07-21",
+      "reviewedAt": "2026-07-21",
+      "relatedServices": [
+        "dental-implants",
+        "full-mouth-reconstruction"
+      ],
+      "status": "verified",
+      "publishable": true
+    }
+  ],
+  "verifiedCases": [
+    "adult-ortho-pathway",
+    "aesthetic-smile-pathway",
+    "implant-full-pathway"
+  ],
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/"
+  }
+}

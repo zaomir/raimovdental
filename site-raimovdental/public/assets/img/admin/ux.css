@@ -1,0 +1,23 @@
+/* Focused-action UX layer: one visually dominant action at a time. */
+:root{--focus:#0f4f43;--focus-hover:#176457;--quiet:#f5f3ee;--quiet-border:#dedbd3;--quiet-text:#59635f}
+.top-actions .secondary,.top-actions .ghost{background:transparent!important;border-color:transparent!important;color:var(--muted)!important;font-weight:700}
+.top-actions .secondary:hover,.top-actions .ghost:hover{background:var(--quiet)!important;color:var(--ink)!important}
+.workspace{padding:32px 36px}.workspace>#screen{max-width:820px;margin:0 auto}
+.script{margin:12px 0 20px;padding:22px 24px;box-shadow:none}.script-text{font-size:22px;line-height:1.45}
+.helper{opacity:.88}.options{grid-template-columns:1fr;gap:10px;margin:18px 0}
+.option,.patient-result,.quick{background:var(--quiet);border-color:var(--quiet-border);box-shadow:none;color:var(--quiet-text);transform:none}
+.option{min-height:72px;padding:15px 17px}.option strong{color:var(--ink);font-size:15px}.option span{color:var(--muted)}
+.option:hover,.option:focus-visible,.option.is-selected,.patient-result:hover,.patient-result:focus-visible{background:var(--focus);border-color:var(--focus);color:#fff;box-shadow:0 8px 22px rgba(15,79,67,.18);outline:none}
+.option:hover strong,.option:focus-visible strong,.option.is-selected strong,.option:hover span,.option:focus-visible span,.option.is-selected span,.patient-result:hover strong,.patient-result:hover small,.patient-result:focus-visible strong,.patient-result:focus-visible small{color:#fff}
+.primary,.danger-btn,.ux-primary{background:var(--focus)!important;color:#fff!important;border-color:var(--focus)!important;box-shadow:0 10px 24px rgba(15,79,67,.2)!important;font-weight:850!important}
+.primary:hover,.danger-btn:hover,.ux-primary:hover{background:var(--focus-hover)!important;transform:translateY(-1px)}
+.secondary,.ghost{background:var(--quiet);color:var(--quiet-text);border:1px solid var(--quiet-border);box-shadow:none}
+.actions{justify-content:flex-end;align-items:center}.actions .secondary,.actions .ghost{margin-right:auto}
+.actions button{min-height:46px}.actions button:not(.primary):not(.danger-btn):not(.ux-primary){opacity:.76}
+.actions button:not(.primary):not(.danger-btn):not(.ux-primary):hover{opacity:1;background:#ece9e2}
+.sidebar{background:rgba(255,253,249,.78);box-shadow:none}.quick-grid{gap:6px}.quick{padding:9px 11px;font-size:12px;font-weight:700}.quick:hover{background:#ece9e2;border-color:#d4d0c7}
+.rules{opacity:.62}.right .panel{box-shadow:none}.notes-card .secondary{opacity:.76}.call-head{box-shadow:none}.status-pill{background:#f0f6f3;border-color:#d8e7df}
+.form-grid{gap:12px}.input{background:#fff;border-color:#d9d6cf}.field-label{margin-top:2px}
+.modal-card .primary{min-width:180px}
+@media(max-width:1180px){.workspace>#screen{max-width:none}}
+@media(max-width:820px){.workspace{padding:18px}.script-text{font-size:19px}.actions{align-items:stretch}.actions button{width:100%}.actions .secondary,.actions .ghost{margin-right:0}.top-actions{gap:4px}}

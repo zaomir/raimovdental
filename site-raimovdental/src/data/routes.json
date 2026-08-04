@@ -1,0 +1,109 @@
+{
+  "canonicalHost": "https://raimovdental.com",
+  "defaultLanguage": "ru",
+  "languages": [
+    "ru",
+    "en"
+  ],
+  "indexable": true,
+  "routes": [
+    {
+      "id": "home",
+      "template": "home",
+      "ru": "/ru/",
+      "en": "/en/",
+      "indexable": true
+    },
+    {
+      "id": "ecosystem",
+      "template": "editorial",
+      "ru": "/ru/ekosistema/",
+      "en": "/en/ecosystem/",
+      "indexable": false
+    },
+    {
+      "id": "comprehensive-diagnostics",
+      "template": "service",
+      "ru": "/ru/kompleksnaya-diagnostika/",
+      "en": "/en/comprehensive-diagnostics/",
+      "indexable": true
+    },
+    {
+      "id": "veneers",
+      "template": "service",
+      "ru": "/ru/viniry/",
+      "en": "/en/veneers/",
+      "indexable": true
+    },
+    {
+      "id": "dental-implants",
+      "template": "service",
+      "ru": "/ru/implantaciya/",
+      "en": "/en/dental-implants/",
+      "indexable": true
+    },
+    {
+      "id": "full-mouth-reconstruction",
+      "template": "service",
+      "ru": "/ru/polnoe-vosstanovlenie-zubov/",
+      "en": "/en/full-mouth-reconstruction/",
+      "indexable": true
+    },
+    {
+      "id": "adult-orthodontics",
+      "template": "service",
+      "ru": "/ru/ortodontiya-dlya-vzroslyh/",
+      "en": "/en/adult-orthodontics/",
+      "indexable": true
+    },
+    {
+      "id": "doctor",
+      "template": "doctor",
+      "ru": "/ru/atabek-raimov/",
+      "en": "/en/atabek-raimov/",
+      "indexable": true
+    },
+    {
+      "id": "raimov-system",
+      "template": "system",
+      "ru": "/ru/raimov-system/",
+      "en": "/en/raimov-system/",
+      "indexable": true
+    },
+    {
+      "id": "academy",
+      "template": "editorial",
+      "ru": "/ru/academy/",
+      "en": "/en/academy/",
+      "indexable": false
+    },
+    {
+      "id": "international-patients",
+      "template": "editorial",
+      "ru": "/ru/mezhdunarodnym-pacientam/",
+      "en": "/en/international-patients/",
+      "indexable": true
+    },
+    {
+      "id": "about",
+      "template": "editorial",
+      "ru": "/ru/o-klinike/",
+      "en": "/en/about/",
+      "indexable": true
+    },
+    {
+      "id": "contact",
+      "template": "contact",
+      "ru": "/ru/kontakty/",
+      "en": "/en/contact/",
+      "indexable": true
+    }
+  ],
+  "forbiddenRoutes": [
+    "/franchise/",
+    "/elite-dental/",
+    "/partners/"
+  ],
+  "hreflangNote": "Each route emits reciprocal ru/en/x-default alternates. Indexability is per-route (D3).",
+  "indexableNote": "D3 2026-07-21: patient routes indexable; academy+ecosystem remain noindex"
+}

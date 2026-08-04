@@ -1,0 +1,349 @@
+{
+  "language": "en",
+  "meta": {
+    "title": "RAIMOV DENTAL — comprehensive dentistry in Bishkek",
+    "description": "Book comprehensive diagnostics. Veneers, implants, adult orthodontics and full-mouth reconstruction in Bishkek."
+  },
+  "hero": {
+    "h1": "A complex case starts with precise diagnostics",
+    "subtitle": "RAIMOV DENTAL in Bishkek: comprehensive diagnostics, an agreed plan and staged treatment — veneers, implants, orthodontics and full-mouth reconstruction.",
+    "primaryCta": {
+      "label": "Book comprehensive diagnostics",
+      "href": "/en/comprehensive-diagnostics/#lead-form",
+      "analytics": "diagnostic_cta_click"
+    },
+    "secondaryCta": {
+      "label": "Message on WhatsApp",
+      "href": "https://wa.me/996555255455",
+      "analytics": "whatsapp_click"
+    },
+    "media": {
+      "type": "image",
+      "src": "/assets/img/doctor/atabek-portrait.jpg",
+      "alt": "Atabek Raimov",
+      "poster": null,
+      "publishable": true
+    },
+    "trustFacts": [
+      {
+        "id": "experience_years",
+        "label": "Experience",
+        "value": "",
+        "publishable": false,
+        "source": null
+      },
+      {
+        "id": "verified_cases",
+        "label": "Verified cases",
+        "value": "",
+        "publishable": false,
+        "source": null
+      }
+    ]
+  },
+  "patientGoals": {
+    "heading": "What would you like to change?",
+    "items": [
+      {
+        "id": "aesthetics",
+        "label": "Improve smile shape and color",
+        "href": "/en/veneers/",
+        "interest": "veneers"
+      },
+      {
+        "id": "missing_teeth",
+        "label": "Replace missing teeth",
+        "href": "/en/dental-implants/",
+        "interest": "implants"
+      },
+      {
+        "id": "bite",
+        "label": "Correct my bite",
+        "href": "/en/adult-orthodontics/",
+        "interest": "orthodontics"
+      },
+      {
+        "id": "full_rehab",
+        "label": "Need full mouth reconstruction",
+        "href": "/en/full-mouth-reconstruction/",
+        "interest": "full_rehabilitation"
+      },
+      {
+        "id": "second_opinion",
+        "label": "Need a second opinion on my treatment plan",
+        "href": "/en/comprehensive-diagnostics/",
+        "interest": "second_opinion"
+      }
+    ]
+  },
+  "cases": {
+    "heading": "Treatment results",
+    "items": [
+      "adult-ortho-pathway",
+      "aesthetic-smile-pathway",
+      "implant-full-pathway"
+    ],
+    "emptyStateHidden": true
+  },
+  "firstVisit": {
+    "heading": "First visit / comprehensive diagnostics",
+    "publicName": "First visit / comprehensive diagnostics",
+    "conductedBy": {
+      "text": "Atabek Raimov and/or the specialist matched to your task",
+      "status": "confirmed"
+    },
+    "duration": {
+      "text": "Visit length is confirmed when you book",
+      "status": "tbd"
+    },
+    "includes": [
+      {
+        "text": "Clinical examination and baseline data collection",
+        "status": "confirmed"
+      },
+      {
+        "text": "Discussion of goals, constraints and expectations",
+        "status": "confirmed"
+      },
+      {
+        "text": "Preliminary review of options and sequence",
+        "status": "confirmed"
+      }
+    ],
+    "patientReceives": [
+      {
+        "text": "Clarity on treatment options and sequence",
+        "status": "confirmed"
+      },
+      {
+        "text": "Staging guidance; exact budget after diagnostics",
+        "status": "confirmed"
+      },
+      {
+        "text": "An agreed next step (plan / follow-up / preparation)",
+        "status": "confirmed"
+      }
+    ],
+    "priceBandId": "first_visit",
+    "priceCreditedToTreatment": {
+      "text": "Whether the visit fee is credited toward treatment is confirmed when you book",
+      "status": "tbd"
+    },
+    "stagedTreatmentAllowed": {
+      "text": "Staged treatment is possible under an agreed plan after diagnostics",
+      "status": "confirmed"
+    },
+    "nextStepAfterDiagnostics": {
+      "text": "Plan alignment and booking the first treatment stage",
+      "status": "confirmed"
+    },
+    "responseSla": {
+      "text": "We reply on WhatsApp during clinic working hours",
+      "status": "confirmed"
+    },
+    "publishable": true
+  },
+  "raimovSystem": {
+    "heading": "Raimov System",
+    "steps": [
+      {
+        "id": "diagnostics",
+        "title": "Precise diagnostics",
+        "benefit": "You understand the starting point and limits before treatment begins",
+        "patientOutcome": "You understand the starting point before treatment begins"
+      },
+      {
+        "id": "design",
+        "title": "Outcome design",
+        "benefit": "You see the direction of change before the plan is agreed",
+        "patientOutcome": "You see the direction of change before agreeing the plan"
+      },
+      {
+        "id": "coordination",
+        "title": "Specialist coordination",
+        "benefit": "One aligned route instead of disconnected recommendations",
+        "patientOutcome": "You get one aligned route instead of disconnected opinions"
+      },
+      {
+        "id": "sequence",
+        "title": "Treatment sequence",
+        "benefit": "You know what happens first and why each step matters",
+        "patientOutcome": "You know the order of stages and why each matters"
+      },
+      {
+        "id": "budget",
+        "title": "Staged budget",
+        "benefit": "You plan costs by stage without unexpected add-ons",
+        "patientOutcome": "You plan costs by stage; amounts after diagnostics"
+      },
+      {
+        "id": "control",
+        "title": "Control and follow-up",
+        "benefit": "Progress is tracked at key milestones",
+        "patientOutcome": "Checkpoints are clear in advance"
+      }
+    ],
+    "cta": {
+      "label": "How Raimov System works",
+      "href": "/en/raimov-system/"
+    }
+  },
+  "doctor": {
+    "heading": "Atabek Raimov",
+    "name": "Atabek Raimov",
+    "role": {
+      "text": "Orthodontist-gnathologist, functional dentist · founder of RAIMOV DENTAL",
+      "publishable": true,
+      "source": "doctor.en.json + FOUNDER_ATTESTATION 2026-07-21"
+    },
+    "competencies": [
+      {
+        "text": "Comprehensive diagnostics and planning",
+        "publishable": true
+      },
+      {
+        "text": "Veneers and smile aesthetics",
+        "publishable": true
+      },
+      {
+        "text": "Implants and prosthetics",
+        "publishable": true
+      },
+      {
+        "text": "Adult orthodontics",
+        "publishable": true
+      },
+      {
+        "text": "Full-mouth reconstruction",
+        "publishable": true
+      }
+    ],
+    "photo": {
+      "src": "/assets/img/doctor/atabek-portrait.jpg",
+      "alt": "Atabek Raimov",
+      "publishable": true
+    },
+    "profileHref": "/en/atabek-raimov/",
+    "body": "Atabek Raimov leads complex aesthetic and functional cases: diagnostics, case conference and a staged plan via Raimov System — without promising an outcome before examination."
+  },
+  "flagshipServices": {
+    "heading": "Core treatment directions",
+    "items": [
+      {
+        "title": "Veneers and aesthetics",
+        "href": "/en/veneers/",
+        "description": "Smile design within a comprehensive treatment plan."
+      },
+      {
+        "title": "Dental implants",
+        "href": "/en/dental-implants/",
+        "description": "Replacing missing teeth with function and bite in mind."
+      },
+      {
+        "title": "Full mouth reconstruction",
+        "href": "/en/full-mouth-reconstruction/",
+        "description": "Structured interdisciplinary treatment for complex cases."
+      },
+      {
+        "title": "Adult orthodontics",
+        "href": "/en/adult-orthodontics/",
+        "description": "Bite correction and preparation for aesthetic treatment."
+      }
+    ]
+  },
+  "reviews": {
+    "heading": "Patient reviews",
+    "items": []
+  },
+  "clinicGallery": {
+    "heading": "Clinic",
+    "items": [
+      {
+        "src": "/assets/img/clinic/reception.jpg",
+        "alt": "RAIMOV DENTAL reception",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/clinic/team-group.jpg",
+        "alt": "Clinic team",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/doctor/atabek-portrait.jpg",
+        "alt": "Atabek Raimov",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+        "alt": "Mir-Ali Talyshkhanov",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/gribanova-marina.jpg",
+        "alt": "Marina Gribanova",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/duisheeva-ayday.jpg",
+        "alt": "Ayday Duisheeva",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/kerimkulova-aiperi.jpg",
+        "alt": "Aiperi Kerimkulova",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+        "alt": "Anonymised clinical result",
+        "publishable": true
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Common questions",
+    "items": [
+      {
+        "q": "Where does treatment start?",
+        "a": "With comprehensive diagnostics and plan alignment. Book via the form on this site or through clinic contacts.",
+        "publishable": true
+      },
+      {
+        "q": "How much does treatment cost?",
+        "a": "Cost depends on your individual plan. Specific amounts are discussed after diagnostics.",
+        "publishable": true
+      },
+      {
+        "q": "Do you guarantee results?",
+        "a": "We do not promise a specific outcome before examination. Plan and prognosis are discussed after diagnostics.",
+        "publishable": true
+      },
+      {
+        "q": "Can treatment be staged?",
+        "a": "Staged treatment is possible per an agreed plan. Details are discussed at the first visit.",
+        "publishable": true
+      },
+      {
+        "q": "Do you accept international patients?",
+        "a": "Your first contact can begin remotely. Visit format is described in the international patients section.",
+        "publishable": true
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Book comprehensive diagnostics",
+    "body": "Describe the task. The coordinator will confirm the first-visit format and reply on WhatsApp during working hours.",
+    "primaryCta": {
+      "label": "Book comprehensive diagnostics",
+      "href": "/en/comprehensive-diagnostics/#lead-form"
+    },
+    "secondaryCta": {
+      "label": "Clinic contacts",
+      "href": "/en/contact/"
+    },
+    "secondOpinion": {
+      "label": "Second opinion",
+      "whatsappPrefillKey": "second_opinion"
+    }
+  }
+}

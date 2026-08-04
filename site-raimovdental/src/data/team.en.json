@@ -1,0 +1,133 @@
+{
+  "language": "en",
+  "path": "/en/team/",
+  "meta": {
+    "title": "RAIMOV DENTAL team | RAIMOV DENTAL",
+    "description": "RAIMOV DENTAL doctors — orthodontics, therapy, implants."
+  },
+  "intro": {
+    "heading": "RAIMOV DENTAL team",
+    "body": "A multidisciplinary team led by Atabek Raimov. Roles use neutral public wording from confirmed clinic cards."
+  },
+  "members": [
+    {
+      "id": "atabek-raimov",
+      "name": "Atabek Raimov",
+      "fullName": "Atabek Saidovich Raimov",
+      "role": "Orthodontist-gnathologist, functional dentist · founder of RAIMOV DENTAL",
+      "specialties": [
+        "Orthodontics",
+        "Gnathology",
+        "Functional dentistry"
+      ],
+      "profileHref": "/en/atabek-raimov/",
+      "photo": {
+        "src": "/assets/img/doctor/atabek-portrait.jpg",
+        "alt": "Atabek Raimov",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-raimov",
+        "FOUNDER_ATTESTATION_2026-07-21"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "talyshkhanov-mir-ali",
+      "name": "Mir-Ali Talyshkhanov",
+      "fullName": "Mir-Ali Talyshkhanov",
+      "role": "Oral surgeon-implantologist, prosthodontist",
+      "specialties": [
+        "Implantology",
+        "Prosthetics"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+        "alt": "Mir-Ali Talyshkhanov",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-talyshkhanov",
+        "MED-clinic-052"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "gribanova-marina",
+      "name": "Marina Gribanova",
+      "fullName": "Marina Nikolaevna Gribanova",
+      "role": "Dentist-therapist",
+      "specialties": [
+        "Restorative dentistry"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/gribanova-marina.jpg",
+        "alt": "Marina Gribanova",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-gribanova",
+        "MED-clinic-069"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "duisheeva-ayday",
+      "name": "Ayday Duisheeva",
+      "fullName": "Ayday Bolotovna Duisheeva",
+      "role": "Orthodontist",
+      "specialties": [
+        "Orthodontics"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/duisheeva-ayday.jpg",
+        "alt": "Ayday Duisheeva",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-duisheeva",
+        "MED-clinic-078"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "kerimkulova-aiperi",
+      "name": "Aiperi Kerimkulova",
+      "fullName": "Aiperi Tursunalievna Kerimkulova",
+      "role": "Dentist-therapist and hygienist",
+      "specialties": [
+        "Therapy",
+        "Hygiene"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/kerimkulova-aiperi.jpg",
+        "alt": "Aiperi Kerimkulova",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-kerimkulova",
+        "MED-clinic-018"
+      ],
+      "publishable": true
+    }
+  ],
+  "leadDoctor": {
+    "name": "Atabek Raimov",
+    "fullNameRu": "Atabek Saidovich Raimov",
+    "profileHref": "/en/atabek-raimov/",
+    "role": "Orthodontist-gnathologist, functional dentist · founder of RAIMOV DENTAL",
+    "photo": {
+      "src": "/assets/img/doctor/atabek-portrait.jpg",
+      "alt": "Atabek Raimov",
+      "publishable": true
+    }
+  },
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/"
+  }
+}

@@ -1,0 +1,37 @@
+# Maps this repo → grainee-v2 paths (identical relative paths).
+version: 1
+source_repo: zaomir/raimovdental
+target_repo: zaomir/grainee-v2
+direction: agents_to_monorepo
+trees:
+  - site-raimovdental
+  - research/raimov-profile
+  - docs/projects/raimovdental
+  - docs/projects/healthcare-ecosystem
+  - docs/raimov
+  - docs/copy/raimov
+  - docs/legal/raimov
+  - docs/legal-templates/raimov
+  - docs/audits/raimov
+  - docs/research/raimov
+  - scripts/raimov
+  - tests/raimov
+  - tests/raimovdental
+ssot_globs:
+  - docs/ssot/RAIMOV*.md
+  - docs/ssot/EXPERT_DENTAL*.md
+  - docs/ssot/ELITE_DENTAL*.md
+extra_files:
+  - docs/expert-clinic-reference.md
+  - agents/manifests/raimovdental.yaml
+excludes:
+  - node_modules
+  - dist
+  - .baseline
+  - .env
+  - .env.*
+  - .git
+  - .DS_Store
+protected_in_target:
+  - research/raimov-profile/evidence/**
+  - site-raimovdental/src/config/pricing.ts

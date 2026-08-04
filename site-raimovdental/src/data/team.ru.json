@@ -1,0 +1,133 @@
+{
+  "language": "ru",
+  "path": "/ru/komanda/",
+  "meta": {
+    "title": "Команда RAIMOV DENTAL | RAIMOV DENTAL",
+    "description": "Врачи RAIMOV DENTAL — ортодонтия, терапия, имплантация."
+  },
+  "intro": {
+    "heading": "Команда RAIMOV DENTAL",
+    "body": "Междисциплинарная команда под руководством Атабека Раимова. Роли публикуются в нейтральной формулировке по подтверждённым карточкам клиники."
+  },
+  "members": [
+    {
+      "id": "atabek-raimov",
+      "name": "Атабек Раимов",
+      "fullName": "Раимов Атабек Саидович",
+      "role": "Ортодонт-гнатолог, функциональный стоматолог · основатель RAIMOV DENTAL",
+      "specialties": [
+        "Ортодонтия",
+        "Гнатология",
+        "Функциональная стоматология"
+      ],
+      "profileHref": "/ru/atabek-raimov/",
+      "photo": {
+        "src": "/assets/img/doctor/atabek-portrait.jpg",
+        "alt": "Атабек Раимов",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-raimov",
+        "FOUNDER_ATTESTATION_2026-07-21"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "talyshkhanov-mir-ali",
+      "name": "Мир-Али Талышханов",
+      "fullName": "Талышханов Мир-Али",
+      "role": "Хирург-имплантолог, ортопед",
+      "specialties": [
+        "Имплантация",
+        "Ортопедия"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+        "alt": "Мир-Али Талышханов",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-talyshkhanov",
+        "MED-clinic-052"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "gribanova-marina",
+      "name": "Марина Грибанова",
+      "fullName": "Грибанова Марина Николаевна",
+      "role": "Врач-стоматолог терапевт",
+      "specialties": [
+        "Терапевтическая стоматология"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/gribanova-marina.jpg",
+        "alt": "Марина Грибанова",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-gribanova",
+        "MED-clinic-069"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "duisheeva-ayday",
+      "name": "Айдай Дуйшеева",
+      "fullName": "Дуйшеева Айдай Болотовна",
+      "role": "Врач-стоматолог ортодонт",
+      "specialties": [
+        "Ортодонтия"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/duisheeva-ayday.jpg",
+        "alt": "Айдай Дуйшеева",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-duisheeva",
+        "MED-clinic-078"
+      ],
+      "publishable": true
+    },
+    {
+      "id": "kerimkulova-aiperi",
+      "name": "Айпери Керимкулова",
+      "fullName": "Керимкулова Айпери Турсуналиевна",
+      "role": "Врач-стоматолог терапевт-гигиенист",
+      "specialties": [
+        "Терапия",
+        "Гигиена"
+      ],
+      "profileHref": null,
+      "photo": {
+        "src": "/assets/img/team/kerimkulova-aiperi.jpg",
+        "alt": "Айпери Керимкулова",
+        "publishable": true
+      },
+      "sourceIds": [
+        "expertdental-doctor-card-kerimkulova",
+        "MED-clinic-018"
+      ],
+      "publishable": true
+    }
+  ],
+  "leadDoctor": {
+    "name": "Атабек Раимов",
+    "fullNameRu": "Раимов Атабек Саидович",
+    "profileHref": "/ru/atabek-raimov/",
+    "role": "Ортодонт-гнатолог, функциональный стоматолог · основатель RAIMOV DENTAL",
+    "photo": {
+      "src": "/assets/img/doctor/atabek-portrait.jpg",
+      "alt": "Атабек Раимов",
+      "publishable": true
+    }
+  },
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "language": "en",
+  "path": "/en/cost-and-payment/",
+  "meta": {
+    "title": "Cost and payment | RAIMOV DENTAL",
+    "description": "Treatment cost and payment terms at RAIMOV DENTAL — individual plan and staged payment."
+  },
+  "intro": {
+    "heading": "Cost and payment",
+    "body": "Cost follows an individual plan. Price list, staged payment, and methods are published after clinic confirmation."
+  },
+  "priceList": {
+    "status": "pending_clinic_confirmation",
+    "pricingSource": "src/config/pricing.ts",
+    "bands": [
+      "first_visit",
+      "comprehensive_diagnostics",
+      "veneers_smile_design",
+      "implants",
+      "full_mouth",
+      "adult_orthodontics"
+    ],
+    "items": [],
+    "note": "Prices live in src/config/pricing.ts when confirmed — not duplicated here.",
+    "publishable": false
+  },
+  "paymentMethods": {
+    "status": "pending_clinic_confirmation",
+    "items": [],
+    "publishable": false
+  },
+  "stagedPayment": {
+    "status": "pending_clinic_confirmation",
+    "description": "Staged payment is possible per an approved plan. Details are confirmed when you book.",
+    "publishable": false
+  },
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/"
+  }
+}

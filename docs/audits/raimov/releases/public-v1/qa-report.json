@@ -1,0 +1,37 @@
+{
+  "project": "raimovdental",
+  "stage": "B",
+  "route": "/ru/",
+  "decision": "DEC-772",
+  "gate": "4B",
+  "generated_at": "2026-07-31T12:10:00Z",
+  "source_sha_base": "2be026cbf5e470d66e8d5cd63fc1fd5eae7bfc11",
+  "checks": {
+    "build": "PASS",
+    "test_raimovdental": "PASS",
+    "axe_wcag22aa_serious_critical": "PASS",
+    "playwright_ru_privacy": "PASS",
+    "stage_a_absent_from_dist": "PASS",
+    "index_follow": "PASS",
+    "canonical": "PASS",
+    "sitemap_public_only": "PASS",
+    "robots_disallow_stage_a": "PASS",
+    "investor_disclaimer": "PASS",
+    "no_dmitry_public": "PASS",
+    "forms_lead_types": ["investor_strategy", "academy_interest"],
+    "nginx_stage_a_include": "PASS"
+  },
+  "screenshots": [
+    "homepage-desktop.png",
+    "homepage-mobile-390.png",
+    "homepage-mobile-320.png",
+    "investor-form.png",
+    "academy-form.png",
+    "404.png"
+  ],
+  "known_limitations": [
+    "Stage C patient contour deferred",
+    "EN pages redirected/410 via nginx map, not rebuilt",
+    "Live Stage A auth smoke runs at production cutover"
+  ]
+}

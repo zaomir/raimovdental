@@ -1,0 +1,15 @@
+{
+  "id": "MED-XXX",
+  "filename": null,
+  "source_type": "repo_historical_asset_reference | clinic_provided | captured_public_page",
+  "source_url": null,
+  "repo_path": null,
+  "captured_at": null,
+  "copyright_owner": "unknown",
+  "usage_rights": "pending_clinic_confirmation",
+  "subject": "unknown",
+  "public_site_eligible": false,
+  "verification_status": "repo_reference_only",
+  "sha256": null,
+  "notes": "Hash is integrity only — not consent. Never use empty-file SHA."
+}

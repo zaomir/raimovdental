@@ -1,0 +1,83 @@
+{
+  "language": "en",
+  "path": "/en/raimov-system/",
+  "brand": "Raimov System",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Raimov System | RAIMOV DENTAL",
+    "description": "Patient-facing explanation of Raimov System — eight steps from diagnostics to follow-up.",
+    "medicalReviewRequired": true,
+    "author": "Atabek Raimov",
+    "medicalReviewer": null,
+    "publishedAt": null,
+    "reviewedAt": null
+  },
+  "intro": {
+    "heading": "Raimov System",
+    "body": "Raimov System is not a single procedure. It is the pathway for a complex case: from diagnostics and case conference to a staged plan and follow-up.",
+    "excludes": "No franchise, royalty, or ELITE DENTAL commercial content on this site."
+  },
+  "steps": [
+    {
+      "step": 1,
+      "id": "diagnostics",
+      "title": "Diagnostic data collection",
+      "description": "Clinical exam, photo protocol, digital scanning, and imaging when indicated.",
+      "patientOutcome": "You understand the baseline and constraints"
+    },
+    {
+      "step": 2,
+      "id": "design",
+      "title": "Outcome design",
+      "description": "Digital planning of smile and function with aligned expectations.",
+      "patientOutcome": "You align on the outcome direction before treatment starts"
+    },
+    {
+      "step": 3,
+      "id": "coordination",
+      "title": "Team review",
+      "description": "Specialists assess options and risks before the final plan.",
+      "patientOutcome": "You get a team decision, not scattered advice"
+    },
+    {
+      "step": 4,
+      "id": "sequence",
+      "title": "Treatment sequence",
+      "description": "Clear route: what happens first and what follows.",
+      "patientOutcome": "You see the stage order on one map"
+    },
+    {
+      "step": 5,
+      "id": "budget",
+      "title": "Staged budget",
+      "description": "Staged estimate without hidden steps. Exact amounts are agreed after diagnostics.",
+      "patientOutcome": "You know amounts are finalised after diagnostics"
+    },
+    {
+      "step": 6,
+      "id": "coordination_team",
+      "title": "Specialist coordination",
+      "description": "One plan with owners at each stage.",
+      "patientOutcome": "You know who owns each stage"
+    },
+    {
+      "step": 7,
+      "id": "control",
+      "title": "Quality control",
+      "description": "Bite, aesthetics, and function checks at key milestones.",
+      "patientOutcome": "Checkpoints are fixed in advance"
+    },
+    {
+      "step": 8,
+      "id": "follow_up",
+      "title": "Long-term follow-up",
+      "description": "Control visit schedule and care guidance after major stages.",
+      "patientOutcome": "You leave with a follow-up plan after core stages"
+    }
+  ],
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/#lead-form",
+    "source": "raimovdental_system_en"
+  }
+}

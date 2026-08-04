@@ -1,0 +1,2 @@
+fact_id,subject,claim_ru,source_id,verification_status,public_site_eligible,notes
+F-XXX,subject,"Observation only — quote what the source literally says, not an inferred medical fact.",SRC-…,repo_reference_only|discovered|unverified|third_party_unverified|clinic_confirmation_required,false,"Always explain why not publishable."

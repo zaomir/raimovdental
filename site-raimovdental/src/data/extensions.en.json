@@ -1,0 +1,109 @@
+{
+  "language": "en",
+  "pages": {
+    "diagnostics": [
+      {
+        "type": "index",
+        "title": "Questions the first diagnostic stage should answer",
+        "items": [
+          { "kicker": "01", "title": "What is the primary problem?", "text": "The presenting concern does not always identify the underlying cause. The team separates the aesthetic request from functional, tissue and practical constraints." },
+          { "kicker": "02", "title": "Which routes are available?", "text": "A patient should be able to compare meaningful scenarios rather than receive one unexplained list of procedures." },
+          { "kicker": "03", "title": "What must happen first?", "text": "Some stages should not be planned before tissue stability, bite correction or additional information has been obtained." },
+          { "kicker": "04", "title": "What decision is needed now?", "text": "The outcome should be clarity about immediate choices, later choices and the questions that remain genuinely open." }
+        ]
+      },
+      {
+        "type": "narrative",
+        "title": "Preparing for a useful first conversation",
+        "body": [
+          "It is more useful to describe the problem you want to solve than to arrive committed to the name of a procedure. Consider previous treatment, what worked or failed, and which time or budget constraints are genuinely important.",
+          "Existing images and records may help the clinician, but they should be transferred only through an agreed private channel. The absence of old records should not prevent an initial enquiry."
+        ]
+      }
+    ],
+    "veneers": [
+      {
+        "type": "narrative",
+        "title": "The main decision is the role of veneers within the complete plan",
+        "body": [
+          "An aesthetic concern may begin with tooth shape or colour, but the long-term logic also depends on tissue health, tooth position, bite and loading. A veneer discussion should therefore identify what the restoration can change and what remains outside its ability to solve.",
+          "Within Raimov System, the aesthetic stage follows an understanding of functional constraints and an agreed direction of change."
+        ]
+      },
+      {
+        "type": "split",
+        "title": "Decision branches before treatment",
+        "items": [
+          { "title": "Orthodontics first", "text": "When tooth position or bite would require excessive restorative compensation, tooth movement may be considered before final restorations." },
+          { "title": "Tissue stabilisation first", "text": "Active periodontal, enamel or loading problems may require a separate solution before definitive aesthetics." },
+          { "title": "Restorations as the principal stage", "text": "When conditions permit, the scope, form and sequence are designed with attention to preserving healthy tissue." }
+        ]
+      }
+    ],
+    "implants": [
+      {
+        "type": "index",
+        "title": "What an implant decision includes",
+        "items": [
+          { "kicker": "A", "title": "The future restoration", "text": "Implant position is considered in relation to the future crown or prosthesis, bite and access for hygiene." },
+          { "kicker": "B", "title": "The tissue environment", "text": "The team reviews available tissue and factors that may affect the surgical and restorative stages." },
+          { "kicker": "C", "title": "Adjacent teeth and bite", "text": "The final result may depend on preparing neighbouring teeth or changing the available space before implant placement." },
+          { "kicker": "D", "title": "Maintenance", "text": "The plan includes monitoring tissue, hygiene and loading after the restorative stage is completed." }
+        ]
+      },
+      {
+        "type": "narrative",
+        "title": "Why the restorative outcome should guide the surgical plan",
+        "body": [
+          "The patient needs a functioning tooth or prosthesis, not an implant as an isolated object. The intended restoration should therefore influence the surgical plan rather than being improvised after placement.",
+          "This order helps the team identify constraints in advance and reduces the risk that a technically completed stage fails to support the overall clinical objective."
+        ]
+      }
+    ],
+    "full-mouth": [
+      {
+        "type": "narrative",
+        "title": "Full-mouth reconstruction is dependency management, not the maximum number of procedures",
+        "body": [
+          "With multiple problems it is easy to create a long treatment list, but a list is not yet a plan. The team must identify which problems influence others, where temporary solutions may be required, which tissues need time and when definitive restorations become appropriate.",
+          "A master plan reduces the risk that one completed stage restricts the next or must be repeated later."
+        ]
+      },
+      {
+        "type": "index",
+        "title": "What keeps a large plan manageable",
+        "items": [
+          { "kicker": "01", "title": "Priorities", "text": "Health, function and stability are addressed before final aesthetic decisions are locked in." },
+          { "kicker": "02", "title": "Provisional stages", "text": "Where appropriate, temporary solutions help test function and adaptation before definitive work." },
+          { "kicker": "03", "title": "Quality gates", "text": "After major stages, the team confirms that the conditions for moving forward have been reached." },
+          { "kicker": "04", "title": "Financial staging", "text": "Budget is connected to the sequence so that near-term commitments and later decisions remain visible." }
+        ]
+      }
+    ],
+    "orthodontics": [
+      {
+        "type": "narrative",
+        "title": "Adult orthodontics is not limited to making teeth look straighter",
+        "body": [
+          "In a comprehensive adult case, tooth movement may create implant space, reduce the amount of future restorative compensation, improve loading or prepare tooth position for an aesthetic stage. The first question is therefore not braces or aligners, but the purpose of movement.",
+          "The orthodontic route belongs inside the master plan so that its outcome supports the clinicians who follow and remains understandable to the patient."
+        ]
+      },
+      {
+        "type": "split",
+        "title": "Two different requests",
+        "items": [
+          { "title": "Stand-alone correction", "text": "The primary task concerns tooth position and bite, without another restorative or surgical stage determining the route." },
+          { "title": "Preparation for comprehensive care", "text": "Orthodontics is judged by how effectively it creates conditions for the next stage of the master plan." }
+        ]
+      },
+      {
+        "type": "narrative",
+        "title": "Retention is part of the treatment, not an afterthought",
+        "body": [
+          "The active movement stage ends only when the team has defined how the new position will be maintained and monitored. Retention, hygiene and follow-up expectations should be discussed before treatment begins, particularly when restorative or implant stages depend on the orthodontic result."
+        ]
+      }
+    ]
+  }
+}

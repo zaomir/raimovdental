@@ -1,0 +1,60 @@
+{
+  "confirmed_at": "2026-07-21",
+  "task": "B1-B4+D3",
+  "assets": [
+    {
+      "src_rel": "media/portraits/atabek-portrait.jpg",
+      "web_path": "/assets/img/doctor/atabek-portrait.jpg",
+      "sha256": "02f4314022f1c6965ca4119f7403435596736a98fc8224d00e50561e9d9f5167",
+      "bytes": 117540
+    },
+    {
+      "src_rel": "media/clinic/006_IMG_4953.JPG",
+      "web_path": "/assets/img/clinic/reception.jpg",
+      "sha256": "80d23d17c00794b98fef68869c23124c1585265f45f0ca6b72c72d13174fe513",
+      "bytes": 319618
+    },
+    {
+      "src_rel": "media/clinic/017_0A2A0386.JPG",
+      "web_path": "/assets/img/clinic/team-group.jpg",
+      "sha256": "525c17fdba2f22e7df8a977aeed2053bb8ecca04690f6388850f25fa9809e77f",
+      "bytes": 194209
+    },
+    {
+      "src_rel": "media/clinic/052_0A2A0467.JPG",
+      "web_path": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+      "sha256": "154d4632ac443ed29d8ad22a0ba0ea08964eca08265c46433a7a51482a76b555",
+      "bytes": 189555
+    },
+    {
+      "src_rel": "media/clinic/069_0A2A0453.JPG",
+      "web_path": "/assets/img/team/gribanova-marina.jpg",
+      "sha256": "a0e2cc030355d93053dc218c72dfe48e336f90c3c2e149a598720a908a21e47d",
+      "bytes": 34819
+    },
+    {
+      "src_rel": "media/clinic/078_0A2A0520.JPG",
+      "web_path": "/assets/img/team/duisheeva-ayday.jpg",
+      "sha256": "2f46f80f75f8e12f78528274bf13b60ca5e65c612524e386e5a1c823b591e5ab",
+      "bytes": 422763
+    },
+    {
+      "src_rel": "media/clinic/018_0A2A0432.JPG",
+      "web_path": "/assets/img/team/kerimkulova-aiperi.jpg",
+      "sha256": "41e40ecdf0cbfdc1dc0f964da7758b54a0df3c0cedeb08da5cedb8cd5bc991ae",
+      "bytes": 216762
+    },
+    {
+      "src_rel": "media/clinic/028__MG_8727.jpeg",
+      "web_path": "/assets/img/cases/ortho-stage-anonymized.jpg",
+      "sha256": "27efe6718c14f96494fd554ac8ee0d41898d2fced7ec14f3b0d5745c8b9fa6c4",
+      "bytes": 163848
+    },
+    {
+      "src_rel": "media/clinic/031__MG_1039.jpeg",
+      "web_path": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+      "sha256": "f1914940d7eba07cae3af5e4ed684a767cc4e18b34ffbce0a83437bc74b3f19a",
+      "bytes": 134247
+    }
+  ]
+}

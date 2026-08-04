@@ -1,0 +1,75 @@
+{
+  "language": "ru",
+  "path": "/ru/o-klinike/",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "О клинике | RAIMOV DENTAL",
+    "description": "RAIMOV DENTAL в Бишкеке — комплексная диагностика, эстетика, имплантация и междисциплинарные планы."
+  },
+  "intro": {
+    "heading": "О клинике RAIMOV DENTAL",
+    "body": "Стоматологическая клиника в Бишкеке, ориентированная на комплексную диагностику, эстетику, имплантацию и междисциплинарные планы. Связанный публичный бренд клиники — Expert Dental Studio (expertdental.kg)."
+  },
+  "founder": {
+    "name": "Атабек Раимов",
+    "fullNameRu": "Раимов Атабек Саидович",
+    "href": "/ru/atabek-raimov/"
+  },
+  "licenses": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": []
+  },
+  "mission": {
+    "status": "clinic_confirmed",
+    "body": "Дать пациенту понятный план: точная диагностика, согласованная команда и наблюдение без обещаний результата до осмотра."
+  },
+  "photos": {
+    "status": "published_founder_grant_2026-07-21",
+    "items": [
+      {
+        "src": "/assets/img/clinic/reception.jpg",
+        "alt": "Ресепшн клиники RAIMOV DENTAL",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/clinic/team-group.jpg",
+        "alt": "Команда клиники",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/doctor/atabek-portrait.jpg",
+        "alt": "Атабек Раимов",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+        "alt": "Мир-Али Талышханов",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/gribanova-marina.jpg",
+        "alt": "Марина Грибанова",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/duisheeva-ayday.jpg",
+        "alt": "Айдай Дуйшеева",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/kerimkulova-aiperi.jpg",
+        "alt": "Айпери Керимкулова",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+        "alt": "Анонимизированный клинический результат",
+        "publishable": true
+      }
+    ]
+  },
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/"
+  }
+}

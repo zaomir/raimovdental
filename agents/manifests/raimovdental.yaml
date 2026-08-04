@@ -1,0 +1,76 @@
+id: raimovdental
+name: RAIMOV Ecosystem
+status: active
+phase: 1
+
+read_first:
+  - docs/projects/raimovdental/AGENTS.md
+  - agents/manifests/raimovdental.yaml
+  - docs/projects/raimovdental/ROUTER.md
+
+allowed_paths:
+  - site-raimovdental/**
+  - research/raimov-profile/**
+  - docs/projects/raimovdental/**
+  - docs/raimov/**
+  - docs/copy/raimov/**
+  - docs/legal/raimov/**
+  - docs/legal-templates/raimov/**
+  - docs/audits/raimov/**
+  - docs/research/raimov/**
+  - docs/ssot/RAIMOV*.md
+  - docs/ssot/EXPERT_DENTAL*.md
+  - docs/ssot/ELITE_DENTAL*.md
+  - scripts/raimov/**
+  - tests/raimov/**
+
+forbidden_paths:
+  - package.json
+  - site-evo/**
+
+protected_paths:
+  - research/raimov-profile/evidence/**
+  - site-raimovdental/src/config/pricing.ts
+
+topics:
+  master_index: docs/ssot/RAIMOV.md
+  architecture: docs/ssot/RAIMOV_ECOSYSTEM_PROJECT_ARCHITECTURE.md
+  strategy: docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md
+  project_status: docs/raimov/PROJECT_STATUS.md
+  routing: docs/projects/raimovdental/ROUTER.md
+  media_rights: research/raimov-profile/
+  pricing:
+    ssot: docs/ssot/RAIMOV.md
+    code:
+      - site-raimovdental/src/config/pricing.ts
+
+test_heuristic:
+  - tests/raimovdental/
+  - tests/raimov/
+
+commands:
+  sync: cd /var/www/grainee-v2 && git pull --ff-only origin main
+  sync_from_agents: bash scripts/raimov/sync-from-agents-repo.sh --apply
+  seed_agents: bash scripts/raimov/seed-agents-repo.sh --apply
+  build: node scripts/build-raimovdental.mjs
+  deploy: DEPLOY_ASSUME_YES=1 bash scripts/deploy-static-all.sh
+  smoke: curl -fsS -o /dev/null -w '%{http_code}' https://raimovdental.com/
+  test: node tests/raimovdental/run-all.mjs
+
+deploy_target: raimovdental
+
+agents_satellite_repo: zaomir/raimovdental
+agents_satellite_path: /var/www/raimovdental
+agents_sync: bash scripts/raimov/sync-from-agents-repo.sh --apply --commit --push
+agents_seed: bash scripts/raimov/seed-agents-repo.sh --apply --push
+
+
+definition_of_done:
+  - Correct RAIMOV authority and namespace used
+  - Evidence, medical, legal and media-rights gates preserved
+  - RAIMOV.md and project status updated if SSOT or release state drifted
+  - RU/EN parity checked on changed routes
+  - No patient-identifiable data or secrets committed
+
+owners:
+  shared_router: platform

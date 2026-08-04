@@ -1,0 +1,41 @@
+{
+  "language": "ru",
+  "path": "/ru/stoimost-i-oplata/",
+  "meta": {
+    "title": "Стоимость и оплата | RAIMOV DENTAL",
+    "description": "Стоимость лечения и условия оплаты в RAIMOV DENTAL — индивидуальный план и этапная оплата."
+  },
+  "intro": {
+    "heading": "Стоимость и оплата",
+    "body": "Стоимость определяется индивидуальным планом. Прайс, этапная оплата и способы оплаты публикуются после согласования с клиникой."
+  },
+  "priceList": {
+    "status": "pending_clinic_confirmation",
+    "pricingSource": "src/config/pricing.ts",
+    "bands": [
+      "first_visit",
+      "comprehensive_diagnostics",
+      "veneers_smile_design",
+      "implants",
+      "full_mouth",
+      "adult_orthodontics"
+    ],
+    "items": [],
+    "note": "Prices live in src/config/pricing.ts when confirmed — not duplicated here.",
+    "publishable": false
+  },
+  "paymentMethods": {
+    "status": "pending_clinic_confirmation",
+    "items": [],
+    "publishable": false
+  },
+  "stagedPayment": {
+    "status": "pending_clinic_confirmation",
+    "description": "Этапная оплата возможна по утверждённому плану. Детали уточняются при записи.",
+    "publishable": false
+  },
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/"
+  }
+}

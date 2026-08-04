@@ -1,0 +1,14 @@
+{
+  "utc": "2026-07-31T13:15:30Z",
+  "deploy_sha": "75f74b5bd94b1f9f99498b7970c5b83f3748d739",
+  "results": [
+    {"url": "/", "expect": 301, "got": 301, "location": "/ru/"},
+    {"url": "/ru/", "expect": 200, "got": 200},
+    {"url": "/en/", "expect": 301, "got": 301, "location": "/ru/"},
+    {"url": "/ru/viniry/", "expect": 301, "got": 301, "location": "/ru/"},
+    {"url": "/ru/mezhdunarodnym-pacientam/", "expect": 410, "got": 410},
+    {"url": "/ru/academy/", "expect": 301, "got": 301, "location": "/ru/#academy"},
+    {"url": "/stage-a/", "expect_unauth": 401, "got_unauth": 401, "expect_auth": 200, "got_auth": 200}
+  ],
+  "pass": true
+}

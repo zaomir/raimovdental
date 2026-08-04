@@ -1,0 +1,75 @@
+{
+  "language": "en",
+  "path": "/en/about/",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "About | RAIMOV DENTAL",
+    "description": "RAIMOV DENTAL in Bishkek — comprehensive diagnostics, aesthetics, implants, and interdisciplinary plans."
+  },
+  "intro": {
+    "heading": "About RAIMOV DENTAL",
+    "body": "A dental clinic in Bishkek focused on comprehensive diagnostics, aesthetics, implants, and interdisciplinary plans. Related public clinic brand: Expert Dental Studio (expertdental.kg)."
+  },
+  "founder": {
+    "name": "Atabek Raimov",
+    "fullNameRu": "Раимов Атабек Саидович",
+    "href": "/en/atabek-raimov/"
+  },
+  "licenses": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": []
+  },
+  "mission": {
+    "status": "clinic_confirmed",
+    "body": "Give every patient a clear plan: precise diagnostics, coordinated team care, and follow-up — without outcome promises before examination."
+  },
+  "photos": {
+    "status": "published_founder_grant_2026-07-21",
+    "items": [
+      {
+        "src": "/assets/img/clinic/reception.jpg",
+        "alt": "RAIMOV DENTAL reception",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/clinic/team-group.jpg",
+        "alt": "Clinic team",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/doctor/atabek-portrait.jpg",
+        "alt": "Atabek Raimov",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+        "alt": "Mir-Ali Talyshkhanov",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/gribanova-marina.jpg",
+        "alt": "Marina Gribanova",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/duisheeva-ayday.jpg",
+        "alt": "Ayday Duisheeva",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/kerimkulova-aiperi.jpg",
+        "alt": "Aiperi Kerimkulova",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+        "alt": "Anonymised clinical result",
+        "publishable": true
+      }
+    ]
+  },
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/"
+  }
+}

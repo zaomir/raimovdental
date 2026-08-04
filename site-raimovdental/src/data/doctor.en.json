@@ -1,0 +1,102 @@
+{
+  "language": "en",
+  "path": "/en/atabek-raimov/",
+  "fullName": "Раимов Атабек Саидович",
+  "publicName": "Atabek Raimov",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Atabek Raimov — lead clinician, RAIMOV DENTAL",
+    "description": "Profile of Atabek Raimov, founder of RAIMOV DENTAL and author of Raimov System.",
+    "medicalReviewRequired": true,
+    "author": "Atabek Raimov",
+    "medicalReviewer": "clinic_attested_2026-07-21",
+    "publishedAt": "2026-07-21",
+    "reviewedAt": "2026-07-21"
+  },
+  "role": {
+    "title": "Orthodontist-gnathologist, functional dentist · founder of RAIMOV DENTAL",
+    "status": "clinic_confirmed",
+    "publishable": true,
+    "confirmation": "founder_attestation_2026-07-21 + expertdental.kg doctor card"
+  },
+  "specializations": {
+    "status": "clinic_confirmed",
+    "items": [
+      "Orthodontics",
+      "Gnathology",
+      "Functional dentistry"
+    ],
+    "publishable": true,
+    "confirmation": "founder_attestation_2026-07-21 + expertdental.kg wording"
+  },
+  "education": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": [],
+    "publishable": false,
+    "note": "Clinic confirmed the packet; detailed education list remains in counsel archive — not ingested into Git."
+  },
+  "certificates": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": [],
+    "publishable": false,
+    "note": "Clinic confirmed the packet; certificate scans/list remain in counsel archive — not ingested into Git."
+  },
+  "clinicalPhilosophy": {
+    "heading": "Clinical philosophy",
+    "body": "Care is built on precise diagnostics, an interdisciplinary plan, and long-term follow-up—without outcome promises before examination.",
+    "publishable": true,
+    "status": "clinic_confirmed"
+  },
+  "focusAreas": {
+    "heading": "Focus areas",
+    "items": [
+      "Comprehensive diagnostics and planning",
+      "Veneers and smile aesthetics",
+      "Implants and prosthetics",
+      "Adult orthodontics",
+      "Full mouth reconstruction"
+    ],
+    "status": "clinic_confirmed",
+    "publishable": true
+  },
+  "cases": {
+    "status": "draft-only",
+    "slugs": [],
+    "note": "Clinic confirmed case readiness; consent-linked case files not extracted from counsel archive."
+  },
+  "publications": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": [],
+    "publishable": false
+  },
+  "speaking": {
+    "status": "clinic_confirmed",
+    "publishable": true,
+    "items": [
+      {
+        "title": "Microimplants in orthodontics (miniscrews)",
+        "event": "Dental Congress DemMed",
+        "dates": "Osh 16 Mar 2024 / Bishkek 30 Mar 2024",
+        "url": "https://bishkek.events/event/stomatologicheskij-kongress/",
+        "handle": "@doctor_raimov"
+      }
+    ]
+  },
+  "raimovSystemRole": {
+    "heading": "Author of Raimov System",
+    "body": "Raimov System is the clinical framework of RAIMOV DENTAL: diagnostics, outcome design, team review, staged plan, and follow-up. No franchise or ELITE DENTAL commercial terms.",
+    "publishable": true
+  },
+  "photo": {
+    "src": "/assets/img/doctor/atabek-portrait.jpg",
+    "alt": "Atabek Raimov",
+    "status": "published_founder_grant_2026-07-21",
+    "publishable": true,
+    "assetId": "MED-PORTRAIT-001"
+  },
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/",
+    "source": "raimovdental_doctor_en"
+  }
+}

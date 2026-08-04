@@ -1,0 +1,53 @@
+{
+  "language": "en",
+  "items": [
+    {
+      "id": "diagnostics-first",
+      "question": "Where does treatment start?",
+      "answer": "With comprehensive diagnostics and plan alignment. Book via the form on this site or through clinic contacts.",
+      "publishable": true
+    },
+    {
+      "id": "pricing",
+      "question": "How much does treatment cost?",
+      "answer": "Cost depends on your individual plan. Specific amounts are discussed after diagnostics.",
+      "publishable": true
+    },
+    {
+      "id": "first-visit",
+      "question": "What does the first visit include?",
+      "answer": "Clinical exam, baseline data collection, and goal discussion. Full scope and duration are confirmed when you book.",
+      "publishable": true
+    },
+    {
+      "id": "international",
+      "question": "Do you accept international patients?",
+      "answer": "Your first contact can begin remotely. Visit format is described in the international patients section.",
+      "publishable": true
+    },
+    {
+      "id": "guarantees",
+      "question": "Do you guarantee results?",
+      "answer": "We do not promise a specific outcome before examination. Plan and prognosis are discussed after diagnostics.",
+      "publishable": true
+    },
+    {
+      "id": "team",
+      "question": "Who provides treatment?",
+      "answer": "RAIMOV DENTAL interdisciplinary team. Team roster is confirmed when you book.",
+      "publishable": true
+    },
+    {
+      "id": "payment",
+      "question": "What payment methods are available?",
+      "answer": "Payment methods will be published after clinic confirmation.",
+      "publishable": false
+    },
+    {
+      "id": "second-opinion",
+      "question": "Can I get a second opinion?",
+      "answer": "Yes. Send your existing treatment plan — we will discuss alternatives after diagnostics.",
+      "publishable": true
+    }
+  ]
+}

@@ -1,0 +1,550 @@
+{
+  "funnelPrimaryService": "comprehensive-diagnostics",
+  "services": [
+    {
+      "slug": "comprehensive-diagnostics",
+      "path": "/en/comprehensive-diagnostics/",
+      "language": "en",
+      "title": "Comprehensive diagnostics",
+      "shortDescription": "The first step toward a clear treatment plan: data collection, team review, and a staged route—without promising an outcome before examination.",
+      "meta": {
+        "title": "Comprehensive diagnostics | RAIMOV DENTAL",
+        "description": "The first step toward a clear treatment plan: data collection, team review, and a staged route—without promising an outcome before examination.",
+        "medicalReviewRequired": true,
+        "author": "Atabek Raimov",
+        "medicalReviewer": "TBD — pending clinic confirmation",
+        "publishedAt": null,
+        "reviewedAt": null
+      },
+      "sections": {
+        "problem": {
+          "heading": "Why patients come",
+          "body": "Patients want veneers, implants, bite correction, or full rehabilitation but need clarity on where to start and how many stages are involved."
+        },
+        "fit": {
+          "heading": "Who it may suit",
+          "body": "Adults who need an interdisciplinary plan combining aesthetics, function, implants, and orthodontics."
+        },
+        "options": {
+          "heading": "Possible treatment options",
+          "body": "After diagnostics, options may include aesthetic, orthodontic, implant, or combined care depending on clinical findings.",
+          "note": "The final plan is defined only after comprehensive diagnostics."
+        },
+        "diagnostics": {
+          "heading": "Diagnostics before treatment",
+          "body": "The scope of examination is individual and may include clinical exam, photo protocol, digital scanning, and imaging when indicated."
+        },
+        "results": {
+          "heading": "Real outcomes",
+          "body": "Only verified cases are shown publicly. Draft structure only until consent and medical review.",
+          "casesStatus": "draft-only — verified cases pending clinic materials"
+        },
+        "approach": {
+          "heading": "The RAIMOV DENTAL approach",
+          "body": "RAIMOV DENTAL follows Raimov System: one route from diagnostics to long-term follow-up, based on data—not generic protocols."
+        },
+        "stages": {
+          "heading": "Treatment stages",
+          "items": [
+            {
+              "title": "Initial consultation and goals",
+              "description": "We discuss expectations, constraints, and priorities."
+            },
+            {
+              "title": "Diagnostic data collection",
+              "description": "Imaging, scanning, and photo protocol when indicated."
+            },
+            {
+              "title": "Team review and outcome design",
+              "description": "Options with a clear sequence of stages."
+            },
+            {
+              "title": "Personal plan and staged estimate",
+              "description": "Transparent route; pricing TBD until clinic confirmation."
+            }
+          ]
+        },
+        "team": {
+          "heading": "Team",
+          "body": "Specialists depend on the plan. Team roster — TBD, pending clinic confirmation."
+        },
+        "timeline": {
+          "heading": "Timeline and visits",
+          "body": "Duration depends on examination scope; clinic will provide visit format guidance."
+        },
+        "costFactors": {
+          "heading": "Cost factors",
+          "body": "Cost depends on diagnostics scope, imaging, and case complexity. Price list — TBD.",
+          "pricingStatus": "TBD — pending clinic price list"
+        },
+        "risks": {
+          "heading": "Limitations and risks",
+          "body": "Diagnostics does not replace an in-person exam. Contraindications are determined by the doctor after assessment."
+        },
+        "aftercare": {
+          "heading": "Aftercare and follow-up",
+          "body": "After diagnostics you receive next-step recommendations and follow-up schedule if treatment starts."
+        },
+        "relatedCases": {
+          "heading": "Related cases",
+          "caseSlugs": [],
+          "note": "Only verified cases with patient consent are published."
+        },
+        "faq": {
+          "heading": "FAQ",
+          "items": [
+            {
+              "question": "Can I get a plan remotely?",
+              "answer": "A preliminary orientation may be possible, but the final plan requires in-person diagnostics. International format — TBD."
+            },
+            {
+              "question": "How long is the visit?",
+              "answer": "TBD — pending clinic confirmation."
+            }
+          ]
+        }
+      },
+      "cta": {
+        "label": "Book comprehensive diagnostics",
+        "href": "/en/comprehensive-diagnostics/",
+        "source": "raimovdental_service_comprehensive-diagnostics_en"
+      }
+    },
+    {
+      "slug": "veneers",
+      "path": "/en/veneers/",
+      "language": "en",
+      "title": "Veneers and smile aesthetics",
+      "shortDescription": "Aesthetic restoration of shape and shade within a comprehensive plan—after bite and tissue assessment.",
+      "meta": {
+        "title": "Veneers and smile aesthetics | RAIMOV DENTAL",
+        "description": "Aesthetic restoration of shape and shade within a comprehensive plan—after bite and tissue assessment.",
+        "medicalReviewRequired": true,
+        "author": "Atabek Raimov",
+        "medicalReviewer": "TBD — pending clinic confirmation",
+        "publishedAt": null,
+        "reviewedAt": null
+      },
+      "sections": {
+        "problem": {
+          "heading": "Why patients come",
+          "body": "Dissatisfaction with smile shape, color, or symmetry; uncertainty whether veneers are appropriate."
+        },
+        "fit": {
+          "heading": "Who it may suit",
+          "body": "Patients with an aesthetic goal after gum, enamel, and bite health assessment. Veneers are chosen only after diagnostics."
+        },
+        "options": {
+          "heading": "Possible treatment options",
+          "body": "Ceramic restorations, minimally invasive approaches, or alternatives if veneers are not optimal.",
+          "note": "The final plan is defined only after comprehensive diagnostics."
+        },
+        "diagnostics": {
+          "heading": "Diagnostics before treatment",
+          "body": "Before aesthetics we assess bite, gums, hard-tissue volume, and functional load."
+        },
+        "results": {
+          "heading": "Real outcomes",
+          "body": "Verified cases only with consent. Public photos — pending clinic materials.",
+          "casesStatus": "draft-only — verified cases pending clinic materials"
+        },
+        "approach": {
+          "heading": "The RAIMOV DENTAL approach",
+          "body": "Aesthetics at RAIMOV DENTAL is embedded in Raimov System: function and prognosis first, then agreed smile design."
+        },
+        "stages": {
+          "heading": "Treatment stages",
+          "items": [
+            {
+              "title": "Diagnostics and smile design",
+              "description": "Digital planning and expectation alignment."
+            },
+            {
+              "title": "Tissue preparation",
+              "description": "Minimal preparation when indicated."
+            },
+            {
+              "title": "Fabrication and try-in",
+              "description": "Shape, shade, and bite check before bonding."
+            },
+            {
+              "title": "Bonding and follow-up",
+              "description": "Care instructions and control visits."
+            }
+          ]
+        },
+        "team": {
+          "heading": "Team",
+          "body": "Aesthetic stage may involve therapist, orthodontist, and lead doctor — TBD."
+        },
+        "timeline": {
+          "heading": "Timeline and visits",
+          "body": "Timelines depend on preparation and lab work — TBD from clinic."
+        },
+        "costFactors": {
+          "heading": "Cost factors",
+          "body": "Material, number of teeth, preparatory stages, and related care affect cost.",
+          "pricingStatus": "TBD — pending clinic price list"
+        },
+        "risks": {
+          "heading": "Limitations and risks",
+          "body": "Veneers may be unsuitable with active inflammation, unstable bite without correction, etc.—the doctor decides."
+        },
+        "aftercare": {
+          "heading": "Aftercare and follow-up",
+          "body": "Hygiene, bite monitoring, and preventive visits per clinic schedule."
+        },
+        "relatedCases": {
+          "heading": "Related cases",
+          "caseSlugs": [
+            "draft-case-example"
+          ],
+          "note": "Only verified cases with patient consent are published."
+        },
+        "faq": {
+          "heading": "FAQ",
+          "items": [
+            {
+              "question": "How long do veneers last?",
+              "answer": "Depends on material, hygiene, and bite. Specific ranges after diagnostics—no guaranteed outcomes."
+            },
+            {
+              "question": "Can veneers be done in one visit?",
+              "answer": "Usually preparation and lab stages are required. Route confirmed after diagnostics."
+            }
+          ]
+        }
+      },
+      "cta": {
+        "label": "Book comprehensive diagnostics",
+        "href": "/en/comprehensive-diagnostics/",
+        "source": "raimovdental_service_veneers_en"
+      }
+    },
+    {
+      "slug": "dental-implants",
+      "path": "/en/dental-implants/",
+      "language": "en",
+      "title": "Dental implants",
+      "shortDescription": "Replacing missing teeth with implant support—within a comprehensive functional and aesthetic plan.",
+      "meta": {
+        "title": "Dental implants | RAIMOV DENTAL",
+        "description": "Replacing missing teeth with implant support—within a comprehensive functional and aesthetic plan.",
+        "medicalReviewRequired": true,
+        "author": "Atabek Raimov",
+        "medicalReviewer": "TBD — pending clinic confirmation",
+        "publishedAt": null,
+        "reviewedAt": null
+      },
+      "sections": {
+        "problem": {
+          "heading": "Why patients come",
+          "body": "Missing teeth, chewing difficulty, bone loss, desire to avoid removable prosthetics."
+        },
+        "fit": {
+          "heading": "Who it may suit",
+          "body": "Patients after bone, bite, and oral health assessment. Final decision after diagnostics."
+        },
+        "options": {
+          "heading": "Possible treatment options",
+          "body": "Single implants, implant bridges, or full-arch solutions—individualized.",
+          "note": "The final plan is defined only after comprehensive diagnostics."
+        },
+        "diagnostics": {
+          "heading": "Diagnostics before treatment",
+          "body": "May include CBCT, bone assessment, and surgical planning."
+        },
+        "results": {
+          "heading": "Real outcomes",
+          "body": "Verified cases pending consent. Public materials — TBD.",
+          "casesStatus": "draft-only — verified cases pending clinic materials"
+        },
+        "approach": {
+          "heading": "The RAIMOV DENTAL approach",
+          "body": "Implants at RAIMOV DENTAL are planned with orthodontics, prosthetics, and aesthetics via Raimov System."
+        },
+        "stages": {
+          "heading": "Treatment stages",
+          "items": [
+            {
+              "title": "Diagnostics and 3D planning",
+              "description": "Anatomy and safety assessment."
+            },
+            {
+              "title": "Surgical stage",
+              "description": "Implant placement when indicated."
+            },
+            {
+              "title": "Healing and monitoring",
+              "description": "Follow-up per doctor schedule."
+            },
+            {
+              "title": "Prosthetic stage",
+              "description": "Crown or structure when tissues are ready."
+            }
+          ]
+        },
+        "team": {
+          "heading": "Team",
+          "body": "Surgeon, prosthodontist, orthodontist if needed — TBD."
+        },
+        "timeline": {
+          "heading": "Timeline and visits",
+          "body": "Often several months including healing. Individual timeline."
+        },
+        "costFactors": {
+          "heading": "Cost factors",
+          "body": "Implant count, bone grafting, materials, and related stages affect cost.",
+          "pricingStatus": "TBD — pending clinic price list"
+        },
+        "risks": {
+          "heading": "Limitations and risks",
+          "body": "Implants have contraindications and complication risks; patient is informed before treatment."
+        },
+        "aftercare": {
+          "heading": "Aftercare and follow-up",
+          "body": "Control visits, hygiene, and load recommendations after prosthetic stage."
+        },
+        "relatedCases": {
+          "heading": "Related cases",
+          "caseSlugs": [
+            "draft-case-example"
+          ],
+          "note": "Only verified cases with patient consent are published."
+        },
+        "faq": {
+          "heading": "FAQ",
+          "items": [
+            {
+              "question": "Is implant surgery painful?",
+              "answer": "Anesthesia per clinic protocol. Details — TBD."
+            },
+            {
+              "question": "Can I chew immediately?",
+              "answer": "Load is staged per doctor instructions."
+            }
+          ]
+        }
+      },
+      "cta": {
+        "label": "Book comprehensive diagnostics",
+        "href": "/en/comprehensive-diagnostics/",
+        "source": "raimovdental_service_dental-implants_en"
+      }
+    },
+    {
+      "slug": "full-mouth-reconstruction",
+      "path": "/en/full-mouth-reconstruction/",
+      "language": "en",
+      "title": "Full mouth reconstruction",
+      "shortDescription": "Interdisciplinary restoration of function and aesthetics for multiple defects or edentulism—staged plan.",
+      "meta": {
+        "title": "Full mouth reconstruction | RAIMOV DENTAL",
+        "description": "Interdisciplinary restoration of function and aesthetics for multiple defects or edentulism—staged plan.",
+        "medicalReviewRequired": true,
+        "author": "Atabek Raimov",
+        "medicalReviewer": "TBD — pending clinic confirmation",
+        "publishedAt": null,
+        "reviewedAt": null
+      },
+      "sections": {
+        "problem": {
+          "heading": "Why patients come",
+          "body": "Multiple damaged or missing teeth, failed temporary solutions, need for a comprehensive plan."
+        },
+        "fit": {
+          "heading": "Who it may suit",
+          "body": "Complex cases ready for staged care. Decision after full diagnostics."
+        },
+        "options": {
+          "heading": "Possible treatment options",
+          "body": "Combinations of implants, prosthetics, orthodontics, aesthetics; All-on-4/6 only if clinically indicated.",
+          "note": "The final plan is defined only after comprehensive diagnostics."
+        },
+        "diagnostics": {
+          "heading": "Diagnostics before treatment",
+          "body": "Extended diagnostics: TMJ function, bite, bone, gums, digital planning."
+        },
+        "results": {
+          "heading": "Real outcomes",
+          "body": "Complex verified cases pending materials.",
+          "casesStatus": "draft-only — verified cases pending clinic materials"
+        },
+        "approach": {
+          "heading": "The RAIMOV DENTAL approach",
+          "body": "Full reconstruction follows Raimov System with team review and staged budget."
+        },
+        "stages": {
+          "heading": "Treatment stages",
+          "items": [
+            {
+              "title": "Comprehensive diagnostics",
+              "description": "Data and problem prioritization."
+            },
+            {
+              "title": "Surgical and orthodontic stages",
+              "description": "When indicated, in agreed sequence."
+            },
+            {
+              "title": "Prosthetics and aesthetics",
+              "description": "Final structures after tissue preparation."
+            },
+            {
+              "title": "Long-term follow-up",
+              "description": "Function and hygiene monitoring."
+            }
+          ]
+        },
+        "team": {
+          "heading": "Team",
+          "body": "Interdisciplinary team — TBD."
+        },
+        "timeline": {
+          "heading": "Timeline and visits",
+          "body": "Months; exact schedule after plan approval."
+        },
+        "costFactors": {
+          "heading": "Cost factors",
+          "body": "Surgery volume, implants, prosthetics, and related stages affect cost.",
+          "pricingStatus": "TBD — pending clinic price list"
+        },
+        "risks": {
+          "heading": "Limitations and risks",
+          "body": "High complexity requires patient compliance; possible load and timeline limits."
+        },
+        "aftercare": {
+          "heading": "Aftercare and follow-up",
+          "body": "Regular exams, professional hygiene, bite adjustment if needed."
+        },
+        "relatedCases": {
+          "heading": "Related cases",
+          "caseSlugs": [
+            "draft-case-example"
+          ],
+          "note": "Only verified cases with patient consent are published."
+        },
+        "faq": {
+          "heading": "FAQ",
+          "items": [
+            {
+              "question": "Can everything be done in one stage?",
+              "answer": "Usually staged. Accelerated protocols only if indicated after diagnostics."
+            }
+          ]
+        }
+      },
+      "cta": {
+        "label": "Book comprehensive diagnostics",
+        "href": "/en/comprehensive-diagnostics/",
+        "source": "raimovdental_service_full-mouth-reconstruction_en"
+      }
+    },
+    {
+      "slug": "adult-orthodontics",
+      "path": "/en/adult-orthodontics/",
+      "language": "en",
+      "title": "Adult orthodontics",
+      "shortDescription": "Bite and tooth alignment for adults—linked with aesthetics and implants when needed.",
+      "meta": {
+        "title": "Adult orthodontics | RAIMOV DENTAL",
+        "description": "Bite and tooth alignment for adults—linked with aesthetics and implants when needed.",
+        "medicalReviewRequired": true,
+        "author": "Atabek Raimov",
+        "medicalReviewer": "TBD — pending clinic confirmation",
+        "publishedAt": null,
+        "reviewedAt": null
+      },
+      "sections": {
+        "problem": {
+          "heading": "Why patients come",
+          "body": "Crowding, spacing, shifted teeth, chewing discomfort, preparation for veneers or implants."
+        },
+        "fit": {
+          "heading": "Who it may suit",
+          "body": "Adults with stable periodontal status or after preparation. Decision after diagnostics."
+        },
+        "options": {
+          "heading": "Possible treatment options",
+          "body": "Braces, aligners, or combined approaches per clinical picture.",
+          "note": "The final plan is defined only after comprehensive diagnostics."
+        },
+        "diagnostics": {
+          "heading": "Diagnostics before treatment",
+          "body": "Bite assessment, imaging, digital planning, TMJ evaluation when indicated."
+        },
+        "results": {
+          "heading": "Real outcomes",
+          "body": "Verified cases pending. Draft structure without public photos.",
+          "casesStatus": "draft-only — verified cases pending clinic materials"
+        },
+        "approach": {
+          "heading": "The RAIMOV DENTAL approach",
+          "body": "Orthodontics is integrated in Raimov System and may precede or accompany aesthetic stages."
+        },
+        "stages": {
+          "heading": "Treatment stages",
+          "items": [
+            {
+              "title": "Bite diagnostics",
+              "description": "Data collection and digital plan."
+            },
+            {
+              "title": "Appliance placement",
+              "description": "Braces or aligners when indicated."
+            },
+            {
+              "title": "Adjustments and control",
+              "description": "Regular visits per schedule."
+            },
+            {
+              "title": "Retention",
+              "description": "Stabilizing results after active phase."
+            }
+          ]
+        },
+        "team": {
+          "heading": "Team",
+          "body": "Orthodontist and related specialists — TBD."
+        },
+        "timeline": {
+          "heading": "Timeline and visits",
+          "body": "Months to a year or more—individual."
+        },
+        "costFactors": {
+          "heading": "Cost factors",
+          "body": "Complexity, appliance type, and duration affect cost.",
+          "pricingStatus": "TBD — pending clinic price list"
+        },
+        "risks": {
+          "heading": "Limitations and risks",
+          "body": "Requires compliance; possible discomfort on some stages."
+        },
+        "aftercare": {
+          "heading": "Aftercare and follow-up",
+          "body": "Retainers and control visits per doctor recommendation."
+        },
+        "relatedCases": {
+          "heading": "Related cases",
+          "caseSlugs": [
+            "draft-case-example"
+          ],
+          "note": "Only verified cases with patient consent are published."
+        },
+        "faq": {
+          "heading": "FAQ",
+          "items": [
+            {
+              "question": "Is there an age limit?",
+              "answer": "Adult orthodontics is possible with suitable tissue status—the doctor decides after diagnostics."
+            }
+          ]
+        }
+      },
+      "cta": {
+        "label": "Book comprehensive diagnostics",
+        "href": "/en/comprehensive-diagnostics/",
+        "source": "raimovdental_service_adult-orthodontics_en"
+      }
+    }
+  ]
+}

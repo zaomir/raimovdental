@@ -1,0 +1,43 @@
+{
+  "language": "ru",
+  "path": "/ru/mezhdunarodnym-pacientam/",
+  "meta": {
+    "title": "Международным пациентам | RAIMOV DENTAL",
+    "description": "TBD"
+  },
+  "intro": {
+    "heading": "Международным пациентам",
+    "body": "RAIMOV DENTAL принимает пациентов из других стран. Логистика, язык сопровождения и формат визита — TBD."
+  },
+  "location": {
+    "city": "Bishkek",
+    "country": "Kyrgyzstan",
+    "address": "TBD",
+    "status": "pending clinic confirmation"
+  },
+  "services": {
+    "items": [
+      "Комплексная диагностика",
+      "Виниры и дизайн улыбки",
+      "Имплантация",
+      "Полное восстановление зубов",
+      "Ортодонтия для взрослых"
+    ]
+  },
+  "visitFormat": {
+    "status": "TBD",
+    "items": []
+  },
+  "languages": {
+    "status": "TBD",
+    "items": [
+      "ru",
+      "en"
+    ]
+  },
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/",
+    "source": "raimovdental_international_ru"
+  }
+}

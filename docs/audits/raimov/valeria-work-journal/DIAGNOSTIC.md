@@ -1,0 +1,40 @@
+# Valeria work journal — production diagnostic
+
+- workflow_sha: `d68dec818e24bad2d7d420d1bef66dbaf4d7d9c2`
+- captured_at_utc: `2026-08-02T22:59:45Z`
+- observations:
+  - `global_deploy_sha=09d76eff197be698650c7955ab249cda507ea2a6`
+  - `valeria_deploy_sha=edbedf7452a2220fda2b742f3df31c7109221d3d`
+  - `nginx_conf=/etc/nginx/fastpanel2-sites/grainee_infra/raimovdental.com.conf`
+  - `gate=basic-auth`
+  - `gate_service=active`
+  - `file:ru/valeria/index.html=present,size=3086`
+  - `file:ru/valeria/month-1/index.html=present,size=3755`
+  - `file:ru/valeria/month-1/plan/index.html=present,size=5948`
+  - `file:ru/valeria/month-1/reports/index.html=present,size=3709`
+  - `file:ru/valeria/month-1/reports/first-two-weeks/index.html=present,size=6968`
+  - `file:ru/assets/work-reports.css=present,size=10227`
+  - `static_plan_items=16`
+  - `static_index_marker=0`
+  - `static_report_marker=0`
+  - `static_google_marker=0`
+  - `static_2gis_marker=0`
+  - `static_articles_marker=0`
+  - `origin:noauth=401,login=404,post=404,cookie_index=401,cookie_plan=401,cookie_report=401,basic_index=200,basic_plan=200,basic_report=200`
+  - `origin:login_password_field=1`
+  - `origin:login_username_field=1`
+  - `origin:cookie_index_marker=1`
+  - `origin:cookie_plan_items=0`
+  - `origin:cookie_report_marker=1`
+  - `origin:basic_index_marker=0`
+  - `origin:basic_plan_items=16`
+  - `edge:noauth=401,login=404,post=404,cookie_index=401,cookie_plan=401,cookie_report=401,basic_index=200,basic_plan=200,basic_report=200`
+  - `edge:login_password_field=1`
+  - `edge:login_username_field=1`
+  - `edge:cookie_index_marker=1`
+  - `edge:cookie_plan_items=0`
+  - `edge:cookie_report_marker=1`
+  - `edge:basic_index_marker=0`
+  - `edge:basic_plan_items=16`
+- secrets_exposed: `false`
+- cursor_used: `false`

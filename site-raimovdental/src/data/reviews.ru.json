@@ -1,0 +1,140 @@
+{
+  "language": "ru",
+  "path": "/ru/otzyvy/",
+  "meta": {
+    "title": "Отзывы | RAIMOV DENTAL",
+    "description": "Отзывы пациентов клиники на 2GIS — с ссылкой на источник."
+  },
+  "intro": {
+    "heading": "Отзывы пациентов",
+    "body": "Публикуем проверенные отзывы с 2GIS с прямой ссылкой на источник. Тексты — без правок."
+  },
+  "reviews": [
+    {
+      "id": "2gis-253606992",
+      "quote": "Хочу сказать большое спасибо всей команде клиники! ❤️\n\nОтдельное спасибо доктору Айдай, доктору Марине и хирургу Мир Али. Спасибо за вашу заботу, поддержку и проделанную работу. Весь процесс лечения прошел очень комфортно, и я всегда чувствовала, что обо мне искренне заботятся.\n\nТеперь у меня улыбка, о которой я давно мечтала. Спасибо вам за это! 🥹🤍",
+      "authorDisplay": "Kishimoto K",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/253606992",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-254452304",
+      "quote": "Хочу выразить огромную благодарность доктору Айпери! Делала у неё профессиональную чистку зубов и осталась очень довольна. Всё прошло аккуратно, безболезненно и комфортно. Доктор очень внимательная, доброжелательная и всё подробно объясняет. После процедуры зубы стали заметно чище и свежее. Однозначно рекомендую доктора Айпери и эту стоматологию!🙌🏻",
+      "authorDisplay": "Narbaeva MS",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/254452304",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-254431963",
+      "quote": "Был записан к стоматологу Айпери, лечили зуб и ставили пломбу. Врач молодец, всё чётко и по делу. Сразу составили план лечения и следовали строго по нему. Отношение к пациенту отличное, работает профессионально и аккуратно. Результатом я полностью доволен, пломба вообще не мешает. Рекомендую как отличного спеца.",
+      "authorDisplay": "David Shibru",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/254431963",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-251015246",
+      "quote": "Очень благодарна стоматологу Эргешовой Бегимай Эргешовне! Профессиональный, внимательный и доброжелательный врач. Лечение прошло комфортно и безболезненно, результатом очень довольна. Рекомендую!",
+      "authorDisplay": "Карина Трай",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/251015246",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-248723373",
+      "quote": "Хочу выразить огромную благодарность ортодонту Айдай Болотовне за профессионализм, внимательное отношение и качественную работу. Спасибо за индивидуальный подход, доброжелательность и уверенность в результате!",
+      "authorDisplay": "Alex Sn",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/248723373",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-257911055",
+      "quote": "Сервис на высоте,начиная от девочек на ресепшене,заканчивая врачами ..",
+      "authorDisplay": "Саша Белов",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/257911055",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    }
+  ],
+  "homeTeaserItems": [
+    {
+      "id": "2gis-253606992",
+      "quote": "Хочу сказать большое спасибо всей команде клиники! ❤️\n\nОтдельное спасибо доктору Айдай, доктору Марине и хирургу Мир Али. Спасибо за вашу заботу, поддержку и проделанную работу. Весь процесс лечения прошел очень комфортно, и я всегда чувствовала, что обо мне искренне заботятся.\n\nТеперь у меня улыбка, о которой я давно мечтала. Спасибо вам за это! 🥹🤍",
+      "authorDisplay": "Kishimoto K",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/253606992",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-254452304",
+      "quote": "Хочу выразить огромную благодарность доктору Айпери! Делала у неё профессиональную чистку зубов и осталась очень довольна. Всё прошло аккуратно, безболезненно и комфортно. Доктор очень внимательная, доброжелательная и всё подробно объясняет. После процедуры зубы стали заметно чище и свежее. Однозначно рекомендую доктора Айпери и эту стоматологию!🙌🏻",
+      "authorDisplay": "Narbaeva MS",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/254452304",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    },
+    {
+      "id": "2gis-254431963",
+      "quote": "Был записан к стоматологу Айпери, лечили зуб и ставили пломбу. Врач молодец, всё чётко и по делу. Сразу составили план лечения и следовали строго по нему. Отношение к пациенту отличное, работает профессионально и аккуратно. Результатом я полностью доволен, пломба вообще не мешает. Рекомендую как отличного спеца.",
+      "authorDisplay": "David Shibru",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/254431963",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Public maps review for clinic firm listing (same location/team as RAIMOV DENTAL). Quote verbatim from 2GIS API."
+    }
+  ],
+  "aggregateRating": {
+    "value": 4.9,
+    "reviewCount": 133,
+    "bestRating": 5,
+    "worstRating": 1,
+    "source": "2GIS",
+    "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews",
+    "capturedAt": "2026-07-21",
+    "publishable": true
+  },
+  "mapsLinks": {
+    "google": null,
+    "twoGis": "https://2gis.kg/bishkek/firm/70000001089655879",
+    "yandex": null,
+    "status": "clinic_maps_confirmed_2gis"
+  }
+}

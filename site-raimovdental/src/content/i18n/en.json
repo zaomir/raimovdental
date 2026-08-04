@@ -1,0 +1,63 @@
+{
+  "language": "en",
+  "locale": "en",
+  "brand": {
+    "clinic": "RAIMOV DENTAL",
+    "system": "Raimov System",
+    "academy": "Raimov Academy",
+    "doctorPublic": "Atabek Raimov",
+    "doctorFull": "Atabek Raimov"
+  },
+  "utilityBar": {
+    "phone": "+996 555 255 455",
+    "hours": "By appointment",
+    "languageSwitch": "RU"
+  },
+  "nav": {
+    "services": "Treatment",
+    "doctor": "Atabek Raimov",
+    "system": "Raimov System",
+    "international": "International patients",
+    "about": "About",
+    "contact": "Contact",
+    "diagnostics": "Comprehensive diagnostics",
+    "bookCta": "Book diagnostics"
+  },
+  "footer": {
+    "tagline": "A new smile starts with a precise plan.",
+    "legal": "Information on this site does not replace an in-person consultation with a dentist.",
+    "privacy": "Privacy policy",
+    "consent": "Data processing consent"
+  },
+  "form": {
+    "heading": "Discuss your treatment plan",
+    "step1Title": "Your goal",
+    "step2Title": "Where you are",
+    "step3Title": "Contact details",
+    "interests": {
+      "smile": "Improve smile shape and color",
+      "implants": "Replace missing teeth",
+      "plan": "Get a comprehensive plan",
+      "bite": "Correct bite",
+      "other": "Other question"
+    },
+    "country": "Country",
+    "city": "City",
+    "channel": "Preferred contact channel",
+    "channels": { "phone": "Phone", "whatsapp": "WhatsApp" },
+    "name": "Name",
+    "phone": "Phone",
+    "messenger": "WhatsApp number",
+    "consent": "I agree to personal data processing",
+    "submit": "Continue in WhatsApp",
+    "next": "Next",
+    "back": "Back",
+    "success": "WhatsApp is open. Send the prepared message to the clinic.",
+    "error": "Could not open WhatsApp. Call +996 555 255 455."
+  },
+  "cta": {
+    "diagnostics": "Book comprehensive diagnostics",
+    "contact": "Contact the clinic"
+  },
+  "breadcrumbs": { "home": "Home" }
+}

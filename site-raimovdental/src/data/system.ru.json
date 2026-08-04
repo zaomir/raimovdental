@@ -1,0 +1,83 @@
+{
+  "language": "ru",
+  "path": "/ru/raimov-system/",
+  "brand": "Raimov System",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Raimov System | RAIMOV DENTAL",
+    "description": "Patient-facing explanation of Raimov System — eight steps from diagnostics to follow-up.",
+    "medicalReviewRequired": true,
+    "author": "Раимов Атабек Саидович",
+    "medicalReviewer": null,
+    "publishedAt": null,
+    "reviewedAt": null
+  },
+  "intro": {
+    "heading": "Raimov System",
+    "body": "Raimov System — не отдельная процедура. Это маршрут сложного случая: от диагностики и консилиума до этапного плана и наблюдения.",
+    "excludes": "No franchise, royalty, or ELITE DENTAL commercial content on this site."
+  },
+  "steps": [
+    {
+      "step": 1,
+      "id": "diagnostics",
+      "title": "Сбор диагностических данных",
+      "description": "Клинический осмотр, фото-протокол, цифровое сканирование и исследования по показаниям.",
+      "patientOutcome": "Понимаете исходную картину и ограничения"
+    },
+    {
+      "step": 2,
+      "id": "design",
+      "title": "Проектирование результата",
+      "description": "Цифровое планирование улыбки и функции с согласованием ожиданий пациента.",
+      "patientOutcome": "Согласовываете направление результата до старта"
+    },
+    {
+      "step": 3,
+      "id": "coordination",
+      "title": "Консилиум",
+      "description": "Команда специалистов оценивает варианты и риски перед финальным планом.",
+      "patientOutcome": "Получаете решение команды, а не разрозненные советы"
+    },
+    {
+      "step": 4,
+      "id": "sequence",
+      "title": "Определение последовательности лечения",
+      "description": "Понятный маршрут: что делаем сначала, что — на следующих этапах.",
+      "patientOutcome": "Видите порядок этапов на одной схеме"
+    },
+    {
+      "step": 5,
+      "id": "budget",
+      "title": "Поэтапный бюджет",
+      "description": "Смета по этапам без скрытых шагов. Конкретные суммы согласуются после диагностики.",
+      "patientOutcome": "Знаете, что суммы финализируются после диагностики"
+    },
+    {
+      "step": 6,
+      "id": "coordination_team",
+      "title": "Координация специалистов",
+      "description": "Один план и ответственные на каждом этапе.",
+      "patientOutcome": "Понимаете, кто отвечает за каждый этап"
+    },
+    {
+      "step": 7,
+      "id": "control",
+      "title": "Контроль качества",
+      "description": "Проверка прикуса, эстетики и функции на ключевых точках лечения.",
+      "patientOutcome": "Контрольные точки зафиксированы заранее"
+    },
+    {
+      "step": 8,
+      "id": "follow_up",
+      "title": "Долгосрочное наблюдение",
+      "description": "График контрольных визитов и рекомендации по уходу после основных этапов.",
+      "patientOutcome": "Есть план наблюдения после основных этапов"
+    }
+  ],
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/#lead-form",
+    "source": "raimovdental_system_ru"
+  }
+}

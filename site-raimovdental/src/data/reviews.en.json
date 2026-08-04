@@ -1,0 +1,90 @@
+{
+  "language": "en",
+  "path": "/en/reviews/",
+  "meta": {
+    "title": "Reviews | RAIMOV DENTAL",
+    "description": "Patient reviews from 2GIS — with source links."
+  },
+  "intro": {
+    "heading": "Patient reviews",
+    "body": "Verified 2GIS reviews with a direct source link. English page shows Latin-script quotes verbatim; more reviews on 2GIS."
+  },
+  "reviews": [
+    {
+      "id": "2gis-257923932",
+      "quote": "Venant de quitter la Chine où j'ai eu des problèmes dentaires douloureux, j'ai pu avoir très rapidement un RDV au cabinet dentaire \"Expert Dental Studio\" de Bishkek avec le Docteur Aiperi. L'accueil y est charmant et chaleureux, la propreté est irréprochable, et les équipements sont de pointe.\nJe tiens à souligner le professionnalisme et l'excellence des compétences des Docteurs Kerimkulova Aiperi Tursunalievna…",
+      "authorDisplay": "POIRE Marie-Hélène",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/257923932",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Verbatim Latin-script 2GIS review for EN page."
+    },
+    {
+      "id": "2gis-aggregate",
+      "quote": "Public 2GIS rating 4.9 / 5 from 133 reviews for this clinic location.",
+      "authorDisplay": "2GIS",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews",
+      "publishable": true,
+      "note": "Aggregate from 2GIS API meta; not a fabricated patient quote."
+    },
+    {
+      "id": "2gis-maps-invite",
+      "quote": "More patient reviews are available on the clinic 2GIS page — we publish only verifiable sources.",
+      "authorDisplay": "RAIMOV DENTAL",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews",
+      "publishable": true
+    }
+  ],
+  "homeTeaserItems": [
+    {
+      "id": "2gis-257923932",
+      "quote": "Venant de quitter la Chine où j'ai eu des problèmes dentaires douloureux, j'ai pu avoir très rapidement un RDV au cabinet dentaire \"Expert Dental Studio\" de Bishkek avec le Docteur Aiperi. L'accueil y est charmant et chaleureux, la propreté est irréprochable, et les équipements sont de pointe.\nJe tiens à souligner le professionnalisme et l'excellence des compétences des Docteurs Kerimkulova Aiperi Tursunalievna…",
+      "authorDisplay": "POIRE Marie-Hélène",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews/257923932",
+      "rating": 5,
+      "capturedAt": "2026-07-21",
+      "publishable": true,
+      "sourceFirmId": "70000001089655879",
+      "note": "Verbatim Latin-script 2GIS review for EN page."
+    },
+    {
+      "id": "2gis-aggregate",
+      "quote": "Public 2GIS rating 4.9 / 5 from 133 reviews for this clinic location.",
+      "authorDisplay": "2GIS",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews",
+      "publishable": true,
+      "note": "Aggregate from 2GIS API meta; not a fabricated patient quote."
+    },
+    {
+      "id": "2gis-maps-invite",
+      "quote": "More patient reviews are available on the clinic 2GIS page — we publish only verifiable sources.",
+      "authorDisplay": "RAIMOV DENTAL",
+      "platform": "2GIS",
+      "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews",
+      "publishable": true
+    }
+  ],
+  "aggregateRating": {
+    "value": 4.9,
+    "reviewCount": 133,
+    "bestRating": 5,
+    "worstRating": 1,
+    "source": "2GIS",
+    "sourceUrl": "https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews",
+    "capturedAt": "2026-07-21",
+    "publishable": true
+  },
+  "mapsLinks": {
+    "google": null,
+    "twoGis": "https://2gis.kg/bishkek/firm/70000001089655879",
+    "yandex": null,
+    "status": "clinic_maps_confirmed_2gis"
+  }
+}

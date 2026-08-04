@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <title>Expert Dental · Рабочая система</title>
+  <style>
+    :root{--bg:#f3f2ee;--card:#fff;--ink:#17322d;--muted:#697873;--line:#d9dedb;--brand:#174d43;--brand2:#23685a;--soft:#eaf2ef;--warn:#fff5dc;--danger:#ffe9e6;--ok:#e8f5ee;--shadow:0 18px 50px rgba(23,50,45,.09)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink)}button{font:inherit}.hidden{display:none!important}
+    .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;background:rgba(255,255,255,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    .brand{display:flex;align-items:center;gap:12px}.brand small{display:block;color:var(--muted)}.mark{width:46px;height:46px;border-radius:14px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:850;box-shadow:0 10px 24px rgba(23,77,67,.2)}
+    .header-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.badge{display:inline-flex;border-radius:999px;padding:7px 10px;background:var(--soft);color:var(--brand);font-size:12px;font-weight:750}.badge.demo{background:var(--warn);color:#7a5200}
+    .btn{border:0;border-radius:13px;padding:12px 16px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:transform .16s ease,box-shadow .2s ease,background .2s ease}.btn:hover{transform:translateY(-1px)}.btn:active{transform:scale(.985)}.primary{background:var(--brand);color:#fff;box-shadow:0 9px 22px rgba(23,77,67,.18)}.secondary{background:#eef1ef;color:var(--ink)}.danger{background:#9f302a;color:#fff}
+    .shell{display:grid;grid-template-columns:230px minmax(0,1fr) 280px;gap:16px;padding:16px;max-width:1500px;margin:auto}.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+    .nav button{width:100%;text-align:left;margin:4px 0;background:transparent;color:var(--ink);box-shadow:none}.nav button.active{background:var(--soft);color:var(--brand)}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}
+    .hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.hero h1{margin:6px 0 8px;font-size:28px}.hero p{max-width:720px}.muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.card{border:1px solid var(--line);border-radius:17px;padding:16px;background:#fff;transition:transform .18s ease,box-shadow .22s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(23,50,45,.08)}.card h3{margin:0 0 7px}.metric{font-size:26px;font-weight:850}.action-card{border:2px solid var(--brand);background:linear-gradient(180deg,#fff,var(--soft))}
+    .stack{display:grid;gap:10px}.update{border-left:4px solid var(--brand)}.update.critical{border-left-color:#9f302a;background:var(--danger)}.check{display:flex;align-items:flex-start;gap:10px}.check input{margin-top:3px}.quiz-option{width:100%;text-align:left;border:1px solid var(--line);background:#fff;margin:6px 0}.quiz-option.selected{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .progress{height:8px;border-radius:999px;background:#e5e8e6;overflow:hidden}.progress span{display:block;height:100%;background:var(--brand);transition:width .35s ease}.task{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.status-ok{color:#17643f}.status-warn{color:#8b5a00}.status-danger{color:#9f302a}
+    .mobile-nav{display:none}.footer{padding:18px;color:var(--muted);font-size:12px;text-align:center}.notice{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--warn);color:#684900;font-size:13px}.back-link{white-space:nowrap}
+    @media(max-width:1050px){.shell{grid-template-columns:210px minmax(0,1fr)}.right{display:none}}
+    @media(max-width:780px){.top{padding:10px 12px;align-items:flex-start}.brand small{max-width:190px}.header-actions{justify-content:flex-end}.header-actions .demo{display:none}.shell{display:block;padding:10px 10px 84px}.side{display:none}.grid{grid-template-columns:1fr}.hero{display:block}.hero h1{font-size:23px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);bottom:0;left:0;right:0;z-index:8;background:#fff;border-top:1px solid var(--line);padding:7px}.mobile-nav button{font-size:11px;padding:9px 4px;background:transparent}.panel{border-radius:16px;padding:15px}.btn{min-height:46px}.back-link{font-size:12px;padding:8px 10px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.card,.progress span{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><div class="mark">ED</div><div><strong>Рабочая система</strong><small id="roleLabel"></small></div></div>
+    <div class="header-actions"><span class="badge demo">Демо · вход без пароля</span><span id="shiftBadge" class="badge">Смена не начата</span><a class="btn secondary back-link" href="../">Все роли</a></div>
+  </header>
+  <div class="shell">
+    <aside class="panel side"><div class="eyebrow">Навигация</div><div id="nav" class="nav"></div><div class="notice">Временный демонстрационный доступ. Перед рабочим запуском будет включена серверная авторизация.</div></aside>
+    <main id="main"></main>
+    <aside class="panel right"><div class="eyebrow">Сегодня</div><h3 id="todayTitle"></h3><div id="todayList" class="stack"></div></aside>
+  </div>
+  <nav id="mobileNav" class="mobile-nav"></nav>
+  <div class="footer">Промежуточный демонстрационный MVP без CRM и реальных данных пациентов.</div>
+  <script>
+  (()=>{'use strict';
+    const $=id=>document.getElementById(id);
+    const path=location.pathname;
+    const roles={
+      admin:{name:'Администратор',subtitle:'Звонки, записи, обращения и передача врачу'},
+      doctor:{name:'Врач',subtitle:'Обращения пациентов, дежурство и медицинские задачи'},
+      manager:{name:'Управляющий',subtitle:'Смены, обучение, качество и контроль'},
+      owner:{name:'Руководитель клиники',subtitle:'Сводка клиники, стандарты и допуски'}
+    };
+    const roleKey=Object.keys(roles).find(k=>path.includes('/'+k+'/'))||'admin';
+    const role=roles[roleKey];
+    const key='ed-workspace-'+roleKey;
+    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0};
+    const save=()=>localStorage.setItem(key,JSON.stringify(state));
+    const updates=[
+      {title:'Новая маршрутизация медицинского обращения',critical:true,copy:'Система сначала предлагает лечащего врача, затем свободного врача нужной специальности и дежурного. Ответственность передаётся только после принятия врачом.'},
+      {title:'Пошаговый опросник передачи врачу',critical:true,copy:'Каждый обязательный вопрос открывается отдельно. Выбор ответа сохраняется и автоматически переводит на следующий шаг.'},
+      {title:'Начало и сдача смены',critical:false,copy:'Перед началом работы нужно прочитать обновления, принять передачу и подтвердить готовность. В конце смены все незакрытые задачи получают владельца и срок.'}
+    ];
+    const quiz=[
+      {q:'Когда обращение считается переданным врачу?',a:['После отправки карточки','После нажатия врачом «Принять обращение»','После завершения звонка'],ok:1,critical:true},
+      {q:'Кому направлять срочный вопрос с красными флагами?',a:['Только лечащему врачу','Первому доступному врачу экстренной группы или дежурному','Любому администратору'],ok:1,critical:true},
+      {q:'Что нужно сделать перед завершением смены?',a:['Закрыть браузер','Назначить владельца, следующий шаг и срок всем открытым задачам','Оставить заметку без срока'],ok:1,critical:false}
+    ];
+    let view='today';
+    function renderNav(){
+      const common=[['today','Сегодня'],['learn','Обучение'],['shift','Смена']];
+      const specific=roleKey==='admin'?[['work','Обращения']]:roleKey==='doctor'?[['work','Медицинские задачи']]:[['work','Команда']];
+      const items=[...common,...specific];
+      $('nav').innerHTML=$('mobileNav').innerHTML=items.map(([id,label])=>`<button class="btn ${view===id?'active':''}" data-view="${id}">${label}</button>`).join('');
+      document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
+    }
+    function gate(){
+      if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
+      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
+      if(!state.handoffAccepted)return{title:'Примите смену',copy:'Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
+      if(!state.shiftStarted)return{title:'Начните работу',copy:'Обновления пройдены, передача принята, рабочее место готово.',action:'Начать работу',view:'shift'};
+      return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
+    }
+    function layout(title,body){$('main').innerHTML=`<section class="panel"><div class="hero"><div><div class="eyebrow">${role.name}</div><h1>${title}</h1><p class="muted">${role.subtitle}</p></div><span class="badge">${state.shiftStarted&&!state.shiftClosed?'В работе':'Требуется действие'}</span></div>${body}</section>`}
+    function today(){const g=gate();layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Статус допуска</div><div class="metric">${state.testPassed?'Актуален':'Ограничен'}</div><p class="muted">Последний результат: ${state.score||0}% · проходной балл 90%</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${state.updateRead?'Все обязательные материалы прочитаны':'2 обязательных материала ожидают подтверждения'}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);$('mainAction').onclick=()=>{view=g.view;render()}}
+    function learn(){let qi=0,answers=[];layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>`);const body=$('learnBody');
+      function updatesView(){body.innerHTML=updates.map((u,i)=>`<article class="card update ${u.critical?'critical':''}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${u.title}</h3><p>${u.copy}</p></article>`).join('')+`<button id="confirmUpdates" class="btn primary">Прочитал(а) и понял(а)</button>`;$('confirmUpdates').onclick=()=>{state.updateRead=true;save();quizView()}}
+      function quizView(){const q=quiz[qi];body.innerHTML=`<div class="card"><div class="eyebrow">Вопрос ${qi+1} из ${quiz.length}${q.critical?' · критический':''}</div><h3>${q.q}</h3><div>${q.a.map((x,i)=>`<button class="btn quiz-option" data-answer="${i}">${x}</button>`).join('')}</div></div>`;body.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{answers[qi]=Number(b.dataset.answer);b.classList.add('selected');setTimeout(()=>{qi++;if(qi<quiz.length)quizView();else finishQuiz()},180)})}
+      function finishQuiz(){const correct=quiz.filter((q,i)=>answers[i]===q.ok).length;const criticalOk=quiz.every((q,i)=>!q.critical||answers[i]===q.ok);state.score=Math.round(correct/quiz.length*100);state.testPassed=state.score>=90&&criticalOk;save();body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Критические вопросы требуют 100% правильных ответов.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;$('quizNext').onclick=()=>{if(state.testPassed){view='today';render()}else{qi=0;answers=[];updatesView()}}}
+      state.updateRead&&!state.testPassed?quizView():updatesView();
+    }
+    function shift(){layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()}}
+    function work(){
+      const admin=`<div class="grid"><div class="card"><h3>Входящие обращения</h3><div class="metric">4</div><p class="muted">1 срочное · 2 записи · 1 вопрос по стоимости</p><a class="btn primary" href="/render/">Открыть модуль обращений</a></div><div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p></div></div>`;
+      const doctor=`<div class="grid"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button class="btn primary">Принять дежурство</button></div></div>`;
+      const manager=`<div class="grid"><div class="card"><h3>Команда сегодня</h3><div class="task"><span>Администратор Айжан</span><b class="status-ok">В работе</b></div><div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div></div><div class="card"><h3>Обучение</h3><div class="metric">75%</div><p class="muted">3 из 4 сотрудников прошли обязательное обновление</p><button class="btn primary">Назначить пересдачу</button></div></div>`;
+      const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
+      layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
+    }
+    function renderRight(){const g=gate();$('todayTitle').textContent=g.title;$('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div><div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;$('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата'}
+    function render(){renderNav();renderRight();({today,learn,shift,work}[view]||today)()}
+    $('roleLabel').textContent=role.name+' · '+role.subtitle;
+    render();
+  })();
+  </script>
+</body>
+</html>

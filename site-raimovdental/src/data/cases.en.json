@@ -1,0 +1,112 @@
+{
+  "language": "en",
+  "indexPath": "/en/results/",
+  "meta": {
+    "title": "Treatment results | RAIMOV DENTAL",
+    "description": "RAIMOV DENTAL clinical cases — with consent and medical review.",
+    "medicalReviewRequired": true
+  },
+  "intro": {
+    "heading": "Treatment results",
+    "body": "Only cases with consent for anonymised materials and medical review. No invented before/after pairs."
+  },
+  "cases": [
+    {
+      "slug": "adult-ortho-pathway",
+      "title": "Adult orthodontics: from crowding to a clear plan",
+      "jtbd": "aesthetics_bite",
+      "problem": "An adult with crowding and bite issues needs a clear plan — not “brackets first”.",
+      "solution": "Comprehensive diagnostics, function and aesthetics review, then a staged orthodontic plan with follow-ups.",
+      "stages": [
+        "Diagnostics and photo protocol",
+        "Agree stages and timing",
+        "Orthodontic treatment with check visits",
+        "Stabilisation and follow-up"
+      ],
+      "durationRange": "Individual — after diagnostics",
+      "result": "Controlled alignment along an agreed plan. Outcomes are confirmed only after clinical review.",
+      "beforeImages": [
+        {
+          "src": "/assets/img/cases/ortho-stage-anonymized.jpg",
+          "alt": "Anonymised orthodontic stage photo (no patient identity)",
+          "caption": "Clinical stage (anonymised)"
+        }
+      ],
+      "afterImages": [],
+      "consentReference": "founder_media_grant_2026-07-21 + anonymized_clinical_archive",
+      "medicalReviewer": "clinic_attested_founder_2026-07-21",
+      "reviewedAt": "2026-07-21",
+      "relatedServices": [
+        "adult-orthodontics"
+      ],
+      "status": "verified",
+      "publishable": true
+    },
+    {
+      "slug": "aesthetic-smile-pathway",
+      "title": "Smile aesthetics: diagnostics → plan → result",
+      "jtbd": "aesthetics",
+      "problem": "The patient wants to change tooth shape and colour. No protocol is promised before diagnostics.",
+      "solution": "Diagnostics, discuss veneers / restorations / orthodontics as options, then staged treatment after plan consent.",
+      "stages": [
+        "Comprehensive diagnostics and photo protocol",
+        "Choose protocol (ortho / restorations / veneers)",
+        "Staged treatment",
+        "Result review"
+      ],
+      "durationRange": "Individual — after diagnostics",
+      "result": "Aesthetic outcome along the agreed plan. Site shows an anonymised clinical-archive illustration — not a guaranteed lookalike result.",
+      "beforeImages": [],
+      "afterImages": [
+        {
+          "src": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+          "alt": "Anonymised aesthetic result photo (no patient identity)",
+          "caption": "Result (anonymised)"
+        }
+      ],
+      "consentReference": "founder_media_grant_2026-07-21 + anonymized_clinical_archive",
+      "medicalReviewer": "clinic_attested_founder_2026-07-21",
+      "reviewedAt": "2026-07-21",
+      "relatedServices": [
+        "veneers"
+      ],
+      "status": "verified",
+      "publishable": true
+    },
+    {
+      "slug": "implant-full-pathway",
+      "title": "Implants and full restoration: a multidisciplinary pathway",
+      "jtbd": "implants_full",
+      "problem": "Partial or full tooth loss needs coordinated surgery, prosthetics, and sometimes orthodontics.",
+      "solution": "Diagnostics, implant/prosthetic plan, surgical and prosthetic stages with healing and load control.",
+      "stages": [
+        "Diagnostics and 3D planning when indicated",
+        "Surgical stage",
+        "Prosthetic stage",
+        "Follow-up"
+      ],
+      "durationRange": "Individual — after diagnostics",
+      "result": "Restored function and aesthetics along a multidisciplinary plan. No timelines promised before examination.",
+      "beforeImages": [],
+      "afterImages": [],
+      "consentReference": "founder_publish_confirm_2026-07-21_pathway_case_no_patient_photo",
+      "medicalReviewer": "clinic_attested_founder_2026-07-21",
+      "reviewedAt": "2026-07-21",
+      "relatedServices": [
+        "dental-implants",
+        "full-mouth-reconstruction"
+      ],
+      "status": "verified",
+      "publishable": true
+    }
+  ],
+  "verifiedCases": [
+    "adult-ortho-pathway",
+    "aesthetic-smile-pathway",
+    "implant-full-pathway"
+  ],
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/"
+  }
+}

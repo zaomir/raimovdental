@@ -1,0 +1,43 @@
+{
+  "language": "en",
+  "path": "/en/international-patients/",
+  "meta": {
+    "title": "International patients | RAIMOV DENTAL",
+    "description": "TBD"
+  },
+  "intro": {
+    "heading": "International patients",
+    "body": "RAIMOV DENTAL welcomes patients from abroad. Logistics, language support, and visit format — TBD."
+  },
+  "location": {
+    "city": "Bishkek",
+    "country": "Kyrgyzstan",
+    "address": "TBD",
+    "status": "pending clinic confirmation"
+  },
+  "services": {
+    "items": [
+      "Comprehensive diagnostics",
+      "Veneers and smile design",
+      "Dental implants",
+      "Full mouth reconstruction",
+      "Adult orthodontics"
+    ]
+  },
+  "visitFormat": {
+    "status": "TBD",
+    "items": []
+  },
+  "languages": {
+    "status": "TBD",
+    "items": [
+      "ru",
+      "en"
+    ]
+  },
+  "cta": {
+    "label": "Book comprehensive diagnostics",
+    "href": "/en/comprehensive-diagnostics/",
+    "source": "raimovdental_international_en"
+  }
+}

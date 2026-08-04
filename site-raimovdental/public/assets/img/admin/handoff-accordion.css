@@ -1,0 +1,39 @@
+.handoff-progress{margin:8px 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+.handoff-progress-top{display:flex;align-items:center;justify-content:space-between;gap:14px;font-size:12px;color:var(--muted)}
+.handoff-progress-top strong{color:var(--brand);font-size:13px}
+.handoff-progress-track{height:6px;margin-top:10px;border-radius:999px;background:#e6e3dc;overflow:hidden}
+.handoff-progress-fill{display:block;height:100%;width:0;border-radius:inherit;background:var(--brand);transition:width .25s ease}
+.handoff-step{display:block!important;margin:0 0 10px!important;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden;scroll-margin-top:112px}
+.handoff-step-header{width:100%;min-height:68px;display:grid;grid-template-columns:34px minmax(0,1fr) minmax(120px,auto) 22px;align-items:center;gap:12px;border:0;background:#fff;padding:13px 15px;text-align:left;color:var(--ink)}
+.handoff-step-header:disabled{cursor:default}
+.handoff-step-number{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#f0eee8;color:var(--muted);font-size:12px;font-weight:900}
+.handoff-step-copy strong{display:block;font-size:14px;line-height:1.3}
+.handoff-step-copy small{display:block;margin-top:3px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.handoff-step-summary{justify-self:end;max-width:240px;color:var(--muted);font-size:12px;line-height:1.35;text-align:right;white-space:normal}
+.handoff-step-chevron{color:var(--muted);font-size:18px;transition:transform .2s ease}
+.handoff-step-body{display:none;padding:4px 16px 17px;border-top:1px solid var(--line);background:linear-gradient(180deg,#fff,#fbfaf7)}
+.handoff-step.is-active{border-color:#b7cbc4;box-shadow:0 12px 30px rgba(18,60,53,.08)}
+.handoff-step.is-active .handoff-step-header{background:#f2f7f5}
+.handoff-step.is-active .handoff-step-number{background:var(--brand);color:#fff}
+.handoff-step.is-active .handoff-step-chevron{transform:rotate(180deg)}
+.handoff-step.is-active .handoff-step-body{display:block}
+.handoff-step.is-active .handoff-step-summary{display:none}
+.handoff-step.is-complete:not(.is-active) .handoff-step-number{background:var(--success-bg);color:var(--success)}
+.handoff-step.is-complete:not(.is-active) .handoff-step-number::before{content:'✓';font-size:14px}
+.handoff-step.is-complete:not(.is-active) .handoff-step-number{font-size:0}
+.handoff-original-label{display:none!important}
+.handoff-step .compact-options{grid-template-columns:repeat(2,minmax(0,1fr));margin:14px 0 4px}
+.handoff-step .choice-button{min-height:58px;padding:12px 14px;border-color:var(--line);background:#fff;box-shadow:none;transform:none;transition:background .16s ease,border-color .16s ease,color .16s ease,box-shadow .16s ease}
+.handoff-step .choice-button strong{font-size:14px;color:var(--ink)}
+.handoff-step .choice-button.is-selected{border-color:var(--brand);background:var(--brand);box-shadow:0 8px 20px rgba(18,60,53,.18),inset 0 0 0 1px var(--brand)}
+.handoff-step .choice-button.is-selected strong{color:#fff}
+.handoff-step .choice-button.is-selected::after{content:'✓';float:right;margin-left:10px;color:#fff;font-weight:900}
+.handoff-step-nav{justify-content:flex-end;margin-top:18px}
+.handoff-step-nav .handoff-back{margin-right:auto}
+.handoff-step-nav button:disabled{cursor:not-allowed;opacity:.45;transform:none}
+.handoff-step-nav .handoff-next.hidden{display:none!important}
+.handoff-review-step{margin-top:14px;padding:4px 0;scroll-margin-top:112px}
+.handoff-review-step .actions{justify-content:flex-end}
+.handoff-review-step .actions .secondary{margin-right:auto}
+@media(max-width:820px){.handoff-step{scroll-margin-top:164px}.handoff-review-step{scroll-margin-top:164px}.handoff-step-header{grid-template-columns:30px minmax(0,1fr) 20px}.handoff-step-summary{grid-column:2/4;justify-self:start;max-width:none;text-align:left;margin-top:-4px}.handoff-step.is-active .handoff-step-summary{display:none}.handoff-step .compact-options{grid-template-columns:1fr}.handoff-progress-top{align-items:flex-start;flex-direction:column;gap:4px}}
+@media(max-width:520px){.handoff-step{scroll-margin-top:178px}.handoff-review-step{scroll-margin-top:178px}.handoff-step-header{padding:12px}.handoff-step-body{padding:4px 12px 14px}.handoff-step-nav{flex-direction:row}.handoff-step-nav button{width:auto;flex:1}.handoff-step-nav .handoff-back{order:0}.handoff-step-nav .handoff-next{order:1}}

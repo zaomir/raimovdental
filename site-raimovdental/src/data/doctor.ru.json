@@ -1,0 +1,102 @@
+{
+  "language": "ru",
+  "path": "/ru/atabek-raimov/",
+  "fullName": "Раимов Атабек Саидович",
+  "publicName": "Атабек Раимов",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Атабек Раимов — главный врач RAIMOV DENTAL",
+    "description": "Профиль Раимова Атабека Саидовича — основателя RAIMOV DENTAL и автора Raimov System.",
+    "medicalReviewRequired": true,
+    "author": "Раимов Атабек Саидович",
+    "medicalReviewer": "clinic_attested_2026-07-21",
+    "publishedAt": "2026-07-21",
+    "reviewedAt": "2026-07-21"
+  },
+  "role": {
+    "title": "Ортодонт-гнатолог, функциональный стоматолог · основатель RAIMOV DENTAL",
+    "status": "clinic_confirmed",
+    "publishable": true,
+    "confirmation": "founder_attestation_2026-07-21 + expertdental.kg doctor card"
+  },
+  "specializations": {
+    "status": "clinic_confirmed",
+    "items": [
+      "Ортодонтия",
+      "Гнатология",
+      "Функциональная стоматология"
+    ],
+    "publishable": true,
+    "confirmation": "founder_attestation_2026-07-21 + expertdental.kg wording"
+  },
+  "education": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": [],
+    "publishable": false,
+    "note": "Клиника подтвердила пакет; детальный список образования в архиве юриста — не извлечён в Git."
+  },
+  "certificates": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": [],
+    "publishable": false,
+    "note": "Клиника подтвердила пакет; сканы/перечень сертификатов в архиве юриста — не извлечены в Git."
+  },
+  "clinicalPhilosophy": {
+    "heading": "Клиническая философия",
+    "body": "Лечение строится на точной диагностике, междисциплинарном плане и долгосрочном наблюдении — без обещаний результата до осмотра.",
+    "publishable": true,
+    "status": "clinic_confirmed"
+  },
+  "focusAreas": {
+    "heading": "Направления работы",
+    "items": [
+      "Комплексная диагностика и планирование",
+      "Виниры и эстетика улыбки",
+      "Имплантация и протезирование",
+      "Ортодонтия для взрослых",
+      "Полное восстановление зубов"
+    ],
+    "status": "clinic_confirmed",
+    "publishable": true
+  },
+  "cases": {
+    "status": "draft-only",
+    "slugs": [],
+    "note": "Клиника подтвердила готовность кейсов; конкретные кейсы с consent ID не извлечены из архива юриста."
+  },
+  "publications": {
+    "status": "clinic_confirmed_pending_extract",
+    "items": [],
+    "publishable": false
+  },
+  "speaking": {
+    "status": "clinic_confirmed",
+    "publishable": true,
+    "items": [
+      {
+        "title": "Микроимпланты в ортодонтии (минивинты)",
+        "event": "Стоматологический конгресс DemMed",
+        "dates": "Ош 16.03.2024 / Бишкек 30.03.2024",
+        "url": "https://bishkek.events/event/stomatologicheskij-kongress/",
+        "handle": "@doctor_raimov"
+      }
+    ]
+  },
+  "raimovSystemRole": {
+    "heading": "Автор Raimov System",
+    "body": "Raimov System — пациентская и клиническая система RAIMOV DENTAL: диагностика, проектирование результата, консилиум, поэтапный план и наблюдение. Без франшизы и коммерческих условий ELITE DENTAL.",
+    "publishable": true
+  },
+  "photo": {
+    "src": "/assets/img/doctor/atabek-portrait.jpg",
+    "alt": "Атабек Раимов",
+    "status": "published_founder_grant_2026-07-21",
+    "publishable": true,
+    "assetId": "MED-PORTRAIT-001"
+  },
+  "cta": {
+    "label": "Записаться на комплексную диагностику",
+    "href": "/ru/kompleksnaya-diagnostika/",
+    "source": "raimovdental_doctor_ru"
+  }
+}

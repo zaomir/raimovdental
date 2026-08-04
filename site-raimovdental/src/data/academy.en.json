@@ -1,0 +1,32 @@
+{
+  "language": "en",
+  "path": "/en/academy/",
+  "brand": "Raimov Academy",
+  "clinic": "RAIMOV DENTAL",
+  "meta": {
+    "title": "Raimov Academy | RAIMOV DENTAL",
+    "description": "Education for doctors—high-level positioning without invented programs.",
+    "medicalReviewRequired": false,
+    "author": "Atabek Raimov",
+    "publishedAt": null,
+    "reviewedAt": null
+  },
+  "intro": {
+    "heading": "Raimov Academy",
+    "body": "An educational direction for doctors. Programs, dates and formats are published after approval — interest from clinicians is welcome without promising an upcoming intake."
+  },
+  "programs": {
+    "status": "not_published",
+    "items": []
+  },
+  "audience": {
+    "status": "direction_only",
+    "description": "For doctors and clinic leaders who need a logic for complex cases. Patient services live under diagnostics and treatment directions."
+  },
+  "contact": {
+    "email": null,
+    "telegram": null,
+    "status": "via_contacts"
+  },
+  "note": "High-level positioning only. No franchise content. No invented program schedule."
+}

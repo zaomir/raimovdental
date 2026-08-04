@@ -1,0 +1,349 @@
+{
+  "language": "ru",
+  "meta": {
+    "title": "RAIMOV DENTAL — комплексная стоматология в Бишкеке",
+    "description": "Запись на комплексную диагностику. Виниры, имплантация, ортодонтия и полное восстановление зубов в Бишкеке."
+  },
+  "hero": {
+    "h1": "Сложный случай начинается с точной диагностики",
+    "subtitle": "RAIMOV DENTAL в Бишкеке: комплексная диагностика, согласованный план и поэтапное лечение — виниры, имплантация, ортодонтия и полное восстановление.",
+    "primaryCta": {
+      "label": "Записаться на комплексную диагностику",
+      "href": "/ru/kompleksnaya-diagnostika/#lead-form",
+      "analytics": "diagnostic_cta_click"
+    },
+    "secondaryCta": {
+      "label": "Написать в WhatsApp",
+      "href": "https://wa.me/996555255455",
+      "analytics": "whatsapp_click"
+    },
+    "media": {
+      "type": "image",
+      "src": "/assets/img/doctor/atabek-portrait.jpg",
+      "alt": "Атабек Раимов",
+      "poster": null,
+      "publishable": true
+    },
+    "trustFacts": [
+      {
+        "id": "experience_years",
+        "label": "Опыт",
+        "value": "",
+        "publishable": false,
+        "source": null
+      },
+      {
+        "id": "verified_cases",
+        "label": "Подтверждённые кейсы",
+        "value": "",
+        "publishable": false,
+        "source": null
+      }
+    ]
+  },
+  "patientGoals": {
+    "heading": "С какой задачей вы пришли?",
+    "items": [
+      {
+        "id": "aesthetics",
+        "label": "Изменить форму и цвет улыбки",
+        "href": "/ru/viniry/",
+        "interest": "veneers"
+      },
+      {
+        "id": "missing_teeth",
+        "label": "Восстановить отсутствующие зубы",
+        "href": "/ru/implantaciya/",
+        "interest": "implants"
+      },
+      {
+        "id": "bite",
+        "label": "Исправить прикус",
+        "href": "/ru/ortodontiya-dlya-vzroslyh/",
+        "interest": "orthodontics"
+      },
+      {
+        "id": "full_rehab",
+        "label": "Нужно полное восстановление зубов",
+        "href": "/ru/polnoe-vosstanovlenie-zubov/",
+        "interest": "full_rehabilitation"
+      },
+      {
+        "id": "second_opinion",
+        "label": "Нужно второе мнение по плану лечения",
+        "href": "/ru/kompleksnaya-diagnostika/",
+        "interest": "second_opinion"
+      }
+    ]
+  },
+  "cases": {
+    "heading": "Результаты лечения",
+    "items": [
+      "adult-ortho-pathway",
+      "aesthetic-smile-pathway",
+      "implant-full-pathway"
+    ],
+    "emptyStateHidden": true
+  },
+  "firstVisit": {
+    "heading": "Первый визит / комплексная диагностика",
+    "publicName": "Первый визит / комплексная диагностика",
+    "conductedBy": {
+      "text": "Атабек Раимов и/или специалист по профилю вашей задачи",
+      "status": "confirmed"
+    },
+    "duration": {
+      "text": "Длительность согласуется при записи",
+      "status": "tbd"
+    },
+    "includes": [
+      {
+        "text": "Клинический осмотр и сбор исходных данных",
+        "status": "confirmed"
+      },
+      {
+        "text": "Обсуждение целей, ограничений и ожиданий",
+        "status": "confirmed"
+      },
+      {
+        "text": "Предварительная оценка вариантов и последовательности",
+        "status": "confirmed"
+      }
+    ],
+    "patientReceives": [
+      {
+        "text": "Понимание вариантов лечения и их последовательности",
+        "status": "confirmed"
+      },
+      {
+        "text": "Ориентиры по этапности; точный бюджет — после диагностики",
+        "status": "confirmed"
+      },
+      {
+        "text": "Согласованный следующий шаг (план / второй визит / подготовка)",
+        "status": "confirmed"
+      }
+    ],
+    "priceBandId": "first_visit",
+    "priceCreditedToTreatment": {
+      "text": "Правило зачёта стоимости визита в лечение подтверждается при записи",
+      "status": "tbd"
+    },
+    "stagedTreatmentAllowed": {
+      "text": "Поэтапное лечение возможно по согласованному плану после диагностики",
+      "status": "confirmed"
+    },
+    "nextStepAfterDiagnostics": {
+      "text": "Согласование плана и запись на первый этап лечения",
+      "status": "confirmed"
+    },
+    "responseSla": {
+      "text": "Ответим в WhatsApp в рабочие часы клиники",
+      "status": "confirmed"
+    },
+    "publishable": true
+  },
+  "raimovSystem": {
+    "heading": "Raimov System",
+    "steps": [
+      {
+        "id": "diagnostics",
+        "title": "Точная диагностика",
+        "benefit": "Понимаете исходную ситуацию и ограничения до начала лечения",
+        "patientOutcome": "Понимаете исходную картину до начала лечения"
+      },
+      {
+        "id": "design",
+        "title": "Проектирование результата",
+        "benefit": "Видите направление изменений до согласования плана",
+        "patientOutcome": "Видите направление изменений до согласия на план"
+      },
+      {
+        "id": "coordination",
+        "title": "Координация специалистов",
+        "benefit": "Один согласованный маршрут вместо разрозненных рекомендаций",
+        "patientOutcome": "Получаете один согласованный маршрут, а не набор мнений"
+      },
+      {
+        "id": "sequence",
+        "title": "Последовательность этапов",
+        "benefit": "Знаете, что делается сначала и зачем каждый шаг нужен",
+        "patientOutcome": "Знаете порядок этапов и зачем нужен каждый"
+      },
+      {
+        "id": "budget",
+        "title": "Этапный бюджет",
+        "benefit": "Планируете расходы по этапам без неожиданных дополнений",
+        "patientOutcome": "Планируете расходы по этапам; суммы — после диагностики"
+      },
+      {
+        "id": "control",
+        "title": "Контроль и наблюдение",
+        "benefit": "Отслеживаете прогресс на ключевых точках лечения",
+        "patientOutcome": "Контрольные точки понятны заранее"
+      }
+    ],
+    "cta": {
+      "label": "Как устроена Raimov System",
+      "href": "/ru/raimov-system/"
+    }
+  },
+  "doctor": {
+    "heading": "Атабек Раимов",
+    "name": "Атабек Раимов",
+    "role": {
+      "text": "Ортодонт-гнатолог, функциональный стоматолог · основатель RAIMOV DENTAL",
+      "publishable": true,
+      "source": "doctor.ru.json + FOUNDER_ATTESTATION 2026-07-21"
+    },
+    "competencies": [
+      {
+        "text": "Комплексная диагностика и планирование",
+        "publishable": true
+      },
+      {
+        "text": "Виниры и эстетика улыбки",
+        "publishable": true
+      },
+      {
+        "text": "Имплантация и протезирование",
+        "publishable": true
+      },
+      {
+        "text": "Ортодонтия для взрослых",
+        "publishable": true
+      },
+      {
+        "text": "Полное восстановление зубов",
+        "publishable": true
+      }
+    ],
+    "photo": {
+      "src": "/assets/img/doctor/atabek-portrait.jpg",
+      "alt": "Атабек Раимов",
+      "publishable": true
+    },
+    "profileHref": "/ru/atabek-raimov/",
+    "body": "Раимов Атабек Саидович ведёт сложные эстетические и функциональные случаи: диагностика, консилиум и поэтапный план по Raimov System — без обещания результата до осмотра."
+  },
+  "flagshipServices": {
+    "heading": "Ключевые направления",
+    "items": [
+      {
+        "title": "Виниры и эстетика",
+        "href": "/ru/viniry/",
+        "description": "Проектирование эстетики в рамках комплексного плана."
+      },
+      {
+        "title": "Имплантация",
+        "href": "/ru/implantaciya/",
+        "description": "Восстановление отсутствующих зубов с учётом функции и прикуса."
+      },
+      {
+        "title": "Полное восстановление",
+        "href": "/ru/polnoe-vosstanovlenie-zubov/",
+        "description": "Поэтапное междисциплинарное лечение сложных случаев."
+      },
+      {
+        "title": "Ортодонтия для взрослых",
+        "href": "/ru/ortodontiya-dlya-vzroslyh/",
+        "description": "Коррекция прикуса и подготовка к эстетическому лечению."
+      }
+    ]
+  },
+  "reviews": {
+    "heading": "Отзывы пациентов",
+    "items": []
+  },
+  "clinicGallery": {
+    "heading": "Клиника",
+    "items": [
+      {
+        "src": "/assets/img/clinic/reception.jpg",
+        "alt": "Ресепшн клиники RAIMOV DENTAL",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/clinic/team-group.jpg",
+        "alt": "Команда клиники",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/doctor/atabek-portrait.jpg",
+        "alt": "Атабек Раимов",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/talyshkhanov-mir-ali.jpg",
+        "alt": "Мир-Али Талышханов",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/gribanova-marina.jpg",
+        "alt": "Марина Грибанова",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/duisheeva-ayday.jpg",
+        "alt": "Айдай Дуйшеева",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/team/kerimkulova-aiperi.jpg",
+        "alt": "Айпери Керимкулова",
+        "publishable": true
+      },
+      {
+        "src": "/assets/img/cases/aesthetic-result-anonymized.jpg",
+        "alt": "Анонимизированный клинический результат",
+        "publishable": true
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Частые вопросы",
+    "items": [
+      {
+        "q": "С чего начинается лечение?",
+        "a": "С комплексной диагностики и согласования плана. Запись — через форму на сайте или по контактам клиники.",
+        "publishable": true
+      },
+      {
+        "q": "Сколько стоит лечение?",
+        "a": "Стоимость зависит от индивидуального плана. Конкретные суммы обсуждаются после диагностики.",
+        "publishable": true
+      },
+      {
+        "q": "Даёте ли гарантии результата?",
+        "a": "Мы не обещаем конкретный результат до осмотра. План и прогноз обсуждаются после диагностики.",
+        "publishable": true
+      },
+      {
+        "q": "Можно ли разбить лечение на этапы?",
+        "a": "Поэтапное лечение возможно по согласованному плану. Детали обсуждаются на первом визите.",
+        "publishable": true
+      },
+      {
+        "q": "Принимаете ли международных пациентов?",
+        "a": "Первичное обращение можно начать дистанционно. Формат визита описан в разделе для международных пациентов.",
+        "publishable": true
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Записаться на комплексную диагностику",
+    "body": "Опишите задачу. Координатор подтвердит формат первого визита и ответит в WhatsApp в рабочие часы.",
+    "primaryCta": {
+      "label": "Записаться на комплексную диагностику",
+      "href": "/ru/kompleksnaya-diagnostika/#lead-form"
+    },
+    "secondaryCta": {
+      "label": "Контакты клиники",
+      "href": "/ru/kontakty/"
+    },
+    "secondOpinion": {
+      "label": "Нужно второе мнение",
+      "whatsappPrefillKey": "second_opinion"
+    }
+  }
+}

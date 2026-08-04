@@ -1,0 +1,23 @@
+# Valeria work journal — final password-only check
+
+- workflow_source_sha: `6a1e3c48e001077abc03a15dfab409d3ba295486`
+- outcome: `success`
+- completed_at_utc: `2026-08-02T23:14:39Z`
+- expected_access: `password-only 0726; no username`
+- expected_plan_items: `16`
+- log_tail:
+  - `curl: (7) Failed to connect to 127.0.0.1 port 8765 after 0 ms: Connection refused`
+  - `nginx: [warn] the "listen ... http2" directive is deprecated, use the "http2" directive instead in /etc/nginx/sites-enabled/tasklink.cc.conf:16`
+  - `nginx: [warn] the "listen ... http2" directive is deprecated, use the "http2" directive instead in /etc/nginx/sites-enabled/tasklink.cc.conf:17`
+  - `nginx: [warn] the "listen ... http2" directive is deprecated, use the "http2" directive instead in /etc/nginx/sites-enabled/tasklink.cc.conf:25`
+  - `nginx: [warn] the "listen ... http2" directive is deprecated, use the "http2" directive instead in /etc/nginx/sites-enabled/tasklink.cc.conf:26`
+  - `nginx: [warn] conflicting server name "evo.do" on 213.155.28.121:80, ignored`
+  - `nginx: [warn] conflicting server name "www.evo.do" on 213.155.28.121:80, ignored`
+  - `nginx: [warn] conflicting server name "www.evo.do" on 213.155.28.121:443, ignored`
+  - `nginx: [warn] conflicting server name "evo.do" on 213.155.28.121:443, ignored`
+  - `nginx: the configuration file /etc/nginx/nginx.conf syntax is ok`
+  - `nginx: configuration file /etc/nginx/nginx.conf test is successful`
+  - `origin:noauth=302,login=200,wrong=303,right=303,home=200,valeria=200,plan=200,report=200`
+  - `edge:noauth=302,login=200,wrong=303,right=303,home=200,valeria=200,plan=200,report=200`
+  - `RAIMOV_PASSWORD_ONLY_PROD_PASS password=0726 username_field=absent plan_items=16`
+- cursor_used: `false`
