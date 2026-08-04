@@ -409,6 +409,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-04T20:29:33Z",
+  "updated_at_utc": "2026-08-04T20:30:04Z",
   "version": 1
 }
