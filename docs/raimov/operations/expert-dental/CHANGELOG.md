@@ -1,12 +1,23 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.5
+version: 1.6
 created: 2026-08-03
-last_updated: 2026-08-03
+last_updated: 2026-08-04
 ---
 
 # Журнал изменений
+
+## 2026-08-04 — прайс-каталог clinic_confirmed → таблица `/price`
+
+Получен полный прайс клиники (направление / услуга / цена). Зафиксировано:
+
+- SSOT JSON: `pricing/PRICE_CATALOG.json` (9 направлений, 77 позиций);
+- Markdown-таблица: `pricing/PRICE_TABLE.md`;
+- Zero Block для Tilda: `docs/projects/raimovdental/tilda/price-table-zero-block.html`;
+- реестры: `ED-MAT-053`, `ED-LINK-033`.
+
+Публикация на Tilda `/price` — вставка Zero Block + удаление дублирующих карточек T847. Production smoke после публикации.
 
 ## 2026-08-03 — версия 1.1 опубликована как продолжение отчёта за первые две недели
 

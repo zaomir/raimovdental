@@ -3,7 +3,7 @@ title: Expert Dental Studio — реестр ссылок
 status: ACTIVE REGISTER
 version: 1.1
 created: 2026-08-03
-last_updated: 2026-08-03
+last_updated: 2026-08-04
 id_prefix: ED-LINK
 ---
 
@@ -28,6 +28,7 @@ id_prefix: ED-LINK
 | ED-LINK-003 | Страница контактов | `http://expertdental.kg/contacts` | Предоставлен пользователем | ED-MAT-022 | Опубликована в первые две недели |
 | ED-LINK-004 | Блог | `http://expertdental.kg/blog` | Предоставлен пользователем | ED-MAT-023 | Опубликовано 9 статей |
 | ED-LINK-005 | Тестовая новая главная | `http://expertdental.kg/home-new` | Предоставлен пользователем | ED-MAT-025 | Прототип, будет дорабатываться |
+| ED-LINK-033 | Страница цен `/price` | `https://expertdental.kg/price` | Production + clinic price list | ED-MAT-053 | Legacy alias; канон долгосрочно `/services/` |
 | ED-LINK-006 | Instagram клиники | `https://www.instagram.com/expert_dental_studio?igsh=enRxbnpueTJxcXZ3` | SSOT | — | Аудит и статистика требуют доступа |
 | ED-LINK-007 | Телефон / WhatsApp | `+996 555 255 455` | SSOT | — | Не преобразован в непроверенный deeplink |
 

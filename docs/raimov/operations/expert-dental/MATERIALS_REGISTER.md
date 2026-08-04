@@ -67,6 +67,7 @@ id_prefix: ED-MAT
 | ED-MAT-023 | Website page | Страница блога | Месяц 1 / 9 | Published | Tilda / `expertdental.kg` | `http://expertdental.kg/blog` | База для индексации |
 | ED-MAT-024 | Content package | Девять статей блога | Месяц 1 / 9 | Published | Tilda / блог Expert Dental | URL-перечень не получен | Нужен отдельный список 9 точных URL |
 | ED-MAT-025 | Website prototype | Тестовая новая главная | Месяц 1 / 4, 9 | Prototype / published | Tilda / `expertdental.kg` | `http://expertdental.kg/home-new` | Не заменяет необходимость полной будущей пересборки сайта |
+| ED-MAT-053 | Price catalog SSOT | Прайс: направления · услуги · цены | Месяц 1 / 4 | Ready for Tilda publish | `docs/raimov/operations/expert-dental/pricing/` | ED-LINK-033 | Каталог JSON + MD + Zero Block `price-table-zero-block.html` |
 
 ## Интерфейсы клиники
 

@@ -33,6 +33,9 @@ docs/raimov/operations/expert-dental/
 ├── MATERIALS_REGISTER.md
 ├── LINKS_REGISTER.md
 ├── CHANGELOG.md
+├── pricing/
+│   ├── PRICE_CATALOG.json   ← clinic-confirmed SSOT
+│   └── PRICE_TABLE.md
 ├── periods/
 │   └── month-01/
 │       ├── PLAN.md
@@ -44,6 +47,8 @@ docs/raimov/operations/expert-dental/
     ├── REPORT_TEMPLATE.md
     └── MATERIAL_ENTRY_TEMPLATE.md
 ```
+
+Tilda Zero Block прайса: `docs/projects/raimovdental/tilda/price-table-zero-block.html`.
 
 Новые периоды создаются по модели:
 

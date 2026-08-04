@@ -59,11 +59,11 @@ This document lists all data required from the clinic before public release. Lan
 
 ## Prices and payment
 
-- [ ] Price list for diagnostics and flagship services
+- [x] Price list for diagnostics and flagship services — Expert Dental full catalog 2026-08-04 → `docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json` (Tilda `/price` Zero Block)
 - [ ] Staged payment policy
 - [ ] Payment methods (cash, card, transfer, etc.)
-- [ ] Currency display rules (KGS / USD / EUR)
-- [ ] Confirm values go to `src/config/pricing.ts` (Lane A/C conflict file)
+- [x] Currency display rules (KGS / USD / EUR) — KGS primary; aligners in USD as clinic provided
+- [ ] Confirm flagship bands in `src/config/pricing.ts` (RAIMOV site bands still TBD; clinic catalog lives in Expert Dental pricing SSOT)
 
 ## Services — medical copy approval
 
