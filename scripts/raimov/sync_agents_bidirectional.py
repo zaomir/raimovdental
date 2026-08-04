@@ -346,6 +346,10 @@ def main() -> int:
         print("DRY-RUN complete (no writes)")
         return 0
 
+    if not actions:
+        print("Nothing to sync; skipping writes/commits")
+        return 0
+
     for a in actions:
         if a.direction == "g2c":
             copy_file(grainee / a.rel, clinic / a.rel)
