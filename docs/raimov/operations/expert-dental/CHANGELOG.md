@@ -12,12 +12,13 @@ last_updated: 2026-08-05
 
 Схема сбора отзывов в системе мотивации пациентов (Layer A):
 
-- триггер WhatsApp CSAT 1–5 через 60–120 мин после eligible-визита;
-- 4–5 → ссылки Google / Яндекс / 2ГИС / ПроДокторов;
+- WhatsApp → трекаемый **Review Hub** (`/feedback/<token>`), CSAT 1–5★ на сайте;
+- 4–5 → три кнопки Яндекс / 2ГИС / Google; кликнутая «серая»; дожимы на 2–3 площадки;
+- лестница N0–N4 (anti-spam), затем STOP; клик ≠ публикация;
 - 1–3 → закрытая форма + алерт управляющему / главврачу;
 - запрет reward-for-review и предварительного отбора «только довольных»;
 - SSOT: `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` §4.1;
-- SOP: `reputation/POST_VISIT_FEEDBACK_LOOP.md`;
+- SOP: `reputation/POST_VISIT_FEEDBACK_LOOP.md` v1.1;
 - решение: `docs/founder-notes/DEC-787_post-visit-feedback-loop.md`.
 
 ## 2026-08-05 — Мир-Али как гнатолог (Tilda update pack)
