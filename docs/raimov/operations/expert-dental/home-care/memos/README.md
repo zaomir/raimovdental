@@ -1,34 +1,50 @@
 ---
-title: Памятки пациента — печать администратором
+title: Памятки пациента — по каждой процедуре прайса
 status: DRAFT — medical review required before mass print
-version: 0.1
+version: 0.2
 created: 2026-08-05
 last_updated: 2026-08-05
-id: ED-MAT-056
-format: A5 portrait, one sheet
+id: ED-MAT-058
+format: A5 portrait
 owner_print: administrator
 ---
 
 # Памятки пациента
 
-Администратор **печатает и выдаёт** памятку после процедуры. Врач не тратит время на печать.
+## Правило выдачи
 
-| ID | Файл | Когда |
-|---|---|---|
-| `memo-hygiene` | [`memo-hygiene.md`](memo-hygiene.md) | Профгигиена |
-| `memo-therapy` | [`memo-therapy.md`](memo-therapy.md) | Пломба / реставрация / билдап |
-| `memo-extraction` | [`memo-extraction.md`](memo-extraction.md) | Удаление зуба |
-| `memo-endo` | [`memo-endo.md`](memo-endo.md) | Лечение каналов |
-| `memo-veneers-ortho` | [`memo-veneers-ortho.md`](memo-veneers-ortho.md) | Виниры, орто, ортопедия, имплант (пилот) |
-| `memo-pediatric` | [`memo-pediatric.md`](memo-pediatric.md) | Детский приём |
-| `memo-diagnostics` | [`memo-diagnostics.md`](memo-diagnostics.md) | Консультация / диагностика |
+Администратор **печатает и выдаёт** памятку, соответствующую **конкретной процедуре** из прайса (не общую «на отделение»). Врач не печатает.
 
-## Печать
+Источник соответствия процедура → файл: [`by-procedure/INDEX.json`](by-procedure/INDEX.json) (**77** позиций = весь `PRICE_CATALOG.json`).
 
-- Формат A5; шрифт крупный; клиника / WhatsApp внизу из актуальных контактов прайса.
-- Без логотипов брендов средств ухода и без цен.
-- До тиража — medical approval.
+## Каталоги
+
+| Путь | Назначение |
+|---|---|
+| [`by-procedure/`](by-procedure/) | **Канон для печати:** одна памятка на каждую позицию прайса |
+| [`by-procedure/INDEX.json`](by-procedure/INDEX.json) | Машиначитаемый индекс для UI админа |
+| `memo-*.md` в этой папке (7 файлов) | Устаревшие **групповые** черновики; оставляем для пилота, приоритет — `by-procedure/` |
+
+## Групповые шаблоны (legacy / пилот)
+
+| ID | Файл |
+|---|---|
+| `memo-hygiene` | [`memo-hygiene.md`](memo-hygiene.md) |
+| `memo-therapy` | [`memo-therapy.md`](memo-therapy.md) |
+| `memo-extraction` | [`memo-extraction.md`](memo-extraction.md) |
+| `memo-endo` | [`memo-endo.md`](memo-endo.md) |
+| `memo-veneers-ortho` | [`memo-veneers-ortho.md`](memo-veneers-ortho.md) |
+| `memo-pediatric` | [`memo-pediatric.md`](memo-pediatric.md) |
+| `memo-diagnostics` | [`memo-diagnostics.md`](memo-diagnostics.md) |
+
+## Регенерация
+
+При изменении прайса:
+
+```bash
+node scripts/raimov/generate-procedure-memos.mjs
+```
 
 ## Скрипт выдачи
 
-См. `../HOME_CARE_HANDOFF_SOP.md` → «Скрипт выдачи памятки».
+См. `../HOME_CARE_HANDOFF_SOP.md`.

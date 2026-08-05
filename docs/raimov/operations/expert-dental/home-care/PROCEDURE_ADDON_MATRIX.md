@@ -149,7 +149,7 @@ source_price: pricing/PRICE_CATALOG.json
 | `next_visit_type` | `hygiene_recall` / `endo_visit_2` / `crown` / `implant_fdm` / `ortho_activation` / `suture_removal` / … |
 | `next_visit_when` | «через 7–14 дней» / «через 3 мес» / дата |
 | `care_sale[]` | классы SKU + где (`clinic` / `external_ok`) |
-| `memo_id` | из ED-MAT-056 |
+| `memo_id` | из `memos/by-procedure/INDEX.json` (ED-MAT-058), 1:1 с процедурой |
 
 ## Приоритет пилота (не весь прайс сразу)
 

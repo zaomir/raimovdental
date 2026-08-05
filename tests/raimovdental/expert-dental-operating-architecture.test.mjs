@@ -52,7 +52,7 @@ function expectedIds(prefix, count) {
 const materials = readFileSync(join(base, 'MATERIALS_REGISTER.md'), 'utf8');
 const materialIds = tableIds(materials, 'ED-MAT');
 assert.equal(materialIds.length, new Set(materialIds).size, 'material IDs must be unique');
-assert.deepEqual([...materialIds].sort(), expectedIds('ED-MAT', 57), 'material IDs must be continuous ED-MAT-001…057');
+assert.deepEqual([...materialIds].sort(), expectedIds('ED-MAT', 58), 'material IDs must be continuous ED-MAT-001…058');
 assert.match(materials, /ED-MAT-035 \| QR material/, 'Yandex QR material must be registered');
 assert.match(materials, /ED-MAT-042 \| Automated guard/, 'operating architecture guard must be registered');
 assert.match(materials, /ED-MAT-043 \| Package handoff/, 'closed v1.1 package handoff must be registered');
@@ -64,9 +64,10 @@ assert.match(materials, /ED-MAT-054 \| Operating SOP/, 'home-care SOP must be re
 assert.match(materials, /ED-MAT-055 \| Procedure matrix/, 'home-care procedure matrix must be registered');
 assert.match(materials, /ED-MAT-056 \| Patient memos/, 'patient memos package must be registered');
 assert.match(materials, /ED-MAT-057 \| Addon matrix/, 'procedure addon matrix must be registered');
+assert.match(materials, /ED-MAT-058 \| Patient memos 1:1/, 'per-procedure memos must be registered');
 assert.match(materials, /девять статей блога/i, 'nine-article package must be registered');
 assert.match(materials, /source not received/i, 'unreceived ZIP remains explicitly marked');
-assert.match(materials, /следующий материал: `ED-MAT-058`/, 'next material ID must advance to ED-MAT-058');
+assert.match(materials, /следующий материал: `ED-MAT-059`/, 'next material ID must advance to ED-MAT-059');
 
 const links = readFileSync(join(base, 'LINKS_REGISTER.md'), 'utf8');
 const linkIds = tableIds(links, 'ED-LINK');
@@ -95,6 +96,11 @@ assert.ok(existsSync(join(base, 'home-care/HOME_CARE_HANDOFF_SOP.md')), 'home-ca
 assert.ok(existsSync(join(base, 'home-care/PROCEDURE_MATRIX.md')), 'home-care matrix file missing');
 assert.ok(existsSync(join(base, 'home-care/PROCEDURE_ADDON_MATRIX.md')), 'home-care addon matrix file missing');
 assert.ok(existsSync(join(base, 'home-care/memos/memo-hygiene.md')), 'hygiene patient memo missing');
+assert.ok(existsSync(join(base, 'home-care/memos/by-procedure/INDEX.json')), 'per-procedure memo index missing');
+const memoIndex = JSON.parse(readFileSync(join(base, 'home-care/memos/by-procedure/INDEX.json'), 'utf8'));
+assert.equal(memoIndex.count, 77, 'per-procedure memos must cover all 77 price-catalog items');
+assert.ok(existsSync(join(base, 'home-care/memos/by-procedure', memoIndex.items[0].file.replace('by-procedure/', ''))), 'first per-procedure memo file missing');
+assert.ok(existsSync(join(root, 'scripts/raimov/generate-procedure-memos.mjs')), 'procedure memo generator missing');
 assert.doesNotMatch(links, /sandbox:\/\/mnt\/data\//, 'temporary sandbox links must not enter the project links register');
 
 const report = readFileSync(join(base, 'periods/month-01/reports/2026-08-02-first-two-weeks.md'), 'utf8');
