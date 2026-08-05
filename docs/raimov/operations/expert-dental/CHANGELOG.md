@@ -8,6 +8,11 @@ last_updated: 2026-08-05
 
 # Журнал изменений
 
+## 2026-08-05 — витрина и склад из матрицы ухода
+
+- `ED-MAT-060`: `SHOWCASE_STOCK_LIST.md` / `.json` — 12 классов, нормы витрины и склада на пилот 2–4 недели;
+- генератор: `scripts/raimov/generate-showcase-stock.mjs`.
+
 ## 2026-08-05 — матрица ухода в скриптах и UI врача/админа
 
 - `ED-MAT-059`: `HOME_CARE_MATRIX.json` + `home-care-matrix.js` / `home-care-ui.js`;

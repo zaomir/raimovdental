@@ -1,0 +1,238 @@
+{
+  "status": "DRAFT — clinic SKU brands + exact pack sizes pending",
+  "version": "0.1",
+  "generated": "2026-08-05",
+  "source": "HOME_CARE_MATRIX.json",
+  "material": "ED-MAT-060",
+  "rule": "display = visible waiting-room / reception units; stock = display + backroom target for ~2–4 weeks pilot",
+  "priorities": {
+    "A": "High: default-checked on many procedures — always on showcase",
+    "B": "Medium: regular offer — showcase + stock",
+    "C": "Low/niche: small showcase face, reorder from stock"
+  },
+  "items": [
+    {
+      "code": "soft_brush",
+      "label": "Мягкая зубная щётка",
+      "where": "clinic, clinic_or_store",
+      "linked_procedures": 45,
+      "default_on_checkout": 44,
+      "optional_on_checkout": 1,
+      "priority": "A",
+      "display": 12,
+      "stock": 60,
+      "pack_note": "adult soft; 2–3 SKU colors/sizes ok",
+      "demand_score": 89,
+      "example_procedures": [
+        "Профессиональная гигиена — постоянный прикус, лёгкая степень (2 челюсти)",
+        "Профессиональная гигиена — постоянный прикус, средняя степень (2 челюсти)",
+        "Профессиональная гигиена — постоянный прикус, тяжёлая степень (2 челюсти)",
+        "Лечение кариеса постоянного зуба во фронтальном отделе",
+        "Восстановление постоянного зуба «Билдап» — разрушение до 1/3 коронковой части"
+      ]
+    },
+    {
+      "code": "interdental_brushes",
+      "label": "Ёршики / суперфлосс",
+      "where": "clinic_or_store",
+      "linked_procedures": 26,
+      "default_on_checkout": 14,
+      "optional_on_checkout": 12,
+      "priority": "A",
+      "display": 10,
+      "stock": 40,
+      "pack_note": "assorted sizes ISO 0–3; multipacks",
+      "demand_score": 40,
+      "example_procedures": [
+        "Лечение кариеса постоянного зуба во фронтальном отделе",
+        "Восстановление постоянного зуба «Билдап» — разрушение до 1/3 коронковой части",
+        "Восстановление постоянного зуба «Билдап» — разрушение до 2/3 коронковой части",
+        "Восстановление постоянного зуба «Билдап» — разрушение до 3/3 коронковой части",
+        "Лечение кариеса постоянного зуба в жевательном отделе — поверхностный"
+      ]
+    },
+    {
+      "code": "denture_brush",
+      "label": "Щётка для протеза",
+      "where": "clinic_or_store",
+      "linked_procedures": 6,
+      "default_on_checkout": 6,
+      "optional_on_checkout": 0,
+      "priority": "B",
+      "display": 3,
+      "stock": 12,
+      "pack_note": "with full/partial denture cases",
+      "demand_score": 12,
+      "example_procedures": [
+        "Протезирование беззубых челюстей — акриловый протез",
+        "Протезирование беззубых челюстей — нейлоновый протез",
+        "Частичный протез — бабочка из акрила (1 зуб)",
+        "Частичное протезирование — бабочка из акрила (2 и более зубов)",
+        "Частичное протезирование — бабочка из нейлона (1 зуб)"
+      ]
+    },
+    {
+      "code": "kids_brush",
+      "label": "Детская щётка",
+      "where": "clinic_or_store",
+      "linked_procedures": 9,
+      "default_on_checkout": 1,
+      "optional_on_checkout": 8,
+      "priority": "C",
+      "display": 6,
+      "stock": 24,
+      "pack_note": "by age 2–5 / 6+",
+      "demand_score": 10,
+      "example_procedures": [
+        "Герметизация фиссур временного зуба",
+        "Герметизация фиссур постоянного зуба",
+        "Профессиональная гигиена полости рта в период временного прикуса (2 челюсти)",
+        "Лечение кариеса временного зуба — поверхностный",
+        "Лечение кариеса временного зуба — средний"
+      ]
+    },
+    {
+      "code": "ortho_brushes",
+      "label": "Орто-ёршики / V-щётка",
+      "where": "clinic",
+      "linked_procedures": 1,
+      "default_on_checkout": 1,
+      "optional_on_checkout": 0,
+      "priority": "C",
+      "display": 6,
+      "stock": 24,
+      "pack_note": "V-brush + interdental ortho set",
+      "demand_score": 2,
+      "example_procedures": [
+        "Ортодонтическое лечение у взрослых — установка брекет-системы"
+      ]
+    },
+    {
+      "code": "ortho_wax",
+      "label": "Ортодонтический воск",
+      "where": "clinic",
+      "linked_procedures": 1,
+      "default_on_checkout": 1,
+      "optional_on_checkout": 0,
+      "priority": "C",
+      "display": 8,
+      "stock": 30,
+      "pack_note": "small packs; high turnover after bonding",
+      "demand_score": 2,
+      "example_procedures": [
+        "Ортодонтическое лечение у взрослых — установка брекет-системы"
+      ]
+    },
+    {
+      "code": "aligner_brush",
+      "label": "Щётка для капп",
+      "where": "clinic_or_store",
+      "linked_procedures": 1,
+      "default_on_checkout": 1,
+      "optional_on_checkout": 0,
+      "priority": "C",
+      "display": 3,
+      "stock": 12,
+      "pack_note": "for aligner patients",
+      "demand_score": 2,
+      "example_procedures": [
+        "Элайнеры"
+      ]
+    },
+    {
+      "code": "kids_paste",
+      "label": "Детская паста",
+      "where": "clinic_or_store",
+      "linked_procedures": 1,
+      "default_on_checkout": 0,
+      "optional_on_checkout": 1,
+      "priority": "C",
+      "display": 4,
+      "stock": 18,
+      "pack_note": "age-appropriate fluoride per doctor",
+      "demand_score": 1,
+      "example_procedures": [
+        "Профессиональная гигиена полости рта в период временного прикуса (2 челюсти)"
+      ]
+    },
+    {
+      "code": "irrigator",
+      "label": "Ирригатор",
+      "where": "clinic_or_store",
+      "linked_procedures": 15,
+      "default_on_checkout": 0,
+      "optional_on_checkout": 15,
+      "priority": "C",
+      "display": 2,
+      "stock": 6,
+      "pack_note": "1 demo on shelf + boxed units",
+      "demand_score": 15,
+      "example_procedures": [
+        "Профессиональная гигиена — постоянный прикус, лёгкая степень (2 челюсти)",
+        "Профессиональная гигиена — постоянный прикус, средняя степень (2 челюсти)",
+        "Профессиональная гигиена — постоянный прикус, тяжёлая степень (2 челюсти)",
+        "Временная коронка из PMMA долгого ношения",
+        "Эстетическая коронка E-max"
+      ]
+    },
+    {
+      "code": "low_abrasive_paste",
+      "label": "Низкоабразивная паста",
+      "where": "clinic_or_store",
+      "linked_procedures": 3,
+      "default_on_checkout": 0,
+      "optional_on_checkout": 3,
+      "priority": "C",
+      "display": 8,
+      "stock": 36,
+      "pack_note": "sensitive / low-RDA; 1–2 SKU",
+      "demand_score": 3,
+      "example_procedures": [
+        "Профессиональная гигиена — постоянный прикус, лёгкая степень (2 челюсти)",
+        "Профессиональная гигиена — постоянный прикус, средняя степень (2 челюсти)",
+        "Профессиональная гигиена — постоянный прикус, тяжёлая степень (2 челюсти)"
+      ]
+    },
+    {
+      "code": "aligner_tabs",
+      "label": "Таблетки для капп",
+      "where": "clinic_or_store",
+      "linked_procedures": 1,
+      "default_on_checkout": 0,
+      "optional_on_checkout": 1,
+      "priority": "C",
+      "display": 4,
+      "stock": 16,
+      "pack_note": "cleaning tablets",
+      "demand_score": 1,
+      "example_procedures": [
+        "Элайнеры"
+      ]
+    },
+    {
+      "code": "denture_tabs",
+      "label": "Таблетки для очистки протеза",
+      "where": "clinic_or_store",
+      "linked_procedures": 6,
+      "default_on_checkout": 0,
+      "optional_on_checkout": 6,
+      "priority": "C",
+      "display": 4,
+      "stock": 16,
+      "pack_note": "boxes, not loose tablets",
+      "demand_score": 6,
+      "example_procedures": [
+        "Протезирование беззубых челюстей — акриловый протез",
+        "Протезирование беззубых челюстей — нейлоновый протез",
+        "Частичный протез — бабочка из акрила (1 зуб)",
+        "Частичное протезирование — бабочка из акрила (2 и более зубов)",
+        "Частичное протезирование — бабочка из нейлона (1 зуб)"
+      ]
+    }
+  ],
+  "totals": {
+    "sku_count": 12,
+    "display_units": 70,
+    "stock_units": 294
+  }
+}
