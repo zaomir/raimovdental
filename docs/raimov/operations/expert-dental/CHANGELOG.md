@@ -8,6 +8,13 @@ last_updated: 2026-08-05
 
 # Журнал изменений
 
+## 2026-08-05 — SSOT Home Care Handoff + вопросы договора (DEC-787)
+
+- `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` (ED-MAT-061);
+- `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` (ED-MAT-062);
+- `docs/founder-notes/DEC-787_expert-dental-home-care-handoff-system.md`;
+- индексы: `RAIMOV.md`, expert-clinic-reference, clinic-growth, patient-funnel, PROJECT_STATUS, ops README.
+
 ## 2026-08-05 — витрина и склад из матрицы ухода
 
 - `ED-MAT-060`: `SHOWCASE_STOCK_LIST.md` / `.json` — 12 классов, нормы витрины и склада на пилот 2–4 недели;

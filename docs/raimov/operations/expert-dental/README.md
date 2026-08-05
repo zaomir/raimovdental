@@ -22,6 +22,8 @@ branch: main
 | Общая стратегия клиники и экосистемы | `docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md` |
 | Access & Continuity (срочный вход / Паспорт) | `docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
 | Мотивация пациентов (Care 12 / Points / referral) | `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
+| Home Care Handoff (витрина / врач / админ / памятки) | `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` |
+| Вопросы для продолжения договора | `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` |
 | План первого месяца | `docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md` |
 | Сайт `expertdental.kg` и блог | `docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md` |
 | Архитектура файлов Expert Dental | `FILE_ARCHITECTURE.md` |

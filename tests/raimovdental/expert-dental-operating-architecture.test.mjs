@@ -52,7 +52,7 @@ function expectedIds(prefix, count) {
 const materials = readFileSync(join(base, 'MATERIALS_REGISTER.md'), 'utf8');
 const materialIds = tableIds(materials, 'ED-MAT');
 assert.equal(materialIds.length, new Set(materialIds).size, 'material IDs must be unique');
-assert.deepEqual([...materialIds].sort(), expectedIds('ED-MAT', 60), 'material IDs must be continuous ED-MAT-001…060');
+assert.deepEqual([...materialIds].sort(), expectedIds('ED-MAT', 62), 'material IDs must be continuous ED-MAT-001…062');
 assert.match(materials, /ED-MAT-035 \| QR material/, 'Yandex QR material must be registered');
 assert.match(materials, /ED-MAT-042 \| Automated guard/, 'operating architecture guard must be registered');
 assert.match(materials, /ED-MAT-043 \| Package handoff/, 'closed v1.1 package handoff must be registered');
@@ -67,9 +67,11 @@ assert.match(materials, /ED-MAT-057 \| Addon matrix/, 'procedure addon matrix mu
 assert.match(materials, /ED-MAT-058 \| Patient memos 1:1/, 'per-procedure memos must be registered');
 assert.match(materials, /ED-MAT-059 \| Home-care UI matrix/, 'home-care UI matrix must be registered');
 assert.match(materials, /ED-MAT-060 \| Showcase \+ stock/, 'showcase stock list must be registered');
+assert.match(materials, /ED-MAT-061 \| Strategy SSOT/, 'home-care strategy SSOT must be registered');
+assert.match(materials, /ED-MAT-062 \| Strategy SSOT/, 'contract questions SSOT must be registered');
 assert.match(materials, /девять статей блога/i, 'nine-article package must be registered');
 assert.match(materials, /source not received/i, 'unreceived ZIP remains explicitly marked');
-assert.match(materials, /следующий материал: `ED-MAT-061`/, 'next material ID must advance to ED-MAT-061');
+assert.match(materials, /следующий материал: `ED-MAT-063`/, 'next material ID must advance to ED-MAT-063');
 
 const links = readFileSync(join(base, 'LINKS_REGISTER.md'), 'utf8');
 const linkIds = tableIds(links, 'ED-LINK');
@@ -107,6 +109,9 @@ assert.ok(existsSync(join(root, 'scripts/raimov/generate-home-care-matrix.mjs'))
 assert.ok(existsSync(join(base, 'home-care/HOME_CARE_MATRIX.json')), 'home-care matrix JSON missing');
 assert.ok(existsSync(join(root, 'scripts/raimov/generate-showcase-stock.mjs')), 'showcase stock generator missing');
 assert.ok(existsSync(join(base, 'home-care/SHOWCASE_STOCK_LIST.json')), 'showcase stock JSON missing');
+assert.ok(existsSync(join(root, 'docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md')), 'home-care SSOT missing');
+assert.ok(existsSync(join(root, 'docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md')), 'contract questions SSOT missing');
+assert.ok(existsSync(join(root, 'docs/founder-notes/DEC-787_expert-dental-home-care-handoff-system.md')), 'DEC-787 missing');
 assert.ok(existsSync(join(root, 'site-raimovdental/public/assets/img/admin/home-care-matrix.js')), 'admin home-care matrix JS missing');
 assert.ok(existsSync(join(root, 'site-raimovdental/public/assets/img/workspace/home-care-matrix.js')), 'workspace home-care matrix JS missing');
 assert.doesNotMatch(links, /sandbox:\/\/mnt\/data\//, 'temporary sandbox links must not enter the project links register');

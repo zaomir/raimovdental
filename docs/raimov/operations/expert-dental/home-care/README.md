@@ -1,14 +1,19 @@
 ---
 title: Expert Dental — домашний уход, витрина и памятки пациента
-status: DRAFT — medical review required
-version: 0.1
+status: DRAFT — medical review required · strategy SSOT live (DEC-787)
+version: 0.2
 created: 2026-08-05
 last_updated: 2026-08-05
-materials: ED-MAT-054 … ED-MAT-060
+materials: ED-MAT-054 … ED-MAT-062
 related_plan_items: 10, 11
+strategy_ssot: docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md
+decision: docs/founder-notes/DEC-787_expert-dental-home-care-handoff-system.md
+contract_questions_ssot: docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md
 ---
 
 # Home care & patient memos
+
+**Канон стратегии:** [`docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md`](../../../ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md) (DEC-787).
 
 Операционный контур **тихой** выдачи средств ухода и памяток пациента после процедуры.
 
