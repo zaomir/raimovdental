@@ -7,6 +7,14 @@
 | Cursor Agents (Mobile/Cloud) | `zaomir/raimovdental` | `/var/www/raimovdental` |
 | Production SSOT + deploy | `zaomir/grainee-v2` | `/var/www/grainee-v2` |
 
+## Cursor setup
+
+**Full guide:** [`CURSOR_AGENTS_SETUP.md`](./CURSOR_AGENTS_SETUP.md)
+
+1. Cursor Dashboard → Cloud Agents → Environment for repo **`zaomir/raimovdental`**
+2. Mobile/Agents: always pick project **raimovdental** (not grainee-v2) for clinic-only
+3. Desktop: this repo folder **or** grainee `raimovdental.code-workspace`
+
 ## Sync (bidirectional)
 
 Updates flow **both ways**. Edit in either repo — cron (every 10 min on VDS) or manual sync keeps them aligned.

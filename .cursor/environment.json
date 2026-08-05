@@ -1,0 +1,5 @@
+{
+  "name": "raimovdental-agents",
+  "install": "node -v\nnpm -v",
+  "start": ""
+}

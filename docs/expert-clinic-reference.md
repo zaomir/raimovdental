@@ -230,5 +230,6 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 - **Production SSOT / deploy:** this monorepo (`zaomir/grainee-v2`).
 - **Bidirectional sync (DEC-784):** `bash scripts/raimov/sync-agents-bidirectional.sh --apply --commit --push` (also auto every 10 min on VDS)
 - Desktop IDE isolation: `raimovdental.code-workspace`
+- **Setup guide:** [`docs/raimov/CURSOR_AGENTS_SETUP.md`](docs/raimov/CURSOR_AGENTS_SETUP.md) — Cloud Environment + Mobile picker + smoke
 - Ops note: [`docs/raimov/AGENTS_SATELLITE.md`](docs/raimov/AGENTS_SATELLITE.md)
 

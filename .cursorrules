@@ -1,0 +1,11 @@
+# .cursorrules — raimovdental Cursor Agents satellite (DEC-783/784)
+
+**Primary consumers = AI agents.** Clinic-only surface.
+
+1. Entry: `START.md` → `AGENTS.md` → `docs/expert-clinic-reference.md`
+2. Production SSOT / deploy = `zaomir/grainee-v2` only — **never deploy from this repo**
+3. Sync = bidirectional DEC-784 (`docs/raimov/AGENTS_SATELLITE.md`)
+4. Facts only from `research/raimov-profile/` registers — no invented clinic claims
+5. Protected: `research/raimov-profile/evidence/**`, `site-raimovdental/src/config/pricing.ts`
+6. Ship: commit here → sync to grainee → deploy from grainee if runtime
+7. No secrets / patient PII in git
