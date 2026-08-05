@@ -36,6 +36,8 @@ topics:
   master_index: docs/ssot/RAIMOV.md
   architecture: docs/ssot/RAIMOV_ECOSYSTEM_PROJECT_ARCHITECTURE.md
   strategy: docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md
+  access_continuity: docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md
+  patient_motivation: docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
   project_status: docs/raimov/PROJECT_STATUS.md
   routing: docs/projects/raimovdental/ROUTER.md
   media_rights: research/raimov-profile/

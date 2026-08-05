@@ -1,12 +1,24 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.6
+version: 1.7
 created: 2026-08-03
-last_updated: 2026-08-04
+last_updated: 2026-08-05
 ---
 
 # Журнал изменений
+
+## 2026-08-05 — система мотивации пациентов (DEC-786)
+
+Принята единая трёхслойная система:
+
+- SSOT: `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`;
+- решение: `docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md`;
+- слои: Continuity (DEC-774) → Expert Care 12 → Expert Points;
+- запрет баллов/скидок за отзывы;
+- фазы 0–3; Care/Points operationally deferred.
+
+Обновлены индексы: `RAIMOV.md`, ops README, patient-funnel, clinic-growth, PROJECT_STATUS.
 
 ## 2026-08-04 — прайс-каталог clinic_confirmed → таблица `/price`
 

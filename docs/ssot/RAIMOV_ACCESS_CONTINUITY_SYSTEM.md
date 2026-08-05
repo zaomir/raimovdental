@@ -5,9 +5,12 @@ type: ssot
 layer: 2
 version: 1.0
 created: 2026-08-01
-last_updated: 2026-08-01
+last_updated: 2026-08-05
 decision: docs/founder-notes/DEC-774_raimov-access-continuity-system.md
 applies_to: raimov, expert-dental, raimovdental
+links_to:
+  - docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
+  - docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
 ---
 
 # RAIMOV DENTAL ACCESS & CONTINUITY SYSTEM
@@ -285,6 +288,8 @@ RAIMOV DENTAL создаёт не отдельную дешёвую «скору
 - специальные условия на отдельную диагностику.
 
 Программа не называется страховкой.
+
+**Слой мотивации:** Expert Care 12 — Layer B единой системы мотивации пациентов Expert Dental (DEC-786). Полный канон абонемента, Expert Points, referral и фаз внедрения: `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`. Continuity (этот документ) остаётся Layer A / фундаментом; баллы и Care не заменяют pre-book и Паспорт.
 
 ---
 

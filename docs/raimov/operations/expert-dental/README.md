@@ -1,9 +1,9 @@
 ---
 title: Expert Dental Studio — операционный индекс проекта
 status: CANON
-version: 1.1
+version: 1.2
 created: 2026-08-03
-last_updated: 2026-08-03
+last_updated: 2026-08-05
 project: expert-dental-bishkek
 repository: zaomir/grainee-v2
 branch: main
@@ -20,6 +20,8 @@ branch: main
 | Предмет | Источник истины |
 |---|---|
 | Общая стратегия клиники и экосистемы | `docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md` |
+| Access & Continuity (срочный вход / Паспорт) | `docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
+| Мотивация пациентов (Care 12 / Points / referral) | `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
 | План первого месяца | `docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md` |
 | Сайт `expertdental.kg` и блог | `docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md` |
 | Архитектура файлов Expert Dental | `FILE_ARCHITECTURE.md` |

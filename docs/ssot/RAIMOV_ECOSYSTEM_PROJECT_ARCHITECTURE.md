@@ -79,7 +79,7 @@ docs/raimov/
 ├── governance/          # decisions, ownership, dependencies, change control
 ├── corporate/           # legal identity, domains, brands, entities, licences
 ├── clinic-growth/       # baseline, offers, capacity, unit economics
-├── patient-funnel/      # lead → booking → visit → diagnosis → plan → payment → recall
+├── patient-funnel/      # lead → booking → visit → diagnosis → plan → payment → recall (+ motivation SSOT DEC-786)
 ├── clinical-system/     # Raimov System modules and quality standards
 ├── academy/             # future education products and release gates
 ├── elite-dental/        # future separate partner/franchise contour

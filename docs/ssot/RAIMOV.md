@@ -3,8 +3,8 @@ owner: Дмитрий (стратегический наставник) + Total
 status: active
 type: ssot-master
 created: 2026-07-21
-last_updated: 2026-08-01
-version: 1.8
+last_updated: 2026-08-05
+version: 1.9
 review_cycle: после каждой стратегической сессии по проекту
 applies_to: raimov, expert-dental, raimovdental, elite-dental, caesthetic
 links_to:
@@ -12,6 +12,7 @@ links_to:
   - docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md
   - docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md
   - docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md
+  - docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
   - docs/ssot/RAIMOV_10M_MASTERPLAN.md
   - docs/ssot/RAIMOV_PUBLIC_PROFILE.md
   - docs/ssot/RAIMOV_LEGAL_GATES.md
@@ -19,6 +20,7 @@ links_to:
   - docs/founder-notes/DEC-743_raimovdental-stage-a-strategic-presentation.md
   - docs/founder-notes/DEC-772_raimovdental-public-stage-b-cutover.md
   - docs/founder-notes/DEC-774_raimov-access-continuity-system.md
+  - docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
   - docs/raimov/
   - research/raimov-profile/
   - site-raimovdental/
@@ -66,11 +68,13 @@ Layer 2 · СТРАТЕГИЯ
   docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md
   docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md
   docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md
+  docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
   docs/ssot/RAIMOV_10M_MASTERPLAN.md
   docs/founder-notes/DEC-742_*.md
   docs/founder-notes/DEC-743_*.md
   docs/founder-notes/DEC-772_*.md
   docs/founder-notes/DEC-774_*.md
+  docs/founder-notes/DEC-786_*.md
 
 Layer 3 · ПРОДУКТ / COPY / RUNTIME
   docs/copy/raimov/
@@ -94,10 +98,12 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | Клиника, воронка, первый месяц, экономика роста | `EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md` |
 | Фазы, аудитория, глубина и CTA сайта | `RAIMOV_DENTAL_WEBSITE_STRATEGY.md` |
 | Срочный вход, бесплатный триаж, Паспорт V0/V1, чек-ап и непрерывность лечения | `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
+| Мотивация пациентов: Continuity + Expert Care 12 + Expert Points | `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
 | Пятилетние внутренние ориентиры | `RAIMOV_10M_MASTERPLAN.md` |
 | Stage A без approval/case gate | `DEC-743_raimovdental-stage-a-strategic-presentation.md` |
 | Public Stage B cutover | `DEC-772_raimovdental-public-stage-b-cutover.md` |
 | Первый applied module Raimov System | `DEC-774_raimov-access-continuity-system.md` |
+| Единая система мотивации пациентов Expert | `DEC-786_expert-dental-patient-motivation-system.md` |
 | Юридический вопрос | `RAIMOV_LEGAL_GATES.md` |
 | Текущая фаза и блокеры | `docs/raimov/PROJECT_STATUS.md` |
 | Публичный текст | `docs/copy/raimov/` после применимых gates |
@@ -132,6 +138,7 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | `EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md` | общая стратегия клиники и роста | ACTIVE |
 | `RAIMOV_DENTAL_WEBSITE_STRATEGY.md` | стратегия сайта по фазам | ACTIVE v1.5 |
 | `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` | первый applied module: access, triage, continuity, economics | ACTIVE v1.0 / PILOT NOT STARTED |
+| `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` | мотивация пациентов: Continuity + Care 12 + Points, фазы 0–3 | ACTIVE v1.0 / OPS GATED |
 | `RAIMOV_10M_MASTERPLAN.md` | внутренний пятилетний/финансовый masterplan | ACTIVE INTERNAL |
 | `RAIMOV_PUBLIC_PROFILE.md` | публично допустимые факты | ACTIVE LIVING |
 | `RAIMOV_LEGAL_GATES.md` | medical, investor, international и network gates | ACTIVE OPEN |
@@ -145,6 +152,7 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | `DEC-743` | Stage A — стратегическая презентация Дмитрия; approval и cases не являются входным gate |
 | `DEC-772` | публичный Stage B и полный cutover старого patient-first сайта |
 | `DEC-774` | Access & Continuity System — первый прикладной модуль Raimov System |
+| `DEC-786` | Expert Dental Patient Motivation System — Continuity + Care 12 + Points |
 
 ## 3.3. Текущий runtime
 
@@ -202,6 +210,16 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 - Expert Care 12 запускается только после проверки мощности и unit economics.
 - Review gating и связь сертификата с отзывом запрещены.
 - Полный канон: `docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md`; решение: `DEC-774`.
+
+## 4.5. Patient Motivation System (Expert Dental)
+
+- Единая система мотивации пациентов — три слоя: Continuity (A) → Expert Care 12 (B) → Expert Points (C).
+- Layer A = фундамент DEC-774; Layers B/C не запускаются раньше Phase gates.
+- Баллы начисляются за оплату, on-time recare, paid referral и семью; **не** за отзывы/UGC.
+- Redeem — гигиена, сервис, приоритет слота; не high-ticket % до диагностики и не кешбек.
+- Expert Care 12 — профилактический абонемент, не страховка.
+- Публичные claims о работающих Points/Care запрещены до operational launch.
+- Полный канон: `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`; решение: `DEC-786`.
 
 ---
 
@@ -266,7 +284,9 @@ Next permitted operational outputs:
 | CRM/medical data split and consents | privacy/operations | OPEN |
 | Passport V0/V1 templates | continuity | NOT STARTED |
 | Cohort economics | scale gate | NOT STARTED |
-| Expert Care 12 | retention | DEFERRED |
+| Expert Care 12 | retention (Motivation Layer B) | DEFERRED — DEC-786 |
+| Expert Points ledger | loyalty (Motivation Layer C) | DEFERRED — DEC-786 |
+| Motivation Phase 0 scripts (pre-book + simple referral) | clinic ops | NOT STARTED — awaiting Continuity pilot gates |
 | Separate urgent-care capacity | investment | DEFERRED |
 | Case library | patient Stage C | DEFERRED |
 
@@ -282,6 +302,8 @@ Next permitted operational outputs:
 - не связывать сертификат, скидку или лечение с отзывом;
 - не хранить медицинские данные в обычной маркетинговой CRM;
 - не называть Expert Care 12 страховкой или действующим продуктом;
+- не начислять баллы/скидки за отзыв, оценку, пост или сторис;
+- не заявлять Expert Points или программу лояльности как уже работающие до Phase gates;
 - не заявлять System, Academy, сеть или international practice как действующие;
 - не придумывать cases, credentials, awards, metrics или financial proof;
 - не публиковать доходность, долю, ROI или инвестиционные условия;
