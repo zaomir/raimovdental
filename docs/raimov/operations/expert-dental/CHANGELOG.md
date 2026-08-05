@@ -1,12 +1,18 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.7
+version: 1.8
 created: 2026-08-03
 last_updated: 2026-08-05
 ---
 
 # Журнал изменений
+
+## 2026-08-05 — полезные подарки пациенту (gift ≠ sale)
+
+- `ED-MAT-063`: `home-care/PATIENT_CARE_GIFTS.md` — щётка и kits как daily reminder; отдельно от розницы витрины;
+- пилот: G0 после гигиены; G2 орто после брекетов; запас gift stock;
+- SSOT Home Care + DEC-787 + SOP кассы обновлены.
 
 ## 2026-08-05 — SSOT Home Care Handoff + вопросы договора (DEC-787)
 

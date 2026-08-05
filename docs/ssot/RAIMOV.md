@@ -105,7 +105,7 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | Фазы, аудитория, глубина и CTA сайта | `RAIMOV_DENTAL_WEBSITE_STRATEGY.md` |
 | Срочный вход, бесплатный триаж, Паспорт V0/V1, чек-ап и непрерывность лечения | `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
 | Мотивация пациентов: Continuity + Expert Care 12 + Expert Points | `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
-| Home Care Handoff: витрина / врач / админ / памятки | `EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` |
+| Home Care Handoff: витрина / врач / админ / памятки / gifts | `EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` |
 | Вопросы для продолжения договора (ассистент / Атабек) | `EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` |
 | Пятилетние внутренние ориентиры | `RAIMOV_10M_MASTERPLAN.md` |
 | Stage A без approval/case gate | `DEC-743_raimovdental-stage-a-strategic-presentation.md` |
@@ -236,8 +236,9 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 ## 4.6. Home Care Handoff System (Expert Dental)
 
 - Три канала: витрина (тихо) → врач (класс ухода, без брендов) → администратор (скрипт, корзина, памятка, next visit).
-- Памятку печатает администратор; шаблоны 1:1 с прайсом.
-- Врач: 0% с SKU; мотивация админа — после пилота.
+- Памятку печатает администратор; шаблоны 1:1 с прайсом; блок «Рецепт для памяти».
+- **Полезный подарок** (часто мягкая щётка) отдельно от розницы: compliance + ежедневное напоминание; gift ≠ sale (`PATIENT_CARE_GIFTS.md`, ED-MAT-063).
+- Врач: 0% с SKU; мотивация админа — после пилота; % не за подарки.
 - Розница ухода отделена от success fee до отдельного согласования.
 - Полный канон: `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md`; решение: `DEC-787`.
 - Пакет вопросов для продолжения договора: `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md`.

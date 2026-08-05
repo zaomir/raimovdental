@@ -82,6 +82,7 @@ id_prefix: ED-MAT
 | ED-MAT-060 | Showcase + stock | Перечень товаров и количеств на витрину/склад | Месяц 1 / 10, 11 | Draft / clinic SKU pending | `home-care/SHOWCASE_STOCK_LIST.md`, `SHOWCASE_STOCK_LIST.json` | — | Из корзин матрицы; бренды утверждает клиника |
 | ED-MAT-061 | Strategy SSOT | Home Care Handoff System | Общая стратегия / 10, 11 | Active / medical+SKU gated | `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` | — | DEC-787 |
 | ED-MAT-062 | Strategy SSOT | Пакет вопросов для продолжения договора | Общая стратегия | Active / answers open | `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` | — | D/M/C реестры; смежно DEC-787 |
+| ED-MAT-063 | Care gifts | Полезные подарки пациенту (щётка / kits); gift ≠ sale | Месяц 1 / 10, 11 | Draft / clinic cost+brand pending | `home-care/PATIENT_CARE_GIFTS.md` | — | Daily brand touchpoint; пилот G0 после гигиены |
 
 ## Интерфейсы клиники
 
@@ -132,9 +133,9 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-063`;
+- следующий материал: `ED-MAT-064`;
 - следующая ссылка: `ED-LINK-034`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;
 - индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок;
-- ED-MAT-054…060 — операционный home-care draft; ED-MAT-061/062 — strategy SSOTs (DEC-787); массовая печать/закупка только после medical / clinic approval.
+- ED-MAT-054…060, 063 — операционный home-care draft; ED-MAT-061/062 — strategy SSOTs (DEC-787); массовая печать/закупка/подарки только после medical / clinic approval.
