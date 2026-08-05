@@ -8,6 +8,15 @@ last_updated: 2026-08-05
 
 # Журнал изменений
 
+## 2026-08-05 — Мир-Али как гнатолог (Tilda update pack)
+
+- Канон роли TM-002: **Гнатолог · хирург-имплантолог, ортопед**
+- Инструкция для Tilda: `docs/projects/raimovdental/tilda/doctors/MIR_ALI_GNATHOLOGIST_TILDA.md`
+- Реестр врачей: `DOCTORS_REGISTER.md`
+- Фото-исходник: `media/team/talyshhanov-mir-ali.png`
+- Homepage Zero Block: карточка Мир-Али вместо placeholder
+- **Прод:** сменить specialization в блоке Persons на Tilda и опубликовать
+
 ## 2026-08-05 — консультации по врачам (clinic update)
 
 Зафиксированы тарифы консультаций:

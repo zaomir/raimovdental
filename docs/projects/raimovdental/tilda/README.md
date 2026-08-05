@@ -7,6 +7,7 @@
 | `homepage-zero-block.html` | Канон главной (HTML+CSS+JS) для вставки в Tilda |
 | `price-table-zero-block.html` | Таблица прайса + отдельный блок Expert Care 12 (proposed) |
 | `PRICE_SECTION_TILDA_AI_PROMPT.md` | Промпт для ИИ Tilda: ala-carte таблица + отдельный SKU Care (без −20% на всё) |
+| `doctors/MIR_ALI_GNATHOLOGIST_TILDA.md` | Инструкция: карточка Мир-Али как гнатолог |
 
 ## Прайс `/price` (2026-08-05)
 
