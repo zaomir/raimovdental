@@ -25,6 +25,7 @@ contract_questions_ssot: docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS
 | [`HOME_CARE_MATRIX.json`](HOME_CARE_MATRIX.json) | Машиночитаемая матрица для UI (генератор → admin/doctor JS) |
 | [`SHOWCASE_STOCK_LIST.md`](SHOWCASE_STOCK_LIST.md) | Витрина + склад: классы товаров и количества |
 | [`PATIENT_CARE_GIFTS.md`](PATIENT_CARE_GIFTS.md) | Полезные подарки (щётка и kits) — daily reminder, gift ≠ sale |
+| [`MESSAGE_ATABEK_SHOWCASE_AND_HANDOFF.md`](MESSAGE_ATABEK_SHOWCASE_AND_HANDOFF.md) | Черновик сообщения Атабеку: зачем handoff + шкафчик в ожидании |
 | [`memos/`](memos/) | Печатные памятки A5: **77 шт.** по каждой процедуре прайса (`memos/by-procedure/`) |
 
 ## Статус
