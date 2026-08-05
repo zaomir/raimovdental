@@ -144,8 +144,8 @@
         <div class="home-care-card">
           <div class="home-care-kicker">Памятка пациента</div>
           <p><code>${esc(row.memo_id)}</code></p>
-          <p class="muted">Печатает администратор. Файл: ${esc(row.memo_file || 'см. by-procedure')}</p>
-          <label class="check"><input id="hcMemoPrinted" type="checkbox"> Памятка распечатана и выдана</label>
+          <p class="muted">Печатает администратор. В памятке — блок «Рецепт для памяти»: уход, препараты (если назначил врач), следующий визит. Файл: ${esc(row.memo_file || 'см. by-procedure')}</p>
+          <label class="check"><input id="hcMemoPrinted" type="checkbox"> Памятка распечатана и выдана (с перечнем к покупке)</label>
         </div>
         <div class="actions home-care-actions">
           <button type="button" class="primary" id="hcSaveTaken">Закрыть визит · уход взят</button>

@@ -10,6 +10,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const catalog = JSON.parse(
   readFileSync(join(root, 'docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json'), 'utf8'),
 );
+const matrix = JSON.parse(
+  readFileSync(join(root, 'docs/raimov/operations/expert-dental/home-care/HOME_CARE_MATRIX.json'), 'utf8'),
+);
+const matrixByProcedure = Object.fromEntries(matrix.procedures.map((row) => [row.procedure, row]));
 const phone = catalog.contacts.phoneDisplay;
 const outDir = join(root, 'docs/raimov/operations/expert-dental/home-care/memos/by-procedure');
 mkdirSync(outDir, { recursive: true });
@@ -36,8 +40,90 @@ WhatsApp / телефон клиники: **${phone}**
 
 ---
 
-*Общие ориентиры после процедуры. Если врач дал отдельные указания — приоритет у них. Черновик до medical review.*
+*Памятка-напоминание, не замена очного назначения. Если врач отметил другое — приоритет у врача. Классы средств без брендов; конкретный артикул покажет администратор. Черновик до medical review.*
 `;
+
+function whereLabel(where) {
+  if (where === 'clinic') return 'в клинике';
+  if (where === 'clinic_or_store') return 'в клинике или в магазине';
+  return 'по указанию врача';
+}
+
+function pharmacyLines(dirId, name) {
+  const n = name.toLowerCase();
+  if (dirId === 'surgery' || n.includes('удаление')) {
+    return [
+      'Обезболивающее — **только если назначил врач** (название и дозу впишите ниже)',
+      'Антисептик / полоскание — **только по схеме врача**',
+    ];
+  }
+  if (dirId === 'endodontics') {
+    return ['Обезболивающее — **только если назначил врач** (название и дозу впишите ниже)'];
+  }
+  if (dirId === 'implantation') {
+    return [
+      'Лекарства после имплантации — **строго по схеме врача** (впишите ниже)',
+      'Полоскания / гель — только если разрешил врач',
+    ];
+  }
+  if (n.includes('травм') || n.includes('шин')) {
+    return ['Обезболивающее / режим — **только по назначению врача**'];
+  }
+  return [];
+}
+
+/** «Рецепт для памяти» — перечень покупок и следующего визита из матрицы */
+function prescriptionBlock(dirId, name) {
+  const row = matrixByProcedure[name];
+  const lines = [];
+  lines.push('## Рецепт для памяти — что купить / взять');
+  lines.push('');
+  lines.push('_Отметьте галочкой то, что рекомендовал врач. Можно взять на ресепшене или купить самостоятельно._');
+  lines.push('');
+
+  const basket = row?.care_basket || [];
+  if (basket.length) {
+    lines.push('### Средства ухода');
+    for (const item of basket) {
+      const mark = item.default_checked ? '☑' : '☐';
+      const hint = item.default_checked ? 'обычно после этой процедуры' : 'если врач отметил';
+      lines.push(`- ${mark} **${item.label}** — ${whereLabel(item.where)} (${hint})`);
+    }
+    lines.push('');
+  } else {
+    lines.push('### Средства ухода');
+    lines.push('- ☐ Сегодня retail-уход обычно не нужен — если врач что-то отметил устно, впишите ниже.');
+    lines.push('');
+  }
+
+  const pharmacy = pharmacyLines(dirId, name);
+  lines.push('### Препараты (аптека) — только по назначению врача');
+  if (pharmacy.length) {
+    for (const line of pharmacy) lines.push(`- ☐ ${line}`);
+  } else {
+    lines.push('- ☐ Обычно не требуются. Если врач назначил — впишите название, дозу и срок:');
+  }
+  lines.push('- ☐ _________________________________');
+  lines.push('- ☐ _________________________________');
+  lines.push('');
+
+  lines.push('### Следующий визит / доп. процедура');
+  if (row?.next_visit) {
+    lines.push(`- ☑ **${row.next_visit}**`);
+    lines.push(`- Когда: **${row.next_visit_when || 'по графику врача'}**`);
+    lines.push('- ☐ Запись сделана на ресепшене: дата ______ время ______');
+  } else {
+    lines.push('- ☐ Следующий шаг уточните у администратора и запишите дату.');
+  }
+  lines.push('');
+  lines.push('### Особые указания врача (от руки)');
+  lines.push('');
+  lines.push('_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _');
+  lines.push('');
+  lines.push('_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _');
+  lines.push('');
+  return lines.join('\n');
+}
 
 function bodyFor(dirId, name) {
   const n = name.toLowerCase();
@@ -655,7 +741,11 @@ for (const dir of catalog.directions) {
   for (const item of dir.items) {
     const id = `memo-${slugify(item.name, globalIdx)}`;
     const filename = `${id}.md`;
-    const content = `${bodyFor(dir.id, item.name).trimEnd()}${footer}\n`;
+    const matrixRow = matrixByProcedure[item.name];
+    const content = `${bodyFor(dir.id, item.name).trimEnd()}
+
+${prescriptionBlock(dir.id, item.name)}${footer}
+`;
     writeFileSync(join(outDir, filename), content, 'utf8');
     index.push({
       memo_id: id,
@@ -664,6 +754,8 @@ for (const dir of catalog.directions) {
       direction_name: dir.name,
       procedure: item.name,
       price: item.price,
+      care_sku: (matrixRow?.care_basket || []).map((x) => x.code),
+      next_visit: matrixRow?.next_visit || null,
     });
     globalIdx += 1;
   }
