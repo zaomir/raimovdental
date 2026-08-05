@@ -1,12 +1,24 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.8
+version: 1.9
 created: 2026-08-03
 last_updated: 2026-08-05
 ---
 
 # Журнал изменений
+
+## 2026-08-05 — Post-Visit Feedback Loop (DEC-787)
+
+Схема сбора отзывов в системе мотивации пациентов (Layer A):
+
+- триггер WhatsApp CSAT 1–5 через 60–120 мин после eligible-визита;
+- 4–5 → ссылки Google / Яндекс / 2ГИС / ПроДокторов;
+- 1–3 → закрытая форма + алерт управляющему / главврачу;
+- запрет reward-for-review и предварительного отбора «только довольных»;
+- SSOT: `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` §4.1;
+- SOP: `reputation/POST_VISIT_FEEDBACK_LOOP.md`;
+- решение: `docs/founder-notes/DEC-787_post-visit-feedback-loop.md`.
 
 ## 2026-08-05 — Мир-Али как гнатолог (Tilda update pack)
 

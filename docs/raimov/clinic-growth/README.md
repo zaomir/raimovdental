@@ -4,4 +4,6 @@ Stores the measurable growth system for Expert Dental Studio and later directly 
 
 **Retention / loyalty canon:** `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` (DEC-786) — Continuity + Expert Care 12 + Expert Points. Cohort economics for Care/Points must stay separate from advertising spend and success-fee formulas.
 
+**Reputation / review collection:** Post-Visit Feedback Loop (DEC-787) — CSAT after visit → public links on 4–5 / private recovery on 1–3; ops SOP `docs/raimov/operations/expert-dental/reputation/POST_VISIT_FEEDBACK_LOOP.md`. No review rewards.
+
 Required rule: separate activity, funnel movement and cash received. No target or success-fee formula is canonical until baseline, attribution and clinic approval exist.
