@@ -27,7 +27,7 @@
     "docs/audits/raimov/valeria-work-journal/PRODUCTION_CHECK.md": "279e3392c9a94661cdafd3deaffebaaa6ce5d6125eaca909406b7e64780f1715",
     "docs/audits/raimov/valeria-work-journal/TARGETED_PRODUCTION.md": "68e62f00a9542bd5d3705c823d06dcf577760104901094654ccc3e6f8ca299d3",
     "docs/copy/raimov/README.md": "78494b960c73b401f2020516ade4b459d96930a925052c5175c25274a6245a4e",
-    "docs/expert-clinic-reference.md": "ad19ee1e82553d6f93b39e06df5518e33fb0cf9ccb9ef85e5046cc4cb95c1bfb",
+    "docs/expert-clinic-reference.md": "ab255795813b0d9b1ca6f559cb3b1354e5fe85faa33a4d6e991e10a0fb2214fd",
     "docs/legal-templates/raimov/README.md": "ef0370aa900172717b0e4563b3348cef34e9e3ad936f2cca97f5ebc877858dbc",
     "docs/legal/raimov/README.md": "c82aa003e6320fee251bfea58f400f666f7aeebcba115c2b3f476ce8d04b00dd",
     "docs/projects/healthcare-ecosystem/AGENTS.md": "baed039f097b45966ba27156cc4ff019ece450a7126c7605e8523cb6f035b156",
@@ -59,7 +59,8 @@
     "docs/projects/raimovdental/tilda/README.md": "c48380e917984880a8b641a982e20922104f49f277735cf176dc3b330007e66f",
     "docs/projects/raimovdental/tilda/homepage-zero-block.html": "4f78a56f61af9fb018d25555e404d49a61840e077c08f5d2a93a0eec53a26010",
     "docs/projects/raimovdental/tilda/price-table-zero-block.html": "271dc1c9b408fa21e1afdcdc329245f146bd0e7f957e845a4e1f343f3217f622",
-    "docs/raimov/AGENTS_SATELLITE.md": "ad1ba242f6920bb870881883b7a2c97bcfffbd5aec2db80e524942902efe8319",
+    "docs/raimov/AGENTS_SATELLITE.md": "7e1e01b2dcd431d40262acb8942e745779954b43905d998d93e22c2f152d4157",
+    "docs/raimov/CURSOR_AGENTS_SETUP.md": "01cfb13d15e38185ea4f02e54b84d925daf968ddb12de15dc66fd7c281b5ab9c",
     "docs/raimov/PROJECT_STATUS.md": "d49e6f425464978420b8920882aa0f5474c62834589e3fbfd11b9ffeedafc18b",
     "docs/raimov/README.md": "87b8c39e8d81244638a69335fe38f0d1aac33d064fcd99d7289e5e6ac439af61",
     "docs/raimov/academy/README.md": "9613ffb736a2cacbe03a7e7e0e5107279b27f297addb051079a00f83464653c7",
@@ -414,6 +415,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-05T11:30:04Z",
+  "updated_at_utc": "2026-08-05T12:00:05Z",
   "version": 1
 }
