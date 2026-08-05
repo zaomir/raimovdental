@@ -4,7 +4,7 @@ status: DRAFT — medical review required
 version: 0.1
 created: 2026-08-05
 last_updated: 2026-08-05
-materials: ED-MAT-054 … ED-MAT-056
+materials: ED-MAT-054 … ED-MAT-057
 related_plan_items: 10, 11
 ---
 
@@ -16,6 +16,7 @@ related_plan_items: 10, 11
 |---|---|
 | [`HOME_CARE_HANDOFF_SOP.md`](HOME_CARE_HANDOFF_SOP.md) | Три канала (витрина / врач / администратор), памятка, мотивация, запреты |
 | [`PROCEDURE_MATRIX.md`](PROCEDURE_MATRIX.md) | Процедура → скрипт админа → корзина → ID памятки |
+| [`PROCEDURE_ADDON_MATRIX.md`](PROCEDURE_ADDON_MATRIX.md) | Процедура → доп. процедура / следующий визит → продажа (клиника / магазин) |
 | [`memos/`](memos/) | Печатные памятки A5 (админ печатает и выдаёт) |
 
 ## Статус

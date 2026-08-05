@@ -40,6 +40,7 @@ docs/raimov/operations/expert-dental/
 │   ├── README.md
 │   ├── HOME_CARE_HANDOFF_SOP.md
 │   ├── PROCEDURE_MATRIX.md
+│   ├── PROCEDURE_ADDON_MATRIX.md
 │   └── memos/               ← A5 памятки; печатает администратор
 ├── periods/
 │   └── month-01/
