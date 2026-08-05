@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 const sourceRoot = join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'workspace');
 const distRoot = join(process.cwd(), 'site-raimovdental', 'dist', 'assets', 'img', 'workspace');
-const required = ['index.html', 'app.html', 'admin/index.html', 'doctor/index.html', 'manager/index.html', 'owner/index.html', 'motion.css', 'motion.js'];
+const required = ['index.html', 'app.html', 'admin/index.html', 'doctor/index.html', 'manager/index.html', 'owner/index.html', 'motion.css', 'motion.js', 'home-care-matrix.js'];
 
 for (const relative of required) {
   assert.ok(existsSync(join(sourceRoot, relative)), `missing workspace source: ${relative}`);
@@ -32,6 +32,9 @@ for (const token of [
   'Принять обращение',
   'Новая маршрутизация медицинского обращения',
   'Пошаговый опросник передачи врачу',
+  'Матрица ухода и памятки после процедуры',
+  'home-care-matrix.js',
+  'ExpertDentalHomeCareUI',
   'Демо · вход без пароля',
 ]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 

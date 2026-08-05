@@ -444,13 +444,27 @@
     renderSidebars();
     toast('Заметка сохранена');
   };
-  document.querySelectorAll('[data-quick]').forEach((button) => {
-    button.onclick = () => {
-      const route = { bleeding: 'triage-bleeding', pain: 'triage-pain', restoration: 'triage-restoration', braces: 'triage-braces', price: 'price', booking: 'booking' }[button.dataset.quick];
-      state.notes['Быстрый сценарий'] = button.textContent.trim();
-      go(route);
-    };
+  document.querySelector('.quick-grid')?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-quick]');
+    if (!button) return;
+    state.notes['Быстрый сценарий'] = button.textContent.trim();
+    if (button.dataset.quick === 'homecare') {
+      window.__edPatientName = state.patient?.name || '';
+      if (window.ExpertDentalHomeCareUI?.openFromApp) window.ExpertDentalHomeCareUI.openFromApp();
+      else toast('Модуль ухода не загружен');
+      return;
+    }
+    const route = {
+      bleeding: 'triage-bleeding',
+      pain: 'triage-pain',
+      restoration: 'triage-restoration',
+      braces: 'triage-braces',
+      price: 'price',
+      booking: 'booking',
+    }[button.dataset.quick];
+    if (route) go(route);
   });
+  window.ExpertDentalHomeCareUI?.ensureQuickButton?.();
   $('openJournal').onclick = () => { renderJournal(); $('journalModal').classList.remove('hidden'); };
   $('closeJournal').onclick = () => $('journalModal').classList.add('hidden');
   $('journalSearch').oninput = renderJournal;

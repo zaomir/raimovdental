@@ -89,8 +89,23 @@ site-raimovdental/public/assets/img/admin/
 ├── index.html                 # подробный /render/
 ├── app.js
 ├── app.css
+├── home-care-matrix.js        # матрица процедура→скрипт→корзина→памятка
+├── home-care-ui.js            # UI закрытия визита
+├── home-care-ui.css
 └── ...                        # модули журнала, передачи врачу и UX
+
+site-raimovdental/public/assets/img/workspace/
+├── ...
+└── home-care-matrix.js        # тот же payload для ролей admin/doctor
 ```
+
+Матрица генерируется:
+
+```bash
+node scripts/raimov/generate-home-care-matrix.mjs
+```
+
+Канон данных: `docs/raimov/operations/expert-dental/home-care/HOME_CARE_MATRIX.json` (ED-MAT-059).
 
 Изменения в production нельзя делать только прямой загрузкой файлов на сервер. Сначала меняется источник в `site-raimovdental/public/**`, затем изменения проходят каноническую сборку.
 

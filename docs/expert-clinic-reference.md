@@ -55,7 +55,7 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 | 🗂️ **Архитектура файлов** | [`docs/raimov/operations/expert-dental/FILE_ARCHITECTURE.md`](docs/raimov/operations/expert-dental/FILE_ARCHITECTURE.md) | Структура папок, правила изменений |
 | 🔗 **Реестр ссылок** | [`docs/raimov/operations/expert-dental/LINKS_REGISTER.md`](docs/raimov/operations/expert-dental/LINKS_REGISTER.md) | Все URL: сайт, Instagram, WhatsApp, карты, офферы |
 | 🪥 **Home care / памятки** | [`docs/raimov/operations/expert-dental/home-care/README.md`](docs/raimov/operations/expert-dental/home-care/README.md) | Витрина, врач, админ; памятки; процедура→доп.→продажа |
-| 📦 **Реестр материалов** | [`docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md`](docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md) | ED-MAT-001..058 — все материалы проекта |
+| 📦 **Реестр материалов** | [`docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md`](docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md) | ED-MAT-001..059 — все материалы проекта |
 | 📅 **Планирование и отчётность** | [`docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md`](docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md) | Система планирования и отчётности |
 | 📋 **План первого месяца** | [`docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md`](docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md) | Канон: 16 пунктов, нельзя расширять без команды |
 | 📊 **Статус первого месяца** | [`docs/raimov/operations/expert-dental/periods/month-01/STATUS.md`](docs/raimov/operations/expert-dental/periods/month-01/STATUS.md) | Что в работе, выполнено, не начато |

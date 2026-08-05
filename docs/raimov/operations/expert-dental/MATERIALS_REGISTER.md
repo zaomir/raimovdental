@@ -78,6 +78,7 @@ id_prefix: ED-MAT
 | ED-MAT-056 | Patient memos | Печатные памятки A5 (7 шаблонов) | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/memos/` | — | Печатает и выдаёт администратор |
 | ED-MAT-057 | Addon matrix | Процедура → доп. процедура → продажа (весь прайс) | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/PROCEDURE_ADDON_MATRIX.md` | — | Следующий визит + retail/внешний магазин |
 | ED-MAT-058 | Patient memos 1:1 | 77 памяток — по каждой процедуре прайса | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/memos/by-procedure/` | — | Канон печати админом; генератор `scripts/raimov/generate-procedure-memos.mjs` |
+| ED-MAT-059 | Home-care UI matrix | Матрица в скриптах + интерфейсах врача/админа | Месяц 1 / 10, 11 | Draft / demo wired | `home-care/HOME_CARE_MATRIX.json`, `site-raimovdental/public/assets/img/admin/home-care-*.js`, `workspace/home-care-matrix.js` | `/render/`, `/assets/img/workspace/{admin,doctor}/` | Генератор `scripts/raimov/generate-home-care-matrix.mjs` |
 
 ## Интерфейсы клиники
 
@@ -128,9 +129,9 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-059`;
+- следующий материал: `ED-MAT-060`;
 - следующая ссылка: `ED-LINK-034`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;
 - индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок;
-- ED-MAT-054…058 — черновики home-care; массовая печать памяток и автокорзина только после medical approval.
+- ED-MAT-054…059 — черновики home-care; массовая печать памяток и автокорзина только после medical approval.

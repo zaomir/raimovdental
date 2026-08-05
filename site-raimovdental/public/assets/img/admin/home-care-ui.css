@@ -1,0 +1,13 @@
+/* Home-care visit panel styles (admin render + workspace) */
+.home-care-panel h3{margin:6px 0 12px;font-size:18px}
+.home-care-body{display:grid;gap:12px;margin-top:12px}
+.home-care-card{border:1px solid #d9dedb;border-radius:14px;padding:12px 14px;background:#f8faf9}
+.home-care-kicker{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#697873;font-weight:800;margin-bottom:6px}
+.home-care-script{margin:0;font-size:15px;line-height:1.45}
+.home-care-hint{margin:8px 0 0;color:#697873;font-size:13px}
+.home-care-basket{display:grid;gap:8px;margin-top:8px}
+.home-care-sku small{color:#697873}
+.home-care-doctor-note{margin:8px 0 0;padding:8px 10px;border-radius:10px;background:#eaf2ef;color:#174d43;font-size:13px}
+.home-care-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.home-care-doctor .check{margin:4px 0}
+.muted{color:#697873}

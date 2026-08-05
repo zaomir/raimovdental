@@ -8,6 +8,13 @@ last_updated: 2026-08-05
 
 # Журнал изменений
 
+## 2026-08-05 — матрица ухода в скриптах и UI врача/админа
+
+- `ED-MAT-059`: `HOME_CARE_MATRIX.json` + `home-care-matrix.js` / `home-care-ui.js`;
+- админ `/render/`: быстрый сценарий «Визит · уход», скрипт HC-01 в call-guidance;
+- workspace admin/doctor: панели закрытия визита и передачи класса ухода на ресепшен;
+- генератор: `scripts/raimov/generate-home-care-matrix.mjs`.
+
 ## 2026-08-05 — памятка на каждую процедуру прайса (77)
 
 - `ED-MAT-058`: `home-care/memos/by-procedure/` — 1:1 с `PRICE_CATALOG.json`;

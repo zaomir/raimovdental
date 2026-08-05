@@ -19,6 +19,7 @@ const required = [
   'owner/index.html',
   'motion.css',
   'motion.js',
+  'home-care-matrix.js',
 ];
 
 assert.ok(existsSync(join(site, 'dist')), 'RAIMOV dist must exist before preserving demo assets');
