@@ -3,7 +3,7 @@ title: Expert Dental Studio — реестр материалов
 status: ACTIVE REGISTER
 version: 1.4
 created: 2026-08-03
-last_updated: 2026-08-03
+last_updated: 2026-08-05
 id_prefix: ED-MAT
 ---
 
@@ -68,6 +68,7 @@ id_prefix: ED-MAT
 | ED-MAT-024 | Content package | Девять статей блога | Месяц 1 / 9 | Published | Tilda / блог Expert Dental | URL-перечень не получен | Нужен отдельный список 9 точных URL |
 | ED-MAT-025 | Website prototype | Тестовая новая главная | Месяц 1 / 4, 9 | Prototype / published | Tilda / `expertdental.kg` | `http://expertdental.kg/home-new` | Не заменяет необходимость полной будущей пересборки сайта |
 | ED-MAT-053 | Price catalog SSOT | Прайс: направления · услуги · цены | Месяц 1 / 4 | Ready for Tilda publish | `docs/raimov/operations/expert-dental/pricing/` | ED-LINK-033 | Каталог JSON + MD + Zero Block `price-table-zero-block.html` |
+| ED-MAT-054 | Care 12 pricing integration | Expert Care 12 SKU в прайсе (proposed) | Мотивация / DEC-786 | Proposed / awaiting clinic | `pricing/PRICE_CATALOG.json` membership+care12, `PRICE_TABLE.md`, Tilda prompt/Zero Block | ED-LINK-033 | Adult 9900 / Family 7900 / Kids 5500; не колонка −20% |
 
 ## Интерфейсы клиники
 
@@ -118,7 +119,7 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-053`;
+- следующий материал: `ED-MAT-055`;
 - следующая ссылка: `ED-LINK-033`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;

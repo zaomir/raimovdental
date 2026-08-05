@@ -3,7 +3,7 @@ owner: Дмитрий + Атабек + управляющий Expert Dental
 status: active — strategy accepted; operational pilot phases gated
 type: ssot
 layer: 2
-version: 1.0
+version: 1.1
 created: 2026-08-05
 last_updated: 2026-08-05
 decision: docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
@@ -15,6 +15,7 @@ links_to:
   - docs/raimov/patient-funnel/README.md
   - docs/raimov/clinic-growth/README.md
   - docs/raimov/operations/expert-dental/pricing/PRICE_TABLE.md
+  - docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json
 ---
 
 # Expert Dental — система мотивации пациентов
@@ -131,24 +132,42 @@ Layer C · LOYALTY LEDGER — Expert Points (after Phase 0)
 
 Платный **профилактический** продукт на 12 месяцев. Не называется страховкой. Не обещает одинаковый набор процедур без показаний.
 
-## 5.2. Состав (рабочий канон до clinic confirmation цифр)
+## 5.2. Состав и интеграция в прайс
 
 | Входит | Не входит |
 |---|---|
-| профилактические осмотры в лимите (ориентир: 2 / год) | безлимит терапии / хирургии |
-| профгигиена по показаниям в лимите (ориентир: 2 / год в рамках утверждённой степени) | импланты, виниры, орто «по абонементу» |
+| профилактические осмотры в лимите (**2 / год**) | безлимит терапии / хирургии |
+| профгигиена **лёгкая или средняя** в лимите (**2 / год**) | импланты, виниры, орто «по абонементу» |
 | ежегодное обновление Паспорта | гарантия результата лечения |
 | приоритетная консультация при срочной проблеме (в рамках duty slots) | 24/7 очный приём |
 | напоминания + координатор recare | кешбек |
-| спецусловия на **отдельную** диагностику из утверждённого списка | автоматическая скидка на high-ticket |
+| — | автоматическая скидка на high-ticket / «≤2000=0 / −20% на всё» |
 
-Точные лимиты, цена абонемента и правила no-show / переноса утверждает клиника после расчёта:
+### Цены (proposed · 2026-08-05)
 
-- себестоимость гигиены (см. `PRICE_TABLE.md`: 4 400–7 700 сом);
-- время врача / гигиениста;
-- мощность кабинетов;
-- ожидаемая посещаемость и max-usage экономика;
-- административные затраты.
+Канон цифр и SKU: `docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json` → `membership` + direction `care12`.
+
+| SKU | Цена | Статус |
+|---|---|---|
+| `care12-adult` | **9 900 сом / 12 мес** | proposed |
+| `care12-family-addon` | **7 900 сом / 12 мес** | proposed |
+| `care12-kids` | **5 500 сом / 12 мес** | proposed |
+
+### Биллинг доплат
+
+| Ситуация | Правило |
+|---|---|
+| Тяжёлая гигиена (7 700) | Care закрывает тариф средней (5 500); доплата **2 200 сом** |
+| 3-я гигиена в году | ala-carte полная цена |
+| Снимки / лечение / high-ticket | всегда отдельно, **0% от Care** |
+
+### Как показывать в прайсе
+
+- отдельный блок / direction `care12`, **не** колонка «цена по подписке» у каждой услуги;
+- ala-carte прайс остаётся clinic_confirmed без изменения цен;
+- публиковать Care как live-оффер только после `clinic_confirmed` + unit economics + Phase 2.
+
+Точные лимиты no-show / переноса и окончательная цена утверждает клиника после расчёта себестоимости гигиены, мощности и max-usage экономики.
 
 ## 5.3. Gate запуска
 
@@ -312,10 +331,12 @@ Expert Care 12 = live только если:
 
 # 14. Связь с прайсом
 
-Ориентиры redeem по гигиене берутся из clinic-confirmed прайса:
+Ala-carte и Care SKU живут в одном каталоге:
 
 - `docs/raimov/operations/expert-dental/pricing/PRICE_TABLE.md`
-- `docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json`
+- `docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json` (`membership` + direction `care12`)
+
+Гигиена лёгкая/средняя / детская помечена `careEligible`. Care — отдельный продукт, не колонка скидок. Redeem баллов по гигиене берёт clinic-confirmed ala-carte цены.
 
 Любой redeem, который меняет кассовую цену позиции, требует записи в операционном журнале Expert Dental и согласования управляющего.
 
@@ -334,11 +355,12 @@ Expert Care 12 = live только если:
 ## Требует утверждения клиники
 
 - exact earn_rate и фиксированные бонусы;
-- цена и лимиты Expert Care 12;
+- **финальная** цена и лимиты Expert Care 12 (proposed уже в `PRICE_CATALOG.json`: Adult 9 900 / Family 7 900 / Kids 5 500);
 - каталог redeem и потолки %;
 - тексты скриптов админа;
 - CRM-поля и инструмент ledger;
-- юридические формулировки оферты абонемента / баллов (локальное право КР).
+- юридические формулировки оферты абонемента / баллов (локальное право КР);
+- правило no-show для Care.
 
 ## Не является текущим фактом
 

@@ -1,12 +1,22 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.7
+version: 1.8
 created: 2026-08-03
 last_updated: 2026-08-05
 ---
 
 # Журнал изменений
+
+## 2026-08-05 — Expert Care 12 в прайсе (proposed)
+
+Интеграция абонемента в расценки без колонки глобальных скидок:
+
+- `PRICE_CATALOG.json`: блок `membership` + direction `care12` (Adult 9 900 / Family 7 900 / Kids 5 500);
+- гигиена: `careEligible` + правило доплаты 2 200 за тяжёлую;
+- `PRICE_TABLE.md` + Zero Block + Tilda AI prompt переписаны (запрет ≤2000=0 / −20%);
+- SSOT мотивации v1.1 + DEC-786 уточнение;
+- статус Care: **proposed** — не live на `/price` без clinic_confirmed.
 
 ## 2026-08-05 — система мотивации пациентов (DEC-786)
 

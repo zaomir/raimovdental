@@ -284,7 +284,7 @@ Next permitted operational outputs:
 | CRM/medical data split and consents | privacy/operations | OPEN |
 | Passport V0/V1 templates | continuity | NOT STARTED |
 | Cohort economics | scale gate | NOT STARTED |
-| Expert Care 12 | retention (Motivation Layer B) | DEFERRED — DEC-786 |
+| Expert Care 12 | retention (Motivation Layer B) | DEFERRED — DEC-786; prices **proposed** in PRICE_CATALOG (Adult 9900 / Family 7900 / Kids 5500) |
 | Expert Points ledger | loyalty (Motivation Layer C) | DEFERRED — DEC-786 |
 | Motivation Phase 0 scripts (pre-book + simple referral) | clinic ops | NOT STARTED — awaiting Continuity pilot gates |
 | Separate urgent-care capacity | investment | DEFERRED |

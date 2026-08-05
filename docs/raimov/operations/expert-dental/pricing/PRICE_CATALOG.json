@@ -4,16 +4,41 @@
   "currencyLabel": "сом",
   "source": "clinic_price_list_2026-08-04",
   "status": "clinic_confirmed",
+  "lastUpdated": "2026-08-05",
   "canonicalUrl": "https://expertdental.kg/price",
   "contacts": {
     "address": "г. Бишкек, ул. Киевская 88 (пер. бульвар Эркиндик)",
     "phone": "+996555255455",
     "phoneDisplay": "+996 555 255 455"
   },
-  "disclaimer": "Итоговая стоимость определяется после осмотра и диагностики. Цены указаны ориентировочно и могут зависеть от сложности случая.",
+  "disclaimer": "Итоговая стоимость определяется после осмотра и диагностики. Цены указаны ориентировочно и могут зависеть от сложности случая. Expert Care 12 — отдельный профилактический продукт; не страховка и не скидка на все услуги прайса.",
   "cta": {
     "label": "Записаться на бесплатную консультацию",
     "href": "https://wa.me/996555255455?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E."
+  },
+  "membership": {
+    "productFamily": "Expert Care 12",
+    "status": "proposed",
+    "decision": "DEC-786",
+    "ssot": "docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md",
+    "notInsurance": true,
+    "pricingModel": "separate_sku_not_column_discount",
+    "forbiddenModels": [
+      "global_percent_off_all_services",
+      "free_if_price_lte_2000",
+      "subscription_column_on_every_row"
+    ],
+    "rules": {
+      "adultHygieneCoveredDegrees": ["light", "medium"],
+      "adultHygieneVisitsPerYear": 2,
+      "checkupVisitsPerYear": 2,
+      "heavyHygieneBilling": "Care covers medium tariff (5 500); patient pays surcharge 7 700 − 5 500 = 2 200 сом",
+      "thirdHygieneVisit": "ala_carte_full_price",
+      "highTicketDiscount": "none",
+      "imagingAndTreatment": "always_ala_carte",
+      "noShow": "REQUIRES_CLINIC_APPROVAL — candidate: consume 1 visit entitlement OR 50% of light hygiene fee",
+      "publicPublish": "do_not_publish_as_live_offer_until_clinic_confirmed"
+    }
   },
   "directions": [
     {
@@ -44,7 +69,9 @@
         {
           "name": "Профессиональная гигиена полости рта в период временного прикуса (2 челюсти)",
           "includes": "Осмотр, визуальная диагностика, снятие твёрдых и мягких зубных отложений аппаратом Air Flow и УЗ, полировка зубов",
-          "price": "2 750 сом"
+          "price": "2 750 сом",
+          "careEligible": "kids",
+          "careNote": "Входит в Expert Care 12 Kids (до 2 раз / 12 мес), когда Care live"
         },
         {
           "name": "Лечение кариеса временного зуба — поверхностный",
@@ -100,17 +127,23 @@
         {
           "name": "Профессиональная гигиена — постоянный прикус, лёгкая степень (2 челюсти)",
           "includes": "Осмотр, визуальная диагностика, снятие твёрдых и мягких зубных отложений аппаратом Air Flow и УЗ, полировка зубов",
-          "price": "4 400 сом"
+          "price": "4 400 сом",
+          "careEligible": "light",
+          "careNote": "Входит в Expert Care 12 Adult (до 2 раз / 12 мес), когда Care live"
         },
         {
           "name": "Профессиональная гигиена — постоянный прикус, средняя степень (2 челюсти)",
           "includes": "Осмотр, визуальная диагностика, снятие твёрдых и мягких зубных отложений аппаратом Air Flow и УЗ, полировка зубов",
-          "price": "5 500 сом"
+          "price": "5 500 сом",
+          "careEligible": "medium",
+          "careNote": "Входит в Expert Care 12 Adult (до 2 раз / 12 мес), когда Care live"
         },
         {
           "name": "Профессиональная гигиена — постоянный прикус, тяжёлая степень (2 челюсти)",
           "includes": "Осмотр, визуальная диагностика, снятие твёрдых и мягких зубных отложений аппаратом Air Flow и УЗ, полировка зубов",
-          "price": "7 700 сом"
+          "price": "7 700 сом",
+          "careEligible": false,
+          "careNote": "Не входит целиком: Care закрывает тариф средней (5 500); доплата 2 200 сом"
         }
       ]
     },
@@ -453,6 +486,44 @@
           "name": "Ретейнер несъёмный",
           "includes": "",
           "price": "3 850 сом / 1 челюсть"
+        }
+      ]
+    },
+    {
+      "id": "care12",
+      "name": "Expert Care 12",
+      "status": "proposed",
+      "publishGate": "clinic_confirmed + unit economics + DEC-786 Phase 2",
+      "note": "Отдельный SKU. Не колонка скидок на весь прайс. Не публиковать как действующий оффер до clinic_confirmed.",
+      "items": [
+        {
+          "sku": "care12-adult",
+          "name": "Expert Care 12 Adult",
+          "includes": "2 профгигиены лёгкой или средней степени / 12 мес; 2 контрольных осмотра / обновление Паспорта; приоритет записи при срочной проблеме в duty-слотах; напоминания recare",
+          "exclusions": "Тяжёлая гигиена целиком; терапия; эндодонтия; хирургия; ортопедия; имплантация; ортодонтия; снимки/КТ; безлимит визитов",
+          "price": "9 900 сом / 12 мес",
+          "priceStatus": "proposed",
+          "currency": "KGS",
+          "faceValueNote": "2× средняя гигиена = 11 000 сом; цена Care ≈ −10% к face средней или буфер над 2× лёгкой (8 800)"
+        },
+        {
+          "sku": "care12-family-addon",
+          "name": "Expert Care 12 Family add-on (2-й член семьи)",
+          "includes": "Тот же профилактический лимит, что Adult, для второго члена семьи на том же договоре",
+          "exclusions": "Те же исключения, что Adult",
+          "price": "7 900 сом / 12 мес",
+          "priceStatus": "proposed",
+          "currency": "KGS"
+        },
+        {
+          "sku": "care12-kids",
+          "name": "Expert Care 12 Kids",
+          "includes": "2 детские профгигиены временного прикуса / 12 мес; 2 контрольных осмотра; напоминания",
+          "exclusions": "Лечение кариеса, удаления, детские коронки, ортодонтия — всегда отдельно",
+          "price": "5 500 сом / 12 мес",
+          "priceStatus": "proposed",
+          "currency": "KGS",
+          "faceValueNote": "2× детская гигиена = 5 500 сом; цена = face value с сервисным пакетом осмотров"
         }
       ]
     }
