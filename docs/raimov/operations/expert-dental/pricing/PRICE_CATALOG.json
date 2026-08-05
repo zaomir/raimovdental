@@ -5,13 +5,57 @@
   "source": "clinic_price_list_2026-08-04",
   "status": "clinic_confirmed",
   "lastUpdated": "2026-08-05",
+  "sourceNotes": [
+    "ala-carte clinic_confirmed 2026-08-04",
+    "added 2026-08-05: Электронная аксиография (диагностика ВНЧС) — 80 000 сом",
+    "2026-08-05 clinic update: consultation fees by doctor — general 550; Mir Ali orthopedics/implants 1500; Atabek orthodontics 3000; gnathology Atabek/Mir Ali 5000"
+  ],
+  "disclaimer": "Итоговая стоимость определяется после осмотра и диагностики. Цена консультации зависит от врача и направления. Цены на лечение указаны ориентировочно и могут зависеть от сложности случая. Expert Care 12 — отдельный профилактический продукт; не страховка и не скидка на все услуги прайса.",
+  "consultationFees": {
+    "status": "clinic_confirmed",
+    "confirmedAt": "2026-08-05",
+    "source": "assistant update — Atabek / Mir Ali",
+    "currency": "KGS",
+    "tiers": [
+      {
+        "id": "general",
+        "label": "Общие врачи (терапевт, ортодонт, ортопед, хирург)",
+        "price": 550,
+        "priceLabel": "550 сом"
+      },
+      {
+        "id": "mir-ali-prostho-implant",
+        "label": "Д-р Мир Али — ортопедия, имплантация",
+        "doctor": "Мир Али",
+        "directions": ["prosthodontics", "implantation"],
+        "price": 1500,
+        "priceLabel": "1 500 сом",
+        "note": "Подняли 2026-08-04; согласовано с д-ром Мир Али лично"
+      },
+      {
+        "id": "atabek-ortho",
+        "label": "Д-р Атабек — ортодонтия",
+        "doctor": "Атабек Раимов",
+        "directions": ["orthodontics"],
+        "price": 3000,
+        "priceLabel": "3 000 сом"
+      },
+      {
+        "id": "gnathology",
+        "label": "Гнатология — д-р Атабек / д-р Мир Али",
+        "doctors": ["Атабек Раимов", "Мир Али"],
+        "directions": ["gnathology"],
+        "price": 5000,
+        "priceLabel": "5 000 сом"
+      }
+    ]
+  },
   "canonicalUrl": "https://expertdental.kg/price",
   "contacts": {
     "address": "г. Бишкек, ул. Киевская 88 (пер. бульвар Эркиндик)",
     "phone": "+996555255455",
     "phoneDisplay": "+996 555 255 455"
   },
-  "disclaimer": "Итоговая стоимость определяется после осмотра и диагностики. Цены указаны ориентировочно и могут зависеть от сложности случая. Expert Care 12 — отдельный профилактический продукт; не страховка и не скидка на все услуги прайса.",
   "cta": {
     "label": "Записаться на бесплатную консультацию",
     "href": "https://wa.me/996555255455?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E."
@@ -46,9 +90,45 @@
       "name": "Диагностика",
       "items": [
         {
-          "name": "Консультация",
+          "name": "Консультация — общие врачи (терапевт, ортодонт, ортопед, хирург)",
           "includes": "Фотопротокол, постановка диагноза, составление плана лечения",
-          "price": "550 – 2 000 сом"
+          "price": "550 сом",
+          "priceBasis": "doctor",
+          "consultationTierId": "general",
+          "sku": "consult-general"
+        },
+        {
+          "name": "Консультация — д-р Мир Али (ортопедия, имплантация)",
+          "includes": "Фотопротокол, постановка диагноза, составление плана лечения",
+          "price": "1 500 сом",
+          "priceBasis": "doctor",
+          "consultationTierId": "mir-ali-prostho-implant",
+          "sku": "consult-mir-ali-prostho-implant",
+          "note": "Тариф поднят 2026-08-04; согласовано с д-ром Мир Али лично"
+        },
+        {
+          "name": "Консультация — д-р Атабек (ортодонтия)",
+          "includes": "Фотопротокол, постановка диагноза, составление плана лечения",
+          "price": "3 000 сом",
+          "priceBasis": "doctor",
+          "consultationTierId": "atabek-ortho",
+          "sku": "consult-atabek-ortho"
+        },
+        {
+          "name": "Консультация гнатология — д-р Атабек / д-р Мир Али",
+          "includes": "Консультация по направлению гнатологии",
+          "price": "5 000 сом",
+          "priceBasis": "doctor",
+          "consultationTierId": "gnathology",
+          "sku": "consult-gnathology"
+        },
+        {
+          "name": "Электронная аксиография (диагностика ВНЧС)",
+          "includes": "Высокоточное цифровое исследование движений нижней челюсти и работы височно-нижнечелюстного сустава (ВНЧС): запись индивидуальной ТРК-траектории суставных головок для оценки нарушений в работе челюсти",
+          "price": "80 000 сом",
+          "careEligible": false,
+          "priceBasis": "flat",
+          "sku": "diagnostics-axiography-tmj"
         }
       ]
     },
