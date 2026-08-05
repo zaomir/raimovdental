@@ -1,7 +1,7 @@
 # RAIMOV ECOSYSTEM PROJECT STATUS
 
 **Date:** 2026-08-05  
-**Status:** STAGE_B_PUBLIC_LIVE / ACCESS_CONTINUITY_STRATEGY_LIVE / PATIENT_MOTIVATION_SSOT_LIVE / OPERATIONAL_PILOT_NOT_STARTED  
+**Status:** STAGE_B_PUBLIC_LIVE / ACCESS_CONTINUITY_STRATEGY_LIVE / PATIENT_MOTIVATION_SSOT_LIVE / HOME_CARE_HANDOFF_SSOT_LIVE / OPERATIONAL_PILOT_NOT_STARTED  
 **Current operating business:** Expert Dental Studio, Bishkek  
 **Master brand:** RAIMOV DENTAL  
 **Public site:** Stage B at `/ru/`; Access & Continuity at `/ru/access-continuity/`; Stage A protected at `/stage-a/`
@@ -15,6 +15,8 @@ The module connects:
 `обращение → триаж → срочная помощь → Паспорт V0 → записанный чек-ап → Паспорт V1 → диагностика → комплексный план → лечение → профилактика`
 
 DEC-786 adds the clinic retention canon: **Expert Dental Patient Motivation System** (Continuity + Expert Care 12 + Expert Points). Strategy SSOT is live; Care 12 and Points remain operationally deferred.
+
+DEC-787 adds **Home Care Handoff System** (showcase / doctor care class / admin memo+basket). Strategy SSOT is live; medical review of memos, approved SKU list and reception pilot remain gated. Contract-continuation question pack: `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md`.
 
 The website is live, but the clinical operational pilot is not launched by this release. It still requires Atabek/clinic approval of triage, the exact free-check-up composition, capacity, staff responsibilities, medical/data consents and cohort economics.
 
@@ -56,6 +58,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 - Expert Care 12 and separate capacity require later gates.
 - Review gating and incentives tied to review tone are prohibited.
 - DEC-786 defines Patient Motivation System: Continuity foundation + gated Care 12 + Expert Points (no review rewards).
+- DEC-787 defines Home Care Handoff System: showcase / doctor care class / admin memo+basket (medical+SKU gates open).
 
 ## Completed
 
@@ -63,6 +66,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 - Protected Stage A presentation.
 - DEC-774 and `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md`.
 - DEC-786 and `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`.
+- DEC-787 and `EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` + `EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md`.
 - Public home teaser and dedicated strategy route.
 - Deterministic build, robots and sitemap integration.
 - Contract tests plus Playwright/Axe responsive gate.
@@ -80,6 +84,8 @@ The website is live, but the clinical operational pilot is not launched by this 
 7. Cohorts are measured for 30/60/90 days.
 8. Separate capacity and Expert Care 12 are considered only after positive gates.
 9. Motivation Phase 0 (pre-book + simple referral) after Continuity pilot start; Points/Care per DEC-786 phases.
+10. Home Care Phase 1–3: medical review memos → approved SKU → 2-week reception pilot (DEC-787).
+11. Contract continuation answers: D-01…D-09 and M-07/M-15 via clinic assistant packet.
 
 ## Deferred
 

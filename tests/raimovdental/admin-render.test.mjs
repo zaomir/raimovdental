@@ -14,7 +14,7 @@ const build = spawnSync(process.execPath, [join(repo, 'scripts/build-raimovdenta
 assert.equal(build.status, 0, build.stderr || build.stdout || 'RAIMOV build failed');
 
 const root = join(repo, 'site-raimovdental', 'dist', 'assets', 'img', 'admin');
-for (const name of ['index.html', 'app.css', 'app.js', 'journal.css', 'doctor-transfer.js', 'ux.css', 'ux.js', 'handoff-accordion.css', 'handoff-accordion.js', 'call-guidance.css', 'call-guidance.js']) {
+for (const name of ['index.html', 'app.css', 'app.js', 'journal.css', 'doctor-transfer.js', 'ux.css', 'ux.js', 'handoff-accordion.css', 'handoff-accordion.js', 'call-guidance.css', 'call-guidance.js', 'home-care-matrix.js', 'home-care-ui.js', 'home-care-ui.css']) {
   assert.ok(existsSync(join(root, name)), `missing admin render asset: ${name}`);
 }
 
@@ -24,18 +24,22 @@ const transferPath = join(root, 'doctor-transfer.js');
 const uxPath = join(root, 'ux.js');
 const accordionPath = join(root, 'handoff-accordion.js');
 const guidancePath = join(root, 'call-guidance.js');
+const matrixPath = join(root, 'home-care-matrix.js');
+const homeCareUiPath = join(root, 'home-care-ui.js');
 const html = readFileSync(htmlPath, 'utf8');
 const js = readFileSync(jsPath, 'utf8');
 const transfer = readFileSync(transferPath, 'utf8');
 const ux = readFileSync(uxPath, 'utf8');
 const accordion = readFileSync(accordionPath, 'utf8');
 const guidance = readFileSync(guidancePath, 'utf8');
+const matrix = readFileSync(matrixPath, 'utf8');
+const homeCareUi = readFileSync(homeCareUiPath, 'utf8');
 const uxCss = readFileSync(join(root, 'ux.css'), 'utf8');
 const accordionCss = readFileSync(join(root, 'handoff-accordion.css'), 'utf8');
 const guidanceCss = readFileSync(join(root, 'call-guidance.css'), 'utf8');
 const nginx = readFileSync(join(repo, 'deploy', 'nginx', 'raimovdental.com.conf'), 'utf8');
 
-for (const path of [jsPath, transferPath, uxPath, accordionPath, guidancePath]) {
+for (const path of [jsPath, transferPath, uxPath, accordionPath, guidancePath, matrixPath, homeCareUiPath]) {
   const syntax = spawnSync(process.execPath, ['--check', path], { encoding: 'utf8' });
   assert.equal(syntax.status, 0, syntax.stderr || syntax.stdout || `${path} syntax invalid`);
 }
@@ -55,7 +59,19 @@ assert.match(html, /ux\.css/);
 assert.match(html, /ux\.js/);
 assert.match(html, /call-guidance\.css/);
 assert.match(html, /call-guidance\.js/);
+assert.match(html, /home-care-matrix\.js/);
+assert.match(html, /home-care-ui\.js/);
+assert.match(html, /home-care-ui\.css/);
 assert.match(js, /openApp/);
+assert.match(js, /homecare/);
+assert.match(js, /ExpertDentalHomeCareUI/);
+assert.match(guidance, /HC-01/);
+assert.match(guidance, /Закрытие визита · уход и памятка/);
+assert.match(matrix, /ExpertDentalHomeCare/);
+assert.match(matrix, /Профессиональная гигиена/);
+assert.match(homeCareUi, /renderAdminPanel/);
+assert.match(homeCareUi, /doctorPanelHtml/);
+assert.match(homeCareUi, /memo_printed/);
 assert.match(js, /\+996/);
 assert.match(js, /Записан на приём/);
 assert.match(js, /Передан врачу/);

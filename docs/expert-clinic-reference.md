@@ -33,6 +33,8 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 | 🏆 **Master SSOT-индекс всего проекта** | [`docs/ssot/RAIMOV.md`](docs/ssot/RAIMOV.md) | Карта всех файлов, статусы, пробелы. Главная точка входа |
 | 📐 **Архитектура экосистемы** | [`docs/ssot/RAIMOV_ECOSYSTEM_PROJECT_ARCHITECTURE.md`](docs/ssot/RAIMOV_ECOSYSTEM_PROJECT_ARCHITECTURE.md) | Топология, владение, фазовые ворота |
 | 🎯 **Стратегия роста (полная)** | [`docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md`](docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md) | Диагноз, воронка, KPI, риски. Канон для разговоров с Атабеком |
+| 🪥 **Home Care Handoff** | [`docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md`](docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md) | Витрина / врач / админ / памятки / gifts (DEC-787) |
+| 📝 **Вопросы для продолжения договора** | [`docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md`](docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md) | D/M/C-пакеты для ассистента и Атабека |
 | 🌐 **Стратегия сайта RAIMOV DENTAL** | [`docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md`](docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md) | Аудитория, глубина, CTA, IA, copy |
 | 🦷 **Стратегия сайта Expert Dental** | [`docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md`](docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md) | SSOT для сайта Expert Dental |
 | 💼 **Предложение роста** | [`docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md`](docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md) | Коммерческое предложение, Instagram, финансовая модель |
@@ -54,7 +56,8 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 | 📂 **Операционный индекс** | [`docs/raimov/operations/expert-dental/README.md`](docs/raimov/operations/expert-dental/README.md) | Главная точка входа в операционную документацию |
 | 🗂️ **Архитектура файлов** | [`docs/raimov/operations/expert-dental/FILE_ARCHITECTURE.md`](docs/raimov/operations/expert-dental/FILE_ARCHITECTURE.md) | Структура папок, правила изменений |
 | 🔗 **Реестр ссылок** | [`docs/raimov/operations/expert-dental/LINKS_REGISTER.md`](docs/raimov/operations/expert-dental/LINKS_REGISTER.md) | Все URL: сайт, Instagram, WhatsApp, карты, офферы |
-| 📦 **Реестр материалов** | [`docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md`](docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md) | ED-MAT-001..052 — все материалы проекта |
+| 🪥 **Home care / памятки** | [`docs/raimov/operations/expert-dental/home-care/README.md`](docs/raimov/operations/expert-dental/home-care/README.md) | Витрина, gifts, врач, админ; памятки; процедура→доп.→продажа |
+| 📦 **Реестр материалов** | [`docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md`](docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md) | ED-MAT-001..063 — все материалы проекта |
 | 📅 **Планирование и отчётность** | [`docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md`](docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md) | Система планирования и отчётности |
 | 📋 **План первого месяца** | [`docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md`](docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md) | Канон: 16 пунктов, нельзя расширять без команды |
 | 📊 **Статус первого месяца** | [`docs/raimov/operations/expert-dental/periods/month-01/STATUS.md`](docs/raimov/operations/expert-dental/periods/month-01/STATUS.md) | Что в работе, выполнено, не начато |

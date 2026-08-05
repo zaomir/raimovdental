@@ -1,9 +1,9 @@
 ---
 title: Expert Dental Studio — реестр материалов
 status: ACTIVE REGISTER
-version: 1.4
+version: 1.5
 created: 2026-08-03
-last_updated: 2026-08-03
+last_updated: 2026-08-05
 id_prefix: ED-MAT
 ---
 
@@ -69,6 +69,21 @@ id_prefix: ED-MAT
 | ED-MAT-025 | Website prototype | Тестовая новая главная | Месяц 1 / 4, 9 | Prototype / published | Tilda / `expertdental.kg` | `http://expertdental.kg/home-new` | Не заменяет необходимость полной будущей пересборки сайта |
 | ED-MAT-053 | Price catalog SSOT | Прайс: направления · услуги · цены | Месяц 1 / 4 | Ready for Tilda publish | `docs/raimov/operations/expert-dental/pricing/` | ED-LINK-033 | Каталог JSON + MD + Zero Block `price-table-zero-block.html` |
 
+## Home care, витрина и памятки пациента
+
+| ID | Тип | Материал | Период / пункты | Статус | Источник | Внешняя ссылка | Примечание |
+|---|---|---|---|---|---|---|---|
+| ED-MAT-054 | Operating SOP | Три канала ухода + handoff + правила % + памятка | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/HOME_CARE_HANDOFF_SOP.md` | — | Витрина / врач / админ; врач 0% SKU |
+| ED-MAT-055 | Procedure matrix | Процедура → скрипт → корзина → memo_id | Месяц 1 / 10, 11 | Draft / clinic SKU list | `docs/raimov/operations/expert-dental/home-care/PROCEDURE_MATRIX.md` | — | Контракт UI администратора |
+| ED-MAT-056 | Patient memos | Печатные памятки A5 (7 шаблонов) | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/memos/` | — | Печатает и выдаёт администратор |
+| ED-MAT-057 | Addon matrix | Процедура → доп. процедура → продажа (весь прайс) | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/PROCEDURE_ADDON_MATRIX.md` | — | Следующий визит + retail/внешний магазин |
+| ED-MAT-058 | Patient memos 1:1 | 77 памяток — по каждой процедуре прайса | Месяц 1 / 10, 11 | Draft / medical review | `docs/raimov/operations/expert-dental/home-care/memos/by-procedure/` | — | Канон печати админом; генератор `scripts/raimov/generate-procedure-memos.mjs` |
+| ED-MAT-059 | Home-care UI matrix | Матрица в скриптах + интерфейсах врача/админа | Месяц 1 / 10, 11 | Draft / demo wired | `home-care/HOME_CARE_MATRIX.json`, `site-raimovdental/public/assets/img/admin/home-care-*.js`, `workspace/home-care-matrix.js` | `/render/`, `/assets/img/workspace/{admin,doctor}/` | Генератор `scripts/raimov/generate-home-care-matrix.mjs` |
+| ED-MAT-060 | Showcase + stock | Перечень товаров и количеств на витрину/склад | Месяц 1 / 10, 11 | Draft / clinic SKU pending | `home-care/SHOWCASE_STOCK_LIST.md`, `SHOWCASE_STOCK_LIST.json` | — | Из корзин матрицы; бренды утверждает клиника |
+| ED-MAT-061 | Strategy SSOT | Home Care Handoff System | Общая стратегия / 10, 11 | Active / medical+SKU gated | `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` | — | DEC-787 |
+| ED-MAT-062 | Strategy SSOT | Пакет вопросов для продолжения договора | Общая стратегия | Active / answers open | `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` | — | D/M/C реестры; смежно DEC-787 |
+| ED-MAT-063 | Care gifts | Полезные подарки пациенту (щётка / kits); gift ≠ sale | Месяц 1 / 10, 11 | Draft / clinic cost+brand pending | `home-care/PATIENT_CARE_GIFTS.md` | — | Daily brand touchpoint; пилот G0 после гигиены |
+
 ## Интерфейсы клиники
 
 | ID | Тип | Материал | Период / пункты | Статус | Источник | Внешняя ссылка | Примечание |
@@ -118,8 +133,9 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-053`;
-- следующая ссылка: `ED-LINK-033`;
+- следующий материал: `ED-MAT-064`;
+- следующая ссылка: `ED-LINK-034`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;
-- индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок.
+- индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок;
+- ED-MAT-054…060, 063 — операционный home-care draft; ED-MAT-061/062 — strategy SSOTs (DEC-787); массовая печать/закупка/подарки только после medical / clinic approval.

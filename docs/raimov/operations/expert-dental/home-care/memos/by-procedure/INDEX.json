@@ -1,0 +1,956 @@
+{
+  "status": "DRAFT — medical review required",
+  "generated": "2026-08-05",
+  "count": 77,
+  "phone": "+996 555 255 455",
+  "items": [
+    {
+      "memo_id": "memo-001-konsultatsiya",
+      "file": "by-procedure/memo-001-konsultatsiya.md",
+      "direction": "diagnostics",
+      "direction_name": "Диагностика",
+      "procedure": "Консультация",
+      "price": "550 – 2 000 сом",
+      "care_sku": [],
+      "next_visit": "Диагностика / профгигиена / профильная консультация по плану"
+    },
+    {
+      "memo_id": "memo-002-germetizatsiya-fissur-vremennogo-zuba",
+      "file": "by-procedure/memo-002-germetizatsiya-fissur-vremennogo-zuba.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Герметизация фиссур временного зуба",
+      "price": "2 200 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль / гигиена"
+    },
+    {
+      "memo_id": "memo-003-germetizatsiya-fissur-postoyannogo-zuba",
+      "file": "by-procedure/memo-003-germetizatsiya-fissur-postoyannogo-zuba.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Герметизация фиссур постоянного зуба",
+      "price": "3 850 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль / гигиена"
+    },
+    {
+      "memo_id": "memo-004-professionalnaya-gigiena-polosti-rta-v-period-vremennogo-prikusa-2-chely",
+      "file": "by-procedure/memo-004-professionalnaya-gigiena-polosti-rta-v-period-vremennogo-prikusa-2-chely.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Профессиональная гигиена полости рта в период временного прикуса (2 челюсти)",
+      "price": "2 750 сом",
+      "care_sku": [
+        "kids_brush",
+        "kids_paste"
+      ],
+      "next_visit": "Детская профгигиена"
+    },
+    {
+      "memo_id": "memo-005-lechenie-kariesa-vremennogo-zuba-poverhnostnyi",
+      "file": "by-procedure/memo-005-lechenie-kariesa-vremennogo-zuba-poverhnostnyi.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Лечение кариеса временного зуба — поверхностный",
+      "price": "1 650 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль пломбы / гигиена"
+    },
+    {
+      "memo_id": "memo-006-lechenie-kariesa-vremennogo-zuba-srednii",
+      "file": "by-procedure/memo-006-lechenie-kariesa-vremennogo-zuba-srednii.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Лечение кариеса временного зуба — средний",
+      "price": "2 750 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль пломбы / гигиена"
+    },
+    {
+      "memo_id": "memo-007-lechenie-kariesa-vremennogo-zuba-glubokii",
+      "file": "by-procedure/memo-007-lechenie-kariesa-vremennogo-zuba-glubokii.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Лечение кариеса временного зуба — глубокий",
+      "price": "3 850 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль пломбы / гигиена"
+    },
+    {
+      "memo_id": "memo-008-lechenie-kariesa-vremennogo-zuba-periodontit-s-plomboi",
+      "file": "by-procedure/memo-008-lechenie-kariesa-vremennogo-zuba-periodontit-s-plomboi.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Лечение кариеса временного зуба — периодонтит с пломбой",
+      "price": "4 950 – 7 700 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль пломбы / гигиена"
+    },
+    {
+      "memo_id": "memo-009-udalenie-vremennogo-zuba-legkaya-stepen",
+      "file": "by-procedure/memo-009-udalenie-vremennogo-zuba-legkaya-stepen.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Удаление временного зуба — лёгкая степень",
+      "price": "550 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / оценка места постоянного зуба"
+    },
+    {
+      "memo_id": "memo-010-udalenie-vremennogo-zuba-srednyaya-stepen",
+      "file": "by-procedure/memo-010-udalenie-vremennogo-zuba-srednyaya-stepen.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Удаление временного зуба — средняя степень",
+      "price": "1 320 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / оценка места постоянного зуба"
+    },
+    {
+      "memo_id": "memo-011-udalenie-vremennogo-zuba-tyazhelaya-stepen",
+      "file": "by-procedure/memo-011-udalenie-vremennogo-zuba-tyazhelaya-stepen.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Удаление временного зуба — тяжёлая степень",
+      "price": "2 200 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / оценка места постоянного зуба"
+    },
+    {
+      "memo_id": "memo-012-detskaya-koronka-standartnaya-stalnaya-koronka-3m",
+      "file": "by-procedure/memo-012-detskaya-koronka-standartnaya-stalnaya-koronka-3m.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Детская коронка (стандартная стальная коронка 3M)",
+      "price": "5 500 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль коронки"
+    },
+    {
+      "memo_id": "memo-013-detskaya-koronka-esteticheskaya-koronka-pmma",
+      "file": "by-procedure/memo-013-detskaya-koronka-esteticheskaya-koronka-pmma.md",
+      "direction": "pediatric",
+      "direction_name": "Детская стоматология",
+      "procedure": "Детская коронка (эстетическая коронка PMMA)",
+      "price": "5 500 сом",
+      "care_sku": [
+        "kids_brush"
+      ],
+      "next_visit": "Контроль коронки"
+    },
+    {
+      "memo_id": "memo-014-professionalnaya-gigiena-postoyannyi-prikus-legkaya-stepen-2-chelyusti",
+      "file": "by-procedure/memo-014-professionalnaya-gigiena-postoyannyi-prikus-legkaya-stepen-2-chelyusti.md",
+      "direction": "hygiene",
+      "direction_name": "Гигиена",
+      "procedure": "Профессиональная гигиена — постоянный прикус, лёгкая степень (2 челюсти)",
+      "price": "4 400 сом",
+      "care_sku": [
+        "soft_brush",
+        "low_abrasive_paste",
+        "irrigator"
+      ],
+      "next_visit": "Профгигиена"
+    },
+    {
+      "memo_id": "memo-015-professionalnaya-gigiena-postoyannyi-prikus-srednyaya-stepen-2-chelyusti",
+      "file": "by-procedure/memo-015-professionalnaya-gigiena-postoyannyi-prikus-srednyaya-stepen-2-chelyusti.md",
+      "direction": "hygiene",
+      "direction_name": "Гигиена",
+      "procedure": "Профессиональная гигиена — постоянный прикус, средняя степень (2 челюсти)",
+      "price": "5 500 сом",
+      "care_sku": [
+        "soft_brush",
+        "low_abrasive_paste",
+        "irrigator"
+      ],
+      "next_visit": "Профгигиена"
+    },
+    {
+      "memo_id": "memo-016-professionalnaya-gigiena-postoyannyi-prikus-tyazhelaya-stepen-2-chelyust",
+      "file": "by-procedure/memo-016-professionalnaya-gigiena-postoyannyi-prikus-tyazhelaya-stepen-2-chelyust.md",
+      "direction": "hygiene",
+      "direction_name": "Гигиена",
+      "procedure": "Профессиональная гигиена — постоянный прикус, тяжёлая степень (2 челюсти)",
+      "price": "7 700 сом",
+      "care_sku": [
+        "soft_brush",
+        "low_abrasive_paste",
+        "irrigator"
+      ],
+      "next_visit": "Повторная гигиена / этап 2"
+    },
+    {
+      "memo_id": "memo-017-lechenie-kariesa-postoyannogo-zuba-vo-frontalnom-otdele",
+      "file": "by-procedure/memo-017-lechenie-kariesa-postoyannogo-zuba-vo-frontalnom-otdele.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба во фронтальном отделе",
+      "price": "4 400 – 15 400 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-018-vosstanovlenie-postoyannogo-zuba-bildap-razrushenie-do-1-3-koronkovoi-ch",
+      "file": "by-procedure/memo-018-vosstanovlenie-postoyannogo-zuba-bildap-razrushenie-do-1-3-koronkovoi-ch.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Восстановление постоянного зуба «Билдап» — разрушение до 1/3 коронковой части",
+      "price": "6 050 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Консультация ортопеда / коронка"
+    },
+    {
+      "memo_id": "memo-019-vosstanovlenie-postoyannogo-zuba-bildap-razrushenie-do-2-3-koronkovoi-ch",
+      "file": "by-procedure/memo-019-vosstanovlenie-postoyannogo-zuba-bildap-razrushenie-do-2-3-koronkovoi-ch.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Восстановление постоянного зуба «Билдап» — разрушение до 2/3 коронковой части",
+      "price": "8 800 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Консультация ортопеда / коронка"
+    },
+    {
+      "memo_id": "memo-020-vosstanovlenie-postoyannogo-zuba-bildap-razrushenie-do-3-3-koronkovoi-ch",
+      "file": "by-procedure/memo-020-vosstanovlenie-postoyannogo-zuba-bildap-razrushenie-do-3-3-koronkovoi-ch.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Восстановление постоянного зуба «Билдап» — разрушение до 3/3 коронковой части",
+      "price": "11 500 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Консультация ортопеда / коронка"
+    },
+    {
+      "memo_id": "memo-021-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-poverhnostnyi",
+      "file": "by-procedure/memo-021-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-poverhnostnyi.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба в жевательном отделе — поверхностный",
+      "price": "4 400 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-022-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-srednii",
+      "file": "by-procedure/memo-022-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-srednii.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба в жевательном отделе — средний",
+      "price": "6 050 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-023-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-glubokii",
+      "file": "by-procedure/memo-023-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-glubokii.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба в жевательном отделе — глубокий",
+      "price": "7 150 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-024-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-s-vovlecheniem-k",
+      "file": "by-procedure/memo-024-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-s-vovlecheniem-k.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба в жевательном отделе с вовлечением контактных пунктов — поверхностный",
+      "price": "5 500 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-025-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-s-vovlecheniem-k",
+      "file": "by-procedure/memo-025-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-s-vovlecheniem-k.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба в жевательном отделе с вовлечением контактных пунктов — средний",
+      "price": "7 150 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-026-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-s-vovlecheniem-k",
+      "file": "by-procedure/memo-026-lechenie-kariesa-postoyannogo-zuba-v-zhevatelnom-otdele-s-vovlecheniem-k.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Лечение кариеса постоянного зуба в жевательном отделе с вовлечением контактных пунктов — глубокий",
+      "price": "8 800 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль при жалобе на прикус"
+    },
+    {
+      "memo_id": "memo-027-travma-zuba-fiksatsiya-sobstvennogo-fragmenta",
+      "file": "by-procedure/memo-027-travma-zuba-fiksatsiya-sobstvennogo-fragmenta.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Травма зуба — фиксация собственного фрагмента",
+      "price": "5 500 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль пульпы / шины"
+    },
+    {
+      "memo_id": "memo-028-travma-zuba-shinirovanie",
+      "file": "by-procedure/memo-028-travma-zuba-shinirovanie.md",
+      "direction": "therapy",
+      "direction_name": "Терапия",
+      "procedure": "Травма зуба — шинирование",
+      "price": "3 300 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль пульпы / шины"
+    },
+    {
+      "memo_id": "memo-029-lechenie-kanalov-postoyannyh-zubov-pervoe-poseschenie",
+      "file": "by-procedure/memo-029-lechenie-kanalov-postoyannyh-zubov-pervoe-poseschenie.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение каналов постоянных зубов — первое посещение",
+      "price": "2 200 сом / 1 канал",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Эндо: второе посещение (обтурация)"
+    },
+    {
+      "memo_id": "memo-030-lechenie-kanalov-postoyannyh-zubov-vtoroe-poseschenie",
+      "file": "by-procedure/memo-030-lechenie-kanalov-postoyannyh-zubov-vtoroe-poseschenie.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение каналов постоянных зубов — второе посещение",
+      "price": "1 650 сом / 1 канал",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-031-lechenie-kanalov-postoyannyh-zubov-perelechivanie",
+      "file": "by-procedure/memo-031-lechenie-kanalov-postoyannyh-zubov-perelechivanie.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение каналов постоянных зубов — перелечивание",
+      "price": "3 300 сом / 1 канал",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-032-lechenie-kanalov-postoyannyh-zubov-perelechivanie-s-obturatsiei",
+      "file": "by-procedure/memo-032-lechenie-kanalov-postoyannyh-zubov-perelechivanie-s-obturatsiei.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение каналов постоянных зубов — перелечивание с обтурацией",
+      "price": "4 400 сом / 1 канал",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-033-pryamoe-pokrytie-pulpy-zuba-preparatom-iz-gruppy-mta",
+      "file": "by-procedure/memo-033-pryamoe-pokrytie-pulpy-zuba-preparatom-iz-gruppy-mta.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Прямое покрытие пульпы зуба препаратом из группы МТА",
+      "price": "3 300 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-034-lechenie-periodontita-1-i-stepeni-slozhnosti-perelechivanie-kanalov-pod-",
+      "file": "by-procedure/memo-034-lechenie-periodontita-1-i-stepeni-slozhnosti-perelechivanie-kanalov-pod-.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение периодонтита 1-й степени сложности (перелечивание каналов) под микроскопом",
+      "price": "5 500 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-035-lechenie-periodontita-2-i-stepeni-slozhnosti-perelechivanie-kanalov-pod-",
+      "file": "by-procedure/memo-035-lechenie-periodontita-2-i-stepeni-slozhnosti-perelechivanie-kanalov-pod-.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение периодонтита 2-й степени сложности (перелечивание каналов) под микроскопом",
+      "price": "7 500 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-036-lechenie-periodontita-3-i-stepeni-slozhnosti-perelechivanie-kanalov-pod-",
+      "file": "by-procedure/memo-036-lechenie-periodontita-3-i-stepeni-slozhnosti-perelechivanie-kanalov-pod-.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Лечение периодонтита 3-й степени сложности (перелечивание каналов) под микроскопом",
+      "price": "10 000 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-037-izvlechenie-inorodnogo-tela-iz-kornevogo-kanala-rabota-pod-mikroskopom",
+      "file": "by-procedure/memo-037-izvlechenie-inorodnogo-tela-iz-kornevogo-kanala-rabota-pod-mikroskopom.md",
+      "direction": "endodontics",
+      "direction_name": "Эндодонтия",
+      "procedure": "Извлечение инородного тела из корневого канала (работа под микроскопом)",
+      "price": "3 500 – 15 000 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Коронка / ортопедия + рентген-контроль"
+    },
+    {
+      "memo_id": "memo-038-udalenie-postoyannogo-zuba-legkaya-stepen",
+      "file": "by-procedure/memo-038-udalenie-postoyannogo-zuba-legkaya-stepen.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Удаление постоянного зуба — лёгкая степень",
+      "price": "3 300 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-039-udalenie-postoyannogo-zuba-srednyaya-stepen",
+      "file": "by-procedure/memo-039-udalenie-postoyannogo-zuba-srednyaya-stepen.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Удаление постоянного зуба — средняя степень",
+      "price": "4 950 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-040-udalenie-postoyannogo-zuba-tyazhelaya-stepen",
+      "file": "by-procedure/memo-040-udalenie-postoyannogo-zuba-tyazhelaya-stepen.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Удаление постоянного зуба — тяжёлая степень",
+      "price": "7 150 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-041-udalenie-zuba-mudrosti-legkaya-stepen",
+      "file": "by-procedure/memo-041-udalenie-zuba-mudrosti-legkaya-stepen.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Удаление зуба мудрости — лёгкая степень",
+      "price": "4 400 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-042-udalenie-zuba-mudrosti-srednyaya-stepen",
+      "file": "by-procedure/memo-042-udalenie-zuba-mudrosti-srednyaya-stepen.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Удаление зуба мудрости — средняя степень",
+      "price": "6 150 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-043-udalenie-zuba-mudrosti-tyazhelaya-stepen",
+      "file": "by-procedure/memo-043-udalenie-zuba-mudrosti-tyazhelaya-stepen.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Удаление зуба мудрости — тяжёлая степень",
+      "price": "7 700 – 15 400 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-044-nalozhenie-shvov",
+      "file": "by-procedure/memo-044-nalozhenie-shvov.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Наложение швов",
+      "price": "550 сом",
+      "care_sku": [],
+      "next_visit": "Контроль лунки / снятие швов; план имплант/мост/бабочка"
+    },
+    {
+      "memo_id": "memo-045-gingivoektomiya",
+      "file": "by-procedure/memo-045-gingivoektomiya.md",
+      "direction": "surgery",
+      "direction_name": "Хирургия",
+      "procedure": "Гингивоэктомия",
+      "price": "1 650 сом / область 1 зуба",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль заживления"
+    },
+    {
+      "memo_id": "memo-046-snyatie-slepkov",
+      "file": "by-procedure/memo-046-snyatie-slepkov.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Снятие слепков",
+      "price": "2 750 сом",
+      "care_sku": [],
+      "next_visit": "Примерка / фиксация"
+    },
+    {
+      "memo_id": "memo-047-snyatie-koronki",
+      "file": "by-procedure/memo-047-snyatie-koronki.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Снятие коронки",
+      "price": "550 – 1 100 сом",
+      "care_sku": [],
+      "next_visit": "Новая коронка / временная"
+    },
+    {
+      "memo_id": "memo-048-vremennaya-koronka-iz-pmma-dolgogo-nosheniya",
+      "file": "by-procedure/memo-048-vremennaya-koronka-iz-pmma-dolgogo-nosheniya.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Временная коронка из PMMA долгого ношения",
+      "price": "5 500 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль прикуса; профгигиена"
+    },
+    {
+      "memo_id": "memo-049-esteticheskaya-koronka-e-max",
+      "file": "by-procedure/memo-049-esteticheskaya-koronka-e-max.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Эстетическая коронка E-max",
+      "price": "33 000 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль прикуса; профгигиена"
+    },
+    {
+      "memo_id": "memo-050-esteticheskaya-koronka-tsirkonii",
+      "file": "by-procedure/memo-050-esteticheskaya-koronka-tsirkonii.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Эстетическая коронка «Цирконий»",
+      "price": "28 600 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль прикуса; профгигиена"
+    },
+    {
+      "memo_id": "memo-051-esteticheskaya-koronka-pressovannaya-keramika",
+      "file": "by-procedure/memo-051-esteticheskaya-koronka-pressovannaya-keramika.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Эстетическая коронка «Прессованная керамика»",
+      "price": "33 000 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль прикуса; профгигиена"
+    },
+    {
+      "memo_id": "memo-052-esteticheskaya-koronka-refraktor",
+      "file": "by-procedure/memo-052-esteticheskaya-koronka-refraktor.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Эстетическая коронка «Рефрактор»",
+      "price": "38 700 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль прикуса; профгигиена"
+    },
+    {
+      "memo_id": "memo-053-koronka-metallokeramika",
+      "file": "by-procedure/memo-053-koronka-metallokeramika.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Коронка металлокерамика",
+      "price": "11 000 – 15 000 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Контроль прикуса; профгигиена"
+    },
+    {
+      "memo_id": "memo-054-protezirovanie-bezzubyh-chelyustei-akrilovyi-protez",
+      "file": "by-procedure/memo-054-protezirovanie-bezzubyh-chelyustei-akrilovyi-protez.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Протезирование беззубых челюстей — акриловый протез",
+      "price": "21 500 сом",
+      "care_sku": [
+        "denture_brush",
+        "denture_tabs"
+      ],
+      "next_visit": "Коррекция протеза; план имплант/мост"
+    },
+    {
+      "memo_id": "memo-055-protezirovanie-bezzubyh-chelyustei-neilonovyi-protez",
+      "file": "by-procedure/memo-055-protezirovanie-bezzubyh-chelyustei-neilonovyi-protez.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Протезирование беззубых челюстей — нейлоновый протез",
+      "price": "28 600 сом",
+      "care_sku": [
+        "denture_brush",
+        "denture_tabs"
+      ],
+      "next_visit": "Коррекция протеза; план имплант/мост"
+    },
+    {
+      "memo_id": "memo-056-chastichnyi-protez-babochka-iz-akrila-1-zub",
+      "file": "by-procedure/memo-056-chastichnyi-protez-babochka-iz-akrila-1-zub.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Частичный протез — бабочка из акрила (1 зуб)",
+      "price": "5 500 сом",
+      "care_sku": [
+        "denture_brush",
+        "denture_tabs"
+      ],
+      "next_visit": "Коррекция протеза; план имплант/мост"
+    },
+    {
+      "memo_id": "memo-057-chastichnoe-protezirovanie-babochka-iz-akrila-2-i-bolee-zubov",
+      "file": "by-procedure/memo-057-chastichnoe-protezirovanie-babochka-iz-akrila-2-i-bolee-zubov.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Частичное протезирование — бабочка из акрила (2 и более зубов)",
+      "price": "8 800 сом",
+      "care_sku": [
+        "denture_brush",
+        "denture_tabs"
+      ],
+      "next_visit": "Коррекция протеза; план имплант/мост"
+    },
+    {
+      "memo_id": "memo-058-chastichnoe-protezirovanie-babochka-iz-neilona-1-zub",
+      "file": "by-procedure/memo-058-chastichnoe-protezirovanie-babochka-iz-neilona-1-zub.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Частичное протезирование — бабочка из нейлона (1 зуб)",
+      "price": "7 700 сом",
+      "care_sku": [
+        "denture_brush",
+        "denture_tabs"
+      ],
+      "next_visit": "Коррекция протеза; план имплант/мост"
+    },
+    {
+      "memo_id": "memo-059-chastichnoe-protezirovanie-babochka-iz-neilona-2-i-bolee-zubov",
+      "file": "by-procedure/memo-059-chastichnoe-protezirovanie-babochka-iz-neilona-2-i-bolee-zubov.md",
+      "direction": "prosthodontics",
+      "direction_name": "Ортопедия",
+      "procedure": "Частичное протезирование — бабочка из нейлона (2 и более зубов)",
+      "price": "9 900 сом",
+      "care_sku": [
+        "denture_brush",
+        "denture_tabs"
+      ],
+      "next_visit": "Коррекция протеза; план имплант/мост"
+    },
+    {
+      "memo_id": "memo-060-implantatsiya-megagen-anyone",
+      "file": "by-procedure/memo-060-implantatsiya-megagen-anyone.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Имплантация Megagen Anyone",
+      "price": "58 000 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль → ФДМ → слепки → коронка"
+    },
+    {
+      "memo_id": "memo-061-implantatsiya-megagen-anyridge",
+      "file": "by-procedure/memo-061-implantatsiya-megagen-anyridge.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Имплантация Megagen AnyRidge",
+      "price": "67 760 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль → ФДМ → слепки → коронка"
+    },
+    {
+      "memo_id": "memo-062-implantatsiya-straumann",
+      "file": "by-procedure/memo-062-implantatsiya-straumann.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Имплантация Straumann",
+      "price": "130 500 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль → ФДМ → слепки → коронка"
+    },
+    {
+      "memo_id": "memo-063-multiyunit-na-implantat",
+      "file": "by-procedure/memo-063-multiyunit-na-implantat.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Мультиюнит на имплантат",
+      "price": "5 720 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Слепки / коронка на импланте"
+    },
+    {
+      "memo_id": "memo-064-ti-beiz-na-implantate",
+      "file": "by-procedure/memo-064-ti-beiz-na-implantate.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Ти-бэйз на имплантате",
+      "price": "2 860 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Слепки / коронка на импланте"
+    },
+    {
+      "memo_id": "memo-065-formirovatel-desnevoi-manzhety-fdm-na-implantate",
+      "file": "by-procedure/memo-065-formirovatel-desnevoi-manzhety-fdm-na-implantate.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Формирователь десневой манжеты (ФДМ) на имплантате",
+      "price": "2 750 сом",
+      "care_sku": [
+        "soft_brush",
+        "interdental_brushes"
+      ],
+      "next_visit": "Слепки / коронка на импланте"
+    },
+    {
+      "memo_id": "memo-066-koronka-na-implantate-iz-dioksida-tsirkoniya",
+      "file": "by-procedure/memo-066-koronka-na-implantate-iz-dioksida-tsirkoniya.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Коронка на имплантате из диоксида циркония",
+      "price": "34 100 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Профгигиена с акцентом на имплант"
+    },
+    {
+      "memo_id": "memo-067-koronka-na-implantate-iz-metallokeramiki",
+      "file": "by-procedure/memo-067-koronka-na-implantate-iz-metallokeramiki.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Коронка на имплантате из металлокерамики",
+      "price": "28 000 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Профгигиена с акцентом на имплант"
+    },
+    {
+      "memo_id": "memo-068-vremennaya-koronka-dolgogo-nosheniya-na-implantate-iz-plastmassy",
+      "file": "by-procedure/memo-068-vremennaya-koronka-dolgogo-nosheniya-na-implantate-iz-plastmassy.md",
+      "direction": "implantation",
+      "direction_name": "Имплантация",
+      "procedure": "Временная коронка долгого ношения на имплантате из пластмассы",
+      "price": "13 200 сом",
+      "care_sku": [
+        "soft_brush",
+        "irrigator",
+        "interdental_brushes"
+      ],
+      "next_visit": "Профгигиена с акцентом на имплант"
+    },
+    {
+      "memo_id": "memo-069-ortodonticheskoe-lechenie-u-vzroslyh-ustanovka-breket-sistemy",
+      "file": "by-procedure/memo-069-ortodonticheskoe-lechenie-u-vzroslyh-ustanovka-breket-sistemy.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Ортодонтическое лечение у взрослых — установка брекет-системы",
+      "price": "50 000 – 220 000 сом",
+      "care_sku": [
+        "ortho_brushes",
+        "soft_brush",
+        "ortho_wax",
+        "irrigator"
+      ],
+      "next_visit": "Активация; профгигиена"
+    },
+    {
+      "memo_id": "memo-070-apparat-marpe-nebnoe-rasshirenie-deti-i-podrostki",
+      "file": "by-procedure/memo-070-apparat-marpe-nebnoe-rasshirenie-deti-i-podrostki.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Аппарат MARPE (небное расширение, дети и подростки)",
+      "price": "60 000 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль / активация аппарата"
+    },
+    {
+      "memo_id": "memo-071-apparat-marko-rossa-nebnoe-rasshirenie-deti",
+      "file": "by-procedure/memo-071-apparat-marko-rossa-nebnoe-rasshirenie-deti.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Аппарат Марко Росса (небное расширение, дети)",
+      "price": "25 000 – 40 000 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль / активация аппарата"
+    },
+    {
+      "memo_id": "memo-072-semnaya-rasshiryayuschaya-ortodonticheskaya-plastina",
+      "file": "by-procedure/memo-072-semnaya-rasshiryayuschaya-ortodonticheskaya-plastina.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Съёмная расширяющая ортодонтическая пластина",
+      "price": "12 000 сом",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Контроль / активация аппарата"
+    },
+    {
+      "memo_id": "memo-073-skanirovanie-polosti-rta",
+      "file": "by-procedure/memo-073-skanirovanie-polosti-rta.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Сканирование полости рта",
+      "price": "4 000 сом",
+      "care_sku": [],
+      "next_visit": "План элайнеров / орто / ортопедии"
+    },
+    {
+      "memo_id": "memo-074-elainery",
+      "file": "by-procedure/memo-074-elainery.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Элайнеры",
+      "price": "300 – 3 500 $",
+      "care_sku": [
+        "aligner_brush",
+        "aligner_tabs"
+      ],
+      "next_visit": "Чек-ап / следующие пары; ретейнеры в конце"
+    },
+    {
+      "memo_id": "memo-075-snyatie-breket-sistemy",
+      "file": "by-procedure/memo-075-snyatie-breket-sistemy.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Снятие брекет-системы",
+      "price": "2 750 сом / 1 челюсть",
+      "care_sku": [
+        "soft_brush"
+      ],
+      "next_visit": "Ретейнер (каппа / несъёмный)"
+    },
+    {
+      "memo_id": "memo-076-kappa-reteniruyuschaya",
+      "file": "by-procedure/memo-076-kappa-reteniruyuschaya.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Каппа ретенирующая",
+      "price": "3 850 сом / 1 челюсть",
+      "care_sku": [
+        "interdental_brushes",
+        "irrigator"
+      ],
+      "next_visit": "Контроль ретенции; профгигиена"
+    },
+    {
+      "memo_id": "memo-077-reteiner-nesemnyi",
+      "file": "by-procedure/memo-077-reteiner-nesemnyi.md",
+      "direction": "orthodontics",
+      "direction_name": "Ортодонтия",
+      "procedure": "Ретейнер несъёмный",
+      "price": "3 850 сом / 1 челюсть",
+      "care_sku": [
+        "interdental_brushes",
+        "irrigator"
+      ],
+      "next_visit": "Контроль ретенции; профгигиена"
+    }
+  ]
+}

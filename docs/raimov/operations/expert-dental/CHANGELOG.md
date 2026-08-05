@@ -1,12 +1,60 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.7
+version: 1.8
 created: 2026-08-03
 last_updated: 2026-08-05
 ---
 
 # Журнал изменений
+
+## 2026-08-05 — полезные подарки пациенту (gift ≠ sale)
+
+- `ED-MAT-063`: `home-care/PATIENT_CARE_GIFTS.md` — щётка и kits как daily reminder; отдельно от розницы витрины;
+- пилот: G0 после гигиены; G2 орто после брекетов; запас gift stock;
+- SSOT Home Care + DEC-787 + SOP кассы обновлены.
+
+## 2026-08-05 — SSOT Home Care Handoff + вопросы договора (DEC-787)
+
+- `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` (ED-MAT-061);
+- `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` (ED-MAT-062);
+- `docs/founder-notes/DEC-787_expert-dental-home-care-handoff-system.md`;
+- индексы: `RAIMOV.md`, expert-clinic-reference, clinic-growth, patient-funnel, PROJECT_STATUS, ops README.
+
+## 2026-08-05 — витрина и склад из матрицы ухода
+
+- `ED-MAT-060`: `SHOWCASE_STOCK_LIST.md` / `.json` — 12 классов, нормы витрины и склада на пилот 2–4 недели;
+- генератор: `scripts/raimov/generate-showcase-stock.mjs`.
+
+## 2026-08-05 — матрица ухода в скриптах и UI врача/админа
+
+- `ED-MAT-059`: `HOME_CARE_MATRIX.json` + `home-care-matrix.js` / `home-care-ui.js`;
+- админ `/render/`: быстрый сценарий «Визит · уход», скрипт HC-01 в call-guidance;
+- workspace admin/doctor: панели закрытия визита и передачи класса ухода на ресепшен;
+- генератор: `scripts/raimov/generate-home-care-matrix.mjs`.
+
+## 2026-08-05 — памятка на каждую процедуру прайса (77)
+
+- `ED-MAT-058`: `home-care/memos/by-procedure/` — 1:1 с `PRICE_CATALOG.json`;
+- индекс: `INDEX.json` + `INDEX.md`;
+- генератор: `scripts/raimov/generate-procedure-memos.mjs`;
+- админ печатает memo выбранной услуги; групповые 7 шаблонов — legacy/пилот.
+
+## 2026-08-05 — матрица доп. процедур и продаж по всему прайсу
+
+- `ED-MAT-057`: `home-care/PROCEDURE_ADDON_MATRIX.md` — для каждой позиции/группы прайса: следующий визит (доп. процедура) + продажа в клинике или ориентир «магазин/аптека»;
+- пилот по-прежнему: гигиена → терапия → эндо → удаление → орто → коронки/импланты.
+
+## 2026-08-05 — home-care handoff и памятки пациента
+
+Добавлен операционный контур тихой выдачи ухода и памяток (черновик до medical review):
+
+- SOP трёх каналов: витрина в ожидании, врач (польза, не бренд), администратор (скрипт + корзина + печать памятки) — `ED-MAT-054`;
+- матрица процедура → скрипт → корзина → `memo_id` — `ED-MAT-055`;
+- 7 печатных памяток A5; исполнитель печати и выдачи — администратор — `ED-MAT-056`;
+- мотивация: врач 0% с SKU; админ — фикс/% маржи после пилота; командный фонд опционально.
+
+Связь с пунктами плана 10 и 11; locked-состав 16 пунктов не расширен.
 
 ## 2026-08-05 — система мотивации пациентов (DEC-786)
 

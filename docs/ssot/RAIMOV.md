@@ -4,7 +4,7 @@ status: active
 type: ssot-master
 created: 2026-07-21
 last_updated: 2026-08-05
-version: 1.9
+version: 1.10
 review_cycle: после каждой стратегической сессии по проекту
 applies_to: raimov, expert-dental, raimovdental, elite-dental, caesthetic
 links_to:
@@ -13,6 +13,8 @@ links_to:
   - docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md
   - docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md
   - docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
+  - docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md
+  - docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md
   - docs/ssot/RAIMOV_10M_MASTERPLAN.md
   - docs/ssot/RAIMOV_PUBLIC_PROFILE.md
   - docs/ssot/RAIMOV_LEGAL_GATES.md
@@ -21,6 +23,7 @@ links_to:
   - docs/founder-notes/DEC-772_raimovdental-public-stage-b-cutover.md
   - docs/founder-notes/DEC-774_raimov-access-continuity-system.md
   - docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
+  - docs/founder-notes/DEC-787_expert-dental-home-care-handoff-system.md
   - docs/raimov/
   - research/raimov-profile/
   - site-raimovdental/
@@ -69,12 +72,15 @@ Layer 2 · СТРАТЕГИЯ
   docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md
   docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md
   docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
+  docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md
+  docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md
   docs/ssot/RAIMOV_10M_MASTERPLAN.md
   docs/founder-notes/DEC-742_*.md
   docs/founder-notes/DEC-743_*.md
   docs/founder-notes/DEC-772_*.md
   docs/founder-notes/DEC-774_*.md
   docs/founder-notes/DEC-786_*.md
+  docs/founder-notes/DEC-787_*.md
 
 Layer 3 · ПРОДУКТ / COPY / RUNTIME
   docs/copy/raimov/
@@ -99,11 +105,14 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | Фазы, аудитория, глубина и CTA сайта | `RAIMOV_DENTAL_WEBSITE_STRATEGY.md` |
 | Срочный вход, бесплатный триаж, Паспорт V0/V1, чек-ап и непрерывность лечения | `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
 | Мотивация пациентов: Continuity + Expert Care 12 + Expert Points | `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
+| Home Care Handoff: витрина / врач / админ / памятки / gifts | `EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` |
+| Вопросы для продолжения договора (ассистент / Атабек) | `EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` |
 | Пятилетние внутренние ориентиры | `RAIMOV_10M_MASTERPLAN.md` |
 | Stage A без approval/case gate | `DEC-743_raimovdental-stage-a-strategic-presentation.md` |
 | Public Stage B cutover | `DEC-772_raimovdental-public-stage-b-cutover.md` |
 | Первый applied module Raimov System | `DEC-774_raimov-access-continuity-system.md` |
 | Единая система мотивации пациентов Expert | `DEC-786_expert-dental-patient-motivation-system.md` |
+| Home Care Handoff System | `DEC-787_expert-dental-home-care-handoff-system.md` |
 | Юридический вопрос | `RAIMOV_LEGAL_GATES.md` |
 | Текущая фаза и блокеры | `docs/raimov/PROJECT_STATUS.md` |
 | Публичный текст | `docs/copy/raimov/` после применимых gates |
@@ -139,6 +148,8 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | `RAIMOV_DENTAL_WEBSITE_STRATEGY.md` | стратегия сайта по фазам | ACTIVE v1.5 |
 | `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` | первый applied module: access, triage, continuity, economics | ACTIVE v1.0 / PILOT NOT STARTED |
 | `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` | мотивация пациентов: Continuity + Care 12 + Points, фазы 0–3 | ACTIVE v1.0 / OPS GATED |
+| `EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` | домашний уход: витрина / врач / админ / памятки | ACTIVE v1.0 / MEDICAL+SKU GATED |
+| `EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md` | пакет вопросов для продолжения договора | ACTIVE v1.0 / ANSWERS OPEN |
 | `RAIMOV_10M_MASTERPLAN.md` | внутренний пятилетний/финансовый masterplan | ACTIVE INTERNAL |
 | `RAIMOV_PUBLIC_PROFILE.md` | публично допустимые факты | ACTIVE LIVING |
 | `RAIMOV_LEGAL_GATES.md` | medical, investor, international и network gates | ACTIVE OPEN |
@@ -153,6 +164,7 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | `DEC-772` | публичный Stage B и полный cutover старого patient-first сайта |
 | `DEC-774` | Access & Continuity System — первый прикладной модуль Raimov System |
 | `DEC-786` | Expert Dental Patient Motivation System — Continuity + Care 12 + Points |
+| `DEC-787` | Expert Dental Home Care Handoff System — showcase / doctor / admin / memos |
 
 ## 3.3. Текущий runtime
 
@@ -220,6 +232,16 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 - Expert Care 12 — профилактический абонемент, не страховка.
 - Публичные claims о работающих Points/Care запрещены до operational launch.
 - Полный канон: `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`; решение: `DEC-786`.
+
+## 4.6. Home Care Handoff System (Expert Dental)
+
+- Три канала: витрина (тихо) → врач (класс ухода, без брендов) → администратор (скрипт, корзина, памятка, next visit).
+- Памятку печатает администратор; шаблоны 1:1 с прайсом; блок «Рецепт для памяти».
+- **Полезный подарок** (часто мягкая щётка) отдельно от розницы: compliance + ежедневное напоминание; gift ≠ sale (`PATIENT_CARE_GIFTS.md`, ED-MAT-063).
+- Врач: 0% с SKU; мотивация админа — после пилота; % не за подарки.
+- Розница ухода отделена от success fee до отдельного согласования.
+- Полный канон: `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md`; решение: `DEC-787`.
+- Пакет вопросов для продолжения договора: `docs/ssot/EXPERT_DENTAL_CONTRACT_CONTINUATION_QUESTIONS.md`.
 
 ---
 

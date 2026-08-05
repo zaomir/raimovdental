@@ -8,4 +8,6 @@ Use this namespace for CRM fields/statuses, responsibility maps, response SLA, r
 
 **Patient motivation (retention / membership / points):** canonical SSOT is `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` (DEC-786). Continuity entry path: `docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` (DEC-774). Do not invent review-reward rules here.
 
+**Post-visit home care / memo handoff:** `docs/ssot/EXPERT_DENTAL_HOME_CARE_HANDOFF_SYSTEM.md` (DEC-787).
+
 No raw patient records or medical files belong in Git. Configuration must use anonymised schemas and example data only.

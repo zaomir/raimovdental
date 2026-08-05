@@ -36,6 +36,13 @@ docs/raimov/operations/expert-dental/
 ├── pricing/
 │   ├── PRICE_CATALOG.json   ← clinic-confirmed SSOT
 │   └── PRICE_TABLE.md
+├── home-care/
+│   ├── README.md
+│   ├── HOME_CARE_HANDOFF_SOP.md
+│   ├── PROCEDURE_MATRIX.md
+│   ├── PROCEDURE_ADDON_MATRIX.md
+│   ├── HOME_CARE_MATRIX.json  ← machine SSOT for admin/doctor UI
+│   └── memos/               ← A5 памятки; печатает администратор
 ├── periods/
 │   └── month-01/
 │       ├── PLAN.md
