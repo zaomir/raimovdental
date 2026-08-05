@@ -29,6 +29,7 @@ branch: main
 | Все созданные материалы | `MATERIALS_REGISTER.md` |
 | Все известные ссылки | `LINKS_REGISTER.md` |
 | История изменений контура | `CHANGELOG.md` |
+| Home care / витрина / памятки пациента | `home-care/README.md` |
 
 ## Периоды работы
 
