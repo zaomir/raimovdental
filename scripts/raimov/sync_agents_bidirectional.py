@@ -45,12 +45,14 @@ TREES = [
     "scripts/raimov",
     "tests/raimov",
     "tests/raimovdental",
+    "site-caesthetic/private/bonita",
 ]
 
 SSOT_GLOBS = [
     "docs/ssot/RAIMOV*.md",
     "docs/ssot/EXPERT_DENTAL*.md",
     "docs/ssot/ELITE_DENTAL*.md",
+    "docs/ssot/BONITA*.md",
 ]
 
 EXTRA_FILES = [
@@ -134,7 +136,8 @@ def expand_ssot(root: Path) -> List[str]:
     ssot = root / "docs" / "ssot"
     if not ssot.is_dir():
         return out
-    for pattern in ("RAIMOV*.md", "EXPERT_DENTAL*.md", "ELITE_DENTAL*.md"):
+    for glob_pat in SSOT_GLOBS:
+        pattern = Path(glob_pat).name
         for p in sorted(ssot.glob(pattern)):
             out.append(str(p.relative_to(root)))
     return out

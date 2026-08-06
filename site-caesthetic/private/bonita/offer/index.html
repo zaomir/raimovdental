@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Стратегия системного роста сети Bonita — CAESTHETIC / ROVLEX</title>
+<style>
+
+    :root {
+      --bg: #07060b;
+      --panel: #0f0d16;
+      --panel2: #15111f;
+      --text: #f6f1ff;
+      --muted: #a79eaf;
+      --line: rgba(255,255,255,.12);
+      --accent: #f07bf2;
+      --accent2: #e8c0ff;
+      --green: #5bffad;
+      --warning: #f7b66d;
+      --danger: #ff6c8c;
+      --paper: #fbf7ef;
+      --ink: #111016;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(240,123,242,.18), transparent 34rem),
+        radial-gradient(circle at 90% 10%, rgba(91,255,173,.10), transparent 28rem),
+        linear-gradient(180deg, #07060b 0%, #0b0812 42%, #07060b 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 36px 22px 80px; }
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      align-content: center;
+      gap: 34px;
+      padding: 28px 0 56px;
+      border-bottom: 1px solid var(--line);
+    }
+    .pill {
+      width: fit-content;
+      border: 1px solid rgba(240,123,242,.35);
+      color: var(--accent2);
+      border-radius: 999px;
+      padding: 10px 18px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 13px;
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 0 30px rgba(240,123,242,.12);
+    }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(42px, 7vw, 92px);
+      line-height: .96;
+      letter-spacing: -.065em;
+      margin: 0;
+      max-width: 980px;
+    }
+    .lead {
+      color: var(--muted);
+      max-width: 840px;
+      font-size: clamp(20px, 2.7vw, 31px);
+      line-height: 1.48;
+      margin: 0;
+    }
+    .forbox {
+      margin-top: 28px;
+      max-width: 850px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(255,255,255,.035);
+      backdrop-filter: blur(12px);
+    }
+    .forbox h3 { margin: 0 0 10px; font-size: 28px; }
+    .forbox p { margin: 0; color: var(--muted); font-size: 18px; }
+    .meta-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      margin-top: 20px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+    }
+    .metric strong { display:block; font-size: 30px; line-height:1; color: var(--accent2); }
+    .metric span { display:block; margin-top: 8px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing:.14em; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 0 -22px 42px;
+      padding: 14px 22px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,6,11,.82);
+      backdrop-filter: blur(16px);
+    }
+    .nav a {
+      flex: none;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.035);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .section {
+      margin: 36px 0;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
+      page-break-inside: avoid;
+    }
+    .section-kicker {
+      display:inline-grid;
+      place-items:center;
+      width: 36px; height:36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #9d6bff);
+      color: white;
+      font-weight: 900;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 30px rgba(240,123,242,.25);
+    }
+    h2 {
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      margin: 0 0 22px;
+    }
+    p {
+      color: #ded6e8;
+      font-size: 19px;
+      margin: 0 0 18px;
+      max-width: 980px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      color: #e6deef;
+      font-size: 16px;
+    }
+    th {
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      background: rgba(240,123,242,.08);
+    }
+    tr:last-child td { border-bottom: 0; }
+
+    .maps-visual {
+      margin: 34px 0;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
+    }
+    .maps-visual * { box-sizing: border-box; }
+    .maps-titleline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: #2b2630;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .maps-num {
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: #d77745;
+      color: #fff;
+      font-weight: 900;
+    }
+    .maps-visual h2 {
+      color: #211b26;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -.03em;
+      font-size: clamp(30px, 4.5vw, 48px);
+      margin: 0 0 18px;
+    }
+    .maps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .map-v-card {
+      border: 1px solid #eadfce;
+      border-radius: 18px;
+      background: #fffaf3;
+      padding: 16px;
+      box-shadow: 0 12px 35px rgba(25,22,33,.06);
+    }
+    .map-v-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      color: #2b2630;
+      margin-bottom: 12px;
+    }
+    .map-v-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .map-v-logo.y { background: #e8483e; }
+    .map-v-logo.g { background: #2ca965; }
+    .map-v-logo.d { background: #26a86f; }
+    .map-v-mini {
+      height: 95px;
+      border-radius: 12px;
+      border: 1px solid #e7dac8;
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(203,187,166,.42) 50%, transparent 51%) 0 0/28px 28px,
+        linear-gradient(0deg, transparent 49%, rgba(203,187,166,.42) 50%, transparent 51%) 0 0/28px 28px,
+        radial-gradient(circle at 62% 45%, rgba(215,119,69,.18), transparent 35%),
+        #f7efe4;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .map-v-mini::after {
+      content: "";
+      position: absolute;
+      left: 62%;
+      top: 42%;
+      width: 15px;
+      height: 15px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: #ef4a4a;
+      box-shadow: 0 0 0 4px rgba(239,74,74,.14);
+    }
+    .map-v-rating {
+      display: flex;
+      align-items: baseline;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .map-v-rating strong {
+      font-size: 36px;
+      line-height: 1;
+      color: #201b26;
+    }
+    .map-v-stars {
+      color: #f2a820;
+      letter-spacing: 1px;
+      font-size: 17px;
+    }
+    .map-v-count {
+      color: #746d7a;
+      font-size: 14px;
+    }
+    .map-v-tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .map-v-tag.red { background: #fde9e7; color: #b75351; }
+    .map-v-tag.amber { background: #fff0d4; color: #9b6700; }
+    .map-v-tag.green { background: #e3f3e9; color: #2f7b57; }
+    .map-v-sub {
+      color: #3a3340;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .map-v-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #574f5d;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .map-v-card li { margin: 4px 0; }
+    .maps-gap {
+      margin-top: 14px;
+      border: 1px solid #eadfce;
+      border-radius: 16px;
+      background: #fffaf3;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .maps-gap strong {
+      color: #2b2630;
+    }
+    .maps-gap-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      color: #2b2630;
+    }
+    .maps-gap-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid #2b2630;
+      display: grid;
+      place-items: center;
+    }
+    .maps-gap p {
+      margin: 0;
+      color: #5e5763;
+      font-size: 16px;
+      max-width: none;
+    }
+    @media (max-width: 900px) {
+      .maps-grid { grid-template-columns: 1fr; }
+      .maps-gap { grid-template-columns: 1fr; }
+    }
+
+
+    .card-breakdown {
+      margin: 36px 0;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(240,123,242,.10), transparent 28rem),
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
+    }
+    .card-breakdown .section-kicker {
+      margin-bottom: 18px;
+    }
+    .card-breakdown > h2 {
+      font-size: clamp(34px, 4.6vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+      margin: 0 0 16px;
+    }
+    .card-breakdown .intro {
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 20px;
+      margin: 0 0 26px;
+    }
+    .platform-panel {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(8, 8, 14, .32);
+      margin-top: 22px;
+      box-shadow: 0 12px 34px rgba(0,0,0,.18);
+    }
+    .platform-panel:first-of-type { margin-top: 0; }
+    .platform-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, var(--accent), #9d6bff);
+      color: #fff;
+    }
+    .platform-bar .left strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+    .platform-bar .left span {
+      display: block;
+      font-size: 13px;
+      margin-top: 4px;
+      opacity: .94;
+    }
+    .platform-bar .right {
+      font-size: 17px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .platform-body {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      padding: 20px;
+      align-items: start;
+    }
+    .platform-copy { min-width: 0; }
+    .platform-rating {
+      float: right;
+      margin-left: 16px;
+      background: linear-gradient(135deg, var(--accent), #9d6bff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      font-size: 58px;
+      line-height: .95;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    .platform-copy h3 {
+      margin: 0;
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -.04em;
+    }
+    .platform-note {
+      margin: 14px 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .platform-copy ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+    .platform-copy li {
+      margin: 9px 0;
+      color: #ddd6e9;
+      font-size: 18px;
+    }
+    .platform-copy li strong {
+      background: linear-gradient(135deg, var(--accent), #9d6bff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .platform-summary {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 4px solid transparent;
+      border-image: linear-gradient(135deg, var(--accent), #9d6bff) 1;
+      border-radius: 0 16px 16px 0;
+      background: rgba(255,255,255,.06);
+      color: #f2ebff;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .platform-shot {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: #000;
+      box-shadow: 0 10px 26px rgba(0,0,0,.20);
+    }
+    .platform-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    @media (max-width: 980px) {
+      .platform-body {
+        grid-template-columns: 1fr;
+      }
+      .platform-bar {
+        grid-template-columns: 1fr;
+      }
+      .platform-rating {
+        float: none;
+        display: block;
+        margin: 0 0 10px;
+      }
+    }
+
+    .highlight {
+      margin: 44px 0;
+      padding: 30px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(240,123,242,.20), rgba(91,255,173,.08));
+      border: 1px solid rgba(240,123,242,.30);
+    }
+    .highlight h2 { margin-bottom: 12px; }
+    .footer {
+      margin-top: 54px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    .print-btn {
+      position: fixed;
+      right: 20px; bottom: 20px;
+      border: 1px solid rgba(240,123,242,.35);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #9d6bff);
+      color: #fff;
+      padding: 13px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 22px 16px 64px; }
+      .hero { min-height: auto; padding-top: 44px; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .section { padding: 24px 20px; border-radius: 24px; }
+      p { font-size: 17px; }
+      .print-btn { display:none; }
+    }
+    @media print {
+      body { background: #fff; color: #111; }
+      .wrap { max-width: none; padding: 0; }
+      .hero, .section { background: #fff; color:#111; box-shadow:none; border-color:#ddd; }
+      .nav, .print-btn { display:none; }
+      p, td { color: #222; }
+      h1, h2, th { color: #111; }
+      .pill, .section-kicker { background:#111; color:#fff; box-shadow:none; }
+      @page { size: A4; margin: 14mm; }
+    }
+
+
+    .audit-gate-screen { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 20% 0%, rgba(240,123,242,.18), transparent 34rem), linear-gradient(180deg, #07060b 0%, #0b0812 100%); }
+    .audit-gate-card { width: min(100%, 440px); padding: 32px; border: 1px solid var(--line); border-radius: 28px; background: rgba(255,255,255,.055); box-shadow: 0 30px 90px rgba(0,0,0,.35); text-align: center; }
+    .audit-gate-card h1 { font-size: 28px; line-height: 1.08; letter-spacing: -.03em; margin: 0 0 12px; }
+    .audit-gate-card p { font-size: 16px; color: var(--muted); margin: 0 0 18px; }
+    .audit-gate-card label { display: block; text-align: left; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent2); margin: 18px 0 8px; font-weight: 800; }
+    .audit-gate-card input { width: 100%; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.06); color: var(--text); padding: 14px 16px; font-size: 18px; outline: none; }
+    .audit-gate-card button { width: 100%; margin-top: 14px; border: 0; border-radius: 999px; background: linear-gradient(135deg, var(--accent), #9d6bff); color: #fff; padding: 14px 18px; font-weight: 900; cursor: pointer; font-size: 16px; }
+    .audit-gate-error { display: none; margin-top: 12px !important; color: var(--danger) !important; font-size: 14px !important; }
+    .audit-gate-error.is-visible { display: block; }
+    body.audit-locked .audit-content { display: none; }
+    body.audit-unlocked .audit-gate-screen { display: none; }
+    h3 { margin: 0 0 12px; font-size: clamp(22px, 2.5vw, 28px); line-height: 1.15; }
+    ul { margin: 0 0 18px; padding-left: 22px; max-width: 980px; }
+    ul li { color: #ddd6e9; font-size: 18px; margin: 9px 0; }
+    .split-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 22px 0; }
+    .split-card { border: 1px solid var(--line); border-radius: 20px; padding: 20px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025)); }
+    .split-card p { margin: 0; font-size: 17px; }
+    .table-note { display: block; margin-top: 6px; font-size: 13px; color: var(--muted); }
+    .cta-link { display: inline-block; margin-top: 8px; text-decoration: none; color: #fff; border-radius: 999px; background: linear-gradient(135deg, var(--accent), #9d6bff); padding: 14px 22px; font-weight: 800; box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+    @media (max-width: 980px) { .split-grid { grid-template-columns: 1fr; } }
+
+  </style></head>
+<body class="audit-locked">
+<section id="audit-gate-screen" class="audit-gate-screen">
+      <form id="audit-gate-form" class="audit-gate-card" autocomplete="off">
+      <div class="pill" style="margin:0 auto 18px">Конфиденциально</div>
+      <h1>Закрытая страница для Bonita</h1>
+      <p>Доступ только по персональному паролю.</p>
+      <label for="audit-password">Пароль</label>
+      <input id="audit-password" type="password" inputmode="numeric" autocomplete="off" placeholder="Введите пароль">
+      <button type="submit" id="audit-unlock">Открыть</button>
+      <p id="audit-gate-error" class="audit-gate-error" role="alert">Неверный пароль. Проверьте и попробуйте снова.</p>
+      </form>
+  </section>
+  
+  <div id="audit-content" class="audit-content">
+
+  <button class="print-btn" type="button" onclick="window.print()">Печать / PDF</button>
+  <main class="wrap">
+    <header class="hero">
+      <div>
+        <div class="pill">Только для сети Bonita · Бишкек</div>
+      </div>
+      <div>
+        <div class="eyebrow">CAESTHETIC · Beauty Network Growth / ROVLEX</div>
+        <h1>Стратегия системного роста сети Bonita</h1>
+      </div>
+      <p class="lead">Персональное предложение для сети магазинов косметики с сильным лицом основателя — без оценки ассортимента, с фокусом на карты, репутацию точек, открытия в срок и путь клиента до визита и покупки.</p>
+      <div class="forbox">
+        <h3>Только для Ани Бонита</h3>
+        <p>Документ подготовлен персонально для основателя сети Bonita, Бишкек. Материал не предназначен для публичного распространения.</p>
+      </div>
+      <div class="meta-grid">
+        <div class="metric"><strong>$1,500</strong><span>setup разово</span></div>
+        <div class="metric"><strong>$1,800</strong><span>retainer / месяц</span></div>
+        <div class="metric"><strong>$1,000</strong><span>opening / точка</span></div>
+        <div class="metric"><strong>$10</strong><span>success / обращение</span></div>
+      </div>
+    </header>
+
+    <nav class="nav">
+      <a href="#s1">01. Сеть и основатель</a>
+      <a href="#s2">02. Главная задача</a>
+      <a href="#s3">03. Карты сети</a>
+      <a href="#s4">04. Opening System</a>
+      <a href="#s5">05. Публичность</a>
+      <a href="#s6">06. Мессенджеры</a>
+      <a href="#s7">07. Реклама</a>
+      <a href="#s8">08. Финансовая модель</a>
+      <a href="#s9">09. Отчёт сети</a>
+      <a href="#s10">10. Почему сейчас</a>
+      <a href="#s11">11. Следующий шаг</a>
+    </nav>
+
+    <div class="highlight">
+      <h2>Управляемый рост сети вместо ручного героизма на каждом запуске</h2>
+      <p>Аня, Bonita уже опирается на витрины, команду консультантов и узнаваемость. Следующий этап — система, где карты всех точек, отзывы, Instagram, мессенджеры, стандарт открытия новых корнеров и контроль сервиса работают согласованно.</p>
+    </div>
+
+    <section class="section" id="s1">
+      <div class="section-kicker">01</div>
+      <h2>Сильная сеть должна расти не только на энергии основателя</h2>
+      <p>Когда рост держится на личной вовлечённости владельца и точечных запусках «своими руками», сеть упирается в потолок: точки выглядят по-разному на картах, часть обращений в Direct/WhatsApp теряется, а каждое новое открытие снова собирается с нуля.</p>
+      <p>Мы предлагаем не «ещё одного маркетолога на аутсорсе», а управляемую модель роста beauty-ритейла: видеть сеть глазами клиента, конкурента рядом с ТЦ и собственника одновременно — и переводить это в конкретные действия.</p>
+    </section>
+
+    <section class="section" id="s2">
+      <div class="section-kicker">02</div>
+      <h2>Главная задача</h2>
+      <p>Построить для Bonita два связанных контура: рост текущих точек и дисциплину открытия новых — без обещаний «гарантированного трафика» и без серых схем с отзывами.</p>
+      <ul>
+        <li>оцифровать репутацию и единый стандарт карточек по сети;</li>
+        <li>сделать путь «увидел в Instagram / на карте → пришёл / купил» управляемым;</li>
+        <li>запустить Opening System: план, сроки, digital-готовность, день открытия;</li>
+        <li>дать собственнику сравнение точек и приоритеты — где чинить сначала.</li>
+      </ul>
+      <p>Мы не оцениваем закупки и качество косметики. Мы работаем с тем, что клиент видит до визита — и с тем, как сеть управляет обращениями и открытиями после клика.</p>
+    </section>
+
+    <section class="section" id="s3">
+      <div class="section-kicker">03</div>
+      <h2>Карты и репутация сети</h2>
+      <p>Google Maps, 2ГИС и Яндекс Карты — цифровая витрина каждой точки. Клиент сравнивает рейтинг, объём отзывов, фото, свежесть ответов и то, насколько понятно «куда идти в ТЦ».</p>
+      <p>По публичным данным 2ГИС у Bonita уже несколько точек (подтверждены ГУМ Чынар и Beta Stores 2; всего в организации указано 4 филиала). Рейтинги сильные, но сеть растёт — и без единого стандарта слабая карточка новой точки тянет вниз восприятие всего бренда.</p>
+      <div class="split-grid">
+        <div class="split-card">
+          <h3>Что делаем</h3>
+          <p>Инвентаризация точек и дублей, единый стандарт описания и фото, мониторинг тем отзывов (консультант, ассортимент, сервис), сравнение с локальными beauty-магазинами, профессиональные ответы в тоне Bonita.</p>
+        </div>
+        <div class="split-card">
+          <h3>Чего не делаем</h3>
+          <p>Не обещаем гарантированный рост рейтинга, не покупаем отзывы, не используем язык накрутки. Фокус — публичное восприятие и путь до визита.</p>
+        </div>
+      </div>
+      <p>Негативные отзывы читаем как управленческие сигналы по точкам: сервис, ожидание, коммуникация, наличие товара — без публичных оправданий ассортимента «в никуда».</p>
+    </section>
+
+    <section class="section" id="s4">
+      <div class="section-kicker">04</div>
+      <h2>Opening System — открытие точки в срок</h2>
+      <p>Новый корнер или магазин нельзя «доделывать маркетингом в день открытия». Нужен чеклист, владельцы задач и контрольная дата — иначе бренд платит налогом сорванного запуска.</p>
+      <ul>
+        <li>план запуска с сроками и ответственными;</li>
+        <li>согласование digital-блока: карты, фото, описание, «как найти в ТЦ»;</li>
+        <li>контроль упаковки коммуникации и контент-пакета открытия;</li>
+        <li>координация анонса в Instagram / Stories / локальных каналах;</li>
+        <li>чеклист команды на день X;</li>
+        <li>сдача: открытие в назначенную дату + закрытый digital-чеклист.</li>
+      </ul>
+      <div class="split-grid">
+        <div class="split-card">
+          <h3>В зоне CAESTHETIC / ROVLEX</h3>
+          <p>Управляемость запуска, рост-контур, сроки digital и маркетинга, отчётность собственнику.</p>
+        </div>
+        <div class="split-card">
+          <h3>Вне scope</h3>
+          <p>Строительный ремонт, подрядчики стройки, закупки товара — остаются на стороне сети или отдельных подрядчиков.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s5">
+      <div class="section-kicker">05</div>
+      <h2>Публичность Ани Бонита и лицо сети</h2>
+      <p>Личный бренд основателя — один из главных активов Bonita. План включает синхронизацию Instagram основателя, точек сети и оффера визита вокруг единого смысла: куда приходить, зачем доверять подбору, почему сеть, а не случайный магазин.</p>
+      <ul>
+        <li>единый тон: основатель как лицо бренда, точки как места сервиса;</li>
+        <li>Highlights и рубрики под маршруты: точки, новинки, консультация, визажистам;</li>
+        <li>контент-пакеты под обычную неделю и под открытие корнера;</li>
+        <li>стратегический мозг в одних руках — даже если публикации делает отдельный SMM.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="s6">
+      <div class="section-kicker">06</div>
+      <h2>WhatsApp, Direct и консультанты</h2>
+      <p>Маркетинг приводит интерес. Деньги появляются, когда консультант доводит человека до визита или покупки.</p>
+      <div class="split-grid">
+        <div class="split-card">
+          <h3>Проверяем</h3>
+          <p>Скорость и качество ответа, названа ли точка и следующий шаг, фиксация источника, follow-up, сценарии под подарок, подбор, проф. запрос визажиста.</p>
+        </div>
+        <div class="split-card">
+          <h3>CRM / таблица</h3>
+          <p>Источник → точка → кто ответил → визит/заказ → отказ/итог → повтор. Если CRM есть — адаптируем процесс; если нет — начинаем с простой таблицы и регламента.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="s7">
+      <div class="section-kicker">07</div>
+      <h2>Реклама после измеримой базы</h2>
+      <p>Рабочий бюджет не должен уходить в общие запросы «косметика Бишкек», пока не ясны карточки, ответы и путь до визита. Сначала baseline — затем paid.</p>
+      <ul>
+        <li>локальные кампании под конкретные точки / ТЦ;</li>
+        <li>подбор, наборы, подарки, аудитория визажистов;</li>
+        <li>короткое окно продвижения открытия новой точки;</li>
+        <li>метрики: стоимость обращения, доля до визита/покупки, вклад по точкам.</li>
+      </ul>
+      <p>Цель — не больше кликов, а больше качественных визитов и покупок. Результат зависит от рынка, сезона и работы на точке; мы контролируем систему, а не обещаем фиксированную выручку.</p>
+    </section>
+
+    <section class="section" id="s8">
+      <div class="section-kicker">08</div>
+      <h2>Финансовая модель</h2>
+      <p>Конкретная структура без формулировки «стоимость рассчитывается индивидуально». Retainer и success fee стартуют с первого месяца; setup — разовый фундамент; opening — за каждую новую точку.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Блок</th><th>Стоимость</th><th>Смысл</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Setup</strong></td>
+              <td><strong>$1,500</strong> разово<span class="table-note">можно 3 × $500</span></td>
+              <td>Network-аудит точек, стратегия 90 дней, стандарт карточек, launch playbook, CRM-скелет, сценарии ответов.</td>
+            </tr>
+            <tr>
+              <td><strong>Retainer</strong></td>
+              <td><strong>$1,800 / месяц</strong></td>
+              <td>Управление системой сети: карты, репутация, координация контента, заявки, сравнение точек, отчётность. С первого месяца.</td>
+            </tr>
+            <tr>
+              <td><strong>Opening project</strong></td>
+              <td><strong>$1,000</strong> / точка<span class="table-note">+ $400 on-time bonus</span></td>
+              <td>План запуска, сроки, digital-готовность, контент открытия, чеклист дня X. Не включает подрядчиков ремонта.</td>
+            </tr>
+            <tr>
+              <td><strong>Рабочие бюджеты</strong></td>
+              <td>от <strong>$2,000 / месяц</strong></td>
+              <td>Реклама от $1,500 + сервисы, инструменты и продакшен от $500. Бюджет сети, не гонорар CAESTHETIC / ROVLEX.</td>
+            </tr>
+            <tr>
+              <td><strong>Success fee</strong></td>
+              <td><strong>$10</strong> / квалифицированное обращение</td>
+              <td>Контакт с интересом к покупке/визиту/подбору; не дубль; источник зафиксирован; передан точке или в WhatsApp-контур сети.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="s9">
+      <div class="section-kicker">09</div>
+      <h2>Ежемесячный управленческий отчёт сети</h2>
+      <p>Собственник покупает не отчёты ради отчётов, а контроль: что происходит по точкам и за что платит каждый месяц.</p>
+      <p>Документ фиксирует: composite-картину по картам и отзывам; ranking точек и слабое звено; обращения и скорость ответа; движение конкурентов у ТЦ; статус открытий; приоритеты на следующий месяц.</p>
+      <p>Это снимает страх «заплачу и не пойму, за что» — и переводит маркетинг в язык управления сетью.</p>
+    </section>
+
+    <section class="section" id="s10">
+      <div class="section-kicker">10</div>
+      <h2>Почему сейчас</h2>
+      <p>Bonita уже сильнее как бренд и сервис, чем это всегда видно снаружи у каждой новой или менее заметной точки. Клиент в ТЦ не обязан знать вашу историю — он видит карточку, фото, отзывы и ответ в Direct.</p>
+      <p>Пока нет единого стандарта сети и Opening System, каждое открытие снова зависит от личного контроля основателя, а конкуренты рядом набирают заметность на картах и в мессенджерах.</p>
+      <p>Отложить системный рост — значит дальше платить налогом ручных запусков: сильная идея бренда, неровный первый экран точек.</p>
+    </section>
+
+    <section class="section" id="s11">
+      <div class="section-kicker">11</div>
+      <h2>Следующий шаг</h2>
+      <p>Мы предлагаем начать не с «запустим рекламу на всё» и не с найма человека «на всё сразу». Первый шаг — короткий разбор: карта точек, пробелы репутации, путь в мессенджерах, ближайшее открытие — и дорожная карта на 90 дней в логике системы.</p>
+      <div class="highlight">
+        <p>Если после просмотра почувствуете, что мы понимаем потенциал сети Bonita — предлагаем спокойно обсудить стратегию на 20 минут.</p>
+        <a class="cta-link" href="mailto:team@caesthetic.com?subject=Bonita%20network%20growth%20strategy">Обсудить стратегию роста Bonita</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>Prepared confidentially for Bonita · CAESTHETIC / ROVLEX</div>
+      <div>Confidential · Bonita · Бишкек</div>
+    </footer>
+  </main>
+
+  </div>
+  <script src="/private/bonita/gate.js"></script>
+</body>
+</html>
