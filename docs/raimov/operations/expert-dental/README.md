@@ -23,6 +23,7 @@ branch: main
 | Access & Continuity (срочный вход / Паспорт) | `docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
 | Мотивация пациентов (Care 12 / Points / referral) | `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
 | Post-Visit Feedback Loop (CSAT → отзывы / recovery) | `reputation/POST_VISIT_FEEDBACK_LOOP.md` · DEC-787 |
+| Атомарный план внедрения Review Hub | `reputation/IMPLEMENTATION_PLAN_ATOMIC.md` · pilot `clinic.raimovdental.com` |
 | Прайс ala-carte + Care 12 SKU | `pricing/PRICE_CATALOG.json` · `pricing/PRICE_TABLE.md` |
 | Врачи / роли на сайте | `DOCTORS_REGISTER.md` · `tilda/doctors/` |
 | План первого месяца | `docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md` |

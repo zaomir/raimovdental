@@ -8,6 +8,13 @@ last_updated: 2026-08-05
 
 # Журнал изменений
 
+## 2026-08-06 — атомарный план Review Hub на clinic.raimovdental.com
+
+- План: `reputation/IMPLEMENTATION_PLAN_ATOMIC.md` (фазы A–E, атомы A1…E3).
+- Пилот-host: `https://clinic.raimovdental.com/feedback/<token>`.
+- Граница с параллельным patient-site агентом: только namespace `/feedback/*`.
+- Код/деплой patient-site — через grainee-v2, не из satellite.
+
 ## 2026-08-05 — Post-Visit Feedback Loop (DEC-787)
 
 Схема сбора отзывов в системе мотивации пациентов (Layer A):

@@ -72,6 +72,7 @@ id_prefix: ED-MAT
 | ED-MAT-055 | Pricing questionnaire | Вопросы ассистенту Атабека по ценам | Прайс / Care / врачи | Sent / awaiting reply | `pricing/QUESTIONS_FOR_ATABEK_ASSISTANT_2026-08-05.md` | — | Dual-price врачей, Care, аксиография, публикация `/price` |
 | ED-MAT-056 | Doctor card update | Мир-Али → гнатолог на сайте | Команда / Tilda | Ready for Tilda publish | `tilda/doctors/MIR_ALI_GNATHOLOGIST_TILDA.md`, `DOCTORS_REGISTER.md`, `media/team/talyshhanov-mir-ali.png` | expertdental.kg doctors block | Specialty string + WA CTA; live Tilda edit required |
 | ED-MAT-057 | Reputation SOP | Post-Visit Feedback Loop (CSAT → карты / recovery) | Мотивация / DEC-787 | Strategy accepted / pilot gated | `reputation/POST_VISIT_FEEDBACK_LOOP.md`, `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` §4.1 | ED-LINK-008–010 | Без reward-for-review; Google URL всё ещё P0 |
+| ED-MAT-058 | Implementation plan | Атомарный план Review Hub на clinic.raimovdental.com | Мотивация / DEC-787 | Draft / coordinating | `reputation/IMPLEMENTATION_PLAN_ATOMIC.md` | clinic.raimovdental.com | Namespace `/feedback/*`; не конфликтовать с patient-site агентом |
 
 ## Интерфейсы клиники
 
@@ -122,7 +123,7 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-058`;
+- следующий материал: `ED-MAT-059`;
 - следующая ссылка: `ED-LINK-034`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;

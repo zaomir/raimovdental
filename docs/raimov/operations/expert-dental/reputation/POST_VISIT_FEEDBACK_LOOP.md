@@ -1,13 +1,15 @@
 ---
 title: Expert Dental — Post-Visit Feedback Loop (SOP)
 status: DRAFT — strategy accepted (DEC-787); operational pilot gated
-version: 1.1
+version: 1.2
 created: 2026-08-05
-last_updated: 2026-08-05
+last_updated: 2026-08-06
+pilot_host: https://clinic.raimovdental.com
 canon:
   - docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md §4.1
   - docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md §8
   - docs/founder-notes/DEC-787_post-visit-feedback-loop.md
+  - docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md
 ---
 
 # Post-Visit Feedback Loop — операционный SOP
@@ -65,9 +67,13 @@ WhatsApp ──► трекаемая ссылка на Review Hub
 ## 4. Триггер и тайминг
 
 1. Приём завершён, услуга eligible.
-2. Через **60–120 минут** — WhatsApp со ссылкой на Hub (`/feedback/<token>`).
+2. Через **60–120 минут** — WhatsApp со ссылкой на Hub:  
+   `https://clinic.raimovdental.com/feedback/<token>` (пилот).
 3. Вне 09:00–20:00 — на 09:30 следующего дня.
 4. Новый CSAT-цикл не чаще 1 / 90 дней на пациента.
+
+Атомарный план внедрения: `IMPLEMENTATION_PLAN_ATOMIC.md`.  
+Параллельный агент владеет patient-site (главная, услуги, врачи); этот контур — **только** `/feedback/*`.
 
 ## 5. Review Hub — поведение страницы
 
@@ -82,7 +88,7 @@ WhatsApp ──► трекаемая ссылка на Review Hub
 Трекинг: `hub_opened`, `csat_scored`, `platform_clicked`.  
 Факт публикации на карте — отдельное поле `publish_detected` (сверка), не полагаться только на клик.
 
-Хост пилота: patient-контур клиники (предпочтительно `expertdental.kg`). Stage B `raimovdental.com` — только если отдельно решено.
+Хост пилота: **`clinic.raimovdental.com`** (staging, noindex). Cutover path сохранится на `expertdental.kg`.
 
 ## 6. Лестница WhatsApp (anti-spam)
 

@@ -37,7 +37,8 @@ docs/raimov/operations/expert-dental/
 │   ├── PRICE_CATALOG.json   ← clinic-confirmed SSOT
 │   └── PRICE_TABLE.md
 ├── reputation/
-│   └── POST_VISIT_FEEDBACK_LOOP.md  ← CSAT / отзывы / recovery (DEC-787)
+│   ├── POST_VISIT_FEEDBACK_LOOP.md       ← CSAT / отзывы / recovery (DEC-787)
+│   └── IMPLEMENTATION_PLAN_ATOMIC.md     ← атомы внедрения на clinic.raimovdental.com
 ├── periods/
 │   └── month-01/
 │       ├── PLAN.md

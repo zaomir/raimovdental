@@ -175,8 +175,8 @@ Layer C · LOYALTY LEDGER — Expert Points (after Phase 0)
 
 WhatsApp **не** просит «ответьте цифрой». Он даёт персональную ссылку:
 
-`https://<clinic-host>/feedback/<token>`  
-(хост пилота — patient-контур клиники, напр. `expertdental.kg`; не путать со Stage B `raimovdental.com`, пока не решено иначе)
+`https://clinic.raimovdental.com/feedback/<token>`  
+(пилот / staging patient-site; `noindex`. После cutover на `expertdental.kg` — тот же path `/feedback/<token>`. Не путать со Stage B `raimovdental.com`.)
 
 Токен = `patient_token` + `visit_id` (или одноразовый opaque id). По нему трекаем без диагноза:
 
