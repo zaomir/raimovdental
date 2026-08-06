@@ -737,7 +737,7 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
           ${ctaPair({
             context: `doctor-${doctor.slug}`,
             message: `Здравствуйте. Хочу записаться к врачу ${doctor.name}. Направление: ${doctor.role}.`,
-            primaryLabel: `Записаться к ${doctor.shortName}`,
+            primaryLabel: `Записаться к ${doctor.bookingName ?? doctor.shortName}`,
           })}
         </div>
       </div>
@@ -800,11 +800,11 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
   }
 
   ${ctaBand({
-    title: `Записаться к врачу ${doctor.shortName}`,
+    title: `Записаться к врачу ${doctor.bookingName ?? doctor.shortName}`,
     text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
     context: `doctor-${doctor.slug}-footer`,
     message: `Здравствуйте. Хочу записаться к врачу ${doctor.name}. Направление: ${doctor.role}.`,
-    primaryLabel: `Записаться к ${doctor.shortName}`,
+    primaryLabel: `Записаться к ${doctor.bookingName ?? doctor.shortName}`,
   })}`;
 }
 

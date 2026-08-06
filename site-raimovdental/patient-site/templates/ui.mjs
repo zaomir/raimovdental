@@ -401,7 +401,7 @@ export function doctorCard(manifest, doctor, { prices, services, context = 'doct
       <div class="doctor-card__actions">
         <a class="btn btn--primary btn--sm" href="${attr(waHref(message))}" data-cta-context="${attr(
     `${context}-${doctor.slug}`
-  )}">Записаться к ${esc(doctor.shortName)}</a>
+  )}">Записаться к ${esc(doctor.bookingName ?? doctor.shortName)}</a>
         <a class="doctor-card__more" href="/doctors/${attr(doctor.slug)}/">О враче</a>
       </div>
     </div>
