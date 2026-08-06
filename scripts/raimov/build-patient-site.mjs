@@ -655,7 +655,9 @@ writeFileSync(
     host: HOST,
     url: '/404/',
     title: 'Страница не найдена — Expert Dental Studio',
-    description: 'Запрошенная страница не найдена.',
+    description:
+      'Запрошенная страница Expert Dental Studio не найдена. Перейдите к услугам, врачам или контактам стоматологической клиники в Бишкеке.',
+    robotsOverride: 'noindex,follow',
     body: pages.notFoundPage(),
     schema: schema.graph(ORIGIN, [clinic]),
     pageId: '404',
@@ -671,7 +673,9 @@ emit(
     host: 'staging',
     url: '/internal/pending/',
     title: 'Ожидаемые материалы — служебная страница',
-    description: 'Служебный отчёт сборки.',
+    description:
+      'Служебный перечень материалов и подтверждений, которые клиника должна предоставить до переноса сайта на основной домен.',
+    robotsOverride: 'noindex,nofollow,noarchive,nosnippet',
     body: pages.pendingPage(),
     schema: schema.graph(ORIGIN, []),
     pageId: 'internal',

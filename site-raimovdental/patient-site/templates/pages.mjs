@@ -1104,7 +1104,8 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
             .map((i) => `<li>${inline(i, { refs: references, used: usedRefs })}</li>`)
             .join('')}</ol>`;
         case 'table':
-          return `<div class="table-scroll"><table>
+          return `<div class="table-scroll" tabindex="0" role="region"
+            aria-label="Таблица в статье"><table>
             <thead><tr>${b.head.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead>
             <tbody>${b.rows
               .map((r) => `<tr>${r.map((c) => `<td>${inline(c, { refs: references, used: usedRefs })}</td>`).join('')}</tr>`)

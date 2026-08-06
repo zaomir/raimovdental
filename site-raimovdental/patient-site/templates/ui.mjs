@@ -281,7 +281,8 @@ export function methodsTable({ columns, rows }, prices) {
       </tr>`;
     })
     .join('');
-  return `<div class="table-wrap"><table class="cmp">
+  return `<div class="table-wrap" tabindex="0" role="region"
+    aria-label="Сравнение методов лечения"><table class="cmp">
     <thead><tr>${head}</tr></thead>
     <tbody>${body}</tbody>
   </table></div>`;

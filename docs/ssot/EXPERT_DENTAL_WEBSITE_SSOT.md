@@ -989,9 +989,14 @@ WhatsApp deeplink обязан содержать контекст страни�
 | Деплой | `scripts/raimov/deploy-patient-site.sh staging\|production` |
 | Хост предпросмотра | `https://clinic.raimovdental.com` (VPS2402, releases + symlink) |
 
-Состояние на 2026-08-06: 39 маршрутов, 11 услуг, 8 врачей, 12 статей, гейты — 0 ошибок,
-визуальный аудит — 0 дефектов на 20 сочетаниях страница×ширина (360 / mobile / desktop).
-Весь сайт закрыт `noindex,nofollow` и `Disallow: /`, потому что это предпросмотр.
+Состояние на 2026-08-06: 39 маршрутов, 11 услуг, 8 врачей, 9 статей; 41 HTML-страница
+прошла content/SEO/schema/link-гейты без ошибок и предупреждений. Browser QA: 86 сценариев
+(все 39 маршрутов на 1440 px и 360 px + 8 ключевых маршрутов на 768 px), 0 ошибок JS,
+0 битых изображений, 0 горизонтальных переполнений, 0 серьёзных/критических нарушений Axe
+WCAG 2 A/AA/2.2 AA. Визуальный screenshot-аудит — 0 дефектов на 21 сочетании
+страница×ширина (360 / mobile / desktop); Impeccable detector — 0 anti-patterns.
+Staging закрыт `noindex,nofollow` и `Disallow: /`; production-сборка отдаёт 39 канонических
+URL с `index,follow`, при этом `/404` и `/internal/pending/` принудительно остаются `noindex`.
 
 ## 33.2. Карта редиректов со старого сайта
 

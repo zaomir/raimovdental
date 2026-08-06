@@ -42,6 +42,7 @@ export function document({
   ogImageAlt = `${brand.name} — стоматологическая клиника в Бишкеке`,
   ogType = 'website',
   extraHead = '',
+  robotsOverride,
   // Content-hashed CSS/JS paths from the builder. A cache in front of the origin cannot
   // serve last week's stylesheet when the URL itself changes with the file.
   assets,
@@ -52,9 +53,11 @@ export function document({
   const cfg = hosts[host];
   if (!cfg) throw new Error(`Unknown host profile: ${host}`);
   const canonical = `${cfg.origin}${url}`;
-  const robots = cfg.indexable
-    ? 'index,follow,max-image-preview:large,max-snippet:-1'
-    : 'noindex,nofollow,noarchive,nosnippet';
+  const robots =
+    robotsOverride
+    ?? (cfg.indexable
+      ? 'index,follow,max-image-preview:large,max-snippet:-1'
+      : 'noindex,nofollow,noarchive,nosnippet');
 
   return `<!doctype html>
 <html lang="ru">
