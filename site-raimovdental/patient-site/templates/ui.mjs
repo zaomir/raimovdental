@@ -30,9 +30,21 @@ export function attr(value = '') {
  * An unknown SKU throws: a broken build is cheaper than a wrong price on a medical site.
  */
 export function money(text = '', prices) {
-  return String(text).replace(/\{\{price:([a-z0-9-]+)\}\}/gi, (_m, sku) => {
+  const source = String(text);
+  const multiplied = source.replace(
+    /\{\{price-mult:([a-z0-9-]+):([1-9]\d*)\}\}/gi,
+    (_m, sku, countText) => {
+      const item = prices?.bySku?.[sku];
+      if (!item) throw new Error(`Unknown price SKU "${sku}" in copy: ${source.slice(0, 70)}`);
+      const match = item.price.match(/^([\d ]+)\s+сом$/);
+      if (!match) throw new Error(`Price SKU "${sku}" cannot be multiplied: ${item.price}`);
+      const total = Number(match[1].replace(/\s/g, '')) * Number(countText);
+      return `${new Intl.NumberFormat('ru-RU').format(total).replace(/\u00a0/g, ' ')} сом`;
+    }
+  );
+  return multiplied.replace(/\{\{price:([a-z0-9-]+)\}\}/gi, (_m, sku) => {
     const item = prices?.bySku?.[sku];
-    if (!item) throw new Error(`Unknown price SKU "${sku}" in copy: ${String(text).slice(0, 70)}`);
+    if (!item) throw new Error(`Unknown price SKU "${sku}" in copy: ${source.slice(0, 70)}`);
     return item.price;
   });
 }
@@ -310,7 +322,7 @@ export function reviewCard(review) {
     <blockquote class="review__quote">${paras}</blockquote>
     <figcaption class="review__meta">
       ${review.authorDisplay ? `<span class="review__author">${esc(review.authorDisplay)}</span>` : ''}
-      <a href="${attr(review.sourceUrl || maps.twoGisReviews)}" target="_blank" rel="noopener nofollow"
+      <a href="${attr(maps.twoGisReviews)}" target="_blank" rel="noopener nofollow"
          data-event="reviews_outbound_click" data-cta-context="review-card">Отзыв на 2ГИС</a>
     </figcaption>
   </figure>`;
@@ -448,15 +460,16 @@ export function initials(fullName) {
   return `${parts[1]?.[0] ?? ''}${parts[0]?.[0] ?? ''}`.toUpperCase();
 }
 
-export function postCard(manifest, article, categories, { feature = false } = {}) {
+export function postCard(manifest, article, categories, { feature = false, headingLevel = 3 } = {}) {
   const cat = categories[article.category];
+  const heading = headingLevel === 2 ? 'h2' : 'h3';
   return `<a class="post-card${feature ? ' post-card--feature' : ''}" href="/blog/${attr(article.slug)}/">
     <div class="post-card__media">${image(manifest, article.cover, article.coverAlt, {
       sizes: feature ? '(min-width: 52rem) 55vw, 92vw' : '(min-width: 62rem) 30vw, 92vw',
     })}</div>
     <div class="stack stack--gap-055">
       <span class="post-card__cat">${esc(cat.label)}</span>
-      <h3 class="post-card__title">${esc(article.title)}</h3>
+      <${heading} class="post-card__title">${esc(article.title)}</${heading}>
       <p class="card__text">${esc(article.excerpt)}</p>
       <p class="post-card__meta">${article.readingTime} мин чтения · обновлено ${formatDate(article.updated)}</p>
     </div>

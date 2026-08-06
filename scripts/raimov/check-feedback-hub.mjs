@@ -165,6 +165,9 @@ if (!/privacy_consent[^>]+required/.test(render)) {
 if (/privacy_consent[^>]+checked/.test(render) || /contact_consent[^>]+checked/.test(render)) {
   fail('render.mjs', 'согласие предвыбрано');
 }
+if (!/href="\/privacy\/"/.test(render)) {
+  fail('render.mjs', 'recovery consent не содержит ссылку на политику конфиденциальности');
+}
 if (
   /name="comment"/.test(render) ||
   !/comment:\s*''/.test(store) ||

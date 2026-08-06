@@ -296,7 +296,7 @@ export const methods = {
       method: 'Профгигиена (Air Flow + УЗ)',
       task: 'Налёт, камень, окрашивание',
       reversibility: 'Полная',
-      price: '4 400–7 700 сом',
+      price: '{{price:hygiene-light}}–{{price:hygiene-heavy}}',
       href: '/services/hygiene/',
     },
     {
@@ -316,7 +316,7 @@ export const methods = {
       method: 'Элайнеры / брекеты',
       task: 'Кривизна, скученность — двигают зубы, не трогают эмаль',
       reversibility: 'Полная',
-      price: 'Элайнеры 300–3 500 $ · брекеты 50 000–220 000 сом',
+      price: 'Элайнеры {{price:ortho-aligners}} · брекеты {{price:ortho-braces}}',
       href: '/services/orthodontics/',
     },
     {
@@ -331,14 +331,18 @@ export const methods = {
       method: 'Коронка',
       task: 'Зуб разрушен более чем наполовину или депульпирован',
       reversibility: 'Необратимо',
-      price: 'E-max 33 000 · цирконий 28 600 · металлокерамика 11 000–15 000 · рефрактор 38 700',
+      price:
+        'E-max {{price:crown-emax}} · цирконий {{price:crown-zirconia}} · металлокерамика '
+        + '{{price:crown-metal-ceramic}} · рефрактор {{price:crown-refractor}}',
       href: '/services/prosthodontics/',
     },
     {
       method: 'Имплантация',
       task: 'Отсутствующий зуб без обточки соседних',
       reversibility: 'Хирургия',
-      price: 'Megagen 58 000 / 67 760 · Straumann 130 500',
+      price:
+        'Megagen {{price:implant-megagen-anyone}} / {{price:implant-megagen-anyridge}} · '
+        + 'Straumann {{price:implant-straumann}}',
       href: '/services/implantation/',
     },
   ],
@@ -385,7 +389,9 @@ export const pricing = {
     },
     {
       label: 'Ориентир по объёму',
-      text: '6 виниров — от 198 000 сом · 8 виниров — от 264 000 сом · 10 виниров — от 330 000 сом',
+      text:
+        '6 виниров — от {{price-mult:veneer-emax:6}} · 8 виниров — от '
+        + '{{price-mult:veneer-emax:8}} · 10 виниров — от {{price-mult:veneer-emax:10}}',
       derivedFrom: 'veneer-emax',
     },
   ],
@@ -400,8 +406,9 @@ export const pricing = {
       + 'изменить, врач заранее объяснит причину и согласует новую стоимость.',
   },
   other:
-    'Другие направления: профгигиена 4 400–7 700 · лечение кариеса 4 400–15 400 · имплантация '
-    + '58 000–130 500 · ортодонтия 50 000–220 000 сом · аксиография ВНЧС '
+    'Другие направления: профгигиена {{price:hygiene-light}}–{{price:hygiene-heavy}} · лечение '
+    + 'кариеса {{price:therapy-caries-front}} · имплантация {{price:implant-megagen-anyone}}–'
+    + '{{price:implant-straumann}} · ортодонтия {{price:ortho-braces}} · аксиография ВНЧС '
     + '{{price:diagnostics-axiography-tmj}}',
   ctaLabel: 'Полный прайс',
   ctaHref: '/services/',
@@ -508,10 +515,11 @@ export const finalCta = {
   fields: [
     { name: 'name', label: 'Имя', type: 'text', required: true, autocomplete: 'name' },
     { name: 'phone', label: 'Телефон', type: 'tel', required: true, autocomplete: 'tel' },
-    { name: 'topic', label: 'Что вас беспокоит', type: 'textarea', required: false, optional: true },
+    { name: 'topic', label: 'Что хотите обсудить', type: 'textarea', required: false, optional: true },
   ],
   submitLabel: 'Записаться',
-  note: 'Ответим в WhatsApp в рабочие часы клиники.',
+  note:
+    'Ответим в WhatsApp в рабочие часы клиники. Не указывайте диагнозы, снимки или медицинские документы.',
 };
 
 /* ----------------------------------------------------------------- block 15 */

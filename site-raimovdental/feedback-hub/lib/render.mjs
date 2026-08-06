@@ -246,6 +246,8 @@ export function renderDetractor(record, cssHref) {
           <span>${esc(copy.detractor.contactConsentLabel)}</span>
         </label>
         <p class="hub__fine">${esc(copy.detractor.privacyNote)}</p>
+        <p class="hub__fine"><a href="/privacy/" target="_blank" rel="noopener">
+          Политика конфиденциальности</a></p>
         <button class="btn" type="submit">${esc(copy.detractor.submit)}</button>
       </form>
     </section>

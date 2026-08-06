@@ -22,6 +22,10 @@ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const { lockedPassages } = await import(
   join(REPO, 'site-raimovdental', 'patient-site', 'content', 'homepage.mjs')
 );
+const homepageSource = readFileSync(
+  join(REPO, 'site-raimovdental', 'patient-site', 'content', 'homepage.mjs'),
+  'utf8'
+);
 /** The only rating the site may quote, straight from the clinic's map data. */
 const RATING = (() => {
   const raw = JSON.parse(
@@ -38,6 +42,17 @@ const failures = [];
 const warnings = [];
 const fail = (page, msg) => failures.push(`${page}: ${msg}`);
 const warn = (page, msg) => warnings.push(`${page}: ${msg}`);
+
+const typedHomepagePrices =
+  homepageSource.match(
+    /(?:[1-9]\d{2,}|[1-9]\d{0,2}(?:[ \u00a0]\d{3})+)\s*(?:[–-]\s*\d[\d ]*)?\s*(?:сом|\$)/g
+  ) ?? [];
+if (typedHomepagePrices.length) {
+  fail(
+    'content/homepage.mjs',
+    `typed prices bypass SKU resolution: ${[...new Set(typedHomepagePrices)].join(', ')}`
+  );
+}
 
 /* ------------------------------------------------------------------ banned */
 
@@ -203,6 +218,24 @@ for (const file of files) {
 
   const h1s = html.match(/<h1[\s>]/g) ?? [];
   if (!internal && h1s.length !== 1) fail(page, `expected exactly one <h1>, found ${h1s.length}`);
+  const headingLevels = [...html.matchAll(/<h([1-6])[\s>]/g)].map((match) => Number(match[1]));
+  for (let index = 1; index < headingLevels.length; index += 1) {
+    if (headingLevels[index] > headingLevels[index - 1] + 1) {
+      fail(
+        page,
+        `heading level jumps from h${headingLevels[index - 1]} to h${headingLevels[index]}`
+      );
+      break;
+    }
+  }
+
+  if (page === '/' && RATING?.sourceUrl) {
+    for (const tag of html.match(/<a\b[^>]*data-event="reviews_outbound_click"[^>]*>/g) ?? []) {
+      if (attrOf(tag, 'href') !== RATING.sourceUrl) {
+        fail(page, 'review proof link must use the verified aggregate source URL');
+      }
+    }
+  }
 
   if (!html.includes('class="skip-link"')) fail(page, 'missing skip link');
   if (/tabindex="[1-9]/.test(html)) fail(page, 'positive tabindex found');

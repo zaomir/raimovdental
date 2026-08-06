@@ -1022,8 +1022,8 @@ export function blogIndexPage({ manifest, articles }) {
         <h1 class="display t-h1">Понятно о здоровье зубов и современных методах лечения</h1>
         <p class="t-lead">Врачи клиники рассказывают, как распознать проблему, выбрать метод лечения
           и избежать лишних процедур.</p>
-        <p class="t-small t-mute">Материалы подготовлены врачами Expert Dental Studio. Медицинские утверждения
-          проверяет главный врач клиники.</p>
+        <p class="t-small t-mute">Материалы носят справочный характер и не заменяют очный приём.
+          Медицинская проверка указывается только у статей с подтверждённым согласованием.</p>
       </div>
       <div class="chip-row">
         <a class="chip" aria-current="true" href="/blog/">Все материалы</a>
@@ -1035,7 +1035,10 @@ export function blogIndexPage({ manifest, articles }) {
   </section>
 
   <section class="section section--tight">
-    <div class="shell">${postCard(manifest, feature, categories, { feature: true })}</div>
+    <div class="shell">${postCard(manifest, feature, categories, {
+      feature: true,
+      headingLevel: 2,
+    })}</div>
   </section>
 
   ${Object.values(categories)
@@ -1092,7 +1095,9 @@ export function blogCategoryPage({ manifest, category, articles, services }) {
 
   <section class="section section--tight">
     <div class="shell">
-      <div class="grid grid--3">${articles.map((a) => postCard(manifest, a, categories)).join('')}</div>
+      <div class="grid grid--3">${articles
+        .map((a) => postCard(manifest, a, categories, { headingLevel: 2 }))
+        .join('')}</div>
       ${
         service
           ? `<p class="mt-4"><a class="link-arrow" href="/services/${attr(service.slug)}/">
@@ -1360,6 +1365,58 @@ export function aboutPage({ manifest, doctors, prices }) {
     </div>
   </section>
 
+  <section class="section section--forest equipment-safety" aria-labelledby="equipment-safety-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: 'Оборудование и безопасность',
+        title: 'Инструменты выбирают по задаче, а не ради технологии',
+        id: 'equipment-safety-title',
+      })}
+      <p class="t-lead shell--narrow equipment-safety__lead">
+        Оборудование помогает врачу увидеть детали и контролировать этапы лечения. Конкретный метод
+        обследования или изоляции назначают после осмотра — не каждому пациенту нужен весь список.
+      </p>
+      <div class="equipment-safety__grid mt-4">
+        <article class="equipment-safety__card">
+          <h3 class="card__title">КТ по показаниям</h3>
+          <p class="card__text">Трёхмерное исследование используют, когда врачу нужно оценить кость,
+            корни или положение непрорезавшихся зубов. Назначение определяет врач.</p>
+        </article>
+        <article class="equipment-safety__card">
+          <h3 class="card__title">Микроскоп</h3>
+          <p class="card__text">Увеличение применяют при сложной анатомии корневых каналов,
+            перелечивании и поиске инородных фрагментов — по клинической необходимости.</p>
+        </article>
+        <article class="equipment-safety__card">
+          <h3 class="card__title">Внутриротовое сканирование</h3>
+          <p class="card__text">Цифровая модель помогает планировать ортодонтические,
+            ортопедические и эстетические этапы без традиционного слепка, когда это уместно.</p>
+        </article>
+        <article class="equipment-safety__card">
+          <h3 class="card__title">Изоляция коффердамом</h3>
+          <p class="card__text">Рабочее поле изолируют от слюны при реставрациях и лечении каналов,
+            если этого требует выбранный клинический протокол.</p>
+        </article>
+        <article class="equipment-safety__card">
+          <h3 class="card__title">Стерилизационная</h3>
+          <p class="card__text">Для обработки многоразовых инструментов в клинике выделена отдельная
+            зона. Одноразовые материалы применяют однократно.</p>
+        </article>
+        <article class="equipment-safety__card">
+          <h3 class="card__title">Air Flow и ультразвук</h3>
+          <p class="card__text">Метод снятия мягких и твёрдых отложений подбирают после оценки
+            состояния эмали, дёсен и объёма налёта.</p>
+        </article>
+      </div>
+      <figure class="equipment-safety__image mt-4">
+        ${image(manifest, 'clinic/sterilization', 'Стерилизационная Expert Dental Studio', {
+          sizes: '(min-width: 56rem) 72vw, 92vw',
+        })}
+        <figcaption class="t-small equipment-safety__caption">Отдельная стерилизационная клиники.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="section section--bone">
     <div class="shell">
       ${sectionHead({ kicker: 'Команда', title: 'Врачи клиники' })}
@@ -1444,9 +1501,12 @@ export function legalPage({ kind }) {
 
   const privacyBody = `
     <h2>Какие данные мы получаем</h2>
-    <p>Сайт не содержит форм регистрации и не создаёт личных кабинетов. Персональные данные вы передаёте
-      добровольно, когда пишете в WhatsApp или звоните по указанному номеру: это имя, номер телефона
-      и та информация о состоянии здоровья, которую вы сообщаете сами.</p>
+    <p>Сайт не создаёт личных кабинетов и не хранит форму записи на своём сервере. Форма составляет
+      сообщение и открывает WhatsApp; до отправки вы можете проверить и изменить его. WhatsApp является
+      сторонним сервисом и обрабатывает отправленные данные по своим условиям. Не отправляйте через
+      форму диагнозы, снимки, медицинские документы и другие чувствительные сведения.</p>
+    <p>При записи вы добровольно передаёте имя, номер телефона и краткую тему обращения после отдельного
+      согласия с этой политикой. Также данные могут быть переданы при звонке администратору.</p>
     <h2>Зачем они нужны</h2>
     <ul>
       <li>Записать вас на приём и согласовать время.</li>
@@ -1457,12 +1517,12 @@ export function legalPage({ kind }) {
       сотрудники и технические обработчики, необходимые для записи и связи, либо лица,
       которым данные должны быть переданы по законодательству Кыргызской Республики.</p>
     <h2>Обратная связь после визита</h2>
-    <p>По персональной ссылке вы можете добровольно поставить оценку и оставить комментарий.
-      Перед отправкой комментария сайт запрашивает отдельное согласие. Оценка, выбранные темы
-      и текст хранятся до 60 дней в защищённом журнале клиники, после чего удаляются.
-      В уведомление управляющему передаётся только обезличенный номер обращения — без текста,
-      оценки, врача и услуги. Разрешение связаться в WhatsApp запрашивается отдельно и не
-      выбирается заранее.</p>
+    <p>По персональной ссылке вы можете добровольно поставить оценку и выбрать одну или несколько
+      тем обращения. Свободный текст и медицинские сведения Review Hub не собирает. Перед отправкой
+      сайт запрашивает отдельное согласие. Оценка и темы хранятся до 60 дней в защищённом журнале,
+      после чего удаляются. В уведомление управляющему передаётся только обезличенный номер обращения —
+      без оценки, врача, услуги и выбранных тем. Разрешение связаться в WhatsApp запрашивается отдельно
+      и не выбирается заранее.</p>
     <h2>Медицинская тайна</h2>
     <p>Сведения о вашем обращении, диагнозе и лечении составляют врачебную тайну. Клинические фотографии
       и материалы лечения публикуются только с отдельного письменного согласия пациента.</p>
@@ -1472,7 +1532,9 @@ export function legalPage({ kind }) {
       идентифицировать. Отключить сбор можно средствами браузера.</p>
     <h2>Как связаться</h2>
     <p>По вопросам обработки персональных данных напишите в WhatsApp на номер
-      <a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a> или обратитесь к администратору клиники
+      <a href="${attr(waHref('Здравствуйте. У меня вопрос об обработке персональных данных.'))}">${esc(
+        contacts.phoneDisplay
+      )}</a> или обратитесь к администратору клиники
       по адресу ${esc(contacts.addressFull)}.</p>`;
 
   const legalBody = `
