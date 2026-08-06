@@ -1,0 +1,43 @@
+[Unit]
+# Expert Dental Studio — Review Hub (post-visit feedback loop, atoms B1–B8).
+# Canon: docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md
+Description=Expert Dental Review Hub (/feedback)
+Documentation=https://github.com/zaomir/grainee-v2/blob/main/site-raimovdental/feedback-hub/server.mjs
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=expertfeedback
+Group=expertfeedback
+WorkingDirectory=/opt/expert-feedback-hub/feedback-hub
+EnvironmentFile=/etc/grainee/feedback-hub.env
+ExecStart=/usr/bin/node /opt/expert-feedback-hub/feedback-hub/server.mjs
+Restart=on-failure
+RestartSec=3
+
+# The service holds patient feedback, so it gets no more of the host than it needs:
+# no privilege escalation, a read-only filesystem apart from its own data directory,
+# and no access to other users' home directories.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+LockPersonality=true
+# MemoryDenyWriteExecute is deliberately absent: V8 maps executable pages for its baseline
+# compiler, and the flag makes node abort with SIGTRAP before it can bind the port.
+ReadWritePaths=/var/lib/expert-feedback-hub
+# Loopback plus outbound HTTPS for the Telegram alert; nothing else.
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=expert-feedback-hub
+
+[Install]
+WantedBy=multi-user.target
