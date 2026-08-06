@@ -154,6 +154,17 @@ if (!files.length) {
   process.exit(1);
 }
 
+/** Brand favicon pack for clinic.raimovdental.com — must ship with the build. */
+const FAVICON_FILES = [
+  'assets/img/brand/favicon.svg',
+  'assets/img/brand/favicon.ico',
+  'assets/img/brand/favicon-32.png',
+  'assets/img/brand/apple-touch-icon.png',
+];
+for (const rel of FAVICON_FILES) {
+  if (!existsSync(join(DIST, rel))) fail('assets', `missing favicon asset: ${rel}`);
+}
+
 const titles = new Map();
 const descriptions = new Map();
 let faqPages = 0;
@@ -225,6 +236,20 @@ for (const file of files) {
   for (const tag of html.match(/<(?:link\b[^>]*rel="stylesheet"|script\b)[^>]*>/g) ?? []) {
     for (const ref of localAssetRefs(tag)) {
       if (!existsSync(join(DIST, ref))) fail(page, `asset reference points at a missing file: ${ref}`);
+    }
+  }
+
+  if (!internal) {
+    if (!html.includes('rel="icon" href="/assets/img/brand/favicon.svg"')) {
+      fail(page, 'missing SVG favicon link');
+    }
+    if (!html.includes('rel="apple-touch-icon" href="/assets/img/brand/apple-touch-icon.png"')) {
+      fail(page, 'missing apple-touch-icon link');
+    }
+    for (const tag of html.match(/<link\b[^>]*rel="(?:icon|apple-touch-icon)"[^>]*>/g) ?? []) {
+      for (const ref of localAssetRefs(tag)) {
+        if (!existsSync(join(DIST, ref))) fail(page, `favicon link points at a missing file: ${ref}`);
+      }
     }
   }
 

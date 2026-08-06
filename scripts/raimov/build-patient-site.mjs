@@ -710,12 +710,8 @@ emit(
 
 cpSync(join(SRC, 'assets'), join(OUT, 'assets'), { recursive: true });
 
-// Favicon: the brand arch reduced to a single mark, so no extra binary to maintain.
-writeFileSync(
-  join(OUT, 'assets', 'img', 'brand', 'favicon.svg'),
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="5" fill="#1e3a32"/><path d="M16 6c-4.4 0-8 3.6-8 8v12h5V14a3 3 0 0 1 6 0v12h5V14c0-4.4-3.6-8-8-8Z" fill="#d9c49a"/></svg>`,
-  'utf8'
-);
+// Favicon mark ships from patient-site/assets/img/brand/ (SVG + PNG/ICO fallbacks).
+// Do not overwrite — the committed brand mark is the SSOT for clinic.raimovdental.com.
 
 /* -------------------------------------------------------- sitemap / robots */
 
