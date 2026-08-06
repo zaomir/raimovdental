@@ -69,6 +69,7 @@ function loadPrices() {
       items: d.items.map((i) => ({
         name: i.name,
         includes: i.includes,
+        exclusions: i.exclusions,
         price: i.price,
         note: i.note,
         duration: i.duration,
@@ -100,13 +101,8 @@ function loadPrices() {
     consultationByTier,
     bySku,
     lastUpdated: raw.lastUpdated,
-    // The catalog CTA advertises a free consultation while the same catalog prices it at
-    // 550–5000 сом. The site follows the price rows: one number, one source (SSOT §12).
     disclaimer:
       (raw.disclaimer ?? '')
-        .split(/(?<=[.!?])\s+/)
-        .filter((sentence) => !/Expert Care/i.test(sentence))
-        .join(' ')
       || 'Цены ориентировочные. Итоговая стоимость определяется после осмотра и зависит от клинической ситуации.',
   };
 }

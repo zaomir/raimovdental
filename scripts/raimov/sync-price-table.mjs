@@ -37,6 +37,7 @@ const sections = catalog.directions
       .map((item) => {
         const details = [
           item.includes,
+          item.exclusions ? `Не входит: ${item.exclusions}` : '',
           item.duration ? `Время: ${item.duration}` : '',
           item.limits,
           item.note,

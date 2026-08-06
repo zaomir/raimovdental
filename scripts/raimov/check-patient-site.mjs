@@ -26,6 +26,17 @@ const homepageSource = readFileSync(
   join(REPO, 'site-raimovdental', 'patient-site', 'content', 'homepage.mjs'),
   'utf8'
 );
+const priceCatalog = JSON.parse(
+  readFileSync(
+    join(REPO, 'docs', 'raimov', 'operations', 'expert-dental', 'pricing', 'PRICE_CATALOG.json'),
+    'utf8'
+  )
+);
+const careDirection = priceCatalog.directions.find((direction) => direction.id === 'care12');
+const carePublishable =
+  priceCatalog.membership?.status === 'clinic_confirmed_public'
+  && careDirection?.status === 'clinic_confirmed_public'
+  && careDirection.items.every((item) => item.priceStatus === 'clinic_confirmed_public');
 /** The only rating the site may quote, straight from the clinic's map data. */
 const RATING = (() => {
   const raw = JSON.parse(
@@ -364,8 +375,8 @@ for (const file of files) {
   if (!internal && /LO-8888\s+8888\s+88/.test(text)) {
     fail(page, 'unverified licence placeholder is public');
   }
-  if (!internal && /Expert Care 12/i.test(text)) {
-    fail(page, 'gated proposed product is public');
+  if (!internal && /Expert Care 12/i.test(text) && !carePublishable) {
+    fail(page, 'Care 12 is public without clinic_confirmed_public catalog status');
   }
   if (
     page.startsWith('/blog/')
@@ -407,11 +418,13 @@ for (const required of [
   '/services/',
   '/services/smile-preview/',
   '/services/named-checkup/',
+  '/services/care-12/',
   '/doctors/',
   '/doctors/raimov-atabek/',
   '/blog/',
   '/blog/cifrovaya-primerka-ulybki/',
   '/blog/imennoy-chekap/',
+  '/blog/expert-care-12/',
   '/contacts/',
   '/privacy/',
   '/legal/',
@@ -443,6 +456,11 @@ requireCta(
   '/services/named-checkup/',
   'Записаться на чек-ап — 0 сом',
   'Хочу записаться на именной чек-ап — 0 сом.'
+);
+requireCta(
+  '/services/care-12/',
+  'Узнать про Expert Care 12',
+  'Хочу узнать подробнее про Expert Care 12 и оформить абонемент.'
 );
 
 const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8');

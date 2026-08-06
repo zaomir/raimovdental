@@ -10,7 +10,8 @@
     "added 2026-08-05: Электронная аксиография (диагностика ВНЧС) — 80 000 сом",
     "2026-08-05 clinic update: consultation fees by doctor — general 550; Mir Ali orthopedics/implants 1500; Atabek orthodontics 3000; gnathology Atabek/Mir Ali 5000",
     "2026-08-06 clinic update: aesthetics direction added — эстетическая диагностика 10000, винир E-max 33000/зуб, композитная реставрация 11000/зуб, отбеливание офисное 15000, домашнее 8000, ночная каппа 15000, временные виниры 15000, снятие старых 1000/зуб; разбор чужого плана 3000; screening direction added (цифровая примерка и чек-ап — 0 сом); cta.label fixed per §6.4",
-    "2026-08-06 reconciliation: grainee-v2 clinic-confirmed directions replace the conflicting satellite proposed aesthetics draft; Care 12 remains proposed and is not publishable"
+    "2026-08-06 reconciliation: grainee-v2 clinic-confirmed directions replace the conflicting satellite proposed aesthetics draft",
+    "2026-08-07 Total decision DEC-800: Expert Care 12 approved for patient-site publication as clinic_confirmed_public information/inquiry; operational activation and checkout remain separate gates"
   ],
   "disclaimer": "Итоговая стоимость определяется после осмотра и диагностики. Цена консультации зависит от врача и направления. Цены на лечение указаны ориентировочно и могут зависеть от сложности случая.",
   "consultationFees": {
@@ -81,8 +82,8 @@
   },
   "membership": {
     "productFamily": "Expert Care 12",
-    "status": "proposed",
-    "decision": "DEC-786",
+    "status": "clinic_confirmed_public",
+    "decision": "DEC-800",
     "ssot": "docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md",
     "notInsurance": true,
     "pricingModel": "separate_sku_not_column_discount",
@@ -102,8 +103,9 @@
       "thirdHygieneVisit": "ala_carte_full_price",
       "highTicketDiscount": "none",
       "imagingAndTreatment": "always_ala_carte",
-      "noShow": "REQUIRES_CLINIC_APPROVAL — candidate: consume 1 visit entitlement OR 50% of light hygiene fee",
-      "publicPublish": "do_not_publish_as_live_offer_until_clinic_confirmed"
+      "noShow": "Финальные правила переноса и неявки администратор сообщает до оформления; сайт не списывает визиты автоматически",
+      "publicPublish": "approved_for_patient_site_information_and_whatsapp_inquiry",
+      "activation": "no_checkout; availability and final contractual terms are confirmed by clinic administration"
     }
   },
   "directions": [
@@ -709,9 +711,9 @@
     {
       "id": "care12",
       "name": "Expert Care 12",
-      "status": "proposed",
-      "publishGate": "clinic_confirmed + unit economics + DEC-786 Phase 2",
-      "note": "Отдельный SKU. Не колонка скидок на весь прайс. Не публиковать как действующий оффер до clinic_confirmed.",
+      "status": "clinic_confirmed_public",
+      "publishGate": "DEC-800 patient-site information and WhatsApp inquiry; no checkout",
+      "note": "Профилактический абонемент на 12 месяцев. Не страховка и не скидка на лечение. Оформление и доступность подтверждает администратор.",
       "items": [
         {
           "sku": "care12-adult",
@@ -719,9 +721,10 @@
           "includes": "2 профгигиены лёгкой или средней степени / 12 мес; 2 контрольных осмотра / обновление Паспорта; приоритет записи при срочной проблеме в duty-слотах; напоминания recare",
           "exclusions": "Тяжёлая гигиена целиком; терапия; эндодонтия; хирургия; ортопедия; имплантация; ортодонтия; снимки/КТ; безлимит визитов",
           "price": "9 900 сом / 12 мес",
-          "priceStatus": "proposed",
+          "priceStatus": "clinic_confirmed_public",
           "currency": "KGS",
-          "faceValueNote": "2× средняя гигиена = 11 000 сом; цена Care ≈ −10% к face средней или буфер над 2× лёгкой (8 800)"
+          "limits": "Тяжёлая гигиена: Care покрывает тариф средней степени, доплата 2 200 сом. Третья гигиена за 12 месяцев оплачивается по полному прайсу.",
+          "note": "Снимки, КТ, лечение, хирургия, ортопедия, имплантация и ортодонтия всегда оплачиваются отдельно"
         },
         {
           "sku": "care12-family-addon",
@@ -729,8 +732,10 @@
           "includes": "Тот же профилактический лимит, что Adult, для второго члена семьи на том же договоре",
           "exclusions": "Те же исключения, что Adult",
           "price": "7 900 сом / 12 мес",
-          "priceStatus": "proposed",
-          "currency": "KGS"
+          "priceStatus": "clinic_confirmed_public",
+          "currency": "KGS",
+          "limits": "Доступен второму члену семьи на том же договоре; лимиты не суммируются между участниками",
+          "note": "Снимки, КТ и любое лечение всегда оплачиваются отдельно"
         },
         {
           "sku": "care12-kids",
@@ -738,9 +743,10 @@
           "includes": "2 детские профгигиены временного прикуса / 12 мес; 2 контрольных осмотра; напоминания",
           "exclusions": "Лечение кариеса, удаления, детские коронки, ортодонтия — всегда отдельно",
           "price": "5 500 сом / 12 мес",
-          "priceStatus": "proposed",
+          "priceStatus": "clinic_confirmed_public",
           "currency": "KGS",
-          "faceValueNote": "2× детская гигиена = 5 500 сом; цена = face value с сервисным пакетом осмотров"
+          "limits": "2 детские профгигиены и 2 контрольных осмотра за 12 месяцев",
+          "note": "Лечение кариеса, удаления, детские коронки, снимки и ортодонтия всегда оплачиваются отдельно"
         }
       ]
     }

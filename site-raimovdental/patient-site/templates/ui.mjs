@@ -189,6 +189,7 @@ export function priceRows(rows) {
   return rows
     .map((r) => {
       const terms = [
+        r.exclusions ? `Не входит: ${r.exclusions}` : '',
         r.duration ? `Время: ${r.duration}` : '',
         r.limits,
       ].filter(Boolean);
@@ -251,15 +252,15 @@ export function trustStrip({ stats, infrastructure }, prices, { license, since }
 }
 
 /**
- * The router: one actionable row per way a patient arrives. Each row opens WhatsApp with its
- * own draft; the direction link beside it is a sibling, never nested inside the row link,
- * so the markup stays valid and both targets are reachable by keyboard.
+ * The router: one compact card per patient situation. The primary card target opens WhatsApp
+ * with its own draft; the optional direction link remains a sibling so both targets are valid
+ * and independently reachable by keyboard.
  */
 export function routerTable(rows, prices, services) {
   const items = rows
     .map((r, i) => {
       const service = services?.find((s) => `/services/${s.slug}/` === r.href);
-      return `<li class="router__row${r.highlight ? ' router__row--lead' : ''}">
+      return `<li class="router__card${r.highlight ? ' router__card--lead' : ''}">
         <a class="router__link" href="${attr(waHref(r.wa))}"
            data-cta-context="router-${i}" data-event="router_row_click">
           <span class="router__situation">${esc(r.situation)}</span>
@@ -267,11 +268,12 @@ export function routerTable(rows, prices, services) {
           <span class="router__price${r.free ? ' router__price--free' : ''}">${esc(
         money(r.price, prices)
       )}${r.free ? '<span class="router__free-mark" aria-hidden="true">✓</span>' : ''}</span>
+          <span class="router__action">Записаться</span>
         </a>
         ${
           service
             ? `<a class="router__more" href="${attr(r.href)}">
-                 <span class="visually-hidden">${esc(r.situation)}: </span>о направлении</a>`
+                 <span class="visually-hidden">${esc(r.situation)}: </span>Подробнее</a>`
             : ''
         }
       </li>`;

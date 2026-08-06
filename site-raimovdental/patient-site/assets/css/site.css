@@ -2018,50 +2018,66 @@ a.card--service:hover {
 /* ------------------------------------------------------------------ router */
 
 .router {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--line);
 }
 
-.router__row {
-  position: relative;
-  border-bottom: 1px solid var(--line);
+.router__card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
 }
 
 .router__link {
-  display: grid;
-  gap: 0.15rem 1.5rem;
-  align-items: baseline;
-  padding: 1rem 7.5rem 1rem 0;
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.38rem;
+  padding: 0.9rem 0.8rem 0.65rem;
   color: inherit;
   text-decoration: none;
 }
 
-/* The whole row is the WhatsApp target; the direction link sits above it. */
-.router__link::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-}
-
-.router__row:hover {
+.router__card:hover {
+  border-color: var(--line-strong);
   background: var(--forest-tint);
+  transform: translateY(-2px);
 }
 
 .router__situation {
   font-weight: 600;
-  font-size: 1.02rem;
+  font-size: 0.92rem;
+  line-height: 1.28;
   color: var(--ink);
+  overflow-wrap: anywhere;
 }
 
 .router__step {
-  font-size: 0.9rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
   color: var(--ink-soft);
+  overflow-wrap: anywhere;
 }
 
 .router__price {
+  margin-top: auto;
+  padding-top: 0.35rem;
   font-weight: 600;
+  font-size: 0.9rem;
   color: var(--ink);
   white-space: nowrap;
 }
@@ -2085,51 +2101,59 @@ a.card--service:hover {
 }
 
 .router__more {
-  position: relative;
-  z-index: 1;
   display: inline-flex;
   align-items: center;
-  min-height: 2.75rem;
-  font-size: 0.82rem;
+  min-height: 2.35rem;
+  margin: 0 0.8rem 0.45rem;
+  font-size: 0.75rem;
   color: var(--brass-ink);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
 
-.router__row--lead {
+.router__action {
+  margin-top: 0.1rem;
+  font-size: 0.76rem;
+  font-weight: 650;
+  color: var(--forest);
+}
+
+.router__card--lead {
+  border-color: var(--brass-line);
   background: var(--brass-tint);
 }
 
-.router__row--lead:hover {
+.router__card--lead:hover {
   background: var(--brass-tint-strong);
 }
 
-.router__row--lead .router__situation {
-  font-size: 1.08rem;
+.router__card--lead .router__situation {
+  font-size: 0.96rem;
 }
 
 @media (min-width: 46rem) {
-  .router__link {
-    grid-template-columns: 1.4fr 1fr auto;
-    padding-right: 8.5rem;
+  .router {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
   }
-  .router__more {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+
+  .router__link {
+    min-height: 11rem;
+    padding: 1.1rem 1rem 0.75rem;
+  }
+
+  .router__situation {
+    font-size: 1rem;
+  }
+
+  .router__step {
+    font-size: 0.86rem;
   }
 }
 
-@media (max-width: 45.99rem) {
-  .router__link {
-    padding-right: 0;
-  }
-  .router__price {
-    margin-top: 0.15rem;
-  }
-  .router__more {
-    margin: 0 0 1rem;
+@media (max-width: 21.2rem) {
+  .router {
+    grid-template-columns: 1fr;
   }
 }
 

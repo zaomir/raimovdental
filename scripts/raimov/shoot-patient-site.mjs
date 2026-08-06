@@ -43,6 +43,7 @@ const SAMPLE = [
   ['service', '/services/gnathology/'],
   ['smile-preview', '/services/smile-preview/'],
   ['named-checkup', '/services/named-checkup/'],
+  ['care-12', '/services/care-12/'],
   ['services', '/services/'],
   ['doctors', '/doctors/'],
   ['blog', '/blog/'],
