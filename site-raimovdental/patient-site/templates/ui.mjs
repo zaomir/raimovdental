@@ -189,13 +189,23 @@ export function priceBlock({ title, rows, note }) {
  * and `topic` shape the WhatsApp draft so the message names the page the patient came
  * from — an administrator reading it knows the case before replying.
  */
-export function doctorCard(manifest, doctor, { prices, context = 'doctors', topic = '' } = {}) {
+export function doctorCard(manifest, doctor, { prices, services, context = 'doctors', topic = '' } = {}) {
   const photo = doctor.photo
     ? image(manifest, doctor.photo, doctor.photoAlt, { sizes: '(min-width: 62rem) 20vw, 45vw' })
     : `<div class="monogram" role="img" aria-label="${attr(doctor.photoAlt)}">${esc(initials(doctor.name))}</div>`;
 
   const consultation = prices?.consultationByTier?.[doctor.consultationTier];
   const treats = (doctor.treats ?? []).slice(0, 3);
+  const facts = doctor.facts ?? [];
+  // "Направление" repeats the role line; the rest of the facts are the parts a patient
+  // weighs when choosing — who the doctor sees and how long they have been practising.
+  const audience = facts.find((f) => f.label === 'Приём')?.value;
+  const credentials = facts.filter((f) => !['Направление', 'Приём'].includes(f.label)).map((f) => f.value);
+  const directions = (doctor.services ?? [])
+    .map((id) => services?.find((s) => s.slug === id))
+    .filter(Boolean)
+    .slice(0, 3);
+
   const message = topic
     ? `Здравствуйте. Хочу записаться к врачу ${doctor.name} — «${topic}».`
     : `Здравствуйте. Хочу записаться к врачу ${doctor.name} (${doctor.role.toLowerCase()}).`;
@@ -205,9 +215,18 @@ export function doctorCard(manifest, doctor, { prices, context = 'doctors', topi
     <div class="doctor-card__body">
       <h3 class="doctor-card__name"><a href="/doctors/${attr(doctor.slug)}/">${esc(doctor.name)}</a></h3>
       <p class="doctor-card__role">${esc(doctor.role)}</p>
+      ${audience ? `<p class="doctor-card__audience">Принимает: ${esc(audience.toLowerCase())}</p>` : ''}
       ${
         treats.length
           ? `<ul class="doctor-card__treats">${treats.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`
+          : ''
+      }
+      ${credentials.length ? `<p class="doctor-card__meta">${esc(credentials.join(' · '))}</p>` : ''}
+      ${
+        directions.length
+          ? `<p class="doctor-card__meta">Направления: ${directions
+              .map((s) => `<a href="/services/${attr(s.slug)}/">${esc(lowerFirst(s.navLabel))}</a>`)
+              .join(', ')}</p>`
           : ''
       }
       ${
@@ -223,6 +242,11 @@ export function doctorCard(manifest, doctor, { prices, context = 'doctors', topi
       </div>
     </div>
   </article>`;
+}
+
+/** Mid-sentence casing that leaves acronyms like ВНЧС intact. */
+function lowerFirst(text) {
+  return text.charAt(0).toLowerCase() + text.slice(1);
 }
 
 export function initials(fullName) {

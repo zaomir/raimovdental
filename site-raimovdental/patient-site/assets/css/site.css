@@ -668,6 +668,12 @@ ol {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
 }
 
+/* auto-fill, not auto-fit: a service led by two doctors should show two cards at the
+   normal width, not two cards stretched across the row. */
+.grid--doctors {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+}
+
 .split {
   display: grid;
   gap: clamp(1.6rem, 4vw, 3.5rem);
@@ -853,6 +859,31 @@ a.card--service:hover {
 .doctor-card__role {
   font-size: 0.87rem;
   color: var(--ink-mute);
+}
+
+.doctor-card__audience {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--forest);
+  background: var(--forest-tint);
+  border-radius: var(--radius);
+  padding: 0.2rem 0.5rem;
+  align-self: flex-start;
+}
+
+.doctor-card__meta {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--ink-mute);
+}
+
+.doctor-card__meta a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.doctor-card__meta a:hover {
+  color: var(--ink);
 }
 
 .doctor-card__treats {

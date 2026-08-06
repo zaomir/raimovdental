@@ -516,9 +516,14 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
         title: 'Кто ведёт это направление',
         lead: 'Можно записаться сразу к нужному специалисту — администратор увидит направление в сообщении.',
       })}
-      <div class="grid grid--4">${serviceDoctors
+      <div class="grid grid--doctors">${serviceDoctors
         .map((d) =>
-          doctorCard(manifest, d, { prices, context: `service-${service.slug}`, topic: service.navLabel })
+          doctorCard(manifest, d, {
+            prices,
+            services,
+            context: `service-${service.slug}`,
+            topic: service.navLabel,
+          })
         )
         .join('')}</div>
     </div>
@@ -571,7 +576,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
 /* --------------------------------------------------------------- doctors */
 
-export function doctorsIndexPage({ manifest, doctors, prices }) {
+export function doctorsIndexPage({ manifest, doctors, prices, services }) {
   const chiefDoctor = doctors.find((d) => d.chief);
   const rest = doctors.filter((d) => !d.chief);
 
@@ -593,8 +598,8 @@ export function doctorsIndexPage({ manifest, doctors, prices }) {
   <section class="section">
     <div class="shell">
       ${sectionHead({ kicker: 'Специалисты', title: 'Остальные врачи клиники' })}
-      <div class="grid grid--4">${rest
-        .map((d) => doctorCard(manifest, d, { prices, context: 'doctors-index' }))
+      <div class="grid grid--doctors">${rest
+        .map((d) => doctorCard(manifest, d, { prices, services, context: 'doctors-index' }))
         .join('')}</div>
       <figure class="team-band mt-4" style="margin-inline:0">
         ${image(manifest, 'team/team', 'Команда врачей Expert Dental Studio', {

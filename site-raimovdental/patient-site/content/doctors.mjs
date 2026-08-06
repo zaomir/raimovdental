@@ -137,8 +137,8 @@ export const doctors = [
     ],
     facts: [
       { label: 'Направление', value: 'Терапевтическая стоматология' },
-      { label: 'Практикует с', value: '2004 года' },
-      { label: 'Опыт работы', value: 'Великобритания, Россия, Кыргызстан' },
+      { label: 'Стаж', value: 'Практикует с 2004 года' },
+      { label: 'Опыт работы', value: 'Работала в Великобритании, России и Кыргызстане' },
     ],
     services: ['caries-treatment', 'endodontics'],
     articles: [],
@@ -265,7 +265,7 @@ export const doctors = [
     ],
     facts: [
       { label: 'Направление', value: 'Детская и терапевтическая стоматология' },
-      { label: 'Опыт работы', value: 'Кыргызстан и за рубежом' },
+      { label: 'Опыт работы', value: 'Работала в Кыргызстане и за рубежом' },
       { label: 'Приём', value: 'Дети и взрослые' },
     ],
     services: ['pediatric-dentistry', 'caries-treatment'],
