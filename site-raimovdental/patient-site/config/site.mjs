@@ -18,7 +18,9 @@ export const brand = {
    * KG registries, so it stays flagged in `pendingFromClinic` until someone checks it against
    * the paper document — a wrong licence number is a legal defect, not a typo.
    */
-  license: '№ LO-8888 8888 88',
+  // Never publish the unsverified placeholder. Production build is blocked until this
+  // becomes a clinic-confirmed value backed by the legal packet.
+  license: null,
 };
 
 export const contacts = {
@@ -39,7 +41,7 @@ export const contacts = {
   hoursDisplay: 'Ежедневно, 08:00–19:00',
   hoursShort: '08–19',
   parking: 'Бесплатная парковка на улице рядом с клиникой',
-  adminSla: 'Администратор отвечает в WhatsApp в среднем за минуту',
+  adminSla: 'Сообщения принимаются круглосуточно; администратор отвечает в рабочие часы',
   // Точные координаты клиника ещё не подтвердила — карта ведёт по текстовому адресу.
   geo: null,
   mapQuery: 'Expert Dental Studio, улица Киевская 88, Бишкек',

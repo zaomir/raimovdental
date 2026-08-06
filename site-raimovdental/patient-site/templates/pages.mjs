@@ -107,7 +107,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
   </section>
 
   ${trustStrip(home.trust, prices, {
-    license: `Лицензия ${brand.license}`,
+    license: brand.license ? `Лицензия ${brand.license}` : null,
     since: `С ${brand.founded} года`,
   })}
 
@@ -790,7 +790,9 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
 export function chiefPage({ manifest, doctor, services, articles, prices }) {
   const consultation = prices.consultationByTier[doctor.consultationTier];
   const chiefServices = chief.services.map((s) => services.find((x) => x.slug === s)).filter(Boolean);
-  const reviewed = articles.filter((a) => a.reviewer === doctor.slug);
+  const reviewed = articles.filter(
+    (a) => a.reviewer === doctor.slug && a.reviewedAt && a.reviewEvidence
+  );
 
   return `
   <section class="section section--tight">
@@ -1158,7 +1160,12 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
     <p class="t-lead mt-2">${esc(article.excerpt)}</p>
     <div class="byline mt-3">
       <span>Автор: <strong>${esc(author.name)}</strong>, ${esc(author.role.toLowerCase())}</span>
-      <span>Проверил: <strong>${esc(reviewer.name)}</strong></span>
+      ${
+        article.reviewedAt && article.reviewEvidence
+          ? `<span>Медицинская проверка: <strong>${esc(reviewer.name)}</strong>,
+              ${formatDate(article.reviewedAt)}</span>`
+          : ''
+      }
       <span>Обновлено ${formatDate(article.updated)}</span>
       <span>${article.readingTime} мин чтения</span>
     </div>
@@ -1189,10 +1196,13 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
 
     <div class="medical-note mt-4" data-article-end>
       Материал носит информационный характер и не заменяет очную консультацию. Диагноз ставится только
-      после осмотра, а при необходимости — по результатам снимков. Медицинскую проверку материала
-      выполнил ${esc(reviewer.name)}, ${esc(reviewer.role.toLowerCase())}. Дата проверки — ${formatDate(
-    article.updated
-  )}.
+      после осмотра, а при необходимости — по результатам снимков.
+      ${
+        article.reviewedAt && article.reviewEvidence
+          ? `Медицинскую проверку материала выполнил ${esc(reviewer.name)},
+              ${esc(reviewer.role.toLowerCase())}. Дата проверки — ${formatDate(article.reviewedAt)}.`
+          : ''
+      }
     </div>
 
     <div class="author-box mt-3">

@@ -158,7 +158,7 @@ export function webPageNode(origin, { url, title, description, medical = false, 
 }
 
 export function articleNode(origin, article, { author, reviewer, category }) {
-  return {
+  const node = {
     '@type': ['Article', 'MedicalWebPage'],
     '@id': `${origin}/blog/${article.slug}/#article`,
     mainEntityOfPage: { '@id': `${origin}/blog/${article.slug}/#article` },
@@ -170,14 +170,18 @@ export function articleNode(origin, article, { author, reviewer, category }) {
     datePublished: article.published,
     dateModified: article.updated,
     articleSection: category.label,
-    // `reviewedBy` is what carries medical trust — the reviewer is a named clinician.
-    reviewedBy: { '@id': `${origin}/doctors/${reviewer.slug}/#physician` },
-    lastReviewed: article.updated,
     author: { '@id': `${origin}/doctors/${author.slug}/#physician` },
     publisher: { '@id': organisationId(origin) },
     isPartOf: { '@type': 'Blog', '@id': `${origin}/blog/#blog`, name: `Блог ${brand.name}` },
     about: { '@type': 'MedicalCondition', name: category.label },
   };
+  // A named reviewer is not proof of review. Publish these fields only when the content
+  // carries both an explicit review date and an approval evidence reference.
+  if (article.reviewedAt && article.reviewEvidence) {
+    node.reviewedBy = { '@id': `${origin}/doctors/${reviewer.slug}/#physician` };
+    node.lastReviewed = article.reviewedAt;
+  }
+  return node;
 }
 
 export function serviceNode(origin, service) {

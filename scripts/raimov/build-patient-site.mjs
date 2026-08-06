@@ -58,8 +58,11 @@ function loadPrices() {
   const raw = JSON.parse(
     readFileSync(join(REPO, 'docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json'), 'utf8')
   );
+  const publishableDirections = raw.directions.filter(
+    (d) => d.status !== 'proposed' && !/do_not_publish/i.test(d.publishGate ?? d.note ?? '')
+  );
   const byDirection = {};
-  for (const d of raw.directions) {
+  for (const d of publishableDirections) {
     byDirection[d.id] = {
       id: d.id,
       name: d.name,
@@ -69,14 +72,14 @@ function loadPrices() {
 
   // Consultation tiers are addressed by id from doctor records.
   const consultationByTier = {};
-  for (const item of raw.directions.find((d) => d.id === 'diagnostics').items) {
+  for (const item of publishableDirections.find((d) => d.id === 'diagnostics').items) {
     if (item.consultationTierId) consultationByTier[item.consultationTierId] = item;
   }
 
   // Copy addresses prices by SKU through {{price:sku}}, so a figure can never drift from
   // the catalog: an unknown or duplicated SKU stops the build instead of shipping.
   const bySku = {};
-  for (const d of raw.directions) {
+  for (const d of publishableDirections) {
     for (const item of d.items) {
       if (!item.sku) continue;
       if (bySku[item.sku]) throw new Error(`Duplicate price SKU in catalog: ${item.sku}`);
@@ -92,8 +95,11 @@ function loadPrices() {
     // The catalog CTA advertises a free consultation while the same catalog prices it at
     // 550–5000 сом. The site follows the price rows: one number, one source (SSOT §12).
     disclaimer:
-      raw.disclaimer ??
-      'Цены ориентировочные. Итоговая стоимость определяется после осмотра и зависит от клинической ситуации.',
+      (raw.disclaimer ?? '')
+        .split(/(?<=[.!?])\s+/)
+        .filter((sentence) => !/Expert Care/i.test(sentence))
+        .join(' ')
+      || 'Цены ориентировочные. Итоговая стоимость определяется после осмотра и зависит от клинической ситуации.',
   };
 }
 
@@ -225,6 +231,17 @@ function validateContent() {
 
   if (!doctors.some((d) => d.chief)) fail('no chief doctor flagged in content/doctors.mjs');
   for (const s of chief.services) if (!serviceSlugs.has(s)) fail(`chief: unknown service "${s}"`);
+
+  if (HOST === 'production') {
+    if (!brand.license) {
+      fail('production legal gate: verified licence number is required');
+    }
+    for (const a of articles) {
+      if (!a.reviewedAt || !a.reviewEvidence) {
+        fail(`production medical gate: article ${a.slug} lacks reviewedAt/reviewEvidence`);
+      }
+    }
+  }
 }
 
 /* ---------------------------------------------------------------- emitting */

@@ -25,11 +25,11 @@ export const intro = {
   submitHint: 'Выберите оценку',
 };
 
-/** 4–5: the three map platforms. Order is fixed so a returning patient sees a stable list. */
+/** The same neutral map options are available after every score — never gated by sentiment. */
 export const promoter = {
-  title: 'Спасибо! Расскажете об этом на картах?',
+  title: 'Спасибо за оценку',
   lead:
-    'Если не сложно — короткий отзыв там, где его увидят другие пациенты. ' +
+    'Если хотите, оставьте публичный отзыв там, где его увидят другие пациенты. ' +
     'Площадки, где вы уже оставили отзыв, станут серыми.',
   doneLabel: 'Отзыв оставлен',
   doneHint: 'Спасибо! Если захотите, можно добавить отзыв и на другой площадке.',
@@ -39,7 +39,7 @@ export const promoter = {
     'Публикация отзыва зависит от модерации самой площадки.',
 };
 
-/** 1–3: recovery. The map buttons are not rendered at all on this branch. */
+/** 1–3: recovery runs independently from the same neutral public-review options. */
 export const detractor = {
   title: 'Спасибо за честность — нам важно это исправить',
   lead:
@@ -57,7 +57,12 @@ export const detractor = {
   ],
   commentLabel: 'Что произошло',
   commentHint: 'необязательно',
-  consentLabel: 'Можно связаться со мной по WhatsApp',
+  privacyConsentLabel:
+    'Согласен на обработку этой оценки и комментария клиникой для разбора обращения',
+  contactConsentLabel: 'Можно связаться со мной по WhatsApp',
+  privacyNote:
+    'Комментарий хранится до 60 дней в защищённом журнале клиники. В уведомление управляющему '
+    + 'уходит только номер обращения — без текста, врача, услуги и оценки.',
   submit: 'Отправить управляющему',
   thanksTitle: 'Мы получили ваше сообщение',
   thanksLead:

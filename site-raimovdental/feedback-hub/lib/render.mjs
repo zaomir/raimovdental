@@ -134,11 +134,8 @@ export function renderStopped(cssHref) {
   });
 }
 
-/**
- * 4–5 branch. A platform already clicked renders as a disabled "done" row rather than
- * disappearing, so a returning patient can see at a glance what is left.
- */
-export function renderPromoter(record, cssHref) {
+/** Same neutral platform choices after every score; score never controls their availability. */
+function platformOptions(record) {
   const remaining = Object.keys(PLATFORM_LABELS).filter((p) => !record.clicks[p]);
   const rows = Object.entries(PLATFORM_LABELS)
     .map(([id, label]) => {
@@ -157,25 +154,30 @@ export function renderPromoter(record, cssHref) {
     })
     .join('');
 
+  return `<section class="card">
+    <h2 class="hub__title">${esc(copy.promoter.title)}</h2>
+    <p class="hub__lead">${esc(remaining.length ? copy.promoter.lead : copy.promoter.allDone)}</p>
+    <ul class="platforms">${rows}</ul>
+    ${
+      remaining.length && Object.keys(record.clicks).length
+        ? `<p class="hub__note">${esc(copy.promoter.doneHint)}</p>`
+        : ''
+    }
+    <p class="hub__fine">${esc(copy.promoter.disclaimer)}</p>
+  </section>`;
+}
+
+export function renderPromoter(record, cssHref) {
   return shell({
     title: copy.promoter.title,
     cssHref,
-    body: `<section class="card">
-      <h1 class="hub__title">${esc(copy.promoter.title)}</h1>
-      <p class="hub__lead">${esc(remaining.length ? copy.promoter.lead : copy.promoter.allDone)}</p>
-      <ul class="platforms">${rows}</ul>
-      ${
-        remaining.length && Object.keys(record.clicks).length
-          ? `<p class="hub__note">${esc(copy.promoter.doneHint)}</p>`
-          : ''
-      }
-      <p class="hub__fine">${esc(copy.promoter.disclaimer)}</p>
-    </section>
+    body: `<h1 class="visually-hidden">${esc(copy.promoter.title)}</h1>
+    ${platformOptions(record)}
     ${optOutForm(record)}`,
   });
 }
 
-/** 1–3 branch. The map buttons are absent from the markup entirely, not merely hidden. */
+/** 1–3 recovery is offered in addition to, not instead of, the neutral map choices. */
 export function renderDetractor(record, cssHref) {
   if (record.recovery) {
     return shell({
@@ -188,7 +190,9 @@ export function renderDetractor(record, cssHref) {
         <p><a class="hub__wa" href="https://wa.me/${esc(
           copy.clinic.phone.replace('+', '')
         )}">Написать в WhatsApp</a></p>
-      </section>`,
+      </section>
+      ${platformOptions(record)}
+      ${optOutForm(record)}`,
     });
   }
 
@@ -218,12 +222,18 @@ export function renderDetractor(record, cssHref) {
           <textarea class="field__control" name="comment" rows="4" maxlength="2000"></textarea>
         </label>
         <label class="check">
-          <input type="checkbox" name="consent" value="1" checked>
-          <span>${esc(copy.detractor.consentLabel)}</span>
+          <input type="checkbox" name="privacy_consent" value="1" required>
+          <span>${esc(copy.detractor.privacyConsentLabel)}</span>
         </label>
+        <label class="check">
+          <input type="checkbox" name="contact_consent" value="1">
+          <span>${esc(copy.detractor.contactConsentLabel)}</span>
+        </label>
+        <p class="hub__fine">${esc(copy.detractor.privacyNote)}</p>
         <button class="btn" type="submit">${esc(copy.detractor.submit)}</button>
       </form>
     </section>
+    ${platformOptions(record)}
     ${optOutForm(record)}`,
   });
 }

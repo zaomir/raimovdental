@@ -522,7 +522,9 @@ export function footer(assets, waMessage) {
         </div>
         ${cols}
       </div>
-      <p class="colophon__legal">${esc(brand.legalName)} · Лицензия ${esc(brand.license)}</p>
+      <p class="colophon__legal">${esc(brand.legalName)}${
+        brand.license ? ` · Лицензия ${esc(brand.license)}` : ''
+      }</p>
       <p class="colophon__warning">Имеются противопоказания. Необходима консультация специалиста.</p>
       <div class="colophon__bottom">
         <span>© ${new Date().getFullYear()} ${esc(brand.name)}</span>
