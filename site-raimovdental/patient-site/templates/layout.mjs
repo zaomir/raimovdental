@@ -39,6 +39,9 @@ export function document({
   ogImage = '/assets/img/clinic/reception.jpg',
   ogType = 'website',
   extraHead = '',
+  // Content-hashed CSS/JS paths from the builder. A cache in front of the origin cannot
+  // serve last week's stylesheet when the URL itself changes with the file.
+  assets,
 }) {
   const cfg = hosts[host];
   if (!cfg) throw new Error(`Unknown host profile: ${host}`);
@@ -70,8 +73,8 @@ export function document({
   <link rel="apple-touch-icon" href="/assets/img/brand/logo.png">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/cormorant-garamond-300-cyrillic.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-400-cyrillic.woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="${assets['css/fonts.css']}">
+  <link rel="stylesheet" href="${assets['css/site.css']}">
   ${extraHead}
   <script type="application/ld+json">${schema}</script>
   ${analyticsTags()}
@@ -85,7 +88,7 @@ ${body}
   </main>
   ${footer()}
   ${actionBar(pageId)}
-  <script src="/assets/js/site.js" defer></script>
+  <script src="${assets['js/site.js']}" defer></script>
 </body>
 </html>
 `;

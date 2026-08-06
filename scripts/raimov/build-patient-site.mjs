@@ -16,6 +16,7 @@
  */
 
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -197,9 +198,31 @@ function page({ route, title, description, body, nodes, pageId, ogImage, ogType 
       pageId,
       ogImage,
       ogType,
+      assets: fingerprints,
       schema: schema.graph(ORIGIN, nodes),
     })
   );
+}
+
+/**
+ * Copies CSS/JS under a content-hashed name and returns the map the layout renders.
+ * Without this, a CDN in front of the origin keeps serving the previous stylesheet for
+ * up to the cache lifetime after a deploy, which is exactly how a fixed contrast bug
+ * reappears in production.
+ */
+function fingerprintAssets() {
+  const map = {};
+  for (const rel of ['css/fonts.css', 'css/site.css', 'js/site.js']) {
+    const body = readFileSync(join(SRC, 'assets', rel));
+    const hash = createHash('sha256').update(body).digest('hex').slice(0, 10);
+    const [dir, file] = rel.split('/');
+    const ext = file.slice(file.lastIndexOf('.'));
+    const hashed = `${file.slice(0, -ext.length)}.${hash}${ext}`;
+    mkdirSync(join(OUT, 'assets', dir), { recursive: true });
+    writeFileSync(join(OUT, 'assets', dir, hashed), body);
+    map[rel] = `/assets/${dir}/${hashed}`;
+  }
+  return map;
 }
 
 function crumbs(route, trail) {
@@ -220,6 +243,8 @@ const ctx = { manifest, services, doctors, articles, prices, categories };
 
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
+
+const fingerprints = fingerprintAssets();
 
 const clinic = schema.clinicNode(ORIGIN);
 const physicians = doctors.map((d) =>
@@ -529,6 +554,7 @@ writeFileSync(
     body: pages.notFoundPage(),
     schema: schema.graph(ORIGIN, [clinic]),
     pageId: '404',
+    assets: fingerprints,
   }),
   'utf8'
 );
@@ -543,6 +569,7 @@ emit(
     body: pages.pendingPage(),
     schema: schema.graph(ORIGIN, []),
     pageId: 'internal',
+    assets: fingerprints,
   })
 );
 
