@@ -16,13 +16,17 @@
 :root {
   --ink: #14201c;
   --ink-soft: #3d4a45;
-  --ink-mute: #6b7873;
+  /* Darkened from #6b7873, which only reached 4.06:1 on the tinted section backgrounds. */
+  --ink-mute: #5d6a65;
 
   --forest: #1e3a32;
   --forest-deep: #162923;
   --forest-tint: #eef2f0;
 
+  /* --brass is a decorative value: rules, hairlines, marks. It reaches only 2.7:1 on the
+     tinted backgrounds, so brass *text* on light surfaces must use --brass-ink. */
   --brass: #b08d4f;
+  --brass-ink: #82632b;
   --brass-soft: #d9c49a;
   --brass-tint: #f6f0e4;
 
@@ -205,10 +209,16 @@ ol {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--brass-ink);
 }
 
-.kicker--onDark {
+/* Dark surfaces flip the kicker automatically, so a section cannot forget the modifier
+   and render 2.2:1 brass on forest. */
+.kicker--onDark,
+.section--forest .kicker,
+.chief .kicker,
+.cta-band .kicker,
+.colophon .kicker {
   color: var(--brass-soft);
 }
 
@@ -752,7 +762,7 @@ a.card--service:hover {
   font-family: var(--font-display);
   font-size: 1.7rem;
   font-weight: 300;
-  color: var(--brass);
+  color: var(--brass-ink);
   line-height: 1;
   margin-bottom: 0.55rem;
 }
@@ -874,13 +884,19 @@ a.card--service:hover {
   list-style: none;
 }
 
+/* The list is reused on light sections, so the light-on-dark colour belongs to the
+   dark band rather than to the list itself. */
 .chief__list li {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.7rem;
   align-items: start;
   font-size: 0.95rem;
-  color: rgba(247, 244, 239, 0.85);
+  color: inherit;
+}
+
+.chief .chief__list li {
+  color: rgba(247, 244, 239, 0.92);
 }
 
 .chief__list li::before {
@@ -1039,7 +1055,7 @@ a.card--service:hover {
   content: counter(item);
   font-family: var(--font-display);
   font-size: 1.05rem;
-  color: var(--brass);
+  color: var(--brass-ink);
   font-variant-numeric: lining-nums;
 }
 
@@ -1154,7 +1170,7 @@ a.card--service:hover {
   font-family: var(--font-display);
   font-size: 1.5rem;
   line-height: 1;
-  color: var(--brass);
+  color: var(--brass-ink);
   flex: none;
   transition: transform 0.2s var(--ease);
 }
@@ -1338,7 +1354,7 @@ a.card--service:hover {
 
 .refs li::before {
   content: counter(ref) '.';
-  color: var(--brass);
+  color: var(--brass-ink);
   font-variant-numeric: lining-nums;
 }
 
@@ -1387,7 +1403,7 @@ a.card--service:hover {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--brass-ink);
 }
 
 .post-card__title {

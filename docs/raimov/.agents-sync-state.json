@@ -258,6 +258,7 @@
     "scripts/raimov/prepare-patient-assets.mjs": "5b8aae7f90b41088f9c4989fa3244c40e8f37ff0b119e21a24a0f5f43596463a",
     "scripts/raimov/preserve-demo-assets.mjs": "f77e7625f84952d0c18285d4db175587794ab49da414eb3cf0bbdfe0e2a0a2c2",
     "scripts/raimov/seed-agents-repo.sh": "5b83609313aa1d865c23c5f797989c4d29910ebaae6d98bf57aa4c40ad3f7189",
+    "scripts/raimov/shoot-patient-site.mjs": "919df07ce03884fc67bd916c9090fff4b159c6caa5fd0db6f0c3c05cbee52b41",
     "scripts/raimov/sync-agents-bidirectional.sh": "0a4b8cca52e13dea152c90151f098d0c8a6571a25e74571590f5eac133ed6915",
     "scripts/raimov/sync-from-agents-repo.sh": "62b6944f59e189c534fc8fffaeb9c551dd7404a2475b1beaaea66d5768924778",
     "scripts/raimov/sync_agents_bidirectional.py": "613aafb15082ab281d2cbd9bf95183730c7b9066aaf0be0324901498c60202f9",
@@ -283,7 +284,7 @@
     "site-raimovdental/expert-dental-report/reputation-materials.mjs": "a2ae41dc82819b7f129f796ccd5f2546faec9ce38bb019c8fe40d19d79ee24b3",
     "site-raimovdental/expert-dental-report/scripts-materials.mjs": "da87a51aa55ec3d17bcfbf4f51adc18a04746c705238da6c3b40f243c226fee9",
     "site-raimovdental/patient-site/assets/css/fonts.css": "e223160916bd2e65b9e2b425f1f99b8db07fd2ef3643dbfb5d23dcac196028d6",
-    "site-raimovdental/patient-site/assets/css/site.css": "0e8c4eea4c958a504189a1b11195800192d66d3199bafb97c7491db37217057c",
+    "site-raimovdental/patient-site/assets/css/site.css": "3978c58cff6e02b35b189c4f1182ef353f711baa5eb09bcbc494c2baca3f74c6",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-cyrillic.woff2": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-latin.woff2": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235",
     "site-raimovdental/patient-site/assets/fonts/manrope-400-cyrillic.woff2": "c268b459a9329e59fecf39a17618efd44c71735532048d60b12aab76a8c14914",
@@ -509,6 +510,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T14:40:05Z",
+  "updated_at_utc": "2026-08-06T14:50:06Z",
   "version": 1
 }
