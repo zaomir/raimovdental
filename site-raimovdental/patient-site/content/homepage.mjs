@@ -42,6 +42,7 @@ export const hero = {
 /* ------------------------------------------------------------------ block 2 */
 
 export const trust = {
+  id: 'trust',
   stats: [
     { value: '4,9 / 5', label: '133 отзыва на 2ГИС, срез 21.07.2026', source: 'twoGisReviews' },
     { value: '8', label: 'врачей в команде' },

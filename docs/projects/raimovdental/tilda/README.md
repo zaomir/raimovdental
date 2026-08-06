@@ -5,7 +5,7 @@
 | File | Purpose |
 |------|---------|
 | `homepage-zero-block.html` | Канон главной (HTML+CSS+JS) для вставки в Tilda |
-| `price-table-zero-block.html` | Таблица прайса + отдельный блок Expert Care 12 (proposed) |
+| `price-table-zero-block.html` | Таблица прайса + отдельный информационный блок Expert Care 12 |
 | `PRICE_SECTION_TILDA_AI_PROMPT.md` | Промпт для ИИ Tilda: ala-carte таблица + отдельный SKU Care (без −20% на всё) |
 | `doctors/MIR_ALI_GNATHOLOGIST_TILDA.md` | Инструкция: карточка Мир-Али как гнатолог |
 
@@ -15,7 +15,7 @@
 2. Markdown-таблица: `docs/raimov/operations/expert-dental/pricing/PRICE_TABLE.md`
 3. Вставка в Tilda: открыть страницу `Цены` (`/price`) → Zero Block → вставить содержимое `price-table-zero-block.html` (body + style; без внешней шапки/меню Tilda)
 4. Удалить старые карточки T847 с дублирующим прайсом, чтобы осталась одна таблица
-5. Блок **Expert Care 12** в Zero Block помечен `proposed` — на прод либо не публиковать, либо оставить пометку черновика до clinic_confirmed
+5. DEC-800 разрешает информационную публикацию **Expert Care 12** и WhatsApp inquiry; checkout и автоматическую активацию не добавлять
 6. После публикации: smoke `https://expertdental.kg/price`
 
 **Запрещено:** колонка «цена по подписке» на всех услугах; правила «≤2000=0» и «−20% на всё».

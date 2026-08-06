@@ -2,6 +2,7 @@
 title: Expert Dental — reconciliation прайса, $0-продуктов, CTA и Review Hub
 status: COMPLETED
 date: 2026-08-06
+updated: 2026-08-07
 owner: Cursor
 scope: clinic.raimovdental.com patient site and feedback hub
 ---
@@ -16,9 +17,9 @@ scope: clinic.raimovdental.com patient site and feedback hub
 3. Live `clinic.raimovdental.com` используется как проверка результата, а не как источник нового факта.
 4. Satellite `zaomir/raimovdental` — транспорт для агентских материалов. Полезные формулировки из PR #4
    переносятся после сверки с SSOT; противоречащий `proposed`-дубль эстетики не переносится.
-5. Expert Care 12 остаётся `proposed / DEFERRED`: `RAIMOV.md`, `PROJECT_STATUS.md` и
-   `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` запрещают публично показывать его как работающий продукт.
-   Страница, статья, цена и CTA Care 12 не публикуются до evidence-backed `clinic_confirmed`.
+5. DEC-800 supersedes the former Care 12 publication hold: страница, статья, подтверждённые цены и
+   WhatsApp inquiry публикуются как `clinic_confirmed_public`. Checkout, автоматическая активация и
+   заявление о полном operational launch остаются закрыты.
 
 ## Объём
 
@@ -26,7 +27,7 @@ scope: clinic.raimovdental.com patient site and feedback hub
    снимков и плана с ценами. Не использовать «бесплатная консультация».
 2. Создать две подтверждённые service pages:
    `/services/smile-preview/` и `/services/named-checkup/`.
-   Третий URL `/services/care-12/` не создаётся, пока Care 12 закрыт фазовым gate.
+   Care 12 публикуется отдельным URL `/services/care-12/` по DEC-800.
 3. Сделать CTA контекстными: label, `data-cta-context` и WhatsApp prefill описывают один продукт,
    услугу, статью или врача. Generic prefill остаётся только в точках выбора.
 4. Развести консультации 550 / 1 500 / 3 000 / 5 000 сом по объёму приёма без оценочных сравнений.
@@ -34,8 +35,8 @@ scope: clinic.raimovdental.com patient site and feedback hub
    границы композитной реставрации, отдельная ночная каппа, отбеливание до виниров,
    wax-up внутри диагностики. Не выдумывать, является ли 15 000 сом за временные виниры ценой
    за зуб или комплект: до подтверждения показывать исходную строку с явным уточнением у администратора.
-6. Добавить две статьи по действующему article contract: цифровая примерка и именной чек-ап.
-   Care 12 article не создаётся до запуска продукта. Reviewer указывается как editorial assignment;
+6. Добавить статьи по действующему article contract: цифровая примерка, именной чек-ап и Care 12.
+   Reviewer указывается как editorial assignment;
    публичная medical-review attestation появляется только после `reviewedAt + reviewEvidence`.
 7. Реализовать Review Hub fallback из satellite PR #6:
    `/feedback/` и unknown/malformed token возвращают 200 с благодарностью, фото команды и тремя картами;
@@ -68,7 +69,8 @@ DETECT TARGET: patient-site templates/assets and feedback-hub.
 
 ## Acceptance
 
-- Build uses one publishable catalog; Care 12 cannot leak while `proposed`.
+- Build uses one publishable catalog; Care 12 renders only while catalog and all three SKUs are
+  `clinic_confirmed_public`.
 - Two confirmed $0 service pages return 200, appear in sitemap and interlink with doctors/services/articles.
 - Every scoped CTA has matching visible intent, context marker and decoded WhatsApp message.
 - New articles pass author/reviewer/reference/FAQ/related-link gates without fabricated review evidence.
@@ -81,8 +83,8 @@ DETECT TARGET: patient-site templates/assets and feedback-hub.
 
 - `PRICE_CATALOG.json` принят как единственный ручной источник цен; `PRICE_TABLE.md` теперь
   генерируется из него через `scripts/raimov/sync-price-table.mjs`, а deploy проверяет отсутствие drift.
-- Care 12 не подтверждён клиникой: выбран обязательный безопасный вариант — продукт снят из
-  публичного прайса; `/services/care-12/`, CTA и статья не публикуются.
+- DEC-800 подтвердил публикационную границу Care 12: `/services/care-12/`, статья, три SKU и
+  WhatsApp inquiry разрешены; checkout и автоматическая активация не добавляются.
 - Созданы страницы `/services/smile-preview/` и `/services/named-checkup/`, две статьи,
   двусторонние связи с врачами и смежными услугами, FAQ и Schema.org.
 - CTA услуг, статей и врачей получили контекстные labels, `data-cta-context` и WhatsApp drafts.

@@ -1,6 +1,6 @@
 # RAIMOV ECOSYSTEM PROJECT STATUS
 
-**Date:** 2026-08-05  
+**Date:** 2026-08-07  
 **Status:** STAGE_B_PUBLIC_LIVE / ACCESS_CONTINUITY_STRATEGY_LIVE / PATIENT_MOTIVATION_SSOT_LIVE / OPERATIONAL_PILOT_NOT_STARTED  
 **Current operating business:** Expert Dental Studio, Bishkek  
 **Master brand:** RAIMOV DENTAL  
@@ -14,7 +14,9 @@ The module connects:
 
 `обращение → триаж → срочная помощь → Паспорт V0 → записанный чек-ап → Паспорт V1 → диагностика → комплексный план → лечение → профилактика`
 
-DEC-786 adds the clinic retention canon: **Expert Dental Patient Motivation System** (Continuity + Expert Care 12 + Expert Points). Strategy SSOT is live; Care 12 and Points remain operationally deferred.
+DEC-786 adds the clinic retention canon: **Expert Dental Patient Motivation System** (Continuity +
+Expert Care 12 + Expert Points). DEC-800 approves Care 12 patient-site information, confirmed prices
+and WhatsApp inquiry; checkout, automatic activation and Expert Points remain operationally deferred.
 
 DEC-787 adds **Post-Visit Feedback Loop** inside Layer A: WhatsApp CSAT 1–5 after eligible visits → public map links on 4–5 / private recovery + manager alert on 1–3. No review rewards.
 
@@ -25,6 +27,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 - `https://raimovdental.com/ru/`
 - `https://raimovdental.com/ru/access-continuity/`
 - `https://raimovdental.com/stage-a/` — Basic Auth, noindex/no-store
+- `https://clinic.raimovdental.com/services/care-12/` — noindex patient-site information / inquiry
 
 ## Production evidence
 
@@ -55,7 +58,8 @@ The website is live, but the clinical operational pilot is not launched by this 
 - The main conversion KPI is a pre-booked next check-up, not certificate count.
 - Passport V0/V1 and warm specialist handoff provide continuity.
 - One hundred urgent cases prove the process, not a new-location investment case.
-- Expert Care 12 and separate capacity require later gates.
+- Expert Care 12 information/inquiry is approved; checkout, automatic activation and separate
+  capacity require later gates.
 - Pre-filtering only “happy” patients before the ask, and incentives tied to review tone, are prohibited.
 - DEC-787 allows post-CSAT follow-up routing (public invite vs private recovery) after a universal ask.
 - DEC-786 defines Patient Motivation System: Continuity foundation + gated Care 12 + Expert Points (no review rewards).
@@ -67,6 +71,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 - DEC-774 and `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md`.
 - DEC-786 and `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`.
 - DEC-787 Post-Visit Feedback Loop + ops SOP `reputation/POST_VISIT_FEEDBACK_LOOP.md`.
+- DEC-800 Care 12 publication boundary, three confirmed public SKUs, service page and article.
 - Public home teaser and dedicated strategy route.
 - Deterministic build, robots and sitemap integration.
 - Contract tests plus Playwright/Axe responsive gate.
@@ -82,7 +87,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 5. Passport V0/V1, certificate and consent templates are approved.
 6. Pilot starts inside Expert Dental Studio.
 7. Cohorts are measured for 30/60/90 days.
-8. Separate capacity and Expert Care 12 are considered only after positive gates.
+8. Separate capacity and Care 12 checkout / automatic activation are considered only after positive gates.
 9. Motivation Phase 0 (pre-book + simple referral + Post-Visit Feedback Loop) after Continuity pilot start; Points/Care per DEC-786 phases.
 
 ## Deferred
@@ -91,7 +96,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 - Separate urgent-care clinic/card/profile.
 - 24/7 in-person claims.
 - Approved public prices and social quotas.
-- Expert Care 12 launch.
+- Expert Care 12 checkout and automatic activation.
 - Expert Points operational ledger.
 - Stage C cases/service pages and EN site.
 - Network counts, investment terms and financial promises.

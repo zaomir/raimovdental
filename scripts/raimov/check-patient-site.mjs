@@ -438,6 +438,52 @@ const routeHtml = new Map(
     readFileSync(file, 'utf8'),
   ])
 );
+
+const homeHtml = routeHtml.get('/') ?? '';
+let previousBlockOffset = -1;
+for (const id of [
+  'start',
+  'preview',
+  'approach',
+  'process',
+  'work',
+  'methods',
+  'prices',
+  'trust',
+  'doctors',
+  'reviews',
+  'faq',
+  'services',
+  'book',
+  'contacts',
+]) {
+  const offset = homeHtml.indexOf(`id="${id}"`);
+  if (offset === -1) fail('/', `homepage block anchor missing: #${id}`);
+  if (offset !== -1 && offset < previousBlockOffset) fail('/', `homepage block out of order: #${id}`);
+  if (offset !== -1) previousBlockOffset = offset;
+}
+if ((homeHtml.match(/class="router__card/g) ?? []).length !== 8) {
+  fail('/', 'homepage router must render exactly eight situation cards');
+}
+if ((homeHtml.match(/class="router__free-mark/g) ?? []).length !== 2) {
+  fail('/', 'homepage router must mark exactly two products as 0 som');
+}
+
+const careHtml = textOf(routeHtml.get('/services/care-12/') ?? '');
+for (const requiredCareText of [
+  '9 900 сом / 12 мес',
+  '7 900 сом / 12 мес',
+  '5 500 сом / 12 мес',
+  'не страховка',
+  'доплата 2 200 сом',
+  'Третья гигиена за 12 месяцев оплачивается по полному прайсу',
+  'Снимки, КТ и любое лечение всегда оплачиваются отдельно',
+]) {
+  if (!careHtml.toLowerCase().includes(requiredCareText.toLowerCase())) {
+    fail('/services/care-12/', `Care 12 disclosure missing: «${requiredCareText}»`);
+  }
+}
+
 function requireCta(route, label, message) {
   const html = routeHtml.get(route) ?? '';
   if (!html.includes(`>${label}</a>`)) fail(route, `CTA label missing: «${label}»`);

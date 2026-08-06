@@ -86,13 +86,13 @@ export function homePage({ manifest, services, doctors, articles, prices, review
           <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.hero))}"
              data-cta-context="hero" data-event="preview_cta_click">${esc(home.hero.primaryLabel)}</a>
           <a class="btn btn--ghost" href="${attr(home.hero.secondaryHref)}"
-             data-cta-context="hero" data-event="price_page_click">${esc(home.hero.secondaryLabel)}</a>
+             data-cta-context="hero-start" data-event="router_row_click">${esc(home.hero.secondaryLabel)}</a>
         </div>
         ${lockedNote(home.hero.note, prices)}
         <p class="t-small t-mute">${esc(home.hero.location)}</p>
       </div>
       <div class="hero__media">
-        ${archImage(manifest, 'clinic/lounge', 'Интерьер Expert Dental Studio: зелёные панели и арочные ниши', {
+        ${portraitImage(manifest, chiefDoctor.photo, chiefDoctor.photoAlt, {
           sizes: '(min-width: 56rem) 38vw, 92vw',
           priority: true,
         })}
@@ -104,10 +104,17 @@ export function homePage({ manifest, services, doctors, articles, prices, review
     </div>
   </section>
 
-  ${trustStrip(home.trust, prices, {
-    license: brand.license ? `Лицензия ${brand.license}` : null,
-    since: `С ${brand.founded} года`,
-  })}
+  <section class="section section--bone" id="${attr(home.router.id)}" aria-labelledby="router-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: home.router.kicker,
+        title: home.router.title,
+        lead: home.router.lead,
+        id: 'router-title',
+      })}
+      ${routerTable(home.router.rows, prices, ordered)}
+    </div>
+  </section>
 
   <section class="section" id="${attr(home.preview.id)}" aria-labelledby="preview-title">
     <div class="shell">
@@ -134,18 +141,6 @@ export function homePage({ manifest, services, doctors, articles, prices, review
         <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.preview))}"
            data-cta-context="preview" data-event="preview_cta_click">${esc(home.preview.ctaLabel)}</a>
       </div>
-    </div>
-  </section>
-
-  <section class="section section--bone" id="${attr(home.router.id)}" aria-labelledby="router-title">
-    <div class="shell">
-      ${sectionHead({
-        kicker: home.router.kicker,
-        title: home.router.title,
-        lead: home.router.lead,
-        id: 'router-title',
-      })}
-      ${routerTable(home.router.rows, prices, ordered)}
     </div>
   </section>
 
@@ -202,6 +197,10 @@ export function homePage({ manifest, services, doctors, articles, prices, review
         ${(cases ?? [])
           .map(
             (c) => `<article class="case-card">
+              <div class="case-card__media" aria-label="Место для подтверждённой пары фотографий до и после">
+                <div class="case-card__placeholder"><strong>До</strong><span>Материал готовится</span></div>
+                <div class="case-card__placeholder"><strong>После</strong><span>Материал готовится</span></div>
+              </div>
               <h3 class="case-card__title">${esc(c.title)}</h3>
               <p class="case-card__problem">${esc(c.problem)}</p>
               <ol class="case-card__stages">${c.stages.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
@@ -217,10 +216,10 @@ export function homePage({ manifest, services, doctors, articles, prices, review
   <section class="section" id="${attr(home.methods.id)}" aria-labelledby="methods-title">
     <div class="shell">
       ${sectionHead({ kicker: home.methods.kicker, title: home.methods.title, id: 'methods-title' })}
-      ${methodsTable(home.methods, prices)}
-      <ul class="guidance mt-4">
+      <ul class="guidance">
         ${home.methods.guidance.map((g) => `<li>${esc(g)}</li>`).join('')}
       </ul>
+      <div class="mt-4">${methodsTable(home.methods, prices)}</div>
       <div class="btn-row mt-3">
         <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.methods))}"
            data-cta-context="methods" data-event="preview_cta_click">${esc(home.preview.ctaLabel)}</a>
@@ -251,6 +250,11 @@ export function homePage({ manifest, services, doctors, articles, prices, review
       <p class="t-small t-mute mt-2">${esc(home.pricing.payment)}</p>
     </div>
   </section>
+
+  ${trustStrip(home.trust, prices, {
+    license: brand.license ? `Лицензия ${brand.license}` : null,
+    since: `С ${brand.founded} года`,
+  })}
 
   <section class="section" id="${attr(home.team.id)}" aria-labelledby="team-title">
     <div class="shell">
@@ -308,6 +312,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
       })}
       <div class="grid grid--3">
         ${ordered
+          .filter((s) => !s.productType)
           .map(
             (s, i) => `<a class="card card--service${i === 0 ? ' card--lead' : ''}"
               href="/services/${attr(s.slug)}/">
@@ -648,7 +653,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
   </section>
 
   ${ctaBand({
-    title: service.productType === 'screening' ? service.ctaLabel : 'Запишитесь на диагностику',
+    title: service.productType ? service.ctaLabel : 'Запишитесь на диагностику',
     text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
     context: `service-${service.slug}-footer`,
     message:

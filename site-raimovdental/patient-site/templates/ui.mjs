@@ -229,7 +229,7 @@ export function lockedNote(note, prices, { title = '', onDark = false } = {}) {
   </div>`;
 }
 
-export function trustStrip({ stats, infrastructure }, prices, { license, since } = {}) {
+export function trustStrip({ id, stats, infrastructure }, prices, { license, since } = {}) {
   const cells = stats
     .map((s) => {
       const value = s.source
@@ -243,7 +243,7 @@ export function trustStrip({ stats, infrastructure }, prices, { license, since }
     })
     .join('');
   const meta = [license, since, infrastructure].filter(Boolean).map(esc).join(' · ');
-  return `<section class="trust" aria-label="Клиника в цифрах">
+  return `<section class="trust"${id ? ` id="${attr(id)}"` : ''} aria-label="Клиника в цифрах">
     <div class="shell">
       <div class="trust__grid">${cells}</div>
       ${meta ? `<p class="trust__meta">${money(meta, prices)}</p>` : ''}

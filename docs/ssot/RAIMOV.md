@@ -282,15 +282,15 @@ Next permitted operational outputs:
 | Access & Continuity strategy canon | Raimov System | PASS — DEC-774 / SSOT v1.0 |
 | Public Access & Continuity route | Stage B | RELEASE IN CURRENT CHANGE |
 | Clinical triage | operational pilot | REQUIRES ATABEK APPROVAL |
-| Free consultation/check-up composition | offer/economics | REQUIRES CLINIC APPROVAL |
+| Products 0 som composition | offer/economics | CONFIRMED — screening route only; TASK-785 |
 | Real standard price and certificate term | offer/trust | OPEN |
 | Capacity and urgent slots | visit SLA | OPEN |
 | CRM/medical data split and consents | privacy/operations | OPEN |
 | Passport V0/V1 templates | continuity | NOT STARTED |
 | Cohort economics | scale gate | NOT STARTED |
-| Expert Care 12 | retention (Motivation Layer B) | DEFERRED — DEC-786; prices **proposed** in PRICE_CATALOG (Adult 9900 / Family 7900 / Kids 5500) |
+| Expert Care 12 | retention (Motivation Layer B) | PATIENT-SITE INFORMATION / INQUIRY APPROVED — DEC-800; checkout and operational activation deferred |
 | Expert Points ledger | loyalty (Motivation Layer C) | DEFERRED — DEC-786 |
-| Motivation Phase 0 scripts (pre-book + simple referral + CSAT loop) | clinic ops | NOT STARTED — awaiting Continuity pilot gates + DEC-787 texts/links |
+| Motivation Phase 0 scripts (pre-book + smile preview + CSAT loop) | clinic ops | SPEC READY — admin training and live execution evidence pending |
 | Separate urgent-care capacity | investment | DEFERRED |
 | Case library | patient Stage C | DEFERRED |
 

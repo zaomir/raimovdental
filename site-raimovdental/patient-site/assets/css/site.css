@@ -652,6 +652,10 @@ ol {
   aspect-ratio: 3 / 4;
 }
 
+.hero__media .portrait {
+  aspect-ratio: 3 / 4;
+}
+
 .hero__badge {
   position: absolute;
   right: clamp(-0.5rem, -1vw, 0rem);
@@ -661,6 +665,17 @@ ol {
   box-shadow: inset 3px 0 0 var(--brass), var(--shadow);
   padding: 0.9rem 1.1rem;
   max-width: 15rem;
+}
+
+@media (max-width: 30rem) {
+  .hero .btn-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero .btn-row .btn {
+    width: 100%;
+  }
 }
 
 @media (min-width: 56rem) {
@@ -2033,11 +2048,11 @@ a.card--service:hover {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  background: var(--paper);
   transition:
-    background-color var(--dur-fast) var(--ease),
-    border-color var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
+    background-color 0.18s var(--ease),
+    border-color 0.18s var(--ease),
+    transform 0.18s var(--ease);
 }
 
 .router__link {
@@ -2119,7 +2134,7 @@ a.card--service:hover {
 }
 
 .router__card--lead {
-  border-color: var(--brass-line);
+  border-color: var(--brass-soft);
   background: var(--brass-tint);
 }
 
@@ -2331,6 +2346,37 @@ a.card--service:hover {
 .case-card {
   border-top: 1px solid var(--line-strong);
   padding-top: 1.1rem;
+}
+
+.case-card__media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.case-card__placeholder {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  place-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--forest-tint);
+  text-align: center;
+  color: var(--ink-mute);
+}
+
+.case-card__placeholder strong {
+  font-size: 0.76rem;
+  color: var(--ink);
+}
+
+.case-card__placeholder span {
+  font-size: 0.67rem;
+  line-height: 1.3;
 }
 
 .case-card__title {

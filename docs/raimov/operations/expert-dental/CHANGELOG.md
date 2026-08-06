@@ -1,12 +1,23 @@
 ---
 title: Expert Dental Studio — журнал изменений операционного контура
 status: ACTIVE
-version: 1.9
+version: 2.0
 created: 2026-08-03
-last_updated: 2026-08-05
+last_updated: 2026-08-07
 ---
 
 # Журнал изменений
+
+## 2026-08-07 — Care 12 publication boundary и homepage v2 (DEC-800)
+
+- Care 12 получил статус `clinic_confirmed_public`: Adult 9 900, Family 7 900, Kids 5 500 сом.
+- Patient-site публикует `/services/care-12/`, статью и контекстный WhatsApp inquiry.
+- Checkout и автоматическая активация не добавлены; договорные условия подтверждает администратор.
+- Главная перестроена по 15-блочной v2-карте: нейтральный hero, карточки маршрута на позиции 2,
+  trust после цен.
+- Операционный SSOT фиксирует 4 слота примерки, free/paid boundary, депозит диагностики,
+  `NEXT_VISIT_BOOKED`, `REDIRECTED`, координатора и метрики.
+- Админский скрипт B.0–B.13: `scripts/WHATSAPP_SMILE_PREVIEW_ADMIN.md`.
 
 ## 2026-08-06 — атомарный план Review Hub на clinic.raimovdental.com
 

@@ -4,7 +4,7 @@
   "currencyLabel": "сом",
   "source": "clinic_price_list_2026-08-04",
   "status": "clinic_confirmed",
-  "lastUpdated": "2026-08-06",
+  "lastUpdated": "2026-08-07",
   "sourceNotes": [
     "ala-carte clinic_confirmed 2026-08-04",
     "added 2026-08-05: Электронная аксиография (диагностика ВНЧС) — 80 000 сом",
@@ -79,6 +79,85 @@
   "cta": {
     "label": "Записаться на примерку — 0 сом",
     "href": "https://wa.me/996555255455?text=%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%86%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D1%83%D1%8E%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D1%83%20%D1%83%D0%BB%D1%8B%D0%B1%D0%BA%D0%B8%20%E2%80%94%200%20%D1%81%D0%BE%D0%BC."
+  },
+  "smilePreviewProgram": {
+    "status": "clinic_confirmed_operational_spec",
+    "sku": "screening-smile-preview",
+    "freePaidBoundary": {
+      "free": "20-minute screening and route: overview photos, request discussion and one visual shape option on screen",
+      "paid": "diagnosis, radiography or CT, intraoral scan and written treatment plan with staged prices"
+    },
+    "certificate": {
+      "named": true,
+      "validDays": 30,
+      "usesPerPerson": 1
+    },
+    "capacity": {
+      "dailyClinicSlots": 4,
+      "primaryProvider": "Керимкулова Айпери",
+      "fallbackProvider": "терапевт или ассистент с обязательными 5 минутами врача у экрана"
+    },
+    "distributionChannels": [
+      "Instagram",
+      "WhatsApp",
+      "после срочного приёма",
+      "внутреннее направление"
+    ],
+    "forbiddenDistribution": [
+      "массовая рассылка",
+      "акция месяца"
+    ],
+    "deposit": "none",
+    "noShowRule": "После второй неявки без предупреждения право на продукты 0 сом прекращается",
+    "recare": "Если пациент не перешёл в эстетическую диагностику, один клинический WhatsApp-контакт через 30 дней; финансовый дожим запрещён"
+  },
+  "aestheticsProposal": {
+    "status": "clinic_confirmed",
+    "diagnosticsSku": "aesthetic-diagnostics",
+    "diagnosticsDeposit": "2 000 сом, зачитывается в стоимость",
+    "clinicalProtocol": [
+      "Санация и ортодонтическая оценка первым этапом",
+      "Отбеливание до виниров; перед подбором оттенка пауза около двух недель",
+      "При подтверждённых признаках бруксизма каппа 15 000 сом обязательна в плане; отказ фиксируется письменно",
+      "Композит применяется на 1–2 зубах, не как метод преображения всей улыбки",
+      "Временные виниры 15 000 сом; снятие старых реставраций 1 000 сом за зуб"
+    ],
+    "review_cadence": {
+      "owner": "Главврач",
+      "trigger": "изменение валютного курса, влияющее на лабораторные позиции",
+      "action": "пересмотреть себестоимость, публичный прайс и плановые цены до подтверждения новой записи"
+    }
+  },
+  "patientJourneyOperations": {
+    "preAppointment": {
+      "rule": "Пациент не выходит без назначенного следующего клинического шага",
+      "offer": "два конкретных слота",
+      "crmStatus": "NEXT_VISIT_BOOKED",
+      "reportCadence": "weekly"
+    },
+    "redirected": {
+      "crmStatus": "REDIRECTED",
+      "owner": "врач",
+      "meaning": "Пациенту по клиническим показаниям отказали в винирах и предложили другой маршрут"
+    },
+    "treatmentCoordinator": {
+      "trigger": "план дороже 150 000 сом или более двух направлений",
+      "initialOwner": "старший администратор"
+    },
+    "adminScript": "docs/raimov/operations/expert-dental/scripts/WHATSAPP_SMILE_PREVIEW_ADMIN.md",
+    "trainingRequiredBeforeProduction": true,
+    "metrics": [
+      "явка на $0",
+      "Preview → диагностика",
+      "доля REDIRECTED",
+      "диагностика → начало лечения",
+      "NEXT_VISIT_BOOKED",
+      "доля $0 в расписании"
+    ],
+    "alerts": [
+      "REDIRECTED близок к 0",
+      "доля $0 в расписании выше 20%"
+    ]
   },
   "membership": {
     "productFamily": "Expert Care 12",

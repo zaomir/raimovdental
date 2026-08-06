@@ -18,9 +18,10 @@ export const brand = {
    * KG registries, so it stays flagged in `pendingFromClinic` until someone checks it against
    * the paper document — a wrong licence number is a legal defect, not a typo.
    */
-  // Never publish the unverified placeholder. Production build is blocked until this
-  // becomes a clinic-confirmed value backed by the legal packet.
-  license: null,
+  // Temporary staging display supplied with TASK-785. It does not satisfy the production
+  // legal gate until the format is checked against the original document.
+  license: 'НГМУ 3333',
+  licenseVerified: false,
 };
 
 export const contacts = {
@@ -36,9 +37,9 @@ export const contacts = {
   countryCode: 'KG',
   addressFull: 'Бишкек, улица Киевская, 88',
   postalCode: '720040',
-  // Clinic-confirmed: одинаковые часы семь дней в неделю.
-  hours: { opens: '08:00', closes: '19:00', days: 'ежедневно', schemaSpec: 'Mo-Su 08:00-19:00' },
-  hoursDisplay: 'Ежедневно, 08:00–19:00',
+  // Clinic-confirmed in the final TASK-785 homepage specification.
+  hours: { opens: '08:00', closes: '19:00', days: 'пн–пт', schemaSpec: 'Mo-Fr 08:00-19:00' },
+  hoursDisplay: 'Пн–пт, 08:00–19:00',
   hoursShort: '08–19',
   parking: 'Бесплатная парковка на улице рядом с клиникой',
   adminSla: 'Администратор отвечает в рабочие часы',
@@ -128,17 +129,16 @@ export const analytics = {
 
 /**
  * Top navigation. Anchors point at the home page so the same bar works from any route;
- * where a full page already exists (врачи, цены, контакты) the link goes there instead
- * of to the home-page summary of it.
+ * all links use the homepage section map from the clinic-approved v2 specification.
  */
 export const nav = [
   { href: '/#preview', label: 'Примерка' },
   { href: '/#approach', label: 'Подход' },
   { href: '/#work', label: 'Работы' },
-  { href: '/doctors/', label: 'Врачи' },
-  { href: '/services/', label: 'Цены' },
+  { href: '/#doctors', label: 'Врачи' },
+  { href: '/#prices', label: 'Цены' },
   { href: '/#reviews', label: 'Отзывы' },
-  { href: '/contacts/', label: 'Контакты' },
+  { href: '/#contacts', label: 'Контакты' },
 ];
 
 export const footerNav = [
@@ -150,6 +150,7 @@ export const footerNav = [
       { href: '/services/implantation/', label: 'Имплантация' },
       { href: '/services/veneers/', label: 'Виниры' },
       { href: '/services/pediatric-dentistry/', label: 'Детская стоматология' },
+      { href: '/services/care-12/', label: 'Expert Care 12' },
       { href: '/services/', label: 'Все услуги и цены' },
     ],
   },
@@ -187,8 +188,8 @@ export const pendingFromClinic = [
   'Портрет Грибановой М. Н. — на Tilda фотография отсутствует, на сайте стоит монограмма.',
   'Парные фото «до/после» для блока «Работы»: согласия на кейсы получены, но снимков в архиве нет — '
     + 'нужны 2–3 случая виниров в одном освещении и ракурсе.',
-  'Формат номера лицензии: «LO-8888 8888 88» не сверен с оригиналом документа. '
-    + 'Пробелы внутри номера нетипичны для реестров КР — проверить до переноса на expertdental.kg.',
+  'Формат временного номера лицензии «НГМУ 3333» не сверен с оригиналом документа. '
+    + 'Проверить до переноса на expertdental.kg.',
   'Орган, выдавший лицензию, и дата выдачи — для страницы /legal/.',
   'ИНН юридического лица «Эксперт Дентал Студия ОсОО», если решено публиковать его в подвале.',
   'Точные координаты для карты и Google Business Profile.',

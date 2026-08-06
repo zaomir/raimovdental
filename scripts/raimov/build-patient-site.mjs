@@ -237,7 +237,7 @@ function validateContent() {
   for (const s of chief.services) if (!serviceSlugs.has(s)) fail(`chief: unknown service "${s}"`);
 
   if (HOST === 'production') {
-    if (!brand.license) {
+    if (!brand.license || !brand.licenseVerified) {
       fail('production legal gate: verified licence number is required');
     }
     for (const a of articles) {
@@ -361,9 +361,9 @@ const physicians = doctors.map((d) =>
 /* home */
 {
   const route = '/';
-  const title = 'Виниры и эстетика зубов в Бишкеке — Expert Dental Studio';
+  const title = 'Стоматология в Бишкеке — Expert Dental Studio';
   const description =
-    'Виниры и эстетическая реставрация в Бишкеке. Цифровая примерка улыбки — 0 сом: показываем вариант формы на экране до обточки. Керамические виниры E-max, отбеливание, гнатология.';
+    'Эстетическая и общая стоматология в Бишкеке. Цифровая примерка улыбки — 0 сом, лечение зубов, ортодонтия, гнатология, имплантация и профилактика.';
   page({
     route,
     title,
@@ -805,6 +805,7 @@ writeFileSync(
 
 const known = new Set(routes.map((r) => r));
 known.add('/internal/pending/');
+for (const legacyRoute of Object.keys(legacy)) known.add(legacyRoute);
 
 for (const [route, html] of written) {
   for (const m of html.matchAll(/href="(\/[^"#?]*)"/g)) {

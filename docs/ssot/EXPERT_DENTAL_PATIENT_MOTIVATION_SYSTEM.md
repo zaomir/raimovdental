@@ -33,7 +33,8 @@ Expert Dental нуждается не в разрозненных скидках
 Система состоит из **трёх слоёв**:
 
 1. **Continuity (фундамент)** — Access & Continuity: срочный вход, Паспорт, сертификат чек-апа, запись до ухода, тёплая передача.
-2. **Membership (удержание)** — Expert Care 12: платный профилактический абонемент после unit-economics gates.
+2. **Membership (удержание)** — Expert Care 12: цены и patient-site inquiry подтверждены
+   DEC-800; checkout и автоматическая операционная активация остаются за отдельными gates.
 3. **Loyalty ledger (учёт)** — баллы Expert Points: начисление за оплаченное поведение и redeem в профилактику/сервис.
 
 Отзывы **не входят** в начисление и redeem. Reward-for-review запрещён. Предварительный отбор «только довольных» до запроса запрещён (DEC-774 / DEC-786 / DEC-787).
@@ -83,8 +84,9 @@ Layer A · CONTINUITY (DEC-774 + DEC-787)
   pre-book / warm handoff /
   Post-Visit Feedback Loop (CSAT → public invite | private recovery; без reward)
 
-Layer B · MEMBERSHIP — Expert Care 12 (gated)
-  годовой профилактический абонемент после capacity + unit economics
+Layer B · MEMBERSHIP — Expert Care 12
+  patient-site information/inquiry approved (DEC-800);
+  checkout and automatic activation remain gated by capacity + unit economics
 
 Layer C · LOYALTY LEDGER — Expert Points (after Phase 0)
   начисление за оплату / recare / referral / семью → redeem в hygiene & service
@@ -105,7 +107,7 @@ Layer C · LOYALTY LEDGER — Expert Points (after Phase 0)
 | Новый / срочный | боль, первый визит | Layer A: сертификат + pre-book |
 | В диагностике / плане | пауза после плана | follow-up + первый оплачиваемый шаг |
 | Этапное лечение | завершение этапа | Points + запись следующего этапа |
-| Завершивший лечение | дата контроля / гигиены | recare + Care 12 offer (когда live) |
+| Завершивший лечение | дата контроля / гигиены | recare + Care 12 inquiry; оформление подтверждает администратор |
 | Семья / дети | второй член семьи | семейный бонус / Points |
 | Спящий (90+ дней без визита) | реактивация | ограниченный hygiene-offer + запись |
 | Рекомендатель | друг дошёл и оплатил | referral reward (не отзыв) |
@@ -299,6 +301,65 @@ WhatsApp: ссылка на Review Hub
 
 ---
 
+# 4.2. Цифровая примерка и эстетический маршрут (TASK-785)
+
+## Продукт 0 сом
+
+- SKU: `screening-smile-preview`.
+- Именной сертификат: 30 дней, один раз на человека.
+- Мощность: не более 4 слотов в день на клинику.
+- Основной врач: Айпери Керимкулова.
+- Fallback: терапевт или ассистент при обязательных 5 минутах врача у экрана.
+- Каналы: Instagram, WhatsApp, после срочного приёма, внутреннее направление.
+- Запрещено: массовая рассылка и позиционирование как «акция месяца».
+
+Граница обязательна во всех каналах: **0 сом** = скрининг и маршрут без снимков, диагноза и
+письменного плана; **платно** = диагноз, снимки, сканирование и письменный план с ценами.
+
+## Эстетическая диагностика
+
+Состав SKU `aesthetic-diagnostics`:
+
+1. клинический фотопротокол;
+2. внутриротовое сканирование;
+3. лабораторный wax-up;
+4. мокап во рту;
+5. письменный план по этапам.
+
+Цена 10 000 сом. Депозит 2 000 сом при записи засчитывается в стоимость. На цифровую примерку
+депозита нет.
+
+## Клинический протокол
+
+- санация и ортодонтическая оценка до необратимого этапа;
+- отбеливание до виниров; перед подбором оттенка пауза около двух недель;
+- при подтверждённых признаках бруксизма каппа 15 000 сом включается в план, отказ фиксируется
+  письменно;
+- композит применяется на 1–2 зубах, не как метод преображения всей улыбки;
+- временные виниры 15 000 сом; снятие старых реставраций 1 000 сом за зуб.
+
+Главврач пересматривает лабораторные цены при изменении валютного курса. Канон:
+`PRICE_CATALOG.json.aestheticsProposal.review_cadence`.
+
+## CRM и ответственность
+
+| Правило | Поле / владелец |
+|---|---|
+| До ухода предложить два конкретных следующих слота | `NEXT_VISIT_BOOKED`, администратор |
+| Отказ от виниров по клиническому маршруту | `REDIRECTED`, заполняет врач |
+| План >150 000 сом или >2 направлений | координатор лечения; на старте старший администратор |
+| После второй неявки без предупреждения | продукты 0 сом прекращают действовать |
+| После примерки без диагностики | один клинический WhatsApp-контакт через 30 дней |
+
+Еженедельные метрики: явка на 0 сом; Preview → диагностика; доля `REDIRECTED`; диагностика → начало
+лечения; `NEXT_VISIT_BOOKED`; доля 0 сом в расписании. Тревога: `REDIRECTED` близок к нулю или доля
+0 сом выше 20%.
+
+Скрипт B.0–B.13:
+`docs/raimov/operations/expert-dental/scripts/WHATSAPP_SMILE_PREVIEW_ADMIN.md`.
+
+---
+
 # 5. Layer B — Expert Care 12 (абонемент)
 
 ## 5.1. Позиционирование
@@ -316,15 +377,15 @@ WhatsApp: ссылка на Review Hub
 | напоминания + координатор recare | кешбек |
 | — | автоматическая скидка на high-ticket / «≤2000=0 / −20% на всё» |
 
-### Цены (proposed · 2026-08-05)
+### Цены (clinic-confirmed public · DEC-800 · 2026-08-07)
 
 Канон цифр и SKU: `docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json` → `membership` + direction `care12`.
 
 | SKU | Цена | Статус |
 |---|---|---|
-| `care12-adult` | **9 900 сом / 12 мес** | proposed |
-| `care12-family-addon` | **7 900 сом / 12 мес** | proposed |
-| `care12-kids` | **5 500 сом / 12 мес** | proposed |
+| `care12-adult` | **9 900 сом / 12 мес** | `clinic_confirmed_public` |
+| `care12-family-addon` | **7 900 сом / 12 мес** | `clinic_confirmed_public` |
+| `care12-kids` | **5 500 сом / 12 мес** | `clinic_confirmed_public` |
 
 ### Биллинг доплат
 
@@ -338,19 +399,41 @@ WhatsApp: ссылка на Review Hub
 
 - отдельный блок / direction `care12`, **не** колонка «цена по подписке» у каждой услуги;
 - ala-carte прайс остаётся clinic_confirmed без изменения цен;
-- публиковать Care как live-оффер только после `clinic_confirmed` + unit economics + Phase 2.
+- patient-site может публиковать состав, цены и WhatsApp inquiry по DEC-800;
+- checkout, автоматическую активацию и утверждение, что весь операционный контур уже live, не
+  публиковать до unit economics + capacity + Phase 2.
 
-Точные лимиты no-show / переноса и окончательная цена утверждает клиника после расчёта себестоимости гигиены, мощности и max-usage экономики.
+Точные договорные правила no-show / переноса перед оформлением сообщает администратор. Сайт не
+списывает визиты автоматически и не подменяет договор.
 
-## 5.3. Gate запуска
+## 5.3. Gate операционной активации
 
-Expert Care 12 = live только если:
+Checkout и автоматическая активация Expert Care 12 включаются только если:
 
 1. Layer A пилот дал ≥1 положительную когорту 30/60/90;
 2. unit economics абонемента при max-usage ≥ целевой маржи клиники;
 3. есть выделенная мощность гигиены / контроля;
 4. правила no-show утверждены;
 5. публичная и админская коммуникация не называет продукт страховкой.
+
+## 5.4. Граница публикации DEC-800
+
+Разрешено на noindex patient-site:
+
+- отдельная страница `/services/care-12/`;
+- статья с составом и ограничениями;
+- три подтверждённые цены из `PRICE_CATALOG.json`;
+- контекстный WhatsApp-запрос администратору.
+
+Не разрешено выводить из публикации:
+
+- что абонемент является страховкой или скидкой на лечение;
+- что оформление или списание визитов происходит автоматически;
+- что опубликованная страница доказывает capacity, entitlement tracking или unit economics;
+- checkout до отдельного решения.
+
+Операционный канон администратора:
+`docs/raimov/operations/expert-dental/scripts/WHATSAPP_SMILE_PREVIEW_ADMIN.md`.
 
 ---
 
@@ -489,12 +572,15 @@ Expert Care 12 = live только если:
 
 | Фаза | Что включаем | Что не включаем | Gate |
 |---|---|---|---|
-| **0 — Continuity only** | Layer A: pre-book, паспорт, сертификат, Post-Visit Feedback Loop (CSAT), простой referral «друг пришёл → вам гигиена» | Points, Care 12 public | triage / capacity / consents / CSAT texts + links |
-| **1 — Points v1** | earn: оплата + hygiene on-time + referral paid; redeem: hygiene / slot | Care 12, high-ticket % | CRM ledger + clinic-approved rates |
-| **2 — Care 12** | membership после unit economics | «страховка», безлимит | positive cohorts + capacity |
+| **0 — Continuity only** | Layer A: pre-book, паспорт, сертификат, Post-Visit Feedback Loop (CSAT), простой referral «друг пришёл → вам гигиена»; Care 12 patient information/inquiry по DEC-800 | Points, Care 12 checkout/auto-activation | triage / capacity / consents / CSAT texts + links |
+| **1 — Points v1** | earn: оплата + hygiene on-time + referral paid; redeem: hygiene / slot | Care 12 checkout/auto-activation, high-ticket % | CRM ledger + clinic-approved rates |
+| **2 — Care 12 operations** | membership activation после unit economics | «страховка», безлимит | positive cohorts + capacity |
 | **3 — Family + reactivation pack** | семейные бонусы, 90/180 playbooks | gamification / UGC rewards | Phase 1–2 stable |
 
-Публичный сайт `raimovdental.com` описывает мотивационную систему только как стратегию / future-state, пока фазы 0–2 не live в клинике. Пациентский runtime Expert — `expertdental.kg` и операционные каналы клиники после утверждения.
+Публичный сайт `raimovdental.com` описывает мотивационную систему только как стратегию /
+future-state. Patient-site Expert на `clinic.raimovdental.com` может публиковать информационный
+Care 12 inquiry по DEC-800; production cutover на `expertdental.kg`, checkout и автоматическая
+активация требуют своих gates.
 
 ---
 
@@ -507,7 +593,7 @@ Expert Care 12 = live только если:
 - публиковать неподтверждённые цены Care / курса баллов;
 - хранить диагнозы и снимки в loyalty ledger или журнале отзывов;
 - давать high-ticket % до диагностики;
-- запускать Care 12 или Points как «уже работает» на публичном Stage B без operational gate;
+- заявлять, что checkout или автоматическая активация Care 12 уже работают, без operational gate;
 - диктовать текст отзыва или платить за публикацию.
 
 ---
@@ -539,7 +625,8 @@ Ala-carte и Care SKU живут в одном каталоге:
 ## Требует утверждения клиники
 
 - exact earn_rate и фиксированные бонусы;
-- **финальная** цена и лимиты Expert Care 12 (proposed уже в `PRICE_CATALOG.json`: Adult 9 900 / Family 7 900 / Kids 5 500);
+- финальные договорные правила переноса / no-show Care 12; публичные цены Adult 9 900 / Family
+  7 900 / Kids 5 500 подтверждены DEC-800 и живут в `PRICE_CATALOG.json`;
 - каталог redeem и потолки %;
 - тексты скриптов админа;
 - CRM-поля и инструмент ledger;
@@ -552,5 +639,5 @@ Ala-carte и Care SKU живут в одном каталоге:
 ## Не является текущим фактом
 
 - работающие Expert Points;
-- продаваемый Expert Care 12;
+- checkout и автоматическая активация Expert Care 12;
 - публичные patient claims о программе лояльности на `raimovdental.com`.
