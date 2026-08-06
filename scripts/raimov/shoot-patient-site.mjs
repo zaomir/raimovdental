@@ -31,6 +31,9 @@ const CHROME = (() => {
 const VIEWPORTS = [
   { id: 'desktop', width: 1440, height: 900, mobile: false },
   { id: 'mobile', width: 390, height: 844, mobile: true },
+  // 360 is the floor the home page specification names (§5.1): blocks 1, 3 and 4 must be
+  // reachable there with no horizontal scroll.
+  { id: 'mobile360', width: 360, height: 800, mobile: true },
 ];
 
 const SAMPLE = [
@@ -194,6 +197,9 @@ const PROBE = `(() => {
     if (cs.visibility === 'hidden' || cs.display === 'none' || cs.opacity === '0') continue;
     const r = el.getBoundingClientRect();
     if (r.width === 0 || r.height === 0) continue;
+    // Screen-reader-only text is clipped to 1x1 on purpose: it is not a layout defect, and
+    // its colour is never seen, so it is exempt from both the clipping and contrast checks.
+    if (r.width <= 1 || r.height <= 1) continue;
 
     // Text taller than its clipping container is text the visitor cannot read.
     if (el.scrollHeight > el.clientHeight + 2 && cs.overflow !== 'visible') {

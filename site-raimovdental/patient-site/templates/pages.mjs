@@ -27,6 +27,7 @@ import {
   initials,
   inline,
   lockedNote,
+  mapLinks,
   methodsTable,
   money,
   postCard,
@@ -377,18 +378,27 @@ function chiefBand(manifest, doctor) {
 /* ----------------------------------------------------------- contact strip */
 
 function contactStrip(manifest) {
-  return `<section class="section section--tight" aria-labelledby="contact-strip">
+  return `<section class="section section--tight" id="contacts" aria-labelledby="contact-strip">
     <div class="shell split split--even">
       <div class="stack" style="--stack-gap:1.25rem">
         <span class="kicker">Как добраться</span>
         <h2 class="display t-h2" id="contact-strip">Клиника в центре Бишкека</h2>
         <dl class="info-list">
-          <div><dt>Адрес</dt><dd class="info-list__value" style="margin:0">${esc(contacts.addressFull)}<br>
+          <div><dt>Адрес</dt><dd class="info-list__value" style="margin:0">${esc(contacts.addressFull)}, ${esc(
+    contacts.postalCode
+  )}<br>
             <span class="t-small t-mute">${esc(contacts.streetNote)}</span></dd></div>
           <div><dt>Часы работы</dt><dd class="info-list__value" style="margin:0">${esc(contacts.hoursDisplay)}</dd></div>
           <div><dt>Парковка</dt><dd class="info-list__value" style="margin:0">${esc(contacts.parking)}</dd></div>
           <div><dt>Телефон и WhatsApp</dt><dd class="info-list__value" style="margin:0">
             <a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></dd></div>
+          <div><dt>Мессенджеры</dt><dd class="info-list__value" style="margin:0">
+            <a href="${attr(social.telegram)}" target="_blank" rel="noopener">Telegram ${esc(
+    social.telegramHandle
+  )}</a> · <a href="${attr(social.instagram)}" target="_blank" rel="noopener">Instagram ${esc(
+    social.instagramHandle
+  )}</a></dd></div>
+          <div><dt>Карты</dt><dd class="info-list__value" style="margin:0">${mapLinks()}</dd></div>
         </dl>
       </div>
       <div class="gallery" style="grid-template-columns:1fr 1fr">

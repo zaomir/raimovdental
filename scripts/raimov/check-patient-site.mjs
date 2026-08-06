@@ -22,6 +22,13 @@ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const { lockedPassages } = await import(
   join(REPO, 'site-raimovdental', 'patient-site', 'content', 'homepage.mjs')
 );
+/** The only rating the site may quote, straight from the clinic's map data. */
+const RATING = (() => {
+  const raw = JSON.parse(
+    readFileSync(join(REPO, 'site-raimovdental', 'src', 'data', 'reviews.ru.json'), 'utf8')
+  );
+  return raw.aggregateRating?.publishable ? raw.aggregateRating : null;
+})();
 const argv = process.argv.slice(2);
 const DIST = argv.includes('--dist')
   ? argv[argv.indexOf('--dist') + 1]
@@ -263,7 +270,19 @@ for (const file of files) {
     }
 
     for (const n of nodes) {
-      if (n.aggregateRating) fail(page, 'aggregateRating published without verified reviews');
+      /*
+       * A rating may be published only as the clinic's own map profile aggregate: it has to
+       * carry the source URL and match the figures in reviews.ru.json. Self-authored `review`
+       * nodes stay banned outright — those are the ones that invent testimonials.
+       */
+      const r = n.aggregateRating;
+      if (r) {
+        if (!RATING) fail(page, 'aggregateRating published without verified review data');
+        else if (!r.url?.includes('2gis.kg')) fail(page, 'aggregateRating without a source URL');
+        else if (r.ratingValue !== RATING.value || r.reviewCount !== RATING.reviewCount) {
+          fail(page, `aggregateRating ${r.ratingValue}/${r.reviewCount} does not match reviews.ru.json`);
+        }
+      }
       if (n.review) fail(page, 'review markup published without verified reviews');
     }
 
