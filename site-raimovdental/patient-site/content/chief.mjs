@@ -64,38 +64,49 @@ export const chief = {
   },
 
   /* Профессиональная деятельность вне приёма. Всё — из публикаций клиники. */
+  /**
+   * `verified: false` items stay in the file but do not render. They are on the clinic's
+   * own Tilda bio, yet none has a primary source, so they are classified `unverified` in
+   * research/raimov-profile/FACT_REGISTER.csv (F-003) and docs/ssot/RAIMOV_PUBLIC_PROFILE.md
+   * P-004. They flip to true when the clinic packet lands — see CLINIC_PENDING_PACKET §3.
+   */
   practice: [
     {
-      title: 'Соучредитель клиник',
+      title: 'Основатель клиник',
       text: 'Expert Dental Clinic и Expert Dental Studio в Бишкеке.',
       verified: true,
     },
     {
       title: 'Основатель «ОртоКомьюнити»',
       text: 'Сообщество ортодонтов Кыргызстана: обмен клиническими случаями и разборы среди практикующих врачей.',
-      verified: true,
+      verified: false,
     },
     {
       title: 'Спикер учебной платформы «Деммед»',
       text: 'Выступления для практикующих стоматологов.',
-      verified: true,
+      verified: false,
     },
     {
       title: 'Ортодонтические офис-курсы',
       text: 'Проводит обучающие курсы для врачей на базе клиники.',
-      verified: true,
+      verified: false,
     },
     {
       title: 'Участие в семинарах и конгрессах',
       text: 'Регулярные выступления на профессиональных мероприятиях.',
-      verified: true,
+      verified: false,
     },
   ],
 
-  /* Цифры публикуются только со ссылкой на источник — иначе это vanity counter. */
+  /*
+   * Цифры публикуются только со ссылкой на источник — иначе это vanity counter.
+   * «400+ завершённых работ» снято: клиника публикует это у себя, но это метрика
+   * результата лечения, а такие на пациентском сайте не публикуются —
+   * FACT_EDITORIAL_CLASSIFICATION.md §3 и RAIMOV_PUBLIC_PROFILE.md P-004.
+   */
   figures: [
-    { value: '400+', label: 'завершённых работ', source: 'по данным клиники' },
     { value: '2', label: 'клиники основаны в Бишкеке', source: 'Expert Dental Clinic, Expert Dental Studio' },
+    { value: '3', label: 'направления приёма', source: 'ортодонтия, гнатология, функциональная стоматология' },
   ],
 
   /**
@@ -108,8 +119,18 @@ export const chief = {
   credentialsFallback:
     'Дипломы, сертификаты и подтверждения квалификации предоставляются по запросу на приёме в клинике.',
 
-  /** Ссылки на публичные выступления. Заполняются по мере подтверждения источников. */
-  talks: [],
+  /**
+   * Только выступления с первичным источником. SPK-001 — `public_ready`
+   * (research/raimov-profile/RAIMOV_PUBLIC_PROFILE.md F-SPK-001).
+   */
+  talks: [
+    {
+      title: 'Микроимпланты в ортодонтии (минивинты)',
+      venue: 'Стоматологический конгресс DemMed, Ош и Бишкек',
+      date: '2024',
+      url: 'https://bishkek.events/event/stomatologicheskij-kongress/',
+    },
+  ],
 
   services: ['gnathology', 'orthodontics', 'diagnostics'],
 
