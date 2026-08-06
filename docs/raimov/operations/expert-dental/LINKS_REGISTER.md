@@ -36,9 +36,9 @@ id_prefix: ED-LINK
 
 | ID | Объект | URL / идентификатор | Статус источника | Связанный материал | Примечание |
 |---|---|---|---|---|---|
-| ED-LINK-008 | Google Maps | Карточка «Стоматология: Эксперт дентал студия» | SSOT, URL требуется | ED-MAT-033 | Точную ссылку добавить после получения |
-| ED-LINK-009 | 2ГИС | `https://2gis.kg/bishkek/firm/70000001089655879` | Источник v1.1, срез 03.08.2026 | ED-MAT-034 | Карточка Expert Dental Studio |
-| ED-LINK-010 | Яндекс Карты | `https://yandex.ru/maps/org/ekspert_dental_studiya/222117460907/` | Источник v1.1, production link | ED-MAT-035 | Прямая цель белой QR-системы |
+| ED-LINK-008 | Google Maps | `https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8` | Получена от клиники 06.08.2026 | ED-MAT-033 | Короткая ссылка на карточку. Deep-link `writereview` требует place id — пациент нажимает «Оставить отзыв» на карточке |
+| ED-LINK-009 | 2ГИС | `https://2gis.kg/bishkek/firm/70000001089655879` | Источник v1.1, срез 03.08.2026 | ED-MAT-034 | Карточка Expert Dental Studio. Вкладка отзывов: `/tab/reviews` |
+| ED-LINK-010 | Яндекс Карты | `https://yandex.ru/maps/org/ekspert_dental_studiya/222117460907/` | Источник v1.1, production link | ED-MAT-035 | Прямая цель белой QR-системы. Вкладка отзывов: `/reviews/` |
 
 ## Планы и отчёты CAESTHETIC
 
@@ -88,7 +88,7 @@ id_prefix: ED-LINK
 
 | Приоритет | Объект | Причина |
 |---|---|---|
-| P0 | Точная ссылка Google Maps | Нужна для QR, отчётов и контроля отзывов |
+| P1 | Place ID Google Maps | Даст deep-link `search.google.com/local/writereview` вместо перехода через карточку |
 | P1 | Девять прямых URL статей блога | Нужен полный каталог опубликованного контента |
 | P1 | Прямые ссылки на конкретные QR-файлы | Целевая ссылка Яндекс известна; необходимо зарегистрировать файлы QR и A5-карточки после получения исходников |
 

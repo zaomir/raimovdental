@@ -1,7 +1,7 @@
 ---
 title: Post-Visit Feedback Loop — атомарный план внедрения
-status: DRAFT
-version: 1.0
+status: IN PROGRESS — фаза B закрыта кодом, фазы A/C ждут клинику
+version: 1.1
 created: 2026-08-06
 last_updated: 2026-08-06
 pilot_host: https://clinic.raimovdental.com
@@ -9,9 +9,38 @@ canon:
   - docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md §4.1
   - docs/raimov/operations/expert-dental/reputation/POST_VISIT_FEEDBACK_LOOP.md
   - docs/founder-notes/DEC-787_post-visit-feedback-loop.md
+implementation:
+  code: site-raimovdental/feedback-hub/
+  service: expert-feedback-hub.service (VPS2402, loopback :8613)
+  nginx: location ^~ /feedback/ в site-raimovdental/deploy/clinic.raimovdental.com.origin.conf
+  deploy: scripts/raimov/deploy-feedback-hub.sh
+  gates: scripts/raimov/check-feedback-hub.mjs
+  data: /var/lib/expert-feedback-hub (state.json + journal.jsonl)
 ---
 
 # Атомарный план внедрения Review Hub
+
+## Статус внедрения (06.08.2026)
+
+| Атом | Статус | Чем закрыт |
+|---|---|---|
+| A1 | ✅ | host зафиксирован: `https://clinic.raimovdental.com/feedback/<token>` |
+| A2 | ✅ | namespace `/feedback/*` изолирован: отдельное дерево, свой CSS, свой сервис; главная и IA не тронуты |
+| A3 | ✅ | все три URL в `LINKS_REGISTER` и в `patient-site/config/site.mjs` (`maps.*Reviews`). Осталось P1: place id Google для deep-link `writereview` |
+| A4 | ⏳ клиника | тексты N0–N4 в SOP §7; на самом Hub тексты уже внедрены и проходят гейты |
+| A5 | ⏳ клиника | chat id есть в `edge.env`; **нужен `TELEGRAM_BOT_TOKEN`** в `/etc/grainee/feedback-hub.env`. Пока не задан — обращение сохраняется и видно в журнале, но в Telegram не уходит |
+| B1 | ✅ | `/feedback/` → 200, `noindex`, не в меню |
+| B2 | ✅ | валидный token → UI; неизвестный / битый / истёкший (60 дней) → одинаковый нейтральный 404 без PII |
+| B3 | ✅ | `state.json` + `journal.jsonl`, атомарная запись. Полей имени, телефона и диагноза нет — гейт это проверяет |
+| B4 | ✅ | CSAT 1–5, событие `csat_scored`, повторная оценка запрещена до `admin reset` |
+| B5 | ✅ | три кнопки карт, `platform_clicked`, при возврате площадка серая |
+| B6 | ✅ код / ⏳ канал | форма recovery + алерт управляющему; доставка ждёт A5 |
+| B7 | ✅ | «не напоминать» → `review_cycle_stopped`, спокойный экран |
+| B8 | ✅ | `/feedback/admin?key=…` — журнал по колонкам SOP §10 + CSV |
+| B9 | ✅ | прогон на проде: open → 5★ → Google → возврат (Google серая) → 1★ на другом токене → форма. Тестовые строки очищены |
+| C1 | частично | кнопка «Создать ссылку» в админке уже есть (нужна была для B9); форма с категорией и врачом — в фазе C |
+
+**Что нужно от клиники, чтобы пилот стал живым:** `TELEGRAM_BOT_TOKEN` (A5) и утверждение текстов (A4). Всё остальное фазы B работает.
 
 Пилот на **`https://clinic.raimovdental.com`** (staging patient-site, уже LIVE, `noindex`).  
 Цель каждого атома: один результат, один владелец, один критерий done. Не начинать следующий атом без done предыдущего, если указана зависимость.
@@ -24,8 +53,9 @@ canon:
 | Review Hub (этот план) | агент Feedback Loop / Дмитрий | **только** `/feedback/*`, `/api/feedback/*` (если появится), журнал, WA-лестница | не менять DNS/vhost целиком; только добавить location при необходимости |
 | Production SSOT + deploy | grainee-v2 | `site-raimovdental/patient-site/`, `scripts/raimov/deploy-patient-site.sh staging` | **не деплоить из raimovdental satellite** |
 
-**Сейчас на clinic:** сайт клиники отвечает `200`, `/feedback/` → `404`. Origin VPS2402, symlink releases.  
-**Код сайта:** `zaomir/grainee-v2` → `site-raimovdental/patient-site/` (в этом satellite дерева может ещё не быть — синк/работа через grainee).
+**Сейчас на clinic:** сайт клиники отвечает `200`, `/feedback/` тоже `200` (Hub развёрнут 06.08.2026). Origin VPS2402, symlink releases.  
+**Код сайта:** `zaomir/grainee-v2` → `site-raimovdental/patient-site/` (в этом satellite дерева может ещё не быть — синк/работа через grainee).  
+**Код Hub:** `zaomir/grainee-v2` → `site-raimovdental/feedback-hub/`, деплой `scripts/raimov/deploy-feedback-hub.sh` (отдельно от сайта).
 
 **Правило merge:** Review Hub PR не должен конфликтовать с правками шаблонов layout параллельного агента. Предпочтительно отдельный mini-app / отдельный template tree под `/feedback/`, общий только base CSS variables если нужно.
 

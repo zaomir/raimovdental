@@ -78,7 +78,7 @@
     "docs/raimov/operations/expert-dental/CHANGELOG.md": "b56fdfc3cd1559d7e1d374f1dc473dc15d44eda9abdf63e68477a71143335d35",
     "docs/raimov/operations/expert-dental/DOCTORS_REGISTER.md": "29422c2e72f9a7d29fde0965ad9e47273863878d215e54d41de717365136172d",
     "docs/raimov/operations/expert-dental/FILE_ARCHITECTURE.md": "aebb2ea1d45ffdf6abd225b5f8328fe3eaba1c61dfde667c539c1723d3628788",
-    "docs/raimov/operations/expert-dental/LINKS_REGISTER.md": "9afcaa393dc63ee976252657db95a34c58d44c2a7bd9930477634ed1474c74ef",
+    "docs/raimov/operations/expert-dental/LINKS_REGISTER.md": "aafbbb064a7cf092b2169f993172431db4c0fff41e56fa10131cda0cf16092c8",
     "docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md": "d4fbee8fa857292b5a446b6190fd9c94728502e66f8cc5615f55cd2edcd8ea20",
     "docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md": "39a40b129c91d871c18f6ac9b3fcce9b27c84bffabe788d9b07ad2ed8cc431f6",
     "docs/raimov/operations/expert-dental/README.md": "da201b1c5bc75a6d9e0a8e09ff0cb46a942aea22f005afcb38523f8bc9a704c1",
@@ -96,7 +96,7 @@
     "docs/raimov/operations/expert-dental/reports/2026-08-first-half/REPORT_PAGES_BLUEPRINT.md": "e7ef0abdda58eebfdb3e7efcd894d3b5cf99b9d0fb0c09bde098d95f15258788",
     "docs/raimov/operations/expert-dental/reports/2026-08-first-half/WEB_REPORT_CONTENT.md": "4fb8a522be5915f5212f2271c6e279675944b6af45197dd4372780e0a6d6f8ad",
     "docs/raimov/operations/expert-dental/reports/2026-08-first-half/manifest.json": "abb223df08754fd387890ebc7f95b857359f309d9138b707c8e2cd6c75888189",
-    "docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md": "32dee9a40dcf969cdf22fc1d217165ea9593f745f2f901a4ac0238dd5774032a",
+    "docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md": "c114eaf681ae8dc392f4af8aeaf64e69bf7089571fa468835d2c63d088d62f88",
     "docs/raimov/operations/expert-dental/reputation/POST_VISIT_FEEDBACK_LOOP.md": "30dfdd30d56d7d5ade9594a2f8d27ae4c5e1a68f457cc239f7912ae799678664",
     "docs/raimov/operations/expert-dental/templates/MATERIAL_ENTRY_TEMPLATE.md": "fae12e9ca6f0c8f39bca699f5825f1852321dad69679f6585af649d270bb2e18",
     "docs/raimov/operations/expert-dental/templates/REPORT_TEMPLATE.md": "3c81ea9f8f66be8e403defc86a03f8ade1df7c45f3d1da8dcb8df5faedccd96f",
@@ -544,6 +544,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T20:20:04Z",
+  "updated_at_utc": "2026-08-06T20:30:05Z",
   "version": 1
 }
