@@ -203,9 +203,28 @@ cands = sorted(glob.glob(os.path.join(r'''${INBOX}''', 'EXPERT_DENTAL-logo-*.png
 if not cands:
     print('MISSING logo'); raise SystemExit(0)
 im = Image.open(cands[-1]).convert('RGBA')
-os.makedirs(r'''${join(OUT, 'img', 'brand')}''', exist_ok=True)
-im.save(os.path.join(r'''${join(OUT, 'img', 'brand')}''', 'logo.png'))
-print('wrote logo', im.size)
+out = r'''${join(OUT, 'img', 'brand')}'''
+os.makedirs(out, exist_ok=True)
+
+# The supplied artwork is black on transparency. Dark sections need the same shapes in
+# bone, so recolour the opaque pixels instead of shipping a second hand-made file.
+def recolour(src, rgb):
+    r, g, b, a = src.split()
+    tinted = Image.new('RGBA', src.size, rgb + (0,))
+    tinted.putalpha(a)
+    return tinted
+
+variants = {'logo': (20, 32, 28), 'logo-light': (247, 244, 239)}
+for name, rgb in variants.items():
+    art = recolour(im, rgb)
+    for w in (1024, 520, 260):
+        if w > art.width:
+            continue
+        h = round(art.height * w / art.width)
+        art.resize((w, h), Image.LANCZOS).save(
+            os.path.join(out, f'{name}.png' if w == 1024 else f'{name}-{w}.png'), optimize=True
+        )
+    print('wrote', name, art.size)
 `);
 }
 

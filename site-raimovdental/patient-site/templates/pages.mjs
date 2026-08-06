@@ -6,7 +6,7 @@
  * §10 (doctor), §12 (prices), §14 (blog catalog) and §15 (article).
  */
 
-import { brand, contacts, cta, pendingFromClinic } from '../config/site.mjs';
+import { brand, contacts, cta, pendingFromClinic, social } from '../config/site.mjs';
 import { chief } from '../content/chief.mjs';
 import { categories } from '../content/articles.mjs';
 import { references } from '../content/references.mjs';
@@ -121,7 +121,7 @@ export function homePage({ manifest, services, doctors, articles, prices }) {
         })}
         <div class="hero__facts">
           <div><div class="fact__value numeral">8</div><div class="fact__label">врачей разных направлений</div></div>
-          <div><div class="fact__value numeral">08–20</div><div class="fact__label">приём ежедневно</div></div>
+          <div><div class="fact__value numeral">${esc(contacts.hoursShort)}</div><div class="fact__label">приём ежедневно</div></div>
           <div><div class="fact__value numeral">24/7</div><div class="fact__label">WhatsApp принимает сообщения</div></div>
         </div>
       </div>
@@ -728,7 +728,7 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
           })}
         </div>
         <div class="stack" style="--stack-gap:1.15rem">
-          <span class="kicker">Главный врач и соучредитель клиники</span>
+          <span class="kicker">Главный врач и основатель клиники</span>
           <h1 class="display t-h1">${esc(doctor.name)}</h1>
           <p class="t-lead">${esc(chief.positioning)}</p>
           <div class="hero__facts" style="margin-top:1rem">
@@ -811,6 +811,13 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
           ? `<div class="mt-4"><h3 class="card__title">Выступления</h3><div class="prose mt-1">${list(
               chief.talks.map((t) => `[${t.title}](${t.url}) — ${t.venue}${t.date ? `, ${t.date}` : ''}`)
             )}</div></div>`
+          : ''
+      }
+      ${
+        social.chiefInstagram
+          ? `<p class="t-small mt-3">Клинические разборы и учебные материалы Атабек Саидович публикует в
+              <a href="${attr(social.chiefInstagram)}" rel="noopener nofollow" target="_blank">Instagram
+              @doctor_raimov</a>.</p>`
           : ''
       }
     </div>

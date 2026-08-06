@@ -33,7 +33,7 @@ const VIEWPORTS = [
   { id: 'mobile', width: 390, height: 844, mobile: true },
 ];
 
-const PAGES = [
+const SAMPLE = [
   ['home', '/'],
   ['chief', '/doctors/raimov-atabek/'],
   ['article', '/blog/viniry-komu-podhodyat/'],
@@ -43,6 +43,27 @@ const PAGES = [
   ['blog', '/blog/'],
   ['contacts', '/contacts/'],
 ];
+
+/**
+ * --all audits every built route rather than the eight representative ones. Screenshots
+ * are skipped there: the point is to prove no page anywhere drops below AA, and writing
+ * 39 full-page JPEGs to prove it is just slower.
+ */
+const ALL = argv.includes('--all');
+const SHOTS = !ALL;
+const PAGES = ALL
+  ? readdirSync(arg('dist', '/var/www/grainee-v2/site-raimovdental/dist/patient-staging'), {
+      recursive: true,
+      withFileTypes: true,
+    })
+      .filter((e) => e.isFile() && e.name === 'index.html')
+      .map((e) => {
+        const rel = e.parentPath.split('dist/')[1].split('/').slice(1).join('/');
+        return [rel || 'home', '/' + (rel ? rel + '/' : '')];
+      })
+      .filter(([name]) => !name.startsWith('internal'))
+      .sort()
+  : SAMPLE;
 
 /* ----------------------------------------------------------------- plumbing */
 
@@ -224,7 +245,7 @@ for (const vp of VIEWPORTS) {
   });
 
   for (const [name, path] of PAGES) {
-    if (vp.id === 'mobile' && !['home', 'chief', 'article', 'services'].includes(name)) continue;
+    if (!ALL && vp.id === 'mobile' && !['home', 'chief', 'article', 'services'].includes(name)) continue;
 
     events.length = 0;
     await call('Page.navigate', { url: BASE + path });
@@ -242,14 +263,28 @@ for (const vp of VIEWPORTS) {
 
     const { contentSize } = await call('Page.getLayoutMetrics');
     const height = Math.min(Math.ceil(contentSize.height), 14000);
-    const shot = await call('Page.captureScreenshot', {
-      format: 'jpeg',
-      quality: 78,
-      captureBeyondViewport: true,
-      clip: { x: 0, y: 0, width: vp.width, height, scale: vp.id === 'desktop' ? 0.62 : 1 },
-    });
-    const file = join(OUT, `${vp.id}-${name}.jpg`);
-    writeFileSync(file, Buffer.from(shot.data, 'base64'));
+    let file = null;
+
+    if (SHOTS) {
+      const shot = await call('Page.captureScreenshot', {
+        format: 'jpeg',
+        quality: 78,
+        captureBeyondViewport: true,
+        clip: { x: 0, y: 0, width: vp.width, height, scale: vp.id === 'desktop' ? 0.62 : 1 },
+      });
+      file = join(OUT, `${vp.id}-${name}.jpg`);
+      writeFileSync(file, Buffer.from(shot.data, 'base64'));
+
+      // The full-page shot is scaled down to stay readable as a whole; the first screens
+      // are also kept at native scale, where type and spacing can actually be judged.
+      const top = await call('Page.captureScreenshot', {
+        format: 'jpeg',
+        quality: 82,
+        captureBeyondViewport: true,
+        clip: { x: 0, y: 0, width: vp.width, height: Math.min(height, vp.mobile ? 1700 : 1500), scale: 1 },
+      });
+      writeFileSync(join(OUT, `${vp.id}-${name}-top.jpg`), Buffer.from(top.data, 'base64'));
+    }
 
     const consoleErrors = events
       .filter((e) => e.method === 'Log.entryAdded' && e.params.entry.level === 'error')

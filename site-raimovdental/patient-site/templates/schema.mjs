@@ -74,6 +74,9 @@ export function physicianNode(origin, doctor) {
   };
   if (doctor.photo) node.image = `${origin}/assets/img/${doctor.photo}.jpg`;
   if (doctor.knowsAbout?.length) node.knowsAbout = doctor.knowsAbout;
+  // sameAs is how search engines reconcile the doctor with the profile patients already
+  // follow, so it belongs on the physician node rather than only on the clinic.
+  if (doctor.chief && social.chiefInstagram) node.sameAs = [social.chiefInstagram];
   return node;
 }
 

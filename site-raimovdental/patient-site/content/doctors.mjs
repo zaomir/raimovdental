@@ -40,7 +40,7 @@ export const doctors = [
     ],
     facts: [
       { label: 'Направление', value: 'Ортодонтия и гнатология' },
-      { label: 'Роль в клинике', value: 'Главный врач, соучредитель' },
+      { label: 'Роль в клинике', value: 'Главный врач, основатель' },
       { label: 'Приём', value: 'Подростки и взрослые' },
     ],
     services: ['gnathology', 'orthodontics', 'diagnostics'],

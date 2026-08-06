@@ -27,8 +27,9 @@ export const contacts = {
   countryCode: 'KG',
   addressFull: 'Бишкек, улица Киевская, 88',
   // Clinic-confirmed: одинаковые часы семь дней в неделю.
-  hours: { opens: '08:00', closes: '20:00', days: 'ежедневно' },
-  hoursDisplay: 'Ежедневно, 08:00–20:00',
+  hours: { opens: '08:00', closes: '19:00', days: 'ежедневно' },
+  hoursDisplay: 'Ежедневно, 08:00–19:00',
+  hoursShort: '08–19',
   parking: 'Бесплатная парковка на улице рядом с клиникой',
   adminSla: 'Администратор отвечает в WhatsApp в среднем за минуту',
   // Точные координаты клиника ещё не подтвердила — карта ведёт по текстовому адресу.
@@ -38,6 +39,8 @@ export const contacts = {
 
 export const social = {
   instagram: 'https://www.instagram.com/expert.dental.studio/',
+  /** Личный профиль главного врача — ведёт клинические разборы и обучение. */
+  chiefInstagram: 'https://www.instagram.com/doctor_raimov/',
 };
 
 /**
