@@ -164,11 +164,12 @@ export function priceRows(rows) {
     .join('');
 }
 
-export function priceBlock({ title, rows, note }) {
+export function priceBlock({ title, rows, note, href }) {
   if (!rows.length) return '';
+  const heading = href ? `<a href="${attr(href)}">${esc(title)} →</a>` : esc(title);
   return `<div class="price-block">
     <div class="price-block__head">
-      <h3 class="display t-h3">${esc(title)}</h3>
+      <h3 class="display t-h3">${heading}</h3>
       ${note ? `<p class="t-small t-mute">${esc(note)}</p>` : ''}
     </div>
     ${priceRows(rows)}

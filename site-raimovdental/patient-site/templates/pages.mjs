@@ -353,7 +353,7 @@ function contactStrip(manifest) {
 
 /* ------------------------------------------------------------ services list */
 
-export function servicesIndexPage({ manifest, services, prices }) {
+export function servicesIndexPage({ manifest, services, prices, membership }) {
   const ordered = [...services].sort((a, b) => a.order - b.order);
   const directions = Object.values(prices.byDirection);
 
@@ -384,7 +384,9 @@ export function servicesIndexPage({ manifest, services, prices }) {
   <section class="section section--bone" aria-labelledby="full-price">
     <div class="shell">
       ${sectionHead({ kicker: 'Прайс', title: 'Полный перечень', id: 'full-price' })}
-      ${directions.map((d) => priceBlock({ title: d.name, rows: d.items })).join('')}
+      ${directions
+        .map((d) => priceBlock({ title: d.name, rows: d.items, href: d.id === 'care12' ? '/services/care-12/' : undefined }))
+        .join('')}
       ${priceDisclaimer(prices)}
     </div>
   </section>
@@ -557,6 +559,118 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
     text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
     context: `service-${service.slug}-footer`,
     message: `Здравствуйте. Хочу записаться на консультацию — «${service.navLabel}».`,
+  })}`;
+}
+
+/* ---------------------------------------------------- membership (Care 12) */
+
+/**
+ * Expert Care 12 is a subscription product, not a treatment — it does not have symptoms,
+ * pre-treatment diagnostics or clinical stages, so it gets its own layout instead of being
+ * forced into `servicePage()`'s treatment-shaped sections. Prices come from
+ * `prices.byDirection.care12` (PRICE_CATALOG.json) — this page never hardcodes a number.
+ */
+export function membershipPage({ manifest, membership, doctors, services, prices }) {
+  const membershipDoctors = membership.doctors.map((slug) => doctors.find((d) => d.slug === slug)).filter(Boolean);
+  const related = (membership.relatedServices || [])
+    .map((slug) => services.find((s) => s.slug === slug))
+    .filter(Boolean);
+  const tierRows = prices.byDirection.care12 ? prices.byDirection.care12.items : [];
+
+  return `
+  <section class="section section--tight">
+    <div class="shell">
+      ${breadcrumbs([
+        { href: '/', label: 'Главная' },
+        { href: '/services/', label: 'Услуги и цены' },
+        { href: `/services/${membership.slug}/`, label: membership.navLabel },
+      ])}
+      <div class="stack" style="--stack-gap:1.25rem;max-width:42rem">
+        <span class="kicker">${esc(membership.kicker)}</span>
+        <h1 class="display t-h1">${esc(membership.title)}</h1>
+        <p class="t-lead">${esc(membership.lead)}</p>
+        <div class="callout callout--note">
+          <div class="callout__title">Не страховка</div>
+          <p>${esc(membership.isInsuranceNote)}</p>
+        </div>
+        ${ctaPair({ context: `service-${membership.slug}`, message: membership.ctaMessage })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bone">
+    <div class="shell split">
+      <div class="prose">
+        <h2 class="display t-h2">Что входит</h2>
+        ${list(membership.includesGeneral)}
+      </div>
+      <div class="prose">
+        <h2 class="display t-h2">Что не входит</h2>
+        ${list(membership.excludesGeneral)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="care12-price">
+    <div class="shell">
+      ${sectionHead({ kicker: 'Тарифы', title: 'Expert Care 12 — цены', id: 'care12-price' })}
+      ${tierRows.length ? priceBlock({ title: 'Тарифы Expert Care 12', rows: tierRows }) : ''}
+      ${priceDisclaimer(prices)}
+    </div>
+  </section>
+
+  <section class="section section--bone">
+    <div class="shell prose">
+      <h2 class="display t-h2">Правила доплат и лимитов</h2>
+      ${list(membership.billingRules)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell split">
+      <div class="stack" style="--stack-gap:1rem">
+        <span class="kicker">Кому подходит</span>
+        <h2 class="display t-h2">Для кого этот абонемент</h2>
+      </div>
+      <div class="prose">${list(membership.suitableFor)}</div>
+    </div>
+  </section>
+
+  ${
+    membershipDoctors.length
+      ? `<section class="section section--bone">
+    <div class="shell">
+      ${sectionHead({ kicker: 'Врачи', title: 'Кто ведёт профилактические визиты' })}
+      <div class="grid grid--4">${membershipDoctors.map((d) => doctorCard(manifest, d)).join('')}</div>
+    </div>
+  </section>`
+      : ''
+  }
+
+  <section class="section">
+    <div class="shell shell--narrow" style="margin-inline:auto">
+      ${faqBlock(membership.faq, { idPrefix: `svc-${membership.slug}` })}
+    </div>
+  </section>
+
+  ${
+    related.length
+      ? `<section class="section section--tight">
+    <div class="shell">
+      <p class="kicker">Смежные направления</p>
+      <div class="chip-row mt-1">
+        ${related.map((r) => `<a class="chip" href="/services/${attr(r.slug)}/">${esc(r.navLabel)}</a>`).join('')}
+      </div>
+    </div>
+  </section>`
+      : ''
+  }
+
+  ${ctaBand({
+    title: 'Оформить Expert Care 12',
+    text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
+    context: `service-${membership.slug}-footer`,
+    message: membership.ctaMessage,
   })}`;
 }
 
