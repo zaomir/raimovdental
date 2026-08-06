@@ -80,7 +80,7 @@
     "docs/raimov/operations/expert-dental/FILE_ARCHITECTURE.md": "aebb2ea1d45ffdf6abd225b5f8328fe3eaba1c61dfde667c539c1723d3628788",
     "docs/raimov/operations/expert-dental/LINKS_REGISTER.md": "aafbbb064a7cf092b2169f993172431db4c0fff41e56fa10131cda0cf16092c8",
     "docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md": "d4fbee8fa857292b5a446b6190fd9c94728502e66f8cc5615f55cd2edcd8ea20",
-    "docs/raimov/operations/expert-dental/PATIENT_CATALOG_RECONCILIATION_PLAN.md": "be39b78f06071b26f488f42ec4f1be5a33139281beb5bda46d503ad3d879e930",
+    "docs/raimov/operations/expert-dental/PATIENT_CATALOG_RECONCILIATION_PLAN.md": "4e2d68ee7e0528c0f863928a7084711a8e3a161f9101c36c2b1c3f297582df69",
     "docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md": "39a40b129c91d871c18f6ac9b3fcce9b27c84bffabe788d9b07ad2ed8cc431f6",
     "docs/raimov/operations/expert-dental/README.md": "da201b1c5bc75a6d9e0a8e09ff0cb46a942aea22f005afcb38523f8bc9a704c1",
     "docs/raimov/operations/expert-dental/media/team/talyshhanov-mir-ali.png": "cac52c21f36183adf20564eae2aa97a8fbe377b75515bc1424f44c33cf28dabb",
@@ -547,6 +547,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T22:40:04Z",
+  "updated_at_utc": "2026-08-06T22:50:04Z",
   "version": 1
 }
