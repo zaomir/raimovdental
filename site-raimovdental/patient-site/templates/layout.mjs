@@ -86,7 +86,9 @@ export function document({
   <meta name="twitter:image" content="${attr(cfg.origin + ogImage)}">
   <meta name="twitter:image:alt" content="${attr(ogImageAlt)}">
   <link rel="icon" href="/assets/img/brand/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/img/brand/logo.png">
+  <link rel="icon" href="/assets/img/brand/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/assets/img/brand/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/img/brand/apple-touch-icon.png" sizes="180x180">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/cormorant-garamond-300-cyrillic.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/manrope-400-cyrillic.woff2" crossorigin>
   <link rel="stylesheet" href="${assets['css/fonts.css']}">
