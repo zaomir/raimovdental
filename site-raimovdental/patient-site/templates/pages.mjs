@@ -353,7 +353,7 @@ function contactStrip(manifest) {
 
 /* ------------------------------------------------------------ services list */
 
-export function servicesIndexPage({ manifest, services, prices, membership }) {
+export function servicesIndexPage({ manifest, services, prices }) {
   const ordered = [...services].sort((a, b) => a.order - b.order);
   const directions = Object.values(prices.byDirection);
 
@@ -384,9 +384,7 @@ export function servicesIndexPage({ manifest, services, prices, membership }) {
   <section class="section section--bone" aria-labelledby="full-price">
     <div class="shell">
       ${sectionHead({ kicker: 'Прайс', title: 'Полный перечень', id: 'full-price' })}
-      ${directions
-        .map((d) => priceBlock({ title: d.name, rows: d.items, href: d.id === 'care12' ? '/services/care-12/' : undefined }))
-        .join('')}
+      ${directions.map((d) => priceBlock({ title: d.name, rows: d.items })).join('')}
       ${priceDisclaimer(prices)}
     </div>
   </section>
