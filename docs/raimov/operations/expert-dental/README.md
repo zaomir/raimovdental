@@ -23,6 +23,8 @@ branch: main
 | Access & Continuity (срочный вход / Паспорт) | `docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md` |
 | Мотивация пациентов (Care 12 / Points / referral) | `docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md` |
 | Прайс ala-carte + Care 12 SKU | `pricing/PRICE_CATALOG.json` · `pricing/PRICE_TABLE.md` |
+| Эстетика SKU (proposed) | `pricing/PRICE_CATALOG.json` → `aesthetics` / `aestheticsProposal` |
+| Скрипт WA: $0-примерка | `scripts/WHATSAPP_SMILE_PREVIEW_ADMIN.md` |
 | Врачи / роли на сайте | `DOCTORS_REGISTER.md` · `tilda/doctors/` |
 | План первого месяца | `docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md` |
 | Сайт `expertdental.kg` и блог | `docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md` |
