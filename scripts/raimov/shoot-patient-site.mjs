@@ -41,6 +41,8 @@ const SAMPLE = [
   ['chief', '/doctors/raimov-atabek/'],
   ['article', '/blog/viniry-komu-podhodyat/'],
   ['service', '/services/gnathology/'],
+  ['smile-preview', '/services/smile-preview/'],
+  ['named-checkup', '/services/named-checkup/'],
   ['services', '/services/'],
   ['doctors', '/doctors/'],
   ['blog', '/blog/'],

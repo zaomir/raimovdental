@@ -116,8 +116,32 @@ if (!/function\s+pruneJournal/.test(store) || (store.match(/pruneJournal\(\)/g) 
   fail('store.mjs', 'journal.jsonl не очищается по 60-дневному retention');
 }
 if (!/review_cycle_stopped/.test(store)) fail('store.mjs', 'нет события review_cycle_stopped');
-for (const event of ['hub_opened', 'csat_scored', 'platform_clicked']) {
+for (const event of [
+  'hub_opened',
+  'csat_scored',
+  'platform_clicked',
+  'platform_already_reviewed',
+]) {
   if (!store.includes(event)) fail('store.mjs', `нет события ${event} (SOP §5)`);
+}
+for (const event of ['anon_hub_opened', 'anon_platform_clicked']) {
+  if (!server.includes(event)) fail('server.mjs', `нет события ${event} (ТЗ Review Hub §6)`);
+}
+if (/Ссылка недействительна|персональн\w+\s+ссылк\w+\s+обязательн/i.test(copy)) {
+  fail('content.mjs', 'fallback содержит тупиковый текст про недействительную/обязательную ссылку');
+}
+const renderLandingBody = render.slice(
+  render.indexOf('export function renderLanding'),
+  render.indexOf('function scale')
+);
+if (!/team\.jpg/.test(render) || !/PLATFORM_LABELS/.test(renderLandingBody)) {
+  fail('render.mjs', 'fallback без фото команды или трёх кнопок карт');
+}
+if (!/already-reviewed/.test(render) || !/alreadyLabel/.test(render)) {
+  fail('render.mjs', 'нет вторичного действия «уже оставил отзыв»');
+}
+if (!/markPlatformAlreadyReviewed/.test(store)) {
+  fail('store.mjs', 'нет отдельного состояния already_reviewed');
 }
 
 /* --------------------------------------------------------------- pii rules */
@@ -147,6 +171,9 @@ if (!/noindex/.test(server) && !/noindex/.test(render)) {
 }
 if (!/timingSafeEqual/.test(server)) fail('server.mjs', 'admin-токен сравнивается небезопасно');
 if (!/127\.0\.0\.1/.test(server)) fail('server.mjs', 'сервис слушает не только loopback');
+if (!/send\(res,\s*200,\s*render\.renderLanding/.test(server)) {
+  fail('server.mjs', 'битый/неизвестный token не возвращает marketing fallback с HTTP 200');
+}
 
 /* -------------------------------------------------------------------- report */
 

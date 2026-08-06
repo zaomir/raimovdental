@@ -57,21 +57,21 @@ ${noJs ? '' : '<script src="/feedback/hub.js" defer></script>'}
 </html>`;
 }
 
-/** Neutral page for unknown, expired or malformed tokens — it reveals nothing either way. */
+/** Unknown routes use the same useful marketing fallback and never reveal token state. */
 export function renderGone(cssHref) {
-  return shell({
-    title: copy.gone.title,
-    cssHref,
-    noJs: true,
-    body: `<section class="card">
-      <h1 class="hub__title">${esc(copy.gone.title)}</h1>
-      <p class="hub__lead">${esc(copy.gone.lead)}</p>
-      <p><a class="hub__wa" href="https://wa.me/${esc(copy.clinic.phone.replace('+', ''))}">Написать в WhatsApp</a></p>
-    </section>`,
-  });
+  return renderLanding(cssHref);
 }
 
 export function renderLanding(cssHref) {
+  const platforms = Object.entries(PLATFORM_LABELS)
+    .map(
+      ([id, label]) => `<li class="platform">
+        <a class="platform__btn" href="/feedback/out/${esc(id)}" rel="nofollow noopener">
+          Оставить отзыв на ${esc(label)}
+        </a>
+      </li>`
+    )
+    .join('');
   return shell({
     title: copy.landing.title,
     cssHref,
@@ -79,7 +79,12 @@ export function renderLanding(cssHref) {
     body: `<section class="card">
       <h1 class="hub__title">${esc(copy.landing.title)}</h1>
       <p class="hub__lead">${esc(copy.landing.lead)}</p>
-      <p><a class="hub__wa" href="https://wa.me/${esc(copy.clinic.phone.replace('+', ''))}">Написать в WhatsApp</a></p>
+      <img class="hub__team" src="/feedback/team.jpg" width="720" height="297"
+        alt="${esc(copy.landing.teamAlt)}">
+      <h2 class="hub__subtitle">${esc(copy.landing.mapsTitle)}</h2>
+      <ul class="platforms">${platforms}</ul>
+      <p class="hub__minor"><a href="https://wa.me/${esc(copy.clinic.phone.replace('+', ''))}">
+        ${esc(copy.landing.whatsappLabel)}</a></p>
     </section>`,
   });
 }
@@ -136,10 +141,11 @@ export function renderStopped(cssHref) {
 
 /** Same neutral platform choices after every score; score never controls their availability. */
 function platformOptions(record) {
-  const remaining = Object.keys(PLATFORM_LABELS).filter((p) => !record.clicks[p]);
+  const done = (platform) => Boolean(record.clicks?.[platform] || record.alreadyReviewed?.[platform]);
+  const remaining = Object.keys(PLATFORM_LABELS).filter((p) => !done(p));
   const rows = Object.entries(PLATFORM_LABELS)
     .map(([id, label]) => {
-      if (record.clicks[id]) {
+      if (done(id)) {
         return `<li class="platform platform--done">
           <span class="platform__label">${esc(label)}</span>
           <span class="platform__state">${esc(copy.promoter.doneLabel)}</span>
@@ -148,7 +154,13 @@ function platformOptions(record) {
       return `<li class="platform">
         <form method="post" action="/feedback/${esc(record.token)}/click">
           <input type="hidden" name="platform" value="${esc(id)}">
-          <button class="platform__btn" type="submit">${esc(label)}</button>
+          <button class="platform__btn" type="submit">Оставить отзыв на ${esc(label)}</button>
+        </form>
+        <form class="platform__already" method="post" action="/feedback/${esc(
+          record.token
+        )}/already-reviewed">
+          <input type="hidden" name="platform" value="${esc(id)}">
+          <button class="platform__already-btn" type="submit">${esc(copy.promoter.alreadyLabel)}</button>
         </form>
       </li>`;
     })
@@ -159,7 +171,8 @@ function platformOptions(record) {
     <p class="hub__lead">${esc(remaining.length ? copy.promoter.lead : copy.promoter.allDone)}</p>
     <ul class="platforms">${rows}</ul>
     ${
-      remaining.length && Object.keys(record.clicks).length
+      remaining.length
+        && (Object.keys(record.clicks ?? {}).length || Object.keys(record.alreadyReviewed ?? {}).length)
         ? `<p class="hub__note">${esc(copy.promoter.doneHint)}</p>`
         : ''
     }

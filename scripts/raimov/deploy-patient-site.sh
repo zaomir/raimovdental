@@ -45,6 +45,7 @@ say "1/7 build"
 node "${REPO}/scripts/raimov/build-patient-site.mjs" --host "$HOST_MODE"
 
 say "2/7 quality gates"
+node "${REPO}/scripts/raimov/sync-price-table.mjs" --check
 node "${REPO}/scripts/raimov/check-patient-site.mjs" --dist "$DIST"
 
 say "3/7 publish release ${STAMP}"

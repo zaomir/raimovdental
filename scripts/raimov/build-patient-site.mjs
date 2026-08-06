@@ -778,6 +778,8 @@ const legacy = {
   '/expertdentalkg/': '/',
   '/price': '/services/',
   '/price/': '/services/',
+  '/services/price': '/services/',
+  '/services/price/': '/services/',
   '/doctors/gribanova-marina': '/doctors/gribanova-marina/',
   // Tilda draft duplicate of the front page.
   '/home-new': '/',

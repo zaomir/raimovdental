@@ -317,6 +317,12 @@ for (const file of files) {
   }
   if (AI_MENTION.test(text)) fail(page, 'public page mentions AI (DEC-251)');
   if (PRIVATE_LEAK.test(html)) fail(page, 'links to the private raimovdental strategy surface');
+  if (!internal && /(?:proposed|REQUIRES_CLINIC_APPROVAL|DEC-\d+)/i.test(text)) {
+    fail(page, 'internal status marker leaked into public copy');
+  }
+  if (/href=["'][^"']*\/null(?:["'/?#]|$)/i.test(html)) {
+    fail(page, 'public link points to /null');
+  }
   if (!internal && /LO-8888\s+8888\s+88/.test(text)) {
     fail(page, 'unverified licence placeholder is public');
   }
@@ -358,9 +364,48 @@ for (const file of files) {
 /* --------------------------------------------------- cross-page contracts */
 
 const routes = files.map((f) => '/' + relative(DIST, f).replace(/index\.html$/, '').replace(/\\/g, '/'));
-for (const required of ['/', '/services/', '/doctors/', '/doctors/raimov-atabek/', '/blog/', '/contacts/', '/privacy/', '/legal/']) {
+for (const required of [
+  '/',
+  '/services/',
+  '/services/smile-preview/',
+  '/services/named-checkup/',
+  '/doctors/',
+  '/doctors/raimov-atabek/',
+  '/blog/',
+  '/blog/cifrovaya-primerka-ulybki/',
+  '/blog/imennoy-chekap/',
+  '/contacts/',
+  '/privacy/',
+  '/legal/',
+]) {
   if (!routes.includes(required)) fail('site', `missing required route ${required}`);
 }
+
+const routeHtml = new Map(
+  files.map((file) => [
+    '/' + relative(DIST, file).replace(/index\.html$/, '').replace(/\\/g, '/'),
+    readFileSync(file, 'utf8'),
+  ])
+);
+function requireCta(route, label, message) {
+  const html = routeHtml.get(route) ?? '';
+  if (!html.includes(`>${label}</a>`)) fail(route, `CTA label missing: «${label}»`);
+  const messages = [...html.matchAll(/href="(https:\/\/wa\.me\/[^"]+)"/g)].map(([, href]) => {
+    const url = new URL(href.replace(/&amp;/g, '&'));
+    return url.searchParams.get('text');
+  });
+  if (!messages.includes(message)) fail(route, `WhatsApp CTA message mismatch: «${message}»`);
+}
+requireCta(
+  '/services/smile-preview/',
+  'Записаться на примерку — 0 сом',
+  'Хочу записаться на цифровую примерку улыбки — 0 сом.'
+);
+requireCta(
+  '/services/named-checkup/',
+  'Записаться на чек-ап — 0 сом',
+  'Хочу записаться на именной чек-ап — 0 сом.'
+);
 
 const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8');
 if (sitemap.includes('/internal/')) fail('sitemap.xml', 'internal route present in sitemap');

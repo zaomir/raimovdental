@@ -118,6 +118,30 @@ body {
   color: var(--ink-soft);
 }
 
+.hub__subtitle {
+  margin: 1.5rem 0 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.hub__team {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.hub__minor {
+  margin: 1.2rem 0 0;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.hub__minor a {
+  color: var(--ink-mute);
+  text-underline-offset: 0.2em;
+}
+
 .hub__note {
   margin: 1.1rem 0 0;
   color: var(--ink-soft);
@@ -217,6 +241,10 @@ body {
   color: var(--bone);
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .platform__btn:hover,
@@ -225,9 +253,32 @@ body {
 }
 
 .platform__btn:focus-visible,
-.btn:focus-visible {
+.btn:focus-visible,
+.platform__already-btn:focus-visible {
   outline: 2px solid var(--forest);
   outline-offset: 2px;
+}
+
+.platform__already {
+  margin-top: 0.3rem !important;
+  text-align: center;
+}
+
+.platform__already-btn {
+  min-height: 2.75rem;
+  padding: 0.45rem 0.7rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink-mute);
+  font: inherit;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.platform__already-btn:hover {
+  color: var(--forest);
 }
 
 /* Already visited: greyed and inert, but still legible at 4.5:1 so the patient can read it. */

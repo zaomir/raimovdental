@@ -28,6 +28,9 @@ export const CSV_COLUMNS = [
   'yandex_click',
   'twogis_click',
   'google_click',
+  'yandex_already_reviewed',
+  'twogis_already_reviewed',
+  'google_already_reviewed',
   'nudges',
   'publish_detected',
   'recovery_status',
@@ -46,6 +49,9 @@ export function toCsv() {
     t.clicks.yandex ?? '',
     t.clicks.twogis ?? '',
     t.clicks.google ?? '',
+    t.alreadyReviewed?.yandex ?? '',
+    t.alreadyReviewed?.twogis ?? '',
+    t.alreadyReviewed?.google ?? '',
     t.nudges ?? 0,
     PLATFORMS.filter((p) => t.publishDetected?.[p]).join('|'),
     t.recovery?.status ?? '',
@@ -59,11 +65,16 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
   const tokens = allTokens();
   const open = tokens.filter((t) => t.recovery && t.recovery.status !== 'CLOSED').length;
   const scored = tokens.filter((t) => t.score !== null);
-  const multi = scored.filter((t) => Object.keys(t.clicks).length >= 2).length;
+  const multi = scored.filter(
+    (t) => new Set([...Object.keys(t.clicks ?? {}), ...Object.keys(t.alreadyReviewed ?? {})]).size >= 2
+  ).length;
 
   const rows = tokens
     .map((t) => {
-      const clicks = PLATFORMS.filter((p) => t.clicks[p]).length;
+      const covered = PLATFORMS.filter((p) => t.clicks?.[p] || t.alreadyReviewed?.[p]);
+      const methods = covered
+        .map((p) => `${p}:${t.alreadyReviewed?.[p] ? 'already_reviewed' : 'clicked'}`)
+        .join(', ');
       const status = t.recovery
         ? `<span class="pill ${t.recovery.status === 'CLOSED' ? '' : 'pill--alert'}">${esc(
             t.recovery.status
@@ -82,7 +93,7 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
         <td>${t.openedAt ? esc(day(t.openedAt)) : '—'}</td>
         <td>${t.score ?? '—'}</td>
         <td>${esc(t.branch ?? '—')}</td>
-        <td>${clicks}/3 ${PLATFORMS.filter((p) => t.clicks[p]).join(', ')}</td>
+        <td>${covered.length}/3 ${esc(methods)}</td>
         <td>${status}</td>
         <td>${recovery}</td>
         <td>${t.stopped ? esc(t.stopped.reason) : '—'}</td>

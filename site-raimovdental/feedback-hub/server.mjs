@@ -34,6 +34,7 @@ const ADMIN_TOKEN = (process.env.FEEDBACK_ADMIN_TOKEN || '').trim();
 
 const CSS = readFileSync(join(HERE, 'assets', 'hub.css'), 'utf8');
 const JS = readFileSync(join(HERE, 'assets', 'hub.js'), 'utf8');
+const TEAM_IMAGE = readFileSync(join(HERE, '..', 'patient-site', 'assets', 'img', 'team', 'team-720.jpg'));
 // Content hash keeps the CDN from serving yesterday's stylesheet after a hub deploy.
 const hash = (s) => {
   let h = 5381;
@@ -64,6 +65,11 @@ function send(res, status, body, headers = {}) {
 /** Post/redirect/get: a refresh after scoring must not replay the score. */
 function seeOther(res, location) {
   res.writeHead(303, { location, 'cache-control': 'no-store', ...SECURITY_HEADERS });
+  res.end();
+}
+
+function found(res, location) {
+  res.writeHead(302, { location, 'cache-control': 'no-store', ...SECURITY_HEADERS });
   res.end();
 }
 
@@ -114,6 +120,12 @@ const server = createServer(async (req, res) => {
         'cache-control': 'public, max-age=600',
       });
     }
+    if (method === 'GET' && path === '/feedback/team.jpg') {
+      return send(res, 200, TEAM_IMAGE, {
+        'content-type': 'image/jpeg',
+        'cache-control': 'public, max-age=86400',
+      });
+    }
     if (method === 'GET' && path === '/feedback/health') {
       return send(res, 200, JSON.stringify({ ok: true, tokens: store.allTokens().length }), {
         'content-type': 'application/json; charset=utf-8',
@@ -161,19 +173,41 @@ const server = createServer(async (req, res) => {
     /* ------------------------------------------------------------ landing */
 
     if (method === 'GET' && path === '/feedback') {
+      store.logEvent('anon_hub_opened', null, { source: 'landing' });
       return send(res, 200, render.renderLanding(CSS_HREF));
+    }
+
+    const anonymousClick = path.match(/^\/feedback\/out\/(yandex|twogis|google)$/);
+    if (method === 'GET' && anonymousClick) {
+      const platform = anonymousClick[1];
+      store.logEvent('anon_platform_clicked', null, { platform });
+      return found(res, render.PLATFORM_URLS[platform]);
     }
 
     /* -------------------------------------------------------- token pages */
 
-    const match = path.match(/^\/feedback\/([A-Za-z0-9_-]{16,64})(\/(score|click|recovery|stop))?$/);
-    if (!match) return send(res, 404, render.renderGone(CSS_HREF));
+    const match = path.match(
+      /^\/feedback\/([A-Za-z0-9_-]{16,64})(\/(score|click|already-reviewed|recovery|stop))?$/
+    );
+    if (!match) {
+      if (method === 'GET') {
+        store.logEvent('anon_hub_opened', null, { source: 'malformed-token' });
+        return send(res, 200, render.renderLanding(CSS_HREF));
+      }
+      return send(res, 404, render.renderGone(CSS_HREF));
+    }
 
     const token = match[1];
     const action = match[3];
     const record = store.getToken(token);
-    // Unknown, expired and malformed all produce the same 404 with no patient data on it.
-    if (!record) return send(res, 404, render.renderGone(CSS_HREF));
+    // Unknown, expired and malformed links all become the same useful, non-identifying fallback.
+    if (!record) {
+      if (method === 'GET') {
+        store.logEvent('anon_hub_opened', null, { source: 'unknown-token' });
+        return send(res, 200, render.renderLanding(CSS_HREF));
+      }
+      return send(res, 404, render.renderGone(CSS_HREF));
+    }
 
     if (method === 'GET' && !action) {
       store.markOpened(token);
@@ -196,6 +230,11 @@ const server = createServer(async (req, res) => {
       const target = render.PLATFORM_URLS[platform];
       // Straight to the map: the patient came here to write, not to read another page.
       return seeOther(res, target || `/feedback/${token}`);
+    }
+
+    if (action === 'already-reviewed') {
+      store.markPlatformAlreadyReviewed(token, form.get('platform'));
+      return seeOther(res, `/feedback/${token}`);
     }
 
     if (action === 'recovery') {

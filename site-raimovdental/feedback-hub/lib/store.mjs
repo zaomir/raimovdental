@@ -95,6 +95,7 @@ export function createToken({ serviceCategory = null, doctorCode = null, source 
     scoredAt: null,
     branch: null,
     clicks: {},
+    alreadyReviewed: {},
     nudges: 0,
     recovery: null,
     stopped: null,
@@ -159,6 +160,20 @@ export function markPlatformClick(token, platform) {
   return { record: r };
 }
 
+export function markPlatformAlreadyReviewed(token, platform) {
+  const r = getToken(token);
+  if (!r) return { error: 'gone' };
+  if (!PLATFORMS.includes(platform)) return { error: 'unknown-platform' };
+  if (r.score === null) return { error: 'not-scored' };
+  r.alreadyReviewed ??= {};
+  if (!r.clicks?.[platform] && !r.alreadyReviewed[platform]) {
+    r.alreadyReviewed[platform] = new Date().toISOString();
+    persist();
+    logEvent('platform_already_reviewed', token, { platform });
+  }
+  return { record: r };
+}
+
 export function saveRecovery(
   token,
   { topics = [], comment = '', privacyConsent = false, contactConsent = false }
@@ -199,6 +214,7 @@ export function resetScore(token) {
   r.scoredAt = null;
   r.branch = null;
   r.clicks = {};
+  r.alreadyReviewed = {};
   r.recovery = null;
   persist();
   logEvent('admin_reset', token);
