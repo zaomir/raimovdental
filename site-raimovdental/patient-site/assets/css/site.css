@@ -340,9 +340,10 @@ ol {
   flex: none;
 }
 
-/* Height-driven so the wordmark keeps its own proportions at any breakpoint. */
+/* Height-driven so the wordmark keeps its own proportions at any breakpoint. The floor
+   is set by the DENTAL STUDIO line, which stops being legible below roughly 38px. */
 .brandmark img {
-  height: clamp(1.65rem, 3.4vw, 2.1rem);
+  height: clamp(2.35rem, 4vw, 2.9rem);
   width: auto;
   display: block;
 }

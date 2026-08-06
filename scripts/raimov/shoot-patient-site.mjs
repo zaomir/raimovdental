@@ -255,8 +255,12 @@ for (const vp of VIEWPORTS) {
       expression: `window.scrollTo(0, document.body.scrollHeight); [...document.images].forEach(i => i.loading = 'eager');`,
     });
     await new Promise((r) => setTimeout(r, 1800));
-    await call('Runtime.evaluate', { expression: 'window.scrollTo(0,0)' });
-    await new Promise((r) => setTimeout(r, 400));
+    // The site sets scroll-behavior: smooth, so an animated scroll back to the top can
+    // still be in flight at capture time and the sticky header gets painted mid-page.
+    await call('Runtime.evaluate', {
+      expression: `document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, 0);`,
+    });
+    await new Promise((r) => setTimeout(r, 500));
 
     const { result } = await call('Runtime.evaluate', { expression: PROBE, returnByValue: true });
     const probe = JSON.parse(result.value);
@@ -266,10 +270,20 @@ for (const vp of VIEWPORTS) {
     let file = null;
 
     if (SHOTS) {
+      // captureBeyondViewport repaints position:sticky at the wrong offset, which makes
+      // the header look broken in the shot. Growing the viewport to the page height and
+      // capturing normally keeps sticky elements where the visitor actually sees them.
+      await call('Emulation.setDeviceMetricsOverride', {
+        width: vp.width,
+        height,
+        deviceScaleFactor: 1,
+        mobile: vp.mobile,
+      });
+      await new Promise((r) => setTimeout(r, 350));
+
       const shot = await call('Page.captureScreenshot', {
         format: 'jpeg',
         quality: 78,
-        captureBeyondViewport: true,
         clip: { x: 0, y: 0, width: vp.width, height, scale: vp.id === 'desktop' ? 0.62 : 1 },
       });
       file = join(OUT, `${vp.id}-${name}.jpg`);
@@ -277,13 +291,28 @@ for (const vp of VIEWPORTS) {
 
       // The full-page shot is scaled down to stay readable as a whole; the first screens
       // are also kept at native scale, where type and spacing can actually be judged.
+      const topHeight = Math.min(height, vp.mobile ? 1700 : 1500);
+      await call('Emulation.setDeviceMetricsOverride', {
+        width: vp.width,
+        height: topHeight,
+        deviceScaleFactor: 1,
+        mobile: vp.mobile,
+      });
+      await new Promise((r) => setTimeout(r, 350));
       const top = await call('Page.captureScreenshot', {
         format: 'jpeg',
         quality: 82,
-        captureBeyondViewport: true,
-        clip: { x: 0, y: 0, width: vp.width, height: Math.min(height, vp.mobile ? 1700 : 1500), scale: 1 },
+        clip: { x: 0, y: 0, width: vp.width, height: topHeight, scale: 1 },
       });
       writeFileSync(join(OUT, `${vp.id}-${name}-top.jpg`), Buffer.from(top.data, 'base64'));
+
+      // Restore the real viewport so the next page lays out at the intended size.
+      await call('Emulation.setDeviceMetricsOverride', {
+        width: vp.width,
+        height: vp.height,
+        deviceScaleFactor: 1,
+        mobile: vp.mobile,
+      });
     }
 
     const consoleErrors = events
