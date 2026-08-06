@@ -50,6 +50,9 @@ node "${REPO}/scripts/raimov/check-patient-site.mjs" --dist "$DIST"
 say "3/7 publish release ${STAMP}"
 mkdir -p "$RELEASES"
 rsync -a --delete "${DIST}/" "${RELEASES}/${STAMP}/"
+SOURCE_SHA="$(git -C "$REPO" rev-parse HEAD)"
+printf '{"sha":"%s","deployedAt":"%s","host":"%s"}\n' \
+  "$SOURCE_SHA" "$STAMP" "$DOMAIN" > "${RELEASES}/${STAMP}/release.json"
 ln -sfn "${RELEASES}/${STAMP}" "${CURRENT}.tmp"
 mv -Tf "${CURRENT}.tmp" "$CURRENT"
 # Keep the five most recent releases; older ones are recoverable from git anyway.
@@ -135,6 +138,7 @@ check /contacts/                          200
 check /privacy/                           200
 check /sitemap.xml                        200
 check /robots.txt                         200
+check /release.json                       200
 check /services/braces/                   301
 check /no-such-page/                      404
 
@@ -146,4 +150,4 @@ if (( fails )); then
 fi
 
 echo
-echo "deployed ${DOMAIN} -> ${RELEASES}/${STAMP} (sha $(git -C "$REPO" rev-parse --short HEAD))"
+echo "deployed ${DOMAIN} -> ${RELEASES}/${STAMP} (sha ${SOURCE_SHA:0:9})"

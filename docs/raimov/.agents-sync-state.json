@@ -98,6 +98,7 @@
     "docs/raimov/operations/expert-dental/reports/2026-08-first-half/manifest.json": "abb223df08754fd387890ebc7f95b857359f309d9138b707c8e2cd6c75888189",
     "docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md": "776afefee0d675d09584733c31450b478614652bfbf175d3c844e48be5f6f097",
     "docs/raimov/operations/expert-dental/reputation/POST_VISIT_FEEDBACK_LOOP.md": "7ffbae7fa065553c05ecf683269735cf158dc897541b54502845836d16c19828",
+    "docs/raimov/operations/expert-dental/reputation/TZ_REVIEW_HUB_NO_TOKEN_AND_ALREADY_REVIEWED.md": "189f79c6f19b465b7311e56a86b4ff853590abb5574717faba67b790723f1960",
     "docs/raimov/operations/expert-dental/templates/MATERIAL_ENTRY_TEMPLATE.md": "fae12e9ca6f0c8f39bca699f5825f1852321dad69679f6585af649d270bb2e18",
     "docs/raimov/operations/expert-dental/templates/REPORT_TEMPLATE.md": "3c81ea9f8f66be8e403defc86a03f8ade1df7c45f3d1da8dcb8df5faedccd96f",
     "docs/raimov/patient-funnel/README.md": "bfbeb56c4fb53d72d3049c90f8fa5cf8f1d057e56312e3bb5623990f5922979a",
@@ -268,7 +269,7 @@
     "scripts/raimov/check-feedback-hub.mjs": "65017f13385ba4ead158132f9b73f9c9316a7d58d5371fe0a42f97caf64d5bfc",
     "scripts/raimov/check-patient-site.mjs": "19bbc4ffda9409ba9f5a1811cb1b1ff16cc092b5c80e47a4918fc3400774f3e1",
     "scripts/raimov/deploy-feedback-hub.sh": "c08ae055dca874b47bd53ec3dadc141805278a4f0d4898b2295629ad016345a4",
-    "scripts/raimov/deploy-patient-site.sh": "2cff86d051822e75b27f46252ae4be960f8c134db9d9c30a198b143a4f4fc5e4",
+    "scripts/raimov/deploy-patient-site.sh": "785a1b19a9956562d59a137cb209267b190417827eb1848ae485663a9581d58c",
     "scripts/raimov/deploy-stage-a-preview.sh": "a1d00c80941c2ab91a5663be81ef50bd9f04e1172d236cf18f7c40fbd6133cb7",
     "scripts/raimov/package-stage-a-preview.mjs": "b059d5619f2b54b978ee076f5e90d3cfef448dc6275f6e379cc354dd4e237a91",
     "scripts/raimov/password-gate.py": "303f35b1e4b0fb22342f421ba00079a132b8fe1a93301154f0e1b35e326940f8",
@@ -544,6 +545,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T21:40:04Z",
+  "updated_at_utc": "2026-08-06T21:50:04Z",
   "version": 1
 }
