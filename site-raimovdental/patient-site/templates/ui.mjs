@@ -311,23 +311,6 @@ function reversibilityTone(value) {
   return 'stop';
 }
 
-export function reviewCard(review) {
-  const paras = String(review.quote)
-    .split(/\n{2,}/)
-    .map((p) => p.trim())
-    .filter(Boolean)
-    .map((p) => `<p>${esc(p)}</p>`)
-    .join('');
-  return `<figure class="review">
-    <blockquote class="review__quote">${paras}</blockquote>
-    <figcaption class="review__meta">
-      ${review.authorDisplay ? `<span class="review__author">${esc(review.authorDisplay)}</span>` : ''}
-      <a href="${attr(maps.twoGisReviews)}" target="_blank" rel="noopener nofollow"
-         data-event="reviews_outbound_click" data-cta-context="review-card">Отзыв на 2ГИС</a>
-    </figcaption>
-  </figure>`;
-}
-
 /**
  * Booking form. There is no server: the form composes a WhatsApp message from the fields.
  * The inputs carry no `name`, so without JavaScript the form still submits to wa.me with the

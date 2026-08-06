@@ -32,7 +32,6 @@ import {
   money,
   postCard,
   priceBlock,
-  reviewCard,
   routerTable,
   telHref,
   trustStrip,
@@ -70,7 +69,6 @@ function priceDisclaimer(prices) {
 export function homePage({ manifest, services, doctors, articles, prices, reviews, cases }) {
   const ordered = [...services].sort((a, b) => a.order - b.order);
   const chiefDoctor = doctors.find((d) => d.chief);
-  const teaser = (reviews?.homeTeaserItems ?? []).slice(0, 3);
   const rating = reviews?.aggregateRating;
 
   const heroTitle = home.hero.titleEm
@@ -273,20 +271,19 @@ export function homePage({ manifest, services, doctors, articles, prices, review
   </section>
 
   ${
-    teaser.length
+    rating
       ? `<section class="section section--bone" id="${attr(home.reviewsBlock.id)}" aria-labelledby="reviews-title">
     <div class="shell">
       ${sectionHead({
         kicker: home.reviewsBlock.kicker,
         title: home.reviewsBlock.title,
-        lead: rating
-          ? `**${String(rating.value).replace('.', ',')} из 5** на основании **${
-              rating.reviewCount
-            }** отзывов на 2ГИС · срез ${formatDate(rating.capturedAt)}`
-          : null,
+        lead: `**${String(rating.value).replace('.', ',')} из 5** на основании **${
+          rating.reviewCount
+        }** отзывов на 2ГИС · срез ${formatDate(rating.capturedAt)}`,
         id: 'reviews-title',
       })}
-      <div class="grid grid--3">${teaser.map((r) => reviewCard(r)).join('')}</div>
+      <p class="t-body shell--narrow">Отзывы читаются на странице клиники в 2ГИС. Мы не перепечатываем
+        отдельные цитаты без стабильной ссылки на конкретную публикацию.</p>
       <p class="mt-3"><a class="link-arrow" href="${attr(maps.twoGisReviews)}" target="_blank"
         rel="noopener nofollow" data-event="reviews_outbound_click"
         data-cta-context="reviews-all">${esc(home.reviewsBlock.ctaLabel)} →</a></p>
@@ -1372,48 +1369,42 @@ export function aboutPage({ manifest, doctors, prices }) {
         title: 'Инструменты выбирают по задаче, а не ради технологии',
         id: 'equipment-safety-title',
       })}
-      <p class="t-lead shell--narrow equipment-safety__lead">
+      <p class="t-lead shell--narrow">
         Оборудование помогает врачу увидеть детали и контролировать этапы лечения. Конкретный метод
         обследования или изоляции назначают после осмотра — не каждому пациенту нужен весь список.
       </p>
-      <div class="equipment-safety__grid mt-4">
-        <article class="equipment-safety__card">
-          <h3 class="card__title">КТ по показаниям</h3>
-          <p class="card__text">Трёхмерное исследование используют, когда врачу нужно оценить кость,
+      <div class="grid grid--3 mt-4">
+        <article class="step">
+          <h3 class="step__title">КТ по показаниям</h3>
+          <p class="step__text">Трёхмерное исследование используют, когда врачу нужно оценить кость,
             корни или положение непрорезавшихся зубов. Назначение определяет врач.</p>
         </article>
-        <article class="equipment-safety__card">
-          <h3 class="card__title">Микроскоп</h3>
-          <p class="card__text">Увеличение применяют при сложной анатомии корневых каналов,
+        <article class="step">
+          <h3 class="step__title">Микроскоп</h3>
+          <p class="step__text">Увеличение применяют при сложной анатомии корневых каналов,
             перелечивании и поиске инородных фрагментов — по клинической необходимости.</p>
         </article>
-        <article class="equipment-safety__card">
-          <h3 class="card__title">Внутриротовое сканирование</h3>
-          <p class="card__text">Цифровая модель помогает планировать ортодонтические,
+        <article class="step">
+          <h3 class="step__title">Внутриротовое сканирование</h3>
+          <p class="step__text">Цифровая модель помогает планировать ортодонтические,
             ортопедические и эстетические этапы без традиционного слепка, когда это уместно.</p>
         </article>
-        <article class="equipment-safety__card">
-          <h3 class="card__title">Изоляция коффердамом</h3>
-          <p class="card__text">Рабочее поле изолируют от слюны при реставрациях и лечении каналов,
+        <article class="step">
+          <h3 class="step__title">Изоляция коффердамом</h3>
+          <p class="step__text">Рабочее поле изолируют от слюны при реставрациях и лечении каналов,
             если этого требует выбранный клинический протокол.</p>
         </article>
-        <article class="equipment-safety__card">
-          <h3 class="card__title">Стерилизационная</h3>
-          <p class="card__text">Для обработки многоразовых инструментов в клинике выделена отдельная
-            зона. Одноразовые материалы применяют однократно.</p>
+        <article class="step">
+          <h3 class="step__title">Стерилизационная</h3>
+          <p class="step__text">Отдельное помещение стерилизационной показано в фотогалерее выше.
+            Вопросы о порядке обработки инструментов можно задать администратору до приёма.</p>
         </article>
-        <article class="equipment-safety__card">
-          <h3 class="card__title">Air Flow и ультразвук</h3>
-          <p class="card__text">Метод снятия мягких и твёрдых отложений подбирают после оценки
+        <article class="step">
+          <h3 class="step__title">Air Flow и ультразвук</h3>
+          <p class="step__text">Метод снятия мягких и твёрдых отложений подбирают после оценки
             состояния эмали, дёсен и объёма налёта.</p>
         </article>
       </div>
-      <figure class="equipment-safety__image mt-4">
-        ${image(manifest, 'clinic/sterilization', 'Стерилизационная Expert Dental Studio', {
-          sizes: '(min-width: 56rem) 72vw, 92vw',
-        })}
-        <figcaption class="t-small equipment-safety__caption">Отдельная стерилизационная клиники.</figcaption>
-      </figure>
     </div>
   </section>
 
