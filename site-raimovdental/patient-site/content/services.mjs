@@ -13,7 +13,7 @@
 export const services = [
   {
     slug: 'diagnostics',
-    order: 1,
+    order: 11,
     featured: true,
     navLabel: 'Комплексная диагностика',
     title: 'Комплексная диагностика перед лечением',
@@ -436,9 +436,9 @@ export const services = [
 
   {
     slug: 'veneers',
-    order: 6,
+    order: 1,
     featured: true,
-    navLabel: 'Виниры',
+    navLabel: 'Виниры и эстетическая реставрация',
     title: 'Виниры и эстетическая реставрация',
     metaTitle: 'Виниры в Бишкеке: показания и цены | Expert Dental Studio',
     metaDescription:
@@ -513,7 +513,7 @@ export const services = [
 
   {
     slug: 'endodontics',
-    order: 7,
+    order: 6,
     featured: true,
     navLabel: 'Лечение каналов',
     title: 'Лечение каналов под микроскопом',
@@ -592,7 +592,8 @@ export const services = [
 
   {
     slug: 'caries-treatment',
-    order: 8,
+    order: 7,
+    featured: true,
     navLabel: 'Лечение кариеса',
     title: 'Лечение кариеса и восстановление зубов',
     metaTitle: 'Лечение кариеса в Бишкеке — цены и этапы | Expert Dental Studio',
@@ -662,7 +663,8 @@ export const services = [
 
   {
     slug: 'surgery',
-    order: 9,
+    order: 8,
+    featured: true,
     navLabel: 'Хирургия',
     title: 'Хирургия и удаление зубов',
     metaTitle: 'Удаление зубов в Бишкеке — цены и этапы | Expert Dental Studio',
@@ -730,7 +732,7 @@ export const services = [
 
   {
     slug: 'pediatric-dentistry',
-    order: 10,
+    order: 9,
     featured: true,
     navLabel: 'Детская стоматология',
     title: 'Детская стоматология',
@@ -805,7 +807,8 @@ export const services = [
 
   {
     slug: 'hygiene',
-    order: 11,
+    order: 10,
+    featured: true,
     navLabel: 'Гигиена и профилактика',
     title: 'Профессиональная гигиена и профилактика',
     metaTitle: 'Профессиональная чистка зубов в Бишкеке — Expert Dental Studio',

@@ -5,7 +5,7 @@
  * of the stack is that a page weighs almost nothing on a mobile connection in Bishkek.
  */
 
-import { brand, contacts, cta, nav, footerNav } from '../config/site.mjs';
+import { brand, contacts, cta, nav, footerNav, maps } from '../config/site.mjs';
 
 /* ------------------------------------------------------------------ escaping */
 
@@ -20,6 +20,21 @@ export function esc(value = '') {
 
 export function attr(value = '') {
   return esc(value);
+}
+
+/* -------------------------------------------------------------------- prices */
+
+/**
+ * Replaces every `{{price:sku}}` token with the figure from PRICE_CATALOG.json.
+ * Copy modules never carry a typed price, so the page and the catalog cannot disagree.
+ * An unknown SKU throws: a broken build is cheaper than a wrong price on a medical site.
+ */
+export function money(text = '', prices) {
+  return String(text).replace(/\{\{price:([a-z0-9-]+)\}\}/gi, (_m, sku) => {
+    const item = prices?.bySku?.[sku];
+    if (!item) throw new Error(`Unknown price SKU "${sku}" in copy: ${String(text).slice(0, 70)}`);
+    return item.price;
+  });
 }
 
 /* -------------------------------------------------------------- inline markup */
@@ -179,6 +194,149 @@ export function priceBlock({ title, rows, note }) {
     </div>
     ${priceRows(rows)}
   </div>`;
+}
+
+/* ------------------------------------------------------- home page primitives */
+
+/**
+ * A reviewed passage that protects the clinic. Rendered at body size with a visible rule —
+ * never small print, never inside a collapsed accordion. See content/homepage.mjs.
+ */
+export function lockedNote(note, prices, { title = '', onDark = false } = {}) {
+  if (!note) return '';
+  const heading = title || note.title || '';
+  return `<div class="note-locked${onDark ? ' note-locked--onDark' : ''}">
+    ${heading ? `<strong class="note-locked__title">${esc(heading)}</strong> ` : ''}
+    <span>${inline(money(note.text, prices))}</span>
+  </div>`;
+}
+
+export function trustStrip({ stats, infrastructure }, prices, { license, since } = {}) {
+  const cells = stats
+    .map((s) => {
+      const value = s.source
+        ? `<a href="${attr(maps[s.source])}" target="_blank" rel="noopener nofollow"
+             data-cta-context="trust-rating" data-event="reviews_outbound_click">${esc(s.value)}</a>`
+        : esc(s.value);
+      return `<div class="trust__cell">
+        <div class="trust__value numeral">${value}</div>
+        <div class="trust__label">${esc(s.label)}</div>
+      </div>`;
+    })
+    .join('');
+  const meta = [license, since, infrastructure].filter(Boolean).map(esc).join(' · ');
+  return `<section class="trust" aria-label="Клиника в цифрах">
+    <div class="shell">
+      <div class="trust__grid">${cells}</div>
+      ${meta ? `<p class="trust__meta">${money(meta, prices)}</p>` : ''}
+    </div>
+  </section>`;
+}
+
+/**
+ * The router: one actionable row per way a patient arrives. Each row opens WhatsApp with its
+ * own draft; the direction link beside it is a sibling, never nested inside the row link,
+ * so the markup stays valid and both targets are reachable by keyboard.
+ */
+export function routerTable(rows, prices, services) {
+  const items = rows
+    .map((r, i) => {
+      const service = services?.find((s) => `/services/${s.slug}/` === r.href);
+      return `<li class="router__row${r.highlight ? ' router__row--lead' : ''}">
+        <a class="router__link" href="${attr(waHref(r.wa))}"
+           data-cta-context="router-${i}" data-event="router_row_click">
+          <span class="router__situation">${esc(r.situation)}</span>
+          <span class="router__step">${esc(r.step)}</span>
+          <span class="router__price${r.free ? ' router__price--free' : ''}">${esc(
+        money(r.price, prices)
+      )}${r.free ? '<span class="router__free-mark" aria-hidden="true">✓</span>' : ''}</span>
+        </a>
+        ${
+          service
+            ? `<a class="router__more" href="${attr(r.href)}">
+                 <span class="visually-hidden">${esc(r.situation)}: </span>о направлении</a>`
+            : ''
+        }
+      </li>`;
+    })
+    .join('');
+  return `<ul class="router" role="list">${items}</ul>`;
+}
+
+/** Four-column comparison that becomes stacked blocks under 46rem via `data-label`. */
+export function methodsTable({ columns, rows }, prices) {
+  const head = columns.map((c) => `<th scope="col">${esc(c)}</th>`).join('');
+  const body = rows
+    .map((r) => {
+      const name = r.href
+        ? `<a href="${attr(r.href)}">${esc(r.method)}</a>`
+        : esc(r.method);
+      return `<tr${r.highlight ? ' class="is-lead"' : ''}>
+        <th scope="row" data-label="${attr(columns[0])}">${name}</th>
+        <td data-label="${attr(columns[1])}">${esc(r.task)}</td>
+        <td data-label="${attr(columns[2])}"><span class="tag tag--${attr(
+        reversibilityTone(r.reversibility)
+      )}">${esc(r.reversibility)}</span></td>
+        <td data-label="${attr(columns[3])}" class="numeral">${esc(money(r.price, prices))}</td>
+      </tr>`;
+    })
+    .join('');
+  return `<div class="table-wrap"><table class="cmp">
+    <thead><tr>${head}</tr></thead>
+    <tbody>${body}</tbody>
+  </table></div>`;
+}
+
+function reversibilityTone(value) {
+  if (/^полная/i.test(value)) return 'ok';
+  if (/^условная/i.test(value)) return 'warn';
+  return 'stop';
+}
+
+export function reviewCard(review) {
+  const quote = String(review.quote).trim();
+  return `<figure class="review">
+    <blockquote class="review__quote"><p>${esc(quote)}</p></blockquote>
+    <figcaption class="review__meta">
+      ${review.author ? `<span class="review__author">${esc(review.author)}</span>` : ''}
+      <a href="${attr(review.url || maps.twoGisReviews)}" target="_blank" rel="noopener nofollow"
+         data-event="reviews_outbound_click" data-cta-context="review-card">Отзыв на 2ГИС</a>
+    </figcaption>
+  </figure>`;
+}
+
+/**
+ * Booking form. There is no server: the form composes a WhatsApp message from the fields.
+ * The inputs carry no `name`, so without JavaScript the form still submits to wa.me with the
+ * default draft in the hidden `text` field and the patient types the rest.
+ */
+export function bookingForm({ fields, submitLabel, note }, defaultMessage) {
+  const inputs = fields
+    .map((f) => {
+      const id = `book-${f.name}`;
+      const label = `<label class="field__label" for="${attr(id)}">${esc(f.label)}${
+        f.optional ? ' <span class="field__hint">(необязательно)</span>' : ''
+      }</label>`;
+      const control =
+        f.type === 'textarea'
+          ? `<textarea class="field__control" id="${attr(id)}" rows="3" data-book-field="${attr(
+              f.name
+            )}"${f.required ? ' required' : ''}></textarea>`
+          : `<input class="field__control" id="${attr(id)}" type="${attr(f.type)}" data-book-field="${attr(
+              f.name
+            )}" autocomplete="${attr(f.autocomplete || 'off')}"${f.required ? ' required' : ''}>`;
+      return `<div class="field">${label}${control}</div>`;
+    })
+    .join('');
+
+  return `<form class="book-form" method="get" action="https://wa.me/${attr(contacts.whatsapp)}"
+      data-book-form target="_blank" rel="noopener">
+    <input type="hidden" name="text" value="${attr(defaultMessage)}" data-book-text>
+    ${inputs}
+    <button class="btn btn--primary btn--wide" type="submit"
+      data-cta-context="home-form" data-event="form_submit">${esc(submitLabel)}</button>
+    ${note ? `<p class="book-form__note">${esc(note)}</p>` : ''}
+  </form>`;
 }
 
 /* -------------------------------------------------------------------- cards */

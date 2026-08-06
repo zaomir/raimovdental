@@ -72,9 +72,21 @@ function loadPrices() {
     if (item.consultationTierId) consultationByTier[item.consultationTierId] = item;
   }
 
+  // Copy addresses prices by SKU through {{price:sku}}, so a figure can never drift from
+  // the catalog: an unknown or duplicated SKU stops the build instead of shipping.
+  const bySku = {};
+  for (const d of raw.directions) {
+    for (const item of d.items) {
+      if (!item.sku) continue;
+      if (bySku[item.sku]) throw new Error(`Duplicate price SKU in catalog: ${item.sku}`);
+      bySku[item.sku] = { ...item, directionId: d.id };
+    }
+  }
+
   return {
     byDirection,
     consultationByTier,
+    bySku,
     lastUpdated: raw.lastUpdated,
     // The catalog CTA advertises a free consultation while the same catalog prices it at
     // 550–5000 сом. The site follows the price rows: one number, one source (SSOT §12).

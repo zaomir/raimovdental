@@ -46,9 +46,20 @@ export const contacts = {
 };
 
 export const social = {
-  instagram: 'https://www.instagram.com/expert.dental.studio/',
+  instagram: 'https://www.instagram.com/expert_dental_studio/',
+  instagramHandle: '@expert_dental_studio',
   /** Личный профиль главного врача — ведёт клинические разборы и обучение. */
   chiefInstagram: 'https://www.instagram.com/doctor_raimov/',
+  telegram: 'https://t.me/doctor_raimov',
+  telegramHandle: '@doctor_raimov',
+};
+
+/** Map profiles. 2GIS is also the only source the site quotes a rating from. */
+export const maps = {
+  twoGis: 'https://2gis.kg/bishkek/firm/70000001089655879',
+  twoGisReviews: 'https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews',
+  google: 'https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8',
+  yandex: null,
 };
 
 /**
@@ -80,15 +91,32 @@ export const analytics = {
   yandexMetrikaId: null,
   metaPixelId: null,
   // Conversion events emitted by assets/js/site.js.
-  events: ['cta_whatsapp', 'cta_call', 'cta_booking_form', 'form_submit', 'article_read'],
+  events: [
+    'cta_whatsapp',
+    'cta_call',
+    'cta_booking_form',
+    'form_submit',
+    'article_read',
+    'preview_cta_click',
+    'router_row_click',
+    'price_page_click',
+    'whatsapp_click',
+    'reviews_outbound_click',
+  ],
 };
 
+/**
+ * Top navigation. Anchors point at the home page so the same bar works from any route;
+ * where a full page already exists (врачи, цены, контакты) the link goes there instead
+ * of to the home-page summary of it.
+ */
 export const nav = [
-  { href: '/services/', label: 'Услуги и цены' },
+  { href: '/#preview', label: 'Примерка' },
+  { href: '/#approach', label: 'Подход' },
+  { href: '/#work', label: 'Работы' },
   { href: '/doctors/', label: 'Врачи' },
-  { href: '/doctors/raimov-atabek/', label: 'Главный врач' },
-  { href: '/blog/', label: 'Блог' },
-  { href: '/about/', label: 'О клинике' },
+  { href: '/services/', label: 'Цены' },
+  { href: '/#reviews', label: 'Отзывы' },
   { href: '/contacts/', label: 'Контакты' },
 ];
 
@@ -124,8 +152,8 @@ export const footerNav = [
 ];
 
 export const cta = {
-  primary: 'Записаться на диагностику',
-  secondary: 'Посмотреть врачей',
+  primary: 'Цифровая примерка улыбки — 0 сом',
+  secondary: 'Услуги и цены',
   whatsapp: 'Написать в WhatsApp',
   call: 'Позвонить',
 };
@@ -136,9 +164,14 @@ export const cta = {
  */
 export const pendingFromClinic = [
   'Портрет Грибановой М. Н. — на Tilda фотография отсутствует, на сайте стоит монограмма.',
-  'Согласия пациентов на публикацию клинических кейсов — до получения раздел /cases/ не публикуется.',
-  'Верифицированные отзывы с внешних площадок — до получения блок отзывов не публикуется.',
-  'Номер лицензии и орган выдачи для страницы /legal/.',
+  'Парные фото «до/после» для блока «Работы»: согласия на кейсы получены, но снимков в архиве нет — '
+    + 'нужны 2–3 случая виниров в одном освещении и ракурсе.',
+  'Формат номера лицензии: «LO-8888 8888 88» не сверен с оригиналом документа. '
+    + 'Пробелы внутри номера нетипичны для реестров КР — проверить до переноса на expertdental.kg.',
+  'Орган, выдавший лицензию, и дата выдачи — для страницы /legal/.',
+  'ИНН юридического лица «Эксперт Дентал Студия ОсОО», если решено публиковать его в подвале.',
+  'График приёма: спецификация главной страницы называет пн–пт, клиника подтверждала ежедневно. '
+    + 'Сайт и schema.org сейчас показывают ежедневно.',
   'Точные координаты для карты и Google Business Profile.',
   'ID счётчиков аналитики (GA4 / Яндекс.Метрика).',
   'Подтверждение стажа и дипломов каждого врача в едином формате.',
