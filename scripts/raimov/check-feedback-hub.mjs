@@ -165,8 +165,12 @@ if (!/privacy_consent[^>]+required/.test(render)) {
 if (/privacy_consent[^>]+checked/.test(render) || /contact_consent[^>]+checked/.test(render)) {
   fail('render.mjs', 'согласие предвыбрано');
 }
-if (!/commentSafety/.test(copy) || !/sanitizeRecoveryComment/.test(store)) {
-  fail('feedback-hub', 'нет предупреждения и серверной минимизации PHI в свободном комментарии');
+if (
+  /name="comment"/.test(render) ||
+  !/comment:\s*''/.test(store) ||
+  !/RECOVERY_TOPIC_IDS\.has\(topic\)/.test(store)
+) {
+  fail('feedback-hub', 'recovery должен быть structured-only, без хранения свободного PHI-текста');
 }
 const notifyCode = notify.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, ' ');
 for (const sensitive of ['record.score', 'serviceCategory', 'doctorCode', 'r?.comment', 'r.comment', 'topics']) {

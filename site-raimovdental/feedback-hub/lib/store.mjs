@@ -5,8 +5,8 @@
  * pilot handles tens of tokens, the host has no native build toolchain, and a plain-text
  * journal is what the weekly review in SOP §12 actually reads.
  *
- * Data minimisation is a hard rule: a record holds a token, coarse visit metadata and the
- * patient's own words. No name, no phone, no diagnosis, no visit notes. The manager
+ * Data minimisation is a hard rule: a record holds a token, coarse visit metadata and
+ * allowlisted recovery topics. No free text, name, phone, diagnosis or visit notes. The manager
  * reconciles a token with a patient through the admin journal, not through this file.
  */
 
@@ -19,6 +19,15 @@ const STATE = join(DATA_DIR, 'state.json');
 const JOURNAL = join(DATA_DIR, 'journal.jsonl');
 
 export const PLATFORMS = ['yandex', 'twogis', 'google'];
+const RECOVERY_TOPIC_IDS = new Set([
+  'service',
+  'waiting',
+  'communication',
+  'cleanliness',
+  'stage-result',
+  'price',
+  'other',
+]);
 
 /** Tokens stop working after this many days, so a leaked link cannot be replayed forever. */
 const TTL_DAYS = 60;
@@ -198,23 +207,6 @@ export function markPlatformAlreadyReviewed(token, platform) {
   return { record: r };
 }
 
-function sanitizeRecoveryComment(value) {
-  const original = String(value ?? '').slice(0, 2000);
-  const contactRedacted = original
-    .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, '[контакт удалён]')
-    .replace(/(?:https?:\/\/|www\.)\S+/gi, '[ссылка удалена]')
-    .replace(/(?:\+?\d[\d\s().-]{6,}\d)/g, '[телефон удалён]');
-  const sensitive = /(диагноз|анамнез|лекарств|препарат|рецепт|дозиров|аллерги|беремен|вич|гепатит|онколог|медицинск\w+\s+документ)/i;
-  const sanitized = contactRedacted
-    .split(/(?<=[.!?])\s+/)
-    .map((part) => (sensitive.test(part) ? '[медицинские данные удалены]' : part))
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 500);
-  return { sanitized, redacted: sanitized !== original.trim().slice(0, 500) };
-}
-
 export function saveRecovery(
   token,
   { topics = [], comment = '', privacyConsent = false, contactConsent = false }
@@ -223,11 +215,15 @@ export function saveRecovery(
   if (!r) return { error: 'gone' };
   if (r.branch !== 'detractor') return { error: 'wrong-branch' };
   if (!privacyConsent) return { error: 'consent-required' };
-  const safeComment = sanitizeRecoveryComment(comment);
+  // Recovery is deliberately structured-only: discard any forged legacy free-text field.
+  const discardedComment = Boolean(String(comment).trim());
+  const safeTopics = [...new Set(Array.isArray(topics) ? topics : [topics])]
+    .filter((topic) => RECOVERY_TOPIC_IDS.has(topic))
+    .slice(0, 8);
   r.recovery = {
-    topics: topics.slice(0, 8),
-    comment: safeComment.sanitized,
-    commentRedacted: safeComment.redacted,
+    topics: safeTopics,
+    comment: '',
+    commentRedacted: discardedComment,
     privacyConsent: true,
     contactConsent: Boolean(contactConsent),
     status: 'NEW',

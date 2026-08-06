@@ -237,13 +237,6 @@ export function renderDetractor(record, cssHref) {
           <legend class="recovery__legend">${esc(copy.detractor.topicsLabel)}</legend>
           ${topics}
         </fieldset>
-        <label class="field">
-          <span class="field__label">${esc(copy.detractor.commentLabel)}
-            <span class="field__hint">${esc(copy.detractor.commentHint)}</span></span>
-          <textarea class="field__control" name="comment" rows="4" maxlength="500"
-            aria-describedby="recovery-comment-safety"></textarea>
-        </label>
-        <p class="hub__fine" id="recovery-comment-safety">${esc(copy.detractor.commentSafety)}</p>
         <label class="check">
           <input type="checkbox" name="privacy_consent" value="1" required>
           <span>${esc(copy.detractor.privacyConsentLabel)}</span>
