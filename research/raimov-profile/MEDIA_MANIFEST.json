@@ -1578,5 +1578,16 @@
     "bytes_total": 17777713,
     "public_site_eligible_true": 9,
     "updated_at": "2026-07-21T17:22:41Z"
+  },
+  "instagram_archive": {
+    "scraped_at": "2026-08-06",
+    "path": "media/instagram/",
+    "dropbox": "dropbox:RAIMOV/instagram-archive/2026-08-06/",
+    "accounts": [
+      "expert_dental_studio",
+      "doctor_raimov"
+    ],
+    "note": "Full feed media binaries on disk + Dropbox; git keeps JSON metadata only",
+    "summary_file": "media/instagram/SUMMARY.json"
   }
 }

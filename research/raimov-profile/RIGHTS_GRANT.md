@@ -6,7 +6,8 @@
 | Confirmed by | Founder instruction in Cursor chat («право получено») |
 | Scope | Research archive under `research/raimov-profile/` + future use for RAIMOV DENTAL patient-site materials derived from clinic-owned public assets |
 | Includes | Historical portraits from `site-caesthetic/private/expert-dental/`; assets downloaded from `expertdental.kg` / Tilda CDN; public HTML page captures; text excerpts |
-| Excludes / still gated | Patient review bodies; who.ca-news DOB/PII; automatic medical claims; Instagram feed bulk scrape (handles listed only) |
+| Excludes / still gated | Patient review bodies; who.ca-news DOB/PII; automatic medical claims |
+| Instagram feed archive | Founder request 2026-08-06: bulk download OK for `@expert_dental_studio` + `@doctor_raimov` → `media/instagram/` (archive only; patient-site publish still medical/copy-gated) |
 | Patient-site publish | Still requires medical/copy gates per DEC-727 / `CONTENT_REQUIRED_FROM_CLINIC.md` — rights ≠ auto-publish of clinical copy |
 
 This file records the founder confirmation so agents stop treating media as `rights_pending` for **archive**. Written clinic license PDF may still be added later if counsel requires.

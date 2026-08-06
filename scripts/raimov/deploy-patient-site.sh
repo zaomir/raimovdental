@@ -26,13 +26,13 @@ DIST="${REPO}/site-raimovdental/dist/patient-${HOST_MODE}"
 
 say() { printf '\n\033[1m%s\033[0m\n' "$*"; }
 
-say "1/6 build"
+say "1/7 build"
 node "${REPO}/scripts/raimov/build-patient-site.mjs" --host "$HOST_MODE"
 
-say "2/6 quality gates"
+say "2/7 quality gates"
 node "${REPO}/scripts/raimov/check-patient-site.mjs" --dist "$DIST"
 
-say "3/6 publish release ${STAMP}"
+say "3/7 publish release ${STAMP}"
 mkdir -p "$RELEASES"
 rsync -a --delete "${DIST}/" "${RELEASES}/${STAMP}/"
 ln -sfn "${RELEASES}/${STAMP}" "${CURRENT}.tmp"
@@ -40,7 +40,7 @@ mv -Tf "${CURRENT}.tmp" "$CURRENT"
 # Keep the five most recent releases; older ones are recoverable from git anyway.
 ls -1dt "${RELEASES}"/*/ 2>/dev/null | tail -n +6 | xargs -r rm -rf
 
-say "4/6 nginx config"
+say "4/7 nginx config"
 install -m 0644 "${REPO}/site-raimovdental/deploy/${DOMAIN}.origin.conf" \
   "/etc/nginx/sites-available/${DOMAIN}.origin.conf"
 ln -sfn "/etc/nginx/sites-available/${DOMAIN}.origin.conf" \
@@ -63,14 +63,40 @@ pathlib.Path(f'/etc/nginx/snippets/{slug}-redirects.conf').write_text('\n'.join(
 print(f'  {len(out) - 1} redirects -> /etc/nginx/snippets/{slug}-redirects.conf')
 PY
 
-say "5/6 nginx test + reload"
+say "5/7 nginx test + reload"
 nginx -t
 systemctl reload nginx
 # Reload is asynchronous: old workers keep serving until they drain, and a smoke run
 # started immediately can still hit the previous TLS context.
 sleep 3
 
-say "6/6 smoke"
+say "6/7 purge edge cache"
+# Assets are served with max-age=30d. CSS and JS carry a content hash so a new build is
+# a new URL, but images and fonts keep stable names on purpose — without a purge the
+# edge keeps serving the previous portraits for a month after they are replaced.
+if [[ -f /etc/evo/secrets.env ]]; then
+  set -a; . /etc/evo/secrets.env; set +a
+fi
+if [[ -n "${CLOUDFLARE_API_TOKEN:-}" ]]; then
+  ZONE=$(echo "$DOMAIN" | awk -F. '{print $(NF-1)"."$NF}')
+  ZONE_ID=$(curl -sS -m 20 -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+    "https://api.cloudflare.com/client/v4/zones?name=${ZONE}" |
+    python3 -c 'import sys,json; r=json.load(sys.stdin).get("result") or [{}]; print(r[0].get("id",""))')
+  if [[ -n "$ZONE_ID" ]]; then
+    PURGED=$(curl -sS -m 30 -X POST \
+      -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" -H 'Content-Type: application/json' \
+      --data "{\"hosts\":[\"${DOMAIN}\"]}" \
+      "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache" |
+      python3 -c 'import sys,json; print(json.load(sys.stdin).get("success"))')
+    echo "  purge ${DOMAIN} (zone ${ZONE}): ${PURGED}"
+  else
+    echo "  WARN: zone ${ZONE} not found — cache not purged"
+  fi
+else
+  echo "  WARN: CLOUDFLARE_API_TOKEN unset — cache not purged"
+fi
+
+say "7/7 smoke"
 fails=0
 check() {
   local path="$1" expect="$2"

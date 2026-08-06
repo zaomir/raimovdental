@@ -1,11 +1,14 @@
 # media/MANIFEST.md
 
-Canonical machine-readable file: **`../MEDIA_MANIFEST.json`**.
+Canonical machine-readable file: **`../MEDIA_MANIFEST.json`** (portraits / clinic stills).
 
-Commit 1 policy:
+## Instagram feed archive (2026-08-06)
 
-- No remote `portrait.jpg` invention
-- No empty-file SHA as portrait digest
-- MED-001 = historical repo reference only (`site-caesthetic/private/expert-dental/atabek-portrait.jpg`, sha256 `02f4314022f1c6965ca4119f7403435596736a98fc8224d00e50561e9d9f5167`)
-- `public_site_eligible: false` · `rights_pending`
-- Images downloaded into this pack: **0**
+Separate pack (binaries not in git):
+
+- `instagram/README.md`
+- `instagram/SUMMARY.json`
+- `instagram/expert_dental_studio/` — clinic account
+- `instagram/doctor_raimov/` — doctor account
+
+Dropbox mirror: `RAIMOV/instagram-archive/2026-08-06/`

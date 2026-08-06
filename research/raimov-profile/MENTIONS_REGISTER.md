@@ -4,8 +4,8 @@
 |---|---|---|---|---|---|
 | MEN-001 | expertdental.kg | Clinic brand + doctor roster + contacts | `evidence/pages/expertdental.kg.html` | `discovered` | Primary clinic site |
 | MEN-002 | raimovdental.com | RAIMOV DENTAL brand shell | `evidence/pages/raimovdental-ru.html` | `discovered` | Project patient site |
-| MEN-003 | Instagram @expert_dental_studio | Clinic social | URL only (no media scrape of feed posts) | `discovered` | Feed posts not bulk-downloaded |
-| MEN-004 | Instagram @doctor_raimov | Personal/professional handle | URL only | `clinic_confirmation_required` ownership still noted for CTA policy | Linked from clinic + congress |
+| MEN-003 | Instagram @expert_dental_studio | Clinic social | `media/instagram/expert_dental_studio/` (2026-08-06) | `archived` | 272 posts / 774 media files; Dropbox `RAIMOV/instagram-archive/2026-08-06/` |
+| MEN-004 | Instagram @doctor_raimov | Personal/professional handle | `media/instagram/doctor_raimov/` (2026-08-06) | `archived` | 366 posts / 1115 media files; founder download request 2026-08-06 |
 | MEN-005 | Telegram @doctor_raimov | Messenger | URL only | `discovered` on clinic site | |
 | MEN-006 | 2GIS firm 70000001089655879 | Maps listing | probe metadata | `needs_manual_validation` | Ratings not for republish |
 | MEN-007 | YDoc directory | Doctor directory page | `evidence/pages/ydoc-raimov.html` + meta excerpt | `third_party_unverified` | Reviews excluded |

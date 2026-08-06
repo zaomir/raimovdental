@@ -1,0 +1,79 @@
+{
+  "generated_at": "2026-08-06T14:57:23.345470+00:00",
+  "accounts": {
+    "expert_dental_studio": {
+      "username": "expert_dental_studio",
+      "profile_url": "https://www.instagram.com/expert_dental_studio/",
+      "profile": {
+        "username": "expert_dental_studio",
+        "fullName": "СТОМАТОЛОГИЯ | ГНАТОЛОГИЯ | БИШКЕК",
+        "biography": "🦷 Функциональная и эстетическая стоматология \n❕Нам доверяют врачи \n⚡️Комплексная реабилитация зубочелюстной системы \n🤍 Ваше доверие - наша репутация",
+        "followersCount": 10914,
+        "followsCount": 14,
+        "postsCount": 297,
+        "externalUrl": "https://wa.me/996555255455/",
+        "private": false,
+        "verified": false,
+        "id": "67274061990",
+        "businessCategoryName": "None"
+      },
+      "posts_scraped": 272,
+      "media_ok": 774,
+      "media_fail": 0,
+      "apify": {
+        "posts": {
+          "id": "veBe2U5JSMqIaoRcn",
+          "dataset": "CVXffragOrtMHnQsM",
+          "status": "SUCCEEDED",
+          "error": null,
+          "usageTotalUsd": 0.6256
+        },
+        "profile": {
+          "id": "t7hLxVWAHGNUkxgCv",
+          "dataset": "UFmyAwavgNfFSld3F",
+          "status": "SUCCEEDED",
+          "error": null,
+          "usageTotalUsd": 0.0023
+        }
+      },
+      "archive_path": "/var/www/grainee-v2/research/raimov-profile/media/instagram/expert_dental_studio"
+    },
+    "doctor_raimov": {
+      "username": "doctor_raimov",
+      "profile_url": "https://www.instagram.com/doctor_raimov/",
+      "profile": {
+        "username": "doctor_raimov",
+        "fullName": "Атабек Саидович",
+        "biography": "Раимов Атабек Саидович\n▪️Ортодонт\n▪️Функциональная диагностика и лечение ВНЧС\n▪️Основатель @expert_dental_studio @expert.dental.kg",
+        "followersCount": 81568,
+        "followsCount": 1389,
+        "postsCount": 392,
+        "externalUrl": "http://www.expertdental.kg/",
+        "private": false,
+        "verified": true,
+        "id": "2314026144",
+        "businessCategoryName": "General Dentist"
+      },
+      "posts_scraped": 366,
+      "media_ok": 1115,
+      "media_fail": 0,
+      "apify": {
+        "posts": {
+          "id": "9HesuJYr6k8yYf8YG",
+          "dataset": "mfvh6F4FBwr2fXstH",
+          "status": "SUCCEEDED",
+          "error": null,
+          "usageTotalUsd": 0.8418000000000001
+        },
+        "profile": {
+          "id": "caCF50nkl0MTMBmQH",
+          "dataset": "Tnpg0nxGRMH2icUvQ",
+          "status": "SUCCEEDED",
+          "error": null,
+          "usageTotalUsd": 0.0023
+        }
+      },
+      "archive_path": "/var/www/grainee-v2/research/raimov-profile/media/instagram/doctor_raimov"
+    }
+  }
+}
