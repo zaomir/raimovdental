@@ -279,6 +279,7 @@
     "site-raimovdental/expert-dental-report/reputation-materials.mjs": "a2ae41dc82819b7f129f796ccd5f2546faec9ce38bb019c8fe40d19d79ee24b3",
     "site-raimovdental/expert-dental-report/scripts-materials.mjs": "da87a51aa55ec3d17bcfbf4f51adc18a04746c705238da6c3b40f243c226fee9",
     "site-raimovdental/patient-site/assets/css/fonts.css": "e223160916bd2e65b9e2b425f1f99b8db07fd2ef3643dbfb5d23dcac196028d6",
+    "site-raimovdental/patient-site/assets/css/site.css": "0e8c4eea4c958a504189a1b11195800192d66d3199bafb97c7491db37217057c",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-cyrillic.woff2": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-latin.woff2": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235",
     "site-raimovdental/patient-site/assets/fonts/manrope-400-cyrillic.woff2": "c268b459a9329e59fecf39a17618efd44c71735532048d60b12aab76a8c14914",
@@ -350,10 +351,16 @@
     "site-raimovdental/patient-site/assets/img/team/team-480.jpg": "299672898211037d613cb579e3de8782c6cc445c853200c184f518abd89df26d",
     "site-raimovdental/patient-site/assets/img/team/team-720.jpg": "765761bc01c079e5b147b0e2a3c698eee34d5caf64aee20345aa9b083a587d8e",
     "site-raimovdental/patient-site/assets/img/team/team.jpg": "8531d6016516e3ac5d0de4162019baf5b01860ecc79f368cefad8254a4ba37cd",
+    "site-raimovdental/patient-site/assets/js/site.js": "6fcb9522e4277407a072366ebb5f8e6f6bcf666ebc907a61c97c3d61412e7f1d",
     "site-raimovdental/patient-site/config/site.mjs": "8fab1527609152ca22b6cab6327ec170a6f6cb0f7499f90141aa1bf9d42e7ff5",
+    "site-raimovdental/patient-site/content/articles.mjs": "58aeb8998984ef034b8278956f943e89a5953f8db5cd6592acadd35c0c208cd9",
+    "site-raimovdental/patient-site/content/chief.mjs": "32b27a9067c91714d0436b623f23c7d16d6255f6c87858cf06b6f93c7f848a60",
     "site-raimovdental/patient-site/content/doctors.mjs": "02b2c108903006592b4b0c2bf2499deaa3006485603320cdf04a29f2b7eeef16",
     "site-raimovdental/patient-site/content/references.mjs": "0e946d51a22ef90ff47d85a00d967298610207442ca36bf0a479f94a9a1994d9",
     "site-raimovdental/patient-site/content/services.mjs": "1e3d3d57db866bceb85e6ee666a52f7f69ece5c7f44ef803704c4e9612002457",
+    "site-raimovdental/patient-site/templates/layout.mjs": "0a6bb1ff45dda790f7f78ad80f8613cd740d73ee1315977061634f6db576c8d1",
+    "site-raimovdental/patient-site/templates/schema.mjs": "48ff9e752db3a356378e47ecc520e4fa6f390429b0e5d6bfd936acd0054202f8",
+    "site-raimovdental/patient-site/templates/ui.mjs": "6d109e181a88c66446734d08970f3a38f4274af4610031d8dbe3afc6dac22449",
     "site-raimovdental/public/assets/img/admin/app.css": "a87d5d65af1fc2cd73191ea468dd1d23575d78fdcb828db13871760721909e09",
     "site-raimovdental/public/assets/img/admin/app.js": "93ddc1bb90289773cfe57e9d1d9a83dc32e766390a2b45fc0aafebe1d49179de",
     "site-raimovdental/public/assets/img/admin/call-guidance.css": "950d5909c868652fc29ba918a7535b2b0906d18f4d7fecd420aa3ea13c9edf13",
@@ -497,6 +504,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T13:50:04Z",
+  "updated_at_utc": "2026-08-06T14:00:05Z",
   "version": 1
 }
