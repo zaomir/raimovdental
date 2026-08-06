@@ -201,7 +201,7 @@ function emit(route, html) {
   written.set(route, html);
 }
 
-function page({ route, title, description, body, nodes, pageId, ogImage, ogType }) {
+function page({ route, title, description, body, nodes, pageId, ogImage, ogType, waMessage }) {
   emit(
     route,
     layout.document({
@@ -213,6 +213,7 @@ function page({ route, title, description, body, nodes, pageId, ogImage, ogType 
       pageId,
       ogImage,
       ogType,
+      waMessage,
       assets: fingerprints,
       schema: schema.graph(ORIGIN, nodes),
     })
@@ -286,6 +287,7 @@ const physicians = doctors.map((d) =>
     title,
     description,
     pageId: 'home',
+    waMessage: 'Здравствуйте. Пишу с сайта Expert Dental Studio, хочу записаться на диагностику.',
     body: pages.homePage(ctx),
     nodes: [
       clinic,
@@ -306,6 +308,7 @@ const physicians = doctors.map((d) =>
     title,
     description,
     pageId: 'services',
+    waMessage: 'Здравствуйте. Смотрю раздел «Услуги и цены» и хочу уточнить стоимость лечения.',
     body: pages.servicesIndexPage(ctx),
     nodes: [
       clinic,
@@ -325,6 +328,7 @@ for (const service of services) {
     title: service.metaTitle,
     description: service.metaDescription,
     pageId: `service-${service.slug}`,
+    waMessage: `Здравствуйте. Смотрю страницу «${service.navLabel}» и хочу записаться на консультацию.`,
     ogImage: `/assets/img/${service.image}.jpg`,
     body: pages.servicePage({ ...ctx, service }),
     nodes: [
@@ -358,6 +362,7 @@ for (const service of services) {
     title,
     description,
     pageId: 'doctors',
+    waMessage: 'Здравствуйте. Смотрю раздел «Врачи» и хочу подобрать специалиста.',
     body: pages.doctorsIndexPage(ctx),
     nodes: [
       clinic,
@@ -385,6 +390,7 @@ for (const doctor of doctors) {
     title,
     description,
     pageId: isChief ? 'chief' : `doctor-${doctor.slug}`,
+    waMessage: `Здравствуйте. Смотрю страницу врача ${doctor.name} и хочу записаться на приём.`,
     ogType: 'profile',
     ogImage: doctor.photo ? `/assets/img/${doctor.photo}.jpg` : undefined,
     body: isChief ? pages.chiefPage({ ...ctx, doctor }) : pages.doctorPage({ ...ctx, doctor }),
@@ -412,6 +418,7 @@ for (const doctor of doctors) {
     title,
     description,
     pageId: 'blog',
+    waMessage: 'Здравствуйте. Читаю блог Expert Dental Studio и хочу записаться на консультацию.',
     body: pages.blogIndexPage(ctx),
     nodes: [
       clinic,
@@ -443,6 +450,7 @@ for (const category of Object.values(categories)) {
     title,
     description,
     pageId: `blog-${category.id}`,
+    waMessage: `Здравствуйте. Читаю раздел блога «${category.label}» и хочу задать вопрос врачу.`,
     body: pages.blogCategoryPage({ ...ctx, category, articles: items }),
     nodes: [
       clinic,
@@ -475,6 +483,7 @@ for (const article of articles) {
     title: article.metaTitle,
     description: article.metaDescription,
     pageId: `article-${article.slug}`,
+    waMessage: `Здравствуйте. Прочитал статью «${article.title}» и хочу записаться на консультацию.`,
     ogType: 'article',
     ogImage: `/assets/img/${article.cover}.jpg`,
     body: pages.articlePage({ ...ctx, article, author, reviewer, category }),
@@ -505,6 +514,7 @@ for (const article of articles) {
   page({
     ...about,
     pageId: 'about',
+    waMessage: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на приём.',
     body: pages.aboutPage(ctx),
     nodes: [
       clinic,
@@ -524,6 +534,7 @@ for (const article of articles) {
   page({
     ...contactsPage,
     pageId: 'contacts',
+    waMessage: 'Здравствуйте. Нашёл контакты на сайте и хочу записаться на приём.',
     body: pages.contactsPage(ctx),
     nodes: [
       clinic,
@@ -554,6 +565,7 @@ for (const article of articles) {
       title,
       description,
       pageId: kind,
+      waMessage: 'Здравствуйте. Читаю правовой раздел сайта, есть вопрос по записи и приёму.',
       body: pages.legalPage({ kind }),
       nodes: [
         clinic,
@@ -578,6 +590,7 @@ writeFileSync(
     body: pages.notFoundPage(),
     schema: schema.graph(ORIGIN, [clinic]),
     pageId: '404',
+    waMessage: 'Здравствуйте. Не нашёл нужную страницу на сайте — подскажите, пожалуйста.',
     assets: fingerprints,
   }),
   'utf8'
@@ -593,6 +606,7 @@ emit(
     body: pages.pendingPage(),
     schema: schema.graph(ORIGIN, []),
     pageId: 'internal',
+    waMessage: 'Здравствуйте. Пишу по служебной странице сайта Expert Dental Studio.',
     assets: fingerprints,
   })
 );

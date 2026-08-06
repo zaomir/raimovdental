@@ -42,6 +42,9 @@ export function document({
   // Content-hashed CSS/JS paths from the builder. A cache in front of the origin cannot
   // serve last week's stylesheet when the URL itself changes with the file.
   assets,
+  // Prefilled WhatsApp draft for the shell buttons (header, drawer, footer, sticky bar).
+  // Every page states its own, so the administrator sees what the patient was reading.
+  waMessage = 'Здравствуйте. Пишу с сайта Expert Dental Studio.',
 }) {
   const cfg = hosts[host];
   if (!cfg) throw new Error(`Unknown host profile: ${host}`);
@@ -82,12 +85,12 @@ export function document({
 <body${pageId ? ` data-page="${attr(pageId)}"` : ''}>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
   ${cfg.banner ? `<div class="staging-note">${esc(cfg.banner)}</div>` : ''}
-  ${header(assets)}
+  ${header(assets, waMessage)}
   <main id="main">
 ${body}
   </main>
-  ${footer(assets)}
-  ${actionBar(pageId)}
+  ${footer(assets, waMessage)}
+  ${actionBar(pageId, waMessage)}
   <script src="${assets['js/site.js']}" defer></script>
 </body>
 </html>

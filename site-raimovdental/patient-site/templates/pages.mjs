@@ -12,6 +12,7 @@ import { categories } from '../content/articles.mjs';
 import { references } from '../content/references.mjs';
 import {
   archImage,
+  portraitImage,
   attr,
   breadcrumbs,
   ctaBand,
@@ -510,8 +511,16 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section">
     <div class="shell">
-      ${sectionHead({ kicker: 'Врачи', title: 'Кто ведёт это направление' })}
-      <div class="grid grid--4">${serviceDoctors.map((d) => doctorCard(manifest, d)).join('')}</div>
+      ${sectionHead({
+        kicker: 'Врачи',
+        title: 'Кто ведёт это направление',
+        lead: 'Можно записаться сразу к нужному специалисту — администратор увидит направление в сообщении.',
+      })}
+      <div class="grid grid--4">${serviceDoctors
+        .map((d) =>
+          doctorCard(manifest, d, { prices, context: `service-${service.slug}`, topic: service.navLabel })
+        )
+        .join('')}</div>
     </div>
   </section>
 
@@ -562,7 +571,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
 /* --------------------------------------------------------------- doctors */
 
-export function doctorsIndexPage({ manifest, doctors }) {
+export function doctorsIndexPage({ manifest, doctors, prices }) {
   const chiefDoctor = doctors.find((d) => d.chief);
   const rest = doctors.filter((d) => !d.chief);
 
@@ -584,7 +593,9 @@ export function doctorsIndexPage({ manifest, doctors }) {
   <section class="section">
     <div class="shell">
       ${sectionHead({ kicker: 'Специалисты', title: 'Остальные врачи клиники' })}
-      <div class="grid grid--4">${rest.map((d) => doctorCard(manifest, d)).join('')}</div>
+      <div class="grid grid--4">${rest
+        .map((d) => doctorCard(manifest, d, { prices, context: 'doctors-index' }))
+        .join('')}</div>
       <figure class="team-band mt-4" style="margin-inline:0">
         ${image(manifest, 'team/team', 'Команда врачей Expert Dental Studio', {
           sizes: '(min-width: 74rem) 74rem, 100vw',
@@ -608,8 +619,11 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
   const authored = articles.filter((a) => a.author === doctor.slug || a.relatedDoctor === doctor.slug);
 
   const photo = doctor.photo
-    ? archImage(manifest, doctor.photo, doctor.photoAlt, { sizes: '(min-width: 56rem) 30vw, 80vw', priority: true })
-    : `<div class="arch" style="aspect-ratio:1"><div class="monogram">${esc(initials(doctor.name))}</div></div>`;
+    ? portraitImage(manifest, doctor.photo, doctor.photoAlt, {
+        sizes: '(min-width: 56rem) 30vw, 80vw',
+        priority: true,
+      })
+    : `<div class="portrait" style="aspect-ratio:1"><div class="monogram">${esc(initials(doctor.name))}</div></div>`;
 
   return `
   <section class="section section--tight">
@@ -722,7 +736,7 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
       ])}
       <div class="split" style="align-items:center">
         <div style="max-width:26rem">
-          ${archImage(manifest, doctor.photo, doctor.photoAlt, {
+          ${portraitImage(manifest, doctor.photo, doctor.photoAlt, {
             sizes: '(min-width: 56rem) 30vw, 80vw',
             priority: true,
           })}
@@ -1181,7 +1195,7 @@ export function aboutPage({ manifest, doctors, prices }) {
           <p class="t-lead">Expert Dental Studio — стоматология в центре Бишкека. Мы работаем командой:
             ортодонт, гнатолог, хирург-имплантолог, ортопед и терапевты согласуют этапы между собой,
             а не лечат каждый свою часть отдельно.</p>
-          ${ctaPair({ context: 'about-hero' })}
+          ${ctaPair({ context: 'about-hero', message: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на первичный приём.' })}
         </div>
         ${archImage(manifest, 'clinic/hall', 'Интерьер Expert Dental Studio', {
           sizes: '(min-width: 56rem) 44vw, 92vw',
@@ -1236,6 +1250,7 @@ export function aboutPage({ manifest, doctors, prices }) {
     title: 'Приходите на диагностику',
     text: `${contacts.hoursDisplay}. ${contacts.parking}.`,
     context: 'about-footer',
+    message: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на диагностику.',
   })}`;
 }
 
@@ -1257,15 +1272,16 @@ export function contactsPage({ manifest }) {
             <div><dt>Телефон</dt><dd class="info-list__value" style="margin:0">
               <a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></dd></div>
             <div><dt>WhatsApp</dt><dd class="info-list__value" style="margin:0">
-              <a href="${attr(waHref('Здравствуйте. Пишу с сайта Expert Dental Studio.'))}"
-                 data-cta-context="contacts">${esc(contacts.phoneDisplay)}</a><br>
+              <a href="${attr(
+                waHref('Здравствуйте. Пишу со страницы контактов Expert Dental Studio.')
+              )}" data-cta-context="contacts-details">${esc(contacts.phoneDisplay)}</a><br>
               <span class="t-small t-mute">${esc(contacts.whatsappNote)}. ${esc(contacts.adminSla)}.</span></dd></div>
             <div><dt>Часы работы</dt><dd class="info-list__value" style="margin:0">${esc(
               contacts.hoursDisplay
             )}</dd></div>
             <div><dt>Парковка</dt><dd class="info-list__value" style="margin:0">${esc(contacts.parking)}</dd></div>
           </dl>
-          ${ctaPair({ context: 'contacts' })}
+          ${ctaPair({ context: 'contacts', message: 'Здравствуйте. Хочу записаться на приём. Подскажите, пожалуйста, свободное время.' })}
         </div>
         <div class="stack" style="--stack-gap:1rem">
           ${archImage(manifest, 'clinic/facade', 'Фасад здания, в котором находится Expert Dental Studio', {
@@ -1287,6 +1303,7 @@ export function contactsPage({ manifest }) {
     title: 'Напишите — ответим быстро',
     text: `${contacts.whatsappNote}. ${contacts.adminSla}.`,
     context: 'contacts-footer',
+    message: 'Здравствуйте. Пишу со страницы контактов, хочу записаться на приём.',
   })}`;
 }
 

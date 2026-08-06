@@ -77,6 +77,12 @@ export function archImage(manifest, name, alt, opts = {}) {
   return `<div class="arch${modifier ? ` ${modifier}` : ''}">${image(manifest, name, alt, rest)}</div>`;
 }
 
+/** The arch is the clinic's interior motif; faces get a plain frame instead. */
+export function portraitImage(manifest, name, alt, opts = {}) {
+  const { modifier = '', ...rest } = opts;
+  return `<div class="portrait${modifier ? ` ${modifier}` : ''}">${image(manifest, name, alt, rest)}</div>`;
+}
+
 /* ----------------------------------------------------------------- CTA links */
 
 export function waHref(message) {
@@ -177,17 +183,46 @@ export function priceBlock({ title, rows, note }) {
 
 /* -------------------------------------------------------------------- cards */
 
-export function doctorCard(manifest, doctor) {
+/**
+ * A doctor card answers the three questions a patient actually has before choosing:
+ * what this doctor treats, what the first visit costs, and how to reach them. `context`
+ * and `topic` shape the WhatsApp draft so the message names the page the patient came
+ * from — an administrator reading it knows the case before replying.
+ */
+export function doctorCard(manifest, doctor, { prices, context = 'doctors', topic = '' } = {}) {
   const photo = doctor.photo
     ? image(manifest, doctor.photo, doctor.photoAlt, { sizes: '(min-width: 62rem) 20vw, 45vw' })
     : `<div class="monogram" role="img" aria-label="${attr(doctor.photoAlt)}">${esc(initials(doctor.name))}</div>`;
-  return `<a class="doctor-card" href="/doctors/${attr(doctor.slug)}/">
-    <div class="doctor-card__photo">${photo}</div>
-    <div>
-      <div class="doctor-card__name">${esc(doctor.name)}</div>
-      <div class="doctor-card__role">${esc(doctor.role)}</div>
+
+  const consultation = prices?.consultationByTier?.[doctor.consultationTier];
+  const treats = (doctor.treats ?? []).slice(0, 3);
+  const message = topic
+    ? `Здравствуйте. Хочу записаться к врачу ${doctor.name} — «${topic}».`
+    : `Здравствуйте. Хочу записаться к врачу ${doctor.name} (${doctor.role.toLowerCase()}).`;
+
+  return `<article class="doctor-card">
+    <a class="doctor-card__photo" href="/doctors/${attr(doctor.slug)}/" tabindex="-1" aria-hidden="true">${photo}</a>
+    <div class="doctor-card__body">
+      <h3 class="doctor-card__name"><a href="/doctors/${attr(doctor.slug)}/">${esc(doctor.name)}</a></h3>
+      <p class="doctor-card__role">${esc(doctor.role)}</p>
+      ${
+        treats.length
+          ? `<ul class="doctor-card__treats">${treats.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`
+          : ''
+      }
+      ${
+        consultation
+          ? `<p class="doctor-card__price">Консультация — <strong>${esc(consultation.price)}</strong></p>`
+          : ''
+      }
+      <div class="doctor-card__actions">
+        <a class="btn btn--primary btn--sm" href="${attr(waHref(message))}" data-cta-context="${attr(
+    `${context}-${doctor.slug}`
+  )}">Записаться</a>
+        <a class="doctor-card__more" href="/doctors/${attr(doctor.slug)}/">О враче</a>
+      </div>
     </div>
-  </a>`;
+  </article>`;
 }
 
 export function initials(fullName) {
@@ -225,7 +260,7 @@ function navLinks(list) {
   return list.map((n) => `<a href="${attr(n.href)}">${esc(n.label)}</a>`).join('');
 }
 
-export function header(assets) {
+export function header(assets, waMessage) {
   return `<header class="masthead">
     <div class="shell masthead__bar">
       <a class="brandmark" href="/" aria-label="${attr(`${brand.name} — на главную`)}">
@@ -245,16 +280,15 @@ export function header(assets) {
       <div class="shell">
         ${navLinks(nav)}
         <div class="btn-row mt-2">
-          <a class="btn btn--primary" href="${attr(
-            waHref('Здравствуйте. Хочу записаться на приём в Expert Dental Studio.')
-          )}" data-cta-context="drawer">${esc(cta.whatsapp)}</a>
+          <a class="btn btn--primary" href="${attr(waHref(waMessage))}"
+             data-cta-context="drawer">${esc(cta.whatsapp)}</a>
         </div>
       </div>
     </div>
   </header>`;
 }
 
-export function footer(assets) {
+export function footer(assets, waMessage) {
   const cols = footerNav
     .map(
       (col) => `<div>
@@ -275,7 +309,7 @@ export function footer(assets) {
           <ul>
             <li><a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></li>
             <li><a href="${attr(
-              waHref('Здравствуйте. Пишу с сайта Expert Dental Studio.')
+              waHref(waMessage)
             )}">${esc(cta.whatsapp)}</a></li>
             <li>${esc(contacts.addressFull)}</li>
           </ul>
@@ -290,9 +324,9 @@ export function footer(assets) {
   </footer>`;
 }
 
-export function actionBar(context = '') {
+export function actionBar(context = '', waMessage) {
   return `<div class="action-bar">
-    <a href="${attr(waHref('Здравствуйте. Хочу записаться на приём в Expert Dental Studio.'))}" data-cta-context="${attr(
+    <a href="${attr(waHref(waMessage))}" data-cta-context="${attr(
     `sticky-${context}`
   )}">${esc(cta.whatsapp)}</a>
     <a href="${attr(telHref())}" data-cta-context="${attr(`sticky-${context}`)}">Позвонить</a>
