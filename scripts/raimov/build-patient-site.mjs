@@ -698,8 +698,10 @@ ${routes
 
 writeFileSync(
   join(OUT, 'robots.txt'),
+  // /feedback/ is the Review Hub: a per-patient token surface that must never be indexed
+  // on either host, including after the production cutover.
   hosts[HOST].indexable
-    ? `User-agent: *\nAllow: /\nDisallow: /internal/\n\nSitemap: ${ORIGIN}/sitemap.xml\n`
+    ? `User-agent: *\nAllow: /\nDisallow: /internal/\nDisallow: /feedback/\n\nSitemap: ${ORIGIN}/sitemap.xml\n`
     : `User-agent: *\nDisallow: /\n`,
   'utf8'
 );

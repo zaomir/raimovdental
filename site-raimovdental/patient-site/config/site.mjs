@@ -55,11 +55,20 @@ export const social = {
 };
 
 /** Map profiles. 2GIS is also the only source the site quotes a rating from. */
+/**
+ * Map profiles. `*Reviews` is the deep link the Review Hub sends a patient to, so it lands
+ * on the review tab rather than the profile overview. Registered in
+ * docs/raimov/operations/expert-dental/LINKS_REGISTER.md (ED-LINK-008/009/010).
+ */
 export const maps = {
   twoGis: 'https://2gis.kg/bishkek/firm/70000001089655879',
   twoGisReviews: 'https://2gis.kg/bishkek/firm/70000001089655879/tab/reviews',
   google: 'https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8',
-  yandex: null,
+  // Short profile link supplied by the clinic; a writereview deep link needs the place id,
+  // which is still outstanding, so the patient taps "Оставить отзыв" on the profile.
+  googleReviews: 'https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8',
+  yandex: 'https://yandex.ru/maps/org/ekspert_dental_studiya/222117460907/',
+  yandexReviews: 'https://yandex.ru/maps/org/ekspert_dental_studiya/222117460907/reviews/',
 };
 
 /**

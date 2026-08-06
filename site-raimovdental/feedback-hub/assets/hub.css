@@ -1,0 +1,405 @@
+/*
+ * Review Hub — self-contained stylesheet.
+ *
+ * It repeats the clinic's tokens rather than importing the patient-site stylesheet, because
+ * the atomic plan keeps this surface independent of the home-page contour: a redesign there
+ * must not be able to break a page a patient is standing in the clinic doorway reading.
+ *
+ * Contrast floor is the same as the main site: body copy on --bone or --paper is --ink or
+ * --ink-soft, secondary copy --ink-mute, brass text only as --brass-ink.
+ */
+
+:root {
+  --ink: #14201c;
+  --ink-soft: #3d4a45;
+  --ink-mute: #5d6a65;
+  --forest: #1e3a32;
+  --forest-deep: #162923;
+  --forest-tint: #eef2f0;
+  --brass: #b08d4f;
+  --brass-ink: #82632b;
+  --brass-tint: #f6f0e4;
+  --bone: #f7f4ef;
+  --paper: #ffffff;
+  --line: rgba(20, 32, 28, 0.14);
+  --line-strong: rgba(20, 32, 28, 0.28);
+  --radius: 4px;
+  --radius-lg: 14px;
+  --font-text: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hub {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 5vw, 2.5rem) clamp(1rem, 5vw, 1.5rem) 1rem;
+}
+
+.hub__head {
+  margin-bottom: clamp(1.25rem, 4vw, 2rem);
+}
+
+.hub__brand {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  font-weight: 600;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 5vw, 2rem);
+}
+
+.hub__title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.35rem, 1.1rem + 1.1vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.hub__lead {
+  margin: 0 0 1.5rem;
+  color: var(--ink-soft);
+}
+
+.hub__note {
+  margin: 1.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+
+.hub__fine {
+  margin: 1.4rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-mute);
+}
+
+.hub__wa {
+  color: var(--forest);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------- scale */
+
+.scale fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.scale__row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+/*
+ * A neutral numeric scale, not a row of stars pre-filled with gold: the page must not hint
+ * at the answer it wants. Targets are 56px tall so a thumb hits the intended number.
+ */
+.star {
+  font: inherit;
+  min-height: 3.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.star:hover,
+.star:focus-visible {
+  background: var(--forest-tint);
+  border-color: var(--forest);
+}
+
+.star:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 2px;
+}
+
+.star__n {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.scale__ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.84rem;
+  color: var(--ink-mute);
+}
+
+/* ------------------------------------------------------------------ platforms */
+
+.platforms {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.platform form {
+  margin: 0;
+}
+
+.platform__btn,
+.btn {
+  font: inherit;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1.1rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--forest);
+  color: var(--bone);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.platform__btn:hover,
+.btn:hover {
+  background: var(--forest-deep);
+}
+
+.platform__btn:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 2px;
+}
+
+/* Already visited: greyed and inert, but still legible at 4.5:1 so the patient can read it. */
+.platform--done {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.1rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bone);
+  color: var(--ink-mute);
+}
+
+.platform__label {
+  font-weight: 600;
+}
+
+.platform__state {
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.platform__state::before {
+  content: '✓ ';
+  color: var(--forest);
+}
+
+/* ------------------------------------------------------------------- recovery */
+
+.recovery {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.recovery__topics {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.recovery__legend {
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--forest);
+  flex: none;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.field__hint {
+  font-weight: 400;
+  color: var(--ink-mute);
+}
+
+.field__control {
+  font: inherit;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.field__control:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 1px;
+  border-color: var(--forest);
+}
+
+/* -------------------------------------------------------------------- opt-out */
+
+.opt-out {
+  margin: 1.25rem 0 0;
+  text-align: center;
+}
+
+.opt-out__btn {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0.5rem;
+  color: var(--ink-mute);
+  font-size: 0.88rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.opt-out__btn:hover {
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------- footer */
+
+.hub__foot {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 1.5rem) 2.5rem;
+}
+
+.hub__foot p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink-mute);
+}
+
+/* ---------------------------------------------------------------------- admin */
+
+.admin {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1rem, 4vw, 2rem) 3rem;
+}
+
+.admin table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  background: var(--paper);
+}
+
+.admin th,
+.admin td {
+  text-align: left;
+  padding: 0.6rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.admin thead th {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brass-ink);
+  border-bottom-color: var(--line-strong);
+}
+
+.admin__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.admin .btn {
+  width: auto;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius);
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: var(--forest-tint);
+  color: var(--forest);
+}
+
+.pill--alert {
+  background: #f8ebe8;
+  color: #8c3b2e;
+}
