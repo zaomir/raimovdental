@@ -4,11 +4,12 @@
   "currencyLabel": "сом",
   "source": "clinic_price_list_2026-08-04",
   "status": "clinic_confirmed",
-  "lastUpdated": "2026-08-05",
+  "lastUpdated": "2026-08-06",
   "sourceNotes": [
     "ala-carte clinic_confirmed 2026-08-04",
     "added 2026-08-05: Электронная аксиография (диагностика ВНЧС) — 80 000 сом",
-    "2026-08-05 clinic update: consultation fees by doctor — general 550; Mir Ali orthopedics/implants 1500; Atabek orthodontics 3000; gnathology Atabek/Mir Ali 5000"
+    "2026-08-05 clinic update: consultation fees by doctor — general 550; Mir Ali orthopedics/implants 1500; Atabek orthodontics 3000; gnathology Atabek/Mir Ali 5000",
+    "2026-08-06 clinic update: aesthetics direction added — эстетическая диагностика 10000, винир E-max 33000/зуб, композитная реставрация 11000/зуб, отбеливание офисное 15000, домашнее 8000, ночная каппа 15000, временные виниры 15000, снятие старых 1000/зуб; разбор чужого плана 3000; screening direction added (цифровая примерка и чек-ап — 0 сом); cta.label fixed per §6.4"
   ],
   "disclaimer": "Итоговая стоимость определяется после осмотра и диагностики. Цена консультации зависит от врача и направления. Цены на лечение указаны ориентировочно и могут зависеть от сложности случая. Expert Care 12 — отдельный профилактический продукт; не страховка и не скидка на все услуги прайса.",
   "consultationFees": {
@@ -27,7 +28,10 @@
         "id": "mir-ali-prostho-implant",
         "label": "Д-р Мир Али — ортопедия, имплантация",
         "doctor": "Мир Али",
-        "directions": ["prosthodontics", "implantation"],
+        "directions": [
+          "prosthodontics",
+          "implantation"
+        ],
         "price": 1500,
         "priceLabel": "1 500 сом",
         "note": "Подняли 2026-08-04; согласовано с д-ром Мир Али лично"
@@ -36,15 +40,22 @@
         "id": "atabek-ortho",
         "label": "Д-р Атабек — ортодонтия",
         "doctor": "Атабек Раимов",
-        "directions": ["orthodontics"],
+        "directions": [
+          "orthodontics"
+        ],
         "price": 3000,
         "priceLabel": "3 000 сом"
       },
       {
         "id": "gnathology",
         "label": "Гнатология — д-р Атабек / д-р Мир Али",
-        "doctors": ["Атабек Раимов", "Мир Али"],
-        "directions": ["gnathology"],
+        "doctors": [
+          "Атабек Раимов",
+          "Мир Али"
+        ],
+        "directions": [
+          "gnathology"
+        ],
         "price": 5000,
         "priceLabel": "5 000 сом"
       }
@@ -57,8 +68,8 @@
     "phoneDisplay": "+996 555 255 455"
   },
   "cta": {
-    "label": "Записаться на бесплатную консультацию",
-    "href": "https://wa.me/996555255455?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E."
+    "label": "Записаться на цифровую примерку — 0 сом",
+    "href": "https://wa.me/996555255455?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D1%86%D0%B8%D1%84%D1%80%D0%BE%D0%B2%D1%83%D1%8E%20%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D1%83%20%D1%83%D0%BB%D1%8B%D0%B1%D0%BA%D0%B8"
   },
   "membership": {
     "productFamily": "Expert Care 12",
@@ -73,7 +84,10 @@
       "subscription_column_on_every_row"
     ],
     "rules": {
-      "adultHygieneCoveredDegrees": ["light", "medium"],
+      "adultHygieneCoveredDegrees": [
+        "light",
+        "medium"
+      ],
       "adultHygieneVisitsPerYear": 2,
       "checkupVisitsPerYear": 2,
       "heavyHygieneBilling": "Care covers medium tariff (5 500); patient pays surcharge 7 700 − 5 500 = 2 200 сом",
@@ -85,6 +99,34 @@
     }
   },
   "directions": [
+    {
+      "id": "screening",
+      "name": "Бесплатный первый шаг",
+      "items": [
+        {
+          "name": "Цифровая примерка улыбки",
+          "includes": "Обзорные фото, разбор запроса, один визуальный вариант формы на экране. Без обточки, без снимков, без диагноза и плана лечения",
+          "price": "0 сом",
+          "sku": "screening-smile-preview",
+          "duration": "20 минут",
+          "limits": "Именной сертификат, 30 дней с момента записи, один раз на человека. Не более 4 слотов в день на клинику",
+          "note": "Скрининг и маршрут, не лечение. Диагностика тарифицируется отдельно"
+        },
+        {
+          "name": "Именной чек-ап",
+          "includes": "Осмотр и маршрут дальнейших шагов без снимков и письменного плана",
+          "price": "0 сом",
+          "sku": "screening-checkup",
+          "limits": "Именной сертификат, один раз на человека"
+        },
+        {
+          "name": "Чек-ап после срочного приёма",
+          "includes": "Повторный осмотр после купирования острой ситуации",
+          "price": "0 сом",
+          "sku": "screening-checkup-followup"
+        }
+      ]
+    },
     {
       "id": "diagnostics",
       "name": "Диагностика",
@@ -129,6 +171,73 @@
           "careEligible": false,
           "priceBasis": "flat",
           "sku": "diagnostics-axiography-tmj"
+        },
+        {
+          "name": "Разбор плана лечения из другой клиники",
+          "includes": "Второе мнение по готовому плану без проведения лечения",
+          "price": "3 000 сом",
+          "sku": "second-opinion"
+        }
+      ]
+    },
+    {
+      "id": "aesthetics",
+      "name": "Эстетика: виниры и реставрация",
+      "items": [
+        {
+          "name": "Эстетическая диагностика",
+          "includes": "Клинический фотопротокол, внутриротовое сканирование, лабораторный wax-up, мокап во рту без обточки и анестезии, письменный план лечения с ценами по этапам",
+          "price": "10 000 сом",
+          "sku": "aesthetic-diagnostics",
+          "duration": "40–60 минут",
+          "note": "Депозит 2 000 сом при записи, зачитывается в стоимость"
+        },
+        {
+          "name": "Керамический винир E-max",
+          "includes": "Стоимость одного винира без подготовительных этапов",
+          "price": "33 000 сом",
+          "priceBasis": "tooth",
+          "sku": "veneer-emax"
+        },
+        {
+          "name": "Композитная эстетическая реставрация",
+          "includes": "Восстановление формы одного зуба композитом. Применяется на 1–2 зубах, не как метод преображения улыбки. Срок службы 3–5 лет",
+          "price": "11 000 сом",
+          "priceBasis": "tooth",
+          "sku": "composite-aesthetic"
+        },
+        {
+          "name": "Отбеливание офисное",
+          "includes": "Осветление на несколько тонов. Форму зубов не меняет",
+          "price": "15 000 сом",
+          "sku": "whitening-office",
+          "note": "Проводится до виниров: керамика не отбеливается"
+        },
+        {
+          "name": "Домашнее отбеливание",
+          "includes": "Индивидуальные каппы и гель для домашнего курса",
+          "price": "8 000 сом",
+          "sku": "whitening-home"
+        },
+        {
+          "name": "Защитная ночная каппа",
+          "includes": "Индивидуальная каппа при бруксизме. Входит в план обязательно при признаках бруксизма",
+          "price": "15 000 сом",
+          "sku": "night-guard"
+        },
+        {
+          "name": "Временные виниры",
+          "includes": "Комплект на период изготовления постоянных реставраций",
+          "price": "15 000 сом",
+          "sku": "veneer-temporary",
+          "note": "Уточняется у администратора в зависимости от количества зубов"
+        },
+        {
+          "name": "Снятие старых виниров или реставраций",
+          "includes": "Снятие прежней реставрации перед новой работой",
+          "price": "1 000 сом",
+          "priceBasis": "tooth",
+          "sku": "restoration-removal"
         }
       ]
     },

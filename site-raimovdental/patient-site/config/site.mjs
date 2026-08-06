@@ -9,9 +9,16 @@
 export const brand = {
   name: 'Expert Dental Studio',
   nameRu: 'Эксперт дентал студия',
+  legalName: 'Эксперт Дентал Студия ОсОО',
   legalNote: 'Стоматологическая клиника, Бишкек',
-  tagline: 'Стоматология комплексного лечения в Бишкеке',
-  founded: 2021,
+  tagline: 'Виниры и эстетическая реставрация в Бишкеке',
+  founded: 2023,
+  /**
+   * Licence number as supplied by the clinic. The spacing inside the number is unusual for
+   * KG registries, so it stays flagged in `pendingFromClinic` until someone checks it against
+   * the paper document — a wrong licence number is a legal defect, not a typo.
+   */
+  license: '№ LO-8888 8888 88',
 };
 
 export const contacts = {
@@ -26,8 +33,9 @@ export const contacts = {
   country: 'Кыргызстан',
   countryCode: 'KG',
   addressFull: 'Бишкек, улица Киевская, 88',
+  postalCode: '720040',
   // Clinic-confirmed: одинаковые часы семь дней в неделю.
-  hours: { opens: '08:00', closes: '19:00', days: 'ежедневно' },
+  hours: { opens: '08:00', closes: '19:00', days: 'ежедневно', schemaSpec: 'Mo-Su 08:00-19:00' },
   hoursDisplay: 'Ежедневно, 08:00–19:00',
   hoursShort: '08–19',
   parking: 'Бесплатная парковка на улице рядом с клиникой',
