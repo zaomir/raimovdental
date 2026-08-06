@@ -82,11 +82,11 @@ export function document({
 <body${pageId ? ` data-page="${attr(pageId)}"` : ''}>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
   ${cfg.banner ? `<div class="staging-note">${esc(cfg.banner)}</div>` : ''}
-  ${header()}
+  ${header(assets)}
   <main id="main">
 ${body}
   </main>
-  ${footer()}
+  ${footer(assets)}
   ${actionBar(pageId)}
   <script src="${assets['js/site.js']}" defer></script>
 </body>

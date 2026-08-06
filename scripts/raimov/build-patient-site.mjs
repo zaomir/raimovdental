@@ -105,6 +105,21 @@ function jpegSize(path) {
   throw new Error(`Cannot read JPEG dimensions: ${path}`);
 }
 
+/**
+ * Photos keep stable filenames on disk but ship under a content-hashed URL. The edge
+ * caches images for 30 days, and the API token available to the deploy cannot purge,
+ * so a replaced portrait would otherwise stay invisible for a month.
+ */
+function fingerprintImage(full, rel) {
+  const body = readFileSync(full);
+  const hash = createHash('sha256').update(body).digest('hex').slice(0, 10);
+  const hashed = `${rel}.${hash}.jpg`;
+  const dest = join(OUT, 'assets', 'img', hashed);
+  mkdirSync(dirname(dest), { recursive: true });
+  writeFileSync(dest, body);
+  return `/assets/img/${hashed}`;
+}
+
 function buildImageManifest() {
   const root = join(SRC, 'assets', 'img');
   const manifest = {};
@@ -120,7 +135,7 @@ function buildImageManifest() {
       const base = rel.replace(/-\d+$/, '');
       const { width, height } = jpegSize(full);
       manifest[base] ??= { width: 0, height: 0, variants: [] };
-      manifest[base].variants.push({ src: `/assets/img/${rel}.jpg`, width });
+      manifest[base].variants.push({ src: fingerprintImage(full, rel), width });
       if (width > manifest[base].width) {
         manifest[base].width = width;
         manifest[base].height = height;
@@ -212,15 +227,23 @@ function page({ route, title, description, body, nodes, pageId, ogImage, ogType 
  */
 function fingerprintAssets() {
   const map = {};
-  for (const rel of ['css/fonts.css', 'css/site.css', 'js/site.js']) {
+  for (const rel of [
+    'css/fonts.css',
+    'css/site.css',
+    'js/site.js',
+    'img/brand/logo-260.png',
+    'img/brand/logo-520.png',
+    'img/brand/logo-light-260.png',
+    'img/brand/logo-light-520.png',
+  ]) {
     const body = readFileSync(join(SRC, 'assets', rel));
     const hash = createHash('sha256').update(body).digest('hex').slice(0, 10);
-    const [dir, file] = rel.split('/');
-    const ext = file.slice(file.lastIndexOf('.'));
-    const hashed = `${file.slice(0, -ext.length)}.${hash}${ext}`;
-    mkdirSync(join(OUT, 'assets', dir), { recursive: true });
-    writeFileSync(join(OUT, 'assets', dir, hashed), body);
-    map[rel] = `/assets/${dir}/${hashed}`;
+    const ext = rel.slice(rel.lastIndexOf('.'));
+    const hashed = `${rel.slice(0, -ext.length)}.${hash}${ext}`;
+    const dest = join(OUT, 'assets', hashed);
+    mkdirSync(dirname(dest), { recursive: true });
+    writeFileSync(dest, body);
+    map[rel] = `/assets/${hashed}`;
   }
   return map;
 }
@@ -237,14 +260,15 @@ if (problems.length) {
   process.exit(1);
 }
 
-const manifest = buildImageManifest();
-const prices = loadPrices();
-const ctx = { manifest, services, doctors, articles, prices, categories };
-
+// The output tree must be cleared first: both fingerprint passes write hashed copies
+// into it, and wiping afterwards would silently drop every file the HTML points at.
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 const fingerprints = fingerprintAssets();
+const manifest = buildImageManifest();
+const prices = loadPrices();
+const ctx = { manifest, services, doctors, articles, prices, categories };
 
 const clinic = schema.clinicNode(ORIGIN);
 const physicians = doctors.map((d) =>

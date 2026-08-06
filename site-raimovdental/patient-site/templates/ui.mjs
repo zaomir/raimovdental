@@ -63,7 +63,7 @@ export function inline(text = '', { refs = {}, used = null } = {}) {
 export function image(manifest, name, alt, { sizes = '100vw', loading = 'lazy', className = '', priority = false } = {}) {
   const entry = manifest[name];
   if (!entry) throw new Error(`Missing image asset: ${name}`);
-  const src = `/assets/img/${name}.jpg`;
+  const src = entry.variants[entry.variants.length - 1].src;
   const srcset = entry.variants.map((v) => `${v.src} ${v.width}w`).join(', ');
   return `<img src="${attr(src)}" srcset="${attr(srcset)}" sizes="${attr(sizes)}" width="${entry.width}" height="${
     entry.height
@@ -225,12 +225,12 @@ function navLinks(list) {
   return list.map((n) => `<a href="${attr(n.href)}">${esc(n.label)}</a>`).join('');
 }
 
-export function header() {
+export function header(assets) {
   return `<header class="masthead">
     <div class="shell masthead__bar">
       <a class="brandmark" href="/" aria-label="${attr(`${brand.name} — на главную`)}">
-        <img src="/assets/img/brand/logo-260.png"
-             srcset="/assets/img/brand/logo-260.png 260w, /assets/img/brand/logo-520.png 520w"
+        <img src="${assets['img/brand/logo-260.png']}"
+             srcset="${assets['img/brand/logo-260.png']} 260w, ${assets['img/brand/logo-520.png']} 520w"
              sizes="168px" width="1024" height="363" alt="${attr(brand.name)}" decoding="async">
       </a>
       <nav class="nav" aria-label="Основная навигация">${navLinks(nav)}</nav>
@@ -254,7 +254,7 @@ export function header() {
   </header>`;
 }
 
-export function footer() {
+export function footer(assets) {
   const cols = footerNav
     .map(
       (col) => `<div>
@@ -268,8 +268,8 @@ export function footer() {
     <div class="shell">
       <div class="colophon__grid">
         <div>
-          <img class="colophon__logo" src="/assets/img/brand/logo-light-260.png"
-               srcset="/assets/img/brand/logo-light-260.png 260w, /assets/img/brand/logo-light-520.png 520w"
+          <img class="colophon__logo" src="${assets['img/brand/logo-light-260.png']}"
+               srcset="${assets['img/brand/logo-light-260.png']} 260w, ${assets['img/brand/logo-light-520.png']} 520w"
                sizes="200px" width="1024" height="363" alt="${attr(brand.name)}" loading="lazy" decoding="async">
           <p style="margin-bottom:1rem">${esc(brand.legalNote)}. ${esc(contacts.hoursDisplay)}.</p>
           <ul>

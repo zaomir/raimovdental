@@ -14,7 +14,7 @@
  *   claims   — no guaranteed outcomes or unverifiable superlatives on a medical site
  */
 
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -107,6 +107,20 @@ const textOf = (html) =>
 
 const attrOf = (tag, name) => tag.match(new RegExp(`${name}="([^"]*)"`, 'i'))?.[1];
 
+/** Root-relative src/href/srcset targets in a tag, as paths under the dist root. */
+const localAssetRefs = (tag) => {
+  const refs = [];
+  for (const name of ['src', 'href']) {
+    const v = attrOf(tag, name);
+    if (v?.startsWith('/assets/')) refs.push(v.slice(1));
+  }
+  for (const candidate of (attrOf(tag, 'srcset') ?? '').split(',')) {
+    const url = candidate.trim().split(/\s+/)[0];
+    if (url.startsWith('/assets/')) refs.push(url.slice(1));
+  }
+  return refs;
+};
+
 /* --------------------------------------------------------------------- run */
 
 const files = walk(DIST);
@@ -169,6 +183,17 @@ for (const file of files) {
     else if (!alt.trim()) warn(page, `empty alt: ${tag.slice(0, 90)}`);
     if (!attrOf(tag, 'width') || !attrOf(tag, 'height')) {
       fail(page, `<img> without width/height (CLS): ${tag.slice(0, 90)}`);
+    }
+    for (const ref of localAssetRefs(tag)) {
+      if (!existsSync(join(DIST, ref))) fail(page, `<img> points at a missing file: ${ref}`);
+    }
+  }
+
+  // Stylesheets and scripts ship under content-hashed names, so a build that forgets to
+  // emit one produces an unstyled page that every other gate here would still pass.
+  for (const tag of html.match(/<(?:link\b[^>]*rel="stylesheet"|script\b)[^>]*>/g) ?? []) {
+    for (const ref of localAssetRefs(tag)) {
+      if (!existsSync(join(DIST, ref))) fail(page, `asset reference points at a missing file: ${ref}`);
     }
   }
 
