@@ -8,6 +8,7 @@
 | `price-table-zero-block.html` | Таблица прайса + отдельный блок Expert Care 12 (proposed) |
 | `PRICE_SECTION_TILDA_AI_PROMPT.md` | Промпт для ИИ Tilda: ala-carte таблица + отдельный SKU Care (без −20% на всё) |
 | `doctors/MIR_ALI_GNATHOLOGIST_TILDA.md` | Инструкция: карточка Мир-Али как гнатолог |
+| `homepage-veneers-focus-content-draft.md` | Черновик контента главной с фокусом на виниры/эстетику, адаптированный под реальные факты клиники (DRAFT, не approved) |
 
 ## Прайс `/price` (2026-08-05)
 
