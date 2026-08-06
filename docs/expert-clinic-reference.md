@@ -116,6 +116,9 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 | Что | Файл | Зачем |
 |-----|------|-------|
 | 📈 **Clinic Growth README** | [`docs/raimov/clinic-growth/README.md`](docs/raimov/clinic-growth/README.md) | Система измеримого роста: baseline, priority services, capacity, offers |
+| 🎯 **Мотивация пациентов** | [`docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`](docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md) | Continuity + Care 12 + Points; Post-Visit Feedback Loop (DEC-787) |
+| 💬 **Сбор отзывов (SOP)** | [`docs/raimov/operations/expert-dental/reputation/POST_VISIT_FEEDBACK_LOOP.md`](docs/raimov/operations/expert-dental/reputation/POST_VISIT_FEEDBACK_LOOP.md) | CSAT WhatsApp → карты / закрытая recovery |
+| 🧩 **План внедрения Review Hub** | [`docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md`](docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md) | Атомы A–E на `clinic.raimovdental.com` |
 | 💼 **Growth Offer** | [`docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md`](docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md) | Предложение роста, Instagram, финансовая модель |
 
 ---

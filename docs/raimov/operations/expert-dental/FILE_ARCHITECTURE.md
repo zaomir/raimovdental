@@ -3,7 +3,7 @@ title: Expert Dental Studio — архитектура файлов
 status: CANON
 version: 1.0
 created: 2026-08-03
-last_updated: 2026-08-03
+last_updated: 2026-08-05
 ---
 
 # Архитектура файлов проекта Expert Dental
@@ -36,6 +36,9 @@ docs/raimov/operations/expert-dental/
 ├── pricing/
 │   ├── PRICE_CATALOG.json   ← clinic-confirmed SSOT
 │   └── PRICE_TABLE.md
+├── reputation/
+│   ├── POST_VISIT_FEEDBACK_LOOP.md       ← CSAT / отзывы / recovery (DEC-787)
+│   └── IMPLEMENTATION_PLAN_ATOMIC.md     ← атомы внедрения на clinic.raimovdental.com
 ├── periods/
 │   └── month-01/
 │       ├── PLAN.md

@@ -16,6 +16,8 @@ The module connects:
 
 DEC-786 adds the clinic retention canon: **Expert Dental Patient Motivation System** (Continuity + Expert Care 12 + Expert Points). Strategy SSOT is live; Care 12 and Points remain operationally deferred.
 
+DEC-787 adds **Post-Visit Feedback Loop** inside Layer A: WhatsApp CSAT 1–5 after eligible visits → public map links on 4–5 / private recovery + manager alert on 1–3. No review rewards.
+
 The website is live, but the clinical operational pilot is not launched by this release. It still requires Atabek/clinic approval of triage, the exact free-check-up composition, capacity, staff responsibilities, medical/data consents and cohort economics.
 
 ## Live surfaces
@@ -54,7 +56,8 @@ The website is live, but the clinical operational pilot is not launched by this 
 - Passport V0/V1 and warm specialist handoff provide continuity.
 - One hundred urgent cases prove the process, not a new-location investment case.
 - Expert Care 12 and separate capacity require later gates.
-- Review gating and incentives tied to review tone are prohibited.
+- Pre-filtering only “happy” patients before the ask, and incentives tied to review tone, are prohibited.
+- DEC-787 allows post-CSAT follow-up routing (public invite vs private recovery) after a universal ask.
 - DEC-786 defines Patient Motivation System: Continuity foundation + gated Care 12 + Expert Points (no review rewards).
 
 ## Completed
@@ -63,6 +66,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 - Protected Stage A presentation.
 - DEC-774 and `RAIMOV_ACCESS_CONTINUITY_SYSTEM.md`.
 - DEC-786 and `EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md`.
+- DEC-787 Post-Visit Feedback Loop + ops SOP `reputation/POST_VISIT_FEEDBACK_LOOP.md`.
 - Public home teaser and dedicated strategy route.
 - Deterministic build, robots and sitemap integration.
 - Contract tests plus Playwright/Axe responsive gate.
@@ -79,7 +83,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 6. Pilot starts inside Expert Dental Studio.
 7. Cohorts are measured for 30/60/90 days.
 8. Separate capacity and Expert Care 12 are considered only after positive gates.
-9. Motivation Phase 0 (pre-book + simple referral) after Continuity pilot start; Points/Care per DEC-786 phases.
+9. Motivation Phase 0 (pre-book + simple referral + Post-Visit Feedback Loop) after Continuity pilot start; Points/Care per DEC-786 phases.
 
 ## Deferred
 

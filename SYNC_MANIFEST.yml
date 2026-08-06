@@ -24,6 +24,8 @@ ssot_globs:
 extra_files:
   - docs/expert-clinic-reference.md
   - agents/manifests/raimovdental.yaml
+  - docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
+  - docs/founder-notes/DEC-787_post-visit-feedback-loop.md
 excludes:
   - node_modules
   - dist
