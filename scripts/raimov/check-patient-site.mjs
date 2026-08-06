@@ -103,6 +103,8 @@ const CLAIMS = [
   [/единственн(ый|ая)\s+в\s+(Бишкеке|Кыргызстане)/i, 'непроверяемое превосходство'],
   [/ведущий\s+(имплантолог|специалист|врач)/i, 'непроверяемое превосходство'],
   [/самые\s+низкие\s+цены|дешевле\s+всех/i, 'непроверяемое ценовое утверждение'],
+  [/закрепля(ет|ют)\s+страх\s+на\s+(годы|лет)/i, 'категоричное утверждение о детском страхе'],
+  [/способ(ен|на)\s+закрепить\s+страх/i, 'категоричное утверждение о детском страхе'],
 ];
 
 /**
@@ -230,6 +232,9 @@ for (const file of files) {
   }
 
   if (page === '/' && RATING?.sourceUrl) {
+    if (html.includes('review__quote')) {
+      fail(page, 'individual review quotes require stable per-review evidence links');
+    }
     for (const tag of html.match(/<a\b[^>]*data-event="reviews_outbound_click"[^>]*>/g) ?? []) {
       if (attrOf(tag, 'href') !== RATING.sourceUrl) {
         fail(page, 'review proof link must use the verified aggregate source URL');
