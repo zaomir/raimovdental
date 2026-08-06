@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const SRC = join(REPO, 'site-raimovdental', 'patient-site');
 
-const { hosts, brand, contacts } = await import(join(SRC, 'config/site.mjs'));
+const { hosts, brand, contacts, publicationGates } = await import(join(SRC, 'config/site.mjs'));
 const { services, serviceBySlug, serviceRedirects } = await import(join(SRC, 'content/services.mjs'));
 const { doctors, doctorBySlug } = await import(join(SRC, 'content/doctors.mjs'));
 const { articles, articleBySlug, categories } = await import(join(SRC, 'content/articles.mjs'));
@@ -239,6 +239,11 @@ function validateContent() {
     for (const a of articles) {
       if (!a.reviewedAt || !a.reviewEvidence) {
         fail(`production medical gate: article ${a.slug} lacks reviewedAt/reviewEvidence`);
+      }
+    }
+    for (const [gate, approval] of Object.entries(publicationGates)) {
+      if (!approval.approved || !approval.evidence) {
+        fail(`production approval gate: ${gate} requires approved=true and evidence`);
       }
     }
   }

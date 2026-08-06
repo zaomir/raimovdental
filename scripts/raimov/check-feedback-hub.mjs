@@ -112,6 +112,9 @@ if (/branch\s*!==\s*'promoter'/.test(store)) {
 if (!/r\.score\s*!==\s*null/.test(store)) {
   fail('store.mjs', 'нет защиты от повторной оценки без admin reset (атом B4)');
 }
+if (!/function\s+pruneJournal/.test(store) || (store.match(/pruneJournal\(\)/g) ?? []).length < 2) {
+  fail('store.mjs', 'journal.jsonl не очищается по 60-дневному retention');
+}
 if (!/review_cycle_stopped/.test(store)) fail('store.mjs', 'нет события review_cycle_stopped');
 for (const event of ['hub_opened', 'csat_scored', 'platform_clicked']) {
   if (!store.includes(event)) fail('store.mjs', `нет события ${event} (SOP §5)`);

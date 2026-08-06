@@ -22,13 +22,15 @@ export const PLATFORMS = ['yandex', 'twogis', 'google'];
 
 /** Tokens stop working after this many days, so a leaked link cannot be replayed forever. */
 const TTL_DAYS = 60;
+const TTL_MS = TTL_DAYS * 24 * 60 * 60 * 1000;
 
 let cache = null;
 
 function load() {
-  if (cache) return cache;
-  mkdirSync(DATA_DIR, { recursive: true });
-  cache = existsSync(STATE) ? JSON.parse(readFileSync(STATE, 'utf8')) : { tokens: {} };
+  if (!cache) {
+    mkdirSync(DATA_DIR, { recursive: true });
+    cache = existsSync(STATE) ? JSON.parse(readFileSync(STATE, 'utf8')) : { tokens: {} };
+  }
   let pruned = false;
   for (const [token, record] of Object.entries(cache.tokens)) {
     if (expired(record)) {
@@ -37,7 +39,27 @@ function load() {
     }
   }
   if (pruned) persist();
+  pruneJournal();
   return cache;
+}
+
+/** Keep the operational journal under the same 60-day retention promise as token state. */
+function pruneJournal() {
+  if (!existsSync(JOURNAL)) return;
+  const cutoff = Date.now() - TTL_MS;
+  const kept = readFileSync(JOURNAL, 'utf8')
+    .split('\n')
+    .filter(Boolean)
+    .filter((line) => {
+      try {
+        return Date.parse(JSON.parse(line).at) >= cutoff;
+      } catch {
+        return false;
+      }
+    });
+  const tmp = `${JOURNAL}.tmp`;
+  writeFileSync(tmp, kept.length ? `${kept.join('\n')}\n` : '');
+  renameSync(tmp, JOURNAL);
 }
 
 /** Write through a temp file so a crash mid-write cannot truncate the journal's index. */
@@ -85,7 +107,7 @@ export function createToken({ serviceCategory = null, doctorCode = null, source 
 
 function expired(record) {
   const age = Date.now() - Date.parse(record.createdAt);
-  return age > TTL_DAYS * 24 * 60 * 60 * 1000;
+  return age > TTL_MS;
 }
 
 /** Returns null for unknown, malformed and expired tokens alike — the caller must not tell them apart. */

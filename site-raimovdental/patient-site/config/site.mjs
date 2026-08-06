@@ -93,6 +93,16 @@ export const hosts = {
 };
 
 /**
+ * Production-only publication approvals. Each gate needs both an affirmative decision and
+ * a traceable evidence reference; staging may render without them because it is noindex.
+ */
+export const publicationGates = {
+  legalPacket: { approved: false, evidence: null },
+  medicalServiceCopy: { approved: false, evidence: null },
+  medicalAdvertisingCounsel: { approved: false, evidence: null },
+};
+
+/**
  * Analytics. Real counter IDs arrive from the clinic later; until then every slot is
  * `null` and the builder emits no third-party script at all. Events still fire into
  * `window.dataLayer`, so nothing needs rewiring when the IDs land.
