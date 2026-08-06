@@ -14,6 +14,18 @@
 # Rollback: systemctl disable --now expert-feedback-hub && remove the /feedback/ location.
 set -euo pipefail
 
+ORIGIN_HOST="vps2402"
+if [[ "$(hostname -s)" != "$ORIGIN_HOST" ]]; then
+  cat >&2 <<EOF
+Refusing to deploy: the hub runs on the ${ORIGIN_HOST} origin, but this box is $(hostname -s).
+Run it on the origin:
+
+  ssh ${ORIGIN_HOST}-root 'cd /var/www/grainee-v2 && git pull --ff-only origin main \\
+    && bash scripts/raimov/deploy-feedback-hub.sh'
+EOF
+  exit 2
+fi
+
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 SRC="${REPO}/site-raimovdental/feedback-hub"
 APP=/opt/expert-feedback-hub

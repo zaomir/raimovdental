@@ -18,6 +18,21 @@ case "$HOST_MODE" in
   *) echo "Usage: $0 [staging|production]" >&2; exit 2 ;;
 esac
 
+# Publishing writes release dirs and nginx config straight onto the box, so running it
+# anywhere but the origin quietly builds a webroot nobody serves and leaves a vhost that
+# breaks the local `nginx -t`. Refuse instead.
+ORIGIN_HOST="vps2402"
+if [[ "$(hostname -s)" != "$ORIGIN_HOST" ]]; then
+  cat >&2 <<EOF
+Refusing to deploy: this publishes to the ${DOMAIN} origin and must run on ${ORIGIN_HOST},
+but this box is $(hostname -s). Run it on the origin:
+
+  ssh ${ORIGIN_HOST}-root 'cd /var/www/grainee-v2 && git pull --ff-only origin main \\
+    && bash scripts/raimov/deploy-patient-site.sh ${HOST_MODE}'
+EOF
+  exit 2
+fi
+
 WEBROOT="/var/www/${DOMAIN}"
 RELEASES="${WEBROOT}/releases"
 CURRENT="${WEBROOT}/current"

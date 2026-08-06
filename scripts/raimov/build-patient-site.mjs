@@ -709,6 +709,9 @@ writeFileSync(
 /* ---------------------------------------------------------------- redirects */
 
 // Emitted as an nginx map so the same file drives both hosts and legacy Tilda URLs.
+// Covers every URL in the expertdental.kg sitemap that does not survive the move;
+// same-slug pages (/contacts, /services, /blog/*) are handled by nginx trailing-slash
+// normalisation, so listing them here would be dead weight.
 const legacy = {
   ...serviceRedirects,
   '/expertdentalkg': '/',
@@ -716,6 +719,12 @@ const legacy = {
   '/price': '/services/',
   '/price/': '/services/',
   '/doctors/gribanova-marina': '/doctors/gribanova-marina/',
+  // Tilda draft duplicate of the front page.
+  '/home-new': '/',
+  '/home-new/': '/',
+  // Tilda's misspelt "cases" page; the new site shows work in the homepage block.
+  '/kaces': '/#work',
+  '/kaces/': '/#work',
 };
 
 writeFileSync(
