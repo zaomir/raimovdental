@@ -601,6 +601,12 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
             services,
             context: `service-${service.slug}`,
             topic: service.navLabel,
+            consultationTier:
+              service.productType === 'screening'
+                ? false
+                : service.slug === 'gnathology'
+                  ? 'gnathology'
+                  : undefined,
           })
         )
         .join('')}</div>
@@ -701,7 +707,9 @@ export function doctorsIndexPage({ manifest, doctors, prices, services }) {
 }
 
 export function doctorPage({ manifest, doctor, services, articles, prices }) {
-  const consultation = prices.consultationByTier[doctor.consultationTier];
+  const consultations = (doctor.consultationTiers ?? [doctor.consultationTier])
+    .map((tier) => prices.consultationByTier[tier])
+    .filter(Boolean);
   const docServices = doctor.services.map((s) => services.find((x) => x.slug === s)).filter(Boolean);
   const authored = articles.filter((a) => a.author === doctor.slug || a.relatedDoctor === doctor.slug);
 
@@ -779,8 +787,8 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
           .join('')}
       </div>
       ${
-        consultation
-          ? `<div class="mt-4">${priceBlock({ title: 'Консультация', rows: [consultation] })}${priceDisclaimer(
+        consultations.length
+          ? `<div class="mt-4">${priceBlock({ title: 'Варианты консультации', rows: consultations })}${priceDisclaimer(
               prices
             )}</div>`
           : ''
@@ -967,7 +975,7 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
         consultation
           ? `<div class="mt-4">${priceBlock({
               title: 'Консультация главного врача',
-              rows: [consultation, prices.consultationByTier['atabek-mirali-gnatho']].filter(Boolean),
+              rows: [consultation, prices.consultationByTier.gnathology].filter(Boolean),
             })}${priceDisclaimer(prices)}</div>`
           : ''
       }

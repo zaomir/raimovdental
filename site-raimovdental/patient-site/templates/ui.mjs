@@ -175,13 +175,18 @@ export function faqBlock(items, { idPrefix = 'faq', title = 'Частые воп
 
 export function priceRows(rows) {
   return rows
-    .map(
-      (r) => `<div class="price-row">
+    .map((r) => {
+      const terms = [
+        r.duration ? `Время: ${r.duration}` : '',
+        r.limits,
+      ].filter(Boolean);
+      return `<div class="price-row">
       <div class="price-row__name">${esc(r.name)}</div>
       <div class="price-row__value">${esc(r.price)}</div>
       ${r.includes && r.includes !== '—' ? `<p class="price-row__includes">${esc(r.includes)}</p>` : ''}
-    </div>`
-    )
+      ${terms.length ? `<p class="price-row__includes">${terms.map(esc).join(' · ')}</p>` : ''}
+    </div>`;
+    })
     .join('');
 }
 
@@ -339,6 +344,12 @@ export function bookingForm({ fields, submitLabel, note }, defaultMessage) {
       data-book-form target="_blank" rel="noopener">
     <input type="hidden" name="text" value="${attr(defaultMessage)}" data-book-text>
     ${inputs}
+    <label class="book-form__consent">
+      <input type="checkbox" required data-book-consent>
+      <span>Согласен на обработку введённых данных для ответа на запрос.
+        <a href="/privacy/" target="_blank" rel="noopener">Политика конфиденциальности</a>
+      </span>
+    </label>
     <button class="btn btn--primary btn--wide" type="submit"
       data-cta-context="home-form" data-event="form_submit">${esc(submitLabel)}</button>
     ${note ? `<p class="book-form__note">${esc(note)}</p>` : ''}
@@ -353,12 +364,28 @@ export function bookingForm({ fields, submitLabel, note }, defaultMessage) {
  * and `topic` shape the WhatsApp draft so the message names the page the patient came
  * from — an administrator reading it knows the case before replying.
  */
-export function doctorCard(manifest, doctor, { prices, services, context = 'doctors', topic = '' } = {}) {
+export function doctorCard(
+  manifest,
+  doctor,
+  { prices, services, context = 'doctors', topic = '', consultationTier } = {}
+) {
   const photo = doctor.photo
     ? image(manifest, doctor.photo, doctor.photoAlt, { sizes: '(min-width: 62rem) 20vw, 45vw' })
     : `<div class="monogram" role="img" aria-label="${attr(doctor.photoAlt)}">${esc(initials(doctor.name))}</div>`;
 
-  const consultation = prices?.consultationByTier?.[doctor.consultationTier];
+  const tierIds =
+    consultationTier === false
+      ? []
+      : consultationTier
+        ? [consultationTier]
+        : doctor.consultationTiers ?? [doctor.consultationTier];
+  const consultations = tierIds.map((id) => prices?.consultationByTier?.[id]).filter(Boolean);
+  const tierLabels = {
+    general: 'Общий приём',
+    'mir-ali-prostho-implant': 'Ортопедия и имплантация',
+    'atabek-ortho': 'Ортодонтия',
+    gnathology: 'Гнатология',
+  };
   const treats = (doctor.treats ?? []).slice(0, 3);
   const facts = doctor.facts ?? [];
   // "Направление" repeats the role line; the rest of the facts are the parts a patient
@@ -393,11 +420,14 @@ export function doctorCard(manifest, doctor, { prices, services, context = 'doct
               .join(', ')}</p>`
           : ''
       }
-      ${
-        consultation
-          ? `<p class="doctor-card__price">Консультация — <strong>${esc(consultation.price)}</strong></p>`
-          : ''
-      }
+      ${consultations
+        .map(
+          (consultation) =>
+            `<p class="doctor-card__price">${esc(
+              tierLabels[consultation.consultationTierId] ?? 'Консультация'
+            )} — <strong>${esc(consultation.price)}</strong></p>`
+        )
+        .join('')}
       <div class="doctor-card__actions">
         <a class="btn btn--primary btn--sm" href="${attr(waHref(message))}" data-cta-context="${attr(
     `${context}-${doctor.slug}`

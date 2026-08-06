@@ -66,7 +66,15 @@ function loadPrices() {
     byDirection[d.id] = {
       id: d.id,
       name: d.name,
-      items: d.items.map((i) => ({ name: i.name, includes: i.includes, price: i.price, note: i.note })),
+      items: d.items.map((i) => ({
+        name: i.name,
+        includes: i.includes,
+        price: i.price,
+        note: i.note,
+        duration: i.duration,
+        limits: i.limits,
+        sku: i.sku,
+      })),
     };
   }
 

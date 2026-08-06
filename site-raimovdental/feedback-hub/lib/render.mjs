@@ -31,6 +31,12 @@ export const PLATFORM_URLS = {
   twogis: maps.twoGisReviews,
   google: maps.googleReviews,
 };
+const PLATFORM_CTA = {
+  yandex: 'Оставить отзыв на Яндекс Картах',
+  twogis: 'Оставить отзыв на 2ГИС',
+  // A direct Google writereview URL requires the clinic's Place ID; until then be explicit.
+  google: 'Открыть карточку в Google Maps',
+};
 
 function shell({ title, body, cssHref, noJs = false }) {
   return `<!doctype html>
@@ -67,7 +73,7 @@ export function renderLanding(cssHref) {
     .map(
       ([id, label]) => `<li class="platform">
         <a class="platform__btn" href="/feedback/out/${esc(id)}" rel="nofollow noopener">
-          Оставить отзыв на ${esc(label)}
+          ${esc(PLATFORM_CTA[id] ?? `Открыть ${label}`)}
         </a>
       </li>`
     )
@@ -154,7 +160,9 @@ function platformOptions(record) {
       return `<li class="platform">
         <form method="post" action="/feedback/${esc(record.token)}/click">
           <input type="hidden" name="platform" value="${esc(id)}">
-          <button class="platform__btn" type="submit">Оставить отзыв на ${esc(label)}</button>
+          <button class="platform__btn" type="submit">${esc(
+            PLATFORM_CTA[id] ?? `Открыть ${label}`
+          )}</button>
         </form>
         <form class="platform__already" method="post" action="/feedback/${esc(
           record.token
@@ -232,8 +240,10 @@ export function renderDetractor(record, cssHref) {
         <label class="field">
           <span class="field__label">${esc(copy.detractor.commentLabel)}
             <span class="field__hint">${esc(copy.detractor.commentHint)}</span></span>
-          <textarea class="field__control" name="comment" rows="4" maxlength="2000"></textarea>
+          <textarea class="field__control" name="comment" rows="4" maxlength="500"
+            aria-describedby="recovery-comment-safety"></textarea>
         </label>
+        <p class="hub__fine" id="recovery-comment-safety">${esc(copy.detractor.commentSafety)}</p>
         <label class="check">
           <input type="checkbox" name="privacy_consent" value="1" required>
           <span>${esc(copy.detractor.privacyConsentLabel)}</span>

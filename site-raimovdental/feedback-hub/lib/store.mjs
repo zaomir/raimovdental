@@ -23,18 +23,26 @@ export const PLATFORMS = ['yandex', 'twogis', 'google'];
 /** Tokens stop working after this many days, so a leaked link cannot be replayed forever. */
 const TTL_DAYS = 60;
 const TTL_MS = TTL_DAYS * 24 * 60 * 60 * 1000;
+const FREQUENCY_CAP_MS = 90 * 24 * 60 * 60 * 1000;
 
 let cache = null;
 
 function load() {
   if (!cache) {
     mkdirSync(DATA_DIR, { recursive: true });
-    cache = existsSync(STATE) ? JSON.parse(readFileSync(STATE, 'utf8')) : { tokens: {} };
+    cache = existsSync(STATE) ? JSON.parse(readFileSync(STATE, 'utf8')) : { tokens: {}, frequency: {} };
   }
+  cache.frequency ??= {};
   let pruned = false;
   for (const [token, record] of Object.entries(cache.tokens)) {
     if (expired(record)) {
       delete cache.tokens[token];
+      pruned = true;
+    }
+  }
+  for (const [patientKey, createdAt] of Object.entries(cache.frequency)) {
+    if (Date.now() - Date.parse(createdAt) > FREQUENCY_CAP_MS) {
+      delete cache.frequency[patientKey];
       pruned = true;
     }
   }
@@ -81,8 +89,23 @@ export function logEvent(event, token, extra = {}) {
  * Tokens are 18 random bytes in base64url: long enough that guessing one is not a path into
  * another patient's page, short enough to survive being pasted into WhatsApp.
  */
-export function createToken({ serviceCategory = null, doctorCode = null, source = 'admin' } = {}) {
+export function createToken({
+  patientRefHash = '',
+  serviceCategory = null,
+  doctorCode = null,
+  source = 'admin',
+} = {}) {
   const state = load();
+  const patientRef = String(patientRefHash).trim().toLowerCase();
+  if (!/^[a-f0-9]{64}$/.test(patientRef)) return { error: 'patient-ref-required' };
+  const patientKey = createHash('sha256').update(patientRef).digest('hex');
+  const previousAt = state.frequency[patientKey];
+  if (previousAt && Date.now() - Date.parse(previousAt) < FREQUENCY_CAP_MS) {
+    return {
+      error: 'frequency-cap',
+      retryAfter: new Date(Date.parse(previousAt) + FREQUENCY_CAP_MS).toISOString(),
+    };
+  }
   const token = randomBytes(18).toString('base64url');
   state.tokens[token] = {
     token,
@@ -101,9 +124,10 @@ export function createToken({ serviceCategory = null, doctorCode = null, source 
     stopped: null,
     publishDetected: {},
   };
+  state.frequency[patientKey] = state.tokens[token].createdAt;
   persist();
   logEvent('token_created', token, { serviceCategory, doctorCode, source });
-  return state.tokens[token];
+  return { record: state.tokens[token] };
 }
 
 function expired(record) {
@@ -174,6 +198,23 @@ export function markPlatformAlreadyReviewed(token, platform) {
   return { record: r };
 }
 
+function sanitizeRecoveryComment(value) {
+  const original = String(value ?? '').slice(0, 2000);
+  const contactRedacted = original
+    .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, '[контакт удалён]')
+    .replace(/(?:https?:\/\/|www\.)\S+/gi, '[ссылка удалена]')
+    .replace(/(?:\+?\d[\d\s().-]{6,}\d)/g, '[телефон удалён]');
+  const sensitive = /(диагноз|анамнез|лекарств|препарат|рецепт|дозиров|аллерги|беремен|вич|гепатит|онколог|медицинск\w+\s+документ)/i;
+  const sanitized = contactRedacted
+    .split(/(?<=[.!?])\s+/)
+    .map((part) => (sensitive.test(part) ? '[медицинские данные удалены]' : part))
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 500);
+  return { sanitized, redacted: sanitized !== original.trim().slice(0, 500) };
+}
+
 export function saveRecovery(
   token,
   { topics = [], comment = '', privacyConsent = false, contactConsent = false }
@@ -182,16 +223,21 @@ export function saveRecovery(
   if (!r) return { error: 'gone' };
   if (r.branch !== 'detractor') return { error: 'wrong-branch' };
   if (!privacyConsent) return { error: 'consent-required' };
+  const safeComment = sanitizeRecoveryComment(comment);
   r.recovery = {
     topics: topics.slice(0, 8),
-    comment: String(comment).slice(0, 2000),
+    comment: safeComment.sanitized,
+    commentRedacted: safeComment.redacted,
     privacyConsent: true,
     contactConsent: Boolean(contactConsent),
     status: 'NEW',
     submittedAt: new Date().toISOString(),
   };
   persist();
-  logEvent('recovery_submitted', token, { contactConsent: r.recovery.contactConsent });
+  logEvent('recovery_submitted', token, {
+    contactConsent: r.recovery.contactConsent,
+    commentRedacted: r.recovery.commentRedacted,
+  });
   return { record: r };
 }
 

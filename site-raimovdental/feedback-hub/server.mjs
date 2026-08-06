@@ -150,12 +150,23 @@ const server = createServer(async (req, res) => {
       }
       if (method === 'POST' && path === '/feedback/admin/token') {
         const form = await readForm(req);
-        const record = store.createToken({
+        const result = store.createToken({
+          patientRefHash: form.get('patient_ref_hash') || '',
           serviceCategory: form.get('service_category') || null,
           doctorCode: form.get('doctor_code') || null,
           source: form.get('source') || 'admin',
         });
-        return send(res, 200, renderAdmin(CSS_HREF, ORIGIN, { created: record }));
+        if (result.error) {
+          const message =
+            result.error === 'frequency-cap'
+              ? `Для этого псевдонима цикл уже создавался. Новый можно открыть после ${result.retryAfter.slice(
+                  0,
+                  10
+                )}.`
+              : 'Нужен 64-символьный HMAC пациента из CRM. Имя и телефон сюда вводить нельзя.';
+          return send(res, 409, renderAdmin(CSS_HREF, ORIGIN, { error: message }));
+        }
+        return send(res, 200, renderAdmin(CSS_HREF, ORIGIN, { created: result.record }));
       }
       if (method === 'POST' && path === '/feedback/admin/reset') {
         const form = await readForm(req);

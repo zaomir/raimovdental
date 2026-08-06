@@ -24,6 +24,7 @@ export const doctors = [
     photo: 'doctors/raimov-atabek',
     photoAlt: 'Раимов Атабек Саидович, главный врач и ортодонт-гнатолог Expert Dental Studio',
     consultationTier: 'atabek-ortho',
+    consultationTiers: ['atabek-ortho', 'gnathology'],
     lead:
       'Ведёт ортодонтический и гнатологический приём: занимается прикусом и работой височно-нижнечелюстного сустава как одной системой, а не двумя отдельными задачами.',
     treats: [
@@ -59,6 +60,7 @@ export const doctors = [
     photo: 'doctors/talyshkhanov-mirali',
     photoAlt: 'Талышханов Мир-Али, хирург-имплантолог и ортопед Expert Dental Studio',
     consultationTier: 'mir-ali-prostho-implant',
+    consultationTiers: ['mir-ali-prostho-implant', 'gnathology'],
     lead:
       'Устанавливает импланты и восстанавливает зубной ряд коронками и протезами. Ведёт случаи, где нужно спланировать хирургический и ортопедический этап вместе.',
     treats: [

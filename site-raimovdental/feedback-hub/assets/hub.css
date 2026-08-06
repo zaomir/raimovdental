@@ -45,6 +45,8 @@
   --brass-tint: #f6f0e4;
   --bone: #f7f4ef;
   --paper: #ffffff;
+  --alert-bg: #f8ebe8;
+  --alert-ink: #8c3b2e;
   --line: rgba(20, 32, 28, 0.14);
   --line-strong: rgba(20, 32, 28, 0.28);
   --radius: 4px;
@@ -140,6 +142,9 @@ body {
 .hub__minor a {
   color: var(--ink-mute);
   text-underline-offset: 0.2em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
 }
 
 .hub__note {
@@ -173,7 +178,7 @@ body {
 .scale__row {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 /*
@@ -398,6 +403,7 @@ body {
   text-decoration: underline;
   text-underline-offset: 0.2em;
   cursor: pointer;
+  min-height: 2.75rem;
 }
 
 .opt-out__btn:hover {
@@ -460,7 +466,7 @@ body {
 
 .admin .btn {
   width: auto;
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   padding: 0.5rem 1rem;
 }
 
@@ -475,6 +481,6 @@ body {
 }
 
 .pill--alert {
-  background: #f8ebe8;
-  color: #8c3b2e;
+  background: var(--alert-bg);
+  color: var(--alert-ink);
 }

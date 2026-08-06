@@ -61,7 +61,7 @@ export function toCsv() {
   return [CSV_COLUMNS, ...rows].map((r) => r.map(quote).join(',')).join('\n');
 }
 
-export function renderAdmin(cssHref, origin, { created = null } = {}) {
+export function renderAdmin(cssHref, origin, { created = null, error = null } = {}) {
   const tokens = allTokens();
   const open = tokens.filter((t) => t.recovery && t.recovery.status !== 'CLOSED').length;
   const scored = tokens.filter((t) => t.score !== null);
@@ -106,6 +106,7 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
     ? `<p class="hub__note"><strong>Ссылка для пациента:</strong>
         <code>${esc(origin)}/feedback/${esc(created.token)}</code></p>`
     : '';
+  const errorBanner = error ? `<p class="hub__note"><strong>${esc(error)}</strong></p>` : '';
 
   return `<!doctype html>
 <html lang="ru">
@@ -122,9 +123,15 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
   <p class="hub__lead">Циклов: ${tokens.length} · с оценкой: ${scored.length} ·
      2+ площадки: ${multi} · открытых разборов: ${open}</p>
   ${banner}
+  ${errorBanner}
   <div class="admin__bar">
     <form method="post" action="/feedback/admin/token">
       <input type="hidden" name="source" value="admin">
+      <label class="field">
+        <span class="field__label">HMAC пациента из CRM</span>
+        <input class="field__control" name="patient_ref_hash" required
+          pattern="[a-fA-F0-9]{64}" minlength="64" maxlength="64" autocomplete="off">
+      </label>
       <button class="btn" type="submit">Создать ссылку</button>
     </form>
     <a class="btn" href="/feedback/admin/journal.csv">Скачать CSV</a>

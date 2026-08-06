@@ -2493,6 +2493,30 @@ a.card--service:hover {
   text-align: center;
 }
 
+.book-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  color: var(--ink-mute);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.book-form__consent input {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+  accent-color: var(--forest);
+}
+
+.book-form__consent a {
+  color: var(--forest);
+  text-underline-offset: 0.2em;
+}
+
 /* ------------------------------------------------------------- odds and ends */
 
 .section-head--compact {

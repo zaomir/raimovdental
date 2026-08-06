@@ -143,6 +143,12 @@ if (!/already-reviewed/.test(render) || !/alreadyLabel/.test(render)) {
 if (!/markPlatformAlreadyReviewed/.test(store)) {
   fail('store.mjs', 'нет отдельного состояния already_reviewed');
 }
+if (!/FREQUENCY_CAP_MS\s*=\s*90/.test(store) || !/patientRefHash/.test(store)) {
+  fail('store.mjs', 'нет 90-дневного patient-level frequency cap');
+}
+if (!/patient_ref_hash[^>]+required/.test(readFileSync(join(HUB, 'lib', 'admin.mjs'), 'utf8'))) {
+  fail('admin.mjs', 'создание цикла возможно без псевдонимного HMAC пациента');
+}
 
 /* --------------------------------------------------------------- pii rules */
 
@@ -158,6 +164,9 @@ if (!/privacy_consent[^>]+required/.test(render)) {
 }
 if (/privacy_consent[^>]+checked/.test(render) || /contact_consent[^>]+checked/.test(render)) {
   fail('render.mjs', 'согласие предвыбрано');
+}
+if (!/commentSafety/.test(copy) || !/sanitizeRecoveryComment/.test(store)) {
+  fail('feedback-hub', 'нет предупреждения и серверной минимизации PHI в свободном комментарии');
 }
 const notifyCode = notify.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, ' ');
 for (const sensitive of ['record.score', 'serviceCategory', 'doctorCode', 'r?.comment', 'r.comment', 'topics']) {
