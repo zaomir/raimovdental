@@ -156,7 +156,7 @@ export function faqBlock(items, { idPrefix = 'faq', title = 'Частые воп
       const qId = `${idPrefix}-q-${i}`;
       const aId = `${idPrefix}-a-${i}`;
       return `<div class="faq__item">
-        <h3 style="margin:0">
+        <h3 class="faq__heading">
           <button class="faq__q" id="${qId}" aria-expanded="true" aria-controls="${aId}" type="button">
             <span>${esc(item.q)}</span>
           </button>
@@ -165,7 +165,7 @@ export function faqBlock(items, { idPrefix = 'faq', title = 'Частые воп
       </div>`;
     })
     .join('');
-  return `<div class="stack" style="--stack-gap:1.25rem">
+  return `<div class="stack stack--gap-125">
       ${title ? `<h2 class="display t-h2">${esc(title)}</h2>` : ''}
       <div class="faq" data-faq>${rows}</div>
     </div>`;
@@ -424,7 +424,7 @@ export function postCard(manifest, article, categories, { feature = false } = {}
     <div class="post-card__media">${image(manifest, article.cover, article.coverAlt, {
       sizes: feature ? '(min-width: 52rem) 55vw, 92vw' : '(min-width: 62rem) 30vw, 92vw',
     })}</div>
-    <div class="stack" style="--stack-gap:.55rem">
+    <div class="stack stack--gap-055">
       <span class="post-card__cat">${esc(cat.label)}</span>
       <h3 class="post-card__title">${esc(article.title)}</h3>
       <p class="card__text">${esc(article.excerpt)}</p>
@@ -505,7 +505,7 @@ export function footer(assets, waMessage) {
           <img class="colophon__logo" src="${assets['img/brand/logo-light-260.png']}"
                srcset="${assets['img/brand/logo-light-260.png']} 260w, ${assets['img/brand/logo-light-520.png']} 520w"
                sizes="200px" width="1024" height="363" alt="${attr(brand.name)}" loading="lazy" decoding="async">
-          <p style="margin-bottom:1rem">${esc(brand.legalNote)}. ${esc(contacts.hoursDisplay)}.</p>
+          <p class="colophon__intro">${esc(brand.legalNote)}. ${esc(contacts.hoursDisplay)}.</p>
           <ul>
             <li><a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></li>
             <li><a href="${attr(waHref(waMessage))}" data-event="whatsapp_click"

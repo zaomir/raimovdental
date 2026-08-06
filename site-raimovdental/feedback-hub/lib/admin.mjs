@@ -69,6 +69,11 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
             t.recovery.status
           )}</span>`
         : '—';
+      const recovery = t.recovery
+        ? `<strong>${esc(t.recovery.topics.join(', ') || 'без темы')}</strong><br>
+           ${esc(t.recovery.comment || 'без комментария')}<br>
+           Контакт в WhatsApp: ${t.recovery.contactConsent ? 'разрешён' : 'не разрешён'}`
+        : '—';
       return `<tr>
         <td><code>${esc(shortId(t.token))}</code></td>
         <td>${esc(day(t.createdAt))}</td>
@@ -79,6 +84,7 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
         <td>${esc(t.branch ?? '—')}</td>
         <td>${clicks}/3 ${PLATFORMS.filter((p) => t.clicks[p]).join(', ')}</td>
         <td>${status}</td>
+        <td>${recovery}</td>
         <td>${t.stopped ? esc(t.stopped.reason) : '—'}</td>
         <td><a href="/feedback/${esc(t.token)}">открыть</a></td>
       </tr>`;
@@ -115,9 +121,9 @@ export function renderAdmin(cssHref, origin, { created = null } = {}) {
   <table>
     <thead><tr>
       <th>Обращение</th><th>Создан</th><th>Услуга</th><th>Врач</th><th>Открыт</th>
-      <th>Оценка</th><th>Ветка</th><th>Площадки</th><th>Разбор</th><th>Стоп</th><th></th>
+      <th>Оценка</th><th>Ветка</th><th>Площадки</th><th>Статус</th><th>Комментарий</th><th>Стоп</th><th></th>
     </tr></thead>
-    <tbody>${rows || '<tr><td colspan="11">Пока пусто</td></tr>'}</tbody>
+    <tbody>${rows || '<tr><td colspan="12">Пока пусто</td></tr>'}</tbody>
   </table>
 </main>
 </body>

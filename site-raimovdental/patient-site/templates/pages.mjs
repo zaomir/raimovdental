@@ -80,7 +80,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
   return `
   <section class="hero">
     <div class="shell hero__grid">
-      <div class="stack" style="--stack-gap:1.4rem">
+      <div class="stack stack--gap-14">
         <span class="kicker">${esc(brand.legalNote)}</span>
         <h1 class="display hero__title">${heroTitle}</h1>
         <p class="t-lead">${esc(home.hero.lead)}</p>
@@ -100,7 +100,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
         })}
         <div class="hero__badge">
           <span class="kicker">Профильное направление</span>
-          <p class="t-small" style="margin-top:.35rem">Гнатология и функциональная диагностика ВНЧС</p>
+          <p class="t-small mt-1">Гнатология и функциональная диагностика ВНЧС</p>
         </div>
       </div>
     </div>
@@ -152,8 +152,8 @@ export function homePage({ manifest, services, doctors, articles, prices, review
   </section>
 
   <section class="section section--forest fluted" id="${attr(home.approach.id)}" aria-labelledby="approach-title">
-    <div class="shell shell--narrow" style="margin-inline:auto">
-      <div class="stack" style="--stack-gap:1.15rem">
+    <div class="shell shell--narrow shell--centered">
+      <div class="stack stack--gap-115">
         <span class="kicker kicker--onDark">${esc(home.approach.kicker)}</span>
         <h2 class="display t-h2" id="approach-title">${esc(home.approach.title)}</h2>
         ${home.approach.paragraphs.map((p) => `<p class="t-lead">${esc(p)}</p>`).join('')}
@@ -181,7 +181,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
           )
           .join('')}
       </ol>
-      <div class="stack mt-4" style="--stack-gap:.85rem">
+      <div class="stack stack--gap-085 mt-4">
         ${home.process.notes.map((n) => lockedNote(n, prices)).join('')}
       </div>
       <p class="t-small t-mute mt-3">${esc(home.process.term)}</p>
@@ -296,7 +296,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
   }
 
   <section class="section" id="faq" aria-labelledby="home-faq-title">
-    <div class="shell shell--narrow" style="margin-inline:auto">
+    <div class="shell shell--narrow shell--centered">
       ${faqBlock(home.faq, { idPrefix: 'home', title: 'Частые вопросы' })}
     </div>
   </section>
@@ -326,7 +326,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
 
   <section class="section section--forest" id="${attr(home.finalCta.id)}" aria-labelledby="book-title">
     <div class="shell split split--even">
-      <div class="stack" style="--stack-gap:1.1rem">
+      <div class="stack stack--gap-11">
         <h2 class="display t-h2" id="book-title">${esc(home.finalCta.title)}</h2>
         <p class="t-lead">${esc(home.finalCta.lead)}</p>
         <ul class="channels">
@@ -355,7 +355,7 @@ function chiefBand(manifest, doctor) {
       <div class="chief__photo">
         ${image(manifest, doctor.photo, doctor.photoAlt, { sizes: '(min-width: 56rem) 24rem, 70vw' })}
       </div>
-      <div class="stack" style="--stack-gap:1.25rem">
+      <div class="stack stack--gap-125">
         <span class="kicker kicker--onDark">Главный врач</span>
         <h2 class="display t-h2" id="chief-title">${esc(doctor.name)}</h2>
         <p class="chief__quote">«${esc(chief.quote)}»</p>
@@ -380,28 +380,28 @@ function chiefBand(manifest, doctor) {
 function contactStrip(manifest) {
   return `<section class="section section--tight" id="contacts" aria-labelledby="contact-strip">
     <div class="shell split split--even">
-      <div class="stack" style="--stack-gap:1.25rem">
+      <div class="stack stack--gap-125">
         <span class="kicker">Как добраться</span>
         <h2 class="display t-h2" id="contact-strip">Клиника в центре Бишкека</h2>
         <dl class="info-list">
-          <div><dt>Адрес</dt><dd class="info-list__value" style="margin:0">${esc(contacts.addressFull)}, ${esc(
+          <div><dt>Адрес</dt><dd class="info-list__value">${esc(contacts.addressFull)}, ${esc(
     contacts.postalCode
   )}<br>
             <span class="t-small t-mute">${esc(contacts.streetNote)}</span></dd></div>
-          <div><dt>Часы работы</dt><dd class="info-list__value" style="margin:0">${esc(contacts.hoursDisplay)}</dd></div>
-          <div><dt>Парковка</dt><dd class="info-list__value" style="margin:0">${esc(contacts.parking)}</dd></div>
-          <div><dt>Телефон и WhatsApp</dt><dd class="info-list__value" style="margin:0">
+          <div><dt>Часы работы</dt><dd class="info-list__value">${esc(contacts.hoursDisplay)}</dd></div>
+          <div><dt>Парковка</dt><dd class="info-list__value">${esc(contacts.parking)}</dd></div>
+          <div><dt>Телефон и WhatsApp</dt><dd class="info-list__value">
             <a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></dd></div>
-          <div><dt>Мессенджеры</dt><dd class="info-list__value" style="margin:0">
+          <div><dt>Мессенджеры</dt><dd class="info-list__value">
             <a href="${attr(social.telegram)}" target="_blank" rel="noopener">Telegram ${esc(
     social.telegramHandle
   )}</a> · <a href="${attr(social.instagram)}" target="_blank" rel="noopener">Instagram ${esc(
     social.instagramHandle
   )}</a></dd></div>
-          <div><dt>Карты</dt><dd class="info-list__value" style="margin:0">${mapLinks()}</dd></div>
+          <div><dt>Карты</dt><dd class="info-list__value">${mapLinks()}</dd></div>
         </dl>
       </div>
-      <div class="gallery" style="grid-template-columns:1fr 1fr">
+      <div class="gallery gallery--duo">
         <figure>${image(manifest, 'clinic/facade', 'Фасад здания, в котором находится Expert Dental Studio', {
           sizes: '(min-width: 56rem) 24vw, 45vw',
         })}<figcaption>Вход в клинику</figcaption></figure>
@@ -423,7 +423,7 @@ export function servicesIndexPage({ manifest, services, prices }) {
   <section class="section section--tight">
     <div class="shell">
       ${breadcrumbs([{ href: '/', label: 'Главная' }, { href: '/services/', label: 'Услуги и цены' }])}
-      <div class="section-head" style="margin-bottom:2rem">
+      <div class="section-head section-head--compact">
         <span class="kicker">Услуги и цены</span>
         <h1 class="display t-h1">Что мы лечим и сколько это стоит</h1>
         <p class="t-lead">Один прайс для сайта, администратора и врача. Итоговая стоимость определяется
@@ -476,8 +476,8 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
         { href: '/services/', label: 'Услуги и цены' },
         { href: `/services/${service.slug}/`, label: service.navLabel },
       ])}
-      <div class="split" style="align-items:center">
-        <div class="stack" style="--stack-gap:1.25rem">
+      <div class="split split--center">
+        <div class="stack stack--gap-125">
           <span class="kicker">${esc(service.kicker)}</span>
           <h1 class="display t-h1">${esc(service.title)}</h1>
           <p class="t-lead">${esc(service.lead)}</p>
@@ -497,7 +497,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section section--bone">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Симптомы и показания</span>
         <h2 class="display t-h2">Когда стоит записаться</h2>
       </div>
@@ -512,7 +512,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Диагностика</span>
         <h2 class="display t-h2">Что делают до лечения</h2>
         <p class="t-lead">План строится по результатам обследования, а не по названию услуги.</p>
@@ -528,8 +528,8 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
         ${service.options
           .map(
             (o) => `<div>
-              <h3 class="card__title" style="color:var(--bone)">${esc(o.name)}</h3>
-              <p class="card__text" style="color:rgba(247,244,239,.75)">${esc(o.text)}</p>
+              <h3 class="card__title card__title--onDark">${esc(o.name)}</h3>
+              <p class="card__text card__text--onDark">${esc(o.text)}</p>
             </div>`
           )
           .join('')}
@@ -559,7 +559,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
       ${sectionHead({ kicker: 'Стоимость', title: 'Цены и что на них влияет', id: 'service-price' })}
       <div class="split">
         <div class="prose">
-          <h3 style="margin-top:0">От чего зависит итоговая сумма</h3>
+          <h3 class="heading-flush">От чего зависит итоговая сумма</h3>
           ${list(service.priceFactors)}
         </div>
         <div>
@@ -592,7 +592,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section section--bone">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Ограничения</span>
         <h2 class="display t-h2">О чём важно знать заранее</h2>
         <p class="t-lead">Мы не обещаем результат заранее. Вот что реально влияет на прогноз.</p>
@@ -602,7 +602,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
   </section>
 
   <section class="section">
-    <div class="shell shell--narrow" style="margin-inline:auto">
+    <div class="shell shell--narrow shell--centered">
       ${faqBlock(service.faq, { idPrefix: `svc-${service.slug}` })}
     </div>
   </section>
@@ -662,7 +662,7 @@ export function doctorsIndexPage({ manifest, doctors, prices, services }) {
       <div class="grid grid--doctors">${rest
         .map((d) => doctorCard(manifest, d, { prices, services, context: 'doctors-index' }))
         .join('')}</div>
-      <figure class="team-band mt-4" style="margin-inline:0">
+      <figure class="team-band team-band--flush mt-4">
         ${image(manifest, 'team/team', 'Команда врачей Expert Dental Studio', {
           sizes: '(min-width: 74rem) 74rem, 100vw',
         })}
@@ -689,7 +689,7 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
         sizes: '(min-width: 56rem) 30vw, 80vw',
         priority: true,
       })
-    : `<div class="portrait" style="aspect-ratio:1"><div class="monogram">${esc(initials(doctor.name))}</div></div>`;
+    : `<div class="portrait portrait--square"><div class="monogram">${esc(initials(doctor.name))}</div></div>`;
 
   return `
   <section class="section section--tight">
@@ -699,17 +699,17 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
         { href: '/doctors/', label: 'Врачи' },
         { href: `/doctors/${doctor.slug}/`, label: doctor.name },
       ])}
-      <div class="split" style="align-items:center">
-        <div style="max-width:26rem">${photo}</div>
-        <div class="stack" style="--stack-gap:1.15rem">
+      <div class="split split--center">
+        <div class="content-portrait">${photo}</div>
+        <div class="stack stack--gap-115">
           <span class="kicker">${esc(doctor.role)}</span>
           <h1 class="display t-h1">${esc(doctor.name)}</h1>
           <p class="t-lead">${esc(doctor.lead)}</p>
-          <dl class="info-list" style="grid-template-columns:repeat(auto-fit,minmax(9rem,1fr))">
+          <dl class="info-list info-list--facts">
             ${doctor.facts
               .map(
                 (f) => `<div><dt>${esc(f.label)}</dt>
-                  <dd class="info-list__value" style="margin:0">${esc(f.value)}</dd></div>`
+                  <dd class="info-list__value">${esc(f.value)}</dd></div>`
               )
               .join('')}
           </dl>
@@ -724,7 +724,7 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
 
   <section class="section section--bone">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Приём</span>
         <h2 class="display t-h2">С чем обращаются к врачу</h2>
       </div>
@@ -734,7 +734,7 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
 
   <section class="section">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Методы</span>
         <h2 class="display t-h2">Как работает</h2>
       </div>
@@ -802,18 +802,18 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
         { href: '/doctors/', label: 'Врачи' },
         { href: '/doctors/raimov-atabek/', label: 'Главный врач' },
       ])}
-      <div class="split" style="align-items:center">
-        <div style="max-width:26rem">
+      <div class="split split--center">
+        <div class="content-portrait">
           ${portraitImage(manifest, doctor.photo, doctor.photoAlt, {
             sizes: '(min-width: 56rem) 30vw, 80vw',
             priority: true,
           })}
         </div>
-        <div class="stack" style="--stack-gap:1.15rem">
+        <div class="stack stack--gap-115">
           <span class="kicker">Главный врач и основатель клиники</span>
           <h1 class="display t-h1">${esc(doctor.name)}</h1>
           <p class="t-lead">${esc(chief.positioning)}</p>
-          <div class="hero__facts" style="margin-top:1rem">
+          <div class="hero__facts hero__facts--offset">
             ${chief.figures
               .map(
                 (f) => `<div><div class="fact__value numeral">${esc(f.value)}</div>
@@ -828,15 +828,15 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
   </section>
 
   <section class="section section--forest fluted">
-    <div class="shell shell--narrow" style="margin-inline:auto;text-align:center">
+    <div class="shell shell--narrow shell--centered text-center">
       <p class="chief__quote">«${esc(chief.quote)}»</p>
-      <p class="t-small mt-2" style="color:rgba(247,244,239,.6)">${esc(chief.quoteNote)}</p>
+      <p class="t-small chief__quote-note mt-2">${esc(chief.quoteNote)}</p>
     </div>
   </section>
 
   <section class="section">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Подход</span>
         <h2 class="display t-h2">Прикус и сустав — одна система</h2>
       </div>
@@ -846,7 +846,7 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
 
   <section class="section section--bone">
     <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
+      <div class="stack stack--gap-1">
         <span class="kicker">Клинический профиль</span>
         <h2 class="display t-h2">${esc(chief.focus.title)}</h2>
       </div>
@@ -1144,7 +1144,7 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
 
   const authorPhoto = author.photo
     ? image(manifest, author.photo, author.photoAlt, { sizes: '4.5rem' })
-    : `<div class="monogram" style="font-size:1.4rem">${esc(initials(author.name))}</div>`;
+    : `<div class="monogram monogram--small">${esc(initials(author.name))}</div>`;
 
   return `
   <article data-article-slug="${attr(article.slug)}">
@@ -1162,7 +1162,8 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
       <span>Автор: <strong>${esc(author.name)}</strong>, ${esc(author.role.toLowerCase())}</span>
       ${
         article.reviewedAt && article.reviewEvidence
-          ? `<span>Медицинская проверка: <strong>${esc(reviewer.name)}</strong>,
+          ? `<span data-review-evidence="${attr(article.reviewEvidence)}">Медицинская проверка:
+              <strong>${esc(reviewer.name)}</strong>,
               ${formatDate(article.reviewedAt)}</span>`
           : ''
       }
@@ -1265,8 +1266,8 @@ export function aboutPage({ manifest, doctors, prices }) {
   <section class="section section--tight">
     <div class="shell">
       ${breadcrumbs([{ href: '/', label: 'Главная' }, { href: '/about/', label: 'О клинике' }])}
-      <div class="split" style="align-items:center">
-        <div class="stack" style="--stack-gap:1.15rem">
+      <div class="split split--center">
+        <div class="stack stack--gap-115">
           <span class="kicker">О клинике</span>
           <h1 class="display t-h1">Клиника, где план лечения составляют до его начала</h1>
           <p class="t-lead">Expert Dental Studio — стоматология в центре Бишкека. Мы работаем командой:
@@ -1338,38 +1339,38 @@ export function contactsPage({ manifest }) {
     <div class="shell">
       ${breadcrumbs([{ href: '/', label: 'Главная' }, { href: '/contacts/', label: 'Контакты' }])}
       <div class="split">
-        <div class="stack" style="--stack-gap:1.5rem">
+        <div class="stack stack--gap-15">
           <div>
             <span class="kicker">Контакты</span>
             <h1 class="display t-h1 mt-1">Как нас найти</h1>
           </div>
           <dl class="info-list">
-            <div><dt>Адрес</dt><dd class="info-list__value" style="margin:0">${esc(contacts.addressFull)}<br>
+            <div><dt>Адрес</dt><dd class="info-list__value">${esc(contacts.addressFull)}<br>
               <span class="t-small t-mute">${esc(contacts.streetNote)}</span></dd></div>
-            <div><dt>Телефон</dt><dd class="info-list__value" style="margin:0">
+            <div><dt>Телефон</dt><dd class="info-list__value">
               <a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></dd></div>
-            <div><dt>WhatsApp</dt><dd class="info-list__value" style="margin:0">
+            <div><dt>WhatsApp</dt><dd class="info-list__value">
               <a href="${attr(
                 waHref('Здравствуйте. Пишу со страницы контактов Expert Dental Studio.')
               )}" data-cta-context="contacts-details">${esc(contacts.phoneDisplay)}</a><br>
               <span class="t-small t-mute">${esc(contacts.whatsappNote)}. ${esc(contacts.adminSla)}.</span></dd></div>
-            <div><dt>Часы работы</dt><dd class="info-list__value" style="margin:0">${esc(
+            <div><dt>Часы работы</dt><dd class="info-list__value">${esc(
               contacts.hoursDisplay
             )}</dd></div>
-            <div><dt>Парковка</dt><dd class="info-list__value" style="margin:0">${esc(contacts.parking)}</dd></div>
+            <div><dt>Парковка</dt><dd class="info-list__value">${esc(contacts.parking)}</dd></div>
           </dl>
           ${ctaPair({ context: 'contacts', message: 'Здравствуйте. Хочу записаться на приём. Подскажите, пожалуйста, свободное время.' })}
         </div>
-        <div class="stack" style="--stack-gap:1rem">
+        <div class="stack stack--gap-1">
           ${archImage(manifest, 'clinic/facade', 'Фасад здания, в котором находится Expert Dental Studio', {
             modifier: 'arch--sm',
             sizes: '(min-width: 56rem) 44vw, 92vw',
             priority: true,
           })}
-          <div style="border:1px solid var(--line);border-radius:var(--radius);overflow:hidden">
+          <div class="map-frame">
             <iframe src="${attr(mapSrc)}" title="Карта: ${attr(contacts.addressFull)}" loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              style="border:0;width:100%;height:320px;display:block"></iframe>
+              ></iframe>
           </div>
         </div>
       </div>
@@ -1400,8 +1401,16 @@ export function legalPage({ kind }) {
       <li>Ответить на вопрос о лечении или стоимости.</li>
       <li>Напомнить о назначенном визите.</li>
     </ul>
-    <p>Данные не используются для рассылок без вашего согласия и не передаются третьим лицам,
-      за исключением случаев, предусмотренных законодательством Кыргызской Республики.</p>
+    <p>Данные не используются для рассылок без вашего согласия. Доступ к ним получают только
+      сотрудники и технические обработчики, необходимые для записи и связи, либо лица,
+      которым данные должны быть переданы по законодательству Кыргызской Республики.</p>
+    <h2>Обратная связь после визита</h2>
+    <p>По персональной ссылке вы можете добровольно поставить оценку и оставить комментарий.
+      Перед отправкой комментария сайт запрашивает отдельное согласие. Оценка, выбранные темы
+      и текст хранятся до 60 дней в защищённом журнале клиники, после чего удаляются.
+      В уведомление управляющему передаётся только обезличенный номер обращения — без текста,
+      оценки, врача и услуги. Разрешение связаться в WhatsApp запрашивается отдельно и не
+      выбирается заранее.</p>
     <h2>Медицинская тайна</h2>
     <p>Сведения о вашем обращении, диагнозе и лечении составляют врачебную тайну. Клинические фотографии
       и материалы лечения публикуются только с отдельного письменного согласия пациента.</p>
@@ -1440,7 +1449,7 @@ export function legalPage({ kind }) {
 
   return `
   <section class="section section--tight">
-    <div class="shell shell--narrow" style="margin-inline:auto">
+    <div class="shell shell--narrow shell--centered">
       ${breadcrumbs([{ href: '/', label: 'Главная' }, { href, label: title }])}
       <h1 class="display t-h1">${esc(title)}</h1>
       <div class="prose mt-3">${isPrivacy ? privacyBody : legalBody}</div>
@@ -1452,11 +1461,11 @@ export function legalPage({ kind }) {
 export function notFoundPage() {
   return `
   <section class="section">
-    <div class="shell shell--narrow" style="margin-inline:auto;text-align:center">
+    <div class="shell shell--narrow shell--centered text-center">
       <span class="kicker">Ошибка 404</span>
       <h1 class="display t-h1 mt-1">Такой страницы нет</h1>
       <p class="t-lead mt-2">Возможно, адрес изменился. Начните с главной или посмотрите услуги и цены.</p>
-      <div class="btn-row mt-3" style="justify-content:center">
+      <div class="btn-row btn-row--center mt-3">
         <a class="btn btn--primary" href="/">На главную</a>
         <a class="btn btn--ghost" href="/services/">Услуги и цены</a>
       </div>
@@ -1468,7 +1477,7 @@ export function notFoundPage() {
 export function pendingPage() {
   return `
   <section class="section">
-    <div class="shell shell--narrow" style="margin-inline:auto">
+    <div class="shell shell--narrow shell--centered">
       <h1 class="display t-h1">Материалы, ожидаемые от клиники</h1>
       <p class="t-lead mt-2">Служебная страница. Пока перечисленное не получено, соответствующие блоки
         сайта не публикуются — вместо них не ставятся выдуманные данные.</p>

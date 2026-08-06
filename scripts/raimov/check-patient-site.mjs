@@ -317,6 +317,19 @@ for (const file of files) {
   }
   if (AI_MENTION.test(text)) fail(page, 'public page mentions AI (DEC-251)');
   if (PRIVATE_LEAK.test(html)) fail(page, 'links to the private raimovdental strategy surface');
+  if (!internal && /LO-8888\s+8888\s+88/.test(text)) {
+    fail(page, 'unverified licence placeholder is public');
+  }
+  if (!internal && /Expert Care 12/i.test(text)) {
+    fail(page, 'gated proposed product is public');
+  }
+  if (
+    page.startsWith('/blog/')
+    && /Проверил:|lastReviewed|reviewedBy/.test(html)
+    && !html.includes('data-review-evidence')
+  ) {
+    fail(page, 'medical review attestation lacks explicit approval evidence');
+  }
 
   /*
    * Locked passages must arrive whole. Truncating one is not a styling choice: each protects

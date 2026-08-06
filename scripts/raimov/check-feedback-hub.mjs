@@ -8,8 +8,8 @@
  * are what would make the whole scheme review-gating rather than review-collecting:
  *
  *   no reward     — nothing is offered in exchange for a rating or a published review;
- *   no pre-filter — every patient answers the same neutral question, the low branch is a
- *                   real recovery path, and the map links never render on it.
+ *   no pre-filter — every patient answers the same neutral question and sees the same
+ *                   optional map links; recovery runs independently for low scores.
  *
  * Canon: POST_VISIT_FEEDBACK_LOOP.md §7, §11; IMPLEMENTATION_PLAN_ATOMIC.md «вне пилота».
  */
@@ -28,6 +28,7 @@ const copy = readFileSync(join(HUB, 'content.mjs'), 'utf8');
 const render = readFileSync(join(HUB, 'lib', 'render.mjs'), 'utf8');
 const store = readFileSync(join(HUB, 'lib', 'store.mjs'), 'utf8');
 const server = readFileSync(join(HUB, 'server.mjs'), 'utf8');
+const notify = readFileSync(join(HUB, 'lib', 'notify.mjs'), 'utf8');
 
 /* --------------------------------------------------------------- copy rules */
 
@@ -98,15 +99,15 @@ if (!/модерац/i.test(copy)) {
 
 /* ------------------------------------------------------------ branch rules */
 
-if (!/renderDetractor/.test(render)) fail('render.mjs', 'нет ветки 1–3★');
+if (!/renderDetractor/.test(render)) fail('render.mjs', 'нет recovery-ветки 1–3★');
 const detractorBody = render.slice(render.indexOf('export function renderDetractor'));
 const detractorOnly = detractorBody.slice(0, detractorBody.indexOf('export function renderToken'));
-if (/PLATFORM_LABELS|platform__btn/.test(detractorOnly)) {
-  fail('render.mjs', 'ветка 1–3★ рендерит кнопки карт — они должны отсутствовать в разметке');
+if (!/platformOptions\(record\)/.test(detractorOnly)) {
+  fail('render.mjs', 'ветка 1–3★ скрывает нейтральные кнопки карт');
 }
 
-if (!/branch\s*!==\s*'promoter'/.test(store)) {
-  fail('store.mjs', 'клик по площадке не запрещён серверно для ветки 1–3★');
+if (/branch\s*!==\s*'promoter'/.test(store)) {
+  fail('store.mjs', 'сервер запрещает карты для 1–3★ — это review gating');
 }
 if (!/r\.score\s*!==\s*null/.test(store)) {
   fail('store.mjs', 'нет защиты от повторной оценки без admin reset (атом B4)');
@@ -124,6 +125,16 @@ const code = store.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, ' 
 const PII = [/\bphone\b\s*[:=]/i, /\bpatientName\b/, /\bdiagnos/i, /\bfullName\b/, /\bbirth/i];
 for (const re of PII) {
   if (re.test(code)) fail('store.mjs', `поле похоже на PII/PHI: ${re}`);
+}
+if (!/privacy_consent[^>]+required/.test(render)) {
+  fail('render.mjs', 'нет обязательного явного согласия на обработку обратной связи');
+}
+if (/privacy_consent[^>]+checked/.test(render) || /contact_consent[^>]+checked/.test(render)) {
+  fail('render.mjs', 'согласие предвыбрано');
+}
+const notifyCode = notify.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, ' ');
+for (const sensitive of ['record.score', 'serviceCategory', 'doctorCode', 'r?.comment', 'r.comment', 'topics']) {
+  if (notifyCode.includes(sensitive)) fail('notify.mjs', `чувствительное поле уходит в Telegram: ${sensitive}`);
 }
 
 /* ------------------------------------------------------------ server rules */

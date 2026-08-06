@@ -1,25 +1,14 @@
 /**
  * Manager alert for the 1–3★ branch — atom B6, SLA in SOP §9 (≤15 min in working hours).
  *
- * The alert carries a short token handle, the score, the topics the patient ticked and their
- * comment. It deliberately does not carry a name or a phone: the manager resolves the patient
- * through the admin journal, which keeps identity out of a group chat.
+ * The alert carries only a short opaque incident handle. Score, doctor, service, topics and
+ * free text stay inside the authenticated journal and never enter a third-party group chat.
  *
  * If the channel is not configured the submission is still stored and still visible in the
  * admin journal — a missing secret must never swallow a complaint.
  */
 
 import { shortId } from './store.mjs';
-
-const TOPIC_LABELS = {
-  service: 'сервис и отношение',
-  waiting: 'ожидание и запись',
-  communication: 'объяснения и коммуникация',
-  cleanliness: 'чистота и комфорт',
-  'stage-result': 'результат этапа',
-  price: 'стоимость и расчёт',
-  other: 'другое',
-};
 
 function config() {
   const token = (process.env.TELEGRAM_BOT_TOKEN || process.env.TELEGRAM_ORDERS_BOT_TOKEN || '').trim();
@@ -37,18 +26,11 @@ export function channelReady() {
 }
 
 export function composeAlert(record, adminUrl) {
-  const r = record.recovery;
-  const topics = (r?.topics ?? []).map((t) => TOPIC_LABELS[t] ?? t).join(', ') || 'не указаны';
   const lines = [
-    `⚠️ Оценка ${record.score}/5 — нужен разбор`,
-    `Обращение: ${shortId(record.token)}`,
-    record.serviceCategory ? `Услуга: ${record.serviceCategory}` : null,
-    record.doctorCode ? `Врач: ${record.doctorCode}` : null,
-    `Темы: ${topics}`,
-    r?.comment ? `Комментарий: ${r.comment}` : 'Комментарий: не оставлен',
-    `Связаться по WhatsApp: ${r?.consent ? 'да, пациент согласен' : 'согласия нет'}`,
+    'Новое обращение после визита — нужен разбор',
+    `Номер обращения: ${shortId(record.token)}`,
     'SLA: первый контакт ≤ 4 рабочих часов, закрытие ≤ 48 часов.',
-    adminUrl ? `Журнал: ${adminUrl}` : null,
+    adminUrl ? `Открыть защищённый журнал: ${adminUrl}` : null,
   ];
   return lines.filter(Boolean).join('\n');
 }

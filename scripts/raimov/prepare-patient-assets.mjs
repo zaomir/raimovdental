@@ -22,8 +22,8 @@ const OUT = join(REPO, 'site-raimovdental', 'patient-site', 'assets');
 const INBOX = process.env.ASSET_INBOX || '/root/.cursor/projects/var-www-grainee-v2/assets';
 
 const FONT_FAMILIES = [
-  { id: 'cormorant-garamond', spec: 'Cormorant+Garamond:wght@300;400;500' },
-  { id: 'manrope', spec: 'Manrope:wght@400;500;600;700' },
+  { id: 'cormorant-garamond', spec: 'Cormorant+Garamond:wght@300..500' },
+  { id: 'manrope', spec: 'Manrope:wght@400..700' },
 ];
 
 // Dropbox filenames are stable; index-based picks would silently drift.

@@ -29,6 +29,14 @@ function load() {
   if (cache) return cache;
   mkdirSync(DATA_DIR, { recursive: true });
   cache = existsSync(STATE) ? JSON.parse(readFileSync(STATE, 'utf8')) : { tokens: {} };
+  let pruned = false;
+  for (const [token, record] of Object.entries(cache.tokens)) {
+    if (expired(record)) {
+      delete cache.tokens[token];
+      pruned = true;
+    }
+  }
+  if (pruned) persist();
   return cache;
 }
 
@@ -120,9 +128,7 @@ export function markPlatformClick(token, platform) {
   const r = getToken(token);
   if (!r) return { error: 'gone' };
   if (!PLATFORMS.includes(platform)) return { error: 'unknown-platform' };
-  // Only the promoter branch renders these links; refuse server-side too, so a crafted
-  // request cannot push an unhappy patient onto a public map.
-  if (r.branch !== 'promoter') return { error: 'wrong-branch' };
+  if (r.score === null) return { error: 'not-scored' };
   if (!r.clicks[platform]) {
     r.clicks[platform] = new Date().toISOString();
     persist();
@@ -131,19 +137,24 @@ export function markPlatformClick(token, platform) {
   return { record: r };
 }
 
-export function saveRecovery(token, { topics = [], comment = '', consent = false }) {
+export function saveRecovery(
+  token,
+  { topics = [], comment = '', privacyConsent = false, contactConsent = false }
+) {
   const r = getToken(token);
   if (!r) return { error: 'gone' };
   if (r.branch !== 'detractor') return { error: 'wrong-branch' };
+  if (!privacyConsent) return { error: 'consent-required' };
   r.recovery = {
     topics: topics.slice(0, 8),
     comment: String(comment).slice(0, 2000),
-    consent: Boolean(consent),
+    privacyConsent: true,
+    contactConsent: Boolean(contactConsent),
     status: 'NEW',
     submittedAt: new Date().toISOString(),
   };
   persist();
-  logEvent('recovery_submitted', token, { topics: r.recovery.topics, consent: r.recovery.consent });
+  logEvent('recovery_submitted', token, { contactConsent: r.recovery.contactConsent });
   return { record: r };
 }
 

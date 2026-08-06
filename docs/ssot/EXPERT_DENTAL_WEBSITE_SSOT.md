@@ -995,8 +995,10 @@ WhatsApp deeplink обязан содержать контекст страни�
 0 битых изображений, 0 горизонтальных переполнений, 0 серьёзных/критических нарушений Axe
 WCAG 2 A/AA/2.2 AA. Визуальный screenshot-аудит — 0 дефектов на 21 сочетании
 страница×ширина (360 / mobile / desktop); Impeccable detector — 0 anti-patterns.
-Staging закрыт `noindex,nofollow` и `Disallow: /`; production-сборка отдаёт 39 канонических
-URL с `index,follow`, при этом `/404` и `/internal/pending/` принудительно остаются `noindex`.
+Staging закрыт `noindex,nofollow` и `Disallow: /`. Production-профиль подготовлен для 39
+канонических URL, но сборка намеренно завершается ошибкой до получения сверенного номера
+лицензии и доказательств медицинской проверки всех девяти статей (`reviewedAt` +
+`reviewEvidence`). `/404` и `/internal/pending/` принудительно остаются `noindex`.
 
 ## 33.2. Карта редиректов со старого сайта
 

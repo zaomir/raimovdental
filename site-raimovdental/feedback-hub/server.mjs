@@ -202,7 +202,8 @@ const server = createServer(async (req, res) => {
       const result = store.saveRecovery(token, {
         topics: form.getAll('topics'),
         comment: form.get('comment') || '',
-        consent: form.get('consent') === '1',
+        privacyConsent: form.get('privacy_consent') === '1',
+        contactConsent: form.get('contact_consent') === '1',
       });
       if (!result.error) {
         const adminUrl = ADMIN_TOKEN ? `${ORIGIN}/feedback/admin` : null;
