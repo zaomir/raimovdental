@@ -108,7 +108,7 @@ export function telHref() {
   return `tel:${contacts.phone}`;
 }
 
-export function ctaPair({ context = '', message, primaryLabel = cta.primary, onDark = false } = {}) {
+export function ctaPair({ context = '', message, primaryLabel = 'Написать в WhatsApp', onDark = false } = {}) {
   const msg = message || 'Здравствуйте. Хочу записаться на диагностику в Expert Dental Studio.';
   return `<div class="btn-row">
       <a class="btn ${onDark ? 'btn--onDark' : 'btn--primary'}" href="${attr(waHref(msg))}" data-cta-context="${attr(
@@ -120,7 +120,7 @@ export function ctaPair({ context = '', message, primaryLabel = cta.primary, onD
     </div>`;
 }
 
-export function ctaBand({ title, text, context = '', message } = {}) {
+export function ctaBand({ title, text, context = '', message, primaryLabel } = {}) {
   return `<section class="section section--tight" aria-labelledby="cta-band-title">
     <div class="shell">
       <div class="cta-band">
@@ -128,7 +128,7 @@ export function ctaBand({ title, text, context = '', message } = {}) {
           <h2 class="cta-band__title" id="cta-band-title">${esc(title)}</h2>
           <p class="cta-band__text">${esc(text)}</p>
         </div>
-        ${ctaPair({ context, message, onDark: true })}
+        ${ctaPair({ context, message, primaryLabel, onDark: true })}
       </div>
     </div>
   </section>`;
@@ -401,7 +401,7 @@ export function doctorCard(manifest, doctor, { prices, services, context = 'doct
       <div class="doctor-card__actions">
         <a class="btn btn--primary btn--sm" href="${attr(waHref(message))}" data-cta-context="${attr(
     `${context}-${doctor.slug}`
-  )}">Записаться</a>
+  )}">Записаться к ${esc(doctor.shortName)}</a>
         <a class="doctor-card__more" href="/doctors/${attr(doctor.slug)}/">О враче</a>
       </div>
     </div>

@@ -456,6 +456,7 @@ export function servicesIndexPage({ manifest, services, prices }) {
     text: 'Опишите администратору, что беспокоит, — он подберёт специалиста и подходящее время.',
     context: 'services-index',
     message: 'Здравствуйте. Не знаю, к какому врачу записаться. Подскажите, пожалуйста.',
+    primaryLabel: 'Помогите выбрать услугу',
   })}`;
 }
 
@@ -465,6 +466,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
   const serviceDoctors = service.doctors.map((slug) => doctors.find((d) => d.slug === slug)).filter(Boolean);
   const serviceArticles = service.articles.map((slug) => articles.find((a) => a.slug === slug)).filter(Boolean);
   const related = service.related.map((slug) => services.find((s) => s.slug === slug)).filter(Boolean);
+  const labels = service.sectionLabels ?? {};
 
   const priceRowsAll = (service.priceDirections || []).flatMap((d) => pickRows(prices, d, service.priceFilter));
 
@@ -484,7 +486,10 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
           <p><strong>Результат:</strong> ${esc(service.result)}</p>
           ${ctaPair({
             context: `service-${service.slug}`,
-            message: `Здравствуйте. Хочу записаться на консультацию — «${service.navLabel}».`,
+            message:
+              service.ctaMessage
+              ?? `Здравствуйте. Хочу записаться на консультацию — «${service.navLabel}».`,
+            primaryLabel: service.ctaLabel ?? `Записаться — ${service.navLabel}`,
           })}
         </div>
         ${archImage(manifest, service.image, service.imageAlt, {
@@ -498,8 +503,8 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
   <section class="section section--bone">
     <div class="shell split">
       <div class="stack stack--gap-1">
-        <span class="kicker">Симптомы и показания</span>
-        <h2 class="display t-h2">Когда стоит записаться</h2>
+        <span class="kicker">${esc(labels.symptomsKicker ?? 'Симптомы и показания')}</span>
+        <h2 class="display t-h2">${esc(labels.symptomsTitle ?? 'Когда стоит записаться')}</h2>
       </div>
       <div class="prose">${list(service.symptoms)}
         <div class="callout callout--note mt-3">
@@ -513,9 +518,11 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
   <section class="section">
     <div class="shell split">
       <div class="stack stack--gap-1">
-        <span class="kicker">Диагностика</span>
-        <h2 class="display t-h2">Что делают до лечения</h2>
-        <p class="t-lead">План строится по результатам обследования, а не по названию услуги.</p>
+        <span class="kicker">${esc(labels.diagnosticsKicker ?? 'Диагностика')}</span>
+        <h2 class="display t-h2">${esc(labels.diagnosticsTitle ?? 'Что делают до лечения')}</h2>
+        <p class="t-lead">${esc(
+          labels.diagnosticsLead ?? 'План строится по результатам обследования, а не по названию услуги.'
+        )}</p>
       </div>
       <div class="prose">${list(service.diagnostics)}</div>
     </div>
@@ -523,7 +530,10 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section section--forest fluted">
     <div class="shell">
-      ${sectionHead({ kicker: 'Варианты лечения', title: 'Что можно сделать' })}
+      ${sectionHead({
+        kicker: labels.optionsKicker ?? 'Варианты лечения',
+        title: labels.optionsTitle ?? 'Что можно сделать',
+      })}
       <div class="grid grid--2">
         ${service.options
           .map(
@@ -539,7 +549,10 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section">
     <div class="shell">
-      ${sectionHead({ kicker: 'Этапы', title: 'Как проходит лечение' })}
+      ${sectionHead({
+        kicker: labels.stagesKicker ?? 'Этапы',
+        title: labels.stagesTitle ?? 'Как проходит лечение',
+      })}
       <div class="steps steps--row">
         ${service.stages
           .map(
@@ -556,7 +569,11 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section section--bone" aria-labelledby="service-price">
     <div class="shell">
-      ${sectionHead({ kicker: 'Стоимость', title: 'Цены и что на них влияет', id: 'service-price' })}
+      ${sectionHead({
+        kicker: 'Стоимость',
+        title: labels.priceTitle ?? 'Цены и что на них влияет',
+        id: 'service-price',
+      })}
       <div class="split">
         <div class="prose">
           <h3 class="heading-flush">От чего зависит итоговая сумма</h3>
@@ -628,10 +645,13 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
   </section>
 
   ${ctaBand({
-    title: 'Запишитесь на диагностику',
+    title: service.productType === 'screening' ? service.ctaLabel : 'Запишитесь на диагностику',
     text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
     context: `service-${service.slug}-footer`,
-    message: `Здравствуйте. Хочу записаться на консультацию — «${service.navLabel}».`,
+    message:
+      service.ctaMessage
+      ?? `Здравствуйте. Хочу записаться на консультацию — «${service.navLabel}».`,
+    primaryLabel: service.ctaLabel ?? `Записаться — ${service.navLabel}`,
   })}`;
 }
 
@@ -676,6 +696,7 @@ export function doctorsIndexPage({ manifest, doctors, prices, services }) {
     text: 'Опишите администратору, что беспокоит. Он подберёт специалиста или предложит начать с диагностики.',
     context: 'doctors-index',
     message: 'Здравствуйте. Подскажите, к какому врачу мне записаться.',
+    primaryLabel: 'Помогите выбрать врача',
   })}`;
 }
 
@@ -715,7 +736,8 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
           </dl>
           ${ctaPair({
             context: `doctor-${doctor.slug}`,
-            message: `Здравствуйте. Хочу записаться на приём к врачу ${doctor.name}.`,
+            message: `Здравствуйте. Хочу записаться к врачу ${doctor.name}. Направление: ${doctor.role}.`,
+            primaryLabel: `Записаться к ${doctor.shortName}`,
           })}
         </div>
       </div>
@@ -781,7 +803,8 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
     title: `Записаться к врачу ${doctor.shortName}`,
     text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
     context: `doctor-${doctor.slug}-footer`,
-    message: `Здравствуйте. Хочу записаться на приём к врачу ${doctor.name}.`,
+    message: `Здравствуйте. Хочу записаться к врачу ${doctor.name}. Направление: ${doctor.role}.`,
+    primaryLabel: `Записаться к ${doctor.shortName}`,
   })}`;
 }
 
@@ -821,7 +844,11 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
               )
               .join('')}
           </div>
-          ${ctaPair({ context: 'chief-hero', message: chief.whatsappMessage })}
+          ${ctaPair({
+            context: 'chief-hero',
+            message: chief.whatsappMessage,
+            primaryLabel: 'Записаться к Атабеку Саидовичу',
+          })}
         </div>
       </div>
     </div>
@@ -968,6 +995,7 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
     text: 'Консультация по ортодонтии и гнатологии. Опишите жалобы администратору — он подберёт удобное время.',
     context: 'chief-footer',
     message: chief.whatsappMessage,
+    primaryLabel: 'Записаться к Атабеку Саидовичу',
   })}`;
 }
 
@@ -1021,6 +1049,7 @@ export function blogIndexPage({ manifest, articles }) {
     text: 'Расскажите администратору, что беспокоит. Он поможет выбрать специалиста и удобное время консультации.',
     context: 'blog-index',
     message: 'Здравствуйте. Читаю блог Expert Dental Studio и хочу записаться на консультацию.',
+    primaryLabel: 'Помогите выбрать врача',
   })}`;
 }
 
@@ -1070,6 +1099,7 @@ export function blogCategoryPage({ manifest, category, articles, services }) {
     text: `${contacts.adminSla}. Напишите — подберём врача и время.`,
     context: `blog-cat-${category.id}`,
     message: `Здравствуйте. У меня вопрос по теме «${category.label}».`,
+    primaryLabel: 'Обсудить тему с врачом',
   })}`;
 }
 
@@ -1232,10 +1262,13 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
   </article>
 
   ${ctaBand({
-    title: 'Запишитесь на консультацию',
+    title: 'Обсудить тему с врачом',
     text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
     context: `article-${article.slug}`,
-    message: `Здравствуйте. Я прочитал статью «${article.title}» и хочу записаться на консультацию.`,
+    message: `Здравствуйте. Я прочитал статью «${article.title}»${
+      service ? ` по направлению «${service.navLabel}»` : ''
+    } и хочу обсудить тему с врачом.`,
+    primaryLabel: 'Обсудить тему с врачом',
   })}
 
   ${
@@ -1273,7 +1306,11 @@ export function aboutPage({ manifest, doctors, prices }) {
           <p class="t-lead">Expert Dental Studio — стоматология в центре Бишкека. Мы работаем командой:
             ортодонт, гнатолог, хирург-имплантолог, ортопед и терапевты согласуют этапы между собой,
             а не лечат каждый свою часть отдельно.</p>
-          ${ctaPair({ context: 'about-hero', message: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на первичный приём.' })}
+          ${ctaPair({
+            context: 'about-hero',
+            message: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на первичный приём.',
+            primaryLabel: 'Записаться на первичный приём',
+          })}
         </div>
         ${archImage(manifest, 'clinic/hall', 'Интерьер Expert Dental Studio', {
           sizes: '(min-width: 56rem) 44vw, 92vw',
@@ -1330,6 +1367,7 @@ export function aboutPage({ manifest, doctors, prices }) {
     text: `${contacts.hoursDisplay}. ${contacts.parking}.`,
     context: 'about-footer',
     message: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на диагностику.',
+    primaryLabel: 'Записаться на диагностику',
   })}`;
 }
 
@@ -1360,7 +1398,11 @@ export function contactsPage({ manifest }) {
             )}</dd></div>
             <div><dt>Парковка</dt><dd class="info-list__value">${esc(contacts.parking)}</dd></div>
           </dl>
-          ${ctaPair({ context: 'contacts', message: 'Здравствуйте. Хочу записаться на приём. Подскажите, пожалуйста, свободное время.' })}
+          ${ctaPair({
+            context: 'contacts',
+            message: 'Здравствуйте. Хочу записаться на приём. Подскажите, пожалуйста, свободное время.',
+            primaryLabel: 'Записаться на приём',
+          })}
         </div>
         <div class="stack stack--gap-1">
           ${archImage(manifest, 'clinic/facade', 'Фасад здания, в котором находится Expert Dental Studio', {
@@ -1383,6 +1425,7 @@ export function contactsPage({ manifest }) {
     text: `${contacts.whatsappNote}. ${contacts.adminSla}.`,
     context: 'contacts-footer',
     message: 'Здравствуйте. Пишу со страницы контактов, хочу записаться на приём.',
+    primaryLabel: 'Записаться на приём',
   })}`;
 }
 

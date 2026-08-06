@@ -408,7 +408,9 @@ for (const service of services) {
     title: service.metaTitle,
     description: service.metaDescription,
     pageId: `service-${service.slug}`,
-    waMessage: `Здравствуйте. Смотрю страницу «${service.navLabel}» и хочу записаться на консультацию.`,
+    waMessage:
+      service.ctaMessage
+      ?? `Здравствуйте. Хочу записаться на консультацию — «${service.navLabel}».`,
     ogImage: `/assets/img/${service.image}.jpg`,
     ogImageWidth: socialImage?.width,
     ogImageHeight: socialImage?.height,
@@ -571,7 +573,11 @@ for (const article of articles) {
     title: article.metaTitle,
     description: article.metaDescription,
     pageId: `article-${article.slug}`,
-    waMessage: `Здравствуйте. Прочитал статью «${article.title}» и хочу записаться на консультацию.`,
+    waMessage: `Здравствуйте. Прочитал статью «${article.title}»${
+      services.find((s) => s.slug === article.relatedService)
+        ? ` по направлению «${services.find((s) => s.slug === article.relatedService).navLabel}»`
+        : ''
+    } и хочу обсудить тему с врачом.`,
     ogType: 'article',
     ogImage: `/assets/img/${article.cover}.jpg`,
     ogImageWidth: socialImage?.width,
