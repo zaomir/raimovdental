@@ -14,7 +14,7 @@
 export const chief = {
   slug: 'raimov-atabek',
   title: 'Главный врач',
-  metaTitle: 'Раимов Атабек Саидович — главный врач Expert Dental Studio, Бишкек',
+  metaTitle: 'Раимов Атабек Саидович — главный врач | Expert Dental',
   metaDescription:
     'Раимов Атабек Саидович — ортодонт-гнатолог, главный врач и соучредитель Expert Dental Studio. Лечение дисфункции ВНЧС, ортодонтия, обучение врачей и сообщество ОртоКомьюнити.',
 

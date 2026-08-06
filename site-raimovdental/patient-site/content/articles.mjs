@@ -45,7 +45,7 @@ export const articles = [
     slug: 'pervyy-vizit-rebenka-k-stomatologu',
     category: 'pediatric',
     title: 'Первый визит ребёнка к стоматологу: как подготовиться без страха',
-    metaTitle: 'Первый визит ребёнка к стоматологу — как подготовить | Expert Dental Studio',
+    metaTitle: 'Первый визит ребёнка к стоматологу | Expert Dental',
     metaDescription:
       'Что сказать ребёнку перед приёмом, каких фраз лучше избегать, как проходит первое знакомство с врачом и что делать, если ребёнок отказывается открывать рот.',
     excerpt:
@@ -173,7 +173,7 @@ export const articles = [
     slug: 'karies-molochnyh-zubov',
     category: 'pediatric',
     title: 'Кариес молочных зубов: почему лечение нельзя откладывать',
-    metaTitle: 'Кариес молочных зубов — нужно ли лечить | Expert Dental Studio',
+    metaTitle: 'Кариес молочных зубов: нужно ли лечить | Expert Dental',
     metaDescription:
       'Как молочные зубы влияют на питание, речь и прикус, почему кариес развивается быстро, как его заметить и какие методы лечения применяются у детей.',
     excerpt:
@@ -304,7 +304,7 @@ export const articles = [
     slug: 'germetizaciya-fissur-u-detey',
     category: 'pediatric',
     title: 'Герметизация фиссур у детей: кому и когда она нужна',
-    metaTitle: 'Герметизация фиссур у детей — показания и цена | Expert Dental Studio',
+    metaTitle: 'Герметизация фиссур у детей: цена и показания | Expert Dental',
     metaDescription:
       'Что такое фиссуры, почему в них развивается кариес, как проходит герметизация, каким детям она показана и что она не заменяет.',
     excerpt:
@@ -444,7 +444,7 @@ export const articles = [
     slug: 'lechenie-kariesa-pochemu-ne-stoit-zhdat-boli',
     category: 'treatment',
     title: 'Лечение кариеса: почему важно не ждать боли',
-    metaTitle: 'Лечение кариеса в Бишкеке — почему нельзя ждать боли | Expert Dental Studio',
+    metaTitle: 'Лечение кариеса в Бишкеке: не ждите боли | Expert Dental',
     metaDescription:
       'Как развивается кариес, почему отсутствие боли не означает отсутствие проблемы, как проходит диагностика и лечение и от чего зависит стоимость.',
     excerpt: 'Объясняем, как развивается кариес и почему отсутствие боли не означает отсутствие проблемы.',
@@ -581,7 +581,7 @@ export const articles = [
     slug: 'lechenie-zuba-pod-mikroskopom',
     category: 'treatment',
     title: 'Лечение зуба под микроскопом: когда оно необходимо',
-    metaTitle: 'Лечение каналов под микроскопом в Бишкеке | Expert Dental Studio',
+    metaTitle: 'Лечение каналов под микроскопом | Expert Dental, Бишкек',
     metaDescription:
       'Что даёт увеличение при лечении корневых каналов, в каких случаях микроскоп действительно нужен, как проходит перелечивание и от чего зависит прогноз.',
     excerpt: 'Как увеличение помогает найти сложные каналы и точнее провести лечение зуба.',
@@ -722,7 +722,7 @@ export const articles = [
     slug: 'mozhno-li-sohranit-razrushennyy-zub',
     category: 'treatment',
     title: 'Можно ли сохранить сильно разрушенный зуб',
-    metaTitle: 'Можно ли спасти разрушенный зуб — Expert Dental Studio, Бишкек',
+    metaTitle: 'Можно ли спасти разрушенный зуб | Expert Dental, Бишкек',
     metaDescription:
       'От чего зависит возможность сохранить разрушенный зуб, какая нужна диагностика и когда применяют пломбу, вкладку, коронку или лечение каналов.',
     excerpt:
@@ -837,7 +837,7 @@ export const articles = [
     slug: 'viniry-komu-podhodyat',
     category: 'aesthetics',
     title: 'Виниры: кому подходят и когда лучше выбрать другой метод',
-    metaTitle: 'Виниры — кому подходят и когда лучше отказаться | Expert Dental Studio',
+    metaTitle: 'Виниры: кому подходят и когда нет | Expert Dental, Бишкек',
     metaDescription:
       'Какие задачи решают виниры, кому они подходят, в каких случаях сначала нужна ортодонтия или лечение и чем винир отличается от коронки и композитной реставрации.',
     excerpt:
@@ -992,7 +992,7 @@ export const articles = [
     slug: 'forma-i-cvet-vinirov',
     category: 'aesthetics',
     title: 'Как выбрать форму и цвет виниров для естественной улыбки',
-    metaTitle: 'Форма и цвет виниров — как подбирают оттенок | Expert Dental Studio',
+    metaTitle: 'Форма и цвет виниров: как подбирают | Expert Dental',
     metaDescription:
       'Как врач подбирает форму, оттенок и прозрачность виниров с учётом лица, губ, прикуса и естественных зубов, и почему самый белый цвет не всегда лучший.',
     excerpt: 'Как врач учитывает лицо, губы, прикус и оттенок соседних зубов перед лечением.',
@@ -1107,7 +1107,7 @@ export const articles = [
     slug: 'srok-sluzhby-vinirov',
     category: 'aesthetics',
     title: 'Сколько служат виниры и от чего зависит их долговечность',
-    metaTitle: 'Сколько служат виниры — что влияет на срок | Expert Dental Studio',
+    metaTitle: 'Сколько служат виниры и от чего это зависит | Expert Dental',
     metaDescription:
       'Что влияет на долговечность виниров: материал, прикус, гигиена и нагрузка. Какие признаки требуют визита к врачу и когда нужна защитная капа.',
     excerpt:

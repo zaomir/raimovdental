@@ -229,7 +229,7 @@ const physicians = doctors.map((d) =>
 /* home */
 {
   const route = '/';
-  const title = `${brand.name} — стоматология комплексного лечения в Бишкеке`;
+  const title = `${brand.name} — комплексная стоматология в Бишкеке`;
   const description =
     'Стоматологическая клиника в Бишкеке: ортодонтия, лечение ВНЧС, имплантация, протезирование, терапия и детский приём. Диагностика, единый план лечения и прозрачные цены.';
   page({
@@ -325,10 +325,12 @@ for (const service of services) {
 for (const doctor of doctors) {
   const route = `/doctors/${doctor.slug}/`;
   const isChief = Boolean(doctor.chief);
-  const title = isChief ? chief.metaTitle : `${doctor.name} — ${doctor.role} | Expert Dental Studio`;
+  // Patronymics blow the 65-char title budget, so meta uses surname + given name.
+  const metaName = doctor.name.split(' ').slice(0, 2).join(' ');
+  const title = isChief ? chief.metaTitle : `${metaName} — ${doctor.metaRole} | Expert Dental`;
   const description = isChief
     ? chief.metaDescription
-    : `${doctor.name}, ${doctor.role.toLowerCase()} Expert Dental Studio в Бишкеке. ${doctor.specialtyLine}. Запись на приём и стоимость консультации.`;
+    : `${doctor.name} — ${doctor.metaRole} Expert Dental Studio в Бишкеке. ${doctor.specialtyLine}. Запись на приём.`;
   page({
     route,
     title,

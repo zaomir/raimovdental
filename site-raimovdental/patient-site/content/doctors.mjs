@@ -14,6 +14,7 @@
 export const doctors = [
   {
     slug: 'raimov-atabek',
+    metaRole: 'ортодонт-гнатолог',
     chief: true,
     name: 'Раимов Атабек Саидович',
     shortName: 'Атабек Саидович',
@@ -48,6 +49,7 @@ export const doctors = [
   },
   {
     slug: 'talyshkhanov-mirali',
+    metaRole: 'имплантолог, ортопед',
     name: 'Талышханов Мир-Али',
     shortName: 'Мир-Али',
     role: 'Хирург-имплантолог, ортопед',
@@ -80,6 +82,7 @@ export const doctors = [
   },
   {
     slug: 'khalbaev-islambek',
+    metaRole: 'хирург-ортопед',
     name: 'Халбаев Исламбек Якубжанович',
     shortName: 'Исламбек Якубжанович',
     role: 'Хирург-ортопед',
@@ -111,6 +114,7 @@ export const doctors = [
   },
   {
     slug: 'gribanova-marina',
+    metaRole: 'стоматолог-терапевт',
     name: 'Грибанова Марина Николаевна',
     shortName: 'Марина Николаевна',
     role: 'Стоматолог-терапевт',
@@ -142,6 +146,7 @@ export const doctors = [
   },
   {
     slug: 'duisheeva-aiday',
+    metaRole: 'стоматолог-ортодонт',
     name: 'Дуйшеева Айдай Болотовна',
     shortName: 'Айдай Болотовна',
     role: 'Стоматолог-ортодонт',
@@ -173,6 +178,7 @@ export const doctors = [
   },
   {
     slug: 'kerimkulova-aiperi',
+    metaRole: 'гигиенист, терапевт',
     name: 'Керимкулова Айпери Турсуналиевна',
     shortName: 'Айпери Турсуналиевна',
     role: 'Стоматолог-терапевт, гигиенист',
@@ -204,6 +210,7 @@ export const doctors = [
   },
   {
     slug: 'ergeshova-begimai',
+    metaRole: 'стоматолог-терапевт',
     name: 'Эргешова Бегимай Эргешовна',
     shortName: 'Бегимай Эргешовна',
     role: 'Стоматолог-терапевт',
@@ -234,6 +241,7 @@ export const doctors = [
   },
   {
     slug: 'taalaibekova-cholpon',
+    metaRole: 'детский стоматолог',
     name: 'Таалайбекова Чолпон Таалайбековна',
     shortName: 'Чолпон Таалайбековна',
     role: 'Детский и взрослый стоматолог-терапевт',
