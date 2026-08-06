@@ -251,6 +251,7 @@
     "scripts/raimov/apply-month1-plan-progress.mjs": "2d4d9d7aa585093a8738b0630d115ad3e37ec3cd31d8563188f85d5308c5d5a3",
     "scripts/raimov/build-patient-site.mjs": "84e58ed07fa2e305221ff5580e0329c1e89efe7b47fe203367c3134633b0e13c",
     "scripts/raimov/check-patient-site.mjs": "028334f9efd76e1e74374ab684ada27e20bf910b44022a51b80c15a03c752017",
+    "scripts/raimov/deploy-patient-site.sh": "e4f11912e48153975957b7a26448fb9f26dfb16a7b138e99c50864922ef5b893",
     "scripts/raimov/deploy-stage-a-preview.sh": "a1d00c80941c2ab91a5663be81ef50bd9f04e1172d236cf18f7c40fbd6133cb7",
     "scripts/raimov/package-stage-a-preview.mjs": "b059d5619f2b54b978ee076f5e90d3cfef448dc6275f6e379cc354dd4e237a91",
     "scripts/raimov/password-gate.py": "303f35b1e4b0fb22342f421ba00079a132b8fe1a93301154f0e1b35e326940f8",
@@ -268,6 +269,7 @@
     "site-raimovdental/DOMAIN_REPORT.md": "d4f9dcf395b93f0952b46ccf03873c10c3829bf19734a5d8e523813fe8773637",
     "site-raimovdental/FIRST_VISIT_PRODUCT.md": "f7d85dd044d53e75107046138b7f0e584d73290982928b17e15be970f029355c",
     "site-raimovdental/HOME_SECTIONS_SCHEMA.md": "6a0b74a3a2de6fe538a08d1c2c5c4ec7d8a8e99cbe05572f8ff8e303ce453f6c",
+    "site-raimovdental/deploy/clinic.raimovdental.com.origin.conf": "0a98dc69784afd35e1c8cf106f5da5cbc598fde70e7ebea4d1dc8b7f8c631bea",
     "site-raimovdental/docs/LEGACY_ROUTE_MAP.md": "1d2010d2255a14f41ec2e6f0184a54a862723674e2e7d004e0134aa5f9029f00",
     "site-raimovdental/docs/QA_ACCESS_CONTINUITY.md": "bfd2ea3eb175d4f04ba2ada8a876b1ddde4d999eac95c5b3673519cca1520245",
     "site-raimovdental/docs/QA_MANIFEST.md": "66a065ffbb98b179015c342bf5ec19cc8d87f15914e49533d70a8e499c6118cd",
@@ -507,6 +509,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T14:20:04Z",
+  "updated_at_utc": "2026-08-06T14:40:05Z",
   "version": 1
 }
