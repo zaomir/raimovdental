@@ -192,6 +192,12 @@ for (const file of files) {
   for (const og of ['og:title', 'og:description', 'og:url', 'og:image']) {
     if (!html.includes(`property="${og}"`)) fail(page, `missing ${og}`);
   }
+  for (const og of ['og:image:width', 'og:image:height', 'og:image:alt']) {
+    if (!html.includes(`property="${og}"`)) fail(page, `missing ${og}`);
+  }
+  for (const twitter of ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image', 'twitter:image:alt']) {
+    if (!html.includes(`name="${twitter}"`)) fail(page, `missing ${twitter}`);
+  }
 
   /* ----------------------------------------------------------------- body */
 
@@ -256,6 +262,10 @@ for (const file of files) {
     const types = nodes.flatMap((n) => (Array.isArray(n['@type']) ? n['@type'] : [n['@type']]));
 
     if (!internal && !types.includes('Dentist')) fail(page, 'JSON-LD missing Dentist/MedicalClinic node');
+    // Category pages are ItemList archives; article pages carry FAQPage plus Article.
+    if (page.startsWith('/blog/') && types.includes('FAQPage') && !types.includes('Article')) {
+      fail(page, 'article route JSON-LD missing Article type');
+    }
 
     if (types.includes('FAQPage')) {
       faqPages += 1;

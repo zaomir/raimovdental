@@ -159,8 +159,9 @@ export function webPageNode(origin, { url, title, description, medical = false, 
 
 export function articleNode(origin, article, { author, reviewer, category }) {
   return {
-    '@type': 'MedicalWebPage',
+    '@type': ['Article', 'MedicalWebPage'],
     '@id': `${origin}/blog/${article.slug}/#article`,
+    mainEntityOfPage: { '@id': `${origin}/blog/${article.slug}/#article` },
     url: `${origin}/blog/${article.slug}/`,
     headline: article.title,
     description: article.metaDescription,

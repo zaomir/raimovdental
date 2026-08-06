@@ -73,23 +73,26 @@
   var drawer = document.querySelector('[data-drawer]');
 
   if (burger && drawer) {
+    function setDrawer(open) {
+      burger.setAttribute('aria-expanded', String(open));
+      drawer.dataset.open = String(open);
+      drawer.hidden = !open;
+    }
+
     burger.addEventListener('click', function () {
       var open = burger.getAttribute('aria-expanded') === 'true';
-      burger.setAttribute('aria-expanded', String(!open));
-      drawer.dataset.open = String(!open);
+      setDrawer(!open);
     });
 
     drawer.addEventListener('click', function (e) {
       if (e.target.closest('a')) {
-        burger.setAttribute('aria-expanded', 'false');
-        drawer.dataset.open = 'false';
+        setDrawer(false);
       }
     });
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && drawer.dataset.open === 'true') {
-        burger.setAttribute('aria-expanded', 'false');
-        drawer.dataset.open = 'false';
+        setDrawer(false);
         burger.focus();
       }
     });

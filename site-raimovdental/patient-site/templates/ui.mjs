@@ -463,7 +463,7 @@ export function header(assets, waMessage) {
         </button>
       </div>
     </div>
-    <div class="drawer" id="site-drawer" data-drawer data-open="false">
+    <div class="drawer" id="site-drawer" data-drawer data-open="false" hidden>
       <div class="shell">
         ${navLinks(nav)}
         <div class="btn-row mt-2">

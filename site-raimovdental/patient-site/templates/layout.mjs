@@ -37,6 +37,9 @@ export function document({
   schema,
   pageId = '',
   ogImage = '/assets/img/clinic/reception.jpg',
+  ogImageWidth = 1600,
+  ogImageHeight = 1067,
+  ogImageAlt = `${brand.name} — стоматологическая клиника в Бишкеке`,
   ogType = 'website',
   extraHead = '',
   // Content-hashed CSS/JS paths from the builder. A cache in front of the origin cannot
@@ -71,7 +74,14 @@ export function document({
   <meta property="og:description" content="${attr(description)}">
   <meta property="og:url" content="${attr(canonical)}">
   <meta property="og:image" content="${attr(cfg.origin + ogImage)}">
+  <meta property="og:image:width" content="${attr(String(ogImageWidth))}">
+  <meta property="og:image:height" content="${attr(String(ogImageHeight))}">
+  <meta property="og:image:alt" content="${attr(ogImageAlt)}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${attr(title)}">
+  <meta name="twitter:description" content="${attr(description)}">
+  <meta name="twitter:image" content="${attr(cfg.origin + ogImage)}">
+  <meta name="twitter:image:alt" content="${attr(ogImageAlt)}">
   <link rel="icon" href="/assets/img/brand/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/img/brand/logo.png">
   <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/cormorant-garamond-300-cyrillic.woff2" crossorigin>

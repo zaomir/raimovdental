@@ -239,7 +239,20 @@ function emit(route, html) {
   written.set(route, html);
 }
 
-function page({ route, title, description, body, nodes, pageId, ogImage, ogType, waMessage }) {
+function page({
+  route,
+  title,
+  description,
+  body,
+  nodes,
+  pageId,
+  ogImage,
+  ogImageWidth,
+  ogImageHeight,
+  ogImageAlt,
+  ogType,
+  waMessage,
+}) {
   emit(
     route,
     layout.document({
@@ -250,6 +263,9 @@ function page({ route, title, description, body, nodes, pageId, ogImage, ogType,
       body,
       pageId,
       ogImage,
+      ogImageWidth,
+      ogImageHeight,
+      ogImageAlt,
       ogType,
       waMessage,
       assets: fingerprints,
@@ -364,6 +380,7 @@ const physicians = doctors.map((d) =>
 
 for (const service of services) {
   const route = `/services/${service.slug}/`;
+  const socialImage = manifest[service.image];
   page({
     route,
     title: service.metaTitle,
@@ -371,6 +388,9 @@ for (const service of services) {
     pageId: `service-${service.slug}`,
     waMessage: `Здравствуйте. Смотрю страницу «${service.navLabel}» и хочу записаться на консультацию.`,
     ogImage: `/assets/img/${service.image}.jpg`,
+    ogImageWidth: socialImage?.width,
+    ogImageHeight: socialImage?.height,
+    ogImageAlt: service.imageAlt,
     body: pages.servicePage({ ...ctx, service }),
     nodes: [
       clinic,
@@ -426,6 +446,7 @@ for (const doctor of doctors) {
   const description = isChief
     ? chief.metaDescription
     : `${doctor.name} — ${doctor.metaRole} Expert Dental Studio в Бишкеке. ${doctor.specialtyLine}. Запись на приём.`;
+  const socialImage = doctor.photo ? manifest[doctor.photo] : null;
   page({
     route,
     title,
@@ -434,6 +455,9 @@ for (const doctor of doctors) {
     waMessage: `Здравствуйте. Смотрю страницу врача ${doctor.name} и хочу записаться на приём.`,
     ogType: 'profile',
     ogImage: doctor.photo ? `/assets/img/${doctor.photo}.jpg` : undefined,
+    ogImageWidth: socialImage?.width,
+    ogImageHeight: socialImage?.height,
+    ogImageAlt: doctor.photoAlt,
     body: isChief ? pages.chiefPage({ ...ctx, doctor }) : pages.doctorPage({ ...ctx, doctor }),
     nodes: [
       clinic,
@@ -519,6 +543,7 @@ for (const article of articles) {
   const author = doctorBySlug.get(article.author);
   const reviewer = doctorBySlug.get(article.reviewer);
   const category = categories[article.category];
+  const socialImage = manifest[article.cover];
   page({
     route,
     title: article.metaTitle,
@@ -527,6 +552,9 @@ for (const article of articles) {
     waMessage: `Здравствуйте. Прочитал статью «${article.title}» и хочу записаться на консультацию.`,
     ogType: 'article',
     ogImage: `/assets/img/${article.cover}.jpg`,
+    ogImageWidth: socialImage?.width,
+    ogImageHeight: socialImage?.height,
+    ogImageAlt: article.coverAlt,
     body: pages.articlePage({ ...ctx, article, author, reviewer, category }),
     nodes: [
       clinic,
