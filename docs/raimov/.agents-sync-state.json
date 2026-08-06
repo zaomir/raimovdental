@@ -102,6 +102,7 @@
     "docs/raimov/release/README.md": "46e5a9a16993a8d61d08689731a61092cae7774dffac4b88b3e2834415934dd3",
     "docs/raimov/technology/README.md": "b7b6c8ecddf2ea895aacf82c6df7189f752e3b4446e7174ce6d4676eb7f8160a",
     "docs/research/raimov/README.md": "8c0da72f1a1f60ae88cebbcb67dec94c94788dabbe4e2563e54e176e64ff2c84",
+    "docs/ssot/BONITA_BEAUTY_GROWTH_OFFER.md": "15e5baf513410f17ec56dfae14b5b6addb7dc80d832e41842b121396d1eda382",
     "docs/ssot/ELITE_DENTAL_STRATEGY.md": "8aff0d09a108d8a5f1acd045ecdabf670a7a6b310d45dda1531fb2a6b310d759",
     "docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md": "ac05d4e9ca067cf9a22bbda44f7845da6df9d6df7a17d04336ffe2cdd7907a1f",
     "docs/ssot/EXPERT_DENTAL_MONTH_1_PLAN_AND_REPORTS.md": "5b5fa1441ecc68b2d4adc77fe22c83a823e80fb3479ec1e55590f97deac7c922",
@@ -274,6 +275,8 @@
     "scripts/raimov/sync-agents-bidirectional.sh": "0a4b8cca52e13dea152c90151f098d0c8a6571a25e74571590f5eac133ed6915",
     "scripts/raimov/sync-from-agents-repo.sh": "62b6944f59e189c534fc8fffaeb9c551dd7404a2475b1beaaea66d5768924778",
     "scripts/raimov/sync_agents_bidirectional.py": "9e73876b9cf6068d5ffd8e275cdd764ea20c50726d0454cf546488a5a373547b",
+    "site-caesthetic/private/bonita/gate.js": "cdb1bbfd26fdb0c975f50245eb6a22dc901e8a600d2359f32959047f52d2ebc4",
+    "site-caesthetic/private/bonita/offer/index.html": "3f80cd62bdef3df44bc3e04b8c7e3955c74667f6526308f4f3cced5fa67d76a4",
     "site-raimovdental/CONTENT_CONTRACT.md": "6b3b29ed753ffd1dcba1e9006bf7e6b95f59627fd41c52d552e5cfd382416db4",
     "site-raimovdental/CONTENT_REQUIRED_FROM_CLINIC.md": "6b94ef78b2c5f0b84de8dfb5c3d630d0d9e29930da2c81c4e8ca11a71169f1fb",
     "site-raimovdental/CTA_COPY_CONTRACT.md": "0f995616a60a49102df1f69a9f552eef90c58550d8cb68d25d8ef865d5790306",
@@ -527,6 +530,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T18:30:05Z",
+  "updated_at_utc": "2026-08-06T18:40:05Z",
   "version": 1
 }
