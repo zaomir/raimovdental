@@ -312,7 +312,7 @@
     "site-raimovdental/feedback-hub/lib/store.mjs": "5474070c560c4d6345d95248f07fa022a7203970a5ca96840188c7eca25c3d4d",
     "site-raimovdental/feedback-hub/server.mjs": "5f3d8429c9c3e1090810103f21eb9a78802e369dbce187f0acd8e6bad743de30",
     "site-raimovdental/patient-site/assets/css/fonts.css": "e223160916bd2e65b9e2b425f1f99b8db07fd2ef3643dbfb5d23dcac196028d6",
-    "site-raimovdental/patient-site/assets/css/site.css": "cfaeec39d247439f3db6787822387d3c45722805c492f883e29893d051da7d12",
+    "site-raimovdental/patient-site/assets/css/site.css": "63cd0cb5a48fb5e1657966e98a9f8ca77aa1f0a119ffecdca3485d89441cf1ca",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-cyrillic.woff2": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-latin.woff2": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235",
     "site-raimovdental/patient-site/assets/fonts/manrope-400-cyrillic.woff2": "c268b459a9329e59fecf39a17618efd44c71735532048d60b12aab76a8c14914",
@@ -544,6 +544,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T20:50:05Z",
+  "updated_at_utc": "2026-08-06T21:00:04Z",
   "version": 1
 }
