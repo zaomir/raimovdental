@@ -273,7 +273,7 @@
     "scripts/raimov/shoot-patient-site.mjs": "d44f489461848de7e5ec6f06d5ec30fa64a2ad9d4f57c0e7c584fc3d540e9e07",
     "scripts/raimov/sync-agents-bidirectional.sh": "0a4b8cca52e13dea152c90151f098d0c8a6571a25e74571590f5eac133ed6915",
     "scripts/raimov/sync-from-agents-repo.sh": "62b6944f59e189c534fc8fffaeb9c551dd7404a2475b1beaaea66d5768924778",
-    "scripts/raimov/sync_agents_bidirectional.py": "613aafb15082ab281d2cbd9bf95183730c7b9066aaf0be0324901498c60202f9",
+    "scripts/raimov/sync_agents_bidirectional.py": "9e73876b9cf6068d5ffd8e275cdd764ea20c50726d0454cf546488a5a373547b",
     "site-raimovdental/CONTENT_CONTRACT.md": "6b3b29ed753ffd1dcba1e9006bf7e6b95f59627fd41c52d552e5cfd382416db4",
     "site-raimovdental/CONTENT_REQUIRED_FROM_CLINIC.md": "6b94ef78b2c5f0b84de8dfb5c3d630d0d9e29930da2c81c4e8ca11a71169f1fb",
     "site-raimovdental/CTA_COPY_CONTRACT.md": "0f995616a60a49102df1f69a9f552eef90c58550d8cb68d25d8ef865d5790306",
@@ -527,6 +527,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T16:30:05Z",
+  "updated_at_utc": "2026-08-06T18:30:05Z",
   "version": 1
 }
