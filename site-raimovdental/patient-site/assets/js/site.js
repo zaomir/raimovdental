@@ -25,14 +25,46 @@
     if (!link) return;
     var href = link.getAttribute('href') || '';
     var context = link.dataset.ctaContext || document.body.dataset.page || 'unknown';
+    var label = link.textContent.trim().slice(0, 80);
+
+    // Named event from the markup (preview_cta_click, router_row_click, price_page_click,
+    // reviews_outbound_click) fires alongside the generic channel event.
+    if (link.dataset.event) track(link.dataset.event, { context: context, label: label });
 
     if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp') > -1) {
-      track('cta_whatsapp', { context: context, label: link.textContent.trim().slice(0, 80) });
+      track('cta_whatsapp', { context: context, label: label });
+      track('whatsapp_click', { context: context, label: label });
     } else if (href.indexOf('tel:') === 0) {
       track('cta_call', { context: context });
     } else if (link.dataset.cta === 'booking') {
       track('cta_booking_form', { context: context });
     }
+  });
+
+  /* --------------------------------------------------------------- booking form */
+
+  /*
+   * The site is static, so the form composes a WhatsApp message instead of posting to a
+   * server. Fields carry no `name`, so without JS the form still submits to wa.me with the
+   * default draft in the hidden `text` input — degraded, but never a dead button.
+   */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-book-form]'), function (form) {
+    var text = form.querySelector('[data-book-text]');
+    if (!text) return;
+    var fallback = text.value;
+
+    form.addEventListener('submit', function () {
+      var parts = [fallback];
+      Array.prototype.forEach.call(form.querySelectorAll('[data-book-field]'), function (field) {
+        var value = (field.value || '').trim();
+        if (!value) return;
+        var key = field.dataset.bookField;
+        var prefix = key === 'name' ? 'Имя' : key === 'phone' ? 'Телефон' : 'Вопрос';
+        parts.push(prefix + ': ' + value);
+      });
+      text.value = parts.join('. ');
+      track('form_submit', { context: 'home-form' });
+    });
   });
 
   /* ------------------------------------------------------------------ drawer */

@@ -892,4 +892,6 @@ export const serviceRedirects = {
   '/services/microscope-treatment/': '/services/endodontics/',
   '/services/therapy/': '/services/caries-treatment/',
   '/prices/': '/services/',
+  // The home page copy calls the price page /price; the canonical route stays /services/.
+  '/price/': '/services/',
 };

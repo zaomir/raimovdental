@@ -1796,3 +1796,690 @@ a.card--service:hover {
 .max-60 {
   max-width: 38rem;
 }
+
+/* ============================================================== home page 2.0
+ *
+ * Components for the fifteen-block home page. Colour rules that keep the page
+ * readable: on --bone and --paper body copy is --ink or --ink-soft, secondary copy
+ * is --ink-mute, and any brass-coloured text uses --brass-ink (plain --brass only
+ * reaches 2.7:1 and is reserved for rules and marks). On --forest everything is
+ * --bone, never below 0.72 alpha.
+ */
+
+/* Anchored sections sit under a sticky masthead. */
+[id='preview'],
+[id='start'],
+[id='approach'],
+[id='process'],
+[id='work'],
+[id='methods'],
+[id='prices'],
+[id='doctors'],
+[id='reviews'],
+[id='faq'],
+[id='services'],
+[id='book'],
+[id='contacts'] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ------------------------------------------------------------- locked notes */
+
+/*
+ * A reviewed passage that protects the clinic — the free/paid boundary, the ban on
+ * promising a result, the clinical protocol, the price disclaimer. Deliberately set at
+ * body size with a brass rule: these must never read as small print.
+ */
+.note-locked {
+  border-left: 2px solid var(--brass);
+  background: var(--brass-tint);
+  padding: 1rem 1.15rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+
+.note-locked__title {
+  color: var(--ink);
+}
+
+.note-locked a {
+  color: var(--brass-ink);
+}
+
+.note-locked--onDark {
+  background: rgba(247, 244, 239, 0.08);
+  border-left-color: var(--brass-soft);
+  color: var(--bone);
+}
+
+.note-locked--onDark .note-locked__title {
+  color: var(--bone);
+}
+
+/* ------------------------------------------------------------- trust strip */
+
+.trust {
+  background: var(--forest);
+  color: var(--bone);
+  padding: clamp(1.6rem, 4vw, 2.4rem) 0;
+}
+
+.trust__grid {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+}
+
+.trust__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--bone);
+}
+
+.trust__value a {
+  color: var(--bone);
+  text-decoration-color: var(--brass-soft);
+  text-underline-offset: 0.22em;
+}
+
+.trust__label {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: rgba(247, 244, 239, 0.78);
+  margin-top: 0.3rem;
+}
+
+.trust__meta {
+  margin-top: clamp(1.1rem, 3vw, 1.6rem);
+  padding-top: 1rem;
+  border-top: 1px solid rgba(247, 244, 239, 0.2);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(247, 244, 239, 0.78);
+}
+
+/* ------------------------------------------------------------- spec columns */
+
+.spec-card {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 1rem;
+}
+
+.spec-card__title {
+  font-size: 0.82rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--brass-ink);
+  margin: 0 0 0.75rem;
+}
+
+.spec-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.spec-card__list li {
+  padding-left: 1.05rem;
+  position: relative;
+}
+
+.spec-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.42rem;
+  height: 1px;
+  background: var(--brass);
+}
+
+/* "What is not included" reads as exclusions, not as a second feature list. */
+.spec-card--out .spec-card__title {
+  color: var(--ink-mute);
+}
+
+.spec-card--out .spec-card__list li::before {
+  background: var(--line-strong);
+}
+
+/* ------------------------------------------------------------------ router */
+
+.router {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.router__row {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.router__link {
+  display: grid;
+  gap: 0.15rem 1.5rem;
+  align-items: baseline;
+  padding: 1rem 7.5rem 1rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The whole row is the WhatsApp target; the direction link sits above it. */
+.router__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.router__row:hover {
+  background: var(--forest-tint);
+}
+
+.router__situation {
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+
+.router__step {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.router__price {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.router__price--free {
+  color: var(--forest);
+}
+
+.router__free-mark {
+  display: inline-block;
+  margin-left: 0.35rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  line-height: 1.05rem;
+  text-align: center;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--bone);
+  vertical-align: 0.05em;
+}
+
+.router__more {
+  position: relative;
+  z-index: 1;
+  font-size: 0.82rem;
+  color: var(--brass-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.router__row--lead {
+  background: var(--brass-tint);
+}
+
+.router__row--lead:hover {
+  background: #f2e9d6;
+}
+
+.router__row--lead .router__situation {
+  font-size: 1.08rem;
+}
+
+@media (min-width: 46rem) {
+  .router__link {
+    grid-template-columns: 1.4fr 1fr auto;
+    padding-right: 8.5rem;
+  }
+  .router__more {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 45.99rem) {
+  .router__link {
+    padding-right: 0;
+  }
+  .router__price {
+    margin-top: 0.15rem;
+  }
+  .router__more {
+    display: inline-block;
+    margin: 0 0 1rem;
+  }
+}
+
+/* ------------------------------------------------------- comparison table */
+
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cmp {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.cmp th,
+.cmp td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.85rem 1rem 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cmp thead th {
+  font-size: 0.76rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  font-weight: 600;
+  border-bottom-color: var(--line-strong);
+}
+
+.cmp tbody th {
+  font-weight: 600;
+  color: var(--ink);
+  padding-right: 1.5rem;
+}
+
+.cmp td {
+  color: var(--ink-soft);
+}
+
+.cmp tr.is-lead th,
+.cmp tr.is-lead td {
+  background: var(--brass-tint);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.tag--ok {
+  background: var(--forest-tint);
+  color: var(--forest);
+}
+
+.tag--warn {
+  background: var(--brass-tint);
+  color: var(--brass-ink);
+}
+
+.tag--stop {
+  background: #f8ebe8;
+  color: var(--alert);
+}
+
+/* Under 46rem the table becomes stacked blocks; each cell carries its column name. */
+@media (max-width: 45.99rem) {
+  .cmp,
+  .cmp tbody,
+  .cmp tr,
+  .cmp th,
+  .cmp td {
+    display: block;
+    width: 100%;
+  }
+  .cmp thead {
+    display: none;
+  }
+  .cmp tr {
+    border-bottom: 1px solid var(--line-strong);
+    padding: 0.9rem 0;
+  }
+  .cmp th,
+  .cmp td {
+    border: 0;
+    padding: 0.2rem 0;
+  }
+  .cmp tbody th {
+    font-size: 1rem;
+    padding-right: 0;
+  }
+  .cmp td::before {
+    content: attr(data-label) ': ';
+    color: var(--ink-mute);
+    font-size: 0.8rem;
+  }
+  .cmp tr.is-lead th,
+  .cmp tr.is-lead td {
+    background: transparent;
+  }
+  .cmp tr.is-lead {
+    background: var(--brass-tint);
+    padding-inline: 0.85rem;
+  }
+}
+
+.guidance {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 46rem;
+}
+
+.guidance li {
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.guidance li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--brass-ink);
+}
+
+/* ------------------------------------------------------------ price groups */
+
+.price-groups {
+  margin: 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.price-groups__row {
+  display: grid;
+  gap: 0.25rem 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.price-groups__row dt {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.price-groups__row dd {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.price-groups__row--free dt {
+  color: var(--forest);
+}
+
+@media (min-width: 46rem) {
+  .price-groups__row {
+    grid-template-columns: 11rem 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------- cases */
+
+.case-card {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 1.1rem;
+}
+
+.case-card__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 0.55rem;
+}
+
+.case-card__problem {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0 0 0.85rem;
+}
+
+.case-card__stages {
+  margin: 0 0 0.85rem;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.case-card__meta {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-mute);
+}
+
+/* ----------------------------------------------------------------- reviews */
+
+.review {
+  margin: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.review__quote {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.review__quote p {
+  margin: 0;
+}
+
+.review__meta {
+  margin-top: auto;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.85rem;
+  align-items: baseline;
+  font-size: 0.84rem;
+}
+
+.review__author {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.review__meta a {
+  color: var(--brass-ink);
+}
+
+/* -------------------------------------------------------------- pull quote */
+
+.pull-quote {
+  margin: 0;
+  max-width: 46rem;
+  border-left: 2px solid var(--brass);
+  padding-left: clamp(1rem, 3vw, 1.6rem);
+}
+
+.pull-quote blockquote {
+  margin: 0;
+}
+
+.pull-quote p {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: 1.32;
+  color: var(--ink);
+  margin: 0;
+}
+
+.pull-quote figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.88rem;
+  color: var(--ink-mute);
+}
+
+/* ---------------------------------------------------------------- channels */
+
+.channels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.channels a {
+  color: var(--bone);
+  text-decoration-color: rgba(247, 244, 239, 0.45);
+  text-underline-offset: 0.22em;
+}
+
+.channels a:hover {
+  text-decoration-color: var(--bone);
+}
+
+/* ------------------------------------------------------------- booking form */
+
+.book-form {
+  background: var(--bone);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  display: grid;
+  gap: 0.9rem;
+  color: var(--ink);
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.field__hint {
+  font-weight: 400;
+  color: var(--ink-mute);
+}
+
+.field__control {
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.85rem;
+  width: 100%;
+}
+
+.field__control:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 1px;
+  border-color: var(--forest);
+}
+
+.btn--wide {
+  width: 100%;
+  justify-content: center;
+}
+
+.book-form__note {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--ink-mute);
+  text-align: center;
+}
+
+/* ------------------------------------------------------------- odds and ends */
+
+.card--lead {
+  background: var(--brass-tint);
+}
+
+.link-arrow--onDark {
+  color: var(--bone);
+  text-decoration-color: var(--brass-soft);
+}
+
+.link-arrow--onDark:hover {
+  text-decoration-color: var(--bone);
+}
+
+@media (min-width: 48rem) {
+  .steps--numbered {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  }
+}
+
+.steps--numbered {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step__meta {
+  font-weight: 500;
+  color: var(--brass-ink);
+  white-space: nowrap;
+}
+
+.section--forest .step__meta {
+  color: var(--brass-soft);
+}
+
+.colophon__legal,
+.colophon__warning {
+  margin: 0;
+  padding-top: 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(247, 244, 239, 0.78);
+}
+
+.colophon__legal {
+  border-top: 1px solid rgba(247, 244, 239, 0.18);
+  margin-top: 1.4rem;
+}
+
+/* Required by KG advertising law for medical services — never below body-adjacent size. */
+.colophon__warning {
+  padding-top: 0.35rem;
+  color: var(--bone);
+  font-weight: 600;
+}

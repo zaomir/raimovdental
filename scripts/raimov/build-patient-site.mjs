@@ -29,6 +29,7 @@ const { doctors, doctorBySlug } = await import(join(SRC, 'content/doctors.mjs'))
 const { articles, articleBySlug, categories } = await import(join(SRC, 'content/articles.mjs'));
 const { references } = await import(join(SRC, 'content/references.mjs'));
 const { chief } = await import(join(SRC, 'content/chief.mjs'));
+const homeContent = await import(join(SRC, 'content/homepage.mjs'));
 const layout = await import(join(SRC, 'templates/layout.mjs'));
 const pages = await import(join(SRC, 'templates/pages.mjs'));
 const schema = await import(join(SRC, 'templates/schema.mjs'));
@@ -94,6 +95,31 @@ function loadPrices() {
       raw.disclaimer ??
       'Цены ориентировочные. Итоговая стоимость определяется после осмотра и зависит от клинической ситуации.',
   };
+}
+
+/* ------------------------------------------------------- reviews and cases */
+
+const DATA = join(REPO, 'site-raimovdental', 'src', 'data');
+
+/**
+ * Public map reviews. Only rows the clinic marked `publishable` are rendered, and only the
+ * 2GIS aggregate is quoted — the site never invents a rating or a testimonial.
+ */
+function loadReviews() {
+  const raw = JSON.parse(readFileSync(join(DATA, 'reviews.ru.json'), 'utf8'));
+  const rating = raw.aggregateRating?.publishable ? raw.aggregateRating : null;
+  const keep = (list) => (list ?? []).filter((r) => r.publishable && r.quote?.trim());
+  const items = keep(raw.reviews);
+  const teaser = keep(raw.homeTeaserItems);
+  if (rating && !items.length) fail('reviews.ru.json: rating is publishable but no review passes the filter');
+  return { aggregateRating: rating, items, homeTeaserItems: teaser.length ? teaser : items.slice(0, 3) };
+}
+
+/** Verified treatment pathways. Photo pairs are not published until the clinic supplies them. */
+function loadCases() {
+  const raw = JSON.parse(readFileSync(join(DATA, 'cases.ru.json'), 'utf8'));
+  const verified = new Set(raw.verifiedCases ?? []);
+  return (raw.cases ?? []).filter((c) => c.publishable && c.status === 'verified' && verified.has(c.slug));
 }
 
 /* ------------------------------------------------------------ image manifest */
@@ -281,9 +307,11 @@ mkdirSync(OUT, { recursive: true });
 const fingerprints = fingerprintAssets();
 const manifest = buildImageManifest();
 const prices = loadPrices();
-const ctx = { manifest, services, doctors, articles, prices, categories };
+const reviews = loadReviews();
+const cases = loadCases();
+const ctx = { manifest, services, doctors, articles, prices, categories, reviews, cases };
 
-const clinic = schema.clinicNode(ORIGIN);
+const clinic = schema.clinicNode(ORIGIN, { rating: reviews.aggregateRating });
 const physicians = doctors.map((d) =>
   schema.physicianNode(ORIGIN, d.chief ? { ...d, knowsAbout: chief.knowsAbout } : d)
 );
@@ -291,9 +319,9 @@ const physicians = doctors.map((d) =>
 /* home */
 {
   const route = '/';
-  const title = `${brand.name} — комплексная стоматология в Бишкеке`;
+  const title = 'Виниры и эстетика зубов в Бишкеке — Expert Dental Studio';
   const description =
-    'Стоматологическая клиника в Бишкеке: ортодонтия, лечение ВНЧС, имплантация, протезирование, терапия и детский приём. Диагностика, единый план лечения и прозрачные цены.';
+    'Виниры и эстетическая реставрация в Бишкеке. Цифровая примерка улыбки — 0 сом: показываем вариант формы на экране до обточки. Керамические виниры E-max, отбеливание, гнатология.';
   page({
     route,
     title,
@@ -305,6 +333,7 @@ const physicians = doctors.map((d) =>
       clinic,
       ...physicians,
       schema.webPageNode(ORIGIN, { url: route, title, description, breadcrumb: false }),
+      schema.faqNode(homeContent.faq),
     ],
   });
 }

@@ -5,7 +5,7 @@
  * of the stack is that a page weighs almost nothing on a mobile connection in Bishkek.
  */
 
-import { brand, contacts, cta, nav, footerNav, maps } from '../config/site.mjs';
+import { brand, contacts, cta, nav, footerNav, maps, social } from '../config/site.mjs';
 
 /* ------------------------------------------------------------------ escaping */
 
@@ -294,12 +294,17 @@ function reversibilityTone(value) {
 }
 
 export function reviewCard(review) {
-  const quote = String(review.quote).trim();
+  const paras = String(review.quote)
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p>${esc(p)}</p>`)
+    .join('');
   return `<figure class="review">
-    <blockquote class="review__quote"><p>${esc(quote)}</p></blockquote>
+    <blockquote class="review__quote">${paras}</blockquote>
     <figcaption class="review__meta">
-      ${review.author ? `<span class="review__author">${esc(review.author)}</span>` : ''}
-      <a href="${attr(review.url || maps.twoGisReviews)}" target="_blank" rel="noopener nofollow"
+      ${review.authorDisplay ? `<span class="review__author">${esc(review.authorDisplay)}</span>` : ''}
+      <a href="${attr(review.sourceUrl || maps.twoGisReviews)}" target="_blank" rel="noopener nofollow"
          data-event="reviews_outbound_click" data-cta-context="review-card">Отзыв на 2ГИС</a>
     </figcaption>
   </figure>`;
@@ -470,6 +475,18 @@ export function header(assets, waMessage) {
   </header>`;
 }
 
+/** Map profiles the clinic actually holds; missing ones are simply absent. */
+export function mapLinks() {
+  return [
+    ['2ГИС', maps.twoGis],
+    ['Яндекс Карты', maps.yandex],
+    ['Google Maps', maps.google],
+  ]
+    .filter(([, url]) => url)
+    .map(([label, url]) => `<a href="${attr(url)}" target="_blank" rel="noopener">${esc(label)}</a>`)
+    .join(' · ');
+}
+
 export function footer(assets, waMessage) {
   const cols = footerNav
     .map(
@@ -490,14 +507,22 @@ export function footer(assets, waMessage) {
           <p style="margin-bottom:1rem">${esc(brand.legalNote)}. ${esc(contacts.hoursDisplay)}.</p>
           <ul>
             <li><a href="${attr(telHref())}">${esc(contacts.phoneDisplay)}</a></li>
-            <li><a href="${attr(
-              waHref(waMessage)
-            )}">${esc(cta.whatsapp)}</a></li>
-            <li>${esc(contacts.addressFull)}</li>
+            <li><a href="${attr(waHref(waMessage))}" data-event="whatsapp_click"
+              data-cta-context="footer">${esc(cta.whatsapp)}</a></li>
+            <li><a href="${attr(social.telegram)}" target="_blank" rel="noopener">Telegram ${esc(
+    social.telegramHandle
+  )}</a></li>
+            <li><a href="${attr(social.instagram)}" target="_blank" rel="noopener">Instagram ${esc(
+    social.instagramHandle
+  )}</a></li>
+            <li>${esc(contacts.addressFull)}, ${esc(contacts.postalCode)}</li>
+            <li>${mapLinks()}</li>
           </ul>
         </div>
         ${cols}
       </div>
+      <p class="colophon__legal">${esc(brand.legalName)} · Лицензия ${esc(brand.license)}</p>
+      <p class="colophon__warning">Имеются противопоказания. Необходима консультация специалиста.</p>
       <div class="colophon__bottom">
         <span>© ${new Date().getFullYear()} ${esc(brand.name)}</span>
         <span>Информация на сайте не является медицинской консультацией и не заменяет очный приём.</span>

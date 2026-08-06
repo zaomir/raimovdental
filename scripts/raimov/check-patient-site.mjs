@@ -19,6 +19,9 @@ import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const { lockedPassages } = await import(
+  join(REPO, 'site-raimovdental', 'patient-site', 'content', 'homepage.mjs')
+);
 const argv = process.argv.slice(2);
 const DIST = argv.includes('--dist')
   ? argv[argv.indexOf('--dist') + 1]
@@ -79,6 +82,21 @@ const CLAIMS = [
   [/ведущий\s+(имплантолог|специалист|врач)/i, 'непроверяемое превосходство'],
   [/самые\s+низкие\s+цены|дешевле\s+всех/i, 'непроверяемое ценовое утверждение'],
 ];
+
+/**
+ * Home page specification §4 — things that must never appear on a public page of this clinic.
+ * Outcome counters and reward-for-treatment offers are the two that keep resurfacing.
+ */
+const FORBIDDEN = [
+  [/бесплатн\w*\s+консультаци/i, 'только «цифровая примерка — 0 сом», не «бесплатная консультация»'],
+  [/скидка\s+только\s+сегодня|успейте|акция\s+месяца/i, 'срочность и акции на медуслуги'],
+  [/рассрочка\s*0\s*%|налоговый\s+вычет/i, 'финансовые обещания вне компетенции клиники'],
+  [/гарантийный\s+срок|гарантия\s+\d+\s+(год|лет)/i, 'гарантийный срок в годах'],
+  [/\b\d[\d\s]{2,}\+?\s+(пациент|улыб|винир)\w*\s+(за|вылечен|установлен)/i, 'счётчик результатов лечения'],
+];
+
+/** Locked passages: reviewed copy that must reach the page whole (content/homepage.mjs). */
+const LOCKED_ROUTES = { '/': true };
 
 /** DEC-251 — public HTML must not mention AI outside the allowed /text routes. */
 const AI_MENTION = /\b(ChatGPT|GPT-[0-9]|Claude|нейросет\w*|искусственн\w+ интеллект\w*)\b/i;
@@ -264,8 +282,26 @@ for (const file of files) {
     const hit = text.match(re);
     if (hit) fail(page, `запрещённое утверждение «${hit[0].trim()}» — ${why}`);
   }
+  for (const [re, why] of FORBIDDEN) {
+    const hit = text.match(re);
+    if (hit) fail(page, `спецификация §4: «${hit[0].trim()}» — ${why}`);
+  }
   if (AI_MENTION.test(text)) fail(page, 'public page mentions AI (DEC-251)');
   if (PRIVATE_LEAK.test(html)) fail(page, 'links to the private raimovdental strategy surface');
+
+  /*
+   * Locked passages must arrive whole. Truncating one is not a styling choice: each protects
+   * the clinic in a named situation (free/paid boundary, no promised result, clinical
+   * protocol, price disclaimer, contraindications).
+   */
+  if (LOCKED_ROUTES[page]) {
+    for (const note of lockedPassages) {
+      const needle = note.text.replace(/\s+/g, ' ').trim();
+      if (!text.includes(needle)) {
+        fail(page, `locked-оговорка отсутствует или сокращена: «${needle.slice(0, 60)}…»`);
+      }
+    }
+  }
 
   // Structural slop: the same sentence repeated across sections reads as filler.
   const sentences = text.split(/(?<=[.!?])\s+/).filter((s) => s.length > 60);

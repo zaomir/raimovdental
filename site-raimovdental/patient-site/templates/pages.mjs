@@ -6,14 +6,16 @@
  * §10 (doctor), §12 (prices), §14 (blog catalog) and §15 (article).
  */
 
-import { brand, contacts, cta, pendingFromClinic, social } from '../config/site.mjs';
+import { brand, contacts, cta, maps, pendingFromClinic, social } from '../config/site.mjs';
 import { chief } from '../content/chief.mjs';
 import { categories } from '../content/articles.mjs';
 import { references } from '../content/references.mjs';
+import * as home from '../content/homepage.mjs';
 import {
   archImage,
   portraitImage,
   attr,
+  bookingForm,
   breadcrumbs,
   ctaBand,
   ctaPair,
@@ -24,9 +26,15 @@ import {
   image,
   initials,
   inline,
+  lockedNote,
+  methodsTable,
+  money,
   postCard,
   priceBlock,
+  reviewCard,
+  routerTable,
   telHref,
+  trustStrip,
   waHref,
 } from './ui.mjs';
 
@@ -58,73 +66,31 @@ function priceDisclaimer(prices) {
 
 /* --------------------------------------------------------------------- home */
 
-export function homePage({ manifest, services, doctors, articles, prices }) {
-  const featured = services.filter((s) => s.featured).sort((a, b) => a.order - b.order);
+export function homePage({ manifest, services, doctors, articles, prices, reviews, cases }) {
+  const ordered = [...services].sort((a, b) => a.order - b.order);
   const chiefDoctor = doctors.find((d) => d.chief);
-  const latest = [...articles].sort((a, b) => b.published.localeCompare(a.published)).slice(0, 3);
+  const teaser = (reviews?.homeTeaserItems ?? []).slice(0, 3);
+  const rating = reviews?.aggregateRating;
 
-  const problems = [
-    { title: 'Щёлкает или болит челюсть', href: '/services/gnathology/', text: 'Диагностика ВНЧС и жевательных мышц.' },
-    { title: 'Неправильный прикус', href: '/services/orthodontics/', text: 'Брекеты, элайнеры, расширение челюсти.' },
-    { title: 'Нет одного или нескольких зубов', href: '/services/implantation/', text: 'Имплантация и протезирование.' },
-    { title: 'Зуб разрушен, боюсь потерять', href: '/services/endodontics/', text: 'Лечение каналов под микроскопом.' },
-    { title: 'Не нравится улыбка', href: '/services/veneers/', text: 'Виниры и эстетическая реставрация.' },
-    { title: 'Ребёнок боится стоматолога', href: '/services/pediatric-dentistry/', text: 'Детский приём с адаптацией.' },
-  ];
-
-  const firstVisit = [
-    { title: 'Разговор', text: 'Что беспокоит, как давно и что уже делали раньше.' },
-    { title: 'Осмотр и фотопротокол', text: 'Врач фиксирует исходное состояние — будет с чем сравнивать.' },
-    { title: 'Снимки по показаниям', text: 'Рентген или КТ назначаются, когда осмотра недостаточно.' },
-    { title: 'План и стоимость', text: 'Последовательность этапов и расчёт — до начала лечения.' },
-  ];
-
-  const equipment = [
-    ['clinic/ct', 'Компьютерный томограф для планирования имплантации'],
-    ['clinic/xray', 'Рентген-кабинет клиники'],
-    ['clinic/sterilization', 'Стерилизационная: инструменты обрабатываются между приёмами'],
-  ];
-
-  const faq = [
-    {
-      q: 'Сколько стоит консультация?',
-      a: 'Консультация платная, её стоимость зависит от врача и направления: общий приём, ортопедия и имплантация, ортодонтия и гнатология тарифицируются отдельно. Все тарифы указаны в разделе [услуги и цены](/services/).',
-    },
-    {
-      q: 'Как записаться?',
-      a: `Напишите в WhatsApp — он принимает сообщения круглосуточно, администратор отвечает в рабочее время. Либо позвоните по номеру ${contacts.phoneDisplay}.`,
-    },
-    {
-      q: 'Где вы находитесь и есть ли парковка?',
-      a: `${contacts.addressFull}, ${contacts.streetNote}. ${contacts.parking}.`,
-    },
-    {
-      q: 'Можно ли поставить диагноз по фотографии?',
-      a: 'Нет. По фотографии нельзя оценить состояние корня, кости и прикуса. Диагноз ставится только после очного осмотра, а при необходимости — по снимку.',
-    },
-    {
-      q: 'Работаете ли вы с детьми?',
-      a: 'Да. Детский приём ведут отдельные врачи, а первый визит строится как знакомство с кабинетом — подробнее на странице [детской стоматологии](/services/pediatric-dentistry/).',
-    },
-  ];
+  const heroTitle = home.hero.titleEm
+    ? esc(home.hero.title).replace(esc(home.hero.titleEm), `<em>${esc(home.hero.titleEm)}</em>`)
+    : esc(home.hero.title);
 
   return `
   <section class="hero">
     <div class="shell hero__grid">
       <div class="stack" style="--stack-gap:1.4rem">
         <span class="kicker">${esc(brand.legalNote)}</span>
-        <h1 class="display hero__title">Стоматология <em>комплексного</em> лечения в Бишкеке</h1>
-        <p class="t-lead">Ортодонтия, лечение ВНЧС, имплантация, протезирование и терапия — с единым планом
-          и участием профильных специалистов, а не набором отдельных процедур.</p>
-        ${ctaPair({
-          context: 'hero',
-          message: 'Здравствуйте. Хочу записаться на диагностику в Expert Dental Studio.',
-        })}
-        <div class="hero__facts">
-          <div><div class="fact__value numeral">8</div><div class="fact__label">врачей разных направлений</div></div>
-          <div><div class="fact__value numeral">${esc(contacts.hoursShort)}</div><div class="fact__label">приём ежедневно</div></div>
-          <div><div class="fact__value numeral">24/7</div><div class="fact__label">WhatsApp принимает сообщения</div></div>
+        <h1 class="display hero__title">${heroTitle}</h1>
+        <p class="t-lead">${esc(home.hero.lead)}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.hero))}"
+             data-cta-context="hero" data-event="preview_cta_click">${esc(home.hero.primaryLabel)}</a>
+          <a class="btn btn--ghost" href="${attr(home.hero.secondaryHref)}"
+             data-cta-context="hero" data-event="price_page_click">${esc(home.hero.secondaryLabel)}</a>
         </div>
+        ${lockedNote(home.hero.note, prices)}
+        <p class="t-small t-mute">${esc(home.hero.location)}</p>
       </div>
       <div class="hero__media">
         ${archImage(manifest, 'clinic/lounge', 'Интерьер Expert Dental Studio: зелёные панели и арочные ниши', {
@@ -133,46 +99,220 @@ export function homePage({ manifest, services, doctors, articles, prices }) {
         })}
         <div class="hero__badge">
           <span class="kicker">Профильное направление</span>
-          <p class="t-small mt-1" style="margin-top:.35rem">Диагностика и лечение дисфункции височно-нижнечелюстного сустава</p>
+          <p class="t-small" style="margin-top:.35rem">Гнатология и функциональная диагностика ВНЧС</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section--bone" aria-labelledby="problems-title">
+  ${trustStrip(home.trust, prices, {
+    license: `Лицензия ${brand.license}`,
+    since: `С ${brand.founded} года`,
+  })}
+
+  <section class="section" id="${attr(home.preview.id)}" aria-labelledby="preview-title">
     <div class="shell">
       ${sectionHead({
-        kicker: 'С чем обращаются',
-        title: 'Начните с того, что беспокоит',
-        lead: 'Не обязательно знать название процедуры. Выберите проблему — дальше расскажем, как её решают и кто из врачей этим занимается.',
-        id: 'problems-title',
+        kicker: home.preview.kicker,
+        title: home.preview.title,
+        lead: home.preview.lead,
+        id: 'preview-title',
       })}
-      <div class="grid grid--3">
-        ${problems
+      <div class="grid grid--4 mt-4">
+        ${home.preview.columns
           .map(
-            (p) => `<a class="card card--problem" href="${attr(p.href)}">
-              <h3 class="card__title">${esc(p.title)}</h3>
-              <p class="card__text">${esc(p.text)}</p>
-              <span class="card__foot">Подробнее →</span>
-            </a>`
+            (c) => `<div class="spec-card${c.tone === 'exclusion' ? ' spec-card--out' : ''}">
+              <h3 class="spec-card__title">${esc(c.title)}</h3>
+              <ul class="spec-card__list">
+                ${c.items.map((i) => `<li>${esc(money(i, prices))}</li>`).join('')}
+              </ul>
+            </div>`
           )
           .join('')}
+      </div>
+      ${lockedNote(home.preview.note, prices)}
+      <div class="btn-row mt-3">
+        <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.preview))}"
+           data-cta-context="preview" data-event="preview_cta_click">${esc(home.preview.ctaLabel)}</a>
       </div>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="services-title">
+  <section class="section section--bone" id="${attr(home.router.id)}" aria-labelledby="router-title">
     <div class="shell">
       ${sectionHead({
-        kicker: 'Направления',
-        title: 'Что мы лечим',
-        lead: 'Полный перечень услуг и актуальный прайс — в [разделе цен](/services/).',
+        kicker: home.router.kicker,
+        title: home.router.title,
+        lead: home.router.lead,
+        id: 'router-title',
+      })}
+      ${routerTable(home.router.rows, prices, ordered)}
+    </div>
+  </section>
+
+  <section class="section section--forest fluted" id="${attr(home.approach.id)}" aria-labelledby="approach-title">
+    <div class="shell shell--narrow" style="margin-inline:auto">
+      <div class="stack" style="--stack-gap:1.15rem">
+        <span class="kicker kicker--onDark">${esc(home.approach.kicker)}</span>
+        <h2 class="display t-h2" id="approach-title">${esc(home.approach.title)}</h2>
+        ${home.approach.paragraphs.map((p) => `<p class="t-lead">${esc(p)}</p>`).join('')}
+        <p><a class="link-arrow link-arrow--onDark" href="${attr(home.approach.link.href)}">${esc(
+    home.approach.link.label
+  )} →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="${attr(home.process.id)}" aria-labelledby="process-title">
+    <div class="shell">
+      ${sectionHead({ kicker: home.process.kicker, title: home.process.title, id: 'process-title' })}
+      <ol class="steps steps--numbered">
+        ${home.process.steps
+          .map(
+            (s) => `<li class="step">
+              <div>
+                <div class="step__title">${esc(s.title)}${
+              s.meta ? ` <span class="step__meta">${esc(money(s.meta, prices))}</span>` : ''
+            }</div>
+                <p class="step__text">${esc(money(s.text, prices))}</p>
+              </div>
+            </li>`
+          )
+          .join('')}
+      </ol>
+      <div class="stack mt-4" style="--stack-gap:.85rem">
+        ${home.process.notes.map((n) => lockedNote(n, prices)).join('')}
+      </div>
+      <p class="t-small t-mute mt-3">${esc(home.process.term)}</p>
+      <div class="btn-row mt-3">
+        <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.process))}"
+           data-cta-context="process" data-event="preview_cta_click">${esc(home.preview.ctaLabel)}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bone" id="${attr(home.work.id)}" aria-labelledby="work-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: home.work.kicker,
+        title: home.work.title,
+        lead: home.work.lead,
+        id: 'work-title',
+      })}
+      <div class="grid grid--3">
+        ${(cases ?? [])
+          .map(
+            (c) => `<article class="case-card">
+              <h3 class="case-card__title">${esc(c.title)}</h3>
+              <p class="case-card__problem">${esc(c.problem)}</p>
+              <ol class="case-card__stages">${c.stages.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
+              <p class="case-card__meta">${esc(c.durationRange)}</p>
+            </article>`
+          )
+          .join('')}
+      </div>
+      <p class="t-small t-mute mt-3">${esc(home.work.pendingNote)}</p>
+    </div>
+  </section>
+
+  <section class="section" id="${attr(home.methods.id)}" aria-labelledby="methods-title">
+    <div class="shell">
+      ${sectionHead({ kicker: home.methods.kicker, title: home.methods.title, id: 'methods-title' })}
+      ${methodsTable(home.methods, prices)}
+      <ul class="guidance mt-4">
+        ${home.methods.guidance.map((g) => `<li>${esc(g)}</li>`).join('')}
+      </ul>
+      <div class="btn-row mt-3">
+        <a class="btn btn--primary" href="${attr(waHref(home.waPrefills.methods))}"
+           data-cta-context="methods" data-event="preview_cta_click">${esc(home.preview.ctaLabel)}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bone" id="${attr(home.pricing.id)}" aria-labelledby="prices-title">
+    <div class="shell">
+      ${sectionHead({ kicker: home.pricing.kicker, title: home.pricing.title, id: 'prices-title' })}
+      <dl class="price-groups">
+        ${home.pricing.groups
+          .map(
+            (g) => `<div class="price-groups__row${g.tone === 'free' ? ' price-groups__row--free' : ''}">
+              <dt>${esc(g.label)}</dt>
+              <dd>${esc(money(g.text, prices))}</dd>
+            </div>`
+          )
+          .join('')}
+      </dl>
+      ${lockedNote(home.pricing.note, prices)}
+      <p class="mt-3">${esc(money(home.pricing.other, prices))}</p>
+      ${priceDisclaimer(prices)}
+      <div class="btn-row mt-3">
+        <a class="btn btn--primary" href="${attr(home.pricing.ctaHref)}"
+           data-cta-context="prices" data-event="price_page_click">${esc(home.pricing.ctaLabel)}</a>
+      </div>
+      <p class="t-small t-mute mt-2">${esc(home.pricing.payment)}</p>
+    </div>
+  </section>
+
+  <section class="section" id="${attr(home.team.id)}" aria-labelledby="team-title">
+    <div class="shell">
+      ${sectionHead({ kicker: home.team.kicker, title: home.team.title, id: 'team-title' })}
+      <div class="grid grid--doctors">
+        ${doctors
+          .slice(0, 8)
+          .map((d) => doctorCard(manifest, d, { prices, services: ordered, context: 'home-doctors' }))
+          .join('')}
+      </div>
+      <figure class="pull-quote mt-4">
+        <blockquote><p>${esc(home.team.quote.text)}</p></blockquote>
+        <figcaption>— ${esc(home.team.quote.author)}${
+    chiefDoctor ? `, <a href="/doctors/${attr(chiefDoctor.slug)}/">главный врач</a>` : ''
+  }</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  ${
+    teaser.length
+      ? `<section class="section section--bone" id="${attr(home.reviewsBlock.id)}" aria-labelledby="reviews-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: home.reviewsBlock.kicker,
+        title: home.reviewsBlock.title,
+        lead: rating
+          ? `**${String(rating.value).replace('.', ',')} из 5** на основании **${
+              rating.reviewCount
+            }** отзывов на 2ГИС · срез ${formatDate(rating.capturedAt)}`
+          : null,
+        id: 'reviews-title',
+      })}
+      <div class="grid grid--3">${teaser.map((r) => reviewCard(r)).join('')}</div>
+      <p class="mt-3"><a class="link-arrow" href="${attr(maps.twoGisReviews)}" target="_blank"
+        rel="noopener nofollow" data-event="reviews_outbound_click"
+        data-cta-context="reviews-all">${esc(home.reviewsBlock.ctaLabel)} →</a></p>
+    </div>
+  </section>`
+      : ''
+  }
+
+  <section class="section" id="faq" aria-labelledby="home-faq-title">
+    <div class="shell shell--narrow" style="margin-inline:auto">
+      ${faqBlock(home.faq, { idPrefix: 'home', title: 'Частые вопросы' })}
+    </div>
+  </section>
+
+  <section class="section section--bone" id="${attr(home.servicesBlock.id)}" aria-labelledby="services-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: home.servicesBlock.kicker,
+        title: home.servicesBlock.title,
+        lead: home.servicesBlock.lead,
         id: 'services-title',
       })}
       <div class="grid grid--3">
-        ${featured
+        ${ordered
           .map(
-            (s) => `<a class="card card--service" href="/services/${attr(s.slug)}/">
+            (s, i) => `<a class="card card--service${i === 0 ? ' card--lead' : ''}"
+              href="/services/${attr(s.slug)}/">
               <h3 class="card__title">${esc(s.navLabel)}</h3>
               <p class="card__text">${esc(s.result)}</p>
               <span class="card__foot">Подробнее →</span>
@@ -183,116 +323,27 @@ export function homePage({ manifest, services, doctors, articles, prices }) {
     </div>
   </section>
 
-  ${chiefBand(manifest, chiefDoctor)}
-
-  <section class="section" aria-labelledby="team-title">
-    <div class="shell">
-      ${sectionHead({
-        kicker: 'Команда',
-        title: 'Врачи клиники',
-        lead: 'Сложные планы ведёт не один специалист: ортодонт, хирург, ортопед и терапевт согласуют этапы между собой.',
-        id: 'team-title',
-      })}
-      <div class="grid grid--4">
-        ${doctors
-          .slice(0, 8)
-          .map((d) => doctorCard(manifest, d))
-          .join('')}
-      </div>
-      <div class="mt-4">
-        <figure class="team-band" style="margin:0">
-          ${image(manifest, 'team/team', 'Команда врачей Expert Dental Studio', {
-            sizes: '(min-width: 74rem) 74rem, 100vw',
-          })}
-          <figcaption class="team-band__caption">Команда Expert Dental Studio, Бишкек</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--forest fluted" aria-labelledby="visit-title">
-    <div class="shell">
-      ${sectionHead({ kicker: 'Первый приём', title: 'Как проходит диагностика', id: 'visit-title' })}
-      <div class="steps steps--row">
-        ${firstVisit
-          .map(
-            (s) => `<div class="step">
-              <div class="step__title">${esc(s.title)}</div>
-              <p class="step__text">${esc(s.text)}</p>
-            </div>`
-          )
-          .join('')}
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="equipment-title">
-    <div class="shell split">
-      <div class="stack" style="--stack-gap:1rem">
-        <span class="kicker">Оборудование и безопасность</span>
-        <h2 class="display t-h2" id="equipment-title">Диагностика на месте</h2>
-        <p class="t-lead">Снимки и планирование выполняются в клинике, поэтому план лечения обсуждается на том же приёме,
-          а не через неделю после визита в сторонний центр.</p>
-        <ul class="chief__list" style="color:var(--ink-soft)">
-          <li>Инструменты проходят полный цикл обработки между приёмами.</li>
-          <li>Лечение проводится под изоляцией коффердамом там, где этого требует протокол.</li>
-          <li>Рентгенологическое исследование назначается по показаниям, а не всем подряд.</li>
+  <section class="section section--forest" id="${attr(home.finalCta.id)}" aria-labelledby="book-title">
+    <div class="shell split split--even">
+      <div class="stack" style="--stack-gap:1.1rem">
+        <h2 class="display t-h2" id="book-title">${esc(home.finalCta.title)}</h2>
+        <p class="t-lead">${esc(home.finalCta.lead)}</p>
+        <ul class="channels">
+          <li><a href="${attr(waHref(home.waPrefills.final))}" data-cta-context="book-channels"
+            data-event="whatsapp_click">WhatsApp ${esc(contacts.phoneDisplay)}</a></li>
+          <li><a href="${attr(social.telegram)}" target="_blank" rel="noopener">Telegram ${esc(
+    social.telegramHandle
+  )}</a></li>
+          <li><a href="${attr(telHref())}" data-cta-context="book-channels">Позвонить ${esc(
+    contacts.phoneDisplay
+  )}</a></li>
         </ul>
       </div>
-      <div class="gallery">
-        ${equipment
-          .map(
-            ([img, alt]) => `<figure>
-              ${image(manifest, img, alt, { sizes: '(min-width: 56rem) 20vw, 45vw' })}
-              <figcaption>${esc(alt)}</figcaption>
-            </figure>`
-          )
-          .join('')}
-      </div>
+      ${bookingForm(home.finalCta, home.waPrefills.final)}
     </div>
   </section>
 
-  <section class="section section--bone" aria-labelledby="prices-title">
-    <div class="shell">
-      ${sectionHead({
-        kicker: 'Стоимость',
-        title: 'С чего начинается счёт',
-        lead: 'Диагностика оплачивается отдельно, и её стоимость известна заранее. Стоимость лечения называется после осмотра — до его начала.',
-        id: 'prices-title',
-      })}
-      ${priceBlock({ title: 'Консультация и диагностика', rows: prices.byDirection.diagnostics.items })}
-      ${priceDisclaimer(prices)}
-      <p class="mt-3"><a class="link-arrow" href="/services/">Полный прайс по всем направлениям →</a></p>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="blog-title">
-    <div class="shell">
-      ${sectionHead({
-        kicker: 'Блог',
-        title: 'Понятно о лечении',
-        lead: 'Материалы готовят врачи клиники. Каждый разбирает одну ситуацию и заканчивается тем, что делать дальше.',
-        id: 'blog-title',
-      })}
-      <div class="grid grid--3">${latest.map((a) => postCard(manifest, a, categories)).join('')}</div>
-      <p class="mt-3"><a class="link-arrow" href="/blog/">Все статьи →</a></p>
-    </div>
-  </section>
-
-  <section class="section section--bone" aria-labelledby="home-faq">
-    <div class="shell shell--narrow" style="margin-inline:auto">
-      ${faqBlock(faq, { idPrefix: 'home', title: 'Частые вопросы' })}
-    </div>
-  </section>
-
-  ${contactStrip(manifest)}
-
-  ${ctaBand({
-    title: 'Запишитесь на диагностику',
-    text: `${contacts.adminSla}. ${contacts.hoursDisplay}.`,
-    context: 'home-footer',
-    message: 'Здравствуйте. Хочу записаться на диагностику в Expert Dental Studio.',
-  })}`;
+  ${contactStrip(manifest)}`;
 }
 
 /* -------------------------------------------------------------- chief band */

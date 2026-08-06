@@ -5,22 +5,49 @@
  * Physician, MedicalWebPage, Article, BreadcrumbList, FAQPage (only with a visible FAQ).
  *
  * Two hard rules, both enforced here:
- *  - no `aggregateRating` and no `review` until verified reviews exist (§20 / studio §9.4);
+ *  - `aggregateRating` is emitted only from the clinic's own map profile, marked publishable
+ *    and dated, and never as self-authored `review` nodes (§20 / studio §9.4);
  *  - `offers` are omitted, because treatment prices are ranges determined after diagnosis
  *    and publishing them as fixed offers would contradict the price disclaimer.
  */
 
-import { brand, contacts, social } from '../config/site.mjs';
+import { brand, contacts, maps, social } from '../config/site.mjs';
 
 export function organisationId(origin) {
   return `${origin}/#clinic`;
 }
 
-export function clinicNode(origin) {
+const DAY_NAMES = {
+  Mo: 'Monday',
+  Tu: 'Tuesday',
+  We: 'Wednesday',
+  Th: 'Thursday',
+  Fr: 'Friday',
+  Sa: 'Saturday',
+  Su: 'Sunday',
+};
+const DAY_ORDER = Object.keys(DAY_NAMES);
+
+/** Expands a `Mo-Su` / `Mo-Fr` spec into the day list schema.org expects. */
+function openDays(spec = 'Mo-Su') {
+  const [from, to] = spec.split('-');
+  const start = DAY_ORDER.indexOf(from);
+  const end = DAY_ORDER.indexOf(to ?? from);
+  if (start < 0 || end < 0) throw new Error(`Bad opening-hours spec: ${spec}`);
+  return DAY_ORDER.slice(start, end + 1).map((d) => DAY_NAMES[d]);
+}
+
+/**
+ * `rating` comes from the clinic's 2GIS profile via reviews.ru.json. It is passed in rather
+ * than imported so a build without publishable review data simply omits the property.
+ */
+export function clinicNode(origin, { rating = null } = {}) {
+  const spec = (contacts.hours.schemaSpec ?? 'Mo-Su 08:00-19:00').split(' ')[0];
   const node = {
-    '@type': ['Dentist', 'MedicalClinic'],
+    '@type': ['Dentist', 'MedicalClinic', 'LocalBusiness'],
     '@id': organisationId(origin),
     name: brand.name,
+    legalName: brand.legalName,
     alternateName: brand.nameRu,
     url: `${origin}/`,
     telephone: contacts.phone,
@@ -29,12 +56,13 @@ export function clinicNode(origin) {
       '@type': 'PostalAddress',
       streetAddress: contacts.street,
       addressLocality: contacts.city,
+      postalCode: contacts.postalCode,
       addressCountry: contacts.countryCode,
     },
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        dayOfWeek: openDays(spec),
         opens: contacts.hours.opens,
         closes: contacts.hours.closes,
       },
@@ -48,9 +76,20 @@ export function clinicNode(origin) {
       { '@type': 'MedicalProcedure', name: 'Детская стоматология' },
     ],
   };
-  if (social.instagram) node.sameAs = [social.instagram];
+  node.sameAs = [social.instagram, social.telegram, maps.twoGis, maps.google].filter(Boolean);
   if (contacts.geo) {
     node.geo = { '@type': 'GeoCoordinates', latitude: contacts.geo.lat, longitude: contacts.geo.lng };
+  }
+  // Only the map profile's own aggregate, attributed and dated. Never a self-authored review.
+  if (rating) {
+    node.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: rating.value,
+      reviewCount: rating.reviewCount,
+      bestRating: rating.bestRating,
+      worstRating: rating.worstRating,
+      url: rating.sourceUrl,
+    };
   }
   return node;
 }

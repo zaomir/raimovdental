@@ -534,12 +534,16 @@ export const waPrefills = {
   sticky: 'Здравствуйте! Хочу записаться на цифровую примерку улыбки',
 };
 
-/** Every locked passage on the page, collected for the pre-ship gate. */
+/**
+ * Every locked passage on the page, normalised to `{ text }` for the pre-ship gate in
+ * scripts/raimov/check-patient-site.mjs. If one stops appearing in the rendered HTML the
+ * build fails rather than quietly shipping a shortened disclaimer.
+ */
 export const lockedPassages = [
   hero.note,
   preview.note,
   ...process.notes,
   pricing.note,
-  faq.find((f) => f.locked),
+  ...faq.filter((f) => f.locked).map((f) => ({ text: f.a })),
   contactsBlock.disclaimer,
-].filter(Boolean);
+].filter((n) => n?.text);
