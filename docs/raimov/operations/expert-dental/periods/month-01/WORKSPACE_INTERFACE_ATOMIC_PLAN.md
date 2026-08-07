@@ -33,7 +33,7 @@ canon:
 | I0.2 | — | ✅ | `workspace/content/recontact-9.json` · followupMatrix ×9 |
 | I0.3 | — | ✅ | `workspace/content/patient-path.json` · 14 steps + 3 routes · `60de349db` |
 | I0.4 | — | ✅ | `workspace/content/admin-feedback-sop.json` · SOP×8 + 3 platforms |
-| I0.5 | — | ⬜ | — |
+| I0.5 | — | ✅ | `workspace/content/gaps.md` · gaps 10/11/8 |
 | I7.1 | 7 | ⬜ | — |
 | I7.2 | 7 | ⬜ | — |
 | I7.3 | 7 | ⬜ | — |
