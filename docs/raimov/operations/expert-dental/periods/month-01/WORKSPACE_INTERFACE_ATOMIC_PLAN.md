@@ -29,10 +29,10 @@ canon:
 
 | Атом | Пункт | Статус | Чем закрыт |
 |---|---:|---|---|
-| I0.1 | — | ⬜ | — |
-| I0.2 | — | ⬜ | — |
-| I0.3 | — | ⬜ | — |
-| I0.4 | — | ⬜ | — |
+| I0.1 | — | ✅ | `workspace/content/scripts-25.json` · commit `00d5c8741` |
+| I0.2 | — | ✅ | `workspace/content/recontact-9.json` · followupMatrix ×9 |
+| I0.3 | — | ✅ | `workspace/content/patient-path.json` · 14 steps + 3 routes · `60de349db` |
+| I0.4 | — | ✅ | `workspace/content/admin-feedback-sop.json` · SOP×8 + 3 platforms |
 | I0.5 | — | ⬜ | — |
 | I7.1 | 7 | ⬜ | — |
 | I7.2 | 7 | ⬜ | — |

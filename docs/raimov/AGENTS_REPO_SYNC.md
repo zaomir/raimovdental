@@ -1,10 +1,10 @@
 # Agents repo sync marker
 
 - **Mode:** bidirectional (DEC-784)
-- **Grainee SHA (pre-commit):** `00d5c87414485409a88c8ab96c50ef0cf24c2c08`
-- **Clinic SHA (pre-commit):** `4ac8bdd6f05fe9356cb6c233b20aae5917795e10`
-- **Synced at (UTC):** 2026-08-07T16:50:06Z
+- **Grainee SHA (pre-commit):** `024203c95755f643efc18b73fbbb0ec9664fabbc`
+- **Clinic SHA (pre-commit):** `d309e182c4179293b39767f14ca71aa2f28ebb44`
+- **Synced at (UTC):** 2026-08-07T16:54:14Z
 - **Script:** `scripts/raimov/sync-agents-bidirectional.sh`
-- **Summary:** g2c=2 c2g=0 conflicts=0
+- **Summary:** g2c=3 c2g=10 conflicts=0
 
 Production deploy still ships only from grainee-v2.
