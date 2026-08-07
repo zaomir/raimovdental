@@ -64,6 +64,7 @@
   --shell: 74rem;
   --shell-narrow: 44rem;
   --section: clamp(3.5rem, 8vw, 7rem);
+  --action-bar-height: 4.25rem;
 
   --arch: 50% 50% 0 0 / 20% 20% 0 0;
   /* Doctor photos sit flat at the top and soften only at the bottom, so a row of
@@ -1808,6 +1809,7 @@ a.card--service:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--line-strong);
   border-top: 1px solid var(--line-strong);
 }
@@ -1835,7 +1837,7 @@ a.card--service:hover {
 
 @media (max-width: 61.99rem) {
   body {
-    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(var(--action-bar-height) + env(safe-area-inset-bottom));
   }
 }
 
@@ -2118,7 +2120,7 @@ a.card--service:hover {
 .router__more {
   display: inline-flex;
   align-items: center;
-  min-height: 2.35rem;
+  min-height: 2.75rem;
   margin: 0 0.8rem 0.45rem;
   font-size: 0.75rem;
   color: var(--brass-ink);
@@ -2566,7 +2568,7 @@ a.card--service:hover {
 .book-form__consent {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-2);
+  gap: 0.5rem;
   min-height: 2.75rem;
   color: var(--ink-mute);
   font-size: 0.84rem;

@@ -95,6 +95,11 @@ function loadPrices() {
       bySku[item.sku] = { ...item, directionId: d.id };
     }
   }
+  for (const adjustment of raw.adjustments ?? []) {
+    if (!adjustment.sku) throw new Error('Price adjustment must have a SKU');
+    if (bySku[adjustment.sku]) throw new Error(`Duplicate price SKU in catalog: ${adjustment.sku}`);
+    bySku[adjustment.sku] = { ...adjustment, directionId: 'adjustments' };
+  }
 
   return {
     byDirection,

@@ -161,7 +161,10 @@ export function breadcrumbs(trail) {
 
 /* ----------------------------------------------------------------------- FAQ */
 
-export function faqBlock(items, { idPrefix = 'faq', title = 'Частые вопросы', refs = {} } = {}) {
+export function faqBlock(
+  items,
+  { idPrefix = 'faq', title = 'Частые вопросы', refs = {}, prices } = {}
+) {
   if (!items?.length) return '';
   const rows = items
     .map((item, i) => {
@@ -173,7 +176,10 @@ export function faqBlock(items, { idPrefix = 'faq', title = 'Частые воп
             <span>${esc(item.q)}</span>
           </button>
         </h3>
-        <div class="faq__a" id="${aId}" role="region" aria-labelledby="${qId}"><p>${inline(item.a, { refs })}</p></div>
+        <div class="faq__a" id="${aId}" role="region" aria-labelledby="${qId}"><p>${inline(
+          money(item.a, prices),
+          { refs }
+        )}</p></div>
       </div>`;
     })
     .join('');

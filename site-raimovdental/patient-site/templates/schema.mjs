@@ -173,7 +173,10 @@ export function articleNode(origin, article, { author, reviewer, category }) {
     author: { '@id': `${origin}/doctors/${author.slug}/#physician` },
     publisher: { '@id': organisationId(origin) },
     isPartOf: { '@type': 'Blog', '@id': `${origin}/blog/#blog`, name: `Блог ${brand.name}` },
-    about: { '@type': 'MedicalCondition', name: category.label },
+    about: {
+      '@type': category.id === 'prevention' ? 'Thing' : 'MedicalCondition',
+      name: category.label,
+    },
   };
   // A named reviewer is not proof of review. Publish these fields only when the content
   // carries both an explicit review date and an approval evidence reference.
@@ -185,6 +188,18 @@ export function articleNode(origin, article, { author, reviewer, category }) {
 }
 
 export function serviceNode(origin, service) {
+  if (service.productType === 'membership') {
+    return {
+      '@type': 'Service',
+      '@id': `${origin}/services/${service.slug}/#service`,
+      name: service.title,
+      description: service.metaDescription,
+      url: `${origin}/services/${service.slug}/`,
+      serviceType: 'Профилактический стоматологический абонемент',
+      provider: { '@id': organisationId(origin) },
+      areaServed: { '@type': 'City', name: 'Бишкек' },
+    };
+  }
   return {
     '@type': 'MedicalProcedure',
     '@id': `${origin}/services/${service.slug}/#procedure`,

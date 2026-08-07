@@ -48,8 +48,8 @@ function pickRows(prices, directionId, filter) {
   return dir.items.filter((i) => needles.some((n) => i.name.toLowerCase().includes(n)));
 }
 
-function list(items, { refs = references } = {}) {
-  return `<ul>${items.map((i) => `<li>${inline(i, { refs })}</li>`).join('')}</ul>`;
+function list(items, { refs = references, prices } = {}) {
+  return `<ul>${items.map((i) => `<li>${inline(money(i, prices), { refs })}</li>`).join('')}</ul>`;
 }
 
 function sectionHead({ kicker, title, lead, id }) {
@@ -197,9 +197,10 @@ export function homePage({ manifest, services, doctors, articles, prices, review
         ${(cases ?? [])
           .map(
             (c) => `<article class="case-card">
-              <div class="case-card__media" aria-label="Место для подтверждённой пары фотографий до и после">
-                <div class="case-card__placeholder"><strong>До</strong><span>Материал готовится</span></div>
-                <div class="case-card__placeholder"><strong>После</strong><span>Материал готовится</span></div>
+              <div class="case-card__media" role="img"
+                   aria-label="Подтверждённая пара фотографий до и после готовится к публикации">
+                <div class="case-card__placeholder" aria-hidden="true"><strong>До</strong><span>Материал готовится</span></div>
+                <div class="case-card__placeholder" aria-hidden="true"><strong>После</strong><span>Материал готовится</span></div>
               </div>
               <h3 class="case-card__title">${esc(c.title)}</h3>
               <p class="case-card__problem">${esc(c.problem)}</p>
@@ -298,7 +299,7 @@ export function homePage({ manifest, services, doctors, articles, prices, review
 
   <section class="section" id="faq" aria-labelledby="home-faq-title">
     <div class="shell shell--narrow shell--centered">
-      ${faqBlock(home.faq, { idPrefix: 'home', title: 'Частые вопросы' })}
+      ${faqBlock(home.faq, { idPrefix: 'home', title: 'Частые вопросы', prices })}
     </div>
   </section>
 
@@ -417,9 +418,28 @@ function contactStrip(manifest) {
 
 /* ------------------------------------------------------------ services list */
 
-export function servicesIndexPage({ manifest, services, prices }) {
+export function servicesIndexPage({ services, prices }) {
   const ordered = [...services].sort((a, b) => a.order - b.order);
+  const screening = ordered.filter((service) => service.productType === 'screening');
+  const memberships = ordered.filter((service) => service.productType === 'membership');
+  const clinical = ordered.filter((service) => !service.productType);
   const directions = Object.values(prices.byDirection);
+  const serviceCards = (items, { membership = false } = {}) =>
+    items
+      .map(
+        (service) => `<a class="card card--service${membership ? ' card--lead' : ''}"
+          href="/services/${attr(service.slug)}/">
+          ${
+            membership
+              ? '<span class="tag tag--ok">Профилактический абонемент</span>'
+              : ''
+          }
+          <h3 class="card__title">${esc(service.navLabel)}</h3>
+          <p class="card__text">${esc(service.result)}</p>
+          <span class="card__foot">Подробнее →</span>
+        </a>`
+      )
+      .join('');
 
   return `
   <section class="section section--tight">
@@ -431,16 +451,22 @@ export function servicesIndexPage({ manifest, services, prices }) {
         <p class="t-lead">Один прайс для сайта, администратора и врача. Итоговая стоимость определяется
           после осмотра — до начала лечения.</p>
       </div>
-      <div class="grid grid--3">
-        ${ordered
-          .map(
-            (s) => `<a class="card card--service" href="/services/${attr(s.slug)}/">
-              <h2 class="card__title">${esc(s.navLabel)}</h2>
-              <p class="card__text">${esc(s.result)}</p>
-              <span class="card__foot">Подробнее →</span>
-            </a>`
-          )
-          .join('')}
+      <div class="stack stack--gap-14 mt-4">
+        <div>
+          <span class="kicker">Первый шаг</span>
+          <h2 class="display t-h3 mt-1">Скрининг и маршрут</h2>
+          <div class="grid grid--3 mt-2">${serviceCards(screening)}</div>
+        </div>
+        <div>
+          <span class="kicker">Профилактика</span>
+          <h2 class="display t-h3 mt-1">Программа на 12 месяцев</h2>
+          <div class="grid grid--3 mt-2">${serviceCards(memberships, { membership: true })}</div>
+        </div>
+        <div>
+          <span class="kicker">Лечение</span>
+          <h2 class="display t-h3 mt-1">Клинические направления</h2>
+          <div class="grid grid--3 mt-2">${serviceCards(clinical)}</div>
+        </div>
       </div>
     </div>
   </section>
@@ -579,7 +605,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
       <div class="split">
         <div class="prose">
           <h3 class="heading-flush">От чего зависит итоговая сумма</h3>
-          ${list(service.priceFactors)}
+          ${list(service.priceFactors, { prices })}
         </div>
         <div>
           ${priceRowsAll.length ? priceBlock({ title: 'Прайс', rows: priceRowsAll }) : ''}
@@ -628,7 +654,7 @@ export function servicePage({ manifest, service, services, doctors, articles, pr
 
   <section class="section">
     <div class="shell shell--narrow shell--centered">
-      ${faqBlock(service.faq, { idPrefix: `svc-${service.slug}` })}
+      ${faqBlock(service.faq, { idPrefix: `svc-${service.slug}`, prices })}
     </div>
   </section>
 
@@ -1141,7 +1167,7 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
         case 'h3':
           return `<h3 id="${attr(slugify(b.text))}">${esc(b.text)}</h3>`;
         case 'p':
-          return `<p>${inline(b.text, { refs: references, used: usedRefs })}</p>`;
+          return `<p>${inline(money(b.text, prices), { refs: references, used: usedRefs })}</p>`;
         case 'ul':
           return `<ul>${b.items
             .map((i) => `<li>${inline(i, { refs: references, used: usedRefs })}</li>`)
@@ -1272,7 +1298,7 @@ export function articlePage({ manifest, article, author, reviewer, category, ser
         : ''
     }
 
-    <div class="mt-4">${faqBlock(article.faq, { idPrefix: `art-${article.slug}` })}</div>
+    <div class="mt-4">${faqBlock(article.faq, { idPrefix: `art-${article.slug}`, prices })}</div>
   </section>
   </article>
 
