@@ -555,9 +555,9 @@
     "site-raimovdental/patient-site/assets/img/doctors/ergeshova-begimai-360.jpg": "002327b7f2210982c7cc266e4b025e2cc4d6445ff60ab05faacf283463566e95",
     "site-raimovdental/patient-site/assets/img/doctors/ergeshova-begimai-560.jpg": "aaefeb78fedf789262df702c6955fab4818e69e758593807c122b7114d828fa9",
     "site-raimovdental/patient-site/assets/img/doctors/ergeshova-begimai.jpg": "693243051116d273a92d5855ba65ff4ad7e3e1d6b778ac3c3fbb25c2f22cea5f",
-    "site-raimovdental/patient-site/assets/img/doctors/gribanova-marina-360.jpg": "41e828e2b7ced36beb7c038916f75bc740273d38af97eae6caad70ae34593e68",
-    "site-raimovdental/patient-site/assets/img/doctors/gribanova-marina-560.jpg": "6e5b36326d4bb301e050ed80ab6aae3cc3b57639de56aced89d44cb73547f28e",
-    "site-raimovdental/patient-site/assets/img/doctors/gribanova-marina.jpg": "001af008ccdcaf78f8e2f872aefc69754f39abab203dc9deb54042b03e245461",
+    "site-raimovdental/patient-site/assets/img/doctors/gribanova-marina-360.jpg": "f166c61dfe0cba77fc3d8ed574e5e3ba575e8c574f78ca23162a00f9181f28b1",
+    "site-raimovdental/patient-site/assets/img/doctors/gribanova-marina-560.jpg": "bab85de7412ba5b642f21a5bf5bd975bb262c289ba14e571a86f22ec67f48f35",
+    "site-raimovdental/patient-site/assets/img/doctors/gribanova-marina.jpg": "602a11ab9768c75a05603ccb862e80b5482d04c32a62e420d61598239c30bd66",
     "site-raimovdental/patient-site/assets/img/doctors/kerimkulova-aiperi-360.jpg": "ebef0aae295e0dc07c455d0ab8c62c376a713c5cbfce7b522f45748cd1591b7a",
     "site-raimovdental/patient-site/assets/img/doctors/kerimkulova-aiperi-560.jpg": "67aeabc8340180d4b570008a987c562a782ba9ac1f37f79bb10d53bf56643f6d",
     "site-raimovdental/patient-site/assets/img/doctors/kerimkulova-aiperi.jpg": "5a0bea781e06e32b4d03690bc0ad173612d20571f72f555fed4ed8971990313f",
@@ -732,6 +732,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-07T13:40:05Z",
+  "updated_at_utc": "2026-08-07T13:50:05Z",
   "version": 1
 }
