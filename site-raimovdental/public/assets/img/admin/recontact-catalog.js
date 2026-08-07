@@ -64,17 +64,54 @@
       queue = [];
     }
     queue.unshift({
-      patient: `Повторное касание · ${task.ruleId}`,
-      result: `${task.situation} · ${task.channel}`,
+      patient: task.patient || `Повторное касание · ${task.ruleId}`,
+      result: task.result || `${task.situation} · ${task.channel}`,
       time: task.createdAtTime,
       due: task.due,
       owner: task.owner,
-      priority: 'Обычный',
-      type: 'recontact',
+      priority: task.priority || 'Обычный',
+      type: task.type || 'recontact',
       ruleId: task.ruleId,
     });
     localStorage.setItem(HANDOFF_KEY, JSON.stringify(queue.slice(0, 20)));
     document.dispatchEvent(new CustomEvent('ed-handoff-updated'));
+  }
+
+  function persistTask(task, toastText) {
+    const items = readTasks();
+    items.unshift(task);
+    writeTasks(items);
+    pushHandoff(task);
+    if ($('recontactModal') && !$('recontactModal').classList.contains('hidden')) render();
+    window.dispatchEvent(new CustomEvent('ed-toast', {
+      detail: { text: toastText || `Задача: ${task.due} · ${task.channel} · ${task.owner}` },
+    }));
+    return task;
+  }
+
+  function createManualTask(input = {}) {
+    const now = new Date();
+    const task = {
+      id: input.id || `task-${Date.now()}`,
+      ruleId: input.ruleId || 'RET',
+      situation: input.situation || input.title || 'Возврат в работу',
+      goal: input.goal || '',
+      due: input.due || 'Сегодня до конца смены',
+      channel: input.channel || 'Телефон',
+      owner: input.owner || DEFAULT_OWNER,
+      script: input.script || '',
+      source_ref: input.source_ref || 'journal',
+      patient: input.patient || '',
+      phone: input.phone || '',
+      result: input.result || '',
+      priority: input.priority || 'Обычный',
+      type: input.type || 'return',
+      journalId: input.journalId || '',
+      createdAt: now.toISOString(),
+      createdAtTime: now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+      status: 'open',
+    };
+    return persistTask(task, input.toast || `Возврат в работу: ${task.due} · ${task.owner}`);
   }
 
   function createTask(ruleId) {
@@ -91,18 +128,12 @@
       owner: resolveOwner(rule),
       script: rule.script && /^S\d{2}$/.test(rule.script) ? rule.script : '',
       source_ref: rule.source_ref || '',
+      type: 'recontact',
       createdAt: now.toISOString(),
       createdAtTime: now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
       status: 'open',
     };
-    const items = readTasks();
-    items.unshift(task);
-    writeTasks(items);
-    pushHandoff(task);
-    render();
-    window.dispatchEvent(new CustomEvent('ed-toast', {
-      detail: { text: `Задача ${rule.id}: ${task.due} · ${task.channel} · ${task.owner}` },
-    }));
+    return persistTask(task, `Задача ${rule.id}: ${task.due} · ${task.channel} · ${task.owner}`);
   }
 
   function renderTasks() {
@@ -252,6 +283,7 @@
     open: openRecontact,
     reload: loadRules,
     createTask,
+    createManualTask,
     tasks: readTasks,
   };
 })();

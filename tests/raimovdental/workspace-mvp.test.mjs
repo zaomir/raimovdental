@@ -76,6 +76,13 @@ for (const role of ['admin', 'doctor', 'manager', 'owner']) {
 }
 
 assert.match(app, /\/render\/#scripts/);
+assert.match(app, /\/render\/#recontact/);
+assert.match(app, /i76-scripts-recontact/);
+assert.match(app, /quizAdmin/);
+assert.match(app, /Отправить файл прайса и закончить диалог/);
+assert.match(app, /Одно содержательное касание/);
+assert.match(app, /Работа ограничена/);
+assert.match(app, /state\.score>=90&&criticalOk/);
 const scripts = JSON.parse(readFileSync(join(distRoot, 'content/scripts-25.json'), 'utf8'));
 assert.equal(scripts.length, 25);
 const adminIndex = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'index.html'), 'utf8');
@@ -98,8 +105,13 @@ assert.match(appJs, /scriptMap = \{ price: 'S05', fear: 'S08' \}/);
 assert.match(appJs, /state\.screen === 'fear'/);
 const recontactJs = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'recontact-catalog.js'), 'utf8');
 assert.match(recontactJs, /createTask/);
+assert.match(recontactJs, /createManualTask/);
 assert.match(recontactJs, /recontact-9\.json/);
 assert.match(recontactJs, /expert-dental-recontact-tasks-v1/);
+assert.match(appJs, /__missed__/);
+assert.match(appJs, /data-return-work/);
+assert.match(appJs, /returnJournalToWork/);
+assert.match(adminIndex, /journalStatus/);
 const recontact = JSON.parse(readFileSync(join(distRoot, 'content/recontact-9.json'), 'utf8'));
 assert.equal(recontact.length, 9);
 assert.ok(recontact.every((item) => item.id && item.rule && item.delay && item.channel));

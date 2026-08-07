@@ -37,14 +37,28 @@
     'Записан на приём', 'Предварительная бронь', 'Передан врачу',
     'Назначен обратный звонок', 'Пациент думает', 'Нет подходящего времени',
     'Запись перенесена', 'Запись отменена', 'Внутреннее направление',
-    'Отказ пациента', 'Не удалось связаться', 'Жалоба зарегистрирована',
-    'Решено без записи'
+    'Отказ пациента', 'Не удалось связаться', 'Пропущен', 'Без результата',
+    'Жалоба зарегистрирована', 'Решено без записи'
+  ];
+
+  const MISSED_OUTCOMES = new Set([
+    'Пропущен',
+    'Без результата',
+    'Не удалось связаться',
+    'Нет подходящего времени',
+  ]);
+
+  const demoMissedJournal = [
+    { id: 'demo-missed-1', at: '31.07.2026, 10:05', patient: 'Нурлан Садыков', phone: '+996 555 10 20 30', service: 'Виниры', outcome: 'Пропущен', reason: 'Не взяли трубку, 2 попытки', owner: 'Администратор смены', next: 'Перезвонить до 18:00', duration: 42 },
+    { id: 'demo-missed-2', at: '31.07.2026, 11:40', patient: 'Айгуль Токтосунова', phone: '+996 700 55 66 77', service: 'Имплантация', outcome: 'Без результата', reason: 'Ушёл в раздумья после цены', owner: 'Администратор смены', next: 'Повторное касание завтра', duration: 310 },
+    { id: 'demo-missed-3', at: '30.07.2026, 16:12', patient: 'Данияр Корчубеков', phone: '+996 777 12 34 56', service: 'Консультация', outcome: 'Не удалось связаться', reason: 'Номер недоступен', owner: 'Старший администратор', next: 'Попытка через WhatsApp', duration: 28 }
   ];
 
   const demoJournal = [
     { id: 'demo-1', at: '31.07.2026, 09:15', patient: 'Айбек Нурланович', phone: '+996 700 41 22 11', service: 'Имплантация', outcome: 'Предварительная бронь', reason: 'Нужно согласовать время', owner: 'Администратор смены', next: 'Позвонить сегодня в 15:00', duration: 236 },
     { id: 'demo-2', at: '31.07.2026, 08:42', patient: 'Мария Ивановна', phone: '+996 555 24 18 06', service: 'Кровь / отёк после удаления', outcome: 'Передан врачу', reason: 'Послеоперационная жалоба', owner: 'Дежурный врач', next: 'Связаться в течение 30 минут', duration: 189 },
-    { id: 'demo-3', at: '30.07.2026, 18:20', patient: 'Елена Сергеевна', phone: '+996 777 09 31 44', service: 'Ортодонтия', outcome: 'Записан на приём', reason: 'Плановая коррекция', owner: 'Администратор смены', next: 'Визит завтра в 11:00', duration: 144 }
+    { id: 'demo-3', at: '30.07.2026, 18:20', patient: 'Елена Сергеевна', phone: '+996 777 09 31 44', service: 'Ортодонтия', outcome: 'Записан на приём', reason: 'Плановая коррекция', owner: 'Администратор смены', next: 'Визит завтра в 11:00', duration: 144 },
+    ...demoMissedJournal
   ];
 
   const demoHandoff = [
@@ -70,9 +84,48 @@
 
   function journal() {
     const existing = readJson(JOURNAL_KEY, []);
-    if (existing.length) return existing;
-    localStorage.setItem(JOURNAL_KEY, JSON.stringify(demoJournal));
-    return demoJournal.slice();
+    if (!existing.length) {
+      localStorage.setItem(JOURNAL_KEY, JSON.stringify(demoJournal));
+      return demoJournal.slice();
+    }
+    const ids = new Set(existing.map((item) => item.id));
+    let changed = false;
+    demoMissedJournal.forEach((row) => {
+      if (!ids.has(row.id)) {
+        existing.push(row);
+        changed = true;
+      }
+    });
+    if (changed) localStorage.setItem(JOURNAL_KEY, JSON.stringify(existing.slice(0, 200)));
+    return existing;
+  }
+
+  function isMissedOutcome(outcome) {
+    return MISSED_OUTCOMES.has(String(outcome || ''));
+  }
+
+  function returnJournalToWork(journalId) {
+    const item = journal().find((row) => row.id === journalId);
+    if (!item) return toast('Обращение не найдено');
+    const api = window.ExpertDentalRecontact;
+    if (!api?.createManualTask) return toast('Модуль задач ещё загружается');
+    api.createManualTask({
+      ruleId: 'RET',
+      type: 'return',
+      journalId: item.id,
+      patient: item.patient,
+      phone: item.phone,
+      situation: `Вернуть в работу · ${item.outcome}`,
+      goal: item.next || 'Связаться и закрыть результат',
+      due: 'Сегодня до конца смены',
+      channel: 'Телефон',
+      owner: item.owner || 'Администратор смены',
+      result: `${item.service}: ${item.next || 'повторный контакт'}`,
+      source_ref: `journal:${item.id}`,
+      toast: `В работе: ${item.patient} · сегодня · ${item.owner || 'Администратор смены'}`,
+    });
+    renderSidebars();
+    renderJournal();
   }
 
   function handoff() {
@@ -438,10 +491,41 @@
   function renderJournal() {
     const query = ($('journalSearch')?.value || '').toLowerCase();
     const status = $('journalStatus')?.value || '';
-    const items = journal().filter((item) => (!status || item.outcome === status) && (!query || `${item.patient} ${item.phone} ${item.service}`.toLowerCase().includes(query)));
     const all = journal();
-    $('journalStats').innerHTML = `<div class="stat-card"><strong>${all.length}</strong><span>Всего обращений</span></div><div class="stat-card"><strong>${all.filter((item) => item.outcome === 'Записан на приём').length}</strong><span>Записано</span></div><div class="stat-card"><strong>${all.filter((item) => item.outcome === 'Передан врачу').length}</strong><span>Передано врачу</span></div>`;
-    $('journalList').innerHTML = items.length ? items.map((item) => `<article class="journal-item"><div class="journal-item-head"><div><strong>${esc(item.patient)}</strong><span>${esc(item.at)} · ${esc(item.phone || '')}</span></div><span class="result-badge">${esc(item.outcome)}</span></div><div class="journal-meta"><span><b>Тема:</b> ${esc(item.service)}</span><span><b>Ответственный:</b> ${esc(item.owner)}</span><span><b>Следующий шаг:</b> ${esc(item.next)}</span>${item.reason ? `<span><b>Причина:</b> ${esc(item.reason)}</span>` : ''}</div></article>`).join('') : '<div class="empty-context">Обращения не найдены.</div>';
+    const items = all.filter((item) => {
+      const statusOk = !status
+        || (status === '__missed__' ? isMissedOutcome(item.outcome) : item.outcome === status);
+      const queryOk = !query || `${item.patient} ${item.phone} ${item.service} ${item.outcome}`.toLowerCase().includes(query);
+      return statusOk && queryOk;
+    });
+    const missedCount = all.filter((item) => isMissedOutcome(item.outcome)).length;
+    $('journalStats').innerHTML = `
+      <div class="stat-card"><strong>${all.length}</strong><span>Всего обращений</span></div>
+      <div class="stat-card"><strong>${missedCount}</strong><span>Пропущен / без результата</span></div>
+      <div class="stat-card"><strong>${all.filter((item) => item.outcome === 'Записан на приём').length}</strong><span>Записано</span></div>
+      <div class="stat-card"><strong>${all.filter((item) => item.outcome === 'Передан врачу').length}</strong><span>Передано врачу</span></div>`;
+    $('journalList').innerHTML = items.length ? items.map((item) => {
+      const missed = isMissedOutcome(item.outcome);
+      return `<article class="journal-item${missed ? ' is-missed' : ''}" data-journal-id="${esc(item.id)}">
+        <div class="journal-item-head">
+          <div><strong>${esc(item.patient)}</strong><span>${esc(item.at)} · ${esc(item.phone || '')}</span></div>
+          <span class="result-badge${missed ? ' is-missed' : ''}">${esc(item.outcome)}</span>
+        </div>
+        <div class="journal-meta">
+          <span><b>Тема:</b> ${esc(item.service)}</span>
+          <span><b>Ответственный:</b> ${esc(item.owner)}</span>
+          <span><b>Следующий шаг:</b> ${esc(item.next)}</span>
+          ${item.reason ? `<span><b>Причина:</b> ${esc(item.reason)}</span>` : ''}
+        </div>
+        ${missed ? `<div class="journal-actions"><button class="primary" type="button" data-return-work="${esc(item.id)}">Вернуть в работу</button></div>` : ''}
+      </article>`;
+    }).join('') : '<div class="empty-context">Обращения не найдены.</div>';
+    $('journalList')?.querySelectorAll('[data-return-work]').forEach((button) => {
+      button.onclick = (event) => {
+        event.preventDefault();
+        returnJournalToWork(button.dataset.returnWork);
+      };
+    });
   }
 
   function openApp() {
@@ -503,7 +587,7 @@
   $('openJournal').onclick = () => { renderJournal(); $('journalModal').classList.remove('hidden'); };
   $('closeJournal').onclick = () => $('journalModal').classList.add('hidden');
   $('journalSearch').oninput = renderJournal;
-  $('journalStatus').innerHTML = '<option value="">Все результаты</option>' + outcomes.map((item) => `<option>${item}</option>`).join('');
+  $('journalStatus').innerHTML = '<option value="">Все результаты</option><option value="__missed__">Пропущен / без результата</option>' + outcomes.map((item) => `<option value="${item}">${item}</option>`).join('');
   $('journalStatus').onchange = renderJournal;
   document.addEventListener('ed-handoff-updated', () => {
     if (!$('app')?.classList.contains('hidden')) renderSidebars();
