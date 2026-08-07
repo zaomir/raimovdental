@@ -186,7 +186,7 @@ h3 {
 }
 .muted { color: var(--muted); }
 
-.grid-3, .grid-2, .grid-5 {
+.grid-3, .grid-2, .grid-5, .grid-complaints {
   display: grid;
   gap: 1rem;
   margin-top: 1.75rem;
@@ -194,10 +194,25 @@ h3 {
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-complaints { grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); }
 @media (max-width: 900px) {
   .grid-5 { grid-template-columns: repeat(2, 1fr); }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
 }
+
+.history-close {
+  margin-top: 2rem;
+  max-width: 44rem;
+  display: grid;
+  gap: 1rem;
+}
+.history-close p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+.history-close strong { color: var(--ink); font-weight: 600; }
 
 .card {
   background: var(--white);
