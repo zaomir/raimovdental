@@ -96,6 +96,18 @@ export const chief = {
       text: 'Регулярные выступления на профессиональных мероприятиях.',
       verified: false,
     },
+    {
+      /**
+       * Source: research/raimov-profile/briefs/atabek-bio-growth-2026-08/
+       * (DUrwwBhCCmZ / DWggvq0DUJ5, visual_strong — on-stage mic). Render gate: verified.
+       * Flip after GAPS_AND_QUESTIONS.md §8 (role + talk topic). DEC-788.
+       */
+      title: 'Спикер OrthoDay',
+      text:
+        'Выступление на конференции OrthoDay в Бишкеке, 29.03.2026 — тема доклада и роль '
+        + 'уточняются у клиники.',
+      verified: false,
+    },
   ],
 
   /*

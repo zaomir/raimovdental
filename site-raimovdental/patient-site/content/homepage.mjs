@@ -196,6 +196,15 @@ export const approach = {
     'Гнатология и функциональная диагностика ВНЧС — профильное направление клиники. Электронная '
       + 'аксиография доступна по показаниям.',
   ],
+  /**
+   * Attribution: bite-before-aesthetics is Atabek Raimov's clinical position, not an anonymous
+   * clinic slogan. Optional — templates/pages.mjs renders only when present (DEC-788).
+   */
+  authorNote: {
+    text: 'Это клиническая позиция Атабека Раимова, главного врача и ортодонта-гнатолога клиники.',
+    href: '/doctors/raimov-atabek/',
+    linkLabel: 'Профиль главного врача',
+  },
   link: { label: 'Подробнее о гнатологии и ВНЧС', href: '/services/gnathology/' },
 };
 

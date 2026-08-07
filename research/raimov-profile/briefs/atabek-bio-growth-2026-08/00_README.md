@@ -34,3 +34,8 @@
 - Не переносить отзывы пациентов из `@expert_dental_studio` в FACT.
 - Искать бейджи Speaker / сертификаты с датами / баннеры программ.
 - Sidecar: скачивать **все** child slides (в grainee часто только `display/image`).
+
+## Founder gate (2026-08-07)
+
+- DEC-788: `docs/founder-notes/DEC-788_consultant-patient-site-personal-brand.md`
+- Checklist: `FOUNDER_LAUNCH_CHECKLIST.md` (этот каталог)

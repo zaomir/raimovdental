@@ -151,6 +151,13 @@ export function homePage({ manifest, services, doctors, articles, prices, review
         <span class="kicker kicker--onDark">${esc(home.approach.kicker)}</span>
         <h2 class="display t-h2" id="approach-title">${esc(home.approach.title)}</h2>
         ${home.approach.paragraphs.map((p) => `<p class="t-lead">${esc(p)}</p>`).join('')}
+        ${
+          home.approach.authorNote
+            ? `<p class="t-lead">${esc(home.approach.authorNote.text)} <a class="link-arrow link-arrow--onDark" href="${attr(
+                home.approach.authorNote.href
+              )}">${esc(home.approach.authorNote.linkLabel)} →</a></p>`
+            : ''
+        }
         <p><a class="link-arrow link-arrow--onDark" href="${attr(home.approach.link.href)}">${esc(
     home.approach.link.label
   )} →</a></p>
