@@ -37,7 +37,7 @@ canon:
 | I7.1 | 7 | ✅ | `/render/` кнопка «Скрипты» + modal · `scripts-25.json` · commit `50f9babd5` · prod |
 | I7.2 | 7 | ✅ | `/render/` карточка скрипта · goal/body/next_action/dont_say · commit `1f7862106` · prod |
 | I7.3 | 7 | ✅ | quick «Стоимость»→S05 / «Страхи»→S08 · guide + catalog openById · commit `d8c76dd78` · prod |
-| I7.4 | 7 | ✅ | `/render/` «Повторные касания» · 9 правил · демо-задача срок/канал/владелец · prod |
+| I7.4 | 7 | ✅ | `/render/` «Повторные касания» · 9 правил · демо-задача · commit `60938dfe4` · prod |
 | I7.5 | 7 | ⬜ | — |
 | I7.6 | 7 | ⬜ | — |
 | I5.1 | 5 | ⬜ | — |
