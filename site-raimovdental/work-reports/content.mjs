@@ -57,6 +57,77 @@ export const periods = [
         goal: 'Увеличить выручку из существующего потока пациентов за счёт правильного выявления потребностей и медицински обоснованных внутренних направлений между врачами.',
       },
     ],
+    additionalPlan: {
+      title: 'Дополнительные задачи от Атабека',
+      intro: 'Задачи, полученные от Атабека Саидовича в процессе работы и не входившие в исходный согласованный план из 16 пунктов. Все перечисленные ниже пункты выполнены.',
+      groups: [
+        {
+          title: 'Задачи, полученные в процессе работы',
+          items: [
+            {
+              text: 'Создать страницу услуг и цен на Tilda.',
+              status: 'completed',
+              links: [
+                { label: 'Страница цен', href: 'https://expertdental.kg/price' },
+                { label: 'Страница услуг', href: 'http://expertdental.kg/services' },
+              ],
+            },
+            {
+              text: 'Создать рендеры (интерфейсы) для администратора.',
+              status: 'completed',
+              links: [
+                { label: 'Интерфейс администратора', href: 'https://raimovdental.com/assets/img/workspace/admin/' },
+                { label: 'Детальный render', href: 'https://raimovdental.com/render/' },
+              ],
+            },
+            {
+              text: 'Создать систему онбординга новых администраторов: инструкции, справочник и тесты в интерфейсе администратора.',
+              status: 'completed',
+              links: [
+                { label: 'Онбординг и тесты', href: 'https://raimovdental.com/render/' },
+                { label: 'Интерфейс администратора', href: 'https://raimovdental.com/assets/img/workspace/admin/' },
+              ],
+            },
+            {
+              text: 'Добавить интерфейсы владельца, управляющего и врача.',
+              status: 'completed',
+              links: [
+                { label: 'Владелец', href: 'https://raimovdental.com/assets/img/workspace/owner/' },
+                { label: 'Управляющий', href: 'https://raimovdental.com/assets/img/workspace/manager/' },
+                { label: 'Врач', href: 'https://raimovdental.com/assets/img/workspace/doctor/' },
+                { label: 'Сводная страница', href: 'https://raimovdental.com/assets/img/workspace/' },
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Дополнительно выполнено',
+          items: [
+            {
+              text: 'Создан прототип нового сайта клиники clinic.raimovdental.com.',
+              status: 'completed',
+              links: [
+                { label: 'clinic.raimovdental.com', href: 'https://clinic.raimovdental.com/' },
+              ],
+            },
+            {
+              text: 'Создан прототип RAIM SMILE SYSTEM на отдельном сайте.',
+              status: 'completed',
+              links: [
+                { label: 'raimsmile.com', href: 'https://raimsmile.com/' },
+              ],
+            },
+            {
+              text: 'Создана площадка raimovdental.com для обсуждения стратегии развития бизнеса в целом.',
+              status: 'completed',
+              links: [
+                { label: 'Стратегия на raimovdental.com', href: 'https://raimovdental.com/ru/' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     reports: [
       {
         slug: 'first-two-weeks',
@@ -85,6 +156,14 @@ export const periods = [
             ],
           },
           {
+            title: 'Страница услуг и цен (Tilda)',
+            text: 'По запросу Атабека Саидовича создана и опубликована страница услуг и цен на Tilda. Таблица прайса и информационный блок Expert Care 12 размещены на expertdental.kg.',
+            links: [
+              { label: 'Страница цен', href: 'https://expertdental.kg/price' },
+              { label: 'Страница услуг', href: 'http://expertdental.kg/services' },
+            ],
+          },
+          {
             title: 'Тестовая главная страница',
             text: 'Мы подготовили тестовую версию новой главной страницы и продолжим её дорабатывать. В перспективе существующий сайт потребуется полностью заменить; текущий этап создаёт необходимую контентную основу и позволяет начать накопление поисковой истории уже сейчас.',
             links: [
@@ -93,16 +172,30 @@ export const periods = [
           },
           {
             title: 'Предварительные интерфейсы клиники',
-            text: 'Мы подготовили предварительные интерфейсы владельца, управляющего клиникой, врача и администратора. Наиболее подробно проработан интерфейс администратора: инструкции по обучению и тестированию, а также рабочие скрипты.',
+            text: 'По запросу Атабека Саидовича подготовлены интерфейсы владельца, управляющего, врача и администратора. Для администратора созданы рендеры, инструкции по обучению, справочник, тесты и рабочие скрипты.',
             links: [
-              { label: 'Открыть интерфейсы клиники', href: 'https://raimovdental.com/assets/img/workspace/' },
+              { label: 'Сводная страница интерфейсов', href: 'https://raimovdental.com/assets/img/workspace/' },
+              { label: 'Администратор', href: 'https://raimovdental.com/assets/img/workspace/admin/' },
+              { label: 'Онбординг и тесты', href: 'https://raimovdental.com/render/' },
+              { label: 'Владелец', href: 'https://raimovdental.com/assets/img/workspace/owner/' },
+              { label: 'Управляющий', href: 'https://raimovdental.com/assets/img/workspace/manager/' },
+              { label: 'Врач', href: 'https://raimovdental.com/assets/img/workspace/doctor/' },
+            ],
+          },
+          {
+            title: 'Дополнительные прототипы и стратегическая площадка',
+            text: 'Помимо задач исходного плана выполнены дополнительные работы: прототип нового сайта клиники, прототип RAIM SMILE SYSTEM и защищённая площадка для обсуждения стратегии развития бизнеса.',
+            links: [
+              { label: 'clinic.raimovdental.com', href: 'https://clinic.raimovdental.com/' },
+              { label: 'raimsmile.com', href: 'https://raimsmile.com/' },
+              { label: 'Стратегия raimovdental.com', href: 'https://raimovdental.com/ru/' },
             ],
           },
           {
             title: 'Аналитико-управленческая система версии 1.1',
             text: 'На основе переданных DOCX, XLSX и Markdown-источников собрана полноценная рабочая система: сравнительный срез Expert Dental и 15 конкурентов, 14 этапов пути пациента, отдельные маршруты имплантации, виниров и ортодонтии, 25 скриптов, 9 правил повторных касаний, белый SOP обратной связи, три зоны контроля, четыре уровня KPI и восемь связанных веб-страниц для управленческого просмотра.',
             links: [
-              { label: 'Открыть карту аналитической системы', href: 'https://raimovdental.com/ru/valeria/expert-dental/' },
+              { label: 'Открыть карту аналитической системы', href: 'https://raimovdental.com/ru/valeria/month-1/reports/first-two-weeks/details/' },
             ],
           },
           {

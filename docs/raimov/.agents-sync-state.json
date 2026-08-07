@@ -94,7 +94,7 @@
     "docs/raimov/operations/expert-dental/media/team/talyshhanov-mir-ali.png": "cac52c21f36183adf20564eae2aa97a8fbe377b75515bc1424f44c33cf28dabb",
     "docs/raimov/operations/expert-dental/periods/month-01/PLAN.md": "cd530ceeb5336b672656138839fa96683a9d2d7aa815d55616c58ef48eafd067",
     "docs/raimov/operations/expert-dental/periods/month-01/STATUS.md": "84b1c010157c8dfed6cae87bc41c2abd67d33d3049654887dd36a8826c58d41a",
-    "docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PLAN.md": "db1623fededf3bed972d45e02038c25fe226127954a13585aafe27952bf45eb1",
+    "docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PLAN.md": "3da871221c7a53a451cc5fbf82d12121ac1adbbf68debb7f4d1bd8f7b2f6b57f",
     "docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PROMPTS.md": "fb177db2b941297f5baa6af04c2d5b05d95803bed6df1688faf7ec3f631c8532",
     "docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_CLOSURE_PLAN.md": "607193be8bd9a35b19e4f682d76522568019714a3c96e43add58fa45260f4f5c",
     "docs/raimov/operations/expert-dental/periods/month-01/reports/2026-08-02-first-two-weeks.md": "c6c228fbaf0c6357752b9abe9a615425a4adafa255809374c7a4f3d7b4c0a1a5",
@@ -3159,9 +3159,9 @@
     "site-raimovdental/public/assets/img/team/kerimkulova-aiperi.jpg": "41e40ecdf0cbfdc1dc0f964da7758b54a0df3c0cedeb08da5cedb8cd5bc991ae",
     "site-raimovdental/public/assets/img/team/talyshkhanov-mir-ali.jpg": "154d4632ac443ed29d8ad22a0ba0ea08964eca08265c46433a7a51482a76b555",
     "site-raimovdental/public/assets/img/workspace/admin/index.html": "350b17b1e86091a12bcb2a2b61d78ce462132e8e4fa04a352d55c49e9742c290",
-    "site-raimovdental/public/assets/img/workspace/app.html": "debd8a364a34b81f895867fb4385c18c6c9d5359e9b005f0165f4c82ba8b4987",
+    "site-raimovdental/public/assets/img/workspace/app.html": "187ef09a74d026f4e679b8bc4596d871624523d2bcc6aef05b40f354fd766c19",
     "site-raimovdental/public/assets/img/workspace/content/admin-feedback-sop.json": "0da57077d55cb3c5796cd20dc42a57ca6de39fbba35883b5748c2e83b1dad3f4",
-    "site-raimovdental/public/assets/img/workspace/content/gaps.md": "bfeddec31e4612458c2bdf9230ed32eaa9defa3c2310bc61836f17bbd47fedfd",
+    "site-raimovdental/public/assets/img/workspace/content/gaps.md": "1e4f65ce84adff59e7b11380be0f70d609fa662a65ca8bf68063e42a947ac73f",
     "site-raimovdental/public/assets/img/workspace/content/patient-path.json": "11f18d4b9aa0dae0a63c6f0c6da17d17360e0763e8a28fd121c63423acecddbf",
     "site-raimovdental/public/assets/img/workspace/content/recontact-9.json": "76e8a3aa5100c8739f3533ecae511fba3b81696458a313b787f0fc7299c2aaf0",
     "site-raimovdental/public/assets/img/workspace/content/scripts-25.json": "e0a7b3ba31077aaeeaf4b1438ccd74574f76900fe42e79a71d1afacd213ff0df",
@@ -3280,7 +3280,7 @@
     "site-raimovdental/stage-b/stage-b.css": "e2155f2154297ab6c0a5c9469e2604555f5d54221c49f7fcc80367c6fa4cd791",
     "site-raimovdental/strategy-atlas/content.mjs": "78fed266bda27d1d186db406d865ecacd3cede370c3aaedffb36bfb3be155dbc",
     "site-raimovdental/strategy-atlas/strategy-atlas.css": "2dc39d66deced987fc40115290707abe862ff8f9e579c0ae145a6966c811ba9d",
-    "site-raimovdental/work-reports/content.mjs": "8a549f6e3d707d2c6802c1d7062d6d0fa6cfb0698929d72d230df835046dac55",
+    "site-raimovdental/work-reports/content.mjs": "a1c0459f720e2d30720da822e6102d38598baff25784b0171074542577d60649",
     "site-raimovdental/work-reports/work-reports.css": "6384c62962094aeb13a022e2d2f76313840354035c49ace345147c362237910f",
     "tests/raimov/README.md": "6f32be86197338f561cfbafc90e0fd34e976b22a803f43d90198bfad06e87f3a",
     "tests/raimov/access-continuity-public.mjs": "ada492f583ec3f53bf1e81e0e9f1cabca8c966f33db835970bde3d55ba57dc95",
@@ -3311,10 +3311,10 @@
     "tests/raimovdental/run-playwright.mjs": "dd951753105714a10cd822b5569ac9f2cde73520167a062a497ea1d9cf40683e",
     "tests/raimovdental/seo-structured-data.mjs": "4528065e966debdd8ce0ca27704d1a8e1dda17639fcbe2bf3e4c82bca4dfece3",
     "tests/raimovdental/telegram-config-guard.test.mjs": "d421c6b5992fffc94d144dbf3707451933600f4757b9ba2c91b73ed714155efb",
-    "tests/raimovdental/valeria-work-reports.test.mjs": "850a29142766ddac93b9b8fd26d5554abf5f3109bb0054bf25ccc0ac313c265d",
-    "tests/raimovdental/workspace-mvp.test.mjs": "b0c86ee9c3de561771c6900e819e9fc36e3c8011fe5257cc55c313d0b5d29a10"
+    "tests/raimovdental/valeria-work-reports.test.mjs": "3661aaa1d5679480c6336af4a6dfccd4bd6792741c42e601f2935a088465d229",
+    "tests/raimovdental/workspace-mvp.test.mjs": "c23bc71d629a6ed852fb805885bd66177834da1466fc2ada71e505fd2f3ff835"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-07T18:05:16Z",
+  "updated_at_utc": "2026-08-07T18:12:50Z",
   "version": 1
 }

@@ -20,7 +20,7 @@
     .progress{height:8px;border-radius:999px;background:#e5e8e6;overflow:hidden}.progress span{display:block;height:100%;background:var(--brand);transition:width .35s ease}.task{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.status-ok{color:#17643f}.status-warn{color:#8b5a00}.status-danger{color:#9f302a}
     .mobile-nav{display:none}.footer{padding:18px;color:var(--muted);font-size:12px;text-align:center}.notice{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--warn);color:#684900;font-size:13px}.back-link{white-space:nowrap}
     @media(max-width:1050px){.shell{grid-template-columns:210px minmax(0,1fr)}.right{display:none}}
-    @media(max-width:780px){.top{padding:10px 12px;align-items:flex-start}.brand small{max-width:190px}.header-actions{justify-content:flex-end}.header-actions .demo{display:none}.shell{display:block;padding:10px 10px 84px}.side{display:none}.grid{grid-template-columns:1fr}.hero{display:block}.hero h1{font-size:23px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);bottom:0;left:0;right:0;z-index:8;background:#fff;border-top:1px solid var(--line);padding:7px}.mobile-nav button{font-size:11px;padding:9px 4px;background:transparent}.panel{border-radius:16px;padding:15px}.btn{min-height:46px}.back-link{font-size:12px;padding:8px 10px}}
+    @media(max-width:780px){.top{padding:10px 12px;align-items:flex-start}.brand small{max-width:190px}.header-actions{justify-content:flex-end}.header-actions .demo{display:none}.shell{display:block;padding:10px 10px 84px}.side{display:none}.grid{grid-template-columns:1fr}.hero{display:block}.hero h1{font-size:23px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;z-index:8;background:#fff;border-top:1px solid var(--line);padding:7px}.mobile-nav button{font-size:11px;padding:9px 4px;background:transparent}.panel{border-radius:16px;padding:15px}.btn{min-height:46px}.back-link{font-size:12px;padding:8px 10px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.card,.progress span{transition:none!important}}
   </style>
 </head>
@@ -71,6 +71,9 @@
     const save=()=>localStorage.setItem(key,JSON.stringify(state));
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     if(roleKey==='admin')fetch(FEEDBACK_SOP_URL).then(r=>r.json()).then(d=>{feedbackSop=d;if(['learn','shift','work'].includes(view))render()}).catch(()=>{});
+    const PATIENT_PATH_URL='content/patient-path.json';
+    let patientPath=null;
+    if(roleKey==='admin'||roleKey==='doctor')fetch(PATIENT_PATH_URL).then(r=>r.json()).then(d=>{patientPath=d;if(view==='path')render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -197,8 +200,9 @@
     let view='today';
     function renderNav(){
       const common=[['today','Сегодня'],['learn','Обучение'],['shift','Смена']];
+      const pathItem=(roleKey==='admin'||roleKey==='doctor')?[['path','Путь']]:[];
       const specific=roleKey==='admin'?[['work','Обращения']]:roleKey==='doctor'?[['work','Медицинские задачи']]:[['work','Команда']];
-      const items=[...common,...specific];
+      const items=[...common,...pathItem,...specific];
       $('nav').innerHTML=$('mobileNav').innerHTML=items.map(([id,label])=>`<button class="btn ${view===id?'active':''}" data-view="${id}">${label}</button>`).join('');
       document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
     }
@@ -276,6 +280,28 @@
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Смена недоступна','Сначала пройдите тест допуска по скриптам и повторным касаниям.');
       layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()};bindPostVisitChecklist();
     }
+
+    function pathStepCard(step, {focus=false}={}){
+      return `<article class="card ${focus?'action-card':''}" data-path-step="${esc(step.id)}"><div class="eyebrow">Этап ${esc(step.number)} · ${esc(step.owner||'')}</div><h3>${esc(step.stage)}</h3><p>${esc(step.patient_question||'')}</p><p class="muted">Канал: ${esc(step.channel||'—')}</p><p><b>Следующее действие:</b> ${esc(step.next_action||step.cta||'—')}</p><p class="muted" style="margin-top:8px">Источник: ${esc(step.source_ref||(patientPath&&patientPath.source)||'')}</p></article>`;
+    }
+    function pathView(){
+      if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Путь недоступен','Сначала пройдите тест допуска по скриптам, повторным касаниям и регламенту отзывов.');
+      if(roleKey==='doctor'&&!state.testPassed)return accessBlocked('Путь недоступен','Сначала пройдите тест допуска.');
+      const steps=(patientPath&&patientPath.steps)||[];
+      if(!steps.length){
+        layout('Путь пациента',`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · этапы</div><h3>Загрузка patient-path.json…</h3><p class="muted">Операционный участок: обращение → консультация / план.</p></div>`);
+        return;
+      }
+      const focus=steps.filter(s=>Number(s.number)>=7&&Number(s.number)<=11);
+      const before=steps.filter(s=>Number(s.number)<7);
+      const after=steps.filter(s=>Number(s.number)>11);
+      const body=`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · путь пациента</div><h3>Этапы для персонала</h3><p class="muted">Показаны этапы от первого обращения до консультации и письменного плана (P07–P11). Полный путь — 14 этапов из patient-path.json.</p><p class="muted">Источник: ${esc(patientPath.source||'')}</p></div>
+        <div class="stack" style="margin-top:14px">${focus.map(s=>pathStepCard(s,{focus:true})).join('')}</div>
+        <div class="card" style="margin-top:14px"><h3>Контекст до обращения</h3><div class="stack">${before.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b class="status-warn">Маркетинг</b></div>`).join('')}</div></div>
+        <div class="card" style="margin-top:14px"><h3>После плана</h3><div class="stack">${after.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b>${esc((s.owner||'').split('+')[0].trim()||'—')}</b></div>`).join('')}</div></div>`;
+      layout('Путь пациента', body);
+    }
+
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
       const admin=`<div class="grid"><div class="card"><h3>Входящие обращения</h3><div class="metric">4</div><p class="muted">1 срочное · 2 записи · 1 вопрос по стоимости</p><a class="btn primary" href="/render/">Открыть модуль обращений</a><a class="btn secondary" href="/render/#scripts" style="margin-top:10px">Открыть скрипты</a><a class="btn secondary" href="/render/#recontact" style="margin-top:10px">Повторные касания</a></div><div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
@@ -297,7 +323,7 @@
       $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
     }
-    function render(){renderNav();renderRight();({today,learn,shift,work}[view]||today)()}
+    function render(){renderNav();renderRight();({today,learn,shift,work,path:pathView}[view]||today)()}
     $('roleLabel').textContent=role.name+' · '+role.subtitle;
     render();
   })();
