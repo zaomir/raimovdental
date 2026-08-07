@@ -38,6 +38,8 @@ const schema = await import(join(SRC, 'templates/schema.mjs'));
 
 const argv = process.argv.slice(2);
 function flag(name, fallback) {
+  const inline = argv.find((value) => value.startsWith(`--${name}=`));
+  if (inline) return inline.slice(name.length + 3);
   const i = argv.indexOf(`--${name}`);
   return i > -1 ? argv[i + 1] : fallback;
 }

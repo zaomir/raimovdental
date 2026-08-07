@@ -131,10 +131,12 @@ check() {
 check /                                   200
 check /services/                          200
 check /services/gnathology/               200
+check /services/care-12/                  200
 check /doctors/                           200
 check /doctors/raimov-atabek/             200
 check /blog/                              200
 check /blog/viniry-komu-podhodyat/        200
+check /blog/expert-care-12/               200
 check /contacts/                          200
 check /privacy/                           200
 check /sitemap.xml                        200
