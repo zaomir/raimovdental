@@ -76,6 +76,6 @@
 
 **UI progress (пункт 4):** I4.1–I4.4 ✅ · пункт 4 UI DoD закрыт по атомам.
 
-**UI progress (пункт 1):** I1.1–I1.3 ✅ · I1.4 ⬜
+**UI progress (пункт 1):** I1.1–I1.4 ✅ · пункт 1 UI DoD закрыт по атомам (только обработка заявок; аудит карт/сайта/Instagram вне scope).
 
-**Next execute:** I1.4 — чеклист аудита обработки заявок у управляющего.
+**Next execute:** I10.1 — `workspace/content/internal-marketing.json` (роли терапевт/гигиенист).

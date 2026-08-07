@@ -52,7 +52,7 @@ canon:
 | I1.1 | 1 | ✅ | единый inbox · `i11-unified-inbox` · каналы звонок/WhatsApp/форма · commit `ac0bd82ab` · prod |
 | I1.2 | 1 | ✅ | SLA статусы inbox · `i12-sla-status` · commit `9343bc3db` · prod |
 | I1.3 | 1 | ✅ | единая карточка · `i13-inquiry-card` · commit `900042168` · prod |
-| I1.4 | 1 | ⬜ | — |
+| I1.4 | 1 | ✅ | чеклист аудита · `i14-inquiry-audit` · демо-нарушение · commit `1af21f5aa` · prod |
 | I10.1 | 10 | ⬜ | — |
 | I10.2 | 10 | ⬜ | — |
 | I10.3 | 10 | ⬜ | — |

@@ -67,6 +67,7 @@
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
+      if(!Array.isArray(state.inquiryAuditChecklist))state.inquiryAuditChecklist=[];
     }
     if(state.quizVersion!==QUIZ_VERSION){
       state.updateRead=false;
@@ -160,16 +161,76 @@
       work();
       renderRight();
     }
+    const INQUIRY_AUDIT_STEPS=[
+      {title:'Канал зафиксирован',detail:'Звонок / WhatsApp / форма — без «неизвестно» и без пустого поля.'},
+      {title:'Потребность заполнена',detail:'Что беспокоит пациента — одной фразой, без пустого поля.'},
+      {title:'Источник указан',detail:'Даже заглушка до I8 лучше пустого; без источника атрибуция невозможна.'},
+      {title:'Next action не пустой',detail:'Есть конкретный следующий шаг. Без next action закрывать / передавать нельзя.'},
+      {title:'Владелец назначен',detail:'Кто отвечает за обращение до записи, передачи или возврата.'},
+      {title:'SLA актуален',detail:'Новое → в работе → записан / упущен / передан врачу. «Упущен» без возврата в работу — нарушение.'}
+    ];
+    const DEMO_INQUIRY_VIOLATION={
+      id:'audit-demo-01',
+      patient:'Айбек Т.',
+      channel:'WhatsApp',
+      need:'Боль · жевательный зуб',
+      source:'— не указан',
+      nextAction:'',
+      owner:'— не назначен',
+      status:'упущен',
+      at:'Вчера 19:10',
+      fails:[2,3,4,5]
+    };
+    function ensureInquiryAuditState(){
+      if(!Array.isArray(state.inquiryAuditChecklist))state.inquiryAuditChecklist=[];
+      while(state.inquiryAuditChecklist.length<INQUIRY_AUDIT_STEPS.length)state.inquiryAuditChecklist.push(false);
+      if(state.inquiryAuditChecklist.length>INQUIRY_AUDIT_STEPS.length)state.inquiryAuditChecklist.length=INQUIRY_AUDIT_STEPS.length;
+    }
+    function inquiryAuditProgress(){
+      ensureInquiryAuditState();
+      const total=INQUIRY_AUDIT_STEPS.length;
+      const done=state.inquiryAuditChecklist.filter(Boolean).length;
+      return {done,total,complete:total>0&&done===total};
+    }
+    function managerInquiryAuditHtml(){
+      ensureInquiryAuditState();
+      const prog=inquiryAuditProgress();
+      const v=DEMO_INQUIRY_VIOLATION;
+      const steps=INQUIRY_AUDIT_STEPS.map((s,i)=>{
+        const fail=v.fails.includes(i);
+        const checked=!!state.inquiryAuditChecklist[i];
+        return `<label class="check card ${checked?'':'update'}${fail?' critical':''}" data-audit-step-row="${i}"><input type="checkbox" data-inquiry-audit-step="${i}" ${checked?'checked':''}><span><b>${esc(s.title)}</b>${fail?' <span class="badge demo">нарушение в демо</span>':''}<br>${esc(s.detail)}</span></label>`;
+      }).join('');
+      const status=`${prog.complete?'<p class="status-ok" style="margin-top:12px">✓ Чеклист аудита пройден</p>':prog.done>0?`<p class="status-warn" style="margin-top:12px">${prog.done} из ${prog.total} пунктов отмечено</p>`:'<p class="muted" style="margin-top:12px">Отметьте пункты по мере проверки очереди.</p>'}`;
+      return `<div class="card action-card" data-atom="i14-inquiry-audit" style="margin-top:14px"><div class="eyebrow">I1.4 · аудит обработки заявок</div><h3>Как проверять обработку заявок</h3><p class="muted">Только контур обработки обращений (inbox → карточка → SLA / next action / владелец). Аудит карт, сайта и Instagram — вне этого экрана.</p>
+        <div class="card update critical" data-atom="i14-demo-violation" data-audit-violation="${esc(v.id)}" style="margin-top:12px"><div class="eyebrow">Демо-нарушение</div><h3>${esc(v.patient)}</h3><p class="muted">${esc(v.at)} · ${esc(v.channel)} · SLA: <b class="status-danger">${esc(v.status)}</b></p><p><b>Потребность:</b> ${esc(v.need)}<br><b>Источник:</b> ${esc(v.source)}<br><b>Next action:</b> ${v.nextAction?esc(v.nextAction):'<span class="status-danger">пусто</span>'}<br><b>Владелец:</b> ${esc(v.owner)}</p><p class="status-danger" style="margin-top:8px">Нарушения: нет next action · нет владельца · нет источника · статус «упущен» без возврата в работу.</p></div>
+        <div class="stack" style="margin-top:14px">${steps}</div>
+        ${status}
+        <p class="muted" style="margin-top:10px">Чеклист управляющего · пункт 1 UI · обработка заявок (не внешний аудит каналов).</p></div>`;
+    }
     function managerTeamHtml(){
       const stats=feedbackTeamStats();
       const teamRows=stats.rows.map(({member,progress})=>`<div class="task" data-staff="${member.id}"><span>${esc(member.name)}<br><span class="muted">Регламент отзывов · ${progress.whenToAsk?'урок 1 ✓':'урок 1 —'} · ${progress.qrPlatforms?'урок 2 ✓':'урок 2 —'}</span></span>${feedbackLessonLabel(progress)}</div>`).join('')+
         `<div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div>`;
       const notice=state.feedbackRetakeNotice?`<p class="status-ok" style="margin-top:12px">${esc(state.feedbackRetakeNotice)}</p>`:'';
       const pending=stats.total-stats.passed;
-      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>`;
+      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${managerInquiryAuditHtml()}`;
     }
     function bindManagerFeedback(){
       if($('assignFeedbackRetake'))$('assignFeedbackRetake').onclick=assignFeedbackRetake;
+    }
+    function bindInquiryAudit(){
+      ensureInquiryAuditState();
+      document.querySelectorAll('[data-inquiry-audit-step]').forEach((el)=>{
+        const i=Number(el.dataset.inquiryAuditStep);
+        el.onchange=()=>{
+          ensureInquiryAuditState();
+          state.inquiryAuditChecklist[i]=el.checked;
+          save();
+          work();
+          renderRight();
+        };
+      });
     }
     function bindPostVisitChecklist(){
       ensurePostVisitState();
@@ -520,7 +581,7 @@
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
-      if(roleKey==='manager')bindManagerFeedback();
+      if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();}
     }
     function renderRight(){
       const g=gate();
@@ -529,8 +590,9 @@
         :'';
       const postVisitLine=roleKey==='admin'&&state.shiftStarted?(()=>{const p=postVisitProgress();return `<div class="card"><b>Чеклист после визита</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Выполнен':p.done+'/'+p.total+' шагов'}</span></div>`})():'';
       const managerFeedbackLine=roleKey==='manager'?(()=>{const s=feedbackTeamStats();return `<div class="card"><b>Уроки регламента отзывов</b><br><span class="${s.pct===100?'status-ok':'status-warn'}">${s.pct}% · ${s.passed}/${s.total}</span></div>`})():'';
+      const managerAuditLine=roleKey==='manager'?(()=>{const p=inquiryAuditProgress();return `<div class="card"><b>Аудит обработки заявок</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Пройден':p.done+'/'+p.total+' пунктов'}</span></div>`})():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
     }
     function render(){renderNav();renderRight();({today,learn,shift,work,path:pathView}[view]||today)()}
