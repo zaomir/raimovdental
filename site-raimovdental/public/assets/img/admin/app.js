@@ -328,6 +328,19 @@
     ]) + `<div class="actions"><button class="secondary" data-go="${state.patient ? 'need' : 'new'}">Назад</button></div>`);
   }
 
+  function syncOutcomeNextGate() {
+    const nextEl = $('outcomeNext');
+    const saveBtn = $('saveOutcome');
+    const gate = $('i44NextActionGate');
+    if (!nextEl || !saveBtn || !gate) return;
+    const hasNext = Boolean(nextEl.value.trim());
+    saveBtn.disabled = !hasNext;
+    saveBtn.setAttribute('aria-disabled', hasNext ? 'false' : 'true');
+    gate.hidden = hasNext;
+    gate.classList.toggle('hidden', hasNext);
+    nextEl.setAttribute('aria-invalid', hasNext ? 'false' : 'true');
+  }
+
   function renderOutcome() {
     const patientName = state.patient?.name || 'Новый пациент';
     const phone = state.patient?.phone || '+996 ';
@@ -335,14 +348,14 @@
     return setScreen('Результат разговора', script(
       'Подтверждаю договорённость. Сейчас я зафиксирую итог и следующий шаг, чтобы обращение не потерялось.',
       'Разговор нельзя завершить без результата, ответственного и следующего действия.'
-    ) + `<div class="form-grid">
+    ) + `<div class="form-grid" data-atom="i44-next-action-gate">
       <div class="form-group wide"><label class="field-label">Результат разговора</label><select id="outcomeSelect" class="input"><option value="">Выберите результат</option>${outcomes.map((item) => `<option${item === state.proposedOutcome ? ' selected' : ''}>${item}</option>`).join('')}</select></div>
       <div class="form-group"><label class="field-label">Пациент</label><input id="outcomePatient" class="input" value="${esc(patientName)}"></div>
       <div class="form-group"><label class="field-label">Телефон</label><input id="outcomePhone" class="input" value="${esc(phone)}"></div>
       <div class="form-group wide"><label class="field-label">Услуга / тема</label><input id="outcomeService" class="input" value="${esc(service)}"></div>
       <div class="form-group"><label class="field-label">Причина / подстатус</label><input id="outcomeReason" class="input" value="${esc(state.notes['Красный флаг'] || state.notes.Симптомы || '')}" placeholder="Почему такой результат"></div>
       <div class="form-group"><label class="field-label">Ответственный</label><select id="outcomeOwner" class="input"><option>Администратор смены</option><option>Старший администратор</option><option${state.proposedOutcome === 'Передан врачу' ? ' selected' : ''}>Дежурный врач</option></select></div>
-      <div class="form-group wide"><label class="field-label">Следующее действие</label><input id="outcomeNext" class="input" value="${esc(state.proposedNext)}" placeholder="Запись, звонок врача, подтверждение, отправка информации"></div>
+      <div class="form-group wide"><label class="field-label">Следующее действие *</label><input id="outcomeNext" class="input" required value="${esc(state.proposedNext)}" placeholder="Запись, звонок врача, подтверждение, отправка информации" aria-describedby="i44NextActionGate"><p id="i44NextActionGate" class="alert danger" role="alert" style="margin-top:8px">Нельзя закрыть контакт / передачу без next action. Укажите следующий шаг (из скрипта или договорённости с пациентом).</p><p class="privacy" style="margin-top:8px">Подсказка: откройте «Скрипты» — у каждого сценария есть поле «Следующий шаг».</p></div>
       <div class="form-group wide"><label class="field-label">Итоговый комментарий</label><textarea id="outcomeComment" class="input">${esc($('freeNote').value || '')}</textarea></div>
     </div><div class="actions"><button id="copySummary" class="secondary">Скопировать саммари</button><button id="saveOutcome" class="primary">Сохранить в журнал</button></div>`);
   }
@@ -426,13 +439,19 @@
 
     $('saveOutcome')?.addEventListener('click', saveOutcome);
     $('copySummary')?.addEventListener('click', copySummary);
+    $('outcomeNext')?.addEventListener('input', syncOutcomeNextGate);
+    syncOutcomeNextGate();
   }
 
   function saveOutcome() {
     const outcome = $('outcomeSelect').value;
     const next = $('outcomeNext').value.trim();
     if (!outcome) return toast('Выберите результат разговора');
-    if (!next) return toast('Укажите следующее действие');
+    if (!next) {
+      syncOutcomeNextGate();
+      $('outcomeNext')?.focus();
+      return toast('Нельзя закрыть: укажите следующее действие (next action)');
+    }
     const record = {
       id: `call-${Date.now()}`,
       at: new Date().toLocaleString('ru-RU'),

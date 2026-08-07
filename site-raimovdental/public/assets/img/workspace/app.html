@@ -58,6 +58,9 @@
     if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
     if(typeof state.postVisitOpen!=='boolean')state.postVisitOpen=false;
     if(!['veneers','implants','ortho'].includes(state.pathRoute))state.pathRoute='veneers';
+    if(typeof state.demoPathNextAction!=='string')state.demoPathNextAction='';
+    if(typeof state.demoPathClosed!=='boolean')state.demoPathClosed=false;
+    if(typeof state.demoPathGateMsg!=='string')state.demoPathGateMsg='';
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
@@ -306,13 +309,50 @@
       const routeLine=hint?`<div class="notice" style="margin-top:10px" data-route-hint="${esc(step.id)}"><b>Подсказка маршрута (${esc(currentPathRoute().title)}):</b> ${esc(hint)}</div>`:'';
       return `<article class="card ${focus||isCurrent?'action-card':''}" data-path-step="${esc(step.id)}" ${isCurrent?'data-path-current="1"':''}><div class="eyebrow" style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap"><span>Этап ${esc(step.number)} · ${esc(step.owner||'')}</span>${currentBadge}</div><h3>${esc(step.stage)}</h3><p>${esc(step.patient_question||'')}</p><p class="muted">Канал: ${esc(step.channel||'—')}</p><p><b>Следующее действие:</b> ${esc(step.next_action||step.cta||'—')}</p>${routeLine}<p class="muted" style="margin-top:8px">Источник: ${esc(step.source_ref||(patientPath&&patientPath.source)||'')}</p></article>`;
     }
+    function demoPathSuggestedNext(){
+      const step=demoPathStep();
+      const fromStep=step?(step.next_action||step.cta||''):'';
+      const fromRoute=routeNextHint(DEMO_PATH_CASE.stepId);
+      return fromStep||fromRoute||'';
+    }
+    function ensureDemoPathNextDefault(){
+      if(!state.demoPathNextAction)state.demoPathNextAction=demoPathSuggestedNext();
+    }
     function demoPathCaseHtml(){
+      ensureDemoPathNextDefault();
       const step=demoPathStep();
       const route=currentPathRoute();
       const stepLabel=step?`${step.id} · ${step.stage}`:DEMO_PATH_CASE.stepId;
-      const next=step?(step.next_action||step.cta||'—'):'—';
+      const catalogNext=step?(step.next_action||step.cta||'—'):'—';
       const progress=step?`Этап ${step.number} из 14`:'Этап на пути';
-      return `<div class="card action-card" data-atom="i43-demo-path-position" data-path-position="${esc(DEMO_PATH_CASE.stepId)}" style="margin-top:14px"><div class="eyebrow">I4.3 · демо-обращение</div><h3>${esc(DEMO_PATH_CASE.patient)}</h3><p>${esc(DEMO_PATH_CASE.channel)} · ${esc(route.title)} · ${esc(DEMO_PATH_CASE.need)}</p><p><b>Текущая позиция на пути:</b> ${esc(stepLabel)}</p><p class="muted">${esc(progress)} · владелец этапа: ${esc((step&&step.owner)||DEMO_PATH_CASE.owner)}</p><p><b>Следующее действие:</b> ${esc(next)}</p><p class="muted" style="margin-top:8px">Позиция демо фиксирована на ${esc(DEMO_PATH_CASE.stepId)}; маршрут услуги следует переключателю I4.2.</p></div>`;
+      const closed=state.demoPathClosed;
+      const gateMsg=state.demoPathGateMsg||'Нельзя закрыть контакт / передачу без next action.';
+      const closeBlock=closed
+        ?`<div class="notice" style="margin-top:12px"><b>Контакт закрыт.</b> Next action: ${esc(state.demoPathNextAction)} · маршрут ${esc(route.title)}</div><button id="demoPathReopen" class="btn secondary" style="margin-top:10px">Открыть снова (демо)</button>`
+        :`<div data-atom="i44-next-action-gate" style="margin-top:14px"><div class="eyebrow">I4.4 · gate</div><h3>Закрытие контакта</h3><p class="muted">Завершение и передача блокируются, пока не указано следующее действие. Подсказка этапа/маршрута можно вставить одной кнопкой.</p><label class="check" style="display:block;margin:10px 0 6px"><span>Следующее действие *</span></label><textarea id="demoPathNextInput" class="btn secondary" style="width:100%;min-height:88px;text-align:left;font-weight:500;resize:vertical">${esc(state.demoPathNextAction)}</textarea><div class="header-actions" style="margin-top:10px"><button id="demoPathUseHint" type="button" class="btn secondary">Подставить из пути / маршрута</button><button id="demoPathClearNext" type="button" class="btn secondary">Очистить</button><button id="demoPathClose" type="button" class="btn primary">Закрыть контакт</button></div>${state.demoPathGateMsg?`<div class="card update critical" style="margin-top:10px" id="i44GateMessage"><b>Блокер</b><p>${esc(gateMsg)}</p></div>`:''}</div>`;
+      return `<div class="card action-card" data-atom="i43-demo-path-position" data-path-position="${esc(DEMO_PATH_CASE.stepId)}" style="margin-top:14px"><div class="eyebrow">I4.3 · демо-обращение</div><h3>${esc(DEMO_PATH_CASE.patient)}</h3><p>${esc(DEMO_PATH_CASE.channel)} · ${esc(route.title)} · ${esc(DEMO_PATH_CASE.need)}</p><p><b>Текущая позиция на пути:</b> ${esc(stepLabel)}</p><p class="muted">${esc(progress)} · владелец этапа: ${esc((step&&step.owner)||DEMO_PATH_CASE.owner)}</p><p><b>Следующее действие (каталог):</b> ${esc(catalogNext)}</p><p class="muted" style="margin-top:8px">Позиция демо фиксирована на ${esc(DEMO_PATH_CASE.stepId)}; маршрут услуги следует переключателю I4.2.</p>${closeBlock}</div>`;
+    }
+    function bindDemoPathCloseGate(){
+      const input=$('demoPathNextInput');
+      if(input)input.oninput=()=>{state.demoPathNextAction=input.value;state.demoPathGateMsg='';save()};
+      if($('demoPathUseHint'))$('demoPathUseHint').onclick=()=>{state.demoPathNextAction=demoPathSuggestedNext();state.demoPathGateMsg='';save();pathView()};
+      if($('demoPathClearNext'))$('demoPathClearNext').onclick=()=>{state.demoPathNextAction='';state.demoPathGateMsg='';save();pathView()};
+      if($('demoPathClose'))$('demoPathClose').onclick=()=>{
+        const next=(input?input.value:state.demoPathNextAction||'').trim();
+        if(!next){
+          state.demoPathNextAction='';
+          state.demoPathGateMsg='Нельзя закрыть контакт / передачу без next action. Укажите следующий шаг или подставьте подсказку из пути / маршрута.';
+          save();
+          pathView();
+          return;
+        }
+        state.demoPathNextAction=next;
+        state.demoPathClosed=true;
+        state.demoPathGateMsg='';
+        save();
+        pathView();
+      };
+      if($('demoPathReopen'))$('demoPathReopen').onclick=()=>{state.demoPathClosed=false;state.demoPathGateMsg='';save();pathView()};
     }
     function pathRouteSwitcherHtml(){
       const cur=currentPathRoute().id;
@@ -337,6 +377,7 @@
       if(!steps.length){
         layout('Путь пациента',`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · этапы</div><h3>Загрузка patient-path.json…</h3><p class="muted">Операционный участок: обращение → консультация / план.</p></div>${pathRouteSwitcherHtml()}${demoPathCaseHtml()}`);
         bindPathRouteSwitcher();
+        bindDemoPathCloseGate();
         return;
       }
       const focus=steps.filter(s=>Number(s.number)>=7&&Number(s.number)<=11);
@@ -350,6 +391,7 @@
         <div class="card" style="margin-top:14px"><h3>После плана</h3><div class="stack">${after.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b>${esc((s.owner||'').split('+')[0].trim()||'—')}</b></div>`).join('')}</div></div>`;
       layout('Путь пациента', body);
       bindPathRouteSwitcher();
+      bindDemoPathCloseGate();
     }
 
     function work(){
