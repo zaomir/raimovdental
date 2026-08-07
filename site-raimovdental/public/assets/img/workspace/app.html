@@ -389,6 +389,11 @@
       if(!readWhen&&$('feedbackWhenRead'))$('feedbackWhenRead').onclick=()=>{state.feedbackLessons.whenToAsk=true;save();renderFeedbackLessons();renderRight()};
       if(!readQr&&$('feedbackQrRead'))$('feedbackQrRead').onclick=()=>{state.feedbackLessons.qrPlatforms=true;save();renderFeedbackLessons();renderRight()};
     }
+    function renderSpeechMarkersBeforeCard(){
+      const wrap=$('speechMarkersBefore');
+      if(!wrap||roleKey!=='admin')return;
+      wrap.innerHTML=`<div class="card" data-atom="i111-speech-markers-before"><div class="eyebrow">I11.1 · маркеры до кресла</div><h3>Банк маркеров потребности</h3><p class="muted">Каркас из speech-markers-before.json · статус draft_pending_clinic. Слушать / уточнять — из patient-path (виниры · импланты · орто). Готовые медфразы пусты до утверждения клиники.</p><div class="header-actions" style="margin-top:12px"><a class="btn primary" href="/render/#markers">Открыть в /render/</a></div></div>`;
+    }
     function renderInternalMarketingLesson(){
       if(roleKey!=='doctor')return;
       const wrap=$('internalLesson');
@@ -408,11 +413,12 @@
     }
     function learn(){
       let qi=0,answers=[];
-      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}${roleKey==='doctor'?'<div id="internalLesson" class="stack" style="margin-top:20px"></div>':''}`);
+      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="speechMarkersBefore" class="stack" style="margin-top:20px"></div><div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}${roleKey==='doctor'?'<div id="internalLesson" class="stack" style="margin-top:20px"></div>':''}`);
       const body=$('learnBody');
       function updatesView(){
         body.innerHTML=updates.map((u,i)=>`<article class="card update ${u.critical?'critical':''}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${u.title}</h3><p>${u.copy}</p></article>`).join('')+`<button id="confirmUpdates" class="btn primary">Прочитал(а) и понял(а)</button>`;
         $('confirmUpdates').onclick=()=>{state.updateRead=true;save();quizView()};
+        renderSpeechMarkersBeforeCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
@@ -424,6 +430,7 @@
           b.classList.add('selected');
           setTimeout(()=>{qi++;if(qi<quiz.length)quizView();else finishQuiz()},180);
         });
+        renderSpeechMarkersBeforeCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
@@ -436,12 +443,14 @@
         save();
         body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Нужно ≥90% и 100% по критическим вопросам. Без pass доступ к работе ограничен.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;
         $('quizNext').onclick=()=>{if(state.testPassed){view='today';render()}else{qi=0;answers=[];updatesView()}};
+        renderSpeechMarkersBeforeCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
       function passedView(){
         body.innerHTML=`<div class="card"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, повторным касаниям и регламенту отзывов.':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];quizView()};
+        renderSpeechMarkersBeforeCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
@@ -638,7 +647,7 @@
         const n=DEMO_INBOX.filter((item)=>(state.inboxStatuses[item.id]||item.defaultStatus)===s).length;
         return `<span class="badge">${esc(s)} · ${n}</span>`;
       }).join('');
-      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. Откройте карточку — канал, потребность, источник, next action и владелец на одном экране (I1.3).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="header-actions" style="margin-top:8px">${counts}</div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p>${inquiryCardHtml()}<div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a></div></div>`;
+      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. Откройте карточку — канал, потребность, источник, next action и владелец на одном экране (I1.3).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="header-actions" style="margin-top:8px">${counts}</div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p>${inquiryCardHtml()}<div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a><a class="btn secondary" href="/render/#markers">Маркеры до кресла</a></div></div>`;
     }
     function bindInboxSla(){
       document.querySelectorAll('[data-inbox-status-select]').forEach((el)=>{

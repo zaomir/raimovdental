@@ -22,6 +22,7 @@ const required = [
   'content/patient-path.json',
   'content/admin-feedback-sop.json',
   'content/internal-marketing.json',
+  'content/speech-markers-before.json',
   'content/gaps.md',
 ];
 
@@ -78,6 +79,11 @@ for (const role of ['admin', 'doctor', 'manager', 'owner']) {
 
 assert.match(app, /\/render\/#scripts/);
 assert.match(app, /\/render\/#recontact/);
+assert.match(app, /\/render\/#markers/);
+assert.match(app, /Маркеры до кресла/);
+assert.match(app, /i111-speech-markers-before/);
+assert.match(app, /renderSpeechMarkersBeforeCard/);
+assert.match(app, /speech-markers-before\.json/);
 assert.match(app, /i54-feedback-quiz/);
 assert.match(app, /quizAdmin/);
 assert.match(app, /Отправить файл прайса и закончить диалог/);
@@ -232,6 +238,21 @@ assert.match(adminIndex, /data-quick="fear"/);
 assert.match(adminIndex, /id="openRecontact"/);
 assert.match(adminIndex, /recontact-catalog\.js/);
 assert.match(adminIndex, /id="recontactModal"/);
+assert.match(adminIndex, /id="openMarkers"/);
+assert.match(adminIndex, /speech-markers-before\.js/);
+assert.match(adminIndex, /id="markersModal"/);
+assert.match(adminIndex, /i111-speech-markers-before/);
+const markersBefore = JSON.parse(readFileSync(join(distRoot, 'content/speech-markers-before.json'), 'utf8'));
+assert.equal(markersBefore.atom, 'I11.1');
+assert.equal(markersBefore.status, 'draft_pending_clinic');
+assert.ok(Array.isArray(markersBefore.markers));
+assert.equal(markersBefore.markers.length, 3);
+assert.ok(markersBefore.markers.every((m) => m.id && m.route && m.listen_for && m.clarify_questions && m.phrase_status === 'draft_pending_clinic'));
+assert.deepEqual(markersBefore.priority_routes, ['veneers', 'implants', 'ortho']);
+const markersJs = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'speech-markers-before.js'), 'utf8');
+assert.match(markersJs, /speech-markers-before\.json/);
+assert.match(markersJs, /openMarkers/);
+assert.match(markersJs, /#markers/);
 const catalogJs = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'scripts-catalog.js'), 'utf8');
 assert.match(catalogJs, /renderDetail/);
 assert.match(catalogJs, /dont_say/);

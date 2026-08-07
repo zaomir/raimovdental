@@ -27,6 +27,7 @@ const required = [
   'content/patient-path.json',
   'content/admin-feedback-sop.json',
   'content/internal-marketing.json',
+  'content/speech-markers-before.json',
   'content/gaps.md',
 ];
 
@@ -55,6 +56,8 @@ assert.match(presentation, /noindex,nofollow,noarchive,nosnippet/);
 assert.match(app, /Демо · вход без пароля/);
 assert.match(app, /\/render\/#scripts/);
 assert.match(app, /\/render\/#recontact/);
+assert.match(app, /\/render\/#markers/);
+assert.match(app, /Маркеры до кресла/);
 assert.match(app, /i54-feedback-quiz/);
 assert.match(app, /quizAdmin/);
 assert.match(app, /Работа ограничена/);
@@ -99,5 +102,13 @@ assert.match(adminIndex, /scripts-catalog\.js/);
 assert.match(adminIndex, /id="openRecontact"/);
 assert.match(adminIndex, /recontact-catalog\.js/);
 assert.match(adminIndex, /id="recontactModal"/);
+assert.match(adminIndex, /id="openMarkers"/);
+assert.match(adminIndex, /speech-markers-before\.js/);
+assert.match(adminIndex, /id="markersModal"/);
+assert.match(adminIndex, /i111-speech-markers-before/);
+const markersJson = JSON.parse(readFileSync(join(target, 'content/speech-markers-before.json'), 'utf8'));
+assert.equal(markersJson.atom, 'I11.1');
+assert.equal(markersJson.status, 'draft_pending_clinic');
+assert.ok(Array.isArray(markersJson.markers) && markersJson.markers.length === 3);
 
 console.log('raimov-demo-assets-preserved: PASS');

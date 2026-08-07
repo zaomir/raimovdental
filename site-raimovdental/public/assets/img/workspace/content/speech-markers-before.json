@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "atom": "I11.1",
+  "status": "draft_pending_clinic",
+  "audience": "admin_before_chair",
+  "source_ref": "EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md §11 + week 3; patient-path.json routes veneers|implants|ortho; gaps.md пункт 11; internal-marketing.json transfer_standard",
+  "goal": "Администратор до кресла слышит маркеры потребности и направляет на консультацию по винирам, имплантации или ортодонтии — без диагноза и без обещания плана лечения.",
+  "priority_routes": ["veneers", "implants", "ortho"],
+  "boundaries": {
+    "do": [
+      "Услышать формулировку пациента и сопоставить с маршрутом услуги.",
+      "Уточнить факты короткими вопросами из patient-path (admin_questions).",
+      "Предложить конкретную консультацию и зафиксировать next step.",
+      "Не оставлять пациента самостоятельно искать врача."
+    ],
+    "dont": [
+      "Не ставить диагноз и не менять назначения врача.",
+      "Не обещать итог лечения, сроки или финальную цену профильного плана.",
+      "Не заполнять банк готовыми медфразами без утверждения клиники.",
+      "Не подменять консультацию узкого специалиста скриптом продажи."
+    ],
+    "source_ref": "gaps.md пункт 11 · internal-marketing.json · transfer_standard.admin_role · правила /render/"
+  },
+  "markers": [
+    {
+      "id": "MB01",
+      "route": "veneers",
+      "route_title": "Виниры",
+      "listen_for": "Не устраивает цвет, форма, сколы, старые реставрации или общая линия улыбки; страх сильной обточки и ненатурального результата.",
+      "listen_for_source_ref": "patient-path.json · routes.veneers.entry",
+      "clarify_questions": "Что именно не нравится: цвет, форма, сколы, промежутки или старые реставрации? Были ли брекеты/элайнеры? Сколько зубов беспокоит визуально? Есть ли желаемый срок?",
+      "clarify_source_ref": "patient-path.json · routes.veneers.admin_questions",
+      "patient_question": "Подойдут ли мне виниры, насколько сохранят мои зубы и будет ли результат естественным?",
+      "patient_question_source_ref": "patient-path.json · routes.veneers.question",
+      "phrase_draft": "",
+      "phrase_status": "draft_pending_clinic",
+      "dont_say_draft": "Не обещать объём обточки, итоговый вид и «идеальную улыбку» без диагностики врача.",
+      "dont_say_status": "draft_pending_clinic",
+      "next_step_draft": "Записать на консультацию по эстетике / винирам; зафиксировать потребность и next action в карточке.",
+      "next_step_status": "draft_pending_clinic",
+      "first_visit_result": "Оценка прикуса и тканей, возможные альтернативы, необходимость подготовки, ориентир объёма лечения и следующий диагностический шаг.",
+      "first_visit_result_source_ref": "patient-path.json · routes.veneers.first_visit_result"
+    },
+    {
+      "id": "MB02",
+      "route": "implants",
+      "route_title": "Имплантация",
+      "listen_for": "Нет одного или нескольких зубов; неудобный протез; зуб предстоит удалить; пациенту уже отказали или предложили разные решения.",
+      "listen_for_source_ref": "patient-path.json · routes.implants.entry",
+      "clarify_questions": "Зуб уже удалён или ещё на месте? Как давно отсутствует? Есть ли КТ/панорамный снимок? Есть ли сейчас боль или отёк? Когда удобно прийти?",
+      "clarify_source_ref": "patient-path.json · routes.implants.admin_questions",
+      "patient_question": "Можно ли восстановить зуб надёжно, сколько этапов и не появятся ли неожиданные расходы?",
+      "patient_question_source_ref": "patient-path.json · routes.implants.question",
+      "phrase_draft": "",
+      "phrase_status": "draft_pending_clinic",
+      "dont_say_draft": "Не выбирать систему импланта и не обещать бюджет / сроки без консультации хирурга-имплантолога.",
+      "dont_say_status": "draft_pending_clinic",
+      "next_step_draft": "Записать на консультацию по восстановлению зуба / имплантации; зафиксировать потребность и next action в карточке.",
+      "next_step_status": "draft_pending_clinic",
+      "first_visit_result": "Предварительный диагноз, варианты восстановления, необходимые исследования, последовательность этапов и ориентир бюджета.",
+      "first_visit_result_source_ref": "patient-path.json · routes.implants.first_visit_result"
+    },
+    {
+      "id": "MB03",
+      "route": "ortho",
+      "route_title": "Ортодонтия",
+      "listen_for": "Неровные зубы, неправильный прикус, повторное лечение после брекетов, щелчки/дискомфорт ВНЧС, выбор между брекетами и элайнерами.",
+      "listen_for_source_ref": "patient-path.json · routes.ortho.entry",
+      "clarify_questions": "Взрослый пациент или ребёнок? Что беспокоит сильнее всего? Было ли лечение раньше? Есть ли щелчки, напряжение или боль в суставе? Есть ли снимки?",
+      "clarify_source_ref": "patient-path.json · routes.ortho.admin_questions",
+      "patient_question": "Какой метод подходит мне, сколько займёт лечение и не ухудшится ли функция сустава?",
+      "patient_question_source_ref": "patient-path.json · routes.ortho.question",
+      "phrase_draft": "",
+      "phrase_status": "draft_pending_clinic",
+      "dont_say_draft": "Не назначать аппарат и не обещать срок выравнивания без ортодонта / гнатолога.",
+      "dont_say_status": "draft_pending_clinic",
+      "next_step_draft": "Записать на ортодонтическую / гнатологическую консультацию; зафиксировать потребность и next action в карточке.",
+      "next_step_status": "draft_pending_clinic",
+      "first_visit_result": "Диагностическая гипотеза, список исследований, возможные аппараты/системы, этапность и ориентир следующего решения.",
+      "first_visit_result_source_ref": "patient-path.json · routes.ortho.first_visit_result"
+    }
+  ],
+  "approval": {
+    "required_from": ["Атабек / главврач", "управляющий (операционный журнал)"],
+    "note": "Готовые речевые формулировки (phrase_draft) пусты до утверждения клиники. Слушать / уточнять — только из patient-path.json."
+  }
+}

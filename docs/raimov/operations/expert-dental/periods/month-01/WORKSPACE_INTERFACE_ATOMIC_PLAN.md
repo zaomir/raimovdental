@@ -58,7 +58,7 @@ canon:
 | I10.3 | 10 | ✅ | урок врача · `i103-internal-lesson` · «Прочитал» · commit `243cbc6d0` · prod |
 | I10.4 | 10 | ✅ | «Предложить консультацию узкого» · `i104-propose-consult` · список передач · commit `19facf3ca` · prod |
 | I10.5 | 10 | ✅ | контроль создано/принято/потеряно · `i105-referral-metrics` · commit `a4169f73d` · prod |
-| I11.1 | 11 | ⬜ | — |
+| I11.1 | 11 | ✅ | `speech-markers-before.json` + `/render/` UI · `i111-speech-markers-before` · commit `f5ea48992` · prod |
 | I11.2 | 11 | ⬜ | — |
 | I11.3 | 11 | ⬜ | — |
 | I11.4 | 11 | ⬜ | — |
