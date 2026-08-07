@@ -394,9 +394,18 @@
       bindDemoPathCloseGate();
     }
 
+    const DEMO_INBOX=[
+      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор'},
+      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор'},
+      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор'}
+    ];
+    function inboxListHtml(){
+      const rows=DEMO_INBOX.map((item)=>`<article class="task" data-inbox-id="${esc(item.id)}" data-inbox-channel="${esc(item.channelKey)}"><span><b>${esc(item.patient)}</b><br><span class="muted">${esc(item.need)}</span><br><span class="muted">${esc(item.at)} · ${esc(item.owner)}</span></span><b>${esc(item.channel)}</b></article>`).join('');
+      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. Закрытые контакты и возврат упущенных — в журнале /render/ (I7.5).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p><div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a></div></div>`;
+    }
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
-      const admin=`<div class="grid"><div class="card"><h3>Входящие обращения</h3><div class="metric">4</div><p class="muted">1 срочное · 2 записи · 1 вопрос по стоимости</p><a class="btn primary" href="/render/">Открыть модуль обращений</a><a class="btn secondary" href="/render/#scripts" style="margin-top:10px">Открыть скрипты</a><a class="btn secondary" href="/render/#recontact" style="margin-top:10px">Повторные касания</a></div><div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
+      const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал I7.5: фильтр «Пропущен / без результата» и «Вернуть в работу».</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
       const doctor=`<div class="grid"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button class="btn primary">Принять дежурство</button></div></div>`;
       const manager=managerTeamHtml();
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;

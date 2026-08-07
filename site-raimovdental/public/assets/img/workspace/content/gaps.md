@@ -76,4 +76,6 @@
 
 **UI progress (пункт 4):** I4.1–I4.4 ✅ · пункт 4 UI DoD закрыт по атомам.
 
-**Next execute:** I1.1 — единый inbox обращений (звонок / WhatsApp / форма).
+**UI progress (пункт 1):** I1.1 ✅ · единый inbox (звонок / WhatsApp / форма) · next I1.2 SLA-статусы.
+
+**Next execute:** I1.2 — статусы SLA на карточке и в списке inbox.

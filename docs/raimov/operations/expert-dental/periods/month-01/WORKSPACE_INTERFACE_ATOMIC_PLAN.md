@@ -49,7 +49,7 @@ canon:
 | I4.2 | 4 | ✅ | route switch veneers\|implants\|ortho · `i42-route-switch` · commit `d48516f7f` · prod |
 | I4.3 | 4 | ✅ | демо-кейс позиция P08 · `i43-demo-path-position` · commit `bf51bde2a` · prod |
 | I4.4 | 4 | ✅ | gate next action · `i44-next-action-gate` · commit `f8d3a0e5c` · prod |
-| I1.1 | 1 | ⬜ | — |
+| I1.1 | 1 | ✅ | единый inbox · `i11-unified-inbox` · каналы звонок/WhatsApp/форма · commit `ac0bd82ab` · prod |
 | I1.2 | 1 | ⬜ | — |
 | I1.3 | 1 | ⬜ | — |
 | I1.4 | 1 | ⬜ | — |
