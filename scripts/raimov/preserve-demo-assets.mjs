@@ -26,6 +26,7 @@ const required = [
   'content/recontact-9.json',
   'content/patient-path.json',
   'content/admin-feedback-sop.json',
+  'content/internal-marketing.json',
   'content/gaps.md',
 ];
 

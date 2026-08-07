@@ -21,6 +21,7 @@ const required = [
   'content/recontact-9.json',
   'content/patient-path.json',
   'content/admin-feedback-sop.json',
+  'content/internal-marketing.json',
   'content/gaps.md',
 ];
 
@@ -177,6 +178,15 @@ assert.ok(patientPath.routes && patientPath.routes.veneers && patientPath.routes
 assert.ok(patientPath.routes.veneers.admin_questions);
 assert.ok(patientPath.routes.implants.first_visit_result);
 assert.ok(patientPath.routes.ortho.page_logic);
+const internalMarketing = JSON.parse(readFileSync(join(distRoot, 'content/internal-marketing.json'), 'utf8'));
+assert.equal(internalMarketing.atom, 'I10.1');
+assert.equal(internalMarketing.status, 'draft_pending_clinic');
+assert.ok(Array.isArray(internalMarketing.roles));
+assert.equal(internalMarketing.roles.length, 2);
+assert.ok(internalMarketing.roles.every((role) => role.id && role.title && Array.isArray(role.when_to_refer) && role.when_to_refer.length === 3));
+assert.deepEqual(internalMarketing.priority_routes, ['veneers', 'implants', 'ortho']);
+assert.ok(internalMarketing.boundaries && Array.isArray(internalMarketing.boundaries.dont));
+assert.ok(internalMarketing.lesson && internalMarketing.lesson.status === 'draft_pending_clinic');
 const scripts = JSON.parse(readFileSync(join(distRoot, 'content/scripts-25.json'), 'utf8'));
 assert.equal(scripts.length, 25);
 const adminIndex = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'index.html'), 'utf8');
