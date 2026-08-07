@@ -14,9 +14,8 @@
 
 ## Access
 
-- `noindex` + basic auth on origin nginx
-- Credentials: same family as Stage A preview (`/etc/nginx/.htpasswd-raimsmile`, mirrored from stage-a unless rotated)
-- Cloudflare may still proxy; origin enforces auth
+- `noindex` on origin (not indexed; still open by direct link)
+- No basic auth
 
 ## Deploy
 
