@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
+  <title>Презентация для Атабека · Рабочая система Expert Dental</title>
+  <style>
+    :root{
+      --bg:#e8ebe7;--surface:#fff;--ink:#17322d;--muted:#5f716c;--line:#d5ddd8;
+      --brand:#174d43;--brand2:#2b7667;--mint:#e8f2ee;--sand:#f4efe6;--warn:#fff7df;--warn-ink:#705300;
+      --shadow:0 22px 60px rgba(23,50,45,.12);--max:1120px;
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:
+      radial-gradient(circle at 8% 0%,#fff 0,transparent 30%),
+      radial-gradient(circle at 92% 8%,#d7e8e1 0,transparent 26%),var(--bg);color:var(--ink);line-height:1.5}
+    a{color:inherit}img{max-width:100%;display:block;height:auto}
+    .wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto;padding:22px 0 80px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 26px;position:sticky;top:0;z-index:4;background:linear-gradient(180deg,rgba(232,235,231,.96),rgba(232,235,231,.88) 70%,transparent);backdrop-filter:blur(10px)}
+    .brand{display:flex;align-items:center;gap:12px}.mark{width:46px;height:46px;border-radius:14px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:0 12px 28px rgba(23,77,67,.22)}
+    .brand small{display:block;color:var(--muted);margin-top:2px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.8);font-size:12px;font-weight:800}
+    .dot{width:8px;height:8px;border-radius:50%;background:#2b8b63;box-shadow:0 0 0 5px rgba(43,139,99,.12)}
+    .slide{margin:0 0 28px;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(22px,4vw,40px);box-shadow:var(--shadow)}
+    .slide.hero{background:linear-gradient(135deg,#153e37,#225f53);color:#fff;border:0;position:relative;overflow:hidden}
+    .slide.hero:after{content:"";position:absolute;right:-80px;top:-100px;width:320px;height:320px;border-radius:50%;border:70px solid rgba(255,255,255,.05)}
+    .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:850;opacity:.72;margin:0 0 10px}
+    h1{font-size:clamp(32px,5vw,56px);line-height:.98;letter-spacing:-.04em;margin:0 0 16px;max-width:16ch}
+    h2{font-size:clamp(24px,3.2vw,34px);letter-spacing:-.03em;margin:0 0 12px}
+    h3{font-size:20px;margin:0 0 8px;letter-spacing:-.02em}
+    .lede{font-size:18px;line-height:1.55;max-width:58ch;margin:0;color:#dbe9e5}
+    .muted{color:var(--muted)}.ink-lede{font-size:17px;max-width:60ch;margin:0 0 18px;color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+    .chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:13px;font-weight:750}
+    .grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .card{border:1px solid var(--line);border-radius:18px;padding:16px 18px;background:#fbfcfb}
+    .card strong{display:block;margin-bottom:6px}
+    .shot{border-radius:18px;border:1px solid var(--line);overflow:hidden;background:#f3f5f3;box-shadow:0 14px 36px rgba(23,50,45,.08)}
+    .shot figcaption{padding:12px 14px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);background:#fff}
+    .flow{display:grid;gap:10px;margin:18px 0 0}
+    .flow-item{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;padding:12px;border-radius:16px;background:var(--mint)}
+    .flow-item b{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--brand);color:#fff}
+    .flow-item p{margin:4px 0 0;color:var(--muted);font-size:14px}
+    .list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+    .list li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+    .check{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mint);color:var(--brand);font-weight:900}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 16px;border-radius:14px;text-decoration:none;font-weight:850;border:1px solid transparent}
+    .btn.primary{background:var(--brand);color:#fff}.btn.ghost{background:#eef2ef;border-color:var(--line)}
+    .btn.on-dark{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.18);color:#fff}
+    .note{margin-top:18px;padding:14px 16px;border-radius:16px;background:var(--warn);color:var(--warn-ink);font-size:14px;line-height:1.5}
+    .toc a{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:750}
+    .toc a:last-child{border:0}.toc span{color:var(--muted);font-weight:650;font-size:13px}
+    .quote{padding:20px;border-radius:18px;background:var(--brand);color:#fff;font-size:17px;line-height:1.55}
+    .quote strong{display:block;margin-bottom:8px;opacity:.8;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
+    .role-tag{display:inline-block;font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--brand2);margin-bottom:8px}
+    @media(max-width:860px){
+      .wrap{width:min(100% - 20px,var(--max))}.top{position:static}.pill{display:none}
+      .grid2,.grid3,.grid4{grid-template-columns:1fr}.slide{border-radius:22px;padding:22px}
+      h1{max-width:none}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="mark">ED</div>
+        <div>
+          <strong>Expert Dental Studio</strong>
+          <small>Презентация для Атабека Раимова</small>
+        </div>
+      </div>
+      <div class="pill"><span class="dot"></span>raimovdental.com · noindex</div>
+    </header>
+
+    <section class="slide hero" id="start">
+      <p class="eyebrow">Промежуточный результат · рабочая система клиники</p>
+      <h1>Что уже сделано для вашей клиники</h1>
+      <p class="lede">Единый демонстрационный контур для администратора, врача, управляющего и руководителя: обучение, допуск, смена, обращения и передача ответственности — в одном процессе.</p>
+      <div class="chips">
+        <span class="chip">4 роли</span>
+        <span class="chip">Скриншоты с боевого демо</span>
+        <span class="chip">Без реальных данных пациентов</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn on-dark" href="../">Открыть живые интерфейсы</a>
+        <a class="btn on-dark" href="/render/">Открыть модуль обращений</a>
+      </div>
+    </section>
+
+    <section class="slide" id="toc">
+      <p class="role-tag">Содержание</p>
+      <h2>Как устроена презентация</h2>
+      <p class="ink-lede">Сначала смысл и результат, затем экраны по ролям, затем границы этапа и ссылки для самостоятельной проверки.</p>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#result">Что это даёт клинике <span>результат</span></a>
+        <a href="#flow">Обязательный процесс <span>логика</span></a>
+        <a href="#hub">Стартовая страница ролей <span>скриншот</span></a>
+        <a href="#admin">Администратор <span>обучение · смена · обращения</span></a>
+        <a href="#render">Модуль звонка <span>/render/</span></a>
+        <a href="#doctor">Врач <span>принятие ответственности</span></a>
+        <a href="#manager">Управляющий <span>команда и допуски</span></a>
+        <a href="#owner">Руководитель <span>сводка и риски</span></a>
+        <a href="#limits">Границы этапа <span>что дальше</span></a>
+        <a href="#links">Живые ссылки <span>проверить самому</span></a>
+      </nav>
+    </section>
+
+    <section class="slide" id="result">
+      <p class="role-tag">Результат</p>
+      <h2>Каких результатов можно добиться этой системой</h2>
+      <p class="ink-lede">Это не отчёт «для галочки» и не CRM. Это рабочий контур, который ведёт сотрудника по обязательному процессу и показывает руководителю, где есть риск или незакрытая ответственность.</p>
+      <div class="grid3">
+        <div class="card"><strong>Единый стандарт смены</strong><span class="muted">Сотрудник не начинает работу, пока не прошёл обновления, тест и принятие передачи.</span></div>
+        <div class="card"><strong>Явная ответственность</strong><span class="muted">Обращение считается переданным врачу только после кнопки «Принять обращение».</span></div>
+        <div class="card"><strong>Контроль без ручного надзора</strong><span class="muted">Управляющий и владелец видят просроченные допуски, срочные задачи и состояние клиники.</span></div>
+        <div class="card"><strong>Скрипты администратора</strong><span class="muted">Новичок ведёт звонок по этапам: контакт → потребность → следующий шаг → фиксация.</span></div>
+        <div class="card"><strong>Безопасные границы</strong><span class="muted">Правила «не ставим диагноз» и маршрутизация красных флагов встроены в процесс.</span></div>
+        <div class="card"><strong>Готовность к внедрению</strong><span class="muted">Логика и интерфейсы готовы к обсуждению; CRM, телефония и серверные пароли — следующий этап.</span></div>
+      </div>
+      <div class="note"><strong>Честно:</strong> сейчас это демонстрационный MVP. Он показывает управляемую логику и интерфейсы. Рост записей и выручки зависит от внедрения в ежедневную работу клиники, а не от факта наличия прототипа.</div>
+    </section>
+
+    <section class="slide" id="flow">
+      <div class="grid2">
+        <div>
+          <p class="role-tag">Правило продукта</p>
+          <h2>Одна система.<br>Одно следующее действие.</h2>
+          <p class="ink-lede">Обязательный поток для каждой роли. Пока шаг не выполнен — доступ к работе ограничен.</p>
+          <div class="flow">
+            <div class="flow-item"><b>1</b><div><h3>Обновления</h3><p>Обязательные изменения в стандартах и маршрутизации.</p></div></div>
+            <div class="flow-item"><b>2</b><div><h3>Обучение и тест</h3><p>Проходной балл 90%, критические вопросы — 100%.</p></div></div>
+            <div class="flow-item"><b>3</b><div><h3>Принятие смены</h3><p>Открытые задачи получают владельца и срок.</p></div></div>
+            <div class="flow-item"><b>4</b><div><h3>Работа</h3><p>Обращения, маршрутизация, дежурство, контроль команды.</p></div></div>
+            <div class="flow-item"><b>5</b><div><h3>Передача и завершение</h3><p>Смена закрывается только с назначенной ответственностью.</p></div></div>
+          </div>
+        </div>
+        <aside>
+          <div class="quote">
+            <strong>Фраза для открытия</strong>
+            Мы собрали первый рабочий контур системы, которая не просто хранит инструкции, а ведёт каждого сотрудника по обязательному процессу и показывает руководителю, где есть риск или незакрытая ответственность.
+          </div>
+          <ul class="list" style="margin-top:16px">
+            <li><span class="check">✓</span><span><strong>Уже сделано:</strong> 4 ролевых интерфейса и единая логика смены.</span></li>
+            <li><span class="check">✓</span><span><strong>Уже сделано:</strong> обновления, тестирование, допуски и маршрутизация.</span></li>
+            <li><span class="check">✓</span><span><strong>Уже сделано:</strong> детальный модуль звонка администратора со скриптами.</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="slide" id="hub">
+      <p class="role-tag">Экран 01 · хаб</p>
+      <h2>Стартовая страница: четыре рабочих уровня</h2>
+      <p class="ink-lede">Владелец сразу видит всю систему целиком: администратор, врач, управляющий, руководитель клиники.</p>
+      <figure class="shot">
+        <img src="shots/01-hub.png" width="1800" height="1125" alt="Сводная страница ролей Expert Dental Workspace" loading="lazy">
+        <figcaption>Живой экран: <a href="../">/assets/img/workspace/</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="slide" id="admin">
+      <p class="role-tag">Экран 02–05 · администратор</p>
+      <h2>Администратор — самая проработанная роль</h2>
+      <p class="ink-lede">Главное действие дня, обязательное обучение, принятие смены и вход в модуль обращений.</p>
+      <div class="grid4" style="margin-bottom:16px">
+        <figure class="shot">
+          <img src="shots/02-admin-today.png" width="1800" height="1125" alt="Администратор: экран Сегодня" loading="lazy">
+          <figcaption>«Сегодня» — одно главное следующее действие</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="shots/03-admin-learn.png" width="1800" height="1125" alt="Администратор: обучение и обновления" loading="lazy">
+          <figcaption>«Обучение» — обязательные обновления и тест</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="shots/04-admin-shift.png" width="1800" height="1125" alt="Администратор: управление сменой" loading="lazy">
+          <figcaption>«Смена» — принять передачу и начать работу</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="shots/05-admin-work.png" width="1800" height="1125" alt="Администратор: обращения" loading="lazy">
+          <figcaption>«Обращения» — вход в модуль /render/</figcaption>
+        </figure>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary" href="../admin/">Открыть интерфейс администратора</a>
+      </div>
+    </section>
+
+    <section class="slide" id="render">
+      <p class="role-tag">Экран 06 · модуль звонка</p>
+      <h2>Пошаговый стандарт входящего обращения</h2>
+      <p class="ink-lede">Таймер звонка, этапы разговора, быстрые медицинские сценарии, подсказки новичку, карточка звонка и очередь передачи смены.</p>
+      <figure class="shot">
+        <img src="shots/06-render-call.png" width="1800" height="1125" alt="Рендер администратора: сценарий входящего звонка" loading="lazy">
+        <figcaption>Живой экран: <a href="/render/">/render/</a> · скрипты, журнал, передача врачу</figcaption>
+      </figure>
+      <div class="grid3" style="margin-top:16px">
+        <div class="card"><strong>6 этапов звонка</strong><span class="muted">Контакт → идентификация → потребность → уточнение → следующий шаг → фиксация.</span></div>
+        <div class="card"><strong>Быстрые сценарии</strong><span class="muted">Кровь/отёк, острая боль, пломба, брекеты, стоимость, запись.</span></div>
+        <div class="card"><strong>Три правила</strong><span class="muted">Не ставим диагноз · всегда следующий шаг · фиксируем важное.</span></div>
+      </div>
+    </section>
+
+    <section class="slide" id="doctor">
+      <p class="role-tag">Экран 07 · врач</p>
+      <h2>Врач принимает медицинскую ответственность явно</h2>
+      <p class="ink-lede">Обращение не «уходит врачу само». Пока врач не нажал «Принять обращение», ответственность остаётся на передающей стороне.</p>
+      <figure class="shot">
+        <img src="shots/07-doctor-work.png" width="1800" height="1125" alt="Интерфейс врача: принятие обращения и дежурство" loading="lazy">
+        <figcaption>Живой экран: <a href="../doctor/">/workspace/doctor/</a> · принятие обращения и дежурства</figcaption>
+      </figure>
+      <div class="cta-row">
+        <a class="btn primary" href="../doctor/">Открыть интерфейс врача</a>
+      </div>
+    </section>
+
+    <section class="slide" id="manager">
+      <p class="role-tag">Экран 08 · управляющий</p>
+      <h2>Управляющий видит команду и качество допуска</h2>
+      <p class="ink-lede">Кто в работе, у кого просрочен тест, какой процент обучения пройден, кому назначить пересдачу.</p>
+      <figure class="shot">
+        <img src="shots/08-manager-team.png" width="1800" height="1125" alt="Интерфейс управляющего: команда и обучение" loading="lazy">
+        <figcaption>Живой экран: <a href="../manager/">/workspace/manager/</a></figcaption>
+      </figure>
+      <div class="cta-row">
+        <a class="btn primary" href="../manager/">Открыть интерфейс управляющего</a>
+      </div>
+    </section>
+
+    <section class="slide" id="owner">
+      <p class="role-tag">Экран 09 · руководитель клиники</p>
+      <h2>Владелец получает сводку без ручного контроля</h2>
+      <p class="ink-lede">Состояние клиники, обращения без владельца, срочные случаи, среднее время принятия — на одном экране.</p>
+      <figure class="shot">
+        <img src="shots/09-owner-summary.png" width="1800" height="1125" alt="Интерфейс руководителя клиники: сводка и стандарты" loading="lazy">
+        <figcaption>Живой экран: <a href="../owner/">/workspace/owner/</a></figcaption>
+      </figure>
+      <div class="cta-row">
+        <a class="btn primary" href="../owner/">Открыть интерфейс руководителя</a>
+      </div>
+    </section>
+
+    <section class="slide" id="limits">
+      <p class="role-tag">Границы этапа</p>
+      <h2>Что уже можно обсуждать и что будет дальше</h2>
+      <div class="grid2">
+        <div>
+          <h3>Сейчас (MVP-демо)</h3>
+          <ul class="list" style="margin-top:12px">
+            <li><span class="check">✓</span><span>Ролевые интерфейсы и обязательный поток смены</span></li>
+            <li><span class="check">✓</span><span>Обучение, тест, допуски</span></li>
+            <li><span class="check">✓</span><span>Скрипты и маршрутизация обращений</span></li>
+            <li><span class="check">✓</span><span>Мобильное отображение</span></li>
+            <li><span class="check">✓</span><span>Демонстрационные данные, без CRM</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Следующий этап внедрения</h3>
+          <ul class="list" style="margin-top:12px">
+            <li><span class="check">→</span><span>Серверная авторизация сотрудников</span></li>
+            <li><span class="check">→</span><span>Подключение CRM и журнала клиники</span></li>
+            <li><span class="check">→</span><span>Телефония / реальные очереди звонков</span></li>
+            <li><span class="check">→</span><span>Список сотрудников и роли в проде</span></li>
+            <li><span class="check">→</span><span>Утверждение показателей на главном экране владельца</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><strong>Что полезно подтвердить на встрече:</strong> роли, порядок передачи обращений, обязательные показатели на экране руководителя и перечень сотрудников для пилота.</div>
+    </section>
+
+    <section class="slide" id="links">
+      <p class="role-tag">Проверить самому</p>
+      <h2>Живые ссылки на raimovdental.com</h2>
+      <p class="ink-lede">Все маршруты открыты для демонстрации, помечены noindex и не используют реальные данные пациентов.</p>
+      <div class="grid2">
+        <div class="card">
+          <strong>Эта презентация</strong>
+          <span class="muted"><a href="https://raimovdental.com/assets/img/workspace/presentation/">https://raimovdental.com/assets/img/workspace/presentation/</a></span>
+        </div>
+        <div class="card">
+          <strong>Хаб всех ролей</strong>
+          <span class="muted"><a href="https://raimovdental.com/assets/img/workspace/">https://raimovdental.com/assets/img/workspace/</a></span>
+        </div>
+        <div class="card">
+          <strong>Администратор</strong>
+          <span class="muted"><a href="https://raimovdental.com/assets/img/workspace/admin/">…/workspace/admin/</a></span>
+        </div>
+        <div class="card">
+          <strong>Врач</strong>
+          <span class="muted"><a href="https://raimovdental.com/assets/img/workspace/doctor/">…/workspace/doctor/</a></span>
+        </div>
+        <div class="card">
+          <strong>Управляющий</strong>
+          <span class="muted"><a href="https://raimovdental.com/assets/img/workspace/manager/">…/workspace/manager/</a></span>
+        </div>
+        <div class="card">
+          <strong>Руководитель</strong>
+          <span class="muted"><a href="https://raimovdental.com/assets/img/workspace/owner/">…/workspace/owner/</a></span>
+        </div>
+        <div class="card">
+          <strong>Модуль обращений</strong>
+          <span class="muted"><a href="https://raimovdental.com/render/">https://raimovdental.com/render/</a></span>
+        </div>
+        <div class="card">
+          <strong>Канон продукта</strong>
+          <span class="muted">docs/ssot/EXPERT_DENTAL_WORKSPACE_MVP.md</span>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary" href="../">Перейти к живым интерфейсам</a>
+        <a class="btn ghost" href="#start">Наверх</a>
+      </div>
+    </section>
+
+    <p class="footer">Expert Dental Studio · демонстрационная презентация для Атабека Раимова · без реальных данных пациентов · noindex</p>
+  </div>
+</body>
+</html>

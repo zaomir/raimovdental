@@ -8,6 +8,14 @@ last_updated: 2026-08-07
 
 # Журнал изменений
 
+## 2026-08-07 — презентация рабочей системы для Атабека
+
+- HTML-презентация со скриншотами 4 ролей и модуля `/render/`:
+  `https://raimovdental.com/assets/img/workspace/presentation/`
+- Материал: ED-MAT-059 · ссылка: ED-LINK-036.
+- Хаб интерфейсов получил кнопку перехода к презентации.
+- Канон: `docs/ssot/EXPERT_DENTAL_WORKSPACE_MVP.md`.
+
 ## 2026-08-07 — Care 12 publication boundary и homepage v2 (DEC-800)
 
 - Care 12 получил статус `clinic_confirmed_public`: Adult 9 900, Family 7 900, Kids 5 500 сом.

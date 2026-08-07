@@ -66,6 +66,7 @@ branch: main
 | Поверхность | Production URL | Назначение |
 |---|---|---|
 | Стартовая презентационная страница | `https://raimovdental.com/assets/img/workspace/` | Карточки ролей и инструкция по презентации владельцу |
+| Презентация для Атабека (со скриншотами) | `https://raimovdental.com/assets/img/workspace/presentation/` | Функционал, результаты, скриншоты 4 ролей + `/render/` |
 | Общий ролевой runtime | `https://raimovdental.com/assets/img/workspace/app.html` | Общий интерфейс, загружаемый ролевыми оболочками |
 | Администратор | `https://raimovdental.com/assets/img/workspace/admin/` | Обращения, обучение, смена и маршрутизация |
 | Врач | `https://raimovdental.com/assets/img/workspace/doctor/` | Принятие обращения, медицинские задачи и дежурство |

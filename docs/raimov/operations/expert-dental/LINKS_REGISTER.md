@@ -76,6 +76,7 @@ id_prefix: ED-LINK
 | ED-LINK-020 | Управляющий | `https://raimovdental.com/assets/img/workspace/manager/` | Production route | ED-MAT-030 | Предварительная роль |
 | ED-LINK-021 | Владелец | `https://raimovdental.com/assets/img/workspace/owner/` | Production route | ED-MAT-031 | Предварительная роль |
 | ED-LINK-022 | Детальный render администратора | `https://raimovdental.com/render/` | Production route | ED-MAT-032 | Обучение, тесты и скрипты |
+| ED-LINK-036 | Презентация для Атабека (workspace) | `https://raimovdental.com/assets/img/workspace/presentation/` | Production route | ED-MAT-059 | Скриншоты + функционал + результаты |
 
 ## Стратегические и исторические страницы
 
@@ -94,4 +95,4 @@ id_prefix: ED-LINK
 
 ## Следующий свободный ID
 
-Следующая ссылка: `ED-LINK-036`.
+Следующая ссылка: `ED-LINK-037`.

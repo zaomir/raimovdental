@@ -5,7 +5,19 @@ import { join } from 'node:path';
 
 const sourceRoot = join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'workspace');
 const distRoot = join(process.cwd(), 'site-raimovdental', 'dist', 'assets', 'img', 'workspace');
-const required = ['index.html', 'app.html', 'admin/index.html', 'doctor/index.html', 'manager/index.html', 'owner/index.html', 'motion.css', 'motion.js'];
+const required = [
+  'index.html',
+  'app.html',
+  'admin/index.html',
+  'doctor/index.html',
+  'manager/index.html',
+  'owner/index.html',
+  'motion.css',
+  'motion.js',
+  'presentation/index.html',
+  'presentation/shots/01-hub.png',
+  'presentation/shots/09-owner-summary.png',
+];
 
 for (const relative of required) {
   assert.ok(existsSync(join(sourceRoot, relative)), `missing workspace source: ${relative}`);
@@ -18,11 +30,22 @@ for (const token of [
   'Одна система.',
   'Интерфейсы по ролям',
   'Как презентовать владельцу',
+  'Презентация для Атабека',
   'Администратор',
   'Врач',
   'Управляющий',
   'Руководитель клиники',
 ]) assert.match(hub, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+
+const presentation = readFileSync(join(distRoot, 'presentation/index.html'), 'utf8');
+for (const token of [
+  'Что уже сделано для вашей клиники',
+  'Каких результатов можно добиться',
+  'shots/01-hub.png',
+  'shots/06-render-call.png',
+  'shots/09-owner-summary.png',
+  'noindex,nofollow,noarchive,nosnippet',
+]) assert.match(presentation, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
 for (const token of [
   'Рабочая система',

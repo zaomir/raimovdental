@@ -85,6 +85,7 @@ id_prefix: ED-MAT
 | ED-MAT-030 | Role interface | Интерфейс управляющего | Дополнительная работа | Preliminary | `site-raimovdental/public/assets/img/workspace/manager/` | `https://raimovdental.com/assets/img/workspace/manager/` | Предварительная версия |
 | ED-MAT-031 | Role interface | Интерфейс владельца | Дополнительная работа | Preliminary | `site-raimovdental/public/assets/img/workspace/owner/` | `https://raimovdental.com/assets/img/workspace/owner/` | Предварительная версия |
 | ED-MAT-032 | Admin render | Детальный прототип администратора | Дополнительная работа / 7 | Live prototype | `site-raimovdental/public/assets/img/admin/` | `https://raimovdental.com/render/` | Инструкции, обучение, тестирование и скрипты |
+| ED-MAT-059 | Owner presentation | Презентация рабочей системы для Атабека | Дополнительная работа / 7, 10, 11 | Live prototype | `site-raimovdental/public/assets/img/workspace/presentation/` | `https://raimovdental.com/assets/img/workspace/presentation/` | Скриншоты ролей + результаты + живые ссылки |
 
 ## Результаты и материалы репутации
 
@@ -123,8 +124,8 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-059`;
-- следующая ссылка: `ED-LINK-034`;
+- следующий материал: `ED-MAT-060`;
+- следующая ссылка: `ED-LINK-037`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;
 - индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок.

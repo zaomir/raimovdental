@@ -19,6 +19,9 @@ const required = [
   'owner/index.html',
   'motion.css',
   'motion.js',
+  'presentation/index.html',
+  'presentation/shots/01-hub.png',
+  'presentation/shots/09-owner-summary.png',
 ];
 
 assert.ok(existsSync(join(site, 'dist')), 'RAIMOV dist must exist before preserving demo assets');
@@ -37,6 +40,12 @@ const hub = readFileSync(join(target, 'index.html'), 'utf8');
 const app = readFileSync(join(target, 'app.html'), 'utf8');
 assert.match(hub, /Как презентовать владельцу/);
 assert.match(hub, /Интерфейсы по ролям/);
+assert.match(hub, /presentation\//);
+assert.match(hub, /Презентация для Атабека/);
+const presentation = readFileSync(join(target, 'presentation/index.html'), 'utf8');
+assert.match(presentation, /Что уже сделано для вашей клиники/);
+assert.match(presentation, /shots\/06-render-call\.png/);
+assert.match(presentation, /noindex,nofollow,noarchive,nosnippet/);
 assert.match(app, /Демо · вход без пароля/);
 assert.doesNotMatch(app, /type=["']password["']/i);
 assert.doesNotMatch(app, /pass\s*:/i);
