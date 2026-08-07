@@ -49,14 +49,18 @@
     const roleKey=Object.keys(roles).find(k=>path.includes('/'+k+'/'))||'admin';
     const role=roles[roleKey];
     const key='ed-workspace-'+roleKey;
-    const QUIZ_VERSION=roleKey==='admin'?'i76-scripts-recontact':'base-v1';
+    const QUIZ_VERSION=roleKey==='admin'?'i54-feedback-quiz':'base-v1';
     const FEEDBACK_SOP_URL='content/admin-feedback-sop.json';
     let feedbackSop=null;
-    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false};
+    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false,feedbackTeamDemo:{bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}},feedbackRetakeNotice:''};
     if(!state.feedbackLessons)state.feedbackLessons={whenToAsk:false,qrPlatforms:false};
     if(typeof state.feedbackLessons.qrPlatforms!=='boolean')state.feedbackLessons.qrPlatforms=false;
     if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
     if(typeof state.postVisitOpen!=='boolean')state.postVisitOpen=false;
+    if(roleKey==='manager'){
+      if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
+      if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
+    }
     if(state.quizVersion!==QUIZ_VERSION){
       state.updateRead=false;
       state.testPassed=false;
@@ -90,6 +94,73 @@
       const status=prog.complete?'<p class="status-ok" style="margin-top:12px">✓ Чеклист выполнен</p>':prog.done>0?`<p class="status-warn" style="margin-top:12px">${prog.done} из ${prog.total} шагов</p>`:'';
       return `<div class="card action-card" data-atom="i53-post-visit"><div class="eyebrow">После визита · демо</div><h3>Визит состоялся</h3><p><b>${esc(demo.patient)}</b><br>${esc(demo.service)} · ${esc(demo.doctor)}</p><p class="muted">Обязательное действие после завершённого визита — пройти чеклист запроса отзыва по регламенту.</p>${status}${btn}${checklist}</div>`;
     }
+    const FEEDBACK_TEAM=[
+      {id:'aizhan',name:'Администратор Айжан',shift:'В работе',shiftClass:'status-ok',liveAdmin:true},
+      {id:'bermet',name:'Администратор Бермет',shift:'Смена закрыта',shiftClass:'muted'},
+      {id:'sezim',name:'Администратор Сезим',shift:'В работе',shiftClass:'status-ok'},
+      {id:'nurlan',name:'Администратор Нурлан',shift:'Тест просрочен',shiftClass:'status-warn'}
+    ];
+    function readLiveAdminFeedback(){
+      try{
+        const s=JSON.parse(localStorage.getItem('ed-workspace-admin')||'null');
+        if(!s||!s.feedbackLessons)return {whenToAsk:false,qrPlatforms:false};
+        return {whenToAsk:!!s.feedbackLessons.whenToAsk,qrPlatforms:!!s.feedbackLessons.qrPlatforms};
+      }catch{return {whenToAsk:false,qrPlatforms:false}}
+    }
+    function staffFeedbackProgress(member){
+      if(member.liveAdmin)return readLiveAdminFeedback();
+      const d=(state.feedbackTeamDemo&&state.feedbackTeamDemo[member.id])||{whenToAsk:false,qrPlatforms:false};
+      return {whenToAsk:!!d.whenToAsk,qrPlatforms:!!d.qrPlatforms};
+    }
+    function feedbackLessonsComplete(p){return p.whenToAsk&&p.qrPlatforms}
+    function feedbackTeamStats(){
+      const rows=FEEDBACK_TEAM.map(m=>({member:m,progress:staffFeedbackProgress(m)}));
+      const passed=rows.filter(r=>feedbackLessonsComplete(r.progress)).length;
+      const total=rows.length;
+      const pct=total?Math.round(passed/total*100):0;
+      return {rows,passed,total,pct};
+    }
+    function feedbackLessonLabel(p){
+      if(feedbackLessonsComplete(p))return '<b class="status-ok">Уроки пройдены</b>';
+      if(p.whenToAsk||p.qrPlatforms)return '<b class="status-warn">Частично</b>';
+      return '<b class="status-danger">Не пройдены</b>';
+    }
+    function resetStaffFeedbackRetake(member){
+      if(member.liveAdmin){
+        try{
+          const s=JSON.parse(localStorage.getItem('ed-workspace-admin')||'null')||{};
+          s.feedbackLessons={whenToAsk:false,qrPlatforms:false};
+          s.testPassed=false;
+          s.score=0;
+          s.updateRead=false;
+          s.quizVersion='';
+          localStorage.setItem('ed-workspace-admin',JSON.stringify(s));
+        }catch{}
+        return;
+      }
+      if(!state.feedbackTeamDemo)state.feedbackTeamDemo={};
+      state.feedbackTeamDemo[member.id]={whenToAsk:false,qrPlatforms:false};
+    }
+    function assignFeedbackRetake(){
+      const pending=FEEDBACK_TEAM.filter(m=>!feedbackLessonsComplete(staffFeedbackProgress(m)));
+      pending.forEach(resetStaffFeedbackRetake);
+      const n=pending.length;
+      state.feedbackRetakeNotice=n?`Пересдача назначена: ${n} ${n===1?'сотруднику':n<5?'сотрудникам':'сотрудникам'}. Уроки и тест регламента отзывов сброшены.`:'Все администраторы уже прошли уроки регламента отзывов.';
+      save();
+      work();
+      renderRight();
+    }
+    function managerTeamHtml(){
+      const stats=feedbackTeamStats();
+      const teamRows=stats.rows.map(({member,progress})=>`<div class="task" data-staff="${member.id}"><span>${esc(member.name)}<br><span class="muted">Регламент отзывов · ${progress.whenToAsk?'урок 1 ✓':'урок 1 —'} · ${progress.qrPlatforms?'урок 2 ✓':'урок 2 —'}</span></span>${feedbackLessonLabel(progress)}</div>`).join('')+
+        `<div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div>`;
+      const notice=state.feedbackRetakeNotice?`<p class="status-ok" style="margin-top:12px">${esc(state.feedbackRetakeNotice)}</p>`:'';
+      const pending=stats.total-stats.passed;
+      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>`;
+    }
+    function bindManagerFeedback(){
+      if($('assignFeedbackRetake'))$('assignFeedbackRetake').onclick=assignFeedbackRetake;
+    }
     function bindPostVisitChecklist(){
       ensurePostVisitState();
       if($('openPostVisitChecklist'))$('openPostVisitChecklist').onclick=()=>{state.postVisitOpen=true;save();({shift,work}[view]||shift)()};
@@ -117,7 +188,9 @@
       {q:'Пациент просит «только прайс» (скрипт S05). Чего нельзя делать?',a:['Уточнить услугу и перевести к консультации','Отправить файл прайса и закончить диалог','Предложить два окна записи после ориентира'],ok:1,critical:true,source:'scripts-25.json · S05 · dont_say'},
       {q:'Пациент говорит о страхе боли (скрипт S08). Какая формулировка запрещена как гарантия?',a:['Спросить, что именно пугает: боль, анестезия, результат или процесс','Сказать «это совсем не больно» как гарантию','Предложить консультацию и следующий шаг'],ok:1,critical:true,source:'scripts-25.json · S08 · dont_say'},
       {q:'Пациент получил ориентир цены и исчез (правило повторного касания). Какой лимит?',a:['Писать каждый день до ответа','Одно содержательное касание','Отправить весь прайс повторно'],ok:1,critical:true,source:'recontact-9.json · R03 · limit'},
-      {q:'Где администратор открывает каталог скриптов и повторные касания?',a:['Только в бумажной папке ресепшена','В /render/: «Скрипты» и «Повторные касания»','В личном WhatsApp без фиксации'],ok:1,critical:false,source:'workspace UI · /render/'}
+      {q:'Где администратор открывает каталог скриптов и повторные касания?',a:['Только в бумажной папке ресепшена','В /render/: «Скрипты» и «Повторные касания»','В личном WhatsApp без фиксации'],ok:1,critical:false,source:'workspace UI · /render/'},
+      {q:'Можно ли обещать скидку, подарок или баллы за публичный отзыв?',a:['Да, если пациент доволен','Нет — reward-for-review запрещён','Да, только за 5 звёзд'],ok:1,critical:true,source:'admin-feedback-sop.json · prohibitions · reward'},
+      {q:'Как относиться к площадкам Яндекс / 2ГИС / Google при просьбе об отзыве?',a:['Только Яндекс обязателен, остальные запрещены','Равный контур: не навязывать одну площадку как условие просьбы','Только Google, иначе отзыв не считается'],ok:1,critical:true,source:'admin-feedback-sop.json · platforms · I5.2'}
     ];
     const updates=roleKey==='admin'?updatesAdmin:updatesBase;
     const quiz=roleKey==='admin'?quizAdmin:quizBase;
@@ -131,7 +204,7 @@
     }
     function gate(){
       if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:roleKey==='admin'?'Обязательные материалы: скрипты, повторные касания и возврат упущенных.':'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
-      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='admin'?'Нужно подтвердить понимание скриптов и правил повторных касаний. Проходной балл 90%, критические ответы — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
+      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='admin'?'Нужно подтвердить понимание скриптов, повторных касаний и регламента отзывов (в т.ч. запрет reward). Проходной балл 90%, критические ответы — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
       if(!state.handoffAccepted)return{title:'Примите смену',copy:'Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
       if(!state.shiftStarted)return{title:'Начните работу',copy:'Обновления пройдены, передача принята, рабочее место готово.',action:'Начать работу',view:'shift'};
       return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
@@ -191,7 +264,7 @@
         renderFeedbackLessons();
       }
       function passedView(){
-        body.innerHTML=`<div class="card"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам и повторным касаниям.':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
+        body.innerHTML=`<div class="card"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, повторным касаниям и регламенту отзывов.':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];quizView()};
         renderFeedbackLessons();
       }
@@ -207,10 +280,11 @@
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
       const admin=`<div class="grid"><div class="card"><h3>Входящие обращения</h3><div class="metric">4</div><p class="muted">1 срочное · 2 записи · 1 вопрос по стоимости</p><a class="btn primary" href="/render/">Открыть модуль обращений</a><a class="btn secondary" href="/render/#scripts" style="margin-top:10px">Открыть скрипты</a><a class="btn secondary" href="/render/#recontact" style="margin-top:10px">Повторные касания</a></div><div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
       const doctor=`<div class="grid"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button class="btn primary">Принять дежурство</button></div></div>`;
-      const manager=`<div class="grid"><div class="card"><h3>Команда сегодня</h3><div class="task"><span>Администратор Айжан</span><b class="status-ok">В работе</b></div><div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div></div><div class="card"><h3>Обучение</h3><div class="metric">75%</div><p class="muted">3 из 4 сотрудников прошли обязательное обновление</p><button class="btn primary">Назначить пересдачу</button></div></div>`;
+      const manager=managerTeamHtml();
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='admin')bindPostVisitChecklist();
+      if(roleKey==='manager')bindManagerFeedback();
     }
     function renderRight(){
       const g=gate();
@@ -218,8 +292,9 @@
         ?`<div class="card"><b>Урок «Когда просить отзыв»</b><br><span class="${state.feedbackLessons.whenToAsk?'status-ok':'status-warn'}">${state.feedbackLessons.whenToAsk?'Прочитано':'Ожидает'}</span></div><div class="card"><b>Урок «QR и три площадки»</b><br><span class="${state.feedbackLessons.qrPlatforms?'status-ok':'status-warn'}">${state.feedbackLessons.qrPlatforms?'Прочитано':'Ожидает'}</span></div>`
         :'';
       const postVisitLine=roleKey==='admin'&&state.shiftStarted?(()=>{const p=postVisitProgress();return `<div class="card"><b>Чеклист после визита</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Выполнен':p.done+'/'+p.total+' шагов'}</span></div>`})():'';
+      const managerFeedbackLine=roleKey==='manager'?(()=>{const s=feedbackTeamStats();return `<div class="card"><b>Уроки регламента отзывов</b><br><span class="${s.pct===100?'status-ok':'status-warn'}">${s.pct}% · ${s.passed}/${s.total}</span></div>`})():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
     }
     function render(){renderNav();renderRight();({today,learn,shift,work}[view]||today)()}

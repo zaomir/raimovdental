@@ -43,8 +43,8 @@ canon:
 | I5.1 | 5 | ✅ | урок «Когда просить отзыв» · admin-feedback-sop.json · «Прочитал» · commit `9cd6fc4af` · prod |
 | I5.2 | 5 | ✅ | урок «QR и три площадки» · equal Yandex/2GIS/Google · no reward · commit `cee5434f8` · prod |
 | I5.3 | 5 | ✅ | post-visit checklist · «визит состоялся» · post_visit_checklist · commit `66d213812` · prod |
-| I5.4 | 5 | ⬜ | — |
-| I5.5 | 5 | ⬜ | — |
+| I5.4 | 5 | ✅ | допуск: ≥2 Q отзывы · critical reward 100% · commit `cd8a6c882` · prod |
+| I5.5 | 5 | ✅ | % уроков отзывов + «Назначить пересдачу» · commit `1148bd2c3` · prod |
 | I4.1 | 4 | ⬜ | — |
 | I4.2 | 4 | ⬜ | — |
 | I4.3 | 4 | ⬜ | — |
