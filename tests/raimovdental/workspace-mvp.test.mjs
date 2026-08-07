@@ -23,6 +23,7 @@ const required = [
   'content/admin-feedback-sop.json',
   'content/internal-marketing.json',
   'content/speech-markers-before.json',
+  'content/speech-markers-chair.json',
   'content/gaps.md',
 ];
 
@@ -84,6 +85,13 @@ assert.match(app, /Маркеры до кресла/);
 assert.match(app, /i111-speech-markers-before/);
 assert.match(app, /renderSpeechMarkersBeforeCard/);
 assert.match(app, /speech-markers-before\.json/);
+assert.match(app, /i112-speech-markers-chair/);
+assert.match(app, /doctorSpeechMarkersChairHtml/);
+assert.match(app, /renderSpeechMarkersChairCard/);
+assert.match(app, /speech-markers-chair\.json/);
+assert.match(app, /Когда не говорить/);
+assert.match(app, /data-chair-when-not/);
+assert.match(app, /MC01/);
 assert.match(app, /i54-feedback-quiz/);
 assert.match(app, /quizAdmin/);
 assert.match(app, /Отправить файл прайса и закончить диалог/);
@@ -249,6 +257,15 @@ assert.ok(Array.isArray(markersBefore.markers));
 assert.equal(markersBefore.markers.length, 3);
 assert.ok(markersBefore.markers.every((m) => m.id && m.route && m.listen_for && m.clarify_questions && m.phrase_status === 'draft_pending_clinic'));
 assert.deepEqual(markersBefore.priority_routes, ['veneers', 'implants', 'ortho']);
+const markersChair = JSON.parse(readFileSync(join(distRoot, 'content/speech-markers-chair.json'), 'utf8'));
+assert.equal(markersChair.atom, 'I11.2');
+assert.equal(markersChair.status, 'draft_pending_clinic');
+assert.ok(markersChair.when_not_to_speak && Array.isArray(markersChair.when_not_to_speak.items) && markersChair.when_not_to_speak.items.length >= 3);
+assert.ok(Array.isArray(markersChair.markers));
+assert.equal(markersChair.markers.length, 3);
+assert.ok(markersChair.markers.every((m) => m.id && m.route && m.observe_for && m.chair_logic && m.when_not_to_speak_draft && m.phrase_status === 'draft_pending_clinic' && m.phrase_draft === ''));
+assert.deepEqual(markersChair.markers.map((m) => m.id), ['MC01', 'MC02', 'MC03']);
+assert.deepEqual(markersChair.priority_routes, ['veneers', 'implants', 'ortho']);
 const markersJs = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'speech-markers-before.js'), 'utf8');
 assert.match(markersJs, /speech-markers-before\.json/);
 assert.match(markersJs, /openMarkers/);

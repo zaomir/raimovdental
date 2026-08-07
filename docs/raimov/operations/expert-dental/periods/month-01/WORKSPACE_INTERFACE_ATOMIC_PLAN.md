@@ -59,7 +59,7 @@ canon:
 | I10.4 | 10 | ✅ | «Предложить консультацию узкого» · `i104-propose-consult` · список передач · commit `19facf3ca` · prod |
 | I10.5 | 10 | ✅ | контроль создано/принято/потеряно · `i105-referral-metrics` · commit `a4169f73d` · prod |
 | I11.1 | 11 | ✅ | `speech-markers-before.json` + `/render/` UI · `i111-speech-markers-before` · commit `f5ea48992` · prod |
-| I11.2 | 11 | ⬜ | — |
+| I11.2 | 11 | ✅ | `speech-markers-chair.json` + UI врача · `i112-speech-markers-chair` · commit `0fd9f7942` · prod |
 | I11.3 | 11 | ⬜ | — |
 | I11.4 | 11 | ⬜ | — |
 | I11.5 | 11 | ⬜ | — |

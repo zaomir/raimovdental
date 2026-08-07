@@ -89,6 +89,9 @@
     const INTERNAL_MARKETING_URL='content/internal-marketing.json';
     let internalMarketing=null;
     if(roleKey==='doctor')fetch(INTERNAL_MARKETING_URL).then(r=>r.json()).then(d=>{internalMarketing=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
+    const SPEECH_MARKERS_CHAIR_URL='content/speech-markers-chair.json';
+    let speechMarkersChair=null;
+    if(roleKey==='doctor')fetch(SPEECH_MARKERS_CHAIR_URL).then(r=>r.json()).then(d=>{speechMarkersChair=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -394,6 +397,34 @@
       if(!wrap||roleKey!=='admin')return;
       wrap.innerHTML=`<div class="card" data-atom="i111-speech-markers-before"><div class="eyebrow">I11.1 · маркеры до кресла</div><h3>Банк маркеров потребности</h3><p class="muted">Каркас из speech-markers-before.json · статус draft_pending_clinic. Слушать / уточнять — из patient-path (виниры · импланты · орто). Готовые медфразы пусты до утверждения клиники.</p><div class="header-actions" style="margin-top:12px"><a class="btn primary" href="/render/#markers">Открыть в /render/</a></div></div>`;
     }
+    function speechMarkersChairWhenNotHtml(bank){
+      const block=bank&&bank.when_not_to_speak||{};
+      const items=Array.isArray(block.items)?block.items:[];
+      const list=items.length?items.map((x)=>`<li>${esc(x)}</li>`).join(''):'<li class="muted">Загрузка блока «когда не говорить»…</li>';
+      return `<div class="notice" data-chair-when-not="1" style="margin-top:12px"><b>${esc(block.title||'Когда не говорить')}</b><ul class="stack" style="margin:8px 0 0;padding-left:18px">${list}</ul><p class="muted" style="margin-top:8px">Источник: ${esc(block.source_ref||bank.source_ref||'')}</p></div>`;
+    }
+    function speechMarkersChairRowsHtml(bank){
+      const markers=Array.isArray(bank&&bank.markers)?bank.markers:[];
+      if(!markers.length)return `<div class="task"><span class="muted">Загрузка speech-markers-chair.json…</span><b>—</b></div>`;
+      return markers.map((m)=>{
+        const phrase=String(m.phrase_draft||'').trim()
+          ?esc(m.phrase_draft)
+          :`<span class="status-warn">Черновик фразы пуст · ${esc(m.phrase_status||'draft_pending_clinic')}</span>`;
+        return `<div class="task" data-chair-marker-id="${esc(m.id)}" data-chair-marker-route="${esc(m.route||'')}" style="flex-wrap:wrap;align-items:flex-start"><span style="flex:1;min-width:220px"><b>${esc(m.id)}</b> · ${esc(m.route_title||m.route||'')}<br><span class="muted">Наблюдать:</span> ${esc(m.observe_for||'')}<br><span class="muted">Логика в кресле:</span> ${esc(m.chair_logic||'')}<br><span class="muted">Когда не говорить:</span> ${esc(m.when_not_to_speak_draft||'')}<br><span class="muted">Что сказать:</span> ${phrase}<br><span class="muted">Next:</span> ${esc(m.next_step_draft||'')} · ${esc(m.recipient_role||'')}</span><b class="status-warn">${esc(m.phrase_status||'draft_pending_clinic')}</b></div>`;
+      }).join('');
+    }
+    function doctorSpeechMarkersChairHtml(){
+      if(roleKey!=='doctor')return '';
+      const bank=speechMarkersChair;
+      const status=bank&&bank.status||'draft_pending_clinic';
+      const count=Array.isArray(bank&&bank.markers)?bank.markers.length:0;
+      return `<div class="card action-card" data-atom="i112-speech-markers-chair" style="margin-top:14px"><div class="eyebrow">I11.2 · маркеры в кресле</div><h3>Банк маркеров в кресле</h3><p class="muted">Каркас из speech-markers-chair.json · статус ${esc(status)}. MC01–MC03 → veneers / implants / ortho. Наблюдать / логика — из patient-path. Готовые медфразы пусты до утверждения клиники.</p>${speechMarkersChairWhenNotHtml(bank||{})}<div class="stack" style="margin-top:12px">${speechMarkersChairRowsHtml(bank)}</div><div class="metric" style="margin-top:12px">${count||'—'}</div><p class="muted">маркеров в банке · без PHI</p></div>`;
+    }
+    function renderSpeechMarkersChairCard(){
+      const wrap=$('speechMarkersChair');
+      if(!wrap||roleKey!=='doctor')return;
+      wrap.innerHTML=doctorSpeechMarkersChairHtml();
+    }
     function renderInternalMarketingLesson(){
       if(roleKey!=='doctor')return;
       const wrap=$('internalLesson');
@@ -413,12 +444,13 @@
     }
     function learn(){
       let qi=0,answers=[];
-      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="speechMarkersBefore" class="stack" style="margin-top:20px"></div><div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}${roleKey==='doctor'?'<div id="internalLesson" class="stack" style="margin-top:20px"></div>':''}`);
+      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="speechMarkersBefore" class="stack" style="margin-top:20px"></div><div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}${roleKey==='doctor'?'<div id="speechMarkersChair" class="stack" style="margin-top:20px"></div><div id="internalLesson" class="stack" style="margin-top:20px"></div>':''}`);
       const body=$('learnBody');
       function updatesView(){
         body.innerHTML=updates.map((u,i)=>`<article class="card update ${u.critical?'critical':''}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${u.title}</h3><p>${u.copy}</p></article>`).join('')+`<button id="confirmUpdates" class="btn primary">Прочитал(а) и понял(а)</button>`;
         $('confirmUpdates').onclick=()=>{state.updateRead=true;save();quizView()};
         renderSpeechMarkersBeforeCard();
+        renderSpeechMarkersChairCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
@@ -431,6 +463,7 @@
           setTimeout(()=>{qi++;if(qi<quiz.length)quizView();else finishQuiz()},180);
         });
         renderSpeechMarkersBeforeCard();
+        renderSpeechMarkersChairCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
@@ -444,6 +477,7 @@
         body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Нужно ≥90% и 100% по критическим вопросам. Без pass доступ к работе ограничен.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;
         $('quizNext').onclick=()=>{if(state.testPassed){view='today';render()}else{qi=0;answers=[];updatesView()}};
         renderSpeechMarkersBeforeCard();
+        renderSpeechMarkersChairCard();
         renderFeedbackLessons();
         renderInternalMarketingLesson();
       }
@@ -781,7 +815,7 @@
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
       const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал I7.5: фильтр «Пропущен / без результата» и «Вернуть в работу».</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
-      const doctor=`${doctorClinicRoleSwitcherHtml()}${doctorTaskSetHtml()}`;
+      const doctor=`${doctorClinicRoleSwitcherHtml()}${doctorTaskSetHtml()}${doctorSpeechMarkersChairHtml()}`;
       const manager=managerTeamHtml();
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
@@ -801,8 +835,9 @@
       const doctorRoleLine=roleKey==='doctor'?(()=>{const r=currentDoctorClinicRole();return `<div class="card"><b>Роль на приёме</b><br><span class="badge" data-doctor-clinic-badge="1">${esc(r.title)}</span></div>`})():'';
       const doctorLessonLine=roleKey==='doctor'?`<div class="card"><b>Урок внутреннего направления</b><br><span class="${state.internalLessonRead?'status-ok':'status-warn'}">${state.internalLessonRead?'Прочитано':'Ожидает'}</span></div>`:'';
       const doctorReferralLine=roleKey==='doctor'?(()=>{ensureInternalReferrals();const n=state.internalReferrals.length;return `<div class="card"><b>Внутренние направления</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' создано':'Нет'}</span></div>`})():'';
+      const doctorChairMarkersLine=roleKey==='doctor'?(()=>{const n=Array.isArray(speechMarkersChair&&speechMarkersChair.markers)?speechMarkersChair.markers.length:0;return `<div class="card" data-atom="i112-speech-markers-chair"><b>Маркеры в кресле</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' · MC01–MC03':'Загрузка'}</span></div>`})():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }

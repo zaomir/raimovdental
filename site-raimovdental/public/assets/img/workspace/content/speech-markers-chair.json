@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "atom": "I11.2",
+  "status": "draft_pending_clinic",
+  "audience": "doctor_in_chair",
+  "source_ref": "EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md §11 + week 3; patient-path.json routes veneers|implants|ortho; gaps.md пункт 11; internal-marketing.json boundaries + transfer_standard",
+  "goal": "Терапевт / гигиенист в кресле замечает маркеры потребности по винирам, имплантации или ортодонтии и передаёт профильному специалисту — без диагноза за узкого и без обещания плана лечения.",
+  "priority_routes": ["veneers", "implants", "ortho"],
+  "when_not_to_speak": {
+    "title": "Когда не говорить",
+    "items": [
+      "Не ставить диагноз за профильного специалиста (ортодонт / имплантолог / эстетика).",
+      "Не назначать аппарат, систему импланта или объём виниров «с кресла» без консультации узкого.",
+      "Не обещать итог лечения, сроки или финальную цену профильного плана.",
+      "Не заполнять банк готовыми медфразами без утверждения клиники.",
+      "Не оставлять пациента самостоятельно искать врача — только конкретная передача."
+    ],
+    "source_ref": "gaps.md пункт 11 · internal-marketing.json · boundaries.dont · transfer_standard"
+  },
+  "boundaries": {
+    "do": [
+      "Заметить сигнал потребности по маршруту veneers|implants|ortho.",
+      "Объяснить, почему ситуацию должен оценить профильный специалист (стандарт передачи).",
+      "Предложить конкретную консультацию и зафиксировать направление: услуга · причина · next step · получатель.",
+      "Опираться на page_logic / first_visit_result из patient-path — не на выдуманные медфразы."
+    ],
+    "dont": [
+      "Не продавать агрессивно и не навязывать одно решение.",
+      "Не ставить диагноз за профильного специалиста.",
+      "Не обещать итог, сроки или цену профильного плана без консультации узкого.",
+      "Не подменять диагностику узкого скриптом продажи."
+    ],
+    "source_ref": "internal-marketing.json · boundaries"
+  },
+  "markers": [
+    {
+      "id": "MC01",
+      "route": "veneers",
+      "route_title": "Виниры",
+      "observe_for": "Не устраивает цвет, форма, сколы, старые реставрации или общая линия улыбки; страх сильной обточки и ненатурального результата.",
+      "observe_source_ref": "patient-path.json · routes.veneers.entry",
+      "patient_question": "Подойдут ли мне виниры, насколько сохранят мои зубы и будет ли результат естественным?",
+      "patient_question_source_ref": "patient-path.json · routes.veneers.question",
+      "chair_logic": "Начинать не с «идеальной улыбки», а с отбора показаний: когда нужны виниры, когда достаточно реставрации, отбеливания или ортодонтии.",
+      "chair_logic_source_ref": "patient-path.json · routes.veneers.page_logic",
+      "phrase_draft": "",
+      "phrase_status": "draft_pending_clinic",
+      "when_not_to_speak_draft": "Не обещать объём обточки, итоговый вид и «идеальную улыбку» без диагностики профильного врача; не назначать объём виниров с кресла терапевта/гигиениста.",
+      "when_not_to_speak_status": "draft_pending_clinic",
+      "next_step_draft": "Предложить консультацию по эстетике / винирам; зафиксировать внутреннее направление и передать администратору для записи.",
+      "next_step_status": "draft_pending_clinic",
+      "first_visit_result": "Оценка прикуса и тканей, возможные альтернативы, необходимость подготовки, ориентир объёма лечения и следующий диагностический шаг.",
+      "first_visit_result_source_ref": "patient-path.json · routes.veneers.first_visit_result",
+      "recipient_role": "Специалист по эстетической стоматологии / ортопед"
+    },
+    {
+      "id": "MC02",
+      "route": "implants",
+      "route_title": "Имплантация",
+      "observe_for": "Нет одного или нескольких зубов; неудобный протез; зуб предстоит удалить; пациенту уже отказали или предложили разные решения.",
+      "observe_source_ref": "patient-path.json · routes.implants.entry",
+      "patient_question": "Можно ли восстановить зуб надёжно, сколько этапов и не появятся ли неожиданные расходы?",
+      "patient_question_source_ref": "patient-path.json · routes.implants.question",
+      "chair_logic": "Не продавать имплант как товар. Объяснить, из чего складывается решение: состояние зуба и кости, снимок, временное решение, имплант, коронка, сроки и наблюдение.",
+      "chair_logic_source_ref": "patient-path.json · routes.implants.page_logic",
+      "phrase_draft": "",
+      "phrase_status": "draft_pending_clinic",
+      "when_not_to_speak_draft": "Не выбирать систему импланта и не обещать бюджет / сроки без консультации хирурга-имплантолога.",
+      "when_not_to_speak_status": "draft_pending_clinic",
+      "next_step_draft": "Предложить консультацию по восстановлению зуба / имплантации; зафиксировать направление и передать администратору.",
+      "next_step_status": "draft_pending_clinic",
+      "first_visit_result": "Предварительный диагноз, варианты восстановления, необходимые исследования, последовательность этапов и ориентир бюджета.",
+      "first_visit_result_source_ref": "patient-path.json · routes.implants.first_visit_result",
+      "recipient_role": "Хирург-имплантолог / ортопед"
+    },
+    {
+      "id": "MC03",
+      "route": "ortho",
+      "route_title": "Ортодонтия",
+      "observe_for": "Неровные зубы, неправильный прикус, повторное лечение после брекетов, щелчки/дискомфорт ВНЧС, выбор между брекетами и элайнерами.",
+      "observe_source_ref": "patient-path.json · routes.ortho.entry",
+      "patient_question": "Какой метод подходит мне, сколько займёт лечение и не ухудшится ли функция сустава?",
+      "patient_question_source_ref": "patient-path.json · routes.ortho.question",
+      "chair_logic": "Показать, что выбор системы — следствие диагностики, а не первый шаг. Развести эстетическое выравнивание и функциональное лечение прикуса.",
+      "chair_logic_source_ref": "patient-path.json · routes.ortho.page_logic",
+      "phrase_draft": "",
+      "phrase_status": "draft_pending_clinic",
+      "when_not_to_speak_draft": "Не назначать аппарат и не обещать срок выравнивания без ортодонта / гнатолога.",
+      "when_not_to_speak_status": "draft_pending_clinic",
+      "next_step_draft": "Предложить ортодонтическую / гнатологическую консультацию; зафиксировать направление и передать администратору.",
+      "next_step_status": "draft_pending_clinic",
+      "first_visit_result": "Диагностическая гипотеза, список исследований, возможные аппараты/системы, этапность и ориентир следующего решения.",
+      "first_visit_result_source_ref": "patient-path.json · routes.ortho.first_visit_result",
+      "recipient_role": "Ортодонт / гнатолог"
+    }
+  ],
+  "approval": {
+    "required_from": ["Атабек / главврач", "управляющий (операционный журнал)"],
+    "note": "Готовые речевые формулировки (phrase_draft) пусты до утверждения клиники. Наблюдать / логика кресла — только из patient-path.json. Блок «когда не говорить» обязателен в UI врача."
+  }
+}

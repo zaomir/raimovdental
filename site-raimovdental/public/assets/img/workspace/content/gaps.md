@@ -80,6 +80,6 @@
 
 **UI progress (пункт 10):** I10.1–I10.5 ✅ · пункт 10 UI DoD закрыт по атомам · контент `internal-marketing.json` (draft_pending_clinic)
 
-**UI progress (пункт 11):** I11.1 ✅ · `speech-markers-before.json` + `/render/` UI · draft_pending_clinic
+**UI progress (пункт 11):** I11.1–I11.2 ✅ · before + chair JSON · draft_pending_clinic · I11.3–I11.5 ⬜
 
-**Next execute:** I11.2 — банк маркеров «в кресле» (`speech-markers-chair.json` + UI врача).
+**Next execute:** I11.3 — журнал внутренних передач (врач + управляющий).
