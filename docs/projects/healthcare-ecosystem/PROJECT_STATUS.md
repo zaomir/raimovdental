@@ -17,7 +17,7 @@ Evidence: `docs/audits/raimov/releases/public-v1/PRODUCTION_CUTOVER.md`.
 | Expert Dental Studio | operating clinic in Bishkek |
 | RAIMOV DENTAL | master brand; Stage B public live; Stage A protected |
 | Atabek Raimov practice | current clinical foundation |
-| Raimov System | forming / being documented |
+| RAIM SMILE SYSTEM | forming / being documented |
 | Raimov Academy | next phase (interest form only) |
 | Own RAIMOV DENTAL clinics | future growth line; strategic conversation CTA |
 | International practice | five-year perspective; not operating product |

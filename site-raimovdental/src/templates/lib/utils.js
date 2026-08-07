@@ -19,7 +19,7 @@ export const CANONICAL_HOST = 'https://raimovdental.com';
 
 export const BRAND = {
   clinic: 'RAIMOV DENTAL',
-  system: 'Raimov System',
+  system: 'RAIM SMILE SYSTEM',
   academy: 'Raimov Academy',
   doctorFullRu: 'Раимов Атабек Саидович',
   doctorPublicRu: 'Атабек Раимов',

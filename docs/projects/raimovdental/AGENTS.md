@@ -1,6 +1,6 @@
 # RAIMOV ecosystem — project AGENTS
 
-**Purpose:** Expert Dental Studio growth system, RAIMOV DENTAL master brand and website, Atabek Raimov evidence pack, Raimov System, Raimov Academy, directly controlled clinic growth and future ELITE DENTAL readiness.
+**Purpose:** Expert Dental Studio growth system, RAIMOV DENTAL master brand and website, Atabek Raimov evidence pack, RAIM SMILE SYSTEM, Raimov Academy, directly controlled clinic growth and future ELITE DENTAL readiness.
 
 **Knowledge domain:** `healthcare-ecosystem`.  
 **Runtime roots:** `site-raimovdental/`, `research/raimov-profile/`.  
@@ -81,7 +81,7 @@ Static — see project router and manifest. Strategy, design or protected-previe
 - Do not edit `research/raimov-profile/evidence/` without rights and source checks.
 - Do not publish ELITE DENTAL as a current franchise or partner offer.
 - Do not publish a share, return, financial terms or public investment offer without legal gate approval.
-- Do not claim that Raimov System, Academy, a clinic network or international practice already operates when planned.
+- Do not claim that RAIM SMILE SYSTEM, Academy, a clinic network or international practice already operates when planned.
 - Do not invite international patients to Bishkek in the replacement strategy.
 - Do not change the agreed first-month commercial canon.
 - Do not treat public copy, a website page or an AI-generated summary as evidence.

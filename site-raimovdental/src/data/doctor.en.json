@@ -6,7 +6,7 @@
   "clinic": "RAIMOV DENTAL",
   "meta": {
     "title": "Atabek Raimov — lead clinician, RAIMOV DENTAL",
-    "description": "Profile of Atabek Raimov, founder of RAIMOV DENTAL and author of Raimov System.",
+    "description": "Profile of Atabek Raimov, founder of RAIMOV DENTAL and developer of RAIM SMILE SYSTEM.",
     "medicalReviewRequired": true,
     "author": "Atabek Raimov",
     "medicalReviewer": "clinic_attested_2026-07-21",
@@ -83,8 +83,8 @@
     ]
   },
   "raimovSystemRole": {
-    "heading": "Author of Raimov System",
-    "body": "Raimov System is the clinical framework of RAIMOV DENTAL: diagnostics, outcome design, team review, staged plan, and follow-up. No franchise or ELITE DENTAL commercial terms.",
+    "heading": "Developer of RAIM SMILE SYSTEM",
+    "body": "Atabek Raimov developed RAIM SMILE SYSTEM: a named protocol where smile aesthetics follow bite and function. For the patient this means five steps—diagnostics, design (including a mock-up before irreversible work), team review, a written staged plan with prices, and follow-up with the same clinician. No outcome promise before examination. No franchise or ELITE DENTAL commercial terms. More: https://raimsmile.com/",
     "publishable": true
   },
   "photo": {

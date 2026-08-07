@@ -13,7 +13,7 @@
 - **Expert Dental Studio** — current operating clinic in Bishkek.
 - **RAIMOV DENTAL** — master brand and future group of directly controlled clinics.
 - **Atabek Raimov** — clinical authority and author of the developing system.
-- **Raimov System** — developing clinical/operating methodology.
+- **RAIM SMILE SYSTEM** — developing clinical/operating methodology.
 - **Raimov Academy** — future professional education line.
 - **ELITE DENTAL** — future separate partner/franchise contour; not a public offer.
 - **CAESTHETIC / ROVLEX** — strategic/operating partner behind the public RAIMOV brand.

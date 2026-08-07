@@ -3,7 +3,7 @@
   "home": {
     "meta": {
       "title": "RAIMOV — dentistry, system and academy",
-      "description": "Atabek Raimov's ecosystem: RAIMOV DENTAL, Raimov System, Raimov Academy and comprehensive dentistry in Bishkek."
+      "description": "Atabek Raimov's ecosystem: RAIMOV DENTAL, RAIM SMILE SYSTEM, Raimov Academy and comprehensive dentistry in Bishkek."
     },
     "hero": {
       "eyebrow": "The Atabek Raimov ecosystem",
@@ -31,7 +31,7 @@
         },
         {
           "kicker": "02",
-          "title": "Raimov System",
+          "title": "RAIM SMILE SYSTEM",
           "text": "A methodology for comprehensive planning that connects aesthetics, function, orthodontics, implants, communication and decision control.",
           "href": "/en/raimov-system/"
         },
@@ -79,7 +79,7 @@
               "href": "/en/academy/"
             },
             {
-              "label": "Explore Raimov System",
+              "label": "Explore RAIM SMILE SYSTEM",
               "href": "/en/raimov-system/"
             },
             {
@@ -132,7 +132,7 @@
       "thesis": "The personal brand is not a decorative layer. It represents public accountability for the method, its standards and the direction of RAIMOV.",
       "meta": {
         "title": "Atabek Raimov — clinician and author of the RAIMOV ecosystem",
-        "description": "Atabek Raimov's role as a clinical integrator, author of Raimov System and leader of an educational ecosystem."
+        "description": "Atabek Raimov's role as a clinical integrator, author of RAIM SMILE SYSTEM and leader of an educational ecosystem."
       },
       "sections": [
         {
@@ -167,7 +167,7 @@
             },
             {
               "kicker": "03",
-              "title": "Author of Raimov System",
+              "title": "Author of RAIM SMILE SYSTEM",
               "text": "Formalises the approach so that quality is supported by reproducible logic, not only individual intuition."
             },
             {
@@ -211,7 +211,7 @@
               "href": "/en/about/"
             },
             {
-              "title": "Raimov System",
+              "title": "RAIM SMILE SYSTEM",
               "text": "A formal planning framework.",
               "href": "/en/raimov-system/"
             },
@@ -241,18 +241,18 @@
         "href": "/en/comprehensive-diagnostics/#lead-form"
       },
       "secondaryCta": {
-        "label": "Explore Raimov System",
+        "label": "Explore RAIM SMILE SYSTEM",
         "href": "/en/raimov-system/"
       },
       "showPatientForm": true
     },
     "system": {
       "eyebrow": "The methodology of the ecosystem",
-      "title": "Raimov System — an operating system for complex dentistry",
+      "title": "RAIM SMILE SYSTEM — an operating system for complex dentistry",
       "lead": "It is not the name of one procedure and not a marketing wrapper for a standard appointment. It describes how a team collects information, makes decisions, explains the plan and controls movement between stages.",
       "thesis": "The system becomes valuable when quality depends on the coordination of many decisions over time.",
       "meta": {
-        "title": "Raimov System — comprehensive treatment planning",
+        "title": "RAIM SMILE SYSTEM — comprehensive treatment planning",
         "description": "Diagnostics, interdisciplinary review, master planning, staged budgets, quality gates and follow-up."
       },
       "sections": [
@@ -276,7 +276,7 @@
         },
         {
           "type": "steps",
-          "title": "Eight stages of Raimov System",
+          "title": "Eight stages of RAIM SMILE SYSTEM",
           "items": [
             {
               "title": "Data collection",
@@ -340,7 +340,7 @@
         },
         {
           "type": "manifesto",
-          "title": "What Raimov System is not",
+          "title": "What RAIM SMILE SYSTEM is not",
           "body": [
             "It does not guarantee the same outcome for every patient.",
             "It does not replace the competence of an individual clinician.",
@@ -383,11 +383,11 @@
     "ecosystem": {
       "eyebrow": "RAIMOV strategy",
       "title": "An ecosystem where clinical experience becomes a method, education and a standard",
-      "lead": "RAIMOV is not designed as a collection of disconnected brands. The clinic creates practical experience, Raimov System formalises it, the Academy teaches it and a professional community returns new questions to the system.",
+      "lead": "RAIMOV is not designed as a collection of disconnected brands. The clinic creates practical experience, RAIM SMILE SYSTEM formalises it, the Academy teaches it and a professional community returns new questions to the system.",
       "thesis": "Practice → method → education → application → feedback → better practice.",
       "meta": {
         "title": "The RAIMOV ecosystem: clinic, system and academy",
-        "description": "The architecture of Atabek Raimov's ecosystem: RAIMOV DENTAL, Raimov System, Academy and a developing professional community."
+        "description": "The architecture of Atabek Raimov's ecosystem: RAIMOV DENTAL, RAIM SMILE SYSTEM, Academy and a developing professional community."
       },
       "sections": [
         {
@@ -402,7 +402,7 @@
             },
             {
               "kicker": "02",
-              "title": "Raimov System",
+              "title": "RAIM SMILE SYSTEM",
               "text": "The intellectual core: a shared logic for diagnostics, planning, communication and control.",
               "href": "/en/raimov-system/"
             },
@@ -459,7 +459,7 @@
           "type": "narrative",
           "title": "What is core today and what remains a direction of development",
           "body": [
-            "The clinic, the clinician's public leadership and Raimov System form the visible core of the ecosystem.",
+            "The clinic, the clinician's public leadership and RAIM SMILE SYSTEM form the visible core of the ecosystem.",
             "Raimov Academy is developing as the educational layer. Programmes and dates will be published only after the academic plan is approved.",
             "A professional network and a competency-validation standard are a future stage, not a claim that a franchise or certification scheme already exists."
           ]
@@ -550,7 +550,7 @@
           "items": [
             {
               "title": "Conceptual modules",
-              "text": "Raimov System principles, diagnostics, planning, presentation and control."
+              "text": "RAIM SMILE SYSTEM principles, diagnostics, planning, presentation and control."
             },
             {
               "title": "Case review",
@@ -590,7 +590,7 @@
         "href": "/en/contact/"
       },
       "secondaryCta": {
-        "label": "Explore Raimov System",
+        "label": "Explore RAIM SMILE SYSTEM",
         "href": "/en/raimov-system/"
       },
       "showPatientForm": false
@@ -602,7 +602,7 @@
       "thesis": "The value of the clinic is measured less by the number of listed services than by the quality of the transition from uncertainty to an agreed plan.",
       "meta": {
         "title": "About RAIMOV DENTAL — the clinical foundation of the ecosystem",
-        "description": "The clinic's role in patient care, testing Raimov System, documenting decisions and supporting professional education."
+        "description": "The clinic's role in patient care, testing RAIM SMILE SYSTEM, documenting decisions and supporting professional education."
       },
       "sections": [
         {
@@ -617,7 +617,7 @@
             {
               "kicker": "02",
               "title": "Method testing",
-              "text": "Raimov System must work in everyday handovers, case conferences and treatment-stage control."
+              "text": "RAIM SMILE SYSTEM must work in everyday handovers, case conferences and treatment-stage control."
             },
             {
               "kicker": "03",
@@ -689,7 +689,7 @@
               "href": "/en/atabek-raimov/"
             },
             {
-              "title": "Raimov System",
+              "title": "RAIM SMILE SYSTEM",
               "text": "How treatment logic is organised.",
               "href": "/en/raimov-system/"
             },

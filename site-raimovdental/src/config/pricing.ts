@@ -63,8 +63,8 @@ export const pricingBands: PriceBand[] = [
     labelEn: 'Full-mouth reconstruction',
     fromAmount: null,
     currency: null,
-    noteRu: 'Этапный бюджет по плану Raimov System.',
-    noteEn: 'Staged budget per Raimov System plan.',
+    noteRu: 'Этапный бюджет по плану RAIM SMILE SYSTEM.',
+    noteEn: 'Staged budget per RAIM SMILE SYSTEM plan.',
     status: 'tbd',
   },
   {

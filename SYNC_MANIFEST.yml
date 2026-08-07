@@ -19,6 +19,7 @@ trees:
   - tests/raimovdental
 ssot_globs:
   - docs/ssot/RAIMOV*.md
+  - docs/ssot/RAIM_SMILE*.md
   - docs/ssot/EXPERT_DENTAL*.md
   - docs/ssot/ELITE_DENTAL*.md
 extra_files:
@@ -26,6 +27,7 @@ extra_files:
   - agents/manifests/raimovdental.yaml
   - docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
   - docs/founder-notes/DEC-787_post-visit-feedback-loop.md
+  - docs/founder-notes/DEC-801_raim-smile-system.md
 excludes:
   - node_modules
   - dist

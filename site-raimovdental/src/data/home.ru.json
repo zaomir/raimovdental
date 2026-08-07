@@ -144,7 +144,7 @@
     "publishable": true
   },
   "raimovSystem": {
-    "heading": "Raimov System",
+    "heading": "RAIM SMILE SYSTEM",
     "steps": [
       {
         "id": "diagnostics",
@@ -184,7 +184,7 @@
       }
     ],
     "cta": {
-      "label": "Как устроена Raimov System",
+      "label": "Как устроена RAIM SMILE SYSTEM",
       "href": "/ru/raimov-system/"
     }
   },
@@ -224,7 +224,7 @@
       "publishable": true
     },
     "profileHref": "/ru/atabek-raimov/",
-    "body": "Раимов Атабек Саидович ведёт сложные эстетические и функциональные случаи: диагностика, консилиум и поэтапный план по Raimov System — без обещания результата до осмотра."
+    "body": "Раимов Атабек Саидович — разработчик RAIM SMILE SYSTEM. Ведёт сложные эстетические и функциональные случаи: диагностика, консилиум и поэтапный план по системе — без обещания результата до осмотра."
   },
   "flagshipServices": {
     "heading": "Ключевые направления",

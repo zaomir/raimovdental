@@ -74,7 +74,7 @@ export function renderSystemPage(ctx, routeDef) {
   if (source.steps?.length) {
     const override = editorialPage(ctx, routeDef);
     const meta = source.meta || override?.meta || defaultPageMeta(ctx.locale, 'raimov-system');
-    const title = editorialText(override?.title || source.intro?.heading || 'Raimov System');
+    const title = editorialText(override?.title || source.intro?.heading || 'RAIM SMILE SYSTEM');
     const lead = editorialText(override?.lead || source.intro?.body || meta.description || '');
     const thesis = editorialText(override?.thesis || '');
     const bookHref = source.cta?.href || (isEn ? '/en/comprehensive-diagnostics/#lead-form' : '/ru/kompleksnaya-diagnostika/#lead-form');
@@ -85,7 +85,7 @@ export function renderSystemPage(ctx, routeDef) {
     const body = `
   <header class="editorial-hero">
     <div class="container container--narrow">
-      <p class="section__eyebrow">Raimov System</p>
+      <p class="section__eyebrow">RAIM SMILE SYSTEM</p>
       <h1 class="editorial-hero__title">${escapeHtml(title)}</h1>
       <p class="editorial-hero__lead">${escapeHtml(lead)}</p>
       ${thesis ? `<p class="editorial-hero__thesis">${escapeHtml(thesis)}</p>` : ''}

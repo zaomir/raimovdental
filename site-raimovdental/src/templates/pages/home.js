@@ -188,8 +188,8 @@ export function renderHomePage(ctx) {
   }) : ''}
   ${system.steps?.length ? sectionShell({
     id: 'system-preview',
-    eyebrow: 'Raimov System',
-    title: system.heading || 'Raimov System',
+    eyebrow: 'RAIM SMILE SYSTEM',
+    title: system.heading || 'RAIM SMILE SYSTEM',
     lead: isEn
       ? 'How the team turns a complex case into a controlled pathway.'
       : 'Как команда превращает сложный случай в управляемый маршрут.',
@@ -246,8 +246,8 @@ export function renderHomePage(ctx) {
   })}
   ${renderContactsSection({ locale, contacts: ctx.contacts })}
   <p class="home-ecosystem-footnote container">${escapeHtml(isEn
-    ? 'RAIMOV DENTAL · Raimov System · Raimov Academy — clinical, methodological and educational layers of one ecosystem.'
-    : 'RAIMOV DENTAL · Raimov System · Raimov Academy — клинический, методологический и образовательный слои одной экосистемы.')}</p>
+    ? 'RAIMOV DENTAL · RAIM SMILE SYSTEM · Raimov Academy — clinical, methodological and educational layers of one ecosystem.'
+    : 'RAIMOV DENTAL · RAIM SMILE SYSTEM · Raimov Academy — клинический, методологический и образовательный слои одной экосистемы.')}</p>
   ${renderStickyCta({
     locale,
     bookHref: normalizedBook,

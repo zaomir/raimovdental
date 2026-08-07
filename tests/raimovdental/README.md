@@ -58,7 +58,7 @@ curl -sS -X POST "https://lwyumrgygbuowndwcsvc.supabase.co/functions/v1/submit-r
 
 ## Brand guard
 
-Tests fail on **Saidov** strings; expect **RAIMOV DENTAL / Raimov System / Atabek Raimov**.
+Tests fail on **Saidov** strings; expect **RAIMOV DENTAL / RAIM SMILE SYSTEM / Atabek Raimov**.
 
 ## Lane ownership
 

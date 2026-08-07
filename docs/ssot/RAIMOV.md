@@ -13,6 +13,7 @@ links_to:
   - docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md
   - docs/ssot/RAIMOV_ACCESS_CONTINUITY_SYSTEM.md
   - docs/ssot/EXPERT_DENTAL_PATIENT_MOTIVATION_SYSTEM.md
+  - docs/ssot/RAIM_SMILE_SYSTEM.md
   - docs/ssot/RAIMOV_10M_MASTERPLAN.md
   - docs/ssot/RAIMOV_PUBLIC_PROFILE.md
   - docs/ssot/RAIMOV_LEGAL_GATES.md
@@ -22,6 +23,7 @@ links_to:
   - docs/founder-notes/DEC-774_raimov-access-continuity-system.md
   - docs/founder-notes/DEC-786_expert-dental-patient-motivation-system.md
   - docs/founder-notes/DEC-787_post-visit-feedback-loop.md
+  - docs/founder-notes/DEC-801_raim-smile-system.md
   - docs/raimov/
   - research/raimov-profile/
   - site-raimovdental/
@@ -33,7 +35,7 @@ links_to:
 
 Public `raimovdental.com` is **Stage B** (DEC-772): RU-only strategic brand platform at `/ru/`. Patient-first catalog is replaced. Protected Stage A remains at `/stage-a/`.
 
-DEC-774 adds the first applied Raimov System module to strategy and public Stage B: **RAIMOV DENTAL Access & Continuity System**. The website explains the model and its gates; it does not claim that the operational pilot, separate emergency clinic, 24/7 in-person care or Expert Care 12 are already running.
+DEC-774 adds the first applied RAIM SMILE SYSTEM module to strategy and public Stage B: **RAIMOV DENTAL Access & Continuity System**. The website explains the model and its gates; it does not claim that the operational pilot, separate emergency clinic, 24/7 in-person care or Expert Care 12 are already running.
 
 Evidence for the public cutover: `docs/audits/raimov/releases/public-v1/PRODUCTION_CUTOVER.md`.
 
@@ -103,7 +105,7 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | Пятилетние внутренние ориентиры | `RAIMOV_10M_MASTERPLAN.md` |
 | Stage A без approval/case gate | `DEC-743_raimovdental-stage-a-strategic-presentation.md` |
 | Public Stage B cutover | `DEC-772_raimovdental-public-stage-b-cutover.md` |
-| Первый applied module Raimov System | `DEC-774_raimov-access-continuity-system.md` |
+| Первый applied module RAIM SMILE SYSTEM | `DEC-774_raimov-access-continuity-system.md` |
 | Единая система мотивации пациентов Expert | `DEC-786_expert-dental-patient-motivation-system.md` |
 | Post-Visit Feedback Loop (CSAT → отзывы / recovery) | `DEC-787_post-visit-feedback-loop.md` |
 | Юридический вопрос | `RAIMOV_LEGAL_GATES.md` |
@@ -118,8 +120,8 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 - **Атабек Раимов** — владелец и клинический лидер действующей практики.
 - **Expert Dental Studio** — действующий операционный бизнес в Бишкеке и клиническая база первого пилота.
 - **RAIMOV DENTAL** — мастер-бренд и перспектива группы собственных клиник.
-- **Raimov System** — формируемая клиническая и операционная система.
-- **RAIMOV DENTAL Access & Continuity System** — первый прикладной модуль Raimov System; стратегия принята, operational pilot ещё не запущен.
+- **RAIM SMILE SYSTEM** — формируемая клиническая и операционная система.
+- **RAIMOV DENTAL Access & Continuity System** — первый прикладной модуль RAIM SMILE SYSTEM; стратегия принята, operational pilot ещё не запущен.
 - **Raimov Academy** — будущее образовательное направление.
 - **Собственные клиники RAIMOV DENTAL** — перспектива Бишкек → Кыргызстан → Центральная Азия.
 - **Международный экспертный контур** — поздняя личная практика Атабека в дорогой юрисдикции; Дубай только условный кандидат.
@@ -153,7 +155,7 @@ Layer 4 · LEGAL / OPERATIONS / RELEASE
 | `DEC-742` | будущая investor-first публичная архитектура, RU-only и full replacement |
 | `DEC-743` | Stage A — стратегическая презентация Дмитрия; approval и cases не являются входным gate |
 | `DEC-772` | публичный Stage B и полный cutover старого patient-first сайта |
-| `DEC-774` | Access & Continuity System — первый прикладной модуль Raimov System |
+| `DEC-774` | Access & Continuity System — первый прикладной модуль RAIM SMILE SYSTEM |
 | `DEC-786` | Expert Dental Patient Motivation System — Continuity + Care 12 + Points |
 
 ## 3.3. Текущий runtime
@@ -279,7 +281,7 @@ Next permitted operational outputs:
 | Пробел | Влияет на | Статус |
 |---|---|---|
 | Stage A and Stage B website gates | website | PASS |
-| Access & Continuity strategy canon | Raimov System | PASS — DEC-774 / SSOT v1.0 |
+| Access & Continuity strategy canon | RAIM SMILE SYSTEM | PASS — DEC-774 / SSOT v1.0 |
 | Public Access & Continuity route | Stage B | RELEASE IN CURRENT CHANGE |
 | Clinical triage | operational pilot | REQUIRES ATABEK APPROVAL |
 | Products 0 som composition | offer/economics | CONFIRMED — screening route only; TASK-785 |

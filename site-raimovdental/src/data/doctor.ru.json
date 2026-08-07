@@ -6,7 +6,7 @@
   "clinic": "RAIMOV DENTAL",
   "meta": {
     "title": "Атабек Раимов — главный врач RAIMOV DENTAL",
-    "description": "Профиль Раимова Атабека Саидовича — основателя RAIMOV DENTAL и автора Raimov System.",
+    "description": "Профиль Раимова Атабека Саидовича — основателя RAIMOV DENTAL и разработчика RAIM SMILE SYSTEM.",
     "medicalReviewRequired": true,
     "author": "Раимов Атабек Саидович",
     "medicalReviewer": "clinic_attested_2026-07-21",
@@ -83,8 +83,8 @@
     ]
   },
   "raimovSystemRole": {
-    "heading": "Автор Raimov System",
-    "body": "Raimov System — пациентская и клиническая система RAIMOV DENTAL: диагностика, проектирование результата, консилиум, поэтапный план и наблюдение. Без франшизы и коммерческих условий ELITE DENTAL.",
+    "heading": "Разработчик RAIM SMILE SYSTEM",
+    "body": "Атабек Раимов — разработчик RAIM SMILE SYSTEM: именного протокола, в котором эстетика улыбки строится на оценке прикуса и функции. Для пациента это означает пять шагов до и после лечения — диагностика, проектирование (включая мокап до необратимого этапа), консилиум, письменный поэтапный план с ценами и наблюдение тем же врачом. Без обещания результата до осмотра. Без франшизы и коммерческих условий ELITE DENTAL. Подробнее: https://raimsmile.com/",
     "publishable": true
   },
   "photo": {

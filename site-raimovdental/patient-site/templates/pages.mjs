@@ -165,6 +165,36 @@ export function homePage({ manifest, services, doctors, articles, prices, review
     </div>
   </section>
 
+  <section class="section section--bone" id="${attr(home.raimSmileSystem.id)}" aria-labelledby="rss-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: home.raimSmileSystem.kicker,
+        title: home.raimSmileSystem.title,
+        lead: home.raimSmileSystem.lead,
+        id: 'rss-title',
+      })}
+      <div class="grid grid--4 mt-4">
+        ${home.raimSmileSystem.steps
+          .map(
+            (s) => `<div class="spec-card">
+              <h3 class="spec-card__title">${esc(s.title)}</h3>
+              <p class="t-small">${esc(s.text)}</p>
+            </div>`
+          )
+          .join('')}
+      </div>
+      ${lockedNote(home.raimSmileSystem.note, prices)}
+      <div class="btn-row mt-3">
+        <a class="btn btn--ghost" href="${attr(home.raimSmileSystem.doctorLink.href)}">${esc(
+    home.raimSmileSystem.doctorLink.label
+  )}</a>
+        <a class="link-arrow" href="${attr(home.raimSmileSystem.external.href)}" rel="noopener" target="_blank">${esc(
+    home.raimSmileSystem.external.label
+  )} →</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="${attr(home.process.id)}" aria-labelledby="process-title">
     <div class="shell">
       ${sectionHead({ kicker: home.process.kicker, title: home.process.title, id: 'process-title' })}
@@ -934,6 +964,31 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
     </div>
   </section>
 
+  <section class="section section--forest fluted" id="${attr(chief.raimSmileSystem.id)}" aria-labelledby="chief-rss-title">
+    <div class="shell">
+      ${sectionHead({
+        kicker: chief.raimSmileSystem.kicker,
+        title: chief.raimSmileSystem.title,
+        lead: chief.raimSmileSystem.lead,
+        id: 'chief-rss-title',
+      })}
+      <div class="grid grid--2 mt-4">
+        ${chief.raimSmileSystem.benefits
+          .map(
+            (b) => `<div class="card card--service">
+              <h3 class="card__title">${esc(b.title)}</h3>
+              <p class="card__text">${esc(b.text)}</p>
+            </div>`
+          )
+          .join('')}
+      </div>
+      <p class="medical-note mt-4">${esc(chief.raimSmileSystem.note)}</p>
+      <p class="mt-3"><a class="link-arrow link-arrow--onDark" href="${attr(
+        chief.raimSmileSystem.externalHref
+      )}" rel="noopener" target="_blank">${esc(chief.raimSmileSystem.externalLabel)} →</a></p>
+    </div>
+  </section>
+
   <section class="section section--bone">
     <div class="shell split">
       <div class="stack stack--gap-1">
@@ -1371,9 +1426,10 @@ export function aboutPage({ manifest, doctors, prices }) {
         <div class="stack stack--gap-115">
           <span class="kicker">О клинике</span>
           <h1 class="display t-h1">Клиника, где план лечения составляют до его начала</h1>
-          <p class="t-lead">Expert Dental Studio — стоматология в центре Бишкека. Мы работаем командой:
-            ортодонт, гнатолог, хирург-имплантолог, ортопед и терапевты согласуют этапы между собой,
-            а не лечат каждый свою часть отдельно.</p>
+          <p class="t-lead">Expert Dental Studio — стоматология в центре Бишкека. Мы работаем по
+            <strong>RAIM SMILE SYSTEM</strong> — именной системе Атабека Раимова: ортодонт, гнатолог,
+            хирург-имплантолог, ортопед и терапевты согласуют этапы между собой, а эстетика следует
+            за оценкой прикуса.</p>
           ${ctaPair({
             context: 'about-hero',
             message: 'Здравствуйте. Читаю страницу «О клинике» и хочу записаться на первичный приём.',
@@ -1390,15 +1446,14 @@ export function aboutPage({ manifest, doctors, prices }) {
 
   <section class="section section--bone">
     <div class="shell">
-      ${sectionHead({ kicker: 'Как мы работаем', title: 'Четыре принципа' })}
+      ${sectionHead({ kicker: 'Как мы работаем', title: 'Четыре принципа RAIM SMILE SYSTEM' })}
       <div class="steps steps--row">
         <div class="step"><div class="step__title">Диагностика до лечения</div>
           <p class="step__text">Осмотр, фотопротокол и снимки по показаниям. План и стоимость известны до начала работы.</p></div>
         <div class="step"><div class="step__title">Один план на всех врачей</div>
-          <p class="step__text">Если задача требует нескольких специалистов, они согласуют последовательность этапов.</p></div>
-        <div class="step"><div class="step__title">Сустав оценивается по показаниям</div>
-          <p class="step__text">Перед большим протезированием или ортодонтией врач определяет,
-            нужна ли функциональная диагностика положения нижней челюсти.</p></div>
+          <p class="step__text">Если задача требует нескольких специалистов, они согласуют последовательность этапов по системе.</p></div>
+        <div class="step"><div class="step__title">Прикус до эстетики</div>
+          <p class="step__text">Перед большим протезированием, винирами или ортодонтией оценивают функцию прикуса и сустава по показаниям.</p></div>
         <div class="step"><div class="step__title">Один источник цен</div>
           <p class="step__text">Прайс на сайте, у администратора и у врача — один и тот же.</p></div>
       </div>

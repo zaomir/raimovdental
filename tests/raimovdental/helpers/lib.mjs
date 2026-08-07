@@ -101,7 +101,7 @@ export const BANNED_BRAND = [
 
 export const REQUIRED_BRAND = [
   'RAIMOV DENTAL',
-  'Raimov System',
+  'RAIM SMILE SYSTEM',
   'Raimov Academy',
   'Раимов',
 ];

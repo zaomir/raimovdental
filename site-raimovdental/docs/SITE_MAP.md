@@ -95,7 +95,7 @@ Every strategy detail route follows the same order:
 
 ## Truth boundary
 
-The atlas explains what Dmitry proposes to build. It does not claim that Raimov System, Academy, a clinic network, Expert Care 12 or the Access & Continuity operational pilot are already launched.
+The atlas explains what Dmitry proposes to build. It does not claim that RAIM SMILE SYSTEM, Academy, a clinic network, Expert Care 12 or the Access & Continuity operational pilot are already launched.
 
 The CAESTHETIC reporting workspace separates planned work from completed work. Activity is not presented as a business result unless a measured result is available.
 

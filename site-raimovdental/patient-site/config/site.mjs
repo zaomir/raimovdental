@@ -11,7 +11,7 @@ export const brand = {
   nameRu: 'Эксперт дентал студия',
   legalName: 'Эксперт Дентал Студия ОсОО',
   legalNote: 'Стоматологическая клиника, Бишкек',
-  tagline: 'Виниры и эстетическая реставрация в Бишкеке',
+  tagline: 'Виниры и эстетика по RAIM SMILE SYSTEM · Бишкек',
   founded: 2023,
   /**
    * Licence number as supplied by the clinic. The spacing inside the number is unusual for
@@ -135,6 +135,7 @@ export const analytics = {
 export const nav = [
   { href: '/#preview', label: 'Примерка' },
   { href: '/#approach', label: 'Подход' },
+  { href: '/#raim-smile-system', label: 'Система' },
   { href: '/#work', label: 'Работы' },
   { href: '/doctors/', label: 'Врачи' },
   { href: '/services/', label: 'Цены' },

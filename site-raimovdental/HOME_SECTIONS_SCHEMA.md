@@ -1,7 +1,7 @@
 # Homepage data schemas (commercial home v2)
 
 **Branch:** `feat/raimovdental-commercial-home-v2`  
-**UI order (final integrator only):** 1 Hero → 2 JTBD → 3 Cases → 4 First visit → 5 Raimov System → 6 Doctor → 7 Flagship services → 8 Reviews → 9 Clinic gallery → 10 FAQ → 11 Final CTA → 12 Contacts/map  
+**UI order (final integrator only):** 1 Hero → 2 JTBD → 3 Cases → 4 First visit → 5 RAIM SMILE SYSTEM → 6 Doctor → 7 Flagship services → 8 Reviews → 9 Clinic gallery → 10 FAQ → 11 Final CTA → 12 Contacts/map  
 
 Lane A fills JSON. Lane B does not touch these files. Blocks without `publishable: true` content must be omitted by the UI (no TBD stubs).
 

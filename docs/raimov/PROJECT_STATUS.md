@@ -52,7 +52,7 @@ The website is live, but the clinical operational pilot is not launched by this 
 
 ## Accepted strategy
 
-- DEC-774 defines Access & Continuity as the first applied Raimov System module.
+- DEC-774 defines Access & Continuity as the first applied RAIM SMILE SYSTEM module.
 - It is a service line/pilot inside Expert Dental Studio, not a separate cheap clinic.
 - Free triage/routing and paid diagnostics/treatment are explicitly separated.
 - The main conversion KPI is a pre-booked next check-up, not certificate count.

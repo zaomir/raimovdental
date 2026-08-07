@@ -120,7 +120,7 @@ try {
 
   const servedHtml = await (await fetch(routeUrl)).text();
   assert.match(servedHtml, /Стратегия Дмитрия/);
-  assert.match(servedHtml, /Raimov System/);
+  assert.match(servedHtml, /RAIM SMILE SYSTEM/);
   assert.doesNotMatch(servedHtml, /https?:\/\//i);
 } finally {
   server.kill('SIGTERM');

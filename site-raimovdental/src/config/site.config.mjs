@@ -5,7 +5,7 @@
 export const siteConfig = {
   brand: {
     clinic: 'RAIMOV DENTAL',
-    system: 'Raimov System',
+    system: 'RAIM SMILE SYSTEM',
     academy: 'Raimov Academy',
     doctorFullRu: 'Раимов Атабек Саидович',
     doctorPublicRu: 'Атабек Раимов',

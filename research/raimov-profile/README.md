@@ -2,7 +2,7 @@
 
 **Status:** Commit-1 scaffold + **media/text archive after rights (2026-07-21)**.  
 **Not:** automatic patient-site publish (medical/copy gates remain).  
-**Brand lock (config):** RAIMOV DENTAL · Raimov System · Raimov Academy · Atabek Raimov · Раимов Атабек Саидович.  
+**Brand lock (config):** RAIMOV DENTAL · RAIM SMILE SYSTEM · Raimov Academy · Atabek Raimov · Раимов Атабек Саидович.  
 **Forbidden public brands:** Saidov Dental · Saidov System · Saidov Academy · Atabek Saidov.  
 **Rights:** `RIGHTS_GRANT.md` · media in `media/` · texts in `TEXTS_REGISTER.md` / `evidence/excerpts/` · speaking in `SPEAKING_REGISTER.md` · mentions in `MENTIONS_REGISTER.md`.
 

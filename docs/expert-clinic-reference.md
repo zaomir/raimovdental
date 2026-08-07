@@ -34,6 +34,7 @@ expert-clinic-reference.md (ЭТОТ ФАЙЛ)
 | 📐 **Архитектура экосистемы** | [`docs/ssot/RAIMOV_ECOSYSTEM_PROJECT_ARCHITECTURE.md`](docs/ssot/RAIMOV_ECOSYSTEM_PROJECT_ARCHITECTURE.md) | Топология, владение, фазовые ворота |
 | 🎯 **Стратегия роста (полная)** | [`docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md`](docs/ssot/EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md) | Диагноз, воронка, KPI, риски. Канон для разговоров с Атабеком |
 | 🌐 **Стратегия сайта RAIMOV DENTAL** | [`docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md`](docs/ssot/RAIMOV_DENTAL_WEBSITE_STRATEGY.md) | Аудитория, глубина, CTA, IA, copy |
+| 😁 **RAIM SMILE SYSTEM** | [`docs/ssot/RAIM_SMILE_SYSTEM.md`](docs/ssot/RAIM_SMILE_SYSTEM.md) | Канон клинической системы + `raimsmile.com` (DEC-801) |
 | 🦷 **Стратегия сайта Expert Dental** | [`docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md`](docs/ssot/EXPERT_DENTAL_WEBSITE_SSOT.md) | SSOT для сайта Expert Dental |
 | 💼 **Предложение роста** | [`docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md`](docs/ssot/EXPERT_DENTAL_GROWTH_OFFER.md) | Коммерческое предложение, Instagram, финансовая модель |
 | 📊 **Practice Growth Blueprint** | [`docs/ssot/PRACTICE_GROWTH_BLUEPRINT.md`](docs/ssot/PRACTICE_GROWTH_BLUEPRINT.md) | Blueprint роста практики |

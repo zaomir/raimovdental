@@ -1,12 +1,12 @@
 /**
  * RAIMOV DENTAL — public site configuration SSOT.
- * Brand lock: RAIMOV DENTAL · Raimov System · Raimov Academy · Atabek Raimov ·
+ * Brand lock: RAIMOV DENTAL · RAIM SMILE SYSTEM · Raimov Academy · Atabek Raimov ·
  * Раимов Атабек Саидович.
  */
 export const siteConfig = {
   brand: {
     clinic: 'RAIMOV DENTAL',
-    system: 'Raimov System',
+    system: 'RAIM SMILE SYSTEM',
     academy: 'Raimov Academy',
     doctorFullRu: 'Раимов Атабек Саидович',
     doctorPublicRu: 'Атабек Раимов',

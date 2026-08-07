@@ -5,7 +5,7 @@ doctorFullRu = "Раимов Атабек Саидович"
 doctorPublicRu = "Атабек Раимов"
 doctorEn = "Atabek Raimov"
 clinic = "RAIMOV DENTAL"
-system = "Raimov System"
+system = "RAIM SMILE SYSTEM"
 academy = "Raimov Academy"
 
 ## Routes (emit both RU and EN)

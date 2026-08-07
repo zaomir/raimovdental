@@ -59,7 +59,7 @@
 | Токен | Источник | Статус | Примечание |
 |---|---|---|---|
 | RAIMOV DENTAL | `site-raimovdental/src/config/site.ts` | `repo_reference_only` | Канонический бренд patient-site |
-| Raimov System | `site.ts` + doctor draft | `repo_reference_only` | Черновая пациентская/клиническая система; не «авторский протокол» без gate |
+| RAIM SMILE SYSTEM | `site.ts` + doctor draft | `repo_reference_only` | Черновая пациентская/клиническая система; не «авторский протокол» без gate |
 | Raimov Academy | `site.ts` | `repo_reference_only` | **Brand token**, не доказанный работающий образовательный проект |
 | Atabek Raimov / Атабек Раимов | `site.ts`, doctor JSON, публичные страницы | `discovered` / `repo_reference_only` | Публичное имя |
 | Раимов Атабек Саидович | clinic site + drafts | `discovered` | Полное ФИО на expertdental.kg |
@@ -91,13 +91,13 @@
 | P-004 | Маркетинговый био-текст Expert Dental (цитата, сокращ.) | Упоминания спикерства DemMed, ОртоКомьюнити, курсов, «более 400 завершенных работ», основатель Expert brands; ВНЧС-формулировки в карточке | `unverified` / marketing | expertdental.kg | Case count / ВНЧС / membership → **не публиковать** без gate |
 | P-005 | Официальная должность (patient-site) | `null` / `pending_clinic_confirmation` | `repo_reference_only` | `doctor.ru.json` | Нет |
 | P-006 | Education / certificates / publications / speaking (JSON) | Пустые массивы | `repo_reference_only` | `doctor.ru.json` | Нет |
-| P-007 | Raimov System (черновик) | Диагностика → проектирование → консилиум → поэтапный план → наблюдение; без франшизы ELITE DENTAL | `repo_reference_only` | `doctor.ru.json` `raimovSystemRole` | Черновик; medical review |
+| P-007 | RAIM SMILE SYSTEM | Диагностика → проектирование → консилиум → поэтапный план → наблюдение; без франшизы ELITE DENTAL | `repo_reference_only` | `doctor.ru.json` `raimovSystemRole` | Черновик; medical review |
 | P-008 | Фото | `photo.src = null`; исторический файл в другом контуре | `rights_pending` | doctor JSON · MED-001 | Нет |
 
 ### 4.2 Что сознательно НЕ фиксируем как факт
 
 - Подтверждённая специализация ВНЧС / гнатология как лицензированный scope
-- Авторство «диагностического протокола» шире черновика Raimov System
+- Авторство «диагностического протокола» шире черновика RAIM SMILE SYSTEM
 - Существование работающей Raimov Academy как образовательной программы
 - Принадлежность Instagram `@doctor_raimov` без clinic OK
 - DOB / био с who.ca-news.org (`excluded`)
@@ -238,7 +238,7 @@ Mentors named in TM-002 bio (Бернацкий, Юров, Ярошевич) —
 - [ ] Education / certificates
 - [x] Media archive rights (founder 2026-07-21) — photos/texts archived
 - [ ] Team roster: выбрать кого публиковать на RAIMOV DENTAL + medical wording
-- [ ] Approved Raimov System / Academy wording
+- [ ] Approved RAIM SMILE SYSTEM / Academy wording
 - [ ] Speaking: DemMed primary PDF / доп. выступления
 - [ ] Written license PDF (если counsel потребует сверх founder grant)
 - [ ] Price list для RAIMOV DENTAL

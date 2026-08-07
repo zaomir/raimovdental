@@ -817,6 +817,22 @@ h1 {
   font-size: 0.94rem;
 }
 
+.system-product-line {
+  max-width: 56rem;
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.system-product-line a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .system-disclaimer {
   max-width: 56rem;
   padding: 1.2rem 0 0 1.4rem;

@@ -17,7 +17,7 @@ This document defines repository topology, ownership boundaries and release gate
 - Expert Dental Studio;
 - RAIMOV DENTAL;
 - Atabek Raimov;
-- Raimov System;
+- RAIM SMILE SYSTEM;
 - Raimov Academy;
 - directly controlled future clinics;
 - the later international expert track;
@@ -37,7 +37,7 @@ This architecture organises implementation around those strategies; it does not 
 2. Evidence, public facts, strategy, copy, legal, operations, runtime and generated output remain separate.
 3. Expert Dental Studio is the current operating clinic.
 4. RAIMOV DENTAL is the master brand and perspective of a future group of directly controlled clinics.
-5. Raimov System, Academy, new clinics, international practice and ELITE DENTAL must be labelled by real status.
+5. RAIM SMILE SYSTEM, Academy, new clinics, international practice and ELITE DENTAL must be labelled by real status.
 6. Stage A is a protected strategic presentation from Dmitry to Atabek; it is not a public launch.
 7. Atabek approval is an outcome of Stage A, not a prerequisite for its Site Map, design or representative page.
 8. Stage A requires a minimal truth register, not case-level clinical proof.
@@ -80,7 +80,7 @@ docs/raimov/
 ├── corporate/           # legal identity, domains, brands, entities, licences
 ├── clinic-growth/       # baseline, offers, capacity, unit economics
 ├── patient-funnel/      # lead → booking → visit → diagnosis → plan → payment → recall (+ motivation SSOT DEC-786)
-├── clinical-system/     # Raimov System modules and quality standards
+├── clinical-system/     # RAIM SMILE SYSTEM modules and quality standards
 ├── academy/             # future education products and release gates
 ├── elite-dental/        # future separate partner/franchise contour
 ├── content/             # route, CTA, truth/proof and editorial registers
@@ -143,7 +143,7 @@ Directories are materialised only when there is a real owner, task or evidence s
 | Expert Dental Studio | operating clinic in Bishkek | `docs/raimov/clinic-growth/`, `patient-funnel/`, `operations/` | current facts only after confirmation |
 | RAIMOV DENTAL | master brand, website and future clinic group | `site-raimovdental/`, `docs/copy/raimov/`, `docs/raimov/content/` | Stage A protected; public Stage B separately gated |
 | Atabek Raimov | current clinical authority | `research/raimov-profile/`, `RAIMOV_PUBLIC_PROFILE.md` | curated facts only |
-| Raimov System | developing methodology | `docs/raimov/clinical-system/` | strategy-level in Stage A; no certification claim |
+| RAIM SMILE SYSTEM | developing methodology | `docs/raimov/clinical-system/` | strategy-level in Stage A; no certification claim |
 | Raimov Academy | future education line | `docs/raimov/academy/` | direction in Stage A; public programme later |
 | Own RAIMOV DENTAL clinics | future Bishkek/Kyrgyzstan/Central Asia line | `clinic-growth/`, `corporate/`, `operations/` | perspective only until real projects exist |
 | International expert practice | future expensive-jurisdiction track | `clinic-growth/`, `docs/research/raimov/international/` | later separate phase; Dubai conditional |

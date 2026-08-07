@@ -127,7 +127,7 @@ This document lists all data required from the clinic before public release. Lan
 
 ## Brand confirmation
 
-- [ ] Confirm public brand: **RAIMOV DENTAL** / **Raimov System** / **Raimov Academy**
+- [ ] Confirm public brand: **RAIMOV DENTAL** / **RAIM SMILE SYSTEM** / **Raimov Academy**
 - [ ] Confirm **no** Saidov Dental / Saidov System / Saidov Academy on patient site
 - [ ] Confirm no franchise (ELITE DENTAL) content on this site
 

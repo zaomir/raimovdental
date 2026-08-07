@@ -11,7 +11,7 @@ Dental healthcare ecosystem centred on Atabek Raimov and the RAIMOV DENTAL maste
 
 - current operating clinic — Expert Dental Studio;
 - current clinical practice and team;
-- developing Raimov System;
+- developing RAIM SMILE SYSTEM;
 - future Raimov Academy;
 - future directly controlled RAIMOV DENTAL clinics;
 - later international expert practice;
@@ -38,7 +38,7 @@ Replacement v1 is RU-only. Medical tourism to Bishkek is excluded. The investor 
 
 ## Knowledge-only / planned entities
 
-- **Raimov System** — developing methodology; no certification claim.
+- **RAIM SMILE SYSTEM** — developing methodology; no certification claim.
 - **Raimov Academy** — future education line; no published programmes yet.
 - **Own RAIMOV DENTAL clinics** — future Bishkek/Kyrgyzstan/Central Asia line.
 - **International expert practice** — later phase; geography open.

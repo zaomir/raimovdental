@@ -215,7 +215,7 @@ export function serviceToEditorialPage(service, ctx) {
       href: `${ctx.path}#lead-form`,
     },
     secondaryCta: {
-      label: ctx.locale === 'en' ? 'How Raimov System works' : 'Как работает Raimov System',
+      label: ctx.locale === 'en' ? 'How RAIM SMILE SYSTEM works' : 'Как работает RAIM SMILE SYSTEM',
       href: ctx.locale === 'en' ? '/en/raimov-system/' : '/ru/raimov-system/',
     },
     meta: {

@@ -70,7 +70,7 @@ export function renderFooter(ctx) {
       ])}
       ${col(isEn ? 'Ecosystem' : 'Экосистема', [
         { label: isEn ? 'Ecosystem architecture' : 'Архитектура экосистемы', href: `${prefix}${isEn ? '/ecosystem/' : '/ekosistema/'}` },
-        { label: 'Raimov System', href: `${prefix}/raimov-system/` },
+        { label: 'RAIM SMILE SYSTEM', href: `${prefix}/raimov-system/` },
         { label: 'Atabek Raimov', href: `${prefix}/atabek-raimov/` },
         { label: isEn ? 'Raimov Academy (for doctors)' : 'Raimov Academy (для врачей)', href: `${prefix}/academy/` },
       ])}
@@ -81,6 +81,6 @@ export function renderFooter(ctx) {
         { label: 'WhatsApp', href: ctx.contacts.whatsappHref },
       ])}
     </div>
-    <div class="site-footer__bottom"><p>© ${year} RAIMOV DENTAL. ${escapeHtml(isEn ? 'Medical decisions require individual diagnostics. Raimov Academy · Raimov System are layers of the RAIMOV ecosystem.' : 'Медицинские решения принимаются только после индивидуальной диагностики. Raimov Academy · Raimov System — слои экосистемы RAIMOV.')}</p></div>
+    <div class="site-footer__bottom"><p>© ${year} RAIMOV DENTAL. ${escapeHtml(isEn ? 'Medical decisions require individual diagnostics. Raimov Academy · RAIM SMILE SYSTEM are layers of the RAIMOV ecosystem.' : 'Медицинские решения принимаются только после индивидуальной диагностики. Raimov Academy · RAIM SMILE SYSTEM — слои экосистемы RAIMOV.')}</p></div>
   </div></footer>`;
 }

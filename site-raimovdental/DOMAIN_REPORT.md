@@ -22,7 +22,7 @@
 
 «Саидович» is a **patronymic**, not a surname. Forbidden brand strings: Saidov Dental, Saidov System, Saidov Academy, Atabek Saidov, saidovdental.com, saidovsystem.com, saidovacademy.com.
 
-Correct: **RAIMOV DENTAL** · **Raimov System** · **Raimov Academy** · **Atabek Raimov** · **Раимов Атабек Саидович**.
+Correct: **RAIMOV DENTAL** · **RAIM SMILE SYSTEM** · **Raimov Academy** · **Atabek Raimov** · **Раимов Атабек Саидович**.
 
 ## Sources
 
