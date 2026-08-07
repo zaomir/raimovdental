@@ -130,13 +130,14 @@ export const analytics = {
 /**
  * Top navigation. Anchors point at the home page so the same bar works from any route;
  * all links use the homepage section map from the clinic-approved v2 specification.
+ * «Цены» → canonical catalog `/services/` (not homepage #prices).
  */
 export const nav = [
   { href: '/#preview', label: 'Примерка' },
   { href: '/#approach', label: 'Подход' },
   { href: '/#work', label: 'Работы' },
   { href: '/#doctors', label: 'Врачи' },
-  { href: '/#prices', label: 'Цены' },
+  { href: '/services/', label: 'Цены' },
   { href: '/#reviews', label: 'Отзывы' },
   { href: '/#contacts', label: 'Контакты' },
 ];
@@ -199,4 +200,7 @@ export const pendingFromClinic = [
   'Сертификаты Дуйшеевой Айдай в блоке #rec883441984 не найдены — прислать отдельно, если есть.',
   '4 неразмеченных скана из «Квалификация врачей» (credentials-archive/unassigned) — назвать владельца.',
   'Официальная публичная должность главного врача — «главный врач» или «основатель».',
+  'OrthoDay 29.03.2026: роль (спикер/модератор/организатор) и тема — см. chief.practice «Спикер OrthoDay» (verified: false) и FOUNDER_LAUNCH_CHECKLIST B3.',
+  'MEAW / Kim Jeong-Il: год курса и право публикации сертификата (FOUNDER_LAUNCH_CHECKLIST B2).',
+  'Медицинская проверка 9 статей блога (reviewedAt + reviewEvidence) — блокер §33.1 до переноса на expertdental.kg.',
 ];

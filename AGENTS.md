@@ -19,7 +19,7 @@ This repository is the **Cursor Agents** surface for Expert Dental / RAIMOV DENT
 ## Do
 
 - Edit clinic site, research, ops docs, copy, legal templates under mirrored trees (`SYNC_MANIFEST.yml`)
-- Commit and push here — VDS cron (or manual sync) mirrors to grainee-v2
+- After every completed task: commit + push here → sync Agents↔grainee → deploy from grainee if runtime — **no asks/reminders**
 - Keep evidence, medical, legal and media-rights gates
 
 ## Do not

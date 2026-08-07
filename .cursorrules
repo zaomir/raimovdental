@@ -7,5 +7,5 @@
 3. Sync = bidirectional DEC-784 (`docs/raimov/AGENTS_SATELLITE.md`)
 4. Facts only from `research/raimov-profile/` registers — no invented clinic claims
 5. Protected: `research/raimov-profile/evidence/**`, `site-raimovdental/src/config/pricing.ts`
-6. Ship: commit here → sync to grainee → deploy from grainee if runtime
+6. Ship: after EVERY completed task — commit, push, sync to grainee, deploy from grainee if runtime — **without asking / reminding**
 7. No secrets / patient PII in git
