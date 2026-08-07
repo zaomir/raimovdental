@@ -62,6 +62,8 @@
     if(typeof state.demoPathClosed!=='boolean')state.demoPathClosed=false;
     if(typeof state.demoPathGateMsg!=='string')state.demoPathGateMsg='';
     if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
+    if(!state.inboxCards||typeof state.inboxCards!=='object')state.inboxCards={};
+    if(typeof state.inboxSelectedId!=='string')state.inboxSelectedId='';
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
@@ -396,10 +398,12 @@
     }
 
     const INBOX_SLA=['новое','в работе','записан','упущен','передан врачу'];
+    const INBOX_SOURCES=['Карты (заглушка до I8)','Сайт (заглушка до I8)','Instagram (заглушка до I8)','WhatsApp (заглушка до I8)','Рекомендация (заглушка до I8)','Другое (заглушка до I8)'];
+    const INBOX_OWNERS=['Администратор','Старший администратор','Дежурный врач','Координатор'];
     const DEMO_INBOX=[
-      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор',defaultStatus:'новое'},
-      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор',defaultStatus:'в работе'},
-      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор',defaultStatus:'записан'}
+      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор',defaultStatus:'новое',source:'Карты (заглушка до I8)',nextAction:'Перезвонить и предложить ближайшее окно'},
+      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор',defaultStatus:'в работе',source:'Instagram (заглушка до I8)',nextAction:'Уточнить ожидания по эстетике и предложить консультацию'},
+      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор',defaultStatus:'записан',source:'Сайт (заглушка до I8)',nextAction:'Подтвердить запись и напомнить про снимок'}
     ];
     function ensureInboxStatuses(){
       if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
@@ -407,24 +411,68 @@
         if(!INBOX_SLA.includes(state.inboxStatuses[item.id]))state.inboxStatuses[item.id]=item.defaultStatus||'новое';
       });
     }
+    function ensureInboxCards(){
+      if(!state.inboxCards||typeof state.inboxCards!=='object')state.inboxCards={};
+      DEMO_INBOX.forEach((item)=>{
+        const cur=state.inboxCards[item.id]||{};
+        state.inboxCards[item.id]={
+          channel:cur.channel||item.channel,
+          need:cur.need||item.need,
+          source:cur.source||item.source||INBOX_SOURCES[0],
+          nextAction:cur.nextAction||item.nextAction||'',
+          owner:cur.owner||item.owner||INBOX_OWNERS[0]
+        };
+      });
+      if(!state.inboxSelectedId||!DEMO_INBOX.some((x)=>x.id===state.inboxSelectedId))state.inboxSelectedId=DEMO_INBOX[0].id;
+    }
     function inboxStatusClass(status){
       if(status==='упущен')return'status-danger';
       if(status==='передан врачу'||status==='записан')return'status-ok';
       if(status==='в работе')return'status-warn';
       return'muted';
     }
+    function inquiryCardHtml(){
+      ensureInboxCards();
+      ensureInboxStatuses();
+      const item=DEMO_INBOX.find((x)=>x.id===state.inboxSelectedId)||DEMO_INBOX[0];
+      const card=state.inboxCards[item.id];
+      const status=state.inboxStatuses[item.id]||item.defaultStatus||'новое';
+      const channelOpts=['Звонок','WhatsApp','Форма'].map((c)=>`<option value="${esc(c)}"${c===card.channel?' selected':''}>${esc(c)}</option>`).join('');
+      const sourceOpts=INBOX_SOURCES.map((s)=>`<option value="${esc(s)}"${s===card.source?' selected':''}>${esc(s)}</option>`).join('');
+      const ownerOpts=INBOX_OWNERS.map((o)=>`<option value="${esc(o)}"${o===card.owner?' selected':''}>${esc(o)}</option>`).join('');
+      const slaOpts=INBOX_SLA.map((s)=>`<option value="${esc(s)}"${s===status?' selected':''}>${esc(s)}</option>`).join('');
+      return `<div class="card action-card" data-atom="i13-inquiry-card" data-inbox-card="${esc(item.id)}" style="margin-top:14px"><div class="eyebrow">I1.3 · единая карточка</div><h3>${esc(item.patient)}</h3><p class="muted">${esc(item.at)} · SLA: <b class="${inboxStatusClass(status)}">${esc(status)}</b></p><p class="muted">Все ключевые поля на одной карточке. Источник — заглушка до I8.</p>
+        <div class="stack" style="margin-top:12px">
+          <label class="muted" style="font-size:12px">Канал</label>
+          <select id="inqChannel" class="btn secondary" style="width:100%;text-align:left">${channelOpts}</select>
+          <label class="muted" style="font-size:12px">Потребность</label>
+          <textarea id="inqNeed" class="btn secondary" style="width:100%;min-height:72px;text-align:left;font-weight:500;resize:vertical">${esc(card.need)}</textarea>
+          <label class="muted" style="font-size:12px">Источник <span class="badge demo">до I8</span></label>
+          <select id="inqSource" class="btn secondary" style="width:100%;text-align:left">${sourceOpts}</select>
+          <label class="muted" style="font-size:12px">Next action</label>
+          <textarea id="inqNext" class="btn secondary" style="width:100%;min-height:72px;text-align:left;font-weight:500;resize:vertical">${esc(card.nextAction)}</textarea>
+          <label class="muted" style="font-size:12px">Владелец</label>
+          <select id="inqOwner" class="btn secondary" style="width:100%;text-align:left">${ownerOpts}</select>
+          <label class="muted" style="font-size:12px">SLA-статус</label>
+          <select id="inqSla" class="btn secondary" style="width:100%;text-align:left">${slaOpts}</select>
+        </div>
+        <div class="header-actions" style="margin-top:12px"><button id="inqSave" type="button" class="btn primary">Сохранить карточку</button><button id="inqOpenRender" type="button" class="btn secondary">В /render/</button></div>
+        <p class="muted" style="margin-top:10px">Поля: канал · потребность · источник · next action · владелец (+ SLA из I1.2).</p></div>`;
+    }
     function inboxListHtml(){
       ensureInboxStatuses();
+      ensureInboxCards();
       const rows=DEMO_INBOX.map((item)=>{
         const status=state.inboxStatuses[item.id]||item.defaultStatus||'новое';
-        const opts=INBOX_SLA.map((s)=>`<option value="${esc(s)}"${s===status?' selected':''}>${esc(s)}</option>`).join('');
-        return `<article class="card" data-inbox-id="${esc(item.id)}" data-inbox-channel="${esc(item.channelKey)}" data-inbox-status="${esc(status)}" data-atom="i12-sla-status" style="padding:12px 14px"><div class="task" style="border:0;padding:0"><span><b>${esc(item.patient)}</b><br><span class="muted">${esc(item.need)}</span><br><span class="muted">${esc(item.at)} · ${esc(item.owner)} · ${esc(item.channel)}</span></span><b class="${inboxStatusClass(status)}">${esc(status)}</b></div><label class="muted" style="display:block;margin-top:10px;font-size:12px">SLA-статус</label><select class="btn secondary" data-inbox-status-select="${esc(item.id)}" style="width:100%;margin-top:6px;text-align:left">${opts}</select></article>`;
+        const card=state.inboxCards[item.id]||{};
+        const active=item.id===state.inboxSelectedId;
+        return `<article class="card ${active?'action-card':''}" data-inbox-id="${esc(item.id)}" data-inbox-channel="${esc(item.channelKey)}" data-inbox-status="${esc(status)}" data-atom="i12-sla-status" style="padding:12px 14px"><div class="task" style="border:0;padding:0"><span><b>${esc(item.patient)}</b><br><span class="muted">${esc(card.need||item.need)}</span><br><span class="muted">${esc(item.at)} · ${esc(card.owner||item.owner)} · ${esc(card.channel||item.channel)}</span></span><b class="${inboxStatusClass(status)}">${esc(status)}</b></div><button type="button" class="btn ${active?'primary':'secondary'}" data-inbox-open="${esc(item.id)}" style="width:100%;margin-top:10px">${active?'Карточка открыта':'Открыть карточку'}</button></article>`;
       }).join('');
       const counts=INBOX_SLA.map((s)=>{
         const n=DEMO_INBOX.filter((item)=>(state.inboxStatuses[item.id]||item.defaultStatus)===s).length;
         return `<span class="badge">${esc(s)} · ${n}</span>`;
       }).join('');
-      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. SLA-статусы переключаются в demo state (I1.2). Закрытые контакты и возврат упущенных — в журнале /render/ (I7.5).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="header-actions" style="margin-top:8px">${counts}</div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p><div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a></div></div>`;
+      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. Откройте карточку — канал, потребность, источник, next action и владелец на одном экране (I1.3).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="header-actions" style="margin-top:8px">${counts}</div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p>${inquiryCardHtml()}<div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a></div></div>`;
     }
     function bindInboxSla(){
       document.querySelectorAll('[data-inbox-status-select]').forEach((el)=>{
@@ -438,6 +486,32 @@
         };
       });
     }
+    function bindInquiryCard(){
+      document.querySelectorAll('[data-inbox-open]').forEach((btn)=>{
+        btn.onclick=()=>{
+          state.inboxSelectedId=btn.getAttribute('data-inbox-open')||'';
+          save();
+          work();
+        };
+      });
+      if($('inqSave'))$('inqSave').onclick=()=>{
+        const id=state.inboxSelectedId;
+        if(!id)return;
+        ensureInboxCards();
+        state.inboxCards[id]={
+          channel:($('inqChannel')&&$('inqChannel').value)||'Звонок',
+          need:($('inqNeed')&&$('inqNeed').value.trim())||'',
+          source:($('inqSource')&&$('inqSource').value)||INBOX_SOURCES[0],
+          nextAction:($('inqNext')&&$('inqNext').value.trim())||'',
+          owner:($('inqOwner')&&$('inqOwner').value)||INBOX_OWNERS[0]
+        };
+        const sla=$('inqSla')&&$('inqSla').value;
+        if(INBOX_SLA.includes(sla))state.inboxStatuses[id]=sla;
+        save();
+        work();
+      };
+      if($('inqOpenRender'))$('inqOpenRender').onclick=()=>{location.href='/render/'};
+    }
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
       const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал I7.5: фильтр «Пропущен / без результата» и «Вернуть в работу».</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
@@ -445,7 +519,7 @@
       const manager=managerTeamHtml();
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
-      if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();}
+      if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
       if(roleKey==='manager')bindManagerFeedback();
     }
     function renderRight(){
