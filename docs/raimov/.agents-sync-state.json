@@ -82,7 +82,7 @@
     "docs/raimov/operations/expert-dental/MATERIALS_REGISTER.md": "4621059e7aae8d4895905b10993ed8ee941d464263a4f8b187bc997444683bb0",
     "docs/raimov/operations/expert-dental/PATIENT_CATALOG_RECONCILIATION_PLAN.md": "ba8d1dea7453e544187b0894d4d1ce0d043e58b280d57c54ce72cafdacf1d6b5",
     "docs/raimov/operations/expert-dental/PLANNING_AND_REPORTING.md": "39a40b129c91d871c18f6ac9b3fcce9b27c84bffabe788d9b07ad2ed8cc431f6",
-    "docs/raimov/operations/expert-dental/README.md": "a1ce0cdbaa24c5024ffa8a8d6351c4eee50e58923e5150f758c4f286f66ae106",
+    "docs/raimov/operations/expert-dental/README.md": "fbe1017e5fd791fcb4d54503097ba9e64bce9c4eb31f0861fb598df8bb48c997",
     "docs/raimov/operations/expert-dental/credentials-archive/README.md": "a3810fe5ecbf2debc956f0f80d32faf8580b6c116f0906a792519de0e06fee49",
     "docs/raimov/operations/expert-dental/credentials-archive/assignment.json": "9df4258214cedf6e441d460985ed0ae5044b5d0a877ddec4b63cd592bcf3b429",
     "docs/raimov/operations/expert-dental/credentials-archive/unassigned/24.jpg": "c691b9039626be26c72858ca0e6656e3a6cf7b64c7bf23cd7c2e2d9621d1ebeb",
@@ -91,7 +91,9 @@
     "docs/raimov/operations/expert-dental/credentials-archive/unassigned/34.jpg": "48700ec09e473a424462aa864e77d46906a7e7cae794bd2e47885df7f81a4db2",
     "docs/raimov/operations/expert-dental/media/team/talyshhanov-mir-ali.png": "cac52c21f36183adf20564eae2aa97a8fbe377b75515bc1424f44c33cf28dabb",
     "docs/raimov/operations/expert-dental/periods/month-01/PLAN.md": "cd530ceeb5336b672656138839fa96683a9d2d7aa815d55616c58ef48eafd067",
-    "docs/raimov/operations/expert-dental/periods/month-01/STATUS.md": "1cf37ed812b2feb861f5ac4df7763fc9c729375231b65d7b3b2827617f7b749e",
+    "docs/raimov/operations/expert-dental/periods/month-01/STATUS.md": "84b1c010157c8dfed6cae87bc41c2abd67d33d3049654887dd36a8826c58d41a",
+    "docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PLAN.md": "dafaa16306b6ff2f76dc1792d55ad26553ea8c99064c2a3b23a9ef5530bc6d07",
+    "docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_CLOSURE_PLAN.md": "607193be8bd9a35b19e4f682d76522568019714a3c96e43add58fa45260f4f5c",
     "docs/raimov/operations/expert-dental/periods/month-01/reports/2026-08-02-first-two-weeks.md": "c6c228fbaf0c6357752b9abe9a615425a4adafa255809374c7a4f3d7b4c0a1a5",
     "docs/raimov/operations/expert-dental/periods/month-01/reports/README.md": "5ff3b59d6d5adcd2e9f00671e4a80acf783b246cad6257616fa85a5b303f0d85",
     "docs/raimov/operations/expert-dental/pricing/PRICE_CATALOG.json": "679aa8d29edf8c000a3034ebdb60c30638b5824226ff4e0bd9f10b165dbdf5ff",
@@ -746,6 +748,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "f7838f6a1003311f3a24841e3ced668220cf60282d5b5f5e21cb466629d07155"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-07T15:30:05Z",
+  "updated_at_utc": "2026-08-07T16:10:05Z",
   "version": 1
 }

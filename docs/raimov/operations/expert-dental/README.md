@@ -67,6 +67,8 @@ branch: main
 |---|---|---|
 | Стартовая презентационная страница | `https://raimovdental.com/assets/img/workspace/` | Карточки ролей и инструкция по презентации владельцу |
 | Презентация для Атабека (со скриншотами) | `https://raimovdental.com/assets/img/workspace/presentation/` | Функционал, результаты, скриншоты 4 ролей + `/render/` |
+| План закрытия пунктов месяца-1 через UI | `periods/month-01/WORKSPACE_INTERFACE_CLOSURE_PLAN.md` | Пункты 1, 4, 5, 7, 8, 10, 11 |
+| Атомарный план UI-закрытия | `periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PLAN.md` | Атомы I0.* … IP.* |
 | Общий ролевой runtime | `https://raimovdental.com/assets/img/workspace/app.html` | Общий интерфейс, загружаемый ролевыми оболочками |
 | Администратор | `https://raimovdental.com/assets/img/workspace/admin/` | Обращения, обучение, смена и маршрутизация |
 | Врач | `https://raimovdental.com/assets/img/workspace/doctor/` | Принятие обращения, медицинские задачи и дежурство |
