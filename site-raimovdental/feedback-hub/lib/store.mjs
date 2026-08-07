@@ -139,6 +139,54 @@ export function createToken({
   return { record: state.tokens[token] };
 }
 
+/**
+ * Stable QA entry: every open of /feedback/demo mints a fresh unscored cycle so the link
+ * always lands on the 1–5 scale. Skips the CRM patient-ref + frequency gates — demo only.
+ */
+export function createDemoToken({
+  serviceCategory = 'demo-stars',
+  doctorCode = 'demo',
+} = {}) {
+  const state = load();
+  let token = '';
+  for (let i = 0; i < 24; i++) {
+    const candidate = randomBytes(18).toString('base64url');
+    // Alphanumeric only: messengers and markdown strip trailing `_` / `-`.
+    if (/^[A-Za-z0-9]{16,64}$/.test(candidate) && !state.tokens[candidate]) {
+      token = candidate;
+      break;
+    }
+  }
+  if (!token) token = randomBytes(18).toString('base64url').replace(/[-_]/g, 'A');
+  state.tokens[token] = {
+    token,
+    createdAt: new Date().toISOString(),
+    serviceCategory,
+    doctorCode,
+    source: 'demo',
+    openedAt: null,
+    score: null,
+    scoredAt: null,
+    branch: null,
+    clicks: {},
+    alreadyReviewed: {},
+    nudges: 0,
+    recovery: null,
+    stopped: null,
+    publishDetected: {},
+  };
+  const demos = Object.values(state.tokens)
+    .filter((r) => r.source === 'demo')
+    .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  while (demos.length > 40) {
+    const old = demos.shift();
+    delete state.tokens[old.token];
+  }
+  persist();
+  logEvent('token_created', token, { serviceCategory, doctorCode, source: 'demo' });
+  return state.tokens[token];
+}
+
 function expired(record) {
   const age = Date.now() - Date.parse(record.createdAt);
   return age > TTL_MS;

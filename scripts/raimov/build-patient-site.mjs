@@ -392,7 +392,7 @@ const physicians = doctors.map((d) =>
   const route = '/services/';
   const title = 'Услуги и цены — Expert Dental Studio, Бишкек';
   const description =
-    'Полный перечень услуг и актуальный прайс стоматологии Expert Dental Studio: диагностика, терапия, эндодонтия, хирургия, имплантация, ортопедия, ортодонтия, детский приём и гигиена.';
+    'Прайс Expert Dental Studio в Бишкеке: диагностика, терапия, имплантация, ортодонтия, детский приём и гигиена.';
   page({
     route,
     title,
@@ -452,7 +452,7 @@ for (const service of services) {
   const route = '/doctors/';
   const title = 'Врачи Expert Dental Studio — стоматологи в Бишкеке';
   const description =
-    'Восемь врачей клиники Expert Dental Studio: ортодонт-гнатолог, хирург-имплантолог, ортопеды, терапевты, гигиенист и детский стоматолог. Направления, методы и запись на приём.';
+    'Команда Expert Dental Studio: ортодонт-гнатолог, имплантолог, ортопеды, терапевты, гигиенист и детский стоматолог. Запись на приём.';
   page({
     route,
     title,
@@ -480,7 +480,7 @@ for (const doctor of doctors) {
   const title = isChief ? chief.metaTitle : `${metaName} — ${doctor.metaRole} | Expert Dental`;
   const description = isChief
     ? chief.metaDescription
-    : `${doctor.name} — ${doctor.metaRole} Expert Dental Studio в Бишкеке. ${doctor.specialtyLine}. Запись на приём.`;
+    : `${metaName} — ${doctor.metaRole}, Expert Dental Studio в Бишкеке. ${doctor.specialtyLine}.`;
   const socialImage = doctor.photo ? manifest[doctor.photo] : null;
   page({
     route,

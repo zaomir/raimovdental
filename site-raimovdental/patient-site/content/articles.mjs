@@ -19,6 +19,7 @@ export const categories = {
   pediatric: {
     id: 'pediatric',
     label: 'Детская стоматология',
+    heading: 'Статьи о детской стоматологии',
     slug: 'detskaya-stomatologiya',
     blurb: 'Здоровые зубы ребёнка без страха и лишнего стресса',
     service: 'pediatric-dentistry',

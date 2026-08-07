@@ -42,6 +42,9 @@ const hash = (s) => {
   return h.toString(36);
 };
 const CSS_HREF = `/feedback/hub.${hash(CSS)}.css`;
+const JS_HREF = `/feedback/hub.${hash(JS)}.js`;
+render.assets.jsHref = JS_HREF;
+render.assets.origin = ORIGIN;
 
 /* -------------------------------------------------------------------- helpers */
 
@@ -114,10 +117,16 @@ const server = createServer(async (req, res) => {
         'cache-control': 'public, max-age=31536000, immutable',
       });
     }
-    if (method === 'GET' && path === '/feedback/hub.js') {
+    if (
+      method === 'GET' &&
+      (path === '/feedback/hub.js' || /^\/feedback\/hub\.[a-z0-9]+\.js$/.test(path))
+    ) {
       return send(res, 200, JS, {
         'content-type': 'application/javascript; charset=utf-8',
-        'cache-control': 'public, max-age=600',
+        'cache-control':
+          path === '/feedback/hub.js'
+            ? 'public, max-age=60'
+            : 'public, max-age=31536000, immutable',
       });
     }
     if (method === 'GET' && path === '/feedback/team.jpg') {
@@ -186,6 +195,12 @@ const server = createServer(async (req, res) => {
     if (method === 'GET' && path === '/feedback') {
       store.logEvent('anon_hub_opened', null, { source: 'landing' });
       return send(res, 200, render.renderLanding(CSS_HREF));
+    }
+
+    // Eternal QA link: mint a fresh unscored token on every open → always the 1–5 page.
+    if (method === 'GET' && path === '/feedback/demo') {
+      const record = store.createDemoToken();
+      return found(res, `/feedback/${record.token}`);
     }
 
     const anonymousClick = path.match(/^\/feedback\/out\/(yandex|twogis|google)$/);

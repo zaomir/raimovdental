@@ -8,8 +8,8 @@
  * are what would make the whole scheme review-gating rather than review-collecting:
  *
  *   no reward     — nothing is offered in exchange for a rating or a published review;
- *   no pre-filter — every patient answers the same neutral question and sees the same
- *                   optional map links; recovery runs independently for low scores.
+ *   no pre-filter — every patient answers the same neutral 1–5 question first;
+ *                   map CTAs appear only after 4–5, while 1–3 opens recovery only.
  *
  * Canon: POST_VISIT_FEEDBACK_LOOP.md §7, §11; IMPLEMENTATION_PLAN_ATOMIC.md «вне пилота».
  */
@@ -102,8 +102,11 @@ if (!/модерац/i.test(copy)) {
 if (!/renderDetractor/.test(render)) fail('render.mjs', 'нет recovery-ветки 1–3★');
 const detractorBody = render.slice(render.indexOf('export function renderDetractor'));
 const detractorOnly = detractorBody.slice(0, detractorBody.indexOf('export function renderToken'));
-if (!/platformOptions\(record\)/.test(detractorOnly)) {
-  fail('render.mjs', 'ветка 1–3★ скрывает нейтральные кнопки карт');
+if (/platformOptions\(record\)/.test(detractorOnly)) {
+  fail('render.mjs', 'ветка 1–3★ не должна показывать кнопки карт — только recovery');
+}
+if (!/platformOptions\(record\)/.test(render.slice(render.indexOf('export function renderPromoter')))) {
+  fail('render.mjs', 'ветка 4–5★ должна показывать кнопки карт');
 }
 
 if (/branch\s*!==\s*'promoter'/.test(store)) {
@@ -185,6 +188,13 @@ for (const sensitive of ['record.score', 'serviceCategory', 'doctorCode', 'r?.co
 if (!/noindex/.test(server) && !/noindex/.test(render)) {
   fail('server.mjs', 'нет noindex на страницах хаба');
 }
+if (!/name="description"/.test(render)) fail('render.mjs', 'нет meta description');
+if (!/rel="canonical"/.test(render)) fail('render.mjs', 'нет canonical');
+if (!/og:title/.test(render) || !/og:image/.test(render)) {
+  fail('render.mjs', 'нет полного Open Graph');
+}
+if (!/twitter:card/.test(render)) fail('render.mjs', 'нет twitter:card');
+if (!/application\/ld\+json/.test(render)) fail('render.mjs', 'нет JSON-LD');
 if (!/timingSafeEqual/.test(server)) fail('server.mjs', 'admin-токен сравнивается небезопасно');
 if (!/127\.0\.0\.1/.test(server)) fail('server.mjs', 'сервис слушает не только loopback');
 if (!/send\(res,\s*200,\s*render\.renderLanding/.test(server)) {

@@ -5,9 +5,8 @@
  *        docs/raimov/operations/expert-dental/reputation/IMPLEMENTATION_PLAN_ATOMIC.md фаза B
  *
  * Two rules govern this copy and the gate in scripts/raimov/check-feedback-hub.mjs enforces
- * both. There is no reward for leaving a review, and there is no pre-filter that sends only
- * happy patients to the maps: every patient sees the same neutral 1–5 question first, and
- * the low branch is a real recovery path rather than a dead end.
+ * both. There is no reward for leaving a review, and every patient sees the same neutral
+ * 1–5 question first. After that, 4–5 opens optional map CTAs; 1–3 opens recovery only.
  */
 
 export const clinic = {
@@ -40,7 +39,7 @@ export const promoter = {
     'Публикация отзыва зависит от модерации самой площадки.',
 };
 
-/** 1–3: recovery runs independently from the same neutral public-review options. */
+/** 1–3: recovery path only — map review CTAs are not shown on this branch. */
 export const detractor = {
   title: 'Спасибо за честность — нам важно это исправить',
   lead:
@@ -85,6 +84,22 @@ export const landing = {
   teamAlt: 'Команда врачей Expert Dental Studio',
   mapsTitle: 'Выберите удобную площадку',
   whatsappLabel: 'Написать клинике в WhatsApp',
+};
+
+/** Meta for noindex hub pages — still need description/canonical/OG for link unfurls. */
+export const seo = {
+  landing:
+    'Оставьте отзыв о визите в Expert Dental Studio на Яндекс Картах, 2ГИС или Google Maps. Без скидок за отзывы.',
+  intro:
+    'Оцените визит в Expert Dental Studio от 1 до 5. Честная оценка помогает клинике становиться лучше.',
+  promoter:
+    'Спасибо за оценку. При желании оставьте публичный отзыв на картах — мы не просим ставить пять звёзд.',
+  detractor:
+    'Расскажите, что пошло не так — управляющий Expert Dental Studio свяжется в рабочие часы клиники.',
+  stopped:
+    'Напоминания об отзывах отключены. Запись и лечение в Expert Dental Studio это не затрагивает.',
+  thanks:
+    'Мы получили ваше сообщение. Управляющий Expert Dental Studio свяжется в рабочие часы клиники.',
 };
 
 export const footerNote =

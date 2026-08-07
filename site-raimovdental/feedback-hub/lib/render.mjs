@@ -38,15 +38,55 @@ const PLATFORM_CTA = {
   google: 'Открыть карточку в Google Maps',
 };
 
-function shell({ title, body, cssHref, noJs = false }) {
+/** Mutated by server.mjs so a hub.js deploy busts the edge cache the same way CSS does. */
+export const assets = {
+  jsHref: '/feedback/hub.js',
+  origin: 'https://clinic.raimovdental.com',
+};
+
+function shell({ title, description, path = '/feedback/', body, cssHref, noJs = false }) {
+  const fullTitle = `${title} — ${copy.clinic.name}`;
+  const canonical = `${assets.origin}${path}`;
+  const ogImage = `${assets.origin}/feedback/team.jpg`;
+  const desc = description || copy.seo.landing;
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: fullTitle,
+    description: desc,
+    url: canonical,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: copy.clinic.name,
+      url: `${assets.origin}/`,
+    },
+    about: {
+      '@type': 'Dentist',
+      name: copy.clinic.name,
+      url: `${assets.origin}/`,
+    },
+  });
   return `<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>${esc(title)} — ${esc(copy.clinic.name)}</title>
+<title>${esc(fullTitle)}</title>
+<meta name="description" content="${esc(desc)}">
+<link rel="canonical" href="${esc(canonical)}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(fullTitle)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:url" content="${esc(canonical)}">
+<meta property="og:image" content="${esc(ogImage)}">
+<meta property="og:locale" content="ru_KG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(fullTitle)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:image" content="${esc(ogImage)}">
 <link rel="stylesheet" href="${esc(cssHref)}">
+<script type="application/ld+json">${jsonLd}</script>
 </head>
 <body>
 <main class="hub" id="main">
@@ -58,7 +98,7 @@ function shell({ title, body, cssHref, noJs = false }) {
 <footer class="hub__foot">
   <p>${esc(copy.footerNote)}</p>
 </footer>
-${noJs ? '' : '<script src="/feedback/hub.js" defer></script>'}
+${noJs ? '' : `<script src="${esc(assets.jsHref)}" defer></script>`}
 </body>
 </html>`;
 }
@@ -80,6 +120,8 @@ export function renderLanding(cssHref) {
     .join('');
   return shell({
     title: copy.landing.title,
+    description: copy.seo.landing,
+    path: '/feedback/',
     cssHref,
     noJs: true,
     body: `<section class="card">
@@ -116,6 +158,8 @@ function scale(token) {
 export function renderIntro(record, cssHref) {
   return shell({
     title: copy.intro.title,
+    description: copy.seo.intro,
+    path: `/feedback/${record.token}/`,
     cssHref,
     body: `<section class="card">
       <h1 class="hub__title">${esc(copy.intro.title)}</h1>
@@ -136,6 +180,8 @@ function optOutForm(record) {
 export function renderStopped(cssHref) {
   return shell({
     title: copy.optOut.confirmTitle,
+    description: copy.seo.stopped,
+    path: '/feedback/',
     cssHref,
     noJs: true,
     body: `<section class="card">
@@ -191,6 +237,8 @@ function platformOptions(record) {
 export function renderPromoter(record, cssHref) {
   return shell({
     title: copy.promoter.title,
+    description: copy.seo.promoter,
+    path: `/feedback/${record.token}/`,
     cssHref,
     body: `<h1 class="visually-hidden">${esc(copy.promoter.title)}</h1>
     ${platformOptions(record)}
@@ -198,11 +246,13 @@ export function renderPromoter(record, cssHref) {
   });
 }
 
-/** 1–3 recovery is offered in addition to, not instead of, the neutral map choices. */
+/** 1–3: recovery only — public map CTAs stay on the 4–5 promoter branch. */
 export function renderDetractor(record, cssHref) {
   if (record.recovery) {
     return shell({
       title: copy.detractor.thanksTitle,
+      description: copy.seo.thanks,
+      path: `/feedback/${record.token}/`,
       cssHref,
       noJs: true,
       body: `<section class="card">
@@ -212,7 +262,6 @@ export function renderDetractor(record, cssHref) {
           copy.clinic.phone.replace('+', '')
         )}">Написать в WhatsApp</a></p>
       </section>
-      ${platformOptions(record)}
       ${optOutForm(record)}`,
     });
   }
@@ -228,6 +277,8 @@ export function renderDetractor(record, cssHref) {
 
   return shell({
     title: copy.detractor.title,
+    description: copy.seo.detractor,
+    path: `/feedback/${record.token}/`,
     cssHref,
     body: `<section class="card" id="recovery">
       <h1 class="hub__title">${esc(copy.detractor.title)}</h1>
@@ -251,7 +302,6 @@ export function renderDetractor(record, cssHref) {
         <button class="btn" type="submit">${esc(copy.detractor.submit)}</button>
       </form>
     </section>
-    ${platformOptions(record)}
     ${optOutForm(record)}`,
   });
 }

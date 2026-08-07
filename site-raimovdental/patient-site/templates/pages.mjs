@@ -8,6 +8,7 @@
 
 import { brand, contacts, cta, maps, pendingFromClinic, social } from '../config/site.mjs';
 import { chief } from '../content/chief.mjs';
+import { credentialsFor } from '../content/credentials.mjs';
 import { categories } from '../content/articles.mjs';
 import { references } from '../content/references.mjs';
 import * as home from '../content/homepage.mjs';
@@ -740,6 +741,7 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
     .filter(Boolean);
   const docServices = doctor.services.map((s) => services.find((x) => x.slug === s)).filter(Boolean);
   const authored = articles.filter((a) => a.author === doctor.slug || a.relatedDoctor === doctor.slug);
+  const credentials = credentialsFor(doctor.slug);
 
   const photo = doctor.photo
     ? portraitImage(manifest, doctor.photo, doctor.photoAlt, {
@@ -800,7 +802,24 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
     </div>
   </section>
 
-  <section class="section section--bone">
+  ${
+    credentials.length
+      ? `<section class="section section--bone">
+    <div class="shell">
+      ${sectionHead({ kicker: 'Квалификация', title: 'Дипломы и сертификаты' })}
+      <div class="gallery">${credentials
+        .map(
+          (c) => `<figure>${image(manifest, c.image, c.alt, {
+            sizes: '(min-width: 56rem) 22vw, 45vw',
+          })}<figcaption>${esc(c.title)}</figcaption></figure>`
+        )
+        .join('')}</div>
+    </div>
+  </section>`
+      : ''
+  }
+
+  <section class="section${credentials.length ? '' : ' section--bone'}">
     <div class="shell">
       ${sectionHead({ kicker: 'Направления', title: 'Услуги врача' })}
       <div class="grid grid--3">
@@ -849,6 +868,7 @@ export function doctorPage({ manifest, doctor, services, articles, prices }) {
 export function chiefPage({ manifest, doctor, services, articles, prices }) {
   const consultation = prices.consultationByTier[doctor.consultationTier];
   const chiefServices = chief.services.map((s) => services.find((x) => x.slug === s)).filter(Boolean);
+  const credentials = credentialsFor(doctor.slug);
   const reviewed = articles.filter(
     (a) => a.reviewer === doctor.slug && a.reviewedAt && a.reviewEvidence
   );
@@ -972,8 +992,8 @@ export function chiefPage({ manifest, doctor, services, articles, prices }) {
     <div class="shell">
       ${sectionHead({ kicker: 'Квалификация', title: 'Дипломы и сертификаты' })}
       ${
-        chief.credentials.length
-          ? `<div class="gallery">${chief.credentials
+        credentials.length
+          ? `<div class="gallery">${credentials
               .map(
                 (c) => `<figure>${image(manifest, c.image, c.alt, {
                   sizes: '(min-width: 56rem) 22vw, 45vw',
@@ -1104,7 +1124,7 @@ export function blogCategoryPage({ manifest, category, articles, services }) {
       ])}
       <div class="section-head">
         <span class="kicker">Рубрика</span>
-        <h1 class="display t-h1">${esc(category.label)}</h1>
+        <h1 class="display t-h1">${esc(category.heading ?? category.label)}</h1>
         <p class="t-lead">${esc(category.blurb)}</p>
       </div>
       <div class="chip-row">

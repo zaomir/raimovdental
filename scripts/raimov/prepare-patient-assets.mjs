@@ -48,6 +48,7 @@ const PORTRAITS = [
   'raimov-atabek',
   'talyshkhanov-mirali',
   'khalbaev-islambek',
+  'gribanova-marina',
   'duisheeva-aiday',
   'kerimkulova-aiperi',
   'ergeshova-begimai',
