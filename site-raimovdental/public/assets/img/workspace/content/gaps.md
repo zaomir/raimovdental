@@ -74,6 +74,6 @@
 
 **UI progress (пункт 5):** I5.1–I5.5 ✅ · пункт 5 UI DoD закрыт по атомам.
 
-**UI progress (пункт 4):** I4.1 ✅ · I4.2–I4.4 ⬜
+**UI progress (пункт 4):** I4.1–I4.2 ✅ · I4.3–I4.4 ⬜
 
-**Next execute:** I4.2 — переключатель маршрута veneers | implants | ortho.
+**Next execute:** I4.3 — текущая позиция демо-кейса на пути пациента.

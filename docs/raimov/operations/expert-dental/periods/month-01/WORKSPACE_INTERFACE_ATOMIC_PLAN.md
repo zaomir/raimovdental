@@ -46,7 +46,7 @@ canon:
 | I5.4 | 5 | ✅ | допуск: ≥2 Q отзывы · critical reward 100% · commit `cd8a6c882` · prod |
 | I5.5 | 5 | ✅ | % уроков отзывов + «Назначить пересдачу» · commit `1148bd2c3` · prod |
 | I4.1 | 4 | ✅ | экран «Путь» · P07–P11 из patient-path.json · `data-atom="i41-patient-path"` · commit `c74443063` · prod |
-| I4.2 | 4 | ⬜ | — |
+| I4.2 | 4 | ✅ | route switch veneers\|implants\|ortho · `i42-route-switch` · commit `d48516f7f` · prod |
 | I4.3 | 4 | ⬜ | — |
 | I4.4 | 4 | ⬜ | — |
 | I1.1 | 1 | ⬜ | — |

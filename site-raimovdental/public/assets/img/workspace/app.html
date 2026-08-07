@@ -57,6 +57,7 @@
     if(typeof state.feedbackLessons.qrPlatforms!=='boolean')state.feedbackLessons.qrPlatforms=false;
     if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
     if(typeof state.postVisitOpen!=='boolean')state.postVisitOpen=false;
+    if(!['veneers','implants','ortho'].includes(state.pathRoute))state.pathRoute='veneers';
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
@@ -281,25 +282,58 @@
       layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()};bindPostVisitChecklist();
     }
 
+    function currentPathRoute(){
+      const id=['veneers','implants','ortho'].includes(state.pathRoute)?state.pathRoute:'veneers';
+      const route=(patientPath&&patientPath.routes&&patientPath.routes[id])||null;
+      return{id,route,title:(route&&route.title)||id};
+    }
+    function routeNextHint(stepId){
+      const {route}=currentPathRoute();
+      if(!route)return'';
+      const fieldByStep={P07:'admin_questions',P08:'first_visit_result',P09:'question',P10:'page_logic',P11:'first_visit_result'};
+      const field=fieldByStep[stepId];
+      return field&&route[field]?String(route[field]):'';
+    }
     function pathStepCard(step, {focus=false}={}){
-      return `<article class="card ${focus?'action-card':''}" data-path-step="${esc(step.id)}"><div class="eyebrow">Этап ${esc(step.number)} · ${esc(step.owner||'')}</div><h3>${esc(step.stage)}</h3><p>${esc(step.patient_question||'')}</p><p class="muted">Канал: ${esc(step.channel||'—')}</p><p><b>Следующее действие:</b> ${esc(step.next_action||step.cta||'—')}</p><p class="muted" style="margin-top:8px">Источник: ${esc(step.source_ref||(patientPath&&patientPath.source)||'')}</p></article>`;
+      const hint=focus?routeNextHint(step.id):'';
+      const routeLine=hint?`<div class="notice" style="margin-top:10px" data-route-hint="${esc(step.id)}"><b>Подсказка маршрута (${esc(currentPathRoute().title)}):</b> ${esc(hint)}</div>`:'';
+      return `<article class="card ${focus?'action-card':''}" data-path-step="${esc(step.id)}"><div class="eyebrow">Этап ${esc(step.number)} · ${esc(step.owner||'')}</div><h3>${esc(step.stage)}</h3><p>${esc(step.patient_question||'')}</p><p class="muted">Канал: ${esc(step.channel||'—')}</p><p><b>Следующее действие:</b> ${esc(step.next_action||step.cta||'—')}</p>${routeLine}<p class="muted" style="margin-top:8px">Источник: ${esc(step.source_ref||(patientPath&&patientPath.source)||'')}</p></article>`;
+    }
+    function pathRouteSwitcherHtml(){
+      const cur=currentPathRoute().id;
+      const opts=[['veneers','Виниры'],['implants','Имплантация'],['ortho','Ортодонтия']];
+      return `<div class="card" data-atom="i42-route-switch" style="margin-top:14px"><div class="eyebrow">I4.2 · маршрут услуги</div><h3>Переключатель направления</h3><p class="muted">Подсказки next step на этапах P07–P11 меняются по выбранному маршруту из patient-path.json.</p><div class="header-actions" style="margin-top:12px">${opts.map(([id,label])=>`<button type="button" class="btn ${cur===id?'primary':'secondary'}" data-path-route="${id}">${label}</button>`).join('')}</div><p class="muted" style="margin-top:10px">Сейчас: <b>${esc(currentPathRoute().title)}</b> · сохраняется в localStorage</p></div>`;
+    }
+    function bindPathRouteSwitcher(){
+      document.querySelectorAll('[data-path-route]').forEach(b=>{
+        b.onclick=()=>{
+          const id=b.getAttribute('data-path-route');
+          if(!['veneers','implants','ortho'].includes(id))return;
+          state.pathRoute=id;
+          save();
+          pathView();
+        };
+      });
     }
     function pathView(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Путь недоступен','Сначала пройдите тест допуска по скриптам, повторным касаниям и регламенту отзывов.');
       if(roleKey==='doctor'&&!state.testPassed)return accessBlocked('Путь недоступен','Сначала пройдите тест допуска.');
       const steps=(patientPath&&patientPath.steps)||[];
       if(!steps.length){
-        layout('Путь пациента',`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · этапы</div><h3>Загрузка patient-path.json…</h3><p class="muted">Операционный участок: обращение → консультация / план.</p></div>`);
+        layout('Путь пациента',`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · этапы</div><h3>Загрузка patient-path.json…</h3><p class="muted">Операционный участок: обращение → консультация / план.</p></div>${pathRouteSwitcherHtml()}`);
+        bindPathRouteSwitcher();
         return;
       }
       const focus=steps.filter(s=>Number(s.number)>=7&&Number(s.number)<=11);
       const before=steps.filter(s=>Number(s.number)<7);
       const after=steps.filter(s=>Number(s.number)>11);
       const body=`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · путь пациента</div><h3>Этапы для персонала</h3><p class="muted">Показаны этапы от первого обращения до консультации и письменного плана (P07–P11). Полный путь — 14 этапов из patient-path.json.</p><p class="muted">Источник: ${esc(patientPath.source||'')}</p></div>
+        ${pathRouteSwitcherHtml()}
         <div class="stack" style="margin-top:14px">${focus.map(s=>pathStepCard(s,{focus:true})).join('')}</div>
         <div class="card" style="margin-top:14px"><h3>Контекст до обращения</h3><div class="stack">${before.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b class="status-warn">Маркетинг</b></div>`).join('')}</div></div>
         <div class="card" style="margin-top:14px"><h3>После плана</h3><div class="stack">${after.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b>${esc((s.owner||'').split('+')[0].trim()||'—')}</b></div>`).join('')}</div></div>`;
       layout('Путь пациента', body);
+      bindPathRouteSwitcher();
     }
 
     function work(){
