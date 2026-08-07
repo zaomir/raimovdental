@@ -136,7 +136,7 @@ export const nav = [
   { href: '/#preview', label: 'Примерка' },
   { href: '/#approach', label: 'Подход' },
   { href: '/#work', label: 'Работы' },
-  { href: '/#doctors', label: 'Врачи' },
+  { href: '/doctors/', label: 'Врачи' },
   { href: '/services/', label: 'Цены' },
   { href: '/#reviews', label: 'Отзывы' },
   { href: '/#contacts', label: 'Контакты' },
