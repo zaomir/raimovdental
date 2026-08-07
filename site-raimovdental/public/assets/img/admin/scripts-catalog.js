@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const SCRIPTS_URL = '/assets/img/workspace/content/scripts-25.json?v=20260807-i72';
+  const SCRIPTS_URL = '/assets/img/workspace/content/scripts-25.json?v=20260807-i73';
   const $ = (id) => document.getElementById(id);
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -11,6 +11,13 @@
   let loadError = '';
   let view = 'list';
   let selectedId = null;
+
+  function scriptIdFromHash() {
+    const raw = String(location.hash || '').replace(/^#/, '');
+    if (!raw.startsWith('scripts')) return '';
+    const match = raw.match(/^scripts(?:=|\/)(S\d{2})$/i) || raw.match(/^scripts=(S\d{2})$/i);
+    return match ? match[1].toUpperCase() : '';
+  }
 
   async function loadScripts() {
     try {
@@ -97,7 +104,7 @@
     stats.innerHTML = `
       <div><b>${scripts.length}</b><span>Всего скриптов</span></div>
       <div><b>${filtered.length}</b><span>Показано</span></div>
-      <div><b>I7.2</b><span>Карточки</span></div>
+      <div><b>I7.3</b><span>Сценарии</span></div>
     `;
 
     if (!filtered.length) {
@@ -145,6 +152,27 @@
     $('scriptsSearch')?.focus();
   }
 
+  async function openById(id) {
+    const scriptId = String(id || '').trim().toUpperCase();
+    if (!/^S\d{2}$/.test(scriptId)) return;
+    const modal = $('scriptsModal');
+    if (!modal) return;
+    if (!scripts.length && !loadError) await loadScripts();
+    modal.classList.remove('hidden');
+    const script = scripts.find((item) => item.id === scriptId);
+    if (!script) {
+      view = 'list';
+      selectedId = null;
+      $('scriptsListView')?.classList.remove('hidden');
+      $('scriptsDetailView')?.classList.add('hidden');
+      $('scriptsEyebrow') && ($('scriptsEyebrow').textContent = 'Пункт 7 · каталог');
+      $('scriptsTitle') && ($('scriptsTitle').textContent = 'Скрипты');
+      renderList(scriptId);
+      return;
+    }
+    openDetail(scriptId);
+  }
+
   function closeScripts() {
     view = 'list';
     selectedId = null;
@@ -174,7 +202,9 @@
       if (view === 'detail') backToList();
       else closeScripts();
     });
-    if (location.hash === '#scripts') openScripts();
+    const deepId = scriptIdFromHash();
+    if (deepId) openById(deepId);
+    else if (location.hash === '#scripts') openScripts();
   }
 
   if (document.readyState === 'loading') {
@@ -183,5 +213,10 @@
     bind();
   }
 
-  window.ExpertDentalScriptsCatalog = { open: openScripts, reload: loadScripts, openDetail };
+  window.ExpertDentalScriptsCatalog = {
+    open: openScripts,
+    reload: loadScripts,
+    openDetail,
+    openById,
+  };
 })();

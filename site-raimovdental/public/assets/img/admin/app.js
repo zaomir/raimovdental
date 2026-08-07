@@ -211,7 +211,18 @@
       return setScreen('Запрос стоимости', script(
         'Стоимость зависит от состояния зубов и плана лечения. Подскажите, пожалуйста, о какой услуге идёт речь?',
         'Не называйте окончательную стоимость без диагностики.'
-      ) + `<div class="form-grid"><div class="form-group wide"><label class="field-label">Услуга</label><select id="priceService" class="input"><option value="">Выберите</option><option>Виниры и эстетика</option><option>Имплантация</option><option>Ортодонтия</option><option>Лечение зуба</option></select></div><div class="form-group wide"><label class="field-label">Что спрашивает пациент</label><textarea id="priceQuestion" class="input"></textarea></div></div><div class="alert info">Пациент должен понять принцип формирования цены и получить конкретное предложение записи.</div><div class="actions"><button class="secondary" data-go="${state.patient ? 'need' : 'new'}">Назад</button><button id="priceNext" class="primary">Предложить консультацию</button></div>`);
+      ) + `<div class="form-grid"><div class="form-group wide"><label class="field-label">Услуга</label><select id="priceService" class="input"><option value="">Выберите</option><option>Виниры и эстетика</option><option>Имплантация</option><option>Ортодонтия</option><option>Лечение зуба</option></select></div><div class="form-group wide"><label class="field-label">Что спрашивает пациент</label><textarea id="priceQuestion" class="input"></textarea></div></div><div class="alert info">Пациент должен понять принцип формирования цены и получить конкретное предложение записи. Каталог: S05 · при выборе услуги откроются S02–S04.</div><div class="actions"><button class="secondary" data-go="${state.patient ? 'need' : 'new'}">Назад</button><button type="button" class="secondary" data-open-script="S05">Открыть скрипт S05</button><button id="priceNext" class="primary">Предложить консультацию</button></div>`);
+    }
+
+    if (state.screen === 'fear') {
+      return setScreen('Страх лечения', script(
+        'Спасибо, что сказали об этом. Страх перед лечением — частая причина откладывать визит. Что именно вас больше всего беспокоит: боль, анестезия, результат или сам процесс?',
+        'Не обещать «совсем не больно» как гарантию.'
+      ) + options([
+        { attr: 'data-open-script', value: 'S08', title: 'Страх боли', description: 'Открыть скрипт S08' },
+        { attr: 'data-open-script', value: 'S09', title: 'Страх имплантации', description: 'Открыть скрипт S09' },
+        { attr: 'data-open-script', value: 'S10', title: 'Страх обточки под виниры', description: 'Открыть скрипт S10' },
+      ]) + `<div class="actions"><button class="secondary" data-go="${state.patient ? 'need' : 'new'}">Назад</button><button class="primary" data-go="consult">К консультации</button></div>`);
     }
 
     if (state.screen === 'booking') {
@@ -326,6 +337,17 @@
       };
     }
 
+    $('priceService')?.addEventListener('change', () => {
+      const selected = $('priceService').value || '';
+      const map = {
+        'Имплантация': 'S02',
+        'Виниры и эстетика': 'S03',
+        'Ортодонтия': 'S04',
+        'Лечение зуба': 'S05',
+      };
+      const id = map[selected] || 'S05';
+      window.ExpertDentalScriptsCatalog?.openById?.(id);
+    });
     $('priceNext')?.addEventListener('click', () => {
       const service = $('priceService').value;
       if (!service) return toast('Выберите услугу');
@@ -406,7 +428,11 @@
     $('notesLog').innerHTML = noteEntries.length ? noteEntries.map(([key, value]) => `<div class="note-row"><b>${esc(key)}:</b> ${esc(value)}</div>`).join('') : '<div class="note-row">Данные ещё не собраны.</div>';
 
     const queue = handoff();
-    $('handoffQueue').innerHTML = queue.length ? queue.map((item) => `<div class="queue-item"><strong>${esc(item.patient)}</strong><span>${esc(item.result)} · ${esc(item.time)}</span></div>`).join('') : '<div class="empty-context">Очередь пуста.</div>';
+    $('handoffQueue').innerHTML = queue.length ? queue.map((item) => {
+      const due = item.due ? ` · срок ${esc(item.due)}` : '';
+      const owner = item.owner ? ` · ${esc(item.owner)}` : '';
+      return `<div class="queue-item"><strong>${esc(item.patient)}</strong><span>${esc(item.result)} · ${esc(item.time)}${due}${owner}</span></div>`;
+    }).join('') : '<div class="empty-context">Очередь пуста.</div>';
   }
 
   function renderJournal() {
@@ -446,16 +472,42 @@
   };
   document.querySelectorAll('[data-quick]').forEach((button) => {
     button.onclick = () => {
-      const route = { bleeding: 'triage-bleeding', pain: 'triage-pain', restoration: 'triage-restoration', braces: 'triage-braces', price: 'price', booking: 'booking' }[button.dataset.quick];
+      const key = button.dataset.quick;
+      const route = {
+        bleeding: 'triage-bleeding',
+        pain: 'triage-pain',
+        restoration: 'triage-restoration',
+        braces: 'triage-braces',
+        price: 'price',
+        fear: 'fear',
+        booking: 'booking',
+      }[key];
       state.notes['Быстрый сценарий'] = button.textContent.trim();
       go(route);
+      const scriptMap = { price: 'S05', fear: 'S08' };
+      const scriptId = scriptMap[key];
+      if (scriptId) {
+        window.setTimeout(() => {
+          window.ExpertDentalScriptsCatalog?.openById?.(scriptId);
+        }, 80);
+      }
     };
+  });
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-open-script]');
+    if (!trigger) return;
+    event.preventDefault();
+    const id = trigger.dataset.openScript;
+    if (id) window.ExpertDentalScriptsCatalog?.openById?.(id);
   });
   $('openJournal').onclick = () => { renderJournal(); $('journalModal').classList.remove('hidden'); };
   $('closeJournal').onclick = () => $('journalModal').classList.add('hidden');
   $('journalSearch').oninput = renderJournal;
   $('journalStatus').innerHTML = '<option value="">Все результаты</option>' + outcomes.map((item) => `<option>${item}</option>`).join('');
   $('journalStatus').onchange = renderJournal;
+  document.addEventListener('ed-handoff-updated', () => {
+    if (!$('app')?.classList.contains('hidden')) renderSidebars();
+  });
 
   if (sessionStorage.getItem('ed-admin') === '1') openApp();
 })();

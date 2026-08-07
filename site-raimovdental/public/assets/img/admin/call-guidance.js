@@ -12,6 +12,7 @@ const scripts={
   veneers:{id:'S03',title:'Виниры и эстетика',say:'Цена зависит от количества зубов, состояния эмали, прикуса, материала и необходимости подготовки. Что именно вы хотите изменить: цвет, форму, сколы, промежутки или старые реставрации?',next:'Связать запрос с диагностикой и предложить консультацию по эстетике.',record:'Эстетическая проблема, желаемый результат, объём, срок и барьер.',avoid:'Не сводить ответ к цене «за один зуб» и не обещать виниры без подготовки.'},
   orthodontics:{id:'S04',title:'Брекеты и элайнеры',say:'Стоимость зависит от сложности прикуса, длительности лечения и выбранной системы. Скажите, лечение нужно взрослому или ребёнку и было ли ортодонтическое лечение раньше?',next:'Объяснить, что система выбирается после диагностики; предложить два окна.',record:'Возраст, прошлое лечение, жалобы на сустав, наличие снимков.',avoid:'Не продавать конкретную систему до осмотра ортодонта.'},
   price:{id:'S05',title:'Просит только прайс',say:'Конечно, я могу назвать ориентиры. Чтобы выделить именно нужную информацию и не перегружать вас всем прайсом, подскажите, какая ситуация или услуга вас интересует?',next:'Дать релевантный ориентир и перевести разговор к диагностике или записи.',record:'Услуга, причина запроса цены, барьер и итог.',avoid:'Не отправлять длинный прайс и не заканчивать на этом разговор.'},
+  fear:{id:'S08',title:'Страх боли',say:'Спасибо, что сказали об этом. Страх перед лечением — частая причина откладывать визит. Что именно вас больше всего беспокоит: боль, анестезия, результат или сам процесс?',next:'Снять конкретный страх без гарантий; предложить консультацию и следующий шаг.',record:'Тип страха, что уже пробовали, готовность к консультации.',avoid:'Не говорить «это совсем не больно» как гарантию.'},
   booking:{id:'Обычный звонок · запись',title:'Запись или перенос',say:'К какому врачу или по какой услуге вы хотите записаться? Я посмотрю ближайшие варианты и предложу два времени.',next:'Предложить два конкретных окна и подтвердить дату, время, врача и способ напоминания.',record:'Услуга, врач, выбранное окно, источник и подтверждение.',avoid:'Не задавать открытый вопрос «Когда вам удобно?» без вариантов.'},
   doctorTransfer:{id:'Передача врачу',title:'Тёплая передача',say:'Чтобы врач сразу получил полную картину, я задам несколько коротких вопросов. Повторять весь рассказ врачу не потребуется.',next:'Срочный звонок: доступный врач срочной группы → дежурный → контролируемый звонок. Обычный: лечащий врач → профильный свободный врач → согласованный обратный звонок.',record:'Процедура, врач, симптомы, приоритет, кому передано, время принятия и следующий шаг.',avoid:'Обращение не считается переданным, пока врач не принял его или не создана задача с владельцем и сроком.'}
 };
@@ -31,6 +32,7 @@ function scriptFor(title){
   if(/Передача врачу/.test(title)&&p==='urgent')return scripts.urgentEscalation;
   if(/Карточка передачи врачу|Способ связи с врачом|Перевод на внутренний номер|Обратный звонок врача/.test(title))return scripts.doctorTransfer;
   if(/Кровь|Острая боль|Пломба|коронка|Поломка брекетов/.test(title))return p==='urgent'?scripts.urgent:scripts.medicalRoutine;
+  if(/Страх лечения/.test(title))return scripts.fear;
   if(/Запрос стоимости/.test(title)){
     const selected=$('priceService')?.value||service();
     if(/Импланта/.test(selected))return scripts.implant;
@@ -83,8 +85,15 @@ function renderGuide(){
   guide.className=`call-script-guide ${p==='urgent'?'is-urgent':'is-routine'}`;
   guide.dataset.signature=signature;
   guide.setAttribute('aria-label',`Скрипт администратора ${item.id}`);
-  guide.innerHTML=`<div class="call-script-guide-head"><div><div class="eyebrow">Контекстный скрипт администратора</div><h3>${esc(item.title)}</h3></div><span class="call-script-id">${esc(item.id)}</span></div><p class="call-script-say">${esc(item.say)}</p><div class="call-script-facts"><div class="call-script-fact"><strong>Следующий шаг</strong><span>${esc(item.next)}</span></div><div class="call-script-fact"><strong>Что фиксировать</strong><span>${esc(item.record)}</span></div><div class="call-script-fact"><strong>Не говорить</strong><span>${esc(item.avoid)}</span></div></div>`;
+  const catalogId=/^S\d+/.test(item.id)?item.id.match(/^S\d+/)[0]:'';
+  guide.innerHTML=`<div class="call-script-guide-head"><div><div class="eyebrow">Контекстный скрипт администратора</div><h3>${esc(item.title)}</h3></div><span class="call-script-id">${esc(item.id)}</span></div><p class="call-script-say">${esc(item.say)}</p><div class="call-script-facts"><div class="call-script-fact"><strong>Следующий шаг</strong><span>${esc(item.next)}</span></div><div class="call-script-fact"><strong>Что фиксировать</strong><span>${esc(item.record)}</span></div><div class="call-script-fact"><strong>Не говорить</strong><span>${esc(item.avoid)}</span></div></div>${catalogId?`<div class="actions call-script-catalog-actions"><button type="button" class="secondary" data-open-script="${esc(catalogId)}">Открыть ${esc(catalogId)} в каталоге</button></div>`:''}`;
   if(existing)existing.replaceWith(guide);else screen.prepend(guide);
+  guide.querySelectorAll('[data-open-script]').forEach((button)=>{
+    button.onclick=(event)=>{
+      event.preventDefault();
+      window.ExpertDentalScriptsCatalog?.openById?.(button.dataset.openScript);
+    };
+  });
 }
 function bindOnce(selector,eventName,handler){
   document.querySelectorAll(selector).forEach(node=>{

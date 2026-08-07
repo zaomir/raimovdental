@@ -53,6 +53,7 @@ assert.match(presentation, /shots\/06-render-call\.png/);
 assert.match(presentation, /noindex,nofollow,noarchive,nosnippet/);
 assert.match(app, /Демо · вход без пароля/);
 assert.match(app, /\/render\/#scripts/);
+assert.match(app, /\/render\/#recontact/);
 assert.doesNotMatch(app, /type=["']password["']/i);
 assert.doesNotMatch(app, /pass\s*:/i);
 const scripts = JSON.parse(readFileSync(join(target, 'content/scripts-25.json'), 'utf8'));
@@ -60,5 +61,8 @@ assert.equal(scripts.length, 25);
 const adminIndex = readFileSync(join(site, 'public', 'assets', 'img', 'admin', 'index.html'), 'utf8');
 assert.match(adminIndex, /id="openScripts"/);
 assert.match(adminIndex, /scripts-catalog\.js/);
+assert.match(adminIndex, /id="openRecontact"/);
+assert.match(adminIndex, /recontact-catalog\.js/);
+assert.match(adminIndex, /id="recontactModal"/);
 
 console.log('raimov-demo-assets-preserved: PASS');
