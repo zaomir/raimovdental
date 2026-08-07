@@ -66,19 +66,23 @@ for (const route of routes.filter((route) => route.endsWith('.html') && route !=
 const planPath = join(dist, 'ru/valeria/month-1/plan/index.html');
 if (existsSync(planPath)) {
   const plan = readFileSync(planPath, 'utf8');
-  check((plan.match(/class="plan-group"/g) || []).length === 5, 'rendered plan contains five groups');
+  check((plan.match(/class="plan-group"/g) || []).length === 3, 'rendered plan contains sequential list and two additional groups');
   check((plan.match(/class="plan-item"/g) || []).length === 23, 'rendered plan contains 16 original + 7 additional items');
-  check((plan.match(/data-plan-number="/g) || []).length === 16, 'rendered plan preserves explicit source numbering for original 16');
-  check((plan.match(/<article class="plan-item" data-plan-status="additional"/g) || []).length === 7, 'rendered plan contains seven additional Atabek tasks');
+  check((plan.match(/data-plan-number="/g) || []).length === 23, 'rendered plan numbers all 23 items');
+  check((plan.match(/data-plan-status="additional"/g) || []).length === 7, 'rendered plan contains seven additional Atabek tasks');
   check(/Дополнительные задачи от Атабека/.test(plan), 'plan shows additional Atabek section');
   check(/expertdental\.kg\/price/.test(plan), 'plan links to Tilda price page');
   check(/clinic\.raimovdental\.com/.test(plan), 'plan links to clinic prototype');
   check(/raimsmile\.com/.test(plan), 'plan links to RAIM SMILE prototype');
-  check((plan.match(/Цель блока:/g) || []).length === 5, 'each plan group has a goal');
   check(/К отчётам/.test(plan), 'plan has reports CTA');
   check(/href="\/ru\/valeria\/month-1\/reports\/"/.test(plan), 'plan reports CTA has canonical destination');
   check((plan.match(/data-plan-number="\d+" data-plan-status="completed"/g) || []).length === 7, 'plan renders seven confirmed completed items');
   for (const number of [2, 4, 5, 7, 9, 13, 15]) check(new RegExp(`data-plan-number="${number}" data-plan-status="completed"`).test(plan), `plan item ${number} is completed`);
+  check(/href="\/ru\/valeria\/month-1\/reports\/first-two-weeks\/details\/competitors\/"/.test(plan), 'completed item 2 links to competitors report');
+  check(/href="\/ru\/valeria\/month-1\/reports\/first-two-weeks\/details\/patient-path\/"/.test(plan), 'completed item 4 links to patient-path report');
+  check(/href="\/ru\/valeria\/month-1\/reports\/first-two-weeks\/details\/scripts\/"/.test(plan), 'completed item 7 links to scripts report');
+  check((plan.match(/class="plan-item-cover"/g) || []).length === 14, 'all completed and additional cards have report cover links');
+  check(/нажмите на карточку, чтобы открыть отчёт/.test(plan), 'plan explains completed cards open reports');
   check(/7 из 16 выполнено/.test(plan), 'plan shows completed summary');
   check((plan.match(/data-plan-number="\d+" data-plan-status="in-progress"/g) || []).length === 3, 'plan renders exactly three in-progress items');
   for (const number of [12, 14, 16]) check(new RegExp(`data-plan-number="${number}" data-plan-status="in-progress"`).test(plan), `plan item ${number} is in progress`);

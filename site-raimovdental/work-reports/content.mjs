@@ -63,6 +63,7 @@ export const periods = [
       groups: [
         {
           title: 'Задачи, полученные в процессе работы',
+          badge: '★ От Атабека · выполнено',
           items: [
             {
               text: 'Создать страницу услуг и цен на Tilda.',
@@ -102,6 +103,7 @@ export const periods = [
         },
         {
           title: 'Дополнительно выполнено',
+          badge: '★ Дополнительно · выполнено',
           items: [
             {
               text: 'Создан прототип нового сайта клиники clinic.raimovdental.com.',

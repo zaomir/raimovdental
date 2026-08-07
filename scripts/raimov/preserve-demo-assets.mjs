@@ -82,6 +82,8 @@ assert.match(app, /i102-doctor-role/);
 assert.match(app, /i102-doctor-tasks/);
 assert.match(app, /i104-propose-consult/);
 assert.match(app, /i104-internal-referrals/);
+assert.match(app, /i105-referral-metrics/);
+assert.match(app, /managerReferralStats/);
 assert.match(app, /data-propose-consult/);
 assert.match(app, /Предложить консультацию узкого/);
 assert.match(app, /doctorClinicRole/);

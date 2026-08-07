@@ -78,6 +78,6 @@
 
 **UI progress (пункт 1):** I1.1–I1.4 ✅ · пункт 1 UI DoD закрыт по атомам (только обработка заявок; аудит карт/сайта/Instagram вне scope).
 
-**UI progress (пункт 10):** I10.1–I10.4 ✅ · I10.5 ⬜ · контент `internal-marketing.json` (draft_pending_clinic)
+**UI progress (пункт 10):** I10.1–I10.5 ✅ · пункт 10 UI DoD закрыт по атомам · контент `internal-marketing.json` (draft_pending_clinic)
 
-**Next execute:** I10.5 — контроль у управляющего: создано / принято / потеряно.
+**Next execute:** I11.1 — банк маркеров «до кресла» (`speech-markers-before.json` + UI).

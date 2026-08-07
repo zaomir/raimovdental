@@ -71,6 +71,7 @@
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
       if(!Array.isArray(state.inquiryAuditChecklist))state.inquiryAuditChecklist=[];
+      if(!Array.isArray(state.managerReferralDemo))state.managerReferralDemo=[];
     }
     if(state.quizVersion!==QUIZ_VERSION){
       state.updateRead=false;
@@ -214,16 +215,93 @@
         ${status}
         <p class="muted" style="margin-top:10px">Чеклист управляющего · пункт 1 UI · обработка заявок (не внешний аудит каналов).</p></div>`;
     }
+    function readLiveDoctorReferrals(){
+      try{
+        const s=JSON.parse(localStorage.getItem('ed-workspace-doctor')||'null');
+        return Array.isArray(s&&s.internalReferrals)?s.internalReferrals.slice():[];
+      }catch{return []}
+    }
+    function writeLiveDoctorReferrals(list){
+      try{
+        const s=JSON.parse(localStorage.getItem('ed-workspace-doctor')||'null')||{};
+        s.internalReferrals=list;
+        localStorage.setItem('ed-workspace-doctor',JSON.stringify(s));
+      }catch{}
+    }
+    function ensureManagerReferralDemo(){
+      if(!Array.isArray(state.managerReferralDemo))state.managerReferralDemo=[];
+      if(state.managerReferralDemo.length)return;
+      state.managerReferralDemo=[
+        {id:'mgr-ref-demo-01',service:'Виниры',reason:'Эстетический запрос на линии улыбки (демо)',nextStep:'Администратор предлагает окно консультации по винирам',recipient:'Специалист по эстетической стоматологии / ортопед',fromRoleTitle:'Терапевт',status:'создано',source:'demo'},
+        {id:'mgr-ref-demo-02',service:'Имплантация',reason:'Отсутствующий зуб · запрос восстановления (демо)',nextStep:'Запись к хирургу-имплантологу согласована',recipient:'Хирург-имплантолог / ортопед',fromRoleTitle:'Гигиенист',status:'принято',source:'demo'},
+        {id:'mgr-ref-demo-03',service:'Ортодонтия',reason:'Прикус / положение зубов · сигнал к ортодонту (демо)',nextStep:'Пациент не записался в согласованный срок',recipient:'Ортодонт / гнатолог',fromRoleTitle:'Терапевт',status:'потеряно',source:'demo'}
+      ];
+      save();
+    }
+    function managerReferralRows(){
+      const live=readLiveDoctorReferrals().map(r=>({...r,source:'live'}));
+      if(live.length)return live;
+      ensureManagerReferralDemo();
+      return state.managerReferralDemo.slice();
+    }
+    function managerReferralStats(){
+      const rows=managerReferralRows();
+      const created=rows.filter(r=>(r.status||'создано')==='создано').length;
+      const accepted=rows.filter(r=>r.status==='принято').length;
+      const lost=rows.filter(r=>r.status==='потеряно').length;
+      return {rows,created,accepted,lost,total:rows.length,live:rows.some(r=>r.source==='live')};
+    }
+    function setManagerReferralStatus(id,status){
+      if(!['создано','принято','потеряно'].includes(status))return;
+      const live=readLiveDoctorReferrals();
+      if(live.some(r=>r.id===id)){
+        const next=live.map(r=>r.id===id?{...r,status}:r);
+        writeLiveDoctorReferrals(next);
+        return;
+      }
+      ensureManagerReferralDemo();
+      state.managerReferralDemo=state.managerReferralDemo.map(r=>r.id===id?{...r,status}:r);
+      save();
+    }
+    function managerReferralControlHtml(){
+      const s=managerReferralStats();
+      const rows=s.rows.length?s.rows.map(r=>{
+        const st=r.status||'создано';
+        const cls=st==='принято'?'status-ok':st==='потеряно'?'status-danger':'status-warn';
+        return `<div class="task" data-manager-referral-id="${esc(r.id)}" style="flex-wrap:wrap;align-items:flex-start"><span style="flex:1;min-width:180px"><b>${esc(r.service||'—')}</b> · <span class="muted">${esc(r.fromRoleTitle||'')}</span><br><span class="muted">Причина:</span> ${esc(r.reason||'')}<br><span class="muted">Next:</span> ${esc(r.nextStep||'')}<br><span class="muted">Получатель:</span> ${esc(r.recipient||'')}</span><div style="text-align:right"><b class="${cls}">${esc(st)}</b><div class="header-actions" style="margin-top:8px;justify-content:flex-end"><button type="button" class="btn secondary" data-referral-status="${esc(r.id)}" data-status="создано">Создано</button><button type="button" class="btn secondary" data-referral-status="${esc(r.id)}" data-status="принято">Принято</button><button type="button" class="btn secondary" data-referral-status="${esc(r.id)}" data-status="потеряно">Потеряно</button></div></div></div>`;
+      }).join(''):`<div class="task"><span class="muted">Нет направлений для контроля</span><b>—</b></div>`;
+      return `<div class="card action-card" data-atom="i105-referral-metrics" style="margin-top:14px"><div class="eyebrow">I10.5 · контроль внутренних направлений</div><h3>Создано / принято / потеряно</h3><p class="muted">${s.live?'Live из роли врача (ed-workspace-doctor)':'Демо-сид управляющего (пока врач не создал направления)'}. KPI из internal-marketing.json.</p>
+        <div class="grid" style="margin-top:12px">
+          <div class="card"><div class="eyebrow">Создано</div><div class="metric">${s.created}</div></div>
+          <div class="card"><div class="eyebrow">Принято</div><div class="metric status-ok">${s.accepted}</div></div>
+          <div class="card"><div class="eyebrow">Потеряно</div><div class="metric status-danger">${s.lost}</div></div>
+          <div class="card"><div class="eyebrow">Всего</div><div class="metric">${s.total}</div></div>
+        </div>
+        <div class="stack" style="margin-top:14px">${rows}</div>
+        <p class="muted" style="margin-top:10px">Пункт 10 UI · внутренний маркетинг · без PHI.</p></div>`;
+    }
     function managerTeamHtml(){
       const stats=feedbackTeamStats();
       const teamRows=stats.rows.map(({member,progress})=>`<div class="task" data-staff="${member.id}"><span>${esc(member.name)}<br><span class="muted">Регламент отзывов · ${progress.whenToAsk?'урок 1 ✓':'урок 1 —'} · ${progress.qrPlatforms?'урок 2 ✓':'урок 2 —'}</span></span>${feedbackLessonLabel(progress)}</div>`).join('')+
         `<div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div>`;
       const notice=state.feedbackRetakeNotice?`<p class="status-ok" style="margin-top:12px">${esc(state.feedbackRetakeNotice)}</p>`:'';
       const pending=stats.total-stats.passed;
-      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${managerInquiryAuditHtml()}`;
+      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${managerReferralControlHtml()}${managerInquiryAuditHtml()}`;
     }
     function bindManagerFeedback(){
       if($('assignFeedbackRetake'))$('assignFeedbackRetake').onclick=assignFeedbackRetake;
+    }
+    function bindManagerReferralMetrics(){
+      document.querySelectorAll('[data-referral-status]').forEach((b)=>{
+        b.onclick=()=>{
+          const id=b.getAttribute('data-referral-status');
+          const status=b.getAttribute('data-status');
+          if(!id||!status)return;
+          setManagerReferralStatus(id,status);
+          work();
+          renderRight();
+        };
+      });
     }
     function bindInquiryAudit(){
       ensureInquiryAuditState();
@@ -700,7 +778,7 @@
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
       if(roleKey==='doctor'){bindDoctorClinicRole();bindProposeConsult();syncDoctorClinicBadge();}
-      if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();}
+      if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();bindManagerReferralMetrics();}
     }
     function renderRight(){
       const g=gate();
@@ -710,11 +788,12 @@
       const postVisitLine=roleKey==='admin'&&state.shiftStarted?(()=>{const p=postVisitProgress();return `<div class="card"><b>Чеклист после визита</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Выполнен':p.done+'/'+p.total+' шагов'}</span></div>`})():'';
       const managerFeedbackLine=roleKey==='manager'?(()=>{const s=feedbackTeamStats();return `<div class="card"><b>Уроки регламента отзывов</b><br><span class="${s.pct===100?'status-ok':'status-warn'}">${s.pct}% · ${s.passed}/${s.total}</span></div>`})():'';
       const managerAuditLine=roleKey==='manager'?(()=>{const p=inquiryAuditProgress();return `<div class="card"><b>Аудит обработки заявок</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Пройден':p.done+'/'+p.total+' пунктов'}</span></div>`})():'';
+      const managerReferralLine=roleKey==='manager'?(()=>{const s=managerReferralStats();return `<div class="card" data-atom="i105-referral-metrics"><b>Внутренние направления</b><br><span class="status-warn">${s.created} созд.</span> · <span class="status-ok">${s.accepted} прин.</span> · <span class="status-danger">${s.lost} пот.</span></div>`})():'';
       const doctorRoleLine=roleKey==='doctor'?(()=>{const r=currentDoctorClinicRole();return `<div class="card"><b>Роль на приёме</b><br><span class="badge" data-doctor-clinic-badge="1">${esc(r.title)}</span></div>`})():'';
       const doctorLessonLine=roleKey==='doctor'?`<div class="card"><b>Урок внутреннего направления</b><br><span class="${state.internalLessonRead?'status-ok':'status-warn'}">${state.internalLessonRead?'Прочитано':'Ожидает'}</span></div>`:'';
       const doctorReferralLine=roleKey==='doctor'?(()=>{ensureInternalReferrals();const n=state.internalReferrals.length;return `<div class="card"><b>Внутренние направления</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' создано':'Нет'}</span></div>`})():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }
