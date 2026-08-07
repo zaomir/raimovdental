@@ -9,3 +9,6 @@ dist/
 .cursor/*
 !.cursor/environment.json
 .vscode/
+
+# Instagram scrape binaries (JSON metadata is committed; full media lives on grainee / Dropbox)
+research/raimov-profile/media/instagram/*/media/
