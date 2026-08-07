@@ -20,7 +20,7 @@ const argv = process.argv.slice(2);
 const arg = (n, d) => (argv.indexOf(`--${n}`) > -1 ? argv[argv.indexOf(`--${n}`) + 1] : d);
 const BASE = arg('base', 'https://clinic.raimovdental.com');
 const OUT = arg('out', '/tmp/ed-shots');
-const PORT = Number(arg('port', 9333));
+const PORT = Number(arg('port', String(9300 + (process.pid % 500))));
 
 const CHROME = (() => {
   const root = '/root/.cache/puppeteer/chrome';
@@ -103,12 +103,40 @@ const chrome = spawn(
   ],
   { stdio: 'ignore' }
 );
+const stopChrome = () => {
+  if (!chrome.killed) chrome.kill();
+};
+process.once('exit', stopChrome);
+process.once('SIGINT', () => process.exit(130));
+process.once('SIGTERM', () => process.exit(143));
 
 await waitPort(PORT);
 
 const { webSocketDebuggerUrl } = await (await fetch(`http://127.0.0.1:${PORT}/json/version`)).json();
 const ws = new WebSocket(webSocketDebuggerUrl);
-await new Promise((r) => (ws.onopen = r));
+await new Promise((resolve, reject) => {
+  if (ws.readyState === WebSocket.OPEN) {
+    resolve();
+    return;
+  }
+  const timer = setTimeout(() => reject(new Error('Chrome WebSocket did not open')), 10000);
+  ws.addEventListener(
+    'open',
+    () => {
+      clearTimeout(timer);
+      resolve();
+    },
+    { once: true }
+  );
+  ws.addEventListener(
+    'error',
+    () => {
+      clearTimeout(timer);
+      reject(new Error('Chrome WebSocket failed'));
+    },
+    { once: true }
+  );
+});
 
 let seq = 0;
 const pending = new Map();

@@ -278,7 +278,7 @@
     "scripts/raimov/prepare-patient-assets.mjs": "c19c8a854384006c1db4f147172e29245232547fdd549b9bd80eb29a01521e50",
     "scripts/raimov/preserve-demo-assets.mjs": "f77e7625f84952d0c18285d4db175587794ab49da414eb3cf0bbdfe0e2a0a2c2",
     "scripts/raimov/seed-agents-repo.sh": "5b83609313aa1d865c23c5f797989c4d29910ebaae6d98bf57aa4c40ad3f7189",
-    "scripts/raimov/shoot-patient-site.mjs": "8161be02e93a9ed6a59f7d24c590f676b013d1d31e0799daa571fc76fd585ba2",
+    "scripts/raimov/shoot-patient-site.mjs": "8d75c094e3a0855c30fea7eeb712a21d813f65c3894d3c8fd601db59b668e63c",
     "scripts/raimov/sync-agents-bidirectional.sh": "0a4b8cca52e13dea152c90151f098d0c8a6571a25e74571590f5eac133ed6915",
     "scripts/raimov/sync-from-agents-repo.sh": "62b6944f59e189c534fc8fffaeb9c551dd7404a2475b1beaaea66d5768924778",
     "scripts/raimov/sync-price-table.mjs": "2fe49d00226fc10f657027d7d8c83b4008712f21ba88cb0a0e7c705587f1276a",
@@ -316,7 +316,7 @@
     "site-raimovdental/feedback-hub/lib/store.mjs": "ee61d105db6124d9a08c6781c1dcc030539742e87e326fad456eab2b6e20cd81",
     "site-raimovdental/feedback-hub/server.mjs": "8f80eb415ccd91771e4d709f803c8d58e8085b7abef7978271656f76a58bdf64",
     "site-raimovdental/patient-site/assets/css/fonts.css": "44f97d68904441342d687c1b7b48bb18d3967e8358ba7b3f1d7f8eb175e750e2",
-    "site-raimovdental/patient-site/assets/css/site.css": "1083d113f6e8596b54255ff6f0d11aeacea36fd5066c287c0a14ec48e1d1c8d2",
+    "site-raimovdental/patient-site/assets/css/site.css": "ac548267a4f5103a8da08bf3fe8d3ae7c221968bec4a1a5627af16bcb74361ef",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-cyrillic.woff2": "017fab69b4be8ffc08ca312823327989ade6dc3d948f0afa125e12ec2e5e7ca1",
     "site-raimovdental/patient-site/assets/fonts/cormorant-garamond-300-latin.woff2": "d80df8ff5aecd299a61549f9e29ab1ed0b9b05f4ea71d50fe978e07d5240b235",
     "site-raimovdental/patient-site/assets/fonts/manrope-400-cyrillic.woff2": "c268b459a9329e59fecf39a17618efd44c71735532048d60b12aab76a8c14914",
@@ -548,6 +548,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "e630c121265b39c17914e1aa1cd1c6c9c3afaec892cbb6ad3c00ba01733546d6"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-06T23:50:06Z",
+  "updated_at_utc": "2026-08-07T00:00:06Z",
   "version": 1
 }

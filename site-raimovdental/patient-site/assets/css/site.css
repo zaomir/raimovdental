@@ -1835,7 +1835,7 @@ a.card--service:hover {
 
 @media (max-width: 61.99rem) {
   body {
-    padding-bottom: 3.4rem;
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
   }
 }
 
