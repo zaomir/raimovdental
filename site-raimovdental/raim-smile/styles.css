@@ -65,6 +65,17 @@ a:hover { color: var(--signal); }
 .brand-lockup {
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.brand-lockup__mark {
+  width: 3.1rem;
+  height: 3.1rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.brand-lockup__text {
   display: grid;
   gap: 0.1rem;
 }
@@ -78,6 +89,13 @@ a:hover { color: var(--signal); }
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.12em;
+}
+
+.hero-brand {
+  width: min(11rem, 42vw);
+  height: auto;
+  margin: 0 0 1.25rem;
+  display: block;
 }
 .nav {
   display: flex;

@@ -109,6 +109,9 @@ function pageHtml(p) {
   <meta name="description" content="${p.meta}">
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
   <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -121,8 +124,11 @@ function pageHtml(p) {
   <header class="site-header">
     <div class="shell">
       <a class="brand-lockup" href="/">
-        <span class="name">RAIM SMILE SYSTEM</span>
-        <span class="note">для Атабека Раимова</span>
+        <img class="brand-lockup__mark" src="/assets/logo.png" width="512" height="512" alt="RAIM SMYLE Veneer System">
+        <span class="brand-lockup__text">
+          <span class="name">RAIM SMYLE</span>
+          <span class="note">Veneer System</span>
+        </span>
       </a>
       <nav class="nav" aria-label="Этапы">
         <a href="/diagnostics/">01</a>
