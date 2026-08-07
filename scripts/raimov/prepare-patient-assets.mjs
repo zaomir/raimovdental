@@ -184,16 +184,19 @@ for src, base in jobs:
 }
 
 function processTeamPhoto() {
+  // Prefer the full-res studio master on the VPS; fall back to legacy inbox vignette crops.
   python(`${PY_HELPERS}
 import glob
-cands = sorted(glob.glob(os.path.join(r'''${INBOX}''', 'dental-new4-*.png')))
+master = '/var/www/grainee-v2/tmp/dental-team.png'
+cands = [master] if os.path.exists(master) else sorted(glob.glob(os.path.join(r'''${INBOX}''', 'dental-new4-*.png')))
 if not cands:
     print('MISSING team photo'); raise SystemExit(0)
 im = load(cands[-1])
-# Founder-supplied render carries a soft black vignette frame; trim it off.
-w, h = im.size
-im = im.crop((round(w*0.045), round(h*0.055), round(w*0.955), round(h*0.985)))
-save_variants(im, r'''${join(OUT, 'img', 'team', 'team')}''', [920, 720, 480], quality=88)
+if cands[-1] != master:
+    # Legacy founder render carries a soft black vignette frame; trim it off.
+    w, h = im.size
+    im = im.crop((round(w*0.045), round(h*0.055), round(w*0.955), round(h*0.985)))
+save_variants(im, r'''${join(OUT, 'img', 'team', 'team')}''', [2400, 1600, 960, 640], quality=88)
 `);
 }
 

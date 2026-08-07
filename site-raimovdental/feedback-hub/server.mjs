@@ -34,7 +34,7 @@ const ADMIN_TOKEN = (process.env.FEEDBACK_ADMIN_TOKEN || '').trim();
 
 const CSS = readFileSync(join(HERE, 'assets', 'hub.css'), 'utf8');
 const JS = readFileSync(join(HERE, 'assets', 'hub.js'), 'utf8');
-const TEAM_IMAGE = readFileSync(join(HERE, '..', 'patient-site', 'assets', 'img', 'team', 'team-720.jpg'));
+const TEAM_IMAGE = readFileSync(join(HERE, '..', 'patient-site', 'assets', 'img', 'team', 'team-960.jpg'));
 // Content hash keeps the CDN from serving yesterday's stylesheet after a hub deploy.
 const hash = (s) => {
   let h = 5381;

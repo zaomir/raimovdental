@@ -78,8 +78,8 @@ say "4/6 install app"
 rsync -a --delete --exclude '.git' "${SRC}/" "${APP}/feedback-hub/"
 install -D -m 0644 "${REPO}/site-raimovdental/patient-site/config/site.mjs" \
   "${APP}/patient-site/config/site.mjs"
-install -D -m 0644 "${REPO}/site-raimovdental/patient-site/assets/img/team/team-720.jpg" \
-  "${APP}/patient-site/assets/img/team/team-720.jpg"
+install -D -m 0644 "${REPO}/site-raimovdental/patient-site/assets/img/team/team-960.jpg" \
+  "${APP}/patient-site/assets/img/team/team-960.jpg"
 chown -R root:root "$APP"
 
 say "5/6 unit"
