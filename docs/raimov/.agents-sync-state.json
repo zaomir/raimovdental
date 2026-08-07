@@ -114,6 +114,9 @@
     "docs/raimov/operations/expert-dental/scripts/WHATSAPP_SMILE_PREVIEW_ADMIN.md": "ca1512bedcac0ffd439764c8f4b34f35c687012dc0f44dc8496587c77e3662d0",
     "docs/raimov/operations/expert-dental/templates/MATERIAL_ENTRY_TEMPLATE.md": "fae12e9ca6f0c8f39bca699f5825f1852321dad69679f6585af649d270bb2e18",
     "docs/raimov/operations/expert-dental/templates/REPORT_TEMPLATE.md": "3c81ea9f8f66be8e403defc86a03f8ade1df7c45f3d1da8dcb8df5faedccd96f",
+    "docs/raimov/operations/nogi-v-ruki/README.md": "ae7e31aafa5302234813d6d956cf9b556ae9a17250ed75d5d164c9280f95af50",
+    "docs/raimov/operations/nogi-v-ruki/periods/month-01/PLAN.md": "cd87ad03241e35ecbae4ba2ecfbe9900ae8aeee5f22912a25d48ebedff181ac9",
+    "docs/raimov/operations/nogi-v-ruki/periods/month-01/STATUS.md": "392019a67ff772d0bbeb01c4937ec285590b88c47a25b6a6172516af85319416",
     "docs/raimov/patient-funnel/README.md": "bfbeb56c4fb53d72d3049c90f8fa5cf8f1d057e56312e3bb5623990f5922979a",
     "docs/raimov/release/README.md": "46e5a9a16993a8d61d08689731a61092cae7774dffac4b88b3e2834415934dd3",
     "docs/raimov/technology/README.md": "b7b6c8ecddf2ea895aacf82c6df7189f752e3b4446e7174ce6d4676eb7f8160a",
@@ -802,6 +805,6 @@
     "tests/raimovdental/workspace-mvp.test.mjs": "fc47c2953f6033ed7547c66879a214da574ec1ed84ad7892bd58a92d8c79bc66"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-07T19:40:05Z",
+  "updated_at_utc": "2026-08-07T21:10:05Z",
   "version": 1
 }
