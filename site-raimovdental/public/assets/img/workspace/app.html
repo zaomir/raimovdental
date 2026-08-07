@@ -27,7 +27,7 @@
 <body>
   <header class="top">
     <div class="brand"><div class="mark">ED</div><div><strong>Рабочая система</strong><small id="roleLabel"></small></div></div>
-    <div class="header-actions"><span class="badge demo">Демо · вход без пароля</span><span id="shiftBadge" class="badge">Смена не начата</span><a class="btn secondary back-link" href="../">Все роли</a></div>
+    <div class="header-actions"><span class="badge demo">Демо · вход без пароля</span><span id="doctorClinicBadge" class="badge hidden">Терапевт</span><span id="shiftBadge" class="badge">Смена не начата</span><a class="btn secondary back-link" href="../">Все роли</a></div>
   </header>
   <div class="shell">
     <aside class="panel side"><div class="eyebrow">Навигация</div><div id="nav" class="nav"></div><div class="notice">Временный демонстрационный доступ. Перед рабочим запуском будет включена серверная авторизация.</div></aside>
@@ -64,6 +64,7 @@
     if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
     if(!state.inboxCards||typeof state.inboxCards!=='object')state.inboxCards={};
     if(typeof state.inboxSelectedId!=='string')state.inboxSelectedId='';
+    if(roleKey==='doctor'&&!['therapist','hygienist'].includes(state.doctorClinicRole))state.doctorClinicRole='therapist';
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
@@ -82,6 +83,9 @@
     const PATIENT_PATH_URL='content/patient-path.json';
     let patientPath=null;
     if(roleKey==='admin'||roleKey==='doctor')fetch(PATIENT_PATH_URL).then(r=>r.json()).then(d=>{patientPath=d;if(view==='path')render()}).catch(()=>{});
+    const INTERNAL_MARKETING_URL='content/internal-marketing.json';
+    let internalMarketing=null;
+    if(roleKey==='doctor')fetch(INTERNAL_MARKETING_URL).then(r=>r.json()).then(d=>{internalMarketing=d;if(view==='work')render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -573,14 +577,60 @@
       };
       if($('inqOpenRender'))$('inqOpenRender').onclick=()=>{location.href='/render/'};
     }
+    function currentDoctorClinicRole(){
+      const id=['therapist','hygienist'].includes(state.doctorClinicRole)?state.doctorClinicRole:'therapist';
+      const fromJson=(internalMarketing&&internalMarketing.roles||[]).find(r=>r.id===id);
+      if(fromJson)return fromJson;
+      return id==='hygienist'
+        ?{id:'hygienist',title:'Гигиенист',role_in_system:'Точка частого контакта; внутренние направления после гигиены.',when_to_refer:[]}
+        :{id:'therapist',title:'Терапевт',role_in_system:'Врач первичного приёма; источник внутренних направлений.',when_to_refer:[]};
+    }
+    function syncDoctorClinicBadge(){
+      const el=$('doctorClinicBadge');
+      if(!el)return;
+      if(roleKey!=='doctor'){el.classList.add('hidden');return;}
+      const r=currentDoctorClinicRole();
+      el.textContent=r.title;
+      el.classList.remove('hidden');
+      el.setAttribute('data-doctor-clinic-role',r.id);
+    }
+    function doctorClinicRoleSwitcherHtml(){
+      const cur=currentDoctorClinicRole();
+      const opts=[['therapist','Терапевт'],['hygienist','Гигиенист']];
+      return `<div class="card action-card" data-atom="i102-doctor-role"><div class="eyebrow">I10.2 · роль на приёме</div><h3>Рабочая роль врача</h3><p class="muted">Бейдж и выбор «терапевт» / «гигиенист» меняют набор задач внутреннего направления. Контент из internal-marketing.json.</p><div class="header-actions" style="margin-top:12px">${opts.map(([id,label])=>`<button type="button" class="btn ${cur.id===id?'primary':'secondary'}" data-doctor-clinic-role="${id}" aria-pressed="${cur.id===id?'true':'false'}">${label}</button>`).join('')}</div><p style="margin-top:12px"><b>${esc(cur.title)}</b> — ${esc(cur.role_in_system||'')}</p><p class="muted" style="margin-top:8px">Сейчас: <span class="badge" data-doctor-clinic-badge="1">${esc(cur.title)}</span> · сохраняется в localStorage</p></div>`;
+    }
+    function doctorTaskSetHtml(){
+      const cur=currentDoctorClinicRole();
+      const refs=(cur.when_to_refer||[]);
+      const loading=!internalMarketing?`<p class="muted">Загрузка internal-marketing.json…</p>`:'';
+      const tasks=refs.length?refs.map(t=>`<div class="task" data-doctor-task-route="${esc(t.route)}"><span><b>${esc(t.route_title||t.route)}</b><br><span class="muted">${esc(t.signals_from_ssot||'')}</span><br>${esc(t.action_draft||'')}<br><span class="muted">Получатель: ${esc(t.recipient_role||'—')} · ${esc(t.action_status||'')}</span></span><b class="status-warn">Направление</b></div>`).join('')
+        :`<div class="task"><span class="muted">Нет задач направления для роли ${esc(cur.title)}</span><b>—</b></div>`;
+      const duty=cur.id==='hygienist'
+        ?`<div class="grid" style="margin-top:14px"><div class="card"><h3>После профессиональной гигиены</h3><p>Зафиксировать эстетический / восстановительный / ортодонтический сигнал и передать администратору.</p><button type="button" class="btn secondary" disabled>Демо · без PHI</button></div><div class="card"><h3>Статус гигиениста</h3><p>Сейчас: свободен<br>Поток: существующие пациенты</p><button type="button" class="btn secondary" disabled>Принять слот гигиены</button></div></div>`
+        :`<div class="grid" style="margin-top:14px"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button type="button" class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button type="button" class="btn primary">Принять дежурство</button></div></div>`;
+      return `<div class="card" data-atom="i102-doctor-tasks" data-doctor-clinic-role="${esc(cur.id)}" style="margin-top:14px"><div class="eyebrow">Рабочий набор · ${esc(cur.title)}</div><h3>Задачи внутреннего направления</h3><p class="muted">Три приоритетных маршрута: виниры · имплантация · ортодонтия. Тексты действий — draft_pending_clinic до утверждения клиники.</p>${loading}<div class="stack" style="margin-top:10px">${tasks}</div></div>${duty}`;
+    }
+    function bindDoctorClinicRole(){
+      document.querySelectorAll('[data-doctor-clinic-role]').forEach(b=>{
+        if(b.tagName!=='BUTTON')return;
+        b.onclick=()=>{
+          const id=b.getAttribute('data-doctor-clinic-role');
+          if(!['therapist','hygienist'].includes(id))return;
+          state.doctorClinicRole=id;
+          save();
+          work();
+        };
+      });
+    }
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
       const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал I7.5: фильтр «Пропущен / без результата» и «Вернуть в работу».</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
-      const doctor=`<div class="grid"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button class="btn primary">Принять дежурство</button></div></div>`;
+      const doctor=`${doctorClinicRoleSwitcherHtml()}${doctorTaskSetHtml()}`;
       const manager=managerTeamHtml();
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
+      if(roleKey==='doctor'){bindDoctorClinicRole();syncDoctorClinicBadge();}
       if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();}
     }
     function renderRight(){
@@ -591,12 +641,15 @@
       const postVisitLine=roleKey==='admin'&&state.shiftStarted?(()=>{const p=postVisitProgress();return `<div class="card"><b>Чеклист после визита</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Выполнен':p.done+'/'+p.total+' шагов'}</span></div>`})():'';
       const managerFeedbackLine=roleKey==='manager'?(()=>{const s=feedbackTeamStats();return `<div class="card"><b>Уроки регламента отзывов</b><br><span class="${s.pct===100?'status-ok':'status-warn'}">${s.pct}% · ${s.passed}/${s.total}</span></div>`})():'';
       const managerAuditLine=roleKey==='manager'?(()=>{const p=inquiryAuditProgress();return `<div class="card"><b>Аудит обработки заявок</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Пройден':p.done+'/'+p.total+' пунктов'}</span></div>`})():'';
+      const doctorRoleLine=roleKey==='doctor'?(()=>{const r=currentDoctorClinicRole();return `<div class="card"><b>Роль на приёме</b><br><span class="badge" data-doctor-clinic-badge="1">${esc(r.title)}</span></div>`})():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${doctorRoleLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
+      syncDoctorClinicBadge();
     }
     function render(){renderNav();renderRight();({today,learn,shift,work,path:pathView}[view]||today)()}
     $('roleLabel').textContent=role.name+' · '+role.subtitle;
+    syncDoctorClinicBadge();
     render();
   })();
   </script>

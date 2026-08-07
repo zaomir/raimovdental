@@ -78,6 +78,6 @@
 
 **UI progress (пункт 1):** I1.1–I1.4 ✅ · пункт 1 UI DoD закрыт по атомам (только обработка заявок; аудит карт/сайта/Instagram вне scope).
 
-**UI progress (пункт 10):** I10.1 ✅ · I10.2–I10.5 ⬜ · контент `internal-marketing.json` (draft_pending_clinic)
+**UI progress (пункт 10):** I10.1–I10.2 ✅ · I10.3–I10.5 ⬜ · контент `internal-marketing.json` (draft_pending_clinic)
 
-**Next execute:** I10.2 — бейдж/выбор «терапевт» / «гигиенист» в интерфейсе врача.
+**Next execute:** I10.3 — урок внутреннего направления в Обучении врача + «прочитал».

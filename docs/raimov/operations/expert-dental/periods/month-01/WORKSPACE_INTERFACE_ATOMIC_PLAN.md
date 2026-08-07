@@ -54,7 +54,7 @@ canon:
 | I1.3 | 1 | ✅ | единая карточка · `i13-inquiry-card` · commit `900042168` · prod |
 | I1.4 | 1 | ✅ | чеклист аудита · `i14-inquiry-audit` · демо-нарушение · commit `1af21f5aa` · prod |
 | I10.1 | 10 | ✅ | `internal-marketing.json` · therapist/hygienist · draft_pending_clinic · commit `ec302a0cb` |
-| I10.2 | 10 | ⬜ | — |
+| I10.2 | 10 | ✅ | бейдж/выбор терапевт\|гигиенист · `i102-doctor-role` · task set · commit `618a5e1a8` · prod |
 | I10.3 | 10 | ⬜ | — |
 | I10.4 | 10 | ⬜ | — |
 | I10.5 | 10 | ⬜ | — |
