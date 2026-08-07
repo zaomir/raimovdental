@@ -40,9 +40,9 @@ canon:
 | I7.4 | 7 | ✅ | `/render/` «Повторные касания» · 9 правил · демо-задача · commit `60938dfe4` · prod |
 | I7.5 | 7 | ✅ | журнал «пропущен / без результата» + «Вернуть в работу» · commit `6401a234e` · prod |
 | I7.6 | 7 | ✅ | admin quiz scripts/recontact · ≥3Q · ≥90% · critical 100% · commit `8a0f946da` · prod |
-| I5.1 | 5 | ⬜ | — |
-| I5.2 | 5 | ⬜ | — |
-| I5.3 | 5 | ⬜ | — |
+| I5.1 | 5 | ✅ | урок «Когда просить отзыв» · admin-feedback-sop.json · «Прочитал» · commit `9cd6fc4af` · prod |
+| I5.2 | 5 | ✅ | урок «QR и три площадки» · equal Yandex/2GIS/Google · no reward · commit `cee5434f8` · prod |
+| I5.3 | 5 | ✅ | post-visit checklist · «визит состоялся» · post_visit_checklist · commit `66d213812` · prod |
 | I5.4 | 5 | ⬜ | — |
 | I5.5 | 5 | ⬜ | — |
 | I4.1 | 4 | ⬜ | — |

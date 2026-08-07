@@ -50,7 +50,13 @@
     const role=roles[roleKey];
     const key='ed-workspace-'+roleKey;
     const QUIZ_VERSION=roleKey==='admin'?'i76-scripts-recontact':'base-v1';
-    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:''};
+    const FEEDBACK_SOP_URL='content/admin-feedback-sop.json';
+    let feedbackSop=null;
+    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false};
+    if(!state.feedbackLessons)state.feedbackLessons={whenToAsk:false,qrPlatforms:false};
+    if(typeof state.feedbackLessons.qrPlatforms!=='boolean')state.feedbackLessons.qrPlatforms=false;
+    if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
+    if(typeof state.postVisitOpen!=='boolean')state.postVisitOpen=false;
     if(state.quizVersion!==QUIZ_VERSION){
       state.updateRead=false;
       state.testPassed=false;
@@ -59,6 +65,39 @@
       localStorage.setItem(key,JSON.stringify(state));
     }
     const save=()=>localStorage.setItem(key,JSON.stringify(state));
+    const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    if(roleKey==='admin')fetch(FEEDBACK_SOP_URL).then(r=>r.json()).then(d=>{feedbackSop=d;if(['learn','shift','work'].includes(view))render()}).catch(()=>{});
+    function ensurePostVisitState(){
+      if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
+      const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
+      while(state.postVisitChecklist.length<len)state.postVisitChecklist.push(false);
+    }
+    function postVisitProgress(){
+      ensurePostVisitState();
+      const total=state.postVisitChecklist.length;
+      const done=state.postVisitChecklist.filter(Boolean).length;
+      return {done,total,complete:total>0&&done===total};
+    }
+    function adminPostVisitCardHtml(){
+      if(roleKey!=='admin'||!state.shiftStarted)return '';
+      ensurePostVisitState();
+      const steps=(feedbackSop&&feedbackSop.post_visit_checklist)||[];
+      const prog=postVisitProgress();
+      const demo={patient:'Айгуль К.',service:'Консультация · виниры',doctor:'доктор Нурбеков'};
+      if(!steps.length)return `<div class="card action-card" data-atom="i53-post-visit"><div class="eyebrow">После визита · демо</div><h3>Визит состоялся</h3><p class="muted">${esc(demo.patient)} · ${esc(demo.service)} · ${esc(demo.doctor)}</p><p class="muted">Загрузка чеклиста регламента…</p></div>`;
+      const checklist=state.postVisitOpen?`<div id="postVisitChecklist" class="stack" style="margin-top:14px">${steps.map((s,i)=>`<label class="check card ${state.postVisitChecklist[i]?'':'update'}"><input type="checkbox" data-checklist-step="${i}" ${state.postVisitChecklist[i]?'checked':''}><span><b>${esc(s.step)}</b><br>${esc(s.action)}<br><span class="muted">${esc(s.restriction)}</span></span></label>`).join('')}<p class="muted">Источник: admin-feedback-sop.json · post_visit_checklist</p></div>`:'';
+      const btn=state.postVisitOpen?'':`<button id="openPostVisitChecklist" class="btn primary" style="margin-top:12px">Открыть чеклист запроса отзыва</button>`;
+      const status=prog.complete?'<p class="status-ok" style="margin-top:12px">✓ Чеклист выполнен</p>':prog.done>0?`<p class="status-warn" style="margin-top:12px">${prog.done} из ${prog.total} шагов</p>`:'';
+      return `<div class="card action-card" data-atom="i53-post-visit"><div class="eyebrow">После визита · демо</div><h3>Визит состоялся</h3><p><b>${esc(demo.patient)}</b><br>${esc(demo.service)} · ${esc(demo.doctor)}</p><p class="muted">Обязательное действие после завершённого визита — пройти чеклист запроса отзыва по регламенту.</p>${status}${btn}${checklist}</div>`;
+    }
+    function bindPostVisitChecklist(){
+      ensurePostVisitState();
+      if($('openPostVisitChecklist'))$('openPostVisitChecklist').onclick=()=>{state.postVisitOpen=true;save();({shift,work}[view]||shift)()};
+      document.querySelectorAll('[data-checklist-step]').forEach(el=>{
+        const i=Number(el.dataset.checklistStep);
+        el.onchange=()=>{state.postVisitChecklist[i]=el.checked;save();({shift,work}[view]||shift)();renderRight()};
+      });
+    }
     const updatesBase=[
       {title:'Новая маршрутизация медицинского обращения',critical:true,copy:'Система сначала предлагает лечащего врача, затем свободного врача нужной специальности и дежурного. Ответственность передаётся только после принятия врачом.'},
       {title:'Пошаговый опросник передачи врачу',critical:true,copy:'Каждый обязательный вопрос открывается отдельно. Выбор ответа сохраняется и автоматически переводит на следующий шаг.'},
@@ -103,13 +142,32 @@
     }
     function layout(title,body){$('main').innerHTML=`<section class="panel"><div class="hero"><div><div class="eyebrow">${role.name}</div><h1>${title}</h1><p class="muted">${role.subtitle}</p></div><span class="badge">${state.shiftStarted&&!state.shiftClosed?'В работе':'Требуется действие'}</span></div>${body}</section>`}
     function today(){const g=gate();layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Статус допуска</div><div class="metric">${state.testPassed?'Актуален':'Ограничен'}</div><p class="muted">Последний результат: ${state.score||0}% · проходной балл 90% · критические 100%</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${state.updateRead?'Все обязательные материалы прочитаны':(roleKey==='admin'?'3 материала по скриптам и повторным касаниям':'2 обязательных материала ожидают подтверждения')}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);$('mainAction').onclick=()=>{view=g.view;render()}}
+    function renderFeedbackLessons(){
+      if(roleKey!=='admin'||!feedbackSop)return;
+      const wrap=$('feedbackLessons');
+      if(!wrap)return;
+      const m=feedbackSop.ask_moment;
+      const readWhen=state.feedbackLessons.whenToAsk;
+      const readQr=state.feedbackLessons.qrPlatforms;
+      const platforms=(feedbackSop.platforms||[]).map(p=>`<li><strong>${esc(p.name)}</strong> — ${esc(p.role_in_sop||'равный контур')}<br><span class="muted">${esc(p.source_ref||'')}</span></li>`).join('');
+      const rewardBan=(feedbackSop.prohibitions||[]).find(p=>/скидк|балл|подарок|reward/i.test(p.text))||{};
+      const starsBan=(feedbackSop.prohibitions||[]).find(p=>/5 звёзд|пять звёзд/i.test(p.text))||{};
+      const qrStep=(feedbackSop.post_visit_checklist||[]).find(s=>/QR/i.test(s.step||''))||{};
+      const pub=feedbackSop.publication_disclaimer||{};
+      const lesson1=`<div class="card update ${readWhen?'':'critical'}" data-lesson="i51-when-to-ask"><div class="eyebrow">Урок · регламент отзывов</div><h3>Когда просить отзыв</h3><p>${esc(m.text)}</p><p class="muted">${esc(m.restriction)}</p>${m.note?`<p>${esc(m.note)}</p>`:''}<p class="muted" style="margin-top:10px">Источник: ${esc(m.source_ref||feedbackSop.source_ref||'')}</p>${readWhen?'<p class="status-ok">✓ Прочитано</p>':'<button id="feedbackWhenRead" class="btn primary">Прочитал</button>'}</div>`;
+      const lesson2=`<div class="card update ${readQr?'':'critical'}" data-lesson="i52-qr-platforms"><div class="eyebrow">Урок · регламент отзывов</div><h3>QR и три площадки</h3><p>Яндекс / 2ГИС / Google — равный контур Post-Visit Feedback Loop. Пациенту не навязывают одну «правильную» площадку как условие просьбы.</p><ul class="stack" style="margin:12px 0;padding-left:18px">${platforms}</ul><p><b>QR на стойке:</b> ${esc(qrStep.action||'Показать QR для перехода на карточку клиники.')}</p><p class="muted">${esc(qrStep.restriction||'Не требовать показать публикацию или скриншот.')}</p><div class="notice" style="margin-top:12px"><b>Запрет reward-for-review:</b> ${esc(rewardBan.text||starsBan.text||'Не обещать скидку, подарок или баллы за публичный отзыв.')}</div><p style="margin-top:12px"><b>Публикация:</b> ${esc(pub.text||'Публикация и срок модерации не гарантируются.')}</p><p class="muted" style="margin-top:10px">Источник: ${esc(pub.source_ref||feedbackSop.source_ref||'')}</p>${readQr?'<p class="status-ok">✓ Прочитано</p>':'<button id="feedbackQrRead" class="btn primary">Прочитал</button>'}</div>`;
+      wrap.innerHTML=lesson1+lesson2;
+      if(!readWhen&&$('feedbackWhenRead'))$('feedbackWhenRead').onclick=()=>{state.feedbackLessons.whenToAsk=true;save();renderFeedbackLessons();renderRight()};
+      if(!readQr&&$('feedbackQrRead'))$('feedbackQrRead').onclick=()=>{state.feedbackLessons.qrPlatforms=true;save();renderFeedbackLessons();renderRight()};
+    }
     function learn(){
       let qi=0,answers=[];
-      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>`);
+      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}`);
       const body=$('learnBody');
       function updatesView(){
         body.innerHTML=updates.map((u,i)=>`<article class="card update ${u.critical?'critical':''}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${u.title}</h3><p>${u.copy}</p></article>`).join('')+`<button id="confirmUpdates" class="btn primary">Прочитал(а) и понял(а)</button>`;
         $('confirmUpdates').onclick=()=>{state.updateRead=true;save();quizView()};
+        renderFeedbackLessons();
       }
       function quizView(){
         const q=quiz[qi];
@@ -119,6 +177,7 @@
           b.classList.add('selected');
           setTimeout(()=>{qi++;if(qi<quiz.length)quizView();else finishQuiz()},180);
         });
+        renderFeedbackLessons();
       }
       function finishQuiz(){
         const correct=quiz.filter((q,i)=>answers[i]===q.ok).length;
@@ -129,10 +188,12 @@
         save();
         body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Нужно ≥90% и 100% по критическим вопросам. Без pass доступ к работе ограничен.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;
         $('quizNext').onclick=()=>{if(state.testPassed){view='today';render()}else{qi=0;answers=[];updatesView()}};
+        renderFeedbackLessons();
       }
       function passedView(){
         body.innerHTML=`<div class="card"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам и повторным касаниям.':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];quizView()};
+        renderFeedbackLessons();
       }
       if(state.testPassed)passedView();
       else if(state.updateRead)quizView();
@@ -140,17 +201,27 @@
     }
     function shift(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Смена недоступна','Сначала пройдите тест допуска по скриптам и повторным касаниям.');
-      layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()}
+      layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()};bindPostVisitChecklist();
     }
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
-      const admin=`<div class="grid"><div class="card"><h3>Входящие обращения</h3><div class="metric">4</div><p class="muted">1 срочное · 2 записи · 1 вопрос по стоимости</p><a class="btn primary" href="/render/">Открыть модуль обращений</a><a class="btn secondary" href="/render/#scripts" style="margin-top:10px">Открыть скрипты</a><a class="btn secondary" href="/render/#recontact" style="margin-top:10px">Повторные касания</a></div><div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p></div></div>`;
+      const admin=`<div class="grid"><div class="card"><h3>Входящие обращения</h3><div class="metric">4</div><p class="muted">1 срочное · 2 записи · 1 вопрос по стоимости</p><a class="btn primary" href="/render/">Открыть модуль обращений</a><a class="btn secondary" href="/render/#scripts" style="margin-top:10px">Открыть скрипты</a><a class="btn secondary" href="/render/#recontact" style="margin-top:10px">Повторные касания</a></div><div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
       const doctor=`<div class="grid"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button class="btn primary">Принять дежурство</button></div></div>`;
       const manager=`<div class="grid"><div class="card"><h3>Команда сегодня</h3><div class="task"><span>Администратор Айжан</span><b class="status-ok">В работе</b></div><div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div></div><div class="card"><h3>Обучение</h3><div class="metric">75%</div><p class="muted">3 из 4 сотрудников прошли обязательное обновление</p><button class="btn primary">Назначить пересдачу</button></div></div>`;
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
+      if(roleKey==='admin')bindPostVisitChecklist();
     }
-    function renderRight(){const g=gate();$('todayTitle').textContent=g.title;$('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div><div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;$('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата'}
+    function renderRight(){
+      const g=gate();
+      const feedbackLine=roleKey==='admin'
+        ?`<div class="card"><b>Урок «Когда просить отзыв»</b><br><span class="${state.feedbackLessons.whenToAsk?'status-ok':'status-warn'}">${state.feedbackLessons.whenToAsk?'Прочитано':'Ожидает'}</span></div><div class="card"><b>Урок «QR и три площадки»</b><br><span class="${state.feedbackLessons.qrPlatforms?'status-ok':'status-warn'}">${state.feedbackLessons.qrPlatforms?'Прочитано':'Ожидает'}</span></div>`
+        :'';
+      const postVisitLine=roleKey==='admin'&&state.shiftStarted?(()=>{const p=postVisitProgress();return `<div class="card"><b>Чеклист после визита</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Выполнен':p.done+'/'+p.total+' шагов'}</span></div>`})():'';
+      $('todayTitle').textContent=g.title;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
+    }
     function render(){renderNav();renderRight();({today,learn,shift,work}[view]||today)()}
     $('roleLabel').textContent=role.name+' · '+role.subtitle;
     render();
