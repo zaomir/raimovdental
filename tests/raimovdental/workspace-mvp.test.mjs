@@ -136,6 +136,12 @@ assert.match(app, /Нельзя закрыть контакт \/ передач�
 assert.match(app, /demoPathClose/);
 assert.match(app, /i11-unified-inbox/);
 assert.match(app, /DEMO_INBOX/);
+assert.match(app, /i12-sla-status/);
+assert.match(app, /INBOX_SLA/);
+assert.match(app, /inboxStatuses/);
+assert.match(app, /bindInboxSla/);
+assert.match(app, /data-inbox-status-select/);
+assert.match(app, /'новое','в работе','записан','упущен','передан врачу'/);
 assert.match(app, /function inboxListHtml/);
 assert.match(app, /Единый inbox обращений/);
 assert.match(app, /data-inbox-channel/);

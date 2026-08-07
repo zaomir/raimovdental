@@ -61,6 +61,7 @@
     if(typeof state.demoPathNextAction!=='string')state.demoPathNextAction='';
     if(typeof state.demoPathClosed!=='boolean')state.demoPathClosed=false;
     if(typeof state.demoPathGateMsg!=='string')state.demoPathGateMsg='';
+    if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
@@ -394,14 +395,48 @@
       bindDemoPathCloseGate();
     }
 
+    const INBOX_SLA=['новое','в работе','записан','упущен','передан врачу'];
     const DEMO_INBOX=[
-      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор'},
-      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор'},
-      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор'}
+      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор',defaultStatus:'новое'},
+      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор',defaultStatus:'в работе'},
+      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор',defaultStatus:'записан'}
     ];
+    function ensureInboxStatuses(){
+      if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
+      DEMO_INBOX.forEach((item)=>{
+        if(!INBOX_SLA.includes(state.inboxStatuses[item.id]))state.inboxStatuses[item.id]=item.defaultStatus||'новое';
+      });
+    }
+    function inboxStatusClass(status){
+      if(status==='упущен')return'status-danger';
+      if(status==='передан врачу'||status==='записан')return'status-ok';
+      if(status==='в работе')return'status-warn';
+      return'muted';
+    }
     function inboxListHtml(){
-      const rows=DEMO_INBOX.map((item)=>`<article class="task" data-inbox-id="${esc(item.id)}" data-inbox-channel="${esc(item.channelKey)}"><span><b>${esc(item.patient)}</b><br><span class="muted">${esc(item.need)}</span><br><span class="muted">${esc(item.at)} · ${esc(item.owner)}</span></span><b>${esc(item.channel)}</b></article>`).join('');
-      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. Закрытые контакты и возврат упущенных — в журнале /render/ (I7.5).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p><div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a></div></div>`;
+      ensureInboxStatuses();
+      const rows=DEMO_INBOX.map((item)=>{
+        const status=state.inboxStatuses[item.id]||item.defaultStatus||'новое';
+        const opts=INBOX_SLA.map((s)=>`<option value="${esc(s)}"${s===status?' selected':''}>${esc(s)}</option>`).join('');
+        return `<article class="card" data-inbox-id="${esc(item.id)}" data-inbox-channel="${esc(item.channelKey)}" data-inbox-status="${esc(status)}" data-atom="i12-sla-status" style="padding:12px 14px"><div class="task" style="border:0;padding:0"><span><b>${esc(item.patient)}</b><br><span class="muted">${esc(item.need)}</span><br><span class="muted">${esc(item.at)} · ${esc(item.owner)} · ${esc(item.channel)}</span></span><b class="${inboxStatusClass(status)}">${esc(status)}</b></div><label class="muted" style="display:block;margin-top:10px;font-size:12px">SLA-статус</label><select class="btn secondary" data-inbox-status-select="${esc(item.id)}" style="width:100%;margin-top:6px;text-align:left">${opts}</select></article>`;
+      }).join('');
+      const counts=INBOX_SLA.map((s)=>{
+        const n=DEMO_INBOX.filter((item)=>(state.inboxStatuses[item.id]||item.defaultStatus)===s).length;
+        return `<span class="badge">${esc(s)} · ${n}</span>`;
+      }).join('');
+      return `<div class="card action-card" data-atom="i11-unified-inbox"><div class="eyebrow">Пункт 1 · inbox</div><h3>Единый inbox обращений</h3><p class="muted">Один список входящих из каналов-демо: звонок / WhatsApp / форма. SLA-статусы переключаются в demo state (I1.2). Закрытые контакты и возврат упущенных — в журнале /render/ (I7.5).</p><div class="header-actions" style="margin-top:10px"><span class="badge">Звонок</span><span class="badge">WhatsApp</span><span class="badge">Форма</span></div><div class="header-actions" style="margin-top:8px">${counts}</div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${DEMO_INBOX.length}</div><p class="muted">обращения в демо-очереди</p><div class="header-actions" style="margin-top:12px;flex-direction:column;align-items:stretch"><a class="btn primary" href="/render/">Открыть /render/ · журнал</a><a class="btn secondary" href="/render/#scripts">Скрипты</a><a class="btn secondary" href="/render/#recontact">Повторные касания</a></div></div>`;
+    }
+    function bindInboxSla(){
+      document.querySelectorAll('[data-inbox-status-select]').forEach((el)=>{
+        el.onchange=()=>{
+          const id=el.getAttribute('data-inbox-status-select');
+          const value=el.value;
+          if(!id||!INBOX_SLA.includes(value))return;
+          state.inboxStatuses[id]=value;
+          save();
+          work();
+        };
+      });
     }
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
@@ -410,7 +445,7 @@
       const manager=managerTeamHtml();
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
-      if(roleKey==='admin')bindPostVisitChecklist();
+      if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();}
       if(roleKey==='manager')bindManagerFeedback();
     }
     function renderRight(){
