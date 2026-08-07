@@ -57,10 +57,13 @@ research/raimov-profile/
   pending-clinic-confirmation.md
   rights-and-consent.md
   queries/SEARCH_QUERIES.md
+  briefs/            # research briefs (bio/growth collection, etc.)
   templates/
   evidence/          # probe metadata; raw HTML only if explicitly added later
   media/             # no binary assets committed without rights
 ```
+
+**Active brief (info collection only):** `briefs/RESEARCH_BRIEF_ATABEK_BIO_GROWTH_2026-08.md` — биография / личный рост Атабека для будущей страницы и стратегии (Dropbox IG visual pass + web + SSOT).
 
 ## Post-merge status (PR #471)
 
