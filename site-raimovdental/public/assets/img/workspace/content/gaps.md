@@ -70,4 +70,4 @@
 | I0.4 | ✅ | `admin-feedback-sop.json` |
 | I0.5 | ✅ | this file |
 
-**Next execute:** I7.1 — раздел «Скрипты» в UI админа / `/render/`.
+**Next execute:** I7.3 — быстрые сценарии «цена» и «страхи» → соответствующие скрипты в `/render/`.

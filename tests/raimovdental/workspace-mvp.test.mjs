@@ -17,6 +17,11 @@ const required = [
   'presentation/index.html',
   'presentation/shots/01-hub.png',
   'presentation/shots/09-owner-summary.png',
+  'content/scripts-25.json',
+  'content/recontact-9.json',
+  'content/patient-path.json',
+  'content/admin-feedback-sop.json',
+  'content/gaps.md',
 ];
 
 for (const relative of required) {
@@ -69,5 +74,20 @@ for (const role of ['admin', 'doctor', 'manager', 'owner']) {
   const wrapper = readFileSync(join(distRoot, role, 'index.html'), 'utf8');
   assert.match(wrapper, /fetch\('\.\.\/app\.html'/);
 }
+
+assert.match(app, /\/render\/#scripts/);
+const scripts = JSON.parse(readFileSync(join(distRoot, 'content/scripts-25.json'), 'utf8'));
+assert.equal(scripts.length, 25);
+const adminIndex = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'index.html'), 'utf8');
+assert.match(adminIndex, /id="openScripts"/);
+assert.match(adminIndex, /scripts-catalog\.js/);
+assert.match(adminIndex, /id="scriptsModal"/);
+assert.match(adminIndex, /id="scriptsDetailView"/);
+assert.match(adminIndex, /id="scriptsBack"/);
+const catalogJs = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'scripts-catalog.js'), 'utf8');
+assert.match(catalogJs, /renderDetail/);
+assert.match(catalogJs, /dont_say/);
+assert.ok(scripts.every((item) => item.id && item.title && item.body && item.next_action));
+assert.equal(scripts.filter((item) => item.dont_say).length, 25);
 
 console.log('expert-dental-workspace-dist-preservation+passwordless-demo: PASS');

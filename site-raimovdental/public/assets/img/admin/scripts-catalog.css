@@ -1,0 +1,31 @@
+.scripts-card{padding:24px}
+.scripts-filters{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:16px}
+.scripts-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.scripts-stats div{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:14px}
+.scripts-stats b{display:block;font-size:24px;color:var(--brand)}
+.scripts-stats span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+.scripts-list{display:grid;gap:10px}
+.scripts-row{display:grid;grid-template-columns:72px minmax(0,1fr) 120px;gap:16px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;cursor:pointer;transition:border-color .15s ease,box-shadow .15s ease}
+.scripts-row:hover{border-color:rgba(15,118,110,.35);box-shadow:0 8px 24px rgba(15,118,110,.08)}
+.scripts-id{font-size:13px;font-weight:900;color:var(--brand);letter-spacing:.04em}
+.scripts-main h3{font-size:15px;margin:0}
+.scripts-main p{display:block;color:var(--muted);font-size:12px;margin:5px 0 0}
+.scripts-meta{display:flex;justify-content:flex-end}
+.scripts-open{padding:8px 12px;font-size:12px}
+.scripts-empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}
+.scripts-detail-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.scripts-detail{display:grid;gap:12px}
+.scripts-field{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+.scripts-field h4{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.scripts-field p{margin:0;font-size:14px;line-height:1.55;white-space:pre-wrap}
+.scripts-field-warn{border-color:rgba(180,83,9,.25);background:#fffaf5}
+.scripts-field-warn h4{color:#b45309}
+@media(max-width:820px){
+  .scripts-card{padding:16px}
+  .scripts-stats{grid-template-columns:1fr 1fr}
+  .scripts-row{grid-template-columns:1fr}
+  .scripts-meta{justify-content:flex-start}
+}
+@media(max-width:520px){
+  .scripts-stats{grid-template-columns:1fr}
+}

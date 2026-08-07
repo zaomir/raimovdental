@@ -3,7 +3,7 @@ title: Expert Dental Workspace — атомарный план закрытия 
 status: PLANNED
 version: 1.0
 created: 2026-08-07
-last_updated: 2026-08-07
+last_updated: 2026-08-07T18:05Z
 parent_plan: docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_CLOSURE_PLAN.md
 plan_points: [1, 4, 5, 7, 8, 10, 11]
 surfaces:
@@ -34,8 +34,8 @@ canon:
 | I0.3 | — | ✅ | `workspace/content/patient-path.json` · 14 steps + 3 routes · `60de349db` |
 | I0.4 | — | ✅ | `workspace/content/admin-feedback-sop.json` · SOP×8 + 3 platforms |
 | I0.5 | — | ✅ | `workspace/content/gaps.md` · gaps 10/11/8 |
-| I7.1 | 7 | ⬜ | — |
-| I7.2 | 7 | ⬜ | — |
+| I7.1 | 7 | ✅ | `/render/` кнопка «Скрипты» + modal · `scripts-25.json` · commit `50f9babd5` · prod |
+| I7.2 | 7 | ✅ | `/render/` карточка скрипта · goal/body/next_action/dont_say · `scripts-25.json` |
 | I7.3 | 7 | ⬜ | — |
 | I7.4 | 7 | ⬜ | — |
 | I7.5 | 7 | ⬜ | — |
