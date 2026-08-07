@@ -17,11 +17,15 @@ trees:
   - scripts/raimov
   - tests/raimov
   - tests/raimovdental
+  - site-caesthetic/private/nogi-v-ruki
+  - site-caesthetic/private/bonita
 ssot_globs:
   - docs/ssot/RAIMOV*.md
   - docs/ssot/RAIM_SMILE*.md
   - docs/ssot/EXPERT_DENTAL*.md
   - docs/ssot/ELITE_DENTAL*.md
+  - docs/ssot/BONITA*.md
+  - docs/ssot/NOGI_V_RUKI*.md
 extra_files:
   - docs/expert-clinic-reference.md
   - agents/manifests/raimovdental.yaml
