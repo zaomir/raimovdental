@@ -3,203 +3,330 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RAIM SMILE SYSTEM — прикус до эстетики</title>
-  <meta name="description" content="RAIM SMILE SYSTEM — именной протокол Атабека Раимова: диагностика прикуса, проектирование улыбки, консилиум, поэтапный план и наблюдение. Клиника Expert Dental Studio, Бишкек.">
-  <meta name="robots" content="noindex,nofollow">
+  <title>RAIM SMILE SYSTEM — черновик для Атабека Раимова</title>
+  <meta name="description" content="Закрытый черновик RAIM SMILE SYSTEM для согласования с Атабеком Раимовым: суть, зачем нужна система и разбор каждого этапа.">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="referrer" content="no-referrer">
   <link rel="canonical" href="https://raimsmile.com/">
-  <meta property="og:title" content="RAIM SMILE SYSTEM">
-  <meta property="og:description" content="Эстетика улыбки на фундаменте прикуса. Без обещания результата до осмотра.">
-  <meta property="og:url" content="https://raimsmile.com/">
-  <meta property="og:type" content="website">
-  <style>
-    :root {
-      --bg: #0f1a17;
-      --fg: #f4efe6;
-      --muted: #b7c0ba;
-      --accent: #c4a574;
-      --line: rgba(244, 239, 230, 0.16);
-      --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-      --font-body: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(196, 165, 116, 0.18), transparent 55%),
-        radial-gradient(ellipse 60% 40% at 100% 30%, rgba(46, 90, 74, 0.35), transparent 50%),
-        var(--bg);
-      color: var(--fg);
-      font-family: var(--font-body);
-      line-height: 1.55;
-    }
-    a { color: var(--accent); }
-    .shell { width: min(1120px, calc(100% - 2.5rem)); margin-inline: auto; }
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      align-content: end;
-      padding: 2rem 0 4.5rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .brand {
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0 0 1.25rem;
-    }
-    h1 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
-      line-height: 1.05;
-      margin: 0 0 1rem;
-      max-width: 14ch;
-    }
-    .lead {
-      max-width: 38rem;
-      color: var(--muted);
-      font-size: 1.08rem;
-      margin: 0 0 2rem;
-    }
-    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.85rem 1.25rem;
-      border: 1px solid var(--accent);
-      background: var(--accent);
-      color: #1a1510;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-    .btn--ghost {
-      background: transparent;
-      color: var(--fg);
-      border-color: var(--line);
-    }
-    section { padding: 4rem 0; border-bottom: 1px solid var(--line); }
-    .kicker {
-      font-size: 0.75rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0 0 0.75rem;
-    }
-    h2 {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
-      margin: 0 0 1rem;
-      max-width: 22ch;
-    }
-    .grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-      margin-top: 2rem;
-    }
-    .card {
-      padding: 1.15rem 1.2rem;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-    }
-    .card h3 {
-      margin: 0 0 0.45rem;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    .card p { margin: 0; color: var(--muted); font-size: 0.94rem; }
-    .note {
-      margin-top: 1.5rem;
-      max-width: 42rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-      border-left: 2px solid var(--accent);
-      padding-left: 1rem;
-    }
-    footer {
-      padding: 2.5rem 0 3rem;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-    footer strong { color: var(--fg); font-weight: 600; }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <header class="hero">
+  <div class="private-bar">
     <div class="shell">
-      <p class="brand">RAIM SMILE SYSTEM</p>
-      <h1>Прикус — фундамент. Эстетика — следствие.</h1>
-      <p class="lead">
-        Именной протокол Атабека Раимова для сложных эстетических и функциональных случаев.
-        Клиника Expert Dental Studio в Бишкеке работает по этой системе: сначала диагностика
-        окклюзии, затем проектирование улыбки — без обещания результата до осмотра.
-      </p>
-      <div class="actions">
-        <a class="btn" href="https://wa.me/996555255455?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5.%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20RAIM%20SMILE%20SYSTEM%20%2F%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D1%91%D0%BC%D0%BA%D1%83">Записаться в WhatsApp</a>
-        <a class="btn btn--ghost" href="https://clinic.raimovdental.com/">Клиника Expert Dental</a>
-        <a class="btn btn--ghost" href="https://raimovdental.com/ru/#system">Стратегия на raimovdental.com</a>
+      <span><strong>Закрытый черновик</strong> · только для Атабека Раимова · не публичный сайт пациентов</span>
+      <span>Этап 1: согласовать развитие системы</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand-lockup" href="/">
+        <span class="name">RAIM SMILE SYSTEM</span>
+        <span class="note">для Атабека Раимова</span>
+      </a>
+      <nav class="nav" aria-label="Разделы">
+        <a href="#essence">Суть</a>
+        <a href="#why">Зачем</a>
+        <a href="#map">Этапы</a>
+        <a href="#ask">Решение</a>
+      </nav>
+    </div>
+  </header>
+
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="kicker">Дмитрий → Атабек · DEC-801</p>
+        <h1>Ваша клиническая логика — как названная система.</h1>
+        <p class="lead">
+          RAIM SMILE SYSTEM не придумывает новый метод лечения. Она упаковывает то, как вы уже
+          ведёте сложные эстетические и функциональные случаи, в понятный маршрут: для команды,
+          для пациента и для дальнейшего масштаба RAIMOV DENTAL.
+        </p>
+        <div class="ask-box">
+          <strong>Что просим на этом этапе</strong>
+          <p>
+            Не запуск рекламы и не обещание пациентам. Просим ваше принципиальное согласие:
+            систему можно развивать, уточнять и менять вместе с вами — под вашим медицинским
+            владением.
+          </p>
+        </div>
+        <div class="actions">
+          <a class="btn" href="#ask">К решению, которое просим</a>
+          <a class="btn btn--ghost" href="#map">Сначала карта из 5 этапов</a>
+        </div>
       </div>
+      <dl class="truth" aria-label="Статус документа">
+        <div>
+          <dt>Аудитория сейчас</dt>
+          <dd>Только вы. Сайт закрыт от индекса и не предназначен пациентам.</dd>
+        </div>
+        <div>
+          <dt>Статус системы</dt>
+          <dd>Формируется. Не сертифицирована, не франшиза, не «готовый продукт».</dd>
+        </div>
+        <div>
+          <dt>Связь с клиником</dt>
+          <dd>Expert Dental Studio — операционная площадка, где логика уже применяется.</dd>
+        </div>
+        <div>
+          <dt>Связь с экосистемой</dt>
+          <dd>Часть траектории на raimovdental.com: практика → система → Academy → клиники.</dd>
+        </div>
+      </dl>
     </div>
   </header>
 
   <main>
-    <section id="why">
+    <section class="section" id="essence">
       <div class="shell">
-        <p class="kicker">Зачем система</p>
-        <h2>Страхи рынка виниров — встроены в маршрут</h2>
-        <p class="lead" style="margin:0;max-width:40rem">
-          Неестественный вид, проблемы с прикусом и суставом, сколы, чрезмерная обточка,
-          неясная стоимость — типичные жалобы после «быстрой улыбки». RAIM SMILE SYSTEM
-          называет эти риски до лечения и привязывает к ним конкретные шаги протокола.
+        <p class="kicker">Суть одной фразой</p>
+        <p class="formula">Прикус и функция — фундамент. Эстетика улыбки — следствие, а не отправная точка.</p>
+        <p class="lead" style="margin-top:1.25rem">
+          Большинство разочарований после виниров начинается не с «плохого керамиста», а с того,
+          что улыбку проектировали без анализа окклюзии. Ваша специализация ортодонта-гнатолога —
+          единственный элемент, который конкурент не скопирует объявлением. Система делает эту
+          логику явной и повторяемой.
         </p>
       </div>
     </section>
 
-    <section id="steps">
+    <section class="section section--forest" id="why">
       <div class="shell">
-        <p class="kicker">Пять этапов</p>
-        <h2>Что получает пациент</h2>
-        <div class="grid">
-          <article class="card"><h3>1. Диагностика</h3><p>Прикус, окклюзия, зубы и дёсны — до разговора об эстетике.</p></article>
-          <article class="card"><h3>2. Проектирование</h3><p>Фотопротокол, сканирование, wax-up и мокап — форма до необратимого шага.</p></article>
-          <article class="card"><h3>3. Консилиум</h3><p>Сложные случаи решает команда, а не один врач в одиночку.</p></article>
-          <article class="card"><h3>4. Поэтапный план</h3><p>Письменный план с ценами и последовательностью до начала лечения.</p></article>
-          <article class="card"><h3>5. Наблюдение</h3><p>Контроль после лечения в том же клиническом контуре.</p></article>
-        </div>
-        <p class="note">
-          Система описывает порядок работы клиники. Конкретный исход лечения не обещается
-          до очного осмотра и диагностики. Юридические «гарантии» на этом сайте не заявляются.
+        <p class="kicker">Зачем это нужно</p>
+        <h2>Три адресата одной системы</h2>
+        <p class="lead">
+          Если система не отвечает на вопрос «зачем» для вас лично, для клиники и для пациента —
+          её не стоит развивать. Ниже — зачем именно.
         </p>
+        <div class="grid-3">
+          <article class="card">
+            <p class="num">Для вас</p>
+            <h3>Снять с вас роль «носителя всего в голове»</h3>
+            <p>
+              Пока маршрут живёт только в вашей голове, качество зависит от вашего личного участия
+              в каждом сложном случае. Названная система позволяет передавать логику команде,
+              не размывая ваш стандарт.
+            </p>
+          </article>
+          <article class="card">
+            <p class="num">Для клиники</p>
+            <h3>Один язык вместо разрозненных процедур</h3>
+            <p>
+              Администратор, ортопед, терапевт и ортодонт говорят об одном плане одними словами.
+              Это снижает хаос на ресепшене, споры о «сначала виниры / сначала прикус» и потерю
+              пациента между этапами.
+            </p>
+          </article>
+          <article class="card">
+            <p class="num">Для пациента</p>
+            <h3>Понятный маршрут до необратимого шага</h3>
+            <p>
+              Пациент видит, почему нельзя «просто поставить виниры», что будет на диагностике,
+              когда утверждается форма, сколько стоит этап и кто отвечает после лечения — без
+              давления «решить сегодня».
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="doctor">
+    <section class="section" id="map">
       <div class="shell">
-        <p class="kicker">Разработчик</p>
-        <h2>Атабек Раимов</h2>
-        <p class="lead" style="margin:0;max-width:40rem">
-          Ортодонт-гнатолог, функциональный стоматолог, основатель Expert Dental Studio и
-          разработчик RAIM SMILE SYSTEM. Дифференциатор системы — клиническая специализация
-          на прикусе и суставе, а не только косметическая стоматология.
+        <p class="kicker">Архитектура</p>
+        <h2>Пять этапов системы</h2>
+        <p class="lead">
+          Это не каталог услуг. Это порядок решений. Каждый этап ниже раскрыт отдельно:
+          что происходит, зачем нужен, что уже есть в практике.
         </p>
-        <div class="actions" style="margin-top:1.5rem">
-          <a class="btn btn--ghost" href="https://clinic.raimovdental.com/doctors/raimov-atabek/">Профиль врача в клинике</a>
-          <a class="btn btn--ghost" href="https://raimovdental.com/ru/">RAIMOV DENTAL</a>
+        <div class="grid-5">
+          <article class="card">
+            <p class="num">01</p>
+            <h3>Диагностика</h3>
+            <p>Прикус и исходная картина до эстетики.</p>
+            <a href="/diagnostics/">Подробнее →</a>
+          </article>
+          <article class="card">
+            <p class="num">02</p>
+            <h3>Проектирование</h3>
+            <p>Форма и оттенок до необратимого шага.</p>
+            <a href="/design/">Подробнее →</a>
+          </article>
+          <article class="card">
+            <p class="num">03</p>
+            <h3>Консилиум</h3>
+            <p>Сложный случай решает команда.</p>
+            <a href="/council/">Подробнее →</a>
+          </article>
+          <article class="card">
+            <p class="num">04</p>
+            <h3>Поэтапный план</h3>
+            <p>Порядок и цены — письменно, до лечения.</p>
+            <a href="/plan/">Подробнее →</a>
+          </article>
+          <article class="card">
+            <p class="num">05</p>
+            <h3>Наблюдение</h3>
+            <p>Контроль после основных этапов.</p>
+            <a href="/follow-up/">Подробнее →</a>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="overview-deep">
+      <div class="shell">
+        <p class="kicker">Краткий разбор на одной странице</p>
+        <h2>Что должен увидеть пациент в каждом этапе</h2>
+
+        <article class="step-detail">
+          <div class="index">01</div>
+          <div>
+            <h3>Диагностика</h3>
+            <p class="muted">Осмотр, оценка прикуса/окклюзии, состояние зубов и дёсен — до разговора «какие виниры ставим».</p>
+            <div class="why">
+              <strong>Зачем</strong>
+              Без этого этапа эстетика закрепляет скрытую функциональную проблему. Для вас это точка,
+              где ваша гнатологическая экспертиза становится обязательным входом, а не «опцией по желанию».
+            </div>
+            <p><a href="/diagnostics/">Полное описание этапа →</a></p>
+          </div>
+        </article>
+
+        <article class="step-detail">
+          <div class="index">02</div>
+          <div>
+            <h3>Проектирование</h3>
+            <p class="muted">Фотопротокол, сканирование, wax-up, мокап во рту — форма утверждается до обточки.</p>
+            <div class="why">
+              <strong>Зачем</strong>
+              Снимает главный страх пациента («увижу ли заранее») и защищает клинику от споров после
+              необратимого шага. Уже опирается на SKU эстетической диагностики в Expert Dental.
+            </div>
+            <p><a href="/design/">Полное описание этапа →</a></p>
+          </div>
+        </article>
+
+        <article class="step-detail">
+          <div class="index">03</div>
+          <div>
+            <h3>Консилиум</h3>
+            <p class="muted">Сложные и междисциплинарные случаи собираются командой, а не одним врачом в одиночку.</p>
+            <div class="why">
+              <strong>Зачем</strong>
+              Вы перестаёте быть единственным узким местом на каждом решении, но сохраняете роль
+              медицинского владельца стандарта на ключевых точках.
+            </div>
+            <p><a href="/council/">Полное описание этапа →</a></p>
+          </div>
+        </article>
+
+        <article class="step-detail">
+          <div class="index">04</div>
+          <div>
+            <h3>Поэтапный план</h3>
+            <p class="muted">Письменный маршрут: последовательность визитов и стоимость этапов до начала лечения.</p>
+            <div class="why">
+              <strong>Зачем</strong>
+              Убирает ощущение давления и «скрытых доплат». Пациент понимает бюджет по этапам;
+              команда работает по одному документу.
+            </div>
+            <p><a href="/plan/">Полное описание этапа →</a></p>
+          </div>
+        </article>
+
+        <article class="step-detail">
+          <div class="index">05</div>
+          <div>
+            <h3>Наблюдение</h3>
+            <p class="muted">Контрольные визиты после основных этапов — тот же клинический контур.</p>
+            <div class="why">
+              <strong>Зачем</strong>
+              Отстройка от медтуризма «поставил и уехал». Для бренда системы это доказательство,
+              что ответственность не заканчивается в день фиксации. Гарантийные юридические условия
+              пока не формализованы — слово «гарантия» публично не используем.
+            </div>
+            <p><a href="/follow-up/">Полное описание этапа →</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="market">
+      <div class="shell">
+        <p class="kicker">Рыночный контекст</p>
+        <h2>Почему система говорит о страхах раньше пациента</h2>
+        <p class="lead">
+          Пациент, который смотрит виниры, уже видел истории разочарований. Побеждает не тот,
+          кто громче обещает «голливудскую улыбку», а тот, кто первым называет риски и показывает механизм их снятия.
+        </p>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Типичные жалобы рынка</h3>
+            <p>Неестественный вид · боль/ВНЧС после виниров · сколы при бруксизме · чрезмерная обточка · нет сопровождения · неясная стоимость.</p>
+          </article>
+          <article class="card">
+            <h3>Ответ системы</h3>
+            <p>Не новый клинический протокол «с нуля», а упаковка уже существующих шагов Expert Dental (примерка, эстетическая диагностика, отбеливание до оттенка, капа при показаниях, письменный план) в узнаваемую историю под вашим именем.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="boundaries">
+      <div class="shell">
+        <p class="kicker">Границы честности</p>
+        <h2>Чего система сознательно не обещает</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Не результат до осмотра</h3>
+            <p>Никаких гарантий исхода лечения в публичных формулировках.</p>
+          </article>
+          <article class="card">
+            <h3>Не сертификация</h3>
+            <p>Пока нет регламентов, обучения и аудита — нельзя называть систему валидированной.</p>
+          </article>
+          <article class="card">
+            <h3>Не франшиза</h3>
+            <p>ELITE DENTAL и лицензирование — отдельная дальняя модель, не предмет этого сайта.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--forest" id="ask">
+      <div class="shell shell--narrow">
+        <p class="kicker">Решение</p>
+        <h2>Что нужно от вас сейчас</h2>
+        <p class="lead">
+          Этот домен и текст — материал для разговора. Мы не просим утвердить финальный
+          пациентский маркетинг. Просим ответить на один вопрос.
+        </p>
+        <div class="card" style="margin-top:1.5rem">
+          <h3>Вы не против развивать, улучшать и изменять RAIM SMILE SYSTEM как именную систему вашей практики?</h3>
+          <p style="margin-top:0.75rem">
+            Если да — следующим шагом будет совместная правка формулировок, клинических акцентов
+            и того, что можно говорить пациентам. Если нет или «не в таком виде» — фиксируем
+            отказ/правки и не двигаем публичный контур.
+          </p>
+        </div>
+        <div class="actions">
+          <a class="btn" href="https://wa.me/996555255455?text=%D0%90%D1%82%D0%B0%D0%B1%D0%B5%D0%BA%2C%20%D0%BF%D0%BE%20RAIM%20SMILE%20SYSTEM%20(%20raimsmile.com%20)%3A%20">Ответить Дмитрию в WhatsApp</a>
+          <a class="btn btn--ghost" href="https://raimovdental.com/ru/">Открыть карту стратегии RAIMOV DENTAL</a>
+        </div>
+        <p class="muted" style="margin-top:1.5rem;font-size:0.9rem">
+          Медицинское владение системой остаётся за вами. Агентство готовит упаковку и инфраструктуру,
+          но не подменяет клинические решения.
+        </p>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="shell">
-      <p><strong>RAIM SMILE SYSTEM</strong> · Expert Dental Studio · Бишкек, ул. Киевская, 88</p>
-      <p>Имеются противопоказания. Необходима консультация специалиста. Информация на сайте не заменяет очный приём.</p>
-      <p>Canon: DEC-801 · docs/ssot/RAIM_SMILE_SYSTEM.md</p>
+      <p><strong>RAIM SMILE SYSTEM</strong> · закрытый черновик для Атабека Раимова</p>
+      <p>Не пациентский оффер. Не инвестиционное предложение. Не франшиза.</p>
+      <p>Canon: DEC-801 · docs/ssot/RAIM_SMILE_SYSTEM.md · Expert Dental Studio, Бишкек</p>
     </div>
   </footer>
 </body>

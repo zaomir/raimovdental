@@ -64,7 +64,7 @@ domain: https://raimsmile.com
 
 | Поверхность | Что показывать |
 |---|---|
-| `raimsmile.com` | Product landing системы (пациентский язык) |
+| `raimsmile.com` | **Этап 1:** закрытый brief для Атабека (basic auth + noindex) — суть, зачем, разбор этапов, запрос на одобрение развития. Публичный patient surface — только после его OK + medical review |
 | `raimovdental.com` Stage B | Система в траектории Атабека: практика → **RAIM SMILE SYSTEM** → Academy → клиники |
 | Expert Dental patient-site | Несколько явных упоминаний: клиника работает по системе |
 | Страница Раимова | Разработчик системы + польза для пациента |
