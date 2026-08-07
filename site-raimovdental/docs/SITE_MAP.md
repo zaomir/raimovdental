@@ -16,8 +16,8 @@ decisions:
 
 | Surface | Access | Reader | Role |
 |---|---|---|---|
-| `/ru/` + strategy detail routes | password-only gate `0726`, no username; noindex, noarchive | Атабек Раимов | актуальная персональная стратегия Дмитрия |
-| `/ru/valeria/` + period routes | тот же password-only gate; noindex, noarchive | Атабек Саидович и внутренняя команда | планы и отчёты CAESTHETIC по периодам; руководитель проекта — Валерия Петрова |
+| `/ru/` + strategy detail routes | open URL; noindex, noarchive | Атабек Раимов | актуальная персональная стратегия Дмитрия |
+| `/ru/valeria/` + period routes | open URL; noindex, noarchive | Атабек Саидович и внутренняя команда | планы и отчёты CAESTHETIC по периодам; руководитель проекта — Валерия Петрова |
 | `/stage-a/` | Basic Auth, noindex | внутренний архив | предыдущая презентационная версия |
 | `/render/` | noindex, separate operational surface | команда клиники | операционный прототип |
 | future patient site | deferred | пациенты | отдельный контур после решения владельца |
@@ -83,15 +83,14 @@ Every strategy detail route follows the same order:
 
 ## Privacy and indexing
 
-- all `/ru/` routes use the existing server-side password-only gate;
-- login form contains only the password field; password is not stored in Git;
-- successful login creates an HttpOnly session;
+- `/ru/` is open by URL (password gate removed 2026-08-07); still not a patient-facing public product;
 - HTML and HTTP headers carry `noindex, nofollow, noarchive, nosnippet`;
 - Cache-Control is private/no-store;
 - `robots.txt` disallows `/`;
 - sitemap is absent and `/sitemap.xml` returns 404;
-- CSS assets are placed under `/ru/assets/` and protected by the same gate;
-- public lead forms and analytics are absent.
+- CSS assets live under `/ru/assets/`;
+- public lead forms and analytics are absent;
+- `/stage-a/` remains Basic Auth.
 
 ## Truth boundary
 

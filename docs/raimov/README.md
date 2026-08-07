@@ -36,6 +36,6 @@ operations/       roles, SOPs, reporting cadence and data ownership
 - ссылки: `operations/expert-dental/LINKS_REGISTER.md`;
 - первый месяц: `operations/expert-dental/periods/month-01/`.
 
-Клиентская витрина: `https://raimovdental.com/ru/valeria/`, пароль `0726`, без username.
+Клиентская витрина: `https://raimovdental.com/ru/valeria/` (открытый URL, `noindex`).
 
 Materialise operational files only when there is a real owner, task, decision or evidence source. Do not create empty evidence, medical, legal or financial documents.

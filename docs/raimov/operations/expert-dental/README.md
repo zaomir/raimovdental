@@ -47,7 +47,7 @@ branch: main
 - план: `https://raimovdental.com/ru/valeria/month-1/plan/`;
 - отчёты: `https://raimovdental.com/ru/valeria/month-1/reports/`.
 
-Доступ: простой пароль `0726`, без username.
+Доступ: открытый URL (`noindex`); парольный gate снят 2026-08-07.
 
 ---
 
