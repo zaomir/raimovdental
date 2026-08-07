@@ -65,6 +65,7 @@
     if(!state.inboxCards||typeof state.inboxCards!=='object')state.inboxCards={};
     if(typeof state.inboxSelectedId!=='string')state.inboxSelectedId='';
     if(roleKey==='doctor'&&!['therapist','hygienist'].includes(state.doctorClinicRole))state.doctorClinicRole='therapist';
+    if(roleKey==='doctor'&&typeof state.internalLessonRead!=='boolean')state.internalLessonRead=false;
     if(roleKey==='manager'){
       if(!state.feedbackTeamDemo||typeof state.feedbackTeamDemo!=='object')state.feedbackTeamDemo={bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}};
       if(typeof state.feedbackRetakeNotice!=='string')state.feedbackRetakeNotice='';
@@ -85,7 +86,7 @@
     if(roleKey==='admin'||roleKey==='doctor')fetch(PATIENT_PATH_URL).then(r=>r.json()).then(d=>{patientPath=d;if(view==='path')render()}).catch(()=>{});
     const INTERNAL_MARKETING_URL='content/internal-marketing.json';
     let internalMarketing=null;
-    if(roleKey==='doctor')fetch(INTERNAL_MARKETING_URL).then(r=>r.json()).then(d=>{internalMarketing=d;if(view==='work')render()}).catch(()=>{});
+    if(roleKey==='doctor')fetch(INTERNAL_MARKETING_URL).then(r=>r.json()).then(d=>{internalMarketing=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -309,14 +310,32 @@
       if(!readWhen&&$('feedbackWhenRead'))$('feedbackWhenRead').onclick=()=>{state.feedbackLessons.whenToAsk=true;save();renderFeedbackLessons();renderRight()};
       if(!readQr&&$('feedbackQrRead'))$('feedbackQrRead').onclick=()=>{state.feedbackLessons.qrPlatforms=true;save();renderFeedbackLessons();renderRight()};
     }
+    function renderInternalMarketingLesson(){
+      if(roleKey!=='doctor')return;
+      const wrap=$('internalLesson');
+      if(!wrap)return;
+      if(!internalMarketing){
+        wrap.innerHTML=`<div class="card" data-atom="i103-internal-lesson"><div class="eyebrow">I10.3 · урок</div><h3>Загрузка internal-marketing.json…</h3></div>`;
+        return;
+      }
+      const lesson=internalMarketing.lesson||{};
+      const read=!!state.internalLessonRead;
+      const steps=(lesson.steps||[]).map((s,i)=>`<li><b>${i+1}.</b> ${esc(s)}</li>`).join('');
+      const dont=(internalMarketing.boundaries&&internalMarketing.boundaries.dont||[]).map((x)=>`<li>${esc(x)}</li>`).join('');
+      const doList=(internalMarketing.boundaries&&internalMarketing.boundaries.do||[]).map((x)=>`<li>${esc(x)}</li>`).join('');
+      const transfer=(internalMarketing.transfer_standard&&internalMarketing.transfer_standard.doctor_explains||[]).map((x)=>`<li>${esc(x)}</li>`).join('');
+      wrap.innerHTML=`<div class="card update ${read?'':'critical'}" data-atom="i103-internal-lesson" data-lesson="${esc(lesson.id||'internal-referral-basics')}"><div class="eyebrow">I10.3 · урок · внутреннее направление</div><h3>${esc(lesson.title||'Внутреннее направление')}</h3><p class="muted">Статус контента: ${esc(lesson.status||internalMarketing.status||'draft_pending_clinic')}</p><p>${esc(lesson.summary||internalMarketing.goal||'')}</p><p style="margin-top:12px"><b>Шаги:</b></p><ul class="stack" style="margin:8px 0;padding-left:18px">${steps}</ul><p style="margin-top:12px"><b>Делать:</b></p><ul class="stack" style="margin:8px 0;padding-left:18px">${doList}</ul><p style="margin-top:12px"><b>Не делать:</b></p><ul class="stack" style="margin:8px 0;padding-left:18px">${dont}</ul><p style="margin-top:12px"><b>Стандарт передачи — врач объясняет:</b></p><ul class="stack" style="margin:8px 0;padding-left:18px">${transfer}</ul><p class="muted" style="margin-top:10px">Источник: ${esc(lesson.source_ref||internalMarketing.source_ref||'')}</p>${read?'<p class="status-ok">✓ Прочитано</p>':'<button id="internalLessonRead" class="btn primary">Прочитал</button>'}</div>`;
+      if(!read&&$('internalLessonRead'))$('internalLessonRead').onclick=()=>{state.internalLessonRead=true;save();renderInternalMarketingLesson();renderRight()};
+    }
     function learn(){
       let qi=0,answers=[];
-      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}`);
+      layout('Обучение и обновления',`<div class="progress"><span style="width:${state.testPassed?100:state.updateRead?55:20}%"></span></div><div id="learnBody" class="stack" style="margin-top:16px"></div>${roleKey==='admin'?'<div id="feedbackLessons" class="stack" style="margin-top:20px"></div>':''}${roleKey==='doctor'?'<div id="internalLesson" class="stack" style="margin-top:20px"></div>':''}`);
       const body=$('learnBody');
       function updatesView(){
         body.innerHTML=updates.map((u,i)=>`<article class="card update ${u.critical?'critical':''}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${u.title}</h3><p>${u.copy}</p></article>`).join('')+`<button id="confirmUpdates" class="btn primary">Прочитал(а) и понял(а)</button>`;
         $('confirmUpdates').onclick=()=>{state.updateRead=true;save();quizView()};
         renderFeedbackLessons();
+        renderInternalMarketingLesson();
       }
       function quizView(){
         const q=quiz[qi];
@@ -327,6 +346,7 @@
           setTimeout(()=>{qi++;if(qi<quiz.length)quizView();else finishQuiz()},180);
         });
         renderFeedbackLessons();
+        renderInternalMarketingLesson();
       }
       function finishQuiz(){
         const correct=quiz.filter((q,i)=>answers[i]===q.ok).length;
@@ -338,11 +358,13 @@
         body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Нужно ≥90% и 100% по критическим вопросам. Без pass доступ к работе ограничен.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;
         $('quizNext').onclick=()=>{if(state.testPassed){view='today';render()}else{qi=0;answers=[];updatesView()}};
         renderFeedbackLessons();
+        renderInternalMarketingLesson();
       }
       function passedView(){
         body.innerHTML=`<div class="card"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, повторным касаниям и регламенту отзывов.':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];quizView()};
         renderFeedbackLessons();
+        renderInternalMarketingLesson();
       }
       if(state.testPassed)passedView();
       else if(state.updateRead)quizView();
@@ -642,8 +664,9 @@
       const managerFeedbackLine=roleKey==='manager'?(()=>{const s=feedbackTeamStats();return `<div class="card"><b>Уроки регламента отзывов</b><br><span class="${s.pct===100?'status-ok':'status-warn'}">${s.pct}% · ${s.passed}/${s.total}</span></div>`})():'';
       const managerAuditLine=roleKey==='manager'?(()=>{const p=inquiryAuditProgress();return `<div class="card"><b>Аудит обработки заявок</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Пройден':p.done+'/'+p.total+' пунктов'}</span></div>`})():'';
       const doctorRoleLine=roleKey==='doctor'?(()=>{const r=currentDoctorClinicRole();return `<div class="card"><b>Роль на приёме</b><br><span class="badge" data-doctor-clinic-badge="1">${esc(r.title)}</span></div>`})():'';
+      const doctorLessonLine=roleKey==='doctor'?`<div class="card"><b>Урок внутреннего направления</b><br><span class="${state.internalLessonRead?'status-ok':'status-warn'}">${state.internalLessonRead?'Прочитано':'Ожидает'}</span></div>`:'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${doctorRoleLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${doctorRoleLine}${doctorLessonLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }
