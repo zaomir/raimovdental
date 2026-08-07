@@ -1,0 +1,482 @@
+[
+  {
+    "domain": "raimveneers.com",
+    "category": "veneers",
+    "status": "свободен",
+    "length": "11",
+    "score": 9.5,
+    "note": "Основной: бренд+ниша, чистая история"
+  },
+  {
+    "domain": "raimsmile.com",
+    "category": "smile",
+    "status": "свободен",
+    "length": "9",
+    "score": 9.2,
+    "note": "Короткий, запоминаемый, RU/EN"
+  },
+  {
+    "domain": "raimmethod.com",
+    "category": "method",
+    "status": "свободен",
+    "length": "10",
+    "score": 9.0,
+    "note": "Система/метод — продукт, не клиника"
+  },
+  {
+    "domain": "smilebyraim.com",
+    "category": "smile",
+    "status": "свободен",
+    "length": "11",
+    "score": 8.8,
+    "note": "Сильный бренд-сигнал"
+  },
+  {
+    "domain": "raimveneer.com",
+    "category": "veneers",
+    "status": "свободен",
+    "length": "10",
+    "score": 8.7,
+    "note": "Ниша, чуть слабее plural"
+  },
+  {
+    "domain": "myraim.com",
+    "category": "prefix",
+    "status": "свободен",
+    "length": "6",
+    "score": 8.5,
+    "note": "Короткий consumer; слабее ниша"
+  },
+  {
+    "domain": "tryraim.com",
+    "category": "prefix",
+    "status": "свободен",
+    "length": "7",
+    "score": 8.4,
+    "note": "Хорош для продукта/лендинга"
+  },
+  {
+    "domain": "drraimov.com",
+    "category": "personal",
+    "status": "свободен",
+    "length": "8",
+    "score": 8.3,
+    "note": "Персональный; чётче drraim"
+  },
+  {
+    "domain": "raimcare.com",
+    "category": "suffix",
+    "status": "свободен",
+    "length": "8",
+    "score": 8.3,
+    "note": "Healthcare-ассоциация"
+  },
+  {
+    "domain": "raimflow.com",
+    "category": "method",
+    "status": "свободен",
+    "length": "8",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimgrin.com",
+    "category": "smile",
+    "status": "свободен",
+    "length": "8",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimoral.com",
+    "category": "dental",
+    "status": "свободен",
+    "length": "8",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimstom.com",
+    "category": "dental",
+    "status": "свободен",
+    "length": "8",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimbeauty.com",
+    "category": "aesthetic",
+    "status": "свободен",
+    "length": "10",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimsmiles.com",
+    "category": "smile",
+    "status": "свободен",
+    "length": "10",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimsystem.com",
+    "category": "method",
+    "status": "свободен",
+    "length": "10",
+    "score": 8.3,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "veneeraim.com",
+    "category": "veneers",
+    "status": "свободен",
+    "length": "9",
+    "score": 8.2,
+    "note": "Читается хуже (veneer+raim)"
+  },
+  {
+    "domain": "raimlight.com",
+    "category": "creative",
+    "status": "свободен",
+    "length": "9",
+    "score": 8.1,
+    "note": "ray/light метафора бренда"
+  },
+  {
+    "domain": "raimpro.com",
+    "category": "suffix",
+    "status": "свободен",
+    "length": "7",
+    "score": 8.0,
+    "note": "Pro-позиционирование"
+  },
+  {
+    "domain": "atabekraimov.com",
+    "category": "personal",
+    "status": "свободен",
+    "length": "12",
+    "score": 8.0,
+    "note": "Персональный бренд врача"
+  },
+  {
+    "domain": "raimesthetics.com",
+    "category": "aesthetic",
+    "status": "свободен",
+    "length": "13",
+    "score": 8.0,
+    "note": "Ниша; длинноват"
+  },
+  {
+    "domain": "raimaesthetic.com",
+    "category": "aesthetic",
+    "status": "свободен",
+    "length": "13",
+    "score": 7.9,
+    "note": "Длинный"
+  },
+  {
+    "domain": "raimdent.com",
+    "category": "dental",
+    "status": "свободен",
+    "length": "8",
+    "score": 7.8,
+    "note": "Короткий; «dent» generic"
+  },
+  {
+    "domain": "mysmileraim.com",
+    "category": "smile",
+    "status": "свободен",
+    "length": "11",
+    "score": 7.8,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimestetica.com",
+    "category": "aesthetic",
+    "status": "свободен",
+    "length": "12",
+    "score": 7.8,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimprotocol.com",
+    "category": "method",
+    "status": "свободен",
+    "length": "12",
+    "score": 7.8,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimlaminates.com",
+    "category": "veneers",
+    "status": "свободен",
+    "length": "13",
+    "score": 7.8,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "veneersbyraim.com",
+    "category": "veneers",
+    "status": "свободен",
+    "length": "13",
+    "score": 7.8,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "araimov.com",
+    "category": "personal",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimapp.com",
+    "category": "suffix",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimara.com",
+    "category": "creative",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimhub.com",
+    "category": "suffix",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "Tech-хаб, слабее эстетика"
+  },
+  {
+    "domain": "raimova.com",
+    "category": "creative",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimray.com",
+    "category": "creative",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimsys.com",
+    "category": "suffix",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimway.com",
+    "category": "suffix",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "dratabek.com",
+    "category": "personal",
+    "status": "свободен",
+    "length": "8",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimovmd.com",
+    "category": "personal",
+    "status": "свободен",
+    "length": "8",
+    "score": 7.5,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raim24.com",
+    "category": "number",
+    "status": "свободен",
+    "length": "6",
+    "score": 7.0,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raim360.com",
+    "category": "number",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.0,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raim365.com",
+    "category": "number",
+    "status": "свободен",
+    "length": "7",
+    "score": 7.0,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimclinic.com",
+    "category": "dental",
+    "status": "свободен",
+    "length": "10",
+    "score": 7.0,
+    "note": "Путаница с raimovdental.com"
+  },
+  {
+    "domain": "raimadvanced.com",
+    "category": "creative",
+    "status": "свободен",
+    "length": "12",
+    "score": 7.0,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimintegration.com",
+    "category": "creative",
+    "status": "свободен",
+    "length": "15",
+    "score": 7.0,
+    "note": "Длинный (15) — на грани"
+  },
+  {
+    "domain": "raim-lab.com",
+    "category": "hyphen",
+    "status": "свободен",
+    "length": "8",
+    "score": 6.7,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raim-pro.com",
+    "category": "hyphen",
+    "status": "свободен",
+    "length": "8",
+    "score": 6.7,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raim-smile.com",
+    "category": "hyphen",
+    "status": "свободен",
+    "length": "10",
+    "score": 6.7,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raimdental.com",
+    "category": "dental",
+    "status": "свободен",
+    "length": "10",
+    "score": 6.5,
+    "note": "История: 라임치과 (KR, 2018)"
+  },
+  {
+    "domain": "raim-dental.com",
+    "category": "hyphen",
+    "status": "свободен",
+    "length": "11",
+    "score": 6.2,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "raim-veneers.com",
+    "category": "hyphen",
+    "status": "свободен",
+    "length": "12",
+    "score": 6.2,
+    "note": "RDAP 404; DNS пустой"
+  },
+  {
+    "domain": "drraim.com",
+    "category": "prefix",
+    "status": "свободен",
+    "length": "6",
+    "score": 6.0,
+    "note": "Конфликт фонетики Dr. Rai"
+  },
+  {
+    "domain": "goraim.com",
+    "category": "prefix",
+    "status": "занят",
+    "length": "6",
+    "score": "—",
+    "note": "Занят (Hostinger)"
+  },
+  {
+    "domain": "getraim.com",
+    "category": "prefix",
+    "status": "занят",
+    "length": "7",
+    "score": "—",
+    "note": "Занят"
+  },
+  {
+    "domain": "raimart.com",
+    "category": "aesthetic",
+    "status": "занят",
+    "length": "7",
+    "score": "—",
+    "note": "Занят"
+  },
+  {
+    "domain": "raimlab.com",
+    "category": "suffix",
+    "status": "занят",
+    "length": "7",
+    "score": "—",
+    "note": "Занят (Wix)"
+  },
+  {
+    "domain": "raimora.com",
+    "category": "creative",
+    "status": "занят",
+    "length": "7",
+    "score": "—",
+    "note": "Занят (GoDaddy)"
+  },
+  {
+    "domain": "useraim.com",
+    "category": "prefix",
+    "status": "занят",
+    "length": "7",
+    "score": "—",
+    "note": "Занят (Namecheap)"
+  },
+  {
+    "domain": "joinraim.com",
+    "category": "prefix",
+    "status": "занят",
+    "length": "8",
+    "score": "—",
+    "note": "Занят (Dynadot)"
+  },
+  {
+    "domain": "raimtech.com",
+    "category": "suffix",
+    "status": "занят",
+    "length": "8",
+    "score": "—",
+    "note": "Занят"
+  },
+  {
+    "domain": "raimstudio.com",
+    "category": "method",
+    "status": "занят",
+    "length": "10",
+    "score": "—",
+    "note": "Занят (GoDaddy)"
+  }
+]
