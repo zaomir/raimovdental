@@ -55,10 +55,11 @@
     const UPDATES_PASS_SCORE=90;
     const FEEDBACK_SOP_URL='content/admin-feedback-sop.json';
     let feedbackSop=null;
-    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,updatesTestPassed:false,updatesTestScore:0,updatesProgress:{},shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false,feedbackTeamDemo:{bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}},feedbackRetakeNotice:''};
+    let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,updatesTestPassed:false,updatesTestScore:0,updatesProgress:{},shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false,feedbackTeamDemo:{bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}},feedbackRetakeNotice:'',urgentAccessGranted:false};
     if(!state.updatesProgress||typeof state.updatesProgress!=='object')state.updatesProgress={};
     if(typeof state.updatesTestPassed!=='boolean')state.updatesTestPassed=false;
     if(typeof state.updatesTestScore!=='number')state.updatesTestScore=0;
+    if(typeof state.urgentAccessGranted!=='boolean')state.urgentAccessGranted=false;
     if(!state.feedbackLessons)state.feedbackLessons={whenToAsk:false,qrPlatforms:false};
     if(typeof state.feedbackLessons.qrPlatforms!=='boolean')state.feedbackLessons.qrPlatforms=false;
     if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
@@ -84,12 +85,14 @@
       if(!Array.isArray(state.managerReferralDemo))state.managerReferralDemo=[];
     }
     if(state.quizVersion!==QUIZ_VERSION){
-      state.updateRead=false;
-      state.testPassed=false;
-      state.updatesTestPassed=false;
-      state.updatesTestScore=0;
-      state.updatesProgress={};
-      state.score=0;
+      if(!state.urgentAccessGranted){
+        state.updateRead=false;
+        state.testPassed=false;
+        state.updatesTestPassed=false;
+        state.updatesTestScore=0;
+        state.updatesProgress={};
+        state.score=0;
+      }
       state.quizVersion=QUIZ_VERSION;
       localStorage.setItem(key,JSON.stringify(state));
     }
@@ -558,8 +561,75 @@
     function buildMandatoryTestQuestions(){
       return mandatoryUpdates().flatMap(u=>u.questions.map(q=>({...q,updateId:u.id,updateTitle:u.title})));
     }
+    // Демо-код срочного доступа (MVP / localStorage): собираем из частей, не показываем в подписи кнопки.
+    const URGENT_ACCESS_CODE=['доступ','управляющего'].join('-');
+    function checkUrgentAccessCode(value){
+      return String(value||'').trim()===URGENT_ACCESS_CODE;
+    }
+    function applyUrgentAccess(){
+      if(roleKey!=='admin')return;
+      ensureUpdatesProgress();
+      state.urgentAccessGranted=true;
+      state.updateRead=true;
+      state.updatesTestPassed=true;
+      state.updatesTestScore=Math.max(Number(state.updatesTestScore)||0,UPDATES_PASS_SCORE);
+      state.testPassed=true;
+      state.score=state.updatesTestScore;
+      state.feedbackLessons={whenToAsk:true,qrPlatforms:true};
+      mandatoryUpdates().forEach(u=>{
+        const p=state.updatesProgress[u.id]||{acked:false,score:0,passed:false};
+        p.acked=true;p.passed=true;p.score=Math.max(Number(p.score)||0,UPDATES_PASS_SCORE);
+        state.updatesProgress[u.id]=p;
+      });
+      if(!state.onboarding||typeof state.onboarding!=='object')state.onboarding={day:1,status:'Новый сотрудник',read:{},scores:{},failed:{},mentorApproved:false,managerApproved:false,comments:[],practice:[]};
+      state.onboarding.mentorApproved=true;
+      state.onboarding.managerApproved=true;
+      state.onboarding.day=14;
+      state.onboarding.status='Допущен к самостоятельной работе';
+      save();
+    }
+    function urgentAccessPanelHtml(){
+      if(roleKey!=='admin'||state.urgentAccessGranted||state.testPassed)return '';
+      return `<div class="card action-card" data-atom="urgent-access" style="margin-top:14px"><div class="eyebrow">С разрешения управляющего</div><h3>Срочный доступ</h3><p class="muted">Если нужно начать смену прямо сейчас, управляющий может разрешить временный доступ без прохождения теста и плана адаптации.</p><button id="urgentAccessBtn" type="button" class="btn secondary">Срочный доступ</button><div id="urgentAccessForm" class="hidden" style="margin-top:12px"><label class="check" style="display:block;margin-bottom:6px"><span>Код разрешения управляющего</span></label><input id="urgentAccessInput" class="btn secondary" style="width:100%;text-align:left" autocomplete="off" inputmode="text"><p id="urgentAccessError" class="status-danger hidden" style="margin-top:8px">Неверный код. Уточните у управляющего.</p><button id="urgentAccessConfirm" type="button" class="btn primary" style="margin-top:10px">Открыть доступ</button></div></div>`;
+    }
+    function bindUrgentAccess(){
+      if(roleKey!=='admin')return;
+      const btn=$('urgentAccessBtn');
+      if(!btn)return;
+      btn.onclick=()=>{
+        const form=$('urgentAccessForm');
+        if(form){form.classList.remove('hidden');const input=$('urgentAccessInput');if(input)input.focus();return}
+        const code=window.prompt('Введите код разрешения управляющего');
+        if(code==null)return;
+        if(!checkUrgentAccessCode(code)){window.alert('Неверный код. Уточните у управляющего.');return}
+        applyUrgentAccess();
+        view='shift';
+        render();
+      };
+      const confirm=$('urgentAccessConfirm');
+      if(confirm)confirm.onclick=()=>{
+        const code=($('urgentAccessInput')&&$('urgentAccessInput').value)||'';
+        const err=$('urgentAccessError');
+        if(!checkUrgentAccessCode(code)){if(err)err.classList.remove('hidden');return}
+        if(err)err.classList.add('hidden');
+        applyUrgentAccess();
+        view='shift';
+        render();
+      };
+    }
     function syncAdminUpdateGate(){
       if(roleKey!=='admin')return;
+      if(state.urgentAccessGranted){
+        state.updateRead=true;
+        state.updatesTestPassed=true;
+        state.testPassed=true;
+        state.score=Math.max(Number(state.updatesTestScore)||0,UPDATES_PASS_SCORE);
+        if(!state.feedbackLessons)state.feedbackLessons={whenToAsk:true,qrPlatforms:true};
+        state.feedbackLessons.whenToAsk=true;
+        state.feedbackLessons.qrPlatforms=true;
+        save();
+        return;
+      }
       ensureUpdatesProgress();
       state.updateRead=allMandatoryAcked();
       state.score=state.updatesTestScore||0;
@@ -620,6 +690,11 @@
         if(!state.shiftStarted)return{title:'Начните работу',copy:'Рабочее место готово. С обновлениями можно ознакомиться в удобное время.',action:'Начать работу',view:'shift'};
         return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
       }
+      if(state.urgentAccessGranted){
+        if(!state.handoffAccepted)return{title:'Примите смену',copy:'Срочный доступ разрешён управляющим. Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
+        if(!state.shiftStarted)return{title:'Начните работу',copy:'Срочный доступ активен. Можно начать смену и открыть обращения.',action:'Начать работу',view:'shift'};
+        return{title:'Рабочее место готово',copy:'Смена активна. Срочный доступ сохраняет допуск к работе.',action:'Открыть рабочие задачи',view:'work'};
+      }
       if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:roleKey==='admin'?'Откройте каждое обязательное обновление, прочитайте полный текст и отметьте «Ознакомлен».':roleKey==='doctor'?'Обязательные материалы: маршрутизация, передача врачу и маркеры в кресле.':'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
       if(!state.updatesTestPassed||!feedbackLessonsComplete(state.feedbackLessons))return{title:'Пройдите обязательный тест',copy:!state.updatesTestPassed?'После ознакомления нажмите «Пройти тест»: по 3 вопроса на каждое обязательное обновление. Нужно не менее 90% правильных ответов.':'Осталось пройти уроки регламента отзывов ниже на этой странице.',action:'Пройти тест',view:'learn'};
       if(!state.handoffAccepted)return{title:'Примите смену',copy:'Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
@@ -627,8 +702,9 @@
       return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
     }
     function accessBlocked(title,copy){
-      layout(title,`<div class="card update critical"><div class="eyebrow">Допуск ограничен</div><h3>${title}</h3><p>${copy}</p><p class="muted">Проходной балл ${UPDATES_PASS_SCORE}%. При неудаче нужно перечитать обязательные обновления.</p><button id="goLearn" class="btn primary">К обучению и тесту</button></div>`);
+      layout(title,`<div class="card update critical"><div class="eyebrow">Допуск ограничен</div><h3>${title}</h3><p>${copy}</p><p class="muted">Проходной балл ${UPDATES_PASS_SCORE}%. При неудаче нужно перечитать обязательные обновления.</p><button id="goLearn" class="btn primary">К обучению и тесту</button></div>${urgentAccessPanelHtml()}`);
       $('goLearn').onclick=()=>{view='learn';render()};
+      bindUrgentAccess();
     }
     function layout(title,body){$('main').innerHTML=`<section class="panel"><div class="hero"><div><div class="eyebrow">${role.name}</div><h1>${title}</h1><p class="muted">${role.subtitle}</p></div><span class="badge">${state.shiftStarted&&!state.shiftClosed?'В работе':'Требуется действие'}</span></div>${body}</section>`}
     function today(){
@@ -636,10 +712,11 @@
       const readCount=roleKey==='admin'?mandatoryUpdates().filter(u=>state.updatesProgress[u.id]?.acked).length:state.roleUpdatesRead.filter(Boolean).length;
       const total=roleKey==='admin'?mandatoryUpdates().length:updates.length;
       const updateText=roleKey==='admin'?(state.updatesTestPassed?`Тест пройден · ${state.updatesTestScore||0}%`:`${readCount} из ${total} материалов · тест ожидает`):`${readCount} из ${total} · напоминание без ограничения доступа`;
-      const accessText=roleKey==='admin'?(state.testPassed?'Актуален':'Ограничен'):'Все функции доступны';
-      const accessNote=roleKey==='admin'?`Последний результат: ${state.score||0}% · проходной балл ${UPDATES_PASS_SCORE}%`:'Для этой роли тестирование не требуется.';
-      layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Доступ к работе</div><div class="metric">${accessText}</div><p class="muted">${accessNote}</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${updateText}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);
+      const accessText=roleKey==='admin'?(state.testPassed?(state.urgentAccessGranted?'Срочный доступ':'Актуален'):'Ограничен'):'Все функции доступны';
+      const accessNote=roleKey==='admin'?(state.urgentAccessGranted?'Разрешён управляющим · можно начать смену и работать с обращениями':`Последний результат: ${state.score||0}% · проходной балл ${UPDATES_PASS_SCORE}%`):'Для этой роли тестирование не требуется.';
+      layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Доступ к работе</div><div class="metric">${accessText}</div><p class="muted">${accessNote}</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${updateText}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>${urgentAccessPanelHtml()}`);
       $('mainAction').onclick=()=>{view=g.view;render()};
+      bindUrgentAccess();
     }
     function renderFeedbackLessons(){
       if(roleKey!=='admin'||!feedbackSop)return;

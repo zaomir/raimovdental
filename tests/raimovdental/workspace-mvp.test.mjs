@@ -461,6 +461,22 @@ for (const token of [
   'Управляющий',
 ]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
+// Срочный доступ администратора (bypass теста/адаптации с разрешения управляющего)
+assert.match(app, /Срочный доступ/);
+assert.match(app, /С разрешения управляющего/);
+assert.match(app, /data-atom="urgent-access"/);
+assert.match(app, /urgentAccessGranted/);
+assert.match(app, /URGENT_ACCESS_CODE/);
+assert.match(app, /applyUrgentAccess/);
+assert.match(app, /checkUrgentAccessCode/);
+assert.match(app, /urgentAccessPanelHtml/);
+assert.match(app, /bindUrgentAccess/);
+assert.match(app, /id="urgentAccessBtn"/);
+assert.match(app, /Код разрешения управляющего/);
+assert.match(app, /\['доступ','управляющего'\]\.join\('-'\)/);
+assert.match(app, /state\.urgentAccessGranted/);
+assert.doesNotMatch(app, /type=["']password["']/i);
+
 const sanitizer = readFileSync(join(distRoot, 'copy-sanitizer.js'), 'utf8');
 for (const token of ['draft_pending_clinic', 'patient-path', 'source_ref', 'next action', 'localStorage']) {
   assert.match(sanitizer, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
