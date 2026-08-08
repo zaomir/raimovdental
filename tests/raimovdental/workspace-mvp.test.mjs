@@ -107,8 +107,11 @@ assert.match(app, /roleKey!=='admin'\)\{[\s\S]{0,800}state\.testPassed=true/);
 assert.match(app, /if\(roleKey!=='admin'\)\{[\s\S]{0,900}Все функции доступны/);
 assert.match(app, /roleKey==='admin'\s*\?`<div class="card"><b>Обновления/);
 
-assert.doesNotMatch(app, /type=["']password["']/i);
-assert.doesNotMatch(app, /pass\s*:/i);
+assert.match(app, /type=["']password["']/i);
+assert.match(app, /MANAGER_SKIP_CODE='5555'/);
+assert.match(app, /Пропустить тестирование/);
+assert.match(app, /manager-skip-test/);
+assert.doesNotMatch(app, /\bpassword\s*:/i);
 assert.match(hub, /@media\(max-width:820px\)/);
 assert.match(app, /@media\(max-width:780px\)/);
 assert.match(hub, /noindex,nofollow,noarchive,nosnippet/);
@@ -234,7 +237,7 @@ assert.match(app, /i84-owner-sources/);
 assert.match(app, /i84-month-plan-link/);
 assert.match(app, /ownerClinicHealthHtml/);
 assert.match(app, /\/ru\/valeria\/month-1\/plan\//);
-assert.match(app, /admin-updates-v2/);
+assert.match(app, /admin-ux-course-v1/);
 assert.match(app, /UPDATES_PASS_SCORE=90/);
 assert.match(app, /updatesProgress/);
 assert.match(app, /admin-updates-quiz/);
@@ -284,7 +287,7 @@ assert.match(app, /inqNext/);
 assert.match(app, /inqOwner/);
 assert.match(app, /заглушка до I8/);
 assert.match(app, /function inboxListHtml/);
-assert.match(app, /Единый inbox обращений/);
+assert.match(app, /Журнал обращений/);
 assert.match(app, /data-inbox-channel/);
 assert.match(app, /channelKey:'call'/);
 assert.match(app, /channelKey:'whatsapp'/);
@@ -466,50 +469,56 @@ assert.ok(feedbackSop.sop_steps.every((step) => step.step && step.action && step
 assert.ok(feedbackSop.publication_disclaimer && feedbackSop.publication_disclaimer.text);
 assert.ok(feedbackSop.prohibitions.some((p) => /скидк|балл|подарок/i.test(p.text)));
 
+// Admin UX v1 — nav + course + updates + manager skip 5555
 for (const token of [
-  'Мой план адаптации',
-  'Адаптация сотрудника',
-  'ONBOARDING_DAYS',
-  'День ${day} из 14',
+  "['today','Сегодня']",
+  "['learn','Обучение']",
+  "['history','История']",
+  'Курс для нового сотрудника',
+  'Вводный курс',
+  'ADMIN_COURSE',
+  'admin-course-tile',
+  'admin-updates-tile',
+  'tile-red',
+  'tile-yellow',
+  'tile-green',
+  'Согласен',
+  'Не согласен',
+  'Что изменить',
+  'Изменить',
+  'Пройти тестирование',
+  'Пропустить тестирование',
+  "MANAGER_SKIP_CODE='5555'",
+  'Управление сменой',
+  'Журнал обращений',
   'Ознакомлен',
-  'Пройти 3 вопроса',
-  'общий результат не ниже 90%',
-  'вопросы безопасности и границ роли',
-  'Повторить только непройденные материалы',
-  'Подтвердить этап',
-  'Вернуть на повторное обучение',
-  'Допустить к пробной смене',
-  'Допустить к самостоятельной работе',
-  'Наставник',
-  'Управляющий',
-  'Начать с дня 1',
-  'Пропустить этап (для презентации)',
-  'Открыть финал (для презентации)',
-  'Подтвердить управляющим · для презентации',
-  'Тестовый режим адаптации',
-  'Сбросить адаптацию и начать с дня 1',
+  'Не ознакомлен',
+  'Тест пройден',
 ]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
-// Демо-обход адаптации админа (не ломает обычный путь 90% / safety)
+assert.match(app, /function ensureCourseState/);
+assert.match(app, /function passAllCourseTests/);
+assert.match(app, /function passAllUpdatesTests/);
+assert.match(app, /function skipTestPanelHtml/);
+assert.match(app, /function bindSkipTest/);
+assert.match(app, /function history\(\)/);
+assert.doesNotMatch(app, /\['work','Обращения'\]/);
+assert.doesNotMatch(app, /roleKey==='admin'\?\[\['onboarding'/);
+
+// Manager/owner adaptation tooling still present (not in admin nav)
+assert.match(app, /Адаптация сотрудника/);
+assert.match(app, /ONBOARDING_DAYS/);
 assert.match(app, /function defaultOnboardingState/);
 assert.match(app, /function ensureOnboardingState/);
 assert.match(app, /function isDemoWorkspace/);
 assert.match(app, /function onboardingDemoToolsAllowed/);
 assert.match(app, /function markOnboardingDayPassed/);
-assert.match(app, /function onboardingProgressPct/);
-assert.match(app, /function syncOnboardingStatus/);
 assert.match(app, /onboardingDemoToolsAllowed\(\)/);
 assert.match(app, /roleKey==='admin'&&isDemoWorkspace\(\)/);
 assert.match(app, /id="onboardingReset"/);
 assert.match(app, /id="onboardingBypass"/);
-assert.match(app, /id="onboardingBypassInline"/);
-assert.match(app, /id="managerApproveDemo"/);
 assert.match(app, /data-atom="onboarding-demo-tools"/);
-assert.match(app, /data-demo-bypass="1"/);
-assert.match(app, /markOnboardingDayPassed\(o,day,\{demo:true\}\)/);
-assert.match(app, /state\.onboarding=defaultOnboardingState\(\)/);
 assert.match(app, /score>=90&&safetyOk/);
-assert.match(app, /!item\.critical\|\|correct===3/);
 
 // Срочный доступ администратора (bypass теста/адаптации с разрешения управляющего)
 assert.match(app, /Срочный доступ/);
@@ -525,7 +534,7 @@ assert.match(app, /id="urgentAccessBtn"/);
 assert.match(app, /Код разрешения управляющего/);
 assert.match(app, /\['доступ','управляющего'\]\.join\('-'\)/);
 assert.match(app, /state\.urgentAccessGranted/);
-assert.doesNotMatch(app, /type=["']password["']/i);
+assert.match(app, /type=["']password["']/i);
 
 const sanitizer = readFileSync(join(distRoot, 'copy-sanitizer.js'), 'utf8');
 for (const token of ['draft_pending_clinic', 'patient-path', 'source_ref', 'next action', 'localStorage']) {
