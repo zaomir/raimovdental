@@ -59,6 +59,14 @@
     .quote strong{display:block;margin-bottom:8px;opacity:.8;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
     .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
     .role-tag{display:inline-block;font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--brand2);margin-bottom:8px}
+    .plan-table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;margin-top:18px}
+    .plan-table th,.plan-table td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    .plan-table th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--mint)}
+    .plan-table tr:last-child td{border-bottom:0}
+    .plan-table .pt{font-weight:900;color:var(--brand);white-space:nowrap}
+    .plan-table a{color:var(--brand2);font-weight:750;text-decoration:none}
+    .plan-table a:hover{text-decoration:underline}
+    .plan-table .shot-ref{color:var(--muted);font-size:12px;white-space:nowrap}
     @media(max-width:860px){
       .wrap{width:min(100% - 20px,var(--max))}.top{position:static}.pill{display:none}
       .grid2,.grid3,.grid4{grid-template-columns:1fr}.slide{border-radius:22px;padding:22px}
@@ -101,6 +109,7 @@
       <p class="ink-lede">Сначала смысл и результат, затем экраны по ролям, затем границы этапа и ссылки для самостоятельной проверки.</p>
       <nav class="toc" aria-label="Содержание">
         <a href="#result">Что это даёт клинике <span>результат</span></a>
+        <a href="#plan-map">Пункты плана месяца <span>1/4/5/7/8/10/11 → экран</span></a>
         <a href="#flow">Обязательный процесс <span>логика</span></a>
         <a href="#hub">Стартовая страница ролей <span>скриншот</span></a>
         <a href="#admin">Администратор <span>обучение · смена · обращения</span></a>
@@ -126,6 +135,67 @@
         <div class="card"><strong>Готовность к внедрению</strong><span class="muted">Логика и интерфейсы готовы к обсуждению; CRM, телефония и серверные пароли — следующий этап.</span></div>
       </div>
       <div class="note"><strong>Честно:</strong> сейчас это демонстрационный MVP. Он показывает управляемую логику и интерфейсы. Рост записей и выручки зависит от внедрения в ежедневную работу клиники, а не от факта наличия прототипа.</div>
+    </section>
+
+    <section class="slide" id="plan-map">
+      <p class="role-tag">Карта закрытия · месяц-1</p>
+      <h2>Пункты плана → экраны интерфейса</h2>
+      <p class="ink-lede">Семь пунктов месяца-1 закрыты контентом и логикой в workspace и модуле обращений. Скриншоты сняты с live-демо на raimovdental.com после деплоя content pack (август 2026).</p>
+      <table class="plan-table">
+        <thead>
+          <tr>
+            <th>Пункт</th>
+            <th>Что закрыто в UI</th>
+            <th>Экран / роль</th>
+            <th>Скрин</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pt">1</td>
+            <td>Единый inbox обращений · SLA-статусы · карточка · чеклист аудита обработки заявок</td>
+            <td><a href="../admin/">Администратор</a> → <b>Обращения</b></td>
+            <td class="shot-ref"><a href="#admin">05-admin-work</a></td>
+          </tr>
+          <tr>
+            <td class="pt">4</td>
+            <td>Путь пациента P07–P11 · переключатель маршрутов виниры/импланты/орто · gate next action</td>
+            <td><a href="../admin/">Администратор</a> → <b>Путь</b></td>
+            <td class="shot-ref"><a href="#path">10-admin-path</a></td>
+          </tr>
+          <tr>
+            <td class="pt">5</td>
+            <td>Уроки «Когда просить отзыв» и «QR и три площадки» · чеклист после визита · контроль допуска</td>
+            <td><a href="../admin/">Администратор</a> → <b>Обучение</b> · <a href="../manager/">Управляющий</a> → команда</td>
+            <td class="shot-ref"><a href="#admin">03-admin-learn</a> · <a href="#manager">08-manager-team</a></td>
+          </tr>
+          <tr>
+            <td class="pt">7</td>
+            <td>Каталог 25 скриптов · 9 правил повторных касаний · журнал упущенных · тест допуска</td>
+            <td><a href="/render/">/render/</a> · скрипты · повторные касания</td>
+            <td class="shot-ref"><a href="#render">06-render-call</a> · <a href="#render-scripts">11-render-scripts</a></td>
+          </tr>
+          <tr>
+            <td class="pt">8</td>
+            <td>Обязательный источник в карточке · воронка по источникам · сводка владельца</td>
+            <td><a href="../manager/">Управляющий</a> · <a href="../owner/">Руководитель</a></td>
+            <td class="shot-ref"><a href="#manager">08-manager-team</a> · <a href="#owner">09-owner-summary</a></td>
+          </tr>
+          <tr>
+            <td class="pt">10</td>
+            <td>Внутренний маркетинг терапевта/гигиениста · урок · «Предложить консультацию узкого» · KPI направлений</td>
+            <td><a href="../doctor/">Врач</a> → <b>Медицинские задачи</b></td>
+            <td class="shot-ref"><a href="#doctor">07-doctor-work</a></td>
+          </tr>
+          <tr>
+            <td class="pt">11</td>
+            <td>Маркеры до кресла (MB01–MB03) · маркеры в кресле (MC01–MC03) · журнал передач · связка маркер→маршрут</td>
+            <td><a href="/render/#markers">/render/#markers</a> · <a href="../doctor/">Врач</a> · <a href="../admin/">Admin</a> → Путь</td>
+            <td class="shot-ref"><a href="#render-markers">12-render-markers</a> · <a href="#doctor">07-doctor-work</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note" style="margin-top:16px"><strong>Граница:</strong> «закрыто интерфейсом» ≠ «пункт плана выполнен целиком». Аудит карт/сайта/Instagram (п.1), CRM runtime и утверждение медфраз маркеров — отдельные этапы.</div>
     </section>
 
     <section class="slide" id="flow">
@@ -193,6 +263,16 @@
       </div>
     </section>
 
+    <section class="slide" id="path">
+      <p class="role-tag">Экран 10 · пункт 4</p>
+      <h2>Путь пациента — этапы и маршруты услуг</h2>
+      <p class="ink-lede">Операционный хвост пути: от обращения до консультации и плана. Переключатель виниры / импланты / орто меняет подсказки next step; без next action контакт не закрывается.</p>
+      <figure class="shot">
+        <img src="shots/10-admin-path.png" width="1800" height="1125" alt="Администратор: экран Путь пациента с маршрутами" loading="lazy">
+        <figcaption>Живой экран: <a href="../admin/">/workspace/admin/</a> → Путь · patient-path.json</figcaption>
+      </figure>
+    </section>
+
     <section class="slide" id="render">
       <p class="role-tag">Экран 06 · модуль звонка</p>
       <h2>Пошаговый стандарт входящего обращения</h2>
@@ -206,6 +286,26 @@
         <div class="card"><strong>Быстрые сценарии</strong><span class="muted">Кровь/отёк, острая боль, пломба, брекеты, стоимость, запись.</span></div>
         <div class="card"><strong>Три правила</strong><span class="muted">Не ставим диагноз · всегда следующий шаг · фиксируем важное.</span></div>
       </div>
+    </section>
+
+    <section class="slide" id="render-scripts">
+      <p class="role-tag">Экран 11 · пункт 7</p>
+      <h2>Каталог 25 скриптов администратора</h2>
+      <p class="ink-lede">Полный каталог scripts-25.json: цель, текст, следующий шаг и «чего не говорить» для каждого сценария. Открывается из модуля обращений.</p>
+      <figure class="shot">
+        <img src="shots/11-render-scripts.png" width="1800" height="1125" alt="Модуль обращений: каталог 25 скриптов" loading="lazy">
+        <figcaption>Живой экран: <a href="/render/#scripts">/render/#scripts</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="slide" id="render-markers">
+      <p class="role-tag">Экран 12 · пункт 11</p>
+      <h2>Речевые маркеры до кресла</h2>
+      <p class="ink-lede">Банк speech-markers-before.json (MB01–MB03): слушать сигнал → предложить маршрут виниры / импланты / орто. Связка с экраном «Путь» и тестом допуска.</p>
+      <figure class="shot">
+        <img src="shots/12-render-markers.png" width="1800" height="1125" alt="Модуль обращений: маркеры до кресла" loading="lazy">
+        <figcaption>Живой экран: <a href="/render/#markers">/render/#markers</a> · draft_pending_clinic до утверждения клиникой</figcaption>
+      </figure>
     </section>
 
     <section class="slide" id="doctor">

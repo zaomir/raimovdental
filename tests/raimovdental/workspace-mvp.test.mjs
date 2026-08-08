@@ -17,6 +17,9 @@ const required = [
   'presentation/index.html',
   'presentation/shots/01-hub.png',
   'presentation/shots/09-owner-summary.png',
+  'presentation/shots/10-admin-path.png',
+  'presentation/shots/11-render-scripts.png',
+  'presentation/shots/12-render-markers.png',
   'content/scripts-25.json',
   'content/recontact-9.json',
   'content/patient-path.json',
@@ -53,6 +56,11 @@ for (const token of [
   'shots/01-hub.png',
   'shots/06-render-call.png',
   'shots/09-owner-summary.png',
+  'shots/10-admin-path.png',
+  'shots/11-render-scripts.png',
+  'shots/12-render-markers.png',
+  'id="plan-map"',
+  'Пункты плана → экраны интерфейса',
   'noindex,nofollow,noarchive,nosnippet',
 ]) assert.match(presentation, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
@@ -394,4 +402,4 @@ assert.ok(feedbackSop.sop_steps.every((step) => step.step && step.action && step
 assert.ok(feedbackSop.publication_disclaimer && feedbackSop.publication_disclaimer.text);
 assert.ok(feedbackSop.prohibitions.some((p) => /скидк|балл|подарок/i.test(p.text)));
 
-console.log('expert-dental-workspace-dist-preservation+passwordless-demo+ip1-content-markers: PASS');
+console.log('expert-dental-workspace-dist-preservation+passwordless-demo+ip2-presentation-map: PASS');

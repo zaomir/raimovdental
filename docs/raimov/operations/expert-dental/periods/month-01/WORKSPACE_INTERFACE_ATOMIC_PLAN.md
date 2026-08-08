@@ -69,7 +69,7 @@ canon:
 | I8.4 | 8 | ✅ | clinic health + источники · `i84-owner-sources` · `/ru/valeria/month-1/plan/` |
 | I8.5 | 8 | ✅ | тест «источник обязателен» · `i85-source-quiz` · admin · critical 100% |
 | IP.1 | — | ✅ | content pack markers · scripts-25 · recontact-9 · sources · speech markers · admin-feedback-sop |
-| IP.2 | — | ⬜ | — |
+| IP.2 | — | ✅ | presentation · shots 01–12 · plan-map table 1/4/5/7/8/10/11 |
 | IP.3 | — | ⬜ | — |
 | IP.4 | — | ⬜ | — |
 | IP.5 | — | ⬜ | — |

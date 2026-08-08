@@ -35,7 +35,9 @@ async function loadPlaywright() {
 }
 
 mkdirSync(outDir, { recursive: true });
-const { chromium } = await loadPlaywright();
+const playwrightModule = await loadPlaywright();
+const { chromium } = playwrightModule.default || playwrightModule;
+if (!chromium) throw new Error('playwright chromium export missing');
 
 const shots = [
   { name: '01-hub', url: `${base}/assets/img/workspace/`, wait: 800 },
@@ -99,6 +101,31 @@ const shots = [
     },
   },
   { name: '06-render-call', url: `${base}/render/`, wait: 1200 },
+  {
+    name: '10-admin-path',
+    url: `${base}/assets/img/workspace/admin/`,
+    wait: 900,
+    prepare: async (page) => {
+      await page.evaluate(() => {
+        localStorage.setItem('ed-workspace-admin', JSON.stringify({
+          updateRead: true, testPassed: true, shiftStarted: true,
+          handoffAccepted: true, shiftClosed: false, score: 100,
+        }));
+      });
+      await page.reload({ waitUntil: 'networkidle' });
+      await page.click('[data-view="path"]');
+    },
+  },
+  {
+    name: '11-render-scripts',
+    url: `${base}/render/#scripts`,
+    wait: 1200,
+  },
+  {
+    name: '12-render-markers',
+    url: `${base}/render/#markers`,
+    wait: 1200,
+  },
   {
     name: '07-doctor-work',
     url: `${base}/assets/img/workspace/doctor/`,

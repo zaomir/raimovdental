@@ -85,6 +85,6 @@
 
 **UI progress (пункт 8):** I8.1–I8.5 ✅ · `sources.json` + gate + manager funnel + owner clinic health/sources + admin quiz «источник обязателен» · пункт 8 UI DoD закрыт по атомам
 
-**Packaging progress:** IP.1 ✅ · automated tests расширены (scripts-25 · recontact-9 · sources · speech markers · admin-feedback-sop keys)
+**Packaging progress:** IP.1 ✅ · IP.2 ✅ · presentation + plan-map table + shots 10–12
 
-**Next execute:** IP.2 — обновить презентацию Атабека (скриншоты + таблица «пункт → экран»).
+**Next execute:** IP.3 — обновить hub «Как презентовать» (сценарий 7 → 5 → 4 → 1 → 10 → 11 → 8).

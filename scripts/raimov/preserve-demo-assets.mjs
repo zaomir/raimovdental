@@ -22,6 +22,9 @@ const required = [
   'presentation/index.html',
   'presentation/shots/01-hub.png',
   'presentation/shots/09-owner-summary.png',
+  'presentation/shots/10-admin-path.png',
+  'presentation/shots/11-render-scripts.png',
+  'presentation/shots/12-render-markers.png',
   'content/scripts-25.json',
   'content/recontact-9.json',
   'content/patient-path.json',
@@ -54,6 +57,11 @@ assert.match(hub, /Презентация для Атабека/);
 const presentation = readFileSync(join(target, 'presentation/index.html'), 'utf8');
 assert.match(presentation, /Что уже сделано для вашей клиники/);
 assert.match(presentation, /shots\/06-render-call\.png/);
+assert.match(presentation, /id="plan-map"/);
+assert.match(presentation, /Пункты плана → экраны интерфейса/);
+assert.match(presentation, /10-admin-path\.png/);
+assert.match(presentation, /11-render-scripts\.png/);
+assert.match(presentation, /12-render-markers\.png/);
 assert.match(presentation, /noindex,nofollow,noarchive,nosnippet/);
 assert.match(app, /Демо · вход без пароля/);
 assert.match(app, /\/render\/#scripts/);
@@ -171,4 +179,4 @@ const sourcesJson = JSON.parse(readFileSync(join(target, 'content/sources.json')
 assert.equal(sourcesJson.atom, 'I8.1');
 assert.equal(sourcesJson.sources.length, 6);
 
-console.log('raimov-demo-assets-preserved+ip1-content-markers: PASS');
+console.log('raimov-demo-assets-preserved+ip2-presentation-map: PASS');
