@@ -68,7 +68,7 @@ canon:
 | I8.3 | 8 | ✅ | сводка воронки · `i83-source-funnel` · manager · DEMO_SOURCE_FUNNEL |
 | I8.4 | 8 | ✅ | clinic health + источники · `i84-owner-sources` · `/ru/valeria/month-1/plan/` |
 | I8.5 | 8 | ✅ | тест «источник обязателен» · `i85-source-quiz` · admin · critical 100% |
-| IP.1 | — | ⬜ | — |
+| IP.1 | — | ✅ | content pack markers · scripts-25 · recontact-9 · sources · speech markers · admin-feedback-sop |
 | IP.2 | — | ⬜ | — |
 | IP.3 | — | ⬜ | — |
 | IP.4 | — | ⬜ | — |

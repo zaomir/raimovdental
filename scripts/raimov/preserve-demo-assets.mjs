@@ -125,6 +125,23 @@ assert.doesNotMatch(app, /type=["']password["']/i);
 assert.doesNotMatch(app, /pass\s*:/i);
 const scripts = JSON.parse(readFileSync(join(target, 'content/scripts-25.json'), 'utf8'));
 assert.equal(scripts.length, 25);
+assert.deepEqual(
+  scripts.map((item) => item.id),
+  Array.from({ length: 25 }, (_, i) => `S${String(i + 1).padStart(2, '0')}`),
+);
+const recontact = JSON.parse(readFileSync(join(target, 'content/recontact-9.json'), 'utf8'));
+assert.equal(recontact.length, 9);
+assert.deepEqual(
+  recontact.map((item) => item.id),
+  Array.from({ length: 9 }, (_, i) => `R${String(i + 1).padStart(2, '0')}`),
+);
+const feedbackSop = JSON.parse(readFileSync(join(target, 'content/admin-feedback-sop.json'), 'utf8'));
+assert.equal(feedbackSop.version, '1.0');
+assert.ok(feedbackSop.ask_moment && feedbackSop.neutral_texts && feedbackSop.platforms.length === 3);
+assert.equal(feedbackSop.prohibitions.length, 12);
+assert.equal(feedbackSop.post_visit_checklist.length, 5);
+assert.equal(feedbackSop.sop_steps.length, 8);
+assert.ok(feedbackSop.publication_disclaimer);
 const adminIndex = readFileSync(join(site, 'public', 'assets', 'img', 'admin', 'index.html'), 'utf8');
 assert.match(adminIndex, /id="openScripts"/);
 assert.match(adminIndex, /scripts-catalog\.js/);
@@ -143,10 +160,15 @@ const markersJson = JSON.parse(readFileSync(join(target, 'content/speech-markers
 assert.equal(markersJson.atom, 'I11.1');
 assert.equal(markersJson.status, 'draft_pending_clinic');
 assert.ok(Array.isArray(markersJson.markers) && markersJson.markers.length === 3);
+assert.deepEqual(markersJson.markers.map((m) => m.id), ['MB01', 'MB02', 'MB03']);
 const markersChairJson = JSON.parse(readFileSync(join(target, 'content/speech-markers-chair.json'), 'utf8'));
 assert.equal(markersChairJson.atom, 'I11.2');
 assert.equal(markersChairJson.status, 'draft_pending_clinic');
 assert.ok(markersChairJson.when_not_to_speak && Array.isArray(markersChairJson.when_not_to_speak.items));
 assert.ok(Array.isArray(markersChairJson.markers) && markersChairJson.markers.length === 3);
+assert.deepEqual(markersChairJson.markers.map((m) => m.id), ['MC01', 'MC02', 'MC03']);
+const sourcesJson = JSON.parse(readFileSync(join(target, 'content/sources.json'), 'utf8'));
+assert.equal(sourcesJson.atom, 'I8.1');
+assert.equal(sourcesJson.sources.length, 6);
 
-console.log('raimov-demo-assets-preserved: PASS');
+console.log('raimov-demo-assets-preserved+ip1-content-markers: PASS');

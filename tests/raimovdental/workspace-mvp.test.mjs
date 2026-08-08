@@ -292,6 +292,11 @@ assert.ok(internalMarketing.boundaries && Array.isArray(internalMarketing.bounda
 assert.ok(internalMarketing.lesson && internalMarketing.lesson.status === 'draft_pending_clinic');
 const scripts = JSON.parse(readFileSync(join(distRoot, 'content/scripts-25.json'), 'utf8'));
 assert.equal(scripts.length, 25);
+assert.deepEqual(
+  scripts.map((item) => item.id),
+  Array.from({ length: 25 }, (_, i) => `S${String(i + 1).padStart(2, '0')}`),
+);
+assert.ok(scripts.every((item) => item.source_ref && item.dont_say));
 const adminIndex = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'index.html'), 'utf8');
 assert.match(adminIndex, /id="openScripts"/);
 assert.match(adminIndex, /scripts-catalog\.js/);
@@ -312,6 +317,8 @@ assert.equal(markersBefore.atom, 'I11.1');
 assert.equal(markersBefore.status, 'draft_pending_clinic');
 assert.ok(Array.isArray(markersBefore.markers));
 assert.equal(markersBefore.markers.length, 3);
+assert.deepEqual(markersBefore.markers.map((m) => m.id), ['MB01', 'MB02', 'MB03']);
+assert.deepEqual(markersBefore.markers.map((m) => m.route), ['veneers', 'implants', 'ortho']);
 assert.ok(markersBefore.markers.every((m) => m.id && m.route && m.listen_for && m.clarify_questions && m.phrase_status === 'draft_pending_clinic'));
 assert.deepEqual(markersBefore.priority_routes, ['veneers', 'implants', 'ortho']);
 const markersChair = JSON.parse(readFileSync(join(distRoot, 'content/speech-markers-chair.json'), 'utf8'));
@@ -361,8 +368,30 @@ assert.match(adminIndex, /journalStatus/);
 assert.match(adminIndex, /app\.js\?v=20260807-i44/);
 const recontact = JSON.parse(readFileSync(join(distRoot, 'content/recontact-9.json'), 'utf8'));
 assert.equal(recontact.length, 9);
-assert.ok(recontact.every((item) => item.id && item.rule && item.delay && item.channel));
+assert.deepEqual(
+  recontact.map((item) => item.id),
+  Array.from({ length: 9 }, (_, i) => `R${String(i + 1).padStart(2, '0')}`),
+);
+assert.ok(recontact.every((item) => item.id && item.rule && item.delay && item.channel && item.source_ref));
 assert.ok(scripts.every((item) => item.id && item.title && item.body && item.next_action));
 assert.equal(scripts.filter((item) => item.dont_say).length, 25);
 
-console.log('expert-dental-workspace-dist-preservation+passwordless-demo: PASS');
+// IP.1 · content pack markers — admin-feedback-sop keys
+const feedbackSop = JSON.parse(readFileSync(join(distRoot, 'content/admin-feedback-sop.json'), 'utf8'));
+assert.equal(feedbackSop.version, '1.0');
+assert.ok(feedbackSop.source_ref);
+assert.ok(feedbackSop.ask_moment && feedbackSop.ask_moment.text && feedbackSop.ask_moment.restriction);
+assert.ok(feedbackSop.neutral_texts && feedbackSop.neutral_texts.in_clinic && feedbackSop.neutral_texts.whatsapp_followup);
+assert.equal(feedbackSop.platforms.length, 3);
+assert.deepEqual(feedbackSop.platforms.map((p) => p.link_id), ['ED-LINK-010', 'ED-LINK-009', 'ED-LINK-008']);
+assert.ok(feedbackSop.platforms.every((p) => p.name && p.url && p.source_ref));
+assert.equal(feedbackSop.prohibitions.length, 12);
+assert.ok(feedbackSop.prohibitions.every((p) => p.text && p.source_ref));
+assert.equal(feedbackSop.post_visit_checklist.length, 5);
+assert.ok(feedbackSop.post_visit_checklist.every((step) => step.step && step.action && step.restriction && step.owner));
+assert.equal(feedbackSop.sop_steps.length, 8);
+assert.ok(feedbackSop.sop_steps.every((step) => step.step && step.action && step.owner));
+assert.ok(feedbackSop.publication_disclaimer && feedbackSop.publication_disclaimer.text);
+assert.ok(feedbackSop.prohibitions.some((p) => /скидк|балл|подарок/i.test(p.text)));
+
+console.log('expert-dental-workspace-dist-preservation+passwordless-demo+ip1-content-markers: PASS');
