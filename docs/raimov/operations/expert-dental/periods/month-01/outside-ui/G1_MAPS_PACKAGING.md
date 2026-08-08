@@ -58,3 +58,9 @@ Feature id в URL: `/g/11w8nfy1bh`. Place ID `ChIJ…` для deep-link `writere
 4. Google Place ID `ChIJ…` получен → deep-link writereview (обновить LINKS P1).
 
 **Статус пункта в STATUS:** остаётся «Не начато», пока чеклист не закрыт скринами — этот файл = рабочий пакет, не закрытие пункта.
+
+## Прогресс исполнения (2026-08-08)
+
+- Заполненный срез: [`G1_MAPS_AUDIT_FILL.md`](G1_MAPS_AUDIT_FILL.md)  
+- Evidence: `docs/raimov/operations/expert-dental/media/maps-packaging-2026-08-08/` (Google + Яндекс PNG; 2ГИС — HTML evidence)  
+- Найдено: телефон/адрес/сайт совпадают с SSOT; **3 варианта названия**; часы на картах ≠ сайт; Place ID Google ещё P1.

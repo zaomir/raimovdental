@@ -8,6 +8,13 @@ last_updated: 2026-08-08
 
 # Журнал изменений
 
+## 2026-08-08 — G1 maps audit-fill (продолжение outside-UI)
+
+- Скриншоты Overview: Google + Яндекс; 2ГИС — evidence из m.2gis HTML (desktop antibot на VPS).
+- `G1_MAPS_AUDIT_FILL.md`: телефон/адрес/сайт OK; 3 варианта названия; рейтинги 4.8 / 4.2 / 4.9.
+- `G2_APPROVAL_SHEET.md` — лист для подписи клиники.
+- Evidence: `media/maps-packaging-2026-08-08/`.
+
 ## 2026-08-08 — outside-UI groups G1–G4 (после IP.6)
 
 - Индекс исполнения: **ED-MAT-062** · `periods/month-01/outside-ui/`.

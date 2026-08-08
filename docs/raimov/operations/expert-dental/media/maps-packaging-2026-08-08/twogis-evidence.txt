@@ -1,0 +1,10 @@
+2GIS firm evidence (from m.2gis.kg HTML, 2026-08-08)
+title: Эксперт Дентал студия, Киевская улица, 88, Бишкек — 2ГИС
+description: Оценка 4.9, 218 фото, 155 отзывов. Вся информация об этом месте есть в 2ГИС
+name: Эксперт Дентал студия
+address: Киевская улица, 88, Бишкек
+rating: 4.9 · photos: 218 · reviews: 155 (from meta description)
+whatsapp: https://wa.me/996555255455
+telegram: https://t.me/+996555255455
+firm_id: 70000001089655879
+note: desktop 2gis.kg returns antibot Forbidden to VPS IP; evidence via mobile HTML curl
