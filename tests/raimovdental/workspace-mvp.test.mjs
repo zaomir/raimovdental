@@ -87,6 +87,26 @@ for (const token of [
   'Демо · вход без пароля',
 ]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
+for (const token of [
+  "const quiz=roleKey==='admin'?quizAdmin:[]",
+  "if(roleKey!=='admin')",
+  'acknowledgementOnlyView',
+  'Обновления не ограничивают доступ',
+  'Можно продолжать работу, смену и пользоваться всеми разделами',
+  'напоминание без ограничения доступа',
+  'Для этой роли тестирование не требуется',
+  'update-state-unread',
+  'update-state-read',
+  'update-state-passed',
+  'Не ознакомлен',
+  'Ознакомлен',
+  'Тест пройден',
+]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+
+assert.match(app, /roleKey!=='admin'\)\{[\s\S]{0,800}state\.testPassed=true/);
+assert.match(app, /if\(roleKey!=='admin'\)\{[\s\S]{0,900}Все функции доступны/);
+assert.match(app, /roleKey==='admin'\s*\?`<div class="card"><b>Обновления/);
+
 assert.doesNotMatch(app, /type=["']password["']/i);
 assert.doesNotMatch(app, /pass\s*:/i);
 assert.match(hub, /@media\(max-width:820px\)/);

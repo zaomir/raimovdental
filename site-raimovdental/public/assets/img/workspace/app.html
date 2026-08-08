@@ -16,7 +16,7 @@
     .nav button{width:100%;text-align:left;margin:4px 0;background:transparent;color:var(--ink);box-shadow:none}.nav button.active{background:var(--soft);color:var(--brand)}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}
     .hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.hero h1{margin:6px 0 8px;font-size:28px}.hero p{max-width:720px}.muted{color:var(--muted)}
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.card{border:1px solid var(--line);border-radius:17px;padding:16px;background:#fff;transition:transform .18s ease,box-shadow .22s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(23,50,45,.08)}.card h3{margin:0 0 7px}.metric{font-size:26px;font-weight:850}.action-card{border:2px solid var(--brand);background:linear-gradient(180deg,#fff,var(--soft))}
-    .stack{display:grid;gap:10px}.update{border-left:4px solid var(--brand)}.update.critical{border-left-color:#9f302a;background:var(--danger)}.check{display:flex;align-items:flex-start;gap:10px}.check input{margin-top:3px}.quiz-option{width:100%;text-align:left;border:1px solid var(--line);background:#fff;margin:6px 0}.quiz-option.selected{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .stack{display:grid;gap:10px}.update{border-left:4px solid var(--brand)}.update.critical{border-left-color:#9f302a;background:var(--danger)}.update-state-unread{border-color:#d48a00;background:#fff5dc}.update-state-read{border-color:#6f91a8;background:#eef5f8}.update-state-passed{border-color:#2a8057;background:#e8f5ee}.check{display:flex;align-items:flex-start;gap:10px}.check input{margin-top:3px}.quiz-option{width:100%;text-align:left;border:1px solid var(--line);background:#fff;margin:6px 0}.quiz-option.selected{background:var(--brand);color:#fff;border-color:var(--brand)}
     .update-open{cursor:pointer;text-align:left;width:100%}.update-open:hover{border-color:var(--brand2)}.update-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}.update-detail-body p{line-height:1.55;margin:0 0 12px}.update-detail-body ul{margin:8px 0 12px;padding-left:20px;line-height:1.5}
     .progress{height:8px;border-radius:999px;background:#e5e8e6;overflow:hidden}.progress span{display:block;height:100%;background:var(--brand);transition:width .35s ease}.task{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.status-ok{color:#17643f}.status-warn{color:#8b5a00}.status-danger{color:#9f302a}
     .mobile-nav{display:none}.footer{padding:18px;color:var(--muted);font-size:12px;text-align:center}.notice{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--warn);color:#684900;font-size:13px}.back-link{white-space:nowrap}
@@ -536,7 +536,13 @@
       {q:'Чего нельзя делать администратору при маркере до кресла?',a:['Уточнять факты из patient-path','Ставить диагноз и обещать итог лечения','Записать на консультацию и зафиксировать next action'],ok:1,critical:true,source:'speech-markers-before.json · boundaries.dont'}
     ];
     const updates=roleKey==='admin'?updatesAdmin:roleKey==='doctor'?updatesDoctor:updatesBase;
-    const quiz=roleKey==='admin'?quizAdmin:roleKey==='doctor'?quizDoctor:quizBase;
+    const quiz=roleKey==='admin'?quizAdmin:[];
+    if(roleKey!=='admin'){
+      if(!Array.isArray(state.roleUpdatesRead))state.roleUpdatesRead=updates.map(()=>false);
+      while(state.roleUpdatesRead.length<updates.length)state.roleUpdatesRead.push(false);
+      state.updateRead=state.roleUpdatesRead.every(Boolean);
+      state.testPassed=true;
+    }
     function ensureUpdatesProgress(){
       if(!state.updatesProgress||typeof state.updatesProgress!=='object')state.updatesProgress={};
       updates.forEach(u=>{
@@ -571,9 +577,13 @@
     function updateStatusLabel(u){
       ensureUpdatesProgress();
       const p=state.updatesProgress[u.id]||{acked:false,score:0,passed:false};
-      if(p.passed)return `<span class="status-ok">Тест · ${p.score}%</span>`;
-      if(p.acked)return '<span class="status-warn">Ознакомлен</span>';
-      return '<span class="status-danger">Не прочитано</span>';
+      if(p.passed)return `<span class="status-ok">Тест пройден · ${p.score}%</span>`;
+      if(p.acked)return '<span>Ознакомлен</span>';
+      return '<span class="status-warn">Не ознакомлен</span>';
+    }
+    function updateStateClass(u){
+      const p=state.updatesProgress[u.id]||{acked:false,passed:false};
+      return p.passed?'update-state-passed':p.acked?'update-state-read':'update-state-unread';
     }
     function resetMandatoryUpdatesAck(){
       ensureUpdatesProgress();
@@ -605,9 +615,13 @@
     }
     function gate(){
       if(roleKey==='admin')syncAdminUpdateGate();
+      if(roleKey!=='admin'){
+        if(!state.handoffAccepted)return{title:'Примите смену',copy:'Непрочитанные обновления не ограничивают работу. Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
+        if(!state.shiftStarted)return{title:'Начните работу',copy:'Рабочее место готово. С обновлениями можно ознакомиться в удобное время.',action:'Начать работу',view:'shift'};
+        return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
+      }
       if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:roleKey==='admin'?'Откройте каждое обязательное обновление, прочитайте полный текст и отметьте «Ознакомлен».':roleKey==='doctor'?'Обязательные материалы: маршрутизация, передача врачу и маркеры в кресле.':'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
-      if(roleKey==='admin'&&(!state.updatesTestPassed||!feedbackLessonsComplete(state.feedbackLessons)))return{title:'Пройдите обязательный тест',copy:!state.updatesTestPassed?'После ознакомления нажмите «Пройти тест»: по 3 вопроса на каждое обязательное обновление. Нужно ≥70% правильных ответов.':'Осталось пройти уроки регламента отзывов ниже на этой странице.',action:'Пройти тест',view:'learn'};
-      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='doctor'?'Нужно подтвердить маршрутизацию, передачу ответственности и маркеры в кресле. Проходной балл 90%, критические — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
+      if(!state.updatesTestPassed||!feedbackLessonsComplete(state.feedbackLessons))return{title:'Пройдите обязательный тест',copy:!state.updatesTestPassed?'После ознакомления нажмите «Пройти тест»: по 3 вопроса на каждое обязательное обновление. Нужно не менее 90% правильных ответов.':'Осталось пройти уроки регламента отзывов ниже на этой странице.',action:'Пройти тест',view:'learn'};
       if(!state.handoffAccepted)return{title:'Примите смену',copy:'Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
       if(!state.shiftStarted)return{title:'Начните работу',copy:'Обновления пройдены, передача принята, рабочее место готово.',action:'Начать работу',view:'shift'};
       return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
@@ -617,7 +631,16 @@
       $('goLearn').onclick=()=>{view='learn';render()};
     }
     function layout(title,body){$('main').innerHTML=`<section class="panel"><div class="hero"><div><div class="eyebrow">${role.name}</div><h1>${title}</h1><p class="muted">${role.subtitle}</p></div><span class="badge">${state.shiftStarted&&!state.shiftClosed?'В работе':'Требуется действие'}</span></div>${body}</section>`}
-    function today(){const g=gate();const adminUpdatesNote=roleKey==='admin'?(()=>{const m=mandatoryUpdates();const acked=m.filter(u=>state.updatesProgress[u.id]?.acked).length;return state.updatesTestPassed?`Тест пройден · ${state.updatesTestScore||0}%`:state.updateRead?`${m.length} материалов прочитано · тест не сдан`:`${acked} из ${m.length} обязательных материалов`})():(roleKey==='doctor'?'4 обязательных материала ожидают подтверждения':'2 обязательных материала ожидают подтверждения');layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Статус допуска</div><div class="metric">${state.testPassed?'Актуален':'Ограничен'}</div><p class="muted">Последний результат: ${state.score||0}% · проходной балл ${roleKey==='admin'?UPDATES_PASS_SCORE:90}%${roleKey==='admin'?'':' · критические 100%'}</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${state.updateRead&&state.updatesTestPassed?'Все обязательные материалы прочитаны и тест сдан':adminUpdatesNote}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);$('mainAction').onclick=()=>{view=g.view;render()}}
+    function today(){
+      const g=gate();
+      const readCount=roleKey==='admin'?mandatoryUpdates().filter(u=>state.updatesProgress[u.id]?.acked).length:state.roleUpdatesRead.filter(Boolean).length;
+      const total=roleKey==='admin'?mandatoryUpdates().length:updates.length;
+      const updateText=roleKey==='admin'?(state.updatesTestPassed?`Тест пройден · ${state.updatesTestScore||0}%`:`${readCount} из ${total} материалов · тест ожидает`):`${readCount} из ${total} · напоминание без ограничения доступа`;
+      const accessText=roleKey==='admin'?(state.testPassed?'Актуален':'Ограничен'):'Все функции доступны';
+      const accessNote=roleKey==='admin'?`Последний результат: ${state.score||0}% · проходной балл ${UPDATES_PASS_SCORE}%`:'Для этой роли тестирование не требуется.';
+      layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Доступ к работе</div><div class="metric">${accessText}</div><p class="muted">${accessNote}</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${updateText}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);
+      $('mainAction').onclick=()=>{view=g.view;render()};
+    }
     function renderFeedbackLessons(){
       if(roleKey!=='admin'||!feedbackSop)return;
       const wrap=$('feedbackLessons');
@@ -698,7 +721,7 @@
       function bindLearnSidecards(){renderSpeechMarkersBeforeCard();renderSpeechMarkersChairCard();renderFeedbackLessons();renderInternalMarketingLesson()}
       function adminUpdatesListView(){
         ensureUpdatesProgress();
-        const cards=updates.map((u,i)=>{const preview=u.summary||u.copy||'';return `<button type="button" class="card update ${u.critical?'critical':''} update-open" data-open-update="${i}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${esc(u.title)}</h3><p class="muted">${esc(preview)}</p><div class="update-meta"><span class="muted">Нажмите, чтобы прочитать полностью</span>${updateStatusLabel(u)}</div></button>`}).join('');
+        const cards=updates.map((u,i)=>{const preview=u.summary||u.copy||'';return `<button type="button" class="card update ${updateStateClass(u)} update-open" data-open-update="${i}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${i+1}. ${esc(u.title)}</h3><p class="muted">${esc(preview)}</p><div class="update-meta"><span class="muted">Нажмите, чтобы прочитать полностью</span>${updateStatusLabel(u)}</div></button>`}).join('');
         const canTest=allMandatoryAcked();
         const testBtn=canTest?`<button id="startUpdatesTest" class="btn primary">${state.updatesTestPassed?'Пересдать тест':'Пройти тест'}</button>`:'<p class="muted">Пройти тест можно после ознакомления со всеми обязательными обновлениями.</p>';
         const scoreBanner=state.updatesTestPassed?`<div class="card ${state.testPassed?'':'update'}" style="margin-bottom:12px"><div class="eyebrow">Результат теста</div><div class="metric">${state.updatesTestScore||0}%</div><p class="muted">${state.testPassed?'Допуск актуален · управляющий видит оценку.':'Тест по обновлениям сдан. Пройдите уроки регламента отзывов ниже для полного допуска.'}</p></div>`:'';
@@ -712,7 +735,7 @@
         ensureUpdatesProgress();const p=state.updatesProgress[u.id]||{acked:false};
         const paragraphs=(u.body||[u.copy||'']).map(x=>`<p>${esc(x)}</p>`).join('');
         const link=u.link?`<a class="btn secondary" href="${esc(u.link.href)}" target="_blank" rel="noopener" style="margin-top:12px">${esc(u.link.label)}</a>`:'';
-        body.innerHTML=`<article class="card update ${u.critical?'critical':''}" data-update-id="${esc(u.id)}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${detailIndex+1}. ${esc(u.title)}</h3><div class="update-detail-body">${paragraphs}${link}</div><label class="check card" style="margin-top:16px"><input type="checkbox" id="updateAckCheckbox" ${p.acked?'checked':''}><span><b>Ознакомлен</b><br><span class="muted">Подтверждаю, что прочитал(а) материал и понимаю, как применять его в работе.</span></span></label><div class="header-actions" style="margin-top:14px"><button type="button" class="btn secondary" id="backToUpdates">← К списку обновлений</button>${allMandatoryAcked()?'<button type="button" class="btn primary" id="detailStartTest">Пройти тест</button>':''}</div></article>`;
+        body.innerHTML=`<article class="card update ${updateStateClass(u)}" data-update-id="${esc(u.id)}"><div class="eyebrow">${u.critical?'Обязательное обновление':'Информация'}</div><h3>${detailIndex+1}. ${esc(u.title)}</h3><p><b>Статус:</b> ${updateStatusLabel(u)}</p><div class="update-detail-body">${paragraphs}${link}</div><label class="check card" style="margin-top:16px"><input type="checkbox" id="updateAckCheckbox" ${p.acked?'checked':''}><span><b>Ознакомлен</b><br><span class="muted">Подтверждаю, что прочитал(а) материал и понимаю, как применять его в работе.</span></span></label><div class="header-actions" style="margin-top:14px"><button type="button" class="btn secondary" id="backToUpdates">← К списку обновлений</button>${allMandatoryAcked()?'<button type="button" class="btn primary" id="detailStartTest">Пройти тест</button>':''}</div></article>`;
         $('backToUpdates').onclick=()=>{learnMode='list';adminUpdatesListView()};
         if($('detailStartTest'))$('detailStartTest').onclick=()=>{learnMode='test';qi=0;answers=[];testQuestions=buildMandatoryTestQuestions();adminUpdatesQuizView()};
         $('updateAckCheckbox').onchange=e=>{ensureUpdatesProgress();state.updatesProgress[u.id].acked=!!e.target.checked;state.updateRead=allMandatoryAcked();save();syncAdminUpdateGate();renderRight()};
@@ -761,8 +784,14 @@
         body.innerHTML=`<div class="card" data-atom="i115-markers-quiz"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}.</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];legacyQuizView()};bindLearnSidecards();
       }
+      function acknowledgementOnlyView(){
+        const unread=updates.filter((_,i)=>!state.roleUpdatesRead[i]).length;
+        body.innerHTML=`<div class="notice"><b>Обновления не ограничивают доступ.</b> Осталось ознакомиться: ${unread}. Можно продолжать работу, смену и пользоваться всеми разделами.</div><div class="stack" style="margin-top:14px">${updates.map((u,i)=>{const read=!!state.roleUpdatesRead[i];return `<article class="card update ${read?'update-state-read':'update-state-unread'}"><div class="eyebrow">Обновление</div><h3>${i+1}. ${esc(u.title)}</h3><p>${esc(u.copy||'')}</p><p><b>Статус:</b> ${read?'Ознакомлен':'<span class="status-warn">Не ознакомлен</span>'}</p>${read?'':'<button class="btn secondary" data-ack-role-update="'+i+'">Ознакомлен</button>'}</article>`}).join('')}</div>`;
+        body.querySelectorAll('[data-ack-role-update]').forEach(b=>b.onclick=()=>{state.roleUpdatesRead[Number(b.dataset.ackRoleUpdate)]=true;state.updateRead=state.roleUpdatesRead.every(Boolean);save();acknowledgementOnlyView();renderRight()});
+        bindLearnSidecards();
+      }
       if(roleKey==='admin'){ensureUpdatesProgress();if(state.testPassed)adminPassedView();else if(learnMode==='detail')adminUpdateDetailView();else if(learnMode==='test'&&testQuestions.length)adminUpdatesQuizView();else adminUpdatesListView();return}
-      if(state.testPassed)legacyPassedView();else if(state.updateRead)legacyQuizView();else legacyUpdatesView();
+      acknowledgementOnlyView();
     }
     function shift(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Смена недоступна','Сначала пройдите тест допуска по скриптам, маркерам и повторным касаниям.');
@@ -1368,7 +1397,10 @@
           :`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-danger">Обязателен</span></div>`;
       })():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${managerSourceFunnelLine}${ownerSourcesLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      const updatesLine=roleKey==='admin'
+        ?`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-warn'}">${state.updateRead?'Ознакомлен':'Ожидает ознакомления'}</span></div><div class="card"><b>Тест администратора</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Тест пройден · '+state.score+'%':'Тест не пройден'}</span></div>`
+        :`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-warn'}">${state.updateRead?'Все прочитаны':state.roleUpdatesRead.filter(Boolean).length+' из '+updates.length+' · не блокирует работу'}</span></div>`;
+      $('todayList').innerHTML=`${updatesLine}${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${managerSourceFunnelLine}${ownerSourcesLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }
