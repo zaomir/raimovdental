@@ -14,6 +14,7 @@ const required = [
   'owner/index.html',
   'motion.css',
   'motion.js',
+  'copy-sanitizer.js',
   'presentation/index.html',
   'presentation/shots/01-hub.png',
   'presentation/shots/09-owner-summary.png',
@@ -214,7 +215,7 @@ assert.match(app, /i84-month-plan-link/);
 assert.match(app, /ownerClinicHealthHtml/);
 assert.match(app, /\/ru\/valeria\/month-1\/plan\//);
 assert.match(app, /admin-updates-v2/);
-assert.match(app, /UPDATES_PASS_SCORE=70/);
+assert.match(app, /UPDATES_PASS_SCORE=90/);
 assert.match(app, /updatesProgress/);
 assert.match(app, /admin-updates-quiz/);
 assert.match(app, /startUpdatesTest/);
@@ -421,5 +422,29 @@ assert.equal(feedbackSop.sop_steps.length, 8);
 assert.ok(feedbackSop.sop_steps.every((step) => step.step && step.action && step.owner));
 assert.ok(feedbackSop.publication_disclaimer && feedbackSop.publication_disclaimer.text);
 assert.ok(feedbackSop.prohibitions.some((p) => /скидк|балл|подарок/i.test(p.text)));
+
+for (const token of [
+  'Мой план адаптации',
+  'Адаптация сотрудника',
+  'ONBOARDING_DAYS',
+  'День ${day} из 14',
+  'Ознакомлен',
+  'Пройти 3 вопроса',
+  'общий результат не ниже 90%',
+  'вопросы безопасности и границ роли',
+  'Повторить только непройденные материалы',
+  'Подтвердить этап',
+  'Вернуть на повторное обучение',
+  'Допустить к пробной смене',
+  'Допустить к самостоятельной работе',
+  'Наставник',
+  'Управляющий',
+]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+
+const sanitizer = readFileSync(join(distRoot, 'copy-sanitizer.js'), 'utf8');
+for (const token of ['draft_pending_clinic', 'patient-path', 'source_ref', 'next action', 'localStorage']) {
+  assert.match(sanitizer, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+}
+assert.match(sanitizer, /\\\/render\\\//);
 
 console.log('expert-dental-workspace-dist-preservation+passwordless-demo+ip3-present-scenario: PASS');

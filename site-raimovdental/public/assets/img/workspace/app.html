@@ -37,6 +37,7 @@
   </div>
   <nav id="mobileNav" class="mobile-nav"></nav>
   <div class="footer">Промежуточный демонстрационный MVP без CRM и реальных данных пациентов.</div>
+  <script src="/assets/img/workspace/copy-sanitizer.js?v=20260808-onboarding"></script>
   <script>
   (()=>{'use strict';
     const $=id=>document.getElementById(id);
@@ -51,7 +52,7 @@
     const role=roles[roleKey];
     const key='ed-workspace-'+roleKey;
     const QUIZ_VERSION=roleKey==='admin'?'admin-updates-v2':roleKey==='doctor'?'i115-markers-quiz':'base-v1';
-    const UPDATES_PASS_SCORE=70;
+    const UPDATES_PASS_SCORE=90;
     const FEEDBACK_SOP_URL='content/admin-feedback-sop.json';
     let feedbackSop=null;
     let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,updatesTestPassed:false,updatesTestScore:0,updatesProgress:{},shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false,feedbackTeamDemo:{bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}},feedbackRetakeNotice:''};
@@ -110,6 +111,32 @@
     const SOURCES_URL='content/sources.json';
     let attributionSources=null;
     if(roleKey==='admin'||roleKey==='manager'||roleKey==='owner')fetch(SOURCES_URL).then(r=>r.json()).then(d=>{attributionSources=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
+    const ONBOARDING_DAYS=[
+      ['Клиника, сервис и роль','Поймите стандарт сервиса, обязанности администратора и границы роли.','Администратор уточняет организационные вопросы, но не ставит диагноз.'],
+      ['Врачи, специальности и услуги','Изучите специальности врачей и правила направления обращения.','Запрос направляется профильному врачу по описанной потребности.'],
+      ['Входящий звонок и запись','Проведите звонок от приветствия до подтверждённой записи.','Предложите два конкретных времени и повторите договорённость.'],
+      ['Карточка обращения','Зафиксируйте источник, ответственного, действие и срок.','Карточка не закрывается, пока не назначены ответственный и срок.'],
+      ['Тревожные медицинские признаки','Распознайте признаки, которые требуют немедленной передачи врачу.','При затруднении дыхания или быстро растущем отёке сразу подключите врача.'],
+      ['Повторные обращения и жалобы','Отработайте обращения после лечения, жалобы и сложные разговоры.','Сначала выслушайте, зафиксируйте факты и передайте ответственному.'],
+      ['Промежуточная проверка','Пройдите проверку знаний и разберите ошибки с наставником.','Повторяются только материалы с ошибками.'],
+      ['Наблюдение за наставником','Наблюдайте за полной сменой и отмечайте решения наставника.','Фиксируйте, как наставник завершает каждое обращение договорённостью.'],
+      ['Работа под контролем: начало','Обрабатывайте простые обращения рядом с наставником.','Наставник проверяет карточку до завершения обращения.'],
+      ['Работа под контролем: маршрутизация','Практикуйте направление обращений и передачу врачу.','Медицинский вопрос передаётся врачу без интерпретации администратора.'],
+      ['Работа под контролем: сложные ситуации','Практикуйте жалобы и повторные обращения под контролем.','В сложном разговоре сохраняйте спокойствие и не обещайте медицинский результат.'],
+      ['Начало, завершение и передача смены','Проверьте готовность рабочего места и передачу незакрытых задач.','У каждой незакрытой задачи остаются ответственный, действие и срок.'],
+      ['Пробная смена','Проведите смену с итоговой проверкой наставника.','Наставник наблюдает и фиксирует критические ошибки.'],
+      ['Итоговая проверка','Подтвердите знания и получите решения наставника и управляющего.','Полный доступ открывается только после двух подтверждений.']
+    ].map((x,i)=>({day:i+1,title:x[0],material:x[1],example:x[2],critical:[0,4,5,13].includes(i),questions:[
+      {q:'Какое действие соответствует материалу дня?',a:[x[2],'Пропустить фиксацию','Дать медицинское заключение'],ok:0},
+      {q:'Когда этап считается завершённым?',a:['После прочтения без проверки','После ознакомления и успешной проверки','Сразу после открытия'],ok:1},
+      {q:'Что делать при сомнении или риске?',a:['Продолжить самостоятельно','Скрыть вопрос','Обратиться к наставнику или врачу'],ok:2}
+    ]}));
+    if(roleKey==='admin'){
+      if(!state.onboarding||typeof state.onboarding!=='object')state.onboarding={day:1,status:'Новый сотрудник',read:{},scores:{},failed:{},mentorApproved:false,managerApproved:false,comments:[],practice:[]};
+      if(!state.onboarding.read)state.onboarding.read={};
+      if(!state.onboarding.scores)state.onboarding.scores={};
+      if(!state.onboarding.failed)state.onboarding.failed={};
+    }
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -569,9 +596,10 @@
     })();
     function renderNav(){
       const common=[['today','Сегодня'],['learn','Обучение'],['shift','Смена']];
+      const onboardingItem=(roleKey==='admin'||roleKey==='manager'||roleKey==='owner')?[['onboarding',roleKey==='admin'?'Мой план адаптации':'Адаптация сотрудника']]:[];
       const pathItem=(roleKey==='admin'||roleKey==='doctor')?[['path','Путь']]:[];
       const specific=roleKey==='admin'?[['work','Обращения']]:roleKey==='doctor'?[['work','Медицинские задачи']]:[['work','Команда']];
-      const items=[...common,...pathItem,...specific];
+      const items=[...common,...onboardingItem,...pathItem,...specific];
       $('nav').innerHTML=$('mobileNav').innerHTML=items.map(([id,label])=>`<button class="btn ${view===id?'active':''}" data-view="${id}">${label}</button>`).join('');
       document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
     }
@@ -1262,6 +1290,41 @@
         };
       });
     }
+    function onboardingAccess(day,approved){
+      if(approved)return'Полный доступ';
+      if(day<=7)return'Обучение, справочник и тренажёр';
+      if(day===8)return'Наблюдение за наставником';
+      if(day<=12)return'Ограниченная работа под контролем';
+      if(day===13)return'Пробная смена';
+      return'Ожидается двойное подтверждение';
+    }
+    function onboarding(){
+      if(roleKey!=='admin'){
+        const saved=JSON.parse(localStorage.getItem('ed-workspace-admin')||'null')||{};
+        const o=saved&&saved.onboarding||{day:10,status:'Работает с наставником',read:{1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true},scores:{1:100,2:100,3:100,4:100,5:100,6:100,7:100,8:100,9:100},failed:{},mentorApproved:false,managerApproved:false,comments:['Уверенно ведёт простые обращения'],practice:['Наблюдение завершено','Три обращения под контролем']};
+        const readCount=Object.values(o.read||{}).filter(Boolean).length;
+        const scores=Object.values(o.scores||{});
+        const avg=scores.length?Math.round(scores.reduce((a,b)=>a+Number(b||0),0)/scores.length):0;
+        const errors=Object.keys(o.failed||{}).length;
+        layout('Адаптация сотрудника',`<div class="card action-card"><div class="eyebrow">Карточка сотрудника</div><h3>Новый администратор</h3><p><b>Этап:</b> ${esc(o.status||'Новый сотрудник')} · день ${Number(o.day||1)} из 14</p><p><b>Прочитано:</b> ${readCount} материалов · <b>средняя оценка:</b> ${avg}% · <b>критические ошибки:</b> ${errors}</p><p><b>Практика:</b> ${esc((o.practice||[]).join(' · ')||'Ещё не начата')}</p><p><b>Комментарии:</b> ${esc((o.comments||[]).join(' · ')||'Комментариев нет')}</p></div><div class="grid"><button class="btn primary" data-onboarding-action="stage">Подтвердить этап</button><button class="btn secondary" data-onboarding-action="repeat">Вернуть на повторное обучение</button><button class="btn secondary" data-onboarding-action="trial">Допустить к пробной смене</button><button class="btn primary" data-onboarding-action="full">Допустить к самостоятельной работе</button></div>`);
+        document.querySelectorAll('[data-onboarding-action]').forEach(b=>b.onclick=()=>{const action=b.dataset.onboardingAction;if(action==='repeat'){o.status='Требуется повторное обучение';o.failed[o.day]=true}else if(action==='trial'){o.day=13;o.status='Пробная смена'}else if(action==='full'){if(roleKey==='manager')o.managerApproved=true;o.status=o.mentorApproved&&o.managerApproved?'Допущен к самостоятельной работе':'Ожидается подтверждение наставника'}else{o.status='Работает с наставником';o.mentorApproved=true}saved.onboarding=o;localStorage.setItem('ed-workspace-admin',JSON.stringify(saved));onboarding()});
+        return;
+      }
+      const o=state.onboarding;
+      const day=Math.max(1,Math.min(14,Number(o.day||1)));
+      const item=ONBOARDING_DAYS[day-1];
+      const completed=Object.values(o.scores).filter(s=>Number(s)>=90).length;
+      const progress=Math.round(completed/14*100);
+      const approved=o.mentorApproved&&o.managerApproved;
+      const status=approved?'Допущен к самостоятельной работе':o.failed[day]?'Требуется повторное обучение':day===1?'Новый сотрудник':day<=7?'Проходит обучение':day<=12?'Работает с наставником':day===13?'Пробная смена':'Ожидается двойное подтверждение';
+      o.status=status;
+      const failedDays=Object.keys(o.failed).map(Number);
+      const availableDays=failedDays.length?failedDays:[day];
+      layout('Мой план адаптации',`<div class="card action-card"><div class="eyebrow">День ${day} из 14</div><h3>${esc(item.title)}</h3><p>${esc(item.material)}</p><div class="progress"><span style="width:${progress}%"></span></div><p><b>Прогресс:</b> ${progress}% · <b>Наставник:</b> старший администратор · <b>Следующая проверка:</b> ${day<14?'в конце дня':'итоговая проверка'}</p><p><b>Условия допуска:</b> общий результат не ниже 90%, вопросы безопасности и границ роли — без ошибок, итог подтверждают наставник и управляющий.</p><p><b>Доступ сейчас:</b> ${onboardingAccess(day,approved)}</p></div><div class="card" style="margin-top:14px"><div class="eyebrow">Короткий материал</div><h3>${esc(item.title)}</h3><p>${esc(item.material)}</p><div class="notice"><b>Пример:</b> ${esc(item.example)}</div><label class="check card" style="margin-top:12px"><input id="onboardingRead" type="checkbox" ${o.read[day]?'checked':''}><span><b>Ознакомлен</b><br><span class="muted">Материал прочитан и понятен.</span></span></label><button id="onboardingTest" class="btn primary" ${o.read[day]?'':'disabled'}>${o.scores[day]?'Повторить проверку':'Пройти 3 вопроса'}</button><div id="onboardingQuiz" class="stack" style="margin-top:12px"></div></div>${failedDays.length?`<div class="card update critical" style="margin-top:14px"><h3>Повторить только непройденные материалы</h3><p>${failedDays.map(d=>`День ${d}: ${esc(ONBOARDING_DAYS[d-1].title)}`).join('<br>')}</p></div>`:''}${day===14?`<div class="card" style="margin-top:14px"><h3>Итоговое подтверждение</h3><p>Наставник: ${o.mentorApproved?'подтверждено':'ожидается'} · Управляющий: ${o.managerApproved?'подтверждено':'ожидается'}</p><button id="mentorApprove" class="btn secondary">Подтвердить наставником</button><p class="muted">Решение управляющего принимается в карточке сотрудника.</p></div>`:''}`);
+      $('onboardingRead').onchange=e=>{o.read[day]=!!e.target.checked;save();onboarding()};
+      $('onboardingTest').onclick=()=>{const box=$('onboardingQuiz');box.innerHTML=item.questions.map((q,qi)=>`<div class="card"><b>${qi+1}. ${esc(q.q)}</b>${q.a.map((a,ai)=>`<label class="check"><input type="radio" name="oq${qi}" value="${ai}"><span>${esc(a)}</span></label>`).join('')}</div>`).join('')+'<button id="finishOnboardingTest" class="btn primary">Проверить ответы</button>';$('finishOnboardingTest').onclick=()=>{const answers=item.questions.map((_,qi)=>Number(document.querySelector(`input[name="oq${qi}"]:checked`)?.value));const correct=item.questions.filter((q,i)=>answers[i]===q.ok).length;const score=Math.round(correct/3*100);const safetyOk=!item.critical||correct===3;o.scores[day]=score;if(score>=90&&safetyOk){delete o.failed[day];if(day<14)o.day=day+1}else{o.failed[day]=true;o.status='Требуется повторное обучение'}save();onboarding()}};
+      if($('mentorApprove'))$('mentorApprove').onclick=()=>{o.mentorApproved=true;save();onboarding()};
+    }
     function work(){
       if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Работа ограничена','Без успешно сданного теста (≥90%, критические 100%) модуль обращений недоступен.');
       const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал I7.5: фильтр «Пропущен / без результата» и «Вернуть в работу».</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
@@ -1309,7 +1372,7 @@
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }
-    function render(){renderNav();renderRight();({today,learn,shift,work,path:pathView}[view]||today)()}
+    function render(){renderNav();renderRight();({today,learn,shift,work,onboarding,path:pathView}[view]||today)()}
     $('roleLabel').textContent=role.name+' · '+role.subtitle;
     syncDoctorClinicBadge();
     render();
