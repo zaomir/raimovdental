@@ -1,9 +1,9 @@
 ---
 title: Expert Dental Studio — реестр материалов
 status: ACTIVE REGISTER
-version: 1.4
+version: 1.5
 created: 2026-08-03
-last_updated: 2026-08-05
+last_updated: 2026-08-08
 id_prefix: ED-MAT
 ---
 
@@ -78,14 +78,16 @@ id_prefix: ED-MAT
 
 | ID | Тип | Материал | Период / пункты | Статус | Источник | Внешняя ссылка | Примечание |
 |---|---|---|---|---|---|---|---|
-| ED-MAT-026 | Interface hub | Сводная страница интерфейсов клиники | Дополнительная работа / 7, 10, 11 | Live prototype | `site-raimovdental/public/assets/img/workspace/` | `https://raimovdental.com/assets/img/workspace/` | Владелец, управляющий, врач, администратор |
+| ED-MAT-026 | Interface hub | Сводная страница интерфейсов клиники | Дополнительная работа / 1, 4, 5, 7, 8, 10, 11 | Live / production verified | `site-raimovdental/public/assets/img/workspace/` | ED-LINK-016, ED-LINK-037 | IP.3: блок «Как презентовать» · `#present` · сценарий 7→5→4→1→10→11→8 |
 | ED-MAT-027 | Interface app | Общий рабочий интерфейс ролей | Дополнительная работа | Live prototype | `site-raimovdental/public/assets/img/workspace/app.html` | `https://raimovdental.com/assets/img/workspace/app.html` | Демо без CRM |
-| ED-MAT-028 | Role interface | Интерфейс администратора | Дополнительная работа / 7 | Live prototype | `site-raimovdental/public/assets/img/workspace/admin/` | `https://raimovdental.com/assets/img/workspace/admin/` | Наиболее подробно проработанная роль |
-| ED-MAT-029 | Role interface | Интерфейс врача | Дополнительная работа / 10, 11 | Preliminary | `site-raimovdental/public/assets/img/workspace/doctor/` | `https://raimovdental.com/assets/img/workspace/doctor/` | Предварительная версия |
-| ED-MAT-030 | Role interface | Интерфейс управляющего | Дополнительная работа | Preliminary | `site-raimovdental/public/assets/img/workspace/manager/` | `https://raimovdental.com/assets/img/workspace/manager/` | Предварительная версия |
-| ED-MAT-031 | Role interface | Интерфейс владельца | Дополнительная работа | Preliminary | `site-raimovdental/public/assets/img/workspace/owner/` | `https://raimovdental.com/assets/img/workspace/owner/` | Предварительная версия |
-| ED-MAT-032 | Admin render | Детальный прототип администратора | Дополнительная работа / 7 | Live prototype | `site-raimovdental/public/assets/img/admin/` | `https://raimovdental.com/render/` | Инструкции, обучение, тестирование и скрипты |
-| ED-MAT-059 | Owner presentation | Презентация рабочей системы для Атабека | Дополнительная работа / 7, 10, 11 | Live prototype | `site-raimovdental/public/assets/img/workspace/presentation/` | `https://raimovdental.com/assets/img/workspace/presentation/` | Скриншоты ролей + результаты + живые ссылки |
+| ED-MAT-028 | Role interface | Интерфейс администратора | Дополнительная работа / 1, 4, 5, 7 | Live / production verified | `site-raimovdental/public/assets/img/workspace/admin/` | ED-LINK-018 | Inbox · путь · обучение отзывов · ED-MAT-060 |
+| ED-MAT-029 | Role interface | Интерфейс врача | Дополнительная работа / 10, 11 | Live / production verified | `site-raimovdental/public/assets/img/workspace/doctor/` | ED-LINK-019 | Внутренний маркетинг · маркеры в кресле · ED-MAT-060 |
+| ED-MAT-030 | Role interface | Интерфейс управляющего | Дополнительная работа / 5, 8 | Live / production verified | `site-raimovdental/public/assets/img/workspace/manager/` | ED-LINK-020 | Допуски отзывов · воронка источников · ED-MAT-060 |
+| ED-MAT-031 | Role interface | Интерфейс владельца | Дополнительная работа / 8 | Live / production verified | `site-raimovdental/public/assets/img/workspace/owner/` | ED-LINK-021 | Clinic health + источники · ED-MAT-060 |
+| ED-MAT-032 | Admin render | Детальный прототип администратора | Дополнительная работа / 7, 11 | Live / production verified | `site-raimovdental/public/assets/img/admin/` | ED-LINK-022, ED-LINK-039 | Скрипты · повторные касания · маркеры до кресла · ED-MAT-060 |
+| ED-MAT-059 | Owner presentation | Презентация рабочей системы для Атабека | Дополнительная работа / 1, 4, 5, 7, 8, 10, 11 | Live / production verified | `site-raimovdental/public/assets/img/workspace/presentation/` | ED-LINK-036, ED-LINK-038 | IP.2: shots 01–12 · `#plan-map` пункт→экран |
+| ED-MAT-060 | Content package | Workspace content pack месяца-1 | Месяц 1 / 1, 4, 5, 7, 8, 10, 11 | Live / production verified | `site-raimovdental/public/assets/img/workspace/content/` | — | scripts-25 · recontact-9 · patient-path · admin-feedback-sop · sources · internal-marketing · speech-markers-before/chair · gaps.md; источники ED-LINK-028–030; draft_pending_clinic где нет канона клиники |
+| ED-MAT-061 | Automated test | Workspace MVP content markers | Месяц 1 / 1, 4, 5, 7, 8, 10, 11 | Active | `tests/raimovdental/workspace-mvp.test.mjs` | — | IP.1: counts и ключи ED-MAT-060; smoke-маркеры IP.2–IP.3 |
 
 ## Результаты и материалы репутации
 
@@ -124,8 +126,8 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-060`;
-- следующая ссылка: `ED-LINK-037`;
+- следующий материал: `ED-MAT-062`;
+- следующая ссылка: `ED-LINK-040`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;
 - индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок.

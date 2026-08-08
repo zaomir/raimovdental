@@ -71,7 +71,7 @@ canon:
 | IP.1 | — | ✅ | content pack markers · scripts-25 · recontact-9 · sources · speech markers · admin-feedback-sop |
 | IP.2 | — | ✅ | presentation · shots 01–12 · plan-map table 1/4/5/7/8/10/11 |
 | IP.3 | — | ✅ | hub «Как презентовать» · сценарий 7→5→4→1→10→11→8 · `ip3-present-scenario` |
-| IP.4 | — | ⬜ | — |
+| IP.4 | — | ✅ | ED-MAT-060–061 · ED-LINK-037–039 · CHANGELOG 2026-08-08 |
 | IP.5 | — | ⬜ | — |
 | IP.6 | — | ⬜ | — |
 
@@ -411,4 +411,4 @@ I0.5 ──► I8.1 ► I8.2 ► I8.3 ► I8.4 ► I8.5
 
 ## Следующий атом к исполнению
 
-**I0.1** — выгрузить 25 скриптов в `workspace/content/scripts-25.json`.
+**IP.5** — prod smoke workspace + `/render/` + presentation; evidence `docs/audits/raimovdental-workspace/`.

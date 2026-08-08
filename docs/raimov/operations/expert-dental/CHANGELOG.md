@@ -3,10 +3,22 @@ title: Expert Dental Studio — журнал изменений операцио
 status: ACTIVE
 version: 2.0
 created: 2026-08-03
-last_updated: 2026-08-07
+last_updated: 2026-08-08
 ---
 
 # Журнал изменений
+
+## 2026-08-08 — workspace content pack и упаковка месяца-1 (IP.1–IP.4)
+
+- Content pack в `site-raimovdental/public/assets/img/workspace/content/`:
+  `scripts-25.json`, `recontact-9.json`, `patient-path.json`, `admin-feedback-sop.json`,
+  `sources.json`, `internal-marketing.json`, `speech-markers-before.json`, `speech-markers-chair.json`, `gaps.md`.
+- Материал: **ED-MAT-060** · тест-маркеры: **ED-MAT-061** (`workspace-mvp.test.mjs`).
+- Презентация Атабека (IP.2): shots 01–12, секция `#plan-map` — **ED-MAT-059** · **ED-LINK-038**.
+- Hub «Как презентовать» (IP.3): сценарий 7→5→4→1→10→11→8, `#present` — **ED-MAT-026** · **ED-LINK-037**.
+- Deep-links `/render/#scripts`, `#recontact`, `#markers` — **ED-LINK-039**.
+- Статусы ролевых интерфейсов workspace (ED-MAT-028–031, ED-MAT-032) обновлены до production verified по атомам I1–I11 / I8.
+- Канон атомов: `periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PLAN.md`.
 
 ## 2026-08-07 — презентация рабочей системы для Атабека
 

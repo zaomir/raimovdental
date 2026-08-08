@@ -52,21 +52,30 @@ function expectedIds(prefix, count) {
 const materials = readFileSync(join(base, 'MATERIALS_REGISTER.md'), 'utf8');
 const materialIds = tableIds(materials, 'ED-MAT');
 assert.equal(materialIds.length, new Set(materialIds).size, 'material IDs must be unique');
-assert.deepEqual([...materialIds].sort(), expectedIds('ED-MAT', 52), 'material IDs must be continuous ED-MAT-001…052');
+assert.deepEqual([...materialIds].sort(), expectedIds('ED-MAT', 61), 'material IDs must be continuous ED-MAT-001…061');
 assert.match(materials, /ED-MAT-035 \| QR material/, 'Yandex QR material must be registered');
 assert.match(materials, /ED-MAT-042 \| Automated guard/, 'operating architecture guard must be registered');
 assert.match(materials, /ED-MAT-043 \| Package handoff/, 'closed v1.1 package handoff must be registered');
 assert.match(materials, /ED-MAT-050 \| Package README/, 'all received v1.1 package materials must be registered');
 assert.match(materials, /ED-MAT-051 \| Detailed web report/, 'published eight-page continuation must be registered');
 assert.match(materials, /ED-MAT-052 \| Production evidence/, 'production evidence must be registered');
+assert.match(materials, /ED-MAT-060 \| Content package/, 'workspace content pack must be registered');
+assert.match(materials, /ED-MAT-061 \| Automated test/, 'workspace MVP test must be registered');
 assert.match(materials, /девять статей блога/i, 'nine-article package must be registered');
 assert.match(materials, /source not received/i, 'unreceived ZIP remains explicitly marked');
-assert.match(materials, /следующий материал: `ED-MAT-053`/, 'next material ID must advance to ED-MAT-053');
+assert.match(materials, /следующий материал: `ED-MAT-062`/, 'next material ID must advance to ED-MAT-062');
 
 const links = readFileSync(join(base, 'LINKS_REGISTER.md'), 'utf8');
 const linkIds = tableIds(links, 'ED-LINK');
 assert.equal(linkIds.length, new Set(linkIds).size, 'link IDs must be unique');
-assert.deepEqual([...linkIds].sort(), expectedIds('ED-LINK', 32), 'link IDs must be continuous ED-LINK-001…032');
+assert.ok(linkIds.includes('ED-LINK-033'), 'price page link must be registered');
+assert.ok(linkIds.includes('ED-LINK-036'), 'presentation link must be registered');
+assert.ok(linkIds.includes('ED-LINK-037'), 'hub present-scenario link must be registered');
+assert.ok(linkIds.includes('ED-LINK-038'), 'presentation plan-map link must be registered');
+assert.ok(linkIds.includes('ED-LINK-039'), 'render deep-links must be registered');
+for (const id of expectedIds('ED-LINK', 32)) {
+  assert.ok(linkIds.includes(id), `links register missing ${id}`);
+}
 for (const url of [
   'https://raimovdental.com/ru/valeria/',
   'https://raimovdental.com/ru/valeria/month-1/plan/',
@@ -75,6 +84,9 @@ for (const url of [
   'https://raimovdental.com/ru/valeria/month-1/reports/first-two-weeks/details/competitors/',
   'https://raimovdental.com/ru/valeria/month-1/reports/first-two-weeks/details/next/',
   'https://raimovdental.com/assets/img/workspace/',
+  'https://raimovdental.com/assets/img/workspace/#present',
+  'https://raimovdental.com/assets/img/workspace/presentation/#plan-map',
+  'https://raimovdental.com/render/#scripts',
   'https://2gis.kg/bishkek/firm/70000001089655879',
   'https://yandex.ru/maps/org/ekspert_dental_studiya/222117460907/',
   'http://expertdental.kg/services',
@@ -84,7 +96,7 @@ for (const url of [
 ]) {
   assert.ok(links.includes(url), `links register missing ${url}`);
 }
-assert.match(links, /Следующая ссылка: `ED-LINK-033`/, 'next link ID must advance to ED-LINK-033');
+assert.match(links, /Следующая ссылка: `ED-LINK-040`/, 'next link ID must advance to ED-LINK-040');
 assert.doesNotMatch(links, /sandbox:\/\/mnt\/data\//, 'temporary sandbox links must not enter the project links register');
 
 const report = readFileSync(join(base, 'periods/month-01/reports/2026-08-02-first-two-weeks.md'), 'utf8');

@@ -1,9 +1,9 @@
 ---
 title: Expert Dental Studio — реестр ссылок
 status: ACTIVE REGISTER
-version: 1.1
+version: 1.2
 created: 2026-08-03
-last_updated: 2026-08-04
+last_updated: 2026-08-08
 id_prefix: ED-LINK
 ---
 
@@ -75,8 +75,11 @@ id_prefix: ED-LINK
 | ED-LINK-019 | Врач | `https://raimovdental.com/assets/img/workspace/doctor/` | Production route | ED-MAT-029 | Предварительная роль |
 | ED-LINK-020 | Управляющий | `https://raimovdental.com/assets/img/workspace/manager/` | Production route | ED-MAT-030 | Предварительная роль |
 | ED-LINK-021 | Владелец | `https://raimovdental.com/assets/img/workspace/owner/` | Production route | ED-MAT-031 | Предварительная роль |
-| ED-LINK-022 | Детальный render администратора | `https://raimovdental.com/render/` | Production route | ED-MAT-032 | Обучение, тесты и скрипты |
-| ED-LINK-036 | Презентация для Атабека (workspace) | `https://raimovdental.com/assets/img/workspace/presentation/` | Production route | ED-MAT-059 | Скриншоты + функционал + результаты |
+| ED-LINK-022 | Детальный render администратора | `https://raimovdental.com/render/` | Production verified | ED-MAT-032 | Обучение, тесты и скрипты |
+| ED-LINK-036 | Презентация для Атабека (workspace) | `https://raimovdental.com/assets/img/workspace/presentation/` | Production verified | ED-MAT-059 | Скриншоты 01–12 + функционал + результаты |
+| ED-LINK-037 | Hub · сценарий презентации | `https://raimovdental.com/assets/img/workspace/#present` | Production verified (IP.3 smoke) | ED-MAT-026 | Блок «Как презентовать» · порядок 7→5→4→1→10→11→8 |
+| ED-LINK-038 | Презентация · plan-map | `https://raimovdental.com/assets/img/workspace/presentation/#plan-map` | Production verified (IP.2 smoke) | ED-MAT-059 | Таблица «пункт месяца-1 → экран» для 1/4/5/7/8/10/11 |
+| ED-LINK-039 | Render · deep-links скриптов и маркеров | `https://raimovdental.com/render/#scripts` · `#recontact` · `#markers` | Production verified | ED-MAT-032 | Три якоря сценария IP.3; базовый маршрут — ED-LINK-022 |
 
 ## Стратегические и исторические страницы
 
@@ -95,4 +98,4 @@ id_prefix: ED-LINK
 
 ## Следующий свободный ID
 
-Следующая ссылка: `ED-LINK-037`.
+Следующая ссылка: `ED-LINK-040`.
