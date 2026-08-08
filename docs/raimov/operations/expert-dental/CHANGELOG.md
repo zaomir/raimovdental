@@ -8,6 +8,13 @@ last_updated: 2026-08-08
 
 # Журнал изменений
 
+## 2026-08-08 — prod smoke и STATUS interface closure (IP.5–IP.6)
+
+- Prod smoke workspace + `/render/` + presentation (IP.5): HTTP 200, noindex, ключевые строки на месте.
+- **STATUS.md** v1.3 (IP.6): колонка и блок «закрыто интерфейсом» для пунктов 1/4/5/7/8/10/11; статусы пунктов не завышены там, где вне-UI часть открыта.
+- `WORKSPACE_INTERFACE_ATOMIC_PLAN.md` и `WORKSPACE_INTERFACE_CLOSURE_PLAN.md` → COMPLETE.
+- `content/gaps.md`: IP.1–IP.6 ✅.
+
 ## 2026-08-08 — workspace content pack и упаковка месяца-1 (IP.1–IP.4)
 
 - Content pack в `site-raimovdental/public/assets/img/workspace/content/`:

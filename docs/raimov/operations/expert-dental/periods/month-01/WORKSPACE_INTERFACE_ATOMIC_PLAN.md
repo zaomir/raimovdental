@@ -1,9 +1,9 @@
 ---
 title: Expert Dental Workspace — атомарный план закрытия пунктов месяца-1
-status: PLANNED
-version: 1.0
+status: COMPLETE
+version: 1.1
 created: 2026-08-07
-last_updated: 2026-08-07T18:05Z
+last_updated: 2026-08-08T15:30Z
 parent_plan: docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_CLOSURE_PLAN.md
 plan_points: [1, 4, 5, 7, 8, 10, 11]
 surfaces:
@@ -73,7 +73,7 @@ canon:
 | IP.3 | — | ✅ | hub «Как презентовать» · сценарий 7→5→4→1→10→11→8 · `ip3-present-scenario` |
 | IP.4 | — | ✅ | ED-MAT-060–061 · ED-LINK-037–039 · CHANGELOG 2026-08-08 |
 | IP.5 | — | ✅ | prod smoke workspace+/render/+presentation · LAST_RUN success |
-| IP.6 | — | ⬜ | — |
+| IP.6 | — | ✅ | STATUS.md «закрыто интерфейсом» 1/4/5/7/8/10/11 · граница UI vs план |
 
 Легенда: ⬜ не начат · 🟡 в работе · ✅ done · ⛔ blocked
 
@@ -411,4 +411,4 @@ I0.5 ──► I8.1 ► I8.2 ► I8.3 ► I8.4 ► I8.5
 
 ## Следующий атом к исполнению
 
-**IP.5** — prod smoke workspace + `/render/` + presentation; evidence `docs/audits/raimovdental-workspace/`.
+**—** · все атомы I0–IP.6 ✅ · parent closure plan фазы 0–8 = done.
