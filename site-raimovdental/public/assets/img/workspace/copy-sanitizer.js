@@ -2,7 +2,7 @@
   'use strict';
 
   const replacements = [
-    [/\bdraft_pending_clinic\b/gi, 'ожидает утверждения клиникой'],
+    [/\bdraft_pending_clinic\b/gi, 'черновик'],
     [/\bpatient-path(?:\.json)?\b/gi, 'путь пациента'],
     [/\bscripts-25\.json\b/gi, 'каталог сценариев'],
     [/\brecontact-9\.json\b/gi, 'правила повторных обращений'],
@@ -18,7 +18,7 @@
     [/\bgate\b/gi, 'обязательное условие'],
     [/\bLive\b/gi, 'текущие данные'],
     [/\bKPI\b/g, 'показатели'],
-    [/\bPHI\b/g, 'личные медицинские данные'],
+    [/\bPHI\b/g, 'данных пациентов'],
     [/\blocalStorage\b/gi, 'память этого устройства'],
     [/\bclinic health\b/gi, 'состояние клиники'],
     [/\b(?:veneers|implants|ortho)\b/gi, 'направление лечения'],
