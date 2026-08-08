@@ -88,12 +88,18 @@ id_prefix: ED-MAT
 | ED-MAT-059 | Owner presentation | Презентация рабочей системы для Атабека | Дополнительная работа / 1, 4, 5, 7, 8, 10, 11 | Live / production verified | `site-raimovdental/public/assets/img/workspace/presentation/` | ED-LINK-036, ED-LINK-038 | IP.2: shots 01–12 · `#plan-map` пункт→экран |
 | ED-MAT-060 | Content package | Workspace content pack месяца-1 | Месяц 1 / 1, 4, 5, 7, 8, 10, 11 | Live / production verified | `site-raimovdental/public/assets/img/workspace/content/` | — | scripts-25 · recontact-9 · patient-path · admin-feedback-sop · sources · internal-marketing · speech-markers-before/chair · gaps.md; источники ED-LINK-028–030; draft_pending_clinic где нет канона клиники |
 | ED-MAT-061 | Automated test | Workspace MVP content markers | Месяц 1 / 1, 4, 5, 7, 8, 10, 11 | Active | `tests/raimovdental/workspace-mvp.test.mjs` | — | IP.1: counts и ключи ED-MAT-060; smoke-маркеры IP.2–IP.3 |
+| ED-MAT-062 | Execution index | Outside-UI groups G1–G4 after workspace MVP | Месяц 1 / 1, 3, 6, 8, 10–12, 14, 16 | Active | `periods/month-01/outside-ui/OUTSIDE_UI_EXECUTION.md` | — | Порядок G1→G2→G3→G4; UI DoD ≠ пункт выполнен |
+| ED-MAT-063 | Maps packaging | Чеклист упаковки Google / Яндекс / 2ГИС | Месяц 1 / 3 | Active / operator pack | `periods/month-01/outside-ui/G1_MAPS_PACKAGING.md` | ED-LINK-008–010, ED-LINK-040 | Пункт 3 не закрыт до скринов Overview |
+| ED-MAT-064 | Offers pack | Офферы виниры · импланты · орто | Месяц 1 / 6 | draft_pending_clinic | `periods/month-01/outside-ui/G1_OFFERS_THREE_DIRECTIONS.md` | — | Без цен; pricing.ts `tbd` |
+| ED-MAT-065 | Clinic approval | Пакет утверждения маркеров и internal-marketing | Месяц 1 / 10, 11 | draft_pending_clinic | `periods/month-01/outside-ui/G2_CLINIC_APPROVAL_MARKERS.md` | ED-MAT-060 | Лист согласования MB/MC + внедрение в смене |
+| ED-MAT-066 | Ops audit | WhatsApp/заявки аудит + CRM-атрибуция источников | Месяц 1 / 1, 8 | Active | `periods/month-01/outside-ui/G3_WHATSAPP_CRM_OPS.md` | ED-MAT-060 | Нужен доступ к WA/CRM клиники |
+| ED-MAT-067 | Reputation cadence | Темп · недельный лог · наполнение карт | Месяц 1 / 12, 14, 16 | Active | `periods/month-01/outside-ui/G4_REPUTATION_CADENCE.md` | ED-LINK-008–010 | Без гарантий рейтинга (п.15) |
 
 ## Результаты и материалы репутации
 
 | ID | Тип | Материал | Период / пункты | Статус | Источник | Внешняя ссылка | Примечание |
 |---|---|---|---|---|---|---|---|
-| ED-MAT-033 | Reputation result | 11 новых опубликованных отзывов Google Maps | Месяц 1 / 12–16 | Reported | Промежуточный отчёт | Точная карточка не внесена | Не гарантировать дальнейшую публикацию |
+| ED-MAT-033 | Reputation result | 11 новых опубликованных отзывов Google Maps | Месяц 1 / 12–16 | Reported | Промежуточный отчёт | ED-LINK-008, ED-LINK-040 | Не гарантировать дальнейшую публикацию; Place ID ChIJ ещё P1 |
 | ED-MAT-034 | Reputation result | 20 новых опубликованных отзывов 2ГИС | Месяц 1 / 12–16 | Reported | Промежуточный отчёт | ED-LINK-009 | Не гарантировать дальнейшую публикацию |
 | ED-MAT-035 | QR material | QR-код на карточку Expert Dental в Яндекс Картах | Месяц 1 / 5, 13 | Target verified; source image pending | Документы v1.1 | ED-LINK-010 | Целевая ссылка подтверждена; отдельный PNG/A5-файл в репозитории не зарегистрирован |
 
@@ -126,8 +132,8 @@ id_prefix: ED-MAT
 
 ## Следующие свободные ID
 
-- следующий материал: `ED-MAT-062`;
-- следующая ссылка: `ED-LINK-040`;
+- следующий материал: `ED-MAT-068`;
+- следующая ссылка: `ED-LINK-041`;
 - при добавлении материала одновременно проверить необходимость новой записи в `LINKS_REGISTER.md`;
 - ZIP-пакет ED-MAT-044 остаётся неполученным и не должен выдаваться за переданный файл;
-- индивидуальные URL девяти статей и точная ссылка Google Maps пока отсутствуют и должны быть добавлены после получения, без догадок.
+- индивидуальные URL девяти статей блога пока отсутствуют; Google Maps short+resolved place зарегистрированы (ED-LINK-008/040), Place ID `ChIJ…` — ещё P1.

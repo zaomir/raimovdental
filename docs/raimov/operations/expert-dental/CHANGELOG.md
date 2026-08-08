@@ -8,6 +8,16 @@ last_updated: 2026-08-08
 
 # Журнал изменений
 
+## 2026-08-08 — outside-UI groups G1–G4 (после IP.6)
+
+- Индекс исполнения: **ED-MAT-062** · `periods/month-01/outside-ui/`.
+- G1 карты/офферы: **ED-MAT-063–064** · Google resolved place **ED-LINK-040**.
+- G2 утверждение маркеров 10–11: **ED-MAT-065**.
+- G3 WhatsApp/CRM: **ED-MAT-066**.
+- G4 каденция репутации 12/14/16: **ED-MAT-067**.
+- STATUS.md v1.4 — фокус сгруппирован; статусы пунктов не завышены.
+- Следующие свободные ID: **ED-MAT-068** · **ED-LINK-041**.
+
 ## 2026-08-08 — prod smoke и STATUS interface closure (IP.5–IP.6)
 
 - Prod smoke workspace + `/render/` + presentation (IP.5): HTTP 200, noindex, ключевые строки на месте.

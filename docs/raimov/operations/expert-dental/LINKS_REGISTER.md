@@ -36,7 +36,7 @@ id_prefix: ED-LINK
 
 | ID | Объект | URL / идентификатор | Статус источника | Связанный материал | Примечание |
 |---|---|---|---|---|---|
-| ED-LINK-008 | Google Maps | `https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8` | Получена от клиники 06.08.2026 | ED-MAT-033 | Короткая ссылка на карточку. Deep-link `writereview` требует place id — пациент нажимает «Оставить отзыв» на карточке |
+| ED-LINK-008 | Google Maps | `https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8` | Получена от клиники 06.08.2026 · smoke 200 | ED-MAT-033, ED-MAT-063 | Короткая ссылка. Resolved place — ED-LINK-040. Deep-link `writereview` требует Place ID `ChIJ…` (P1) |
 | ED-LINK-009 | 2ГИС | `https://2gis.kg/bishkek/firm/70000001089655879` | Источник v1.1, срез 03.08.2026 | ED-MAT-034 | Карточка Expert Dental Studio. Вкладка отзывов: `/tab/reviews` |
 | ED-LINK-010 | Яндекс Карты | `https://yandex.ru/maps/org/ekspert_dental_studiya/222117460907/` | Источник v1.1, production link | ED-MAT-035 | Прямая цель белой QR-системы. Вкладка отзывов: `/reviews/` |
 
@@ -80,6 +80,7 @@ id_prefix: ED-LINK
 | ED-LINK-037 | Hub · сценарий презентации | `https://raimovdental.com/assets/img/workspace/#present` | Production verified (IP.3 smoke) | ED-MAT-026 | Блок «Как презентовать» · порядок 7→5→4→1→10→11→8 |
 | ED-LINK-038 | Презентация · plan-map | `https://raimovdental.com/assets/img/workspace/presentation/#plan-map` | Production verified (IP.2 smoke) | ED-MAT-059 | Таблица «пункт месяца-1 → экран» для 1/4/5/7/8/10/11 |
 | ED-LINK-039 | Render · deep-links скриптов и маркеров | `https://raimovdental.com/render/#scripts` · `#recontact` · `#markers` | Production verified | ED-MAT-032 | Три якоря сценария IP.3; базовый маршрут — ED-LINK-022 |
+| ED-LINK-040 | Google Maps · resolved place | `https://www.google.com/maps/place/Stomatologiya:+Ekspert+Dental+Studiya/@42.8743647,74.6077928,17z` | Production verified (curl 200, 2026-08-08) | ED-MAT-063, ED-MAT-033 | Разворот ED-LINK-008; feature `/g/11w8nfy1bh`; Place ID ChIJ — P1 |
 
 ## Стратегические и исторические страницы
 
@@ -98,4 +99,4 @@ id_prefix: ED-LINK
 
 ## Следующий свободный ID
 
-Следующая ссылка: `ED-LINK-040`.
+Следующая ссылка: `ED-LINK-041`.
