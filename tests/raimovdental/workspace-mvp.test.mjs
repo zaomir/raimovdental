@@ -482,7 +482,34 @@ for (const token of [
   'Допустить к самостоятельной работе',
   'Наставник',
   'Управляющий',
+  'Начать с дня 1',
+  'Пропустить этап (для презентации)',
+  'Открыть финал (для презентации)',
+  'Подтвердить управляющим · для презентации',
+  'Тестовый режим адаптации',
+  'Сбросить адаптацию и начать с дня 1',
 ]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+
+// Демо-обход адаптации админа (не ломает обычный путь 90% / safety)
+assert.match(app, /function defaultOnboardingState/);
+assert.match(app, /function ensureOnboardingState/);
+assert.match(app, /function isDemoWorkspace/);
+assert.match(app, /function onboardingDemoToolsAllowed/);
+assert.match(app, /function markOnboardingDayPassed/);
+assert.match(app, /function onboardingProgressPct/);
+assert.match(app, /function syncOnboardingStatus/);
+assert.match(app, /onboardingDemoToolsAllowed\(\)/);
+assert.match(app, /roleKey==='admin'&&isDemoWorkspace\(\)/);
+assert.match(app, /id="onboardingReset"/);
+assert.match(app, /id="onboardingBypass"/);
+assert.match(app, /id="onboardingBypassInline"/);
+assert.match(app, /id="managerApproveDemo"/);
+assert.match(app, /data-atom="onboarding-demo-tools"/);
+assert.match(app, /data-demo-bypass="1"/);
+assert.match(app, /markOnboardingDayPassed\(o,day,\{demo:true\}\)/);
+assert.match(app, /state\.onboarding=defaultOnboardingState\(\)/);
+assert.match(app, /score>=90&&safetyOk/);
+assert.match(app, /!item\.critical\|\|correct===3/);
 
 // Срочный доступ администратора (bypass теста/адаптации с разрешения управляющего)
 assert.match(app, /Срочный доступ/);
