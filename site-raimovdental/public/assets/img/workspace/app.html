@@ -101,7 +101,7 @@
     if(roleKey==='admin')fetch(SPEECH_MARKERS_BEFORE_URL).then(r=>r.json()).then(d=>{speechMarkersBefore=d;if(['learn','path'].includes(view))render()}).catch(()=>{});
     const SOURCES_URL='content/sources.json';
     let attributionSources=null;
-    if(roleKey==='admin'||roleKey==='manager')fetch(SOURCES_URL).then(r=>r.json()).then(d=>{attributionSources=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
+    if(roleKey==='admin'||roleKey==='manager'||roleKey==='owner')fetch(SOURCES_URL).then(r=>r.json()).then(d=>{attributionSources=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -859,6 +859,29 @@
         <p class="muted" style="margin-top:10px"><b>Логика:</b> «Обращения» — первый контакт с зафиксированным источником (I8.2); «Записи» — согласованное окно; «Визиты» — состоявшийся приём; «Упущенные» — no-show или SLA «упущен» без возврата. «Визит%» = визиты ÷ обращения.</p>
         <p class="muted">Пункт 8 UI · без PHI · период демо: текущий месяц.</p></div>`;
     }
+    function ownerClinicHealthHtml(){
+      if(roleKey!=='owner')return '';
+      const s=managerSourceFunnelStats();
+      const top=s.rows.slice().sort((a,b)=>b.visits-a.visits).slice(0,3)
+        .map((r)=>`<div class="task" data-owner-source-row="${esc(r.key)}"><span><b>${esc(r.label)}</b><br><span class="muted">${r.inquiries} обр. → ${r.visits} визитов</span></span><b class="status-ok">${r.convVisit}%</b></div>`)
+        .join('');
+      return `<div class="grid">
+        <div class="card" data-atom="i84-clinic-health"><div class="eyebrow">I8.4 · clinic health</div><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p><p class="muted" style="margin-top:8px">Демо-индикатор готовности операционного контура месяца.</p></div>
+        <div class="card"><div class="eyebrow">Контроль стандартов</div><h3>Операционный контур</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><p class="muted" style="margin-top:10px">Связка с I8.2 gate и аудитом заявок управляющего.</p></div>
+      </div>
+      <div class="card action-card" data-atom="i84-owner-sources" style="margin-top:14px"><div class="eyebrow">I8.4 · источники</div><h3>Сводка по источникам</h3><p class="muted">Тот же демо-сид, что у управляющего (I8.3) · sources.json. Владелец видит итог месяца и топ каналов по визитам.</p>
+        <div class="grid" style="margin-top:12px">
+          <div class="card"><div class="eyebrow">Обращения</div><div class="metric">${s.totals.inquiries}</div></div>
+          <div class="card"><div class="eyebrow">Записи</div><div class="metric">${s.totals.booked}</div><p class="muted">${s.convBook}% конверсия</p></div>
+          <div class="card"><div class="eyebrow">Визиты</div><div class="metric status-ok">${s.totals.visits}</div></div>
+          <div class="card"><div class="eyebrow">Упущенные</div><div class="metric status-danger">${s.totals.missed}</div></div>
+        </div>
+        <div class="stack" style="margin-top:14px"><div class="eyebrow">Топ по визитам</div>${top}</div>
+        <p class="muted" style="margin-top:12px">Полная таблица воронки — у управляющего (I8.3).</p>
+        <div class="header-actions" style="margin-top:12px"><a class="btn primary" data-atom="i84-month-plan-link" href="/ru/valeria/month-1/plan/">План месяца 1</a></div>
+        <p class="muted" style="margin-top:8px">Ссылка на утверждённый план: <code>/ru/valeria/month-1/plan/</code></p>
+      </div>`;
+    }
     function ensureInboxStatuses(){
       if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
       DEMO_INBOX.forEach((item)=>{
@@ -1120,7 +1143,7 @@
       const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Контроль смены</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал I7.5: фильтр «Пропущен / без результата» и «Вернуть в работу».</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
       const doctor=`${doctorClinicRoleSwitcherHtml()}${doctorTaskSetHtml()}${doctorSpeechMarkersChairHtml()}`;
       const manager=managerTeamHtml();
-      const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
+      const owner=ownerClinicHealthHtml();
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
       if(roleKey==='doctor'){bindDoctorClinicRole();bindProposeConsult();bindHandoffJournal();syncDoctorClinicBadge();}
@@ -1136,6 +1159,7 @@
       const managerAuditLine=roleKey==='manager'?(()=>{const p=inquiryAuditProgress();return `<div class="card"><b>Аудит обработки заявок</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Пройден':p.done+'/'+p.total+' пунктов'}</span></div>`})():'';
       const managerReferralLine=roleKey==='manager'?(()=>{const s=managerReferralStats();return `<div class="card" data-atom="i105-referral-metrics"><b>Внутренние направления</b><br><span class="status-warn">${s.created} созд.</span> · <span class="status-ok">${s.accepted} прин.</span> · <span class="status-danger">${s.lost} пот.</span></div>`})():'';
       const managerSourceFunnelLine=roleKey==='manager'?(()=>{const s=managerSourceFunnelStats();return `<div class="card" data-atom="i83-source-funnel"><b>Воронка по источникам</b><br><span class="status-ok">${s.totals.visits} визитов</span> · <span class="status-danger">${s.totals.missed} упущ.</span> · ${s.convVisit}%</div>`})():'';
+      const ownerSourcesLine=roleKey==='owner'?(()=>{const s=managerSourceFunnelStats();return `<div class="card" data-atom="i84-owner-sources"><b>Источники месяца</b><br><span class="status-ok">${s.totals.visits} визитов</span> · ${s.convVisit}% · <a href="/ru/valeria/month-1/plan/">план</a></div>`})():'';
       const doctorRoleLine=roleKey==='doctor'?(()=>{const r=currentDoctorClinicRole();return `<div class="card"><b>Роль на приёме</b><br><span class="badge" data-doctor-clinic-badge="1">${esc(r.title)}</span></div>`})():'';
       const doctorLessonLine=roleKey==='doctor'?`<div class="card"><b>Урок внутреннего направления</b><br><span class="${state.internalLessonRead?'status-ok':'status-warn'}">${state.internalLessonRead?'Прочитано':'Ожидает'}</span></div>`:'';
       const doctorReferralLine=roleKey==='doctor'?(()=>{ensureInternalReferrals();const n=state.internalReferrals.length;return `<div class="card"><b>Внутренние направления</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' создано':'Нет'}</span></div>`})():'';
@@ -1157,7 +1181,7 @@
           :`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-danger">Обязателен</span></div>`;
       })():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${managerSourceFunnelLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${managerSourceFunnelLine}${ownerSourcesLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }

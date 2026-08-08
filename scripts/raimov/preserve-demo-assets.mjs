@@ -94,6 +94,9 @@ assert.match(app, /Нельзя закрыть контакт без источ�
 assert.match(app, /i83-source-funnel/);
 assert.match(app, /managerSourceFunnelStats/);
 assert.match(app, /Воронка по источникам/);
+assert.match(app, /i84-clinic-health/);
+assert.match(app, /i84-owner-sources/);
+assert.match(app, /\/ru\/valeria\/month-1\/plan\//);
 assert.match(app, /i102-doctor-role/);
 assert.match(app, /i102-doctor-tasks/);
 assert.match(app, /i104-propose-consult/);
