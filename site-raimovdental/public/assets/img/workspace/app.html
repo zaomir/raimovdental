@@ -101,7 +101,7 @@
     if(roleKey==='admin')fetch(SPEECH_MARKERS_BEFORE_URL).then(r=>r.json()).then(d=>{speechMarkersBefore=d;if(['learn','path'].includes(view))render()}).catch(()=>{});
     const SOURCES_URL='content/sources.json';
     let attributionSources=null;
-    if(roleKey==='admin')fetch(SOURCES_URL).then(r=>r.json()).then(d=>{attributionSources=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
+    if(roleKey==='admin'||roleKey==='manager')fetch(SOURCES_URL).then(r=>r.json()).then(d=>{attributionSources=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -299,7 +299,7 @@
         `<div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div>`;
       const notice=state.feedbackRetakeNotice?`<p class="status-ok" style="margin-top:12px">${esc(state.feedbackRetakeNotice)}</p>`:'';
       const pending=stats.total-stats.passed;
-      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${handoffJournalHtml()}${managerReferralControlHtml()}${managerInquiryAuditHtml()}`;
+      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${handoffJournalHtml()}${managerReferralControlHtml()}${managerSourceFunnelHtml()}${managerInquiryAuditHtml()}`;
     }
     function bindManagerFeedback(){
       if($('assignFeedbackRetake'))$('assignFeedbackRetake').onclick=assignFeedbackRetake;
@@ -817,6 +817,48 @@
       const key=normalizeSourceKey(card&&(card.sourceKey||card.source));
       return !!key&&sourceCatalog().some((s)=>s.key===key);
     }
+    const DEMO_SOURCE_FUNNEL={
+      maps:{inquiries:42,booked:28,visits:22,missed:6},
+      site:{inquiries:18,booked:12,visits:9,missed:3},
+      instagram:{inquiries:35,booked:20,visits:15,missed:5},
+      whatsapp:{inquiries:51,booked:38,visits:30,missed:8},
+      referral:{inquiries:24,booked:20,visits:18,missed:2},
+      other:{inquiries:5,booked:2,visits:1,missed:1}
+    };
+    function managerSourceFunnelRows(){
+      return sourceCatalog().map((src)=>{
+        const d=DEMO_SOURCE_FUNNEL[src.key]||{inquiries:0,booked:0,visits:0,missed:0};
+        const convVisit=d.inquiries?Math.round(d.visits/d.inquiries*100):0;
+        return {key:src.key,label:src.label||src.key,...d,convVisit};
+      });
+    }
+    function managerSourceFunnelStats(){
+      const rows=managerSourceFunnelRows();
+      const totals=rows.reduce((a,r)=>({inquiries:a.inquiries+r.inquiries,booked:a.booked+r.booked,visits:a.visits+r.visits,missed:a.missed+r.missed}),{inquiries:0,booked:0,visits:0,missed:0});
+      return {rows,totals,convVisit:totals.inquiries?Math.round(totals.visits/totals.inquiries*100):0,convBook:totals.inquiries?Math.round(totals.booked/totals.inquiries*100):0};
+    }
+    function managerSourceFunnelHtml(){
+      if(roleKey!=='manager')return '';
+      const s=managerSourceFunnelStats();
+      const head=`<div class="task" style="border-bottom:1px solid var(--line);padding-bottom:8px;font-size:12px"><span style="flex:2"><b>Источник</b></span><span style="flex:1;text-align:right"><b>Обращ.</b></span><span style="flex:1;text-align:right"><b>Записи</b></span><span style="flex:1;text-align:right"><b>Визиты</b></span><span style="flex:1;text-align:right"><b>Упущ.</b></span><span style="flex:1;text-align:right"><b>Визит%</b></span></div>`;
+      const body=s.rows.map((r)=>{
+        const missedCls=r.missed>0?'status-danger':'muted';
+        return `<div class="task" data-source-funnel-row="${esc(r.key)}" style="flex-wrap:wrap;font-size:13px"><span style="flex:2;min-width:100px"><b>${esc(r.label)}</b><br><span class="muted">${esc(r.key)}</span></span><span style="flex:1;text-align:right">${r.inquiries}</span><span style="flex:1;text-align:right">${r.booked}</span><span style="flex:1;text-align:right"><span class="status-ok">${r.visits}</span></span><span style="flex:1;text-align:right"><b class="${missedCls}">${r.missed}</b></span><span style="flex:1;text-align:right">${r.convVisit}%</span></div>`;
+      }).join('');
+      const t=s.totals;
+      return `<div class="card action-card" data-atom="i83-source-funnel" style="margin-top:14px"><div class="eyebrow">I8.3 · аналитика источников</div><h3>Воронка по источникам</h3><p class="muted">Демо-сид месяца · sources.json (I8.1). Обращения → записи → визиты → упущенные по каждому каналу атрибуции.</p>
+        <div class="grid" style="margin-top:12px">
+          <div class="card"><div class="eyebrow">Обращения</div><div class="metric">${t.inquiries}</div></div>
+          <div class="card"><div class="eyebrow">Записи</div><div class="metric">${t.booked}</div><p class="muted">${s.convBook}% от обращений</p></div>
+          <div class="card"><div class="eyebrow">Визиты</div><div class="metric status-ok">${t.visits}</div></div>
+          <div class="card"><div class="eyebrow">Упущенные</div><div class="metric status-danger">${t.missed}</div></div>
+        </div>
+        <div class="stack" style="margin-top:14px">${head}${body}
+          <div class="task" style="border-top:2px solid var(--line);padding-top:10px;font-weight:750"><span style="flex:2"><b>Итого</b></span><span style="flex:1;text-align:right">${t.inquiries}</span><span style="flex:1;text-align:right">${t.booked}</span><span style="flex:1;text-align:right">${t.visits}</span><span style="flex:1;text-align:right">${t.missed}</span><span style="flex:1;text-align:right">${s.convVisit}%</span></div>
+        </div>
+        <p class="muted" style="margin-top:10px"><b>Логика:</b> «Обращения» — первый контакт с зафиксированным источником (I8.2); «Записи» — согласованное окно; «Визиты» — состоявшийся приём; «Упущенные» — no-show или SLA «упущен» без возврата. «Визит%» = визиты ÷ обращения.</p>
+        <p class="muted">Пункт 8 UI · без PHI · период демо: текущий месяц.</p></div>`;
+    }
     function ensureInboxStatuses(){
       if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
       DEMO_INBOX.forEach((item)=>{
@@ -1093,6 +1135,7 @@
       const managerFeedbackLine=roleKey==='manager'?(()=>{const s=feedbackTeamStats();return `<div class="card"><b>Уроки регламента отзывов</b><br><span class="${s.pct===100?'status-ok':'status-warn'}">${s.pct}% · ${s.passed}/${s.total}</span></div>`})():'';
       const managerAuditLine=roleKey==='manager'?(()=>{const p=inquiryAuditProgress();return `<div class="card"><b>Аудит обработки заявок</b><br><span class="${p.complete?'status-ok':'status-warn'}">${p.complete?'Пройден':p.done+'/'+p.total+' пунктов'}</span></div>`})():'';
       const managerReferralLine=roleKey==='manager'?(()=>{const s=managerReferralStats();return `<div class="card" data-atom="i105-referral-metrics"><b>Внутренние направления</b><br><span class="status-warn">${s.created} созд.</span> · <span class="status-ok">${s.accepted} прин.</span> · <span class="status-danger">${s.lost} пот.</span></div>`})():'';
+      const managerSourceFunnelLine=roleKey==='manager'?(()=>{const s=managerSourceFunnelStats();return `<div class="card" data-atom="i83-source-funnel"><b>Воронка по источникам</b><br><span class="status-ok">${s.totals.visits} визитов</span> · <span class="status-danger">${s.totals.missed} упущ.</span> · ${s.convVisit}%</div>`})():'';
       const doctorRoleLine=roleKey==='doctor'?(()=>{const r=currentDoctorClinicRole();return `<div class="card"><b>Роль на приёме</b><br><span class="badge" data-doctor-clinic-badge="1">${esc(r.title)}</span></div>`})():'';
       const doctorLessonLine=roleKey==='doctor'?`<div class="card"><b>Урок внутреннего направления</b><br><span class="${state.internalLessonRead?'status-ok':'status-warn'}">${state.internalLessonRead?'Прочитано':'Ожидает'}</span></div>`:'';
       const doctorReferralLine=roleKey==='doctor'?(()=>{ensureInternalReferrals();const n=state.internalReferrals.length;return `<div class="card"><b>Внутренние направления</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' создано':'Нет'}</span></div>`})():'';
@@ -1114,7 +1157,7 @@
           :`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-danger">Обязателен</span></div>`;
       })():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${managerSourceFunnelLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }

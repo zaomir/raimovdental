@@ -65,7 +65,7 @@ canon:
 | I11.5 | 11 | ✅ | тест на маркеры · `i115-markers-quiz` · врач + админ · critical 100% · commit `e4f3645bb` · prod |
 | I8.1 | 8 | ✅ | `sources.json` · maps/site/instagram/whatsapp/referral/other · commit `047fdb316` |
 | I8.2 | 8 | ✅ | обязательный источник · `i82-source-gate` · commit `c4704378f` · prod |
-| I8.3 | 8 | ⬜ | — |
+| I8.3 | 8 | ✅ | сводка воронки · `i83-source-funnel` · manager · DEMO_SOURCE_FUNNEL |
 | I8.4 | 8 | ⬜ | — |
 | I8.5 | 8 | ⬜ | — |
 | IP.1 | — | ⬜ | — |

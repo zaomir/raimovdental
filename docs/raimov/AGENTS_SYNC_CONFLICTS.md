@@ -1,9 +1,8 @@
 # Agents sync conflicts (auto-resolved)
 
-UTC: 2026-08-07T18:17:18Z
+UTC: 2026-08-08T14:08:02Z
 
 | Rel | Winner | Reason |
 |-----|--------|--------|
-| `site-raimovdental/public/assets/img/workspace/app.html` | grainee→clinic | `conflict_newer_grainee` |
-| `tests/raimovdental/workspace-mvp.test.mjs` | grainee→clinic | `conflict_newer_grainee` |
+| `docs/raimov/operations/expert-dental/periods/month-01/WORKSPACE_INTERFACE_ATOMIC_PLAN.md` | grainee→clinic | `conflict_newer_grainee` |
 
