@@ -1,9 +1,9 @@
 # Agents repo sync marker
 
 - **Mode:** bidirectional (DEC-784)
-- **Grainee SHA (pre-commit):** `ee731c3cc4de18ceb43f9bf16b0c75e54fa25aa7`
-- **Clinic SHA (pre-commit):** `5535264544c7e24a153519429ff9b73ed76b5ada`
-- **Synced at (UTC):** 2026-08-08T16:42:51Z
+- **Grainee SHA (pre-commit):** `8a98ddd2a957fee495fb3257cba8b269bf0c7a70`
+- **Clinic SHA (pre-commit):** `00c2d8e64e90cc70a9ca556c52b3607a317e7e59`
+- **Synced at (UTC):** 2026-08-08T16:51:29Z
 - **Script:** `scripts/raimov/sync-agents-bidirectional.sh`
 - **Summary:** g2c=2 c2g=0 conflicts=0
 

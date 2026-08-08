@@ -3184,7 +3184,7 @@
     "site-raimovdental/public/assets/img/team/kerimkulova-aiperi.jpg": "41e40ecdf0cbfdc1dc0f964da7758b54a0df3c0cedeb08da5cedb8cd5bc991ae",
     "site-raimovdental/public/assets/img/team/talyshkhanov-mir-ali.jpg": "154d4632ac443ed29d8ad22a0ba0ea08964eca08265c46433a7a51482a76b555",
     "site-raimovdental/public/assets/img/workspace/admin/index.html": "350b17b1e86091a12bcb2a2b61d78ce462132e8e4fa04a352d55c49e9742c290",
-    "site-raimovdental/public/assets/img/workspace/app.html": "286148dfc5206338bef57fae42e0f014e5ac87d995b055d304e77f7647c2df48",
+    "site-raimovdental/public/assets/img/workspace/app.html": "0f8893cf3db171686dc1419a41d75688a73b8f7a0b22dcdb9dc01440f56b0a36",
     "site-raimovdental/public/assets/img/workspace/content/admin-feedback-sop.json": "0da57077d55cb3c5796cd20dc42a57ca6de39fbba35883b5748c2e83b1dad3f4",
     "site-raimovdental/public/assets/img/workspace/content/gaps.md": "8d0cc8c9580d7cedfe848c35c2fe695befc4265a2567250ef601318d9942bf9e",
     "site-raimovdental/public/assets/img/workspace/content/internal-marketing.json": "d589642f8c331b18cab0942e60af270a6547b0e37311a1058374e7228be54c4c",
@@ -3345,10 +3345,10 @@
     "tests/raimovdental/seo-structured-data.mjs": "4528065e966debdd8ce0ca27704d1a8e1dda17639fcbe2bf3e4c82bca4dfece3",
     "tests/raimovdental/telegram-config-guard.test.mjs": "d421c6b5992fffc94d144dbf3707451933600f4757b9ba2c91b73ed714155efb",
     "tests/raimovdental/valeria-work-reports.test.mjs": "d7fe51c695f2f587d53d7bc0b9237cdb535b55e268492ba237734bdb15fcf304",
-    "tests/raimovdental/workspace-mvp.test.mjs": "eea28443a7107562bf5c6e6104da3fbef729eb85826da18c1b8901b08bb94b8e",
+    "tests/raimovdental/workspace-mvp.test.mjs": "79888313650eb10fc73ee41f8be9fab6295242e43e189c92aa68225c20957a2a",
     "tests/raimovdental/workspace-visible-copy.test.mjs": "d28d6fefed9b5ad60f605d4bc31a81607ce233c5388fc3dfbb9ba1519b583a4a"
   },
   "policy": "bidirectional_hash_lww_protected_grainee",
-  "updated_at_utc": "2026-08-08T16:42:51Z",
+  "updated_at_utc": "2026-08-08T16:51:29Z",
   "version": 1
 }
