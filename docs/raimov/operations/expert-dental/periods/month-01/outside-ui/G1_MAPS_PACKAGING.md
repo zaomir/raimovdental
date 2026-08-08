@@ -20,7 +20,12 @@ as_of: 2026-08-08
 
 **Google resolved place (ED-LINK-040):**  
 `https://www.google.com/maps/place/Stomatologiya:+Ekspert+Dental+Studiya/@42.8743647,74.6077928,17z`  
-Feature id в URL: `/g/11w8nfy1bh`. Place ID `ChIJ…` для deep-link `writereview` — **ещё не получен** (P1 в LINKS_REGISTER).
+Feature id: `/g/11w8nfy1bh`.  
+
+**Place ID + writereview (ED-LINK-041):**  
+`ChIJq-8xG8a3njgR-Jz17KDbaKw` →  
+`https://search.google.com/local/writereview?placeid=ChIJq-8xG8a3njgR-Jz17KDbaKw`  
+Evidence: `media/maps-packaging-2026-08-08/google-place-id.txt`.
 
 ## Чеклист унификации (заполняет оператор + клиника)
 
@@ -55,12 +60,14 @@ Feature id в URL: `/g/11w8nfy1bh`. Place ID `ChIJ…` для deep-link `writere
 1. Три ссылки в реестре ✅ (есть).
 2. Чеклист выше пройден оператором с скриншотами Overview по каждой площадке.
 3. Расхождения названия/телефона/часов устранены или зафиксированы как BLOCKER клиники.
-4. Google Place ID `ChIJ…` получен → deep-link writereview (обновить LINKS P1).
+4. Google Place ID `ChIJ…` получен → deep-link writereview ✅ **ED-LINK-041**.
 
 **Статус пункта в STATUS:** остаётся «Не начато», пока чеклист не закрыт скринами — этот файл = рабочий пакет, не закрытие пункта.
 
 ## Прогресс исполнения (2026-08-08)
 
 - Заполненный срез: [`G1_MAPS_AUDIT_FILL.md`](G1_MAPS_AUDIT_FILL.md)  
-- Evidence: `docs/raimov/operations/expert-dental/media/maps-packaging-2026-08-08/` (Google + Яндекс PNG; 2ГИС — HTML evidence)  
-- Найдено: телефон/адрес/сайт совпадают с SSOT; **3 варианта названия**; часы на картах ≠ сайт; Place ID Google ещё P1.
+- Бриф названия: [`G1_NAME_UNIFY_BRIEF.md`](G1_NAME_UNIFY_BRIEF.md)  
+- Ответы на отзывы: [`G1_REVIEW_REPLY_PASS.md`](G1_REVIEW_REPLY_PASS.md)  
+- Evidence: `media/maps-packaging-2026-08-08/` (Google + Яндекс PNG; 2ГИС — HTML; Place ID txt)  
+- Найдено: телефон/адрес/сайт OK; **3 варианта названия**; часы сайт↔карты; Place ID ✅; Яндекс ответы 3/3; Google/2ГИС ответы — клиника.

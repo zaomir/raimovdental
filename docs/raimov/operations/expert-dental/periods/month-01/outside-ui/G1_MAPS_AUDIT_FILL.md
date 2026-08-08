@@ -61,13 +61,13 @@ evidence_dir: docs/raimov/operations/expert-dental/media/maps-packaging-2026-08-
 
 ## BLOCKER / следующие действия оператора
 
-1. **Унифицировать название** на трёх площадках → канон `Expert Dental Studio` (или согласованный RU).  
-2. **Скрин Overview 2ГИС** с десктопа/телефона клиники (VPS получает antibot) → заменить `twogis-overview.png`.  
-3. **Place ID Google `ChIJ…`** — выгрузить из GBP / Google Business → writereview deep-link (LINKS P1).  
-4. Проверить **ответы на отзывы** (п.13/16) на Google (45) и 2ГИС (155).  
+1. **Унифицировать название** на трёх площадках → см. [`G1_NAME_UNIFY_BRIEF.md`](G1_NAME_UNIFY_BRIEF.md).  
+2. **Скрин Overview 2ГИС** с десктопа/телефона клиники (VPS получает antibot) → `twogis-overview.png`.  
+3. ~~**Place ID Google**~~ ✅ `ChIJq-8xG8a3njgR-Jz17KDbaKw` → **ED-LINK-041**.  
+4. Проверить **ответы на отзывы** Google (45) и 2ГИС (155) — Яндекс 3/3 OK; см. [`G1_REVIEW_REPLY_PASS.md`](G1_REVIEW_REPLY_PASS.md).  
 5. Согласовать **часы** сайт ↔ карты.  
 6. Решить, оставлять ли **цены на Яндексе** без отдельного утверждения прайса.
 
 ## Статус пункта 3
 
-Пакет и evidence **готовы**; пункт 3 в STATUS остаётся **«Не начато»** до закрытия BLOCKER 1–3 (название + скрин 2ГИС + Place ID / ответы).
+Пакет и evidence **готовы**; Place ID закрыт. Пункт 3 в STATUS остаётся **«Не начато»** до закрытия BLOCKER 1–2 (название + скрин 2ГИС) и прохода ответов Google/2ГИС.

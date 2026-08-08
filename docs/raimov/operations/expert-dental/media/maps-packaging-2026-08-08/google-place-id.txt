@@ -1,0 +1,13 @@
+Google Place ID resolution — 2026-08-08
+
+short: https://maps.app.goo.gl/GSsMuQfJ7hkY59cj8
+feature: /g/11w8nfy1bh
+ftid: 0x389eb7c61b31efab:0xac68dba0ecf59cf8
+cid_decimal: 12423421056318283000
+place_id: ChIJq-8xG8a3njgR-Jz17KDbaKw
+writereview: https://search.google.com/local/writereview?placeid=ChIJq-8xG8a3njgR-Jz17KDbaKw
+
+Evidence: Playwright load of short link → consent → maps place URL containing ftid;
+ChIJ extracted from page/network after consent. writereview HTTP 200 (signin wall expected).
+
+Register: ED-LINK-041

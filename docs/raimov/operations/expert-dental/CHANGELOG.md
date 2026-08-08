@@ -8,6 +8,15 @@ last_updated: 2026-08-08
 
 # Журнал изменений
 
+## 2026-08-08 — G1 Place ID + G4 W32 log + G3 worksheet
+
+- Google Place ID `ChIJq-8xG8a3njgR-Jz17KDbaKw` → **ED-LINK-041** writereview (smoke 200).
+- Бриф унификации названия: `G1_NAME_UNIFY_BRIEF.md`; проход ответов: `G1_REVIEW_REPLY_PASS.md` (Яндекс 3/3).
+- G3 worksheet: `G3_AUDIT_WORKSHEET.md` (без PHI).
+- Старт каденции G4: **ED-MAT-068** · `g4-logs/2026-W32.md`.
+- Следующие свободные ID: **ED-MAT-069** · **ED-LINK-042**.
+- STATUS: п.3 Place ID закрыт; пункт не повышен (название + 2ГИС скрин).
+
 ## 2026-08-08 — G1 maps audit-fill (продолжение outside-UI)
 
 - Скриншоты Overview: Google + Яндекс; 2ГИС — evidence из m.2gis HTML (desktop antibot на VPS).

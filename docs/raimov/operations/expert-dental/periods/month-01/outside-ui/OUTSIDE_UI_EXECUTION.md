@@ -27,15 +27,15 @@ Workspace MVP (I0→IP.6) закрыт. Ниже — операционные г
 
 | Группа | Статус пакета | Следующий внешний шаг |
 |---|---|---|
-| G1 | **in progress** · audit-fill + Google/Яндекс PNG | Унификация названия · скрин 2ГИС · Place ID |
+| G1 | **in progress** · Place ID ✅ (ED-LINK-041) · audit-fill | Унификация названия · скрин 2ГИС с клиники · ответы Google/2ГИС |
 | G2 | pack ready · лист согласования | Подпись главврача (`G2_APPROVAL_SHEET.md`) |
-| G3 | pack ready | Доступ WA/CRM |
-| G4 | pack ready | Недельный лог |
+| G3 | pack ready · worksheet | Доступ WA/CRM → заполнить `G3_AUDIT_WORKSHEET.md` |
+| G4 | **started** · лог 2026-W32 (ED-MAT-068) | Закрыть W32 цифрами прироста; ≥4 недели подряд |
 
 ## Свободные ID (после этого пакета)
 
-- следующий материал: см. `MATERIALS_REGISTER.md`
-- следующая ссылка: см. `LINKS_REGISTER.md`
+- следующий материал: `ED-MAT-069`
+- следующая ссылка: `ED-LINK-042`
 
 ## Связанные файлы
 
@@ -47,3 +47,5 @@ Workspace MVP (I0→IP.6) закрыт. Ниже — операционные г
 | ED-MAT-065 | `G2_CLINIC_APPROVAL_MARKERS.md` |
 | ED-MAT-066 | `G3_WHATSAPP_CRM_OPS.md` |
 | ED-MAT-067 | `G4_REPUTATION_CADENCE.md` |
+| ED-MAT-068 | `g4-logs/2026-W32.md` (+ следующие недели) |
+| ED-LINK-041 | Google writereview Place ID |
