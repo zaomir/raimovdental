@@ -72,7 +72,7 @@ canon:
 | IP.2 | — | ✅ | presentation · shots 01–12 · plan-map table 1/4/5/7/8/10/11 |
 | IP.3 | — | ✅ | hub «Как презентовать» · сценарий 7→5→4→1→10→11→8 · `ip3-present-scenario` |
 | IP.4 | — | ✅ | ED-MAT-060–061 · ED-LINK-037–039 · CHANGELOG 2026-08-08 |
-| IP.5 | — | ⬜ | — |
+| IP.5 | — | ✅ | prod smoke workspace+/render/+presentation · LAST_RUN success |
 | IP.6 | — | ⬜ | — |
 
 Легенда: ⬜ не начат · 🟡 в работе · ✅ done · ⛔ blocked
