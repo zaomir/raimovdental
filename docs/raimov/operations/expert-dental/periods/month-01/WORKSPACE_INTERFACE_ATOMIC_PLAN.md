@@ -61,7 +61,7 @@ canon:
 | I11.1 | 11 | ✅ | `speech-markers-before.json` + `/render/` UI · `i111-speech-markers-before` · commit `f5ea48992` · prod |
 | I11.2 | 11 | ✅ | `speech-markers-chair.json` + UI врача · `i112-speech-markers-chair` · commit `0fd9f7942` · prod |
 | I11.3 | 11 | ✅ | журнал внутренних передач · `i113-handoff-journal` · от кого→к кому→услуга→статус · commit `ab8d3905e` · prod |
-| I11.4 | 11 | ⬜ | — |
+| I11.4 | 11 | ✅ | связка маркер → маршрут · `i114-marker-route` · commit `27061c01c` · prod |
 | I11.5 | 11 | ⬜ | — |
 | I8.1 | 8 | ⬜ | — |
 | I8.2 | 8 | ⬜ | — |

@@ -80,6 +80,6 @@
 
 **UI progress (пункт 10):** I10.1–I10.5 ✅ · пункт 10 UI DoD закрыт по атомам · контент `internal-marketing.json` (draft_pending_clinic)
 
-**UI progress (пункт 11):** I11.1–I11.3 ✅ · before + chair JSON · журнал передач · draft_pending_clinic · I11.4–I11.5 ⬜
+**UI progress (пункт 11):** I11.1–I11.4 ✅ · before + chair + журнал + связка маркер→маршрут · I11.5 ⬜
 
-**Next execute:** I11.4 — связка маркер → маршрут услуги.
+**Next execute:** I11.5 — тест на маркеры (врач + админ, critical 100%).

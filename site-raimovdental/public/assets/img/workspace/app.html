@@ -58,6 +58,8 @@
     if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
     if(typeof state.postVisitOpen!=='boolean')state.postVisitOpen=false;
     if(!['veneers','implants','ortho'].includes(state.pathRoute))state.pathRoute='veneers';
+    if(typeof state.selectedMarkerId!=='string')state.selectedMarkerId='';
+    if(typeof state.markerNextStep!=='string')state.markerNextStep='';
     if(typeof state.demoPathNextAction!=='string')state.demoPathNextAction='';
     if(typeof state.demoPathClosed!=='boolean')state.demoPathClosed=false;
     if(typeof state.demoPathGateMsg!=='string')state.demoPathGateMsg='';
@@ -91,7 +93,10 @@
     if(roleKey==='doctor')fetch(INTERNAL_MARKETING_URL).then(r=>r.json()).then(d=>{internalMarketing=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
     const SPEECH_MARKERS_CHAIR_URL='content/speech-markers-chair.json';
     let speechMarkersChair=null;
-    if(roleKey==='doctor')fetch(SPEECH_MARKERS_CHAIR_URL).then(r=>r.json()).then(d=>{speechMarkersChair=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
+    if(roleKey==='doctor')fetch(SPEECH_MARKERS_CHAIR_URL).then(r=>r.json()).then(d=>{speechMarkersChair=d;if(['work','learn','path'].includes(view))render()}).catch(()=>{});
+    const SPEECH_MARKERS_BEFORE_URL='content/speech-markers-before.json';
+    let speechMarkersBefore=null;
+    if(roleKey==='admin')fetch(SPEECH_MARKERS_BEFORE_URL).then(r=>r.json()).then(d=>{speechMarkersBefore=d;if(['learn','path'].includes(view))render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -436,7 +441,11 @@
     ];
     const updates=roleKey==='admin'?updatesAdmin:updatesBase;
     const quiz=roleKey==='admin'?quizAdmin:quizBase;
-    let view='today';
+    let view=(()=>{
+      const h=String(location.hash||'').replace(/^#/,'').toLowerCase();
+      if((roleKey==='admin'||roleKey==='doctor')&&h==='path')return 'path';
+      return 'today';
+    })();
     function renderNav(){
       const common=[['today','Сегодня'],['learn','Обучение'],['shift','Смена']];
       const pathItem=(roleKey==='admin'||roleKey==='doctor')?[['path','Путь']]:[];
@@ -479,7 +488,11 @@
     function renderSpeechMarkersBeforeCard(){
       const wrap=$('speechMarkersBefore');
       if(!wrap||roleKey!=='admin')return;
-      wrap.innerHTML=`<div class="card" data-atom="i111-speech-markers-before"><div class="eyebrow">I11.1 · маркеры до кресла</div><h3>Банк маркеров потребности</h3><p class="muted">Каркас из speech-markers-before.json · статус draft_pending_clinic. Слушать / уточнять — из patient-path (виниры · импланты · орто). Готовые медфразы пусты до утверждения клиники.</p><div class="header-actions" style="margin-top:12px"><a class="btn primary" href="/render/#markers">Открыть в /render/</a></div></div>`;
+      const link=state.selectedMarkerId
+        ?`<p class="status-ok" style="margin-top:10px">I11.4 · выбран ${esc(state.selectedMarkerId)} → маршрут ${esc(currentPathRoute().title)}</p>`
+        :`<p class="muted" style="margin-top:10px">I11.4: на экране «Путь» выбор маркера предлагает маршрут и next step.</p>`;
+      wrap.innerHTML=`<div class="card" data-atom="i111-speech-markers-before"><div class="eyebrow">I11.1 · маркеры до кресла</div><h3>Банк маркеров потребности</h3><p class="muted">Каркас из speech-markers-before.json · статус draft_pending_clinic. Слушать / уточнять — из patient-path (виниры · импланты · орто). Готовые медфразы пусты до утверждения клиники.</p>${link}<div class="header-actions" style="margin-top:12px"><a class="btn primary" href="/render/#markers">Открыть в /render/</a><button type="button" class="btn secondary" id="goPathMarkers">Путь · связка маркера</button></div></div>`;
+      if($('goPathMarkers'))$('goPathMarkers').onclick=()=>{view='path';render()};
     }
     function speechMarkersChairWhenNotHtml(bank){
       const block=bank&&bank.when_not_to_speak||{};
@@ -655,6 +668,54 @@
       const opts=[['veneers','Виниры'],['implants','Имплантация'],['ortho','Ортодонтия']];
       return `<div class="card" data-atom="i42-route-switch" style="margin-top:14px"><div class="eyebrow">I4.2 · маршрут услуги</div><h3>Переключатель направления</h3><p class="muted">Подсказки next step на этапах P07–P11 меняются по выбранному маршруту из patient-path.json.</p><div class="header-actions" style="margin-top:12px">${opts.map(([id,label])=>`<button type="button" class="btn ${cur===id?'primary':'secondary'}" data-path-route="${id}">${label}</button>`).join('')}</div><p class="muted" style="margin-top:10px">Сейчас: <b>${esc(currentPathRoute().title)}</b> · сохраняется в localStorage</p></div>`;
     }
+    function markerRouteBank(){
+      if(roleKey==='admin')return speechMarkersBefore;
+      if(roleKey==='doctor')return speechMarkersChair;
+      return null;
+    }
+    function markerRouteList(){
+      const bank=markerRouteBank();
+      return Array.isArray(bank&&bank.markers)?bank.markers:[];
+    }
+    function applyMarkerRoute(markerId){
+      const marker=markerRouteList().find(m=>m.id===markerId);
+      if(!marker||!['veneers','implants','ortho'].includes(marker.route))return false;
+      state.pathRoute=marker.route;
+      state.selectedMarkerId=marker.id;
+      state.markerNextStep=String(marker.next_step_draft||'').trim();
+      if(state.markerNextStep){
+        state.demoPathNextAction=state.markerNextStep;
+        state.demoPathGateMsg='';
+      }
+      save();
+      return true;
+    }
+    function markerRouteLinkHtml(){
+      if(roleKey!=='admin'&&roleKey!=='doctor')return '';
+      const bank=markerRouteBank();
+      const markers=markerRouteList();
+      const sourceName=roleKey==='admin'?'speech-markers-before.json':'speech-markers-chair.json';
+      const loading=!bank?`<p class="muted">Загрузка ${esc(sourceName)}…</p>`:'';
+      const selected=markers.find(m=>m.id===state.selectedMarkerId)||null;
+      const proposal=selected
+        ?`<div class="notice" style="margin-top:12px" data-marker-route-proposal="1"><b>Предложение:</b> ${esc(selected.id)} → <b>${esc(selected.route_title||selected.route)}</b> (${esc(selected.route)})<br><span class="muted">Next step:</span> ${esc(state.markerNextStep||selected.next_step_draft||'—')}<br><span class="muted">Маршрут пути (I4.2):</span> ${esc(currentPathRoute().title)}</div>`
+        :`<p class="muted" style="margin-top:12px">Выберите маркер — UI предложит маршрут veneers|implants|ortho и next step, синхронизирует переключатель I4.2.</p>`;
+      const rows=markers.length?markers.map(m=>{
+        const active=m.id===state.selectedMarkerId;
+        return `<div class="task" data-marker-route-id="${esc(m.id)}" style="flex-wrap:wrap;align-items:flex-start"><span style="flex:1;min-width:180px"><b>${esc(m.id)}</b> · ${esc(m.route_title||m.route)}<br><span class="muted">${esc(m.listen_for||m.observe_for||'')}</span><br><span class="muted">Next:</span> ${esc(m.next_step_draft||'')}</span><button type="button" class="btn ${active?'primary':'secondary'}" data-apply-marker-route="${esc(m.id)}" data-atom="i114-marker-route" aria-pressed="${active?'true':'false'}">${active?'Выбран':'Выбрать → маршрут'}</button></div>`;
+      }).join(''):`<div class="task"><span class="muted">Нет маркеров в банке</span><b>—</b></div>`;
+      return `<div class="card action-card" data-atom="i114-marker-route" style="margin-top:14px"><div class="eyebrow">I11.4 · связка маркер → маршрут</div><h3>Выбор маркера предлагает маршрут</h3><p class="muted">Источник: ${esc(sourceName)} · зависит от I11.1 / I4.2. Без выдуманных медфраз · draft_pending_clinic.</p>${loading}${proposal}<div class="stack" style="margin-top:12px">${rows}</div></div>`;
+    }
+    function bindMarkerRouteLink(){
+      document.querySelectorAll('[data-apply-marker-route]').forEach((b)=>{
+        b.onclick=()=>{
+          const id=b.getAttribute('data-apply-marker-route');
+          if(!id||!applyMarkerRoute(id))return;
+          pathView();
+          renderRight();
+        };
+      });
+    }
     function bindPathRouteSwitcher(){
       document.querySelectorAll('[data-path-route]').forEach(b=>{
         b.onclick=()=>{
@@ -671,8 +732,9 @@
       if(roleKey==='doctor'&&!state.testPassed)return accessBlocked('Путь недоступен','Сначала пройдите тест допуска.');
       const steps=(patientPath&&patientPath.steps)||[];
       if(!steps.length){
-        layout('Путь пациента',`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · этапы</div><h3>Загрузка patient-path.json…</h3><p class="muted">Операционный участок: обращение → консультация / план.</p></div>${pathRouteSwitcherHtml()}${demoPathCaseHtml()}`);
+        layout('Путь пациента',`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · этапы</div><h3>Загрузка patient-path.json…</h3><p class="muted">Операционный участок: обращение → консультация / план.</p></div>${pathRouteSwitcherHtml()}${markerRouteLinkHtml()}${demoPathCaseHtml()}`);
         bindPathRouteSwitcher();
+        bindMarkerRouteLink();
         bindDemoPathCloseGate();
         return;
       }
@@ -681,12 +743,14 @@
       const after=steps.filter(s=>Number(s.number)>11);
       const body=`<div class="card" data-atom="i41-patient-path"><div class="eyebrow">Пункт 4 · путь пациента</div><h3>Этапы для персонала</h3><p class="muted">Показаны этапы от первого обращения до консультации и письменного плана (P07–P11). Полный путь — 14 этапов из patient-path.json.</p><p class="muted">Источник: ${esc(patientPath.source||'')}</p></div>
         ${pathRouteSwitcherHtml()}
+        ${markerRouteLinkHtml()}
         ${demoPathCaseHtml()}
         <div class="stack" style="margin-top:14px">${focus.map(s=>pathStepCard(s,{focus:true})).join('')}</div>
         <div class="card" style="margin-top:14px"><h3>Контекст до обращения</h3><div class="stack">${before.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b class="status-warn">Маркетинг</b></div>`).join('')}</div></div>
         <div class="card" style="margin-top:14px"><h3>После плана</h3><div class="stack">${after.map(s=>`<div class="task"><span><b>${esc(s.number)}. ${esc(s.stage)}</b><br><span class="muted">${esc(s.owner||'')}</span></span><b>${esc((s.owner||'').split('+')[0].trim()||'—')}</b></div>`).join('')}</div></div>`;
       layout('Путь пациента', body);
       bindPathRouteSwitcher();
+      bindMarkerRouteLink();
       bindDemoPathCloseGate();
     }
 
@@ -925,8 +989,13 @@
       const doctorReferralLine=roleKey==='doctor'?(()=>{ensureInternalReferrals();const n=state.internalReferrals.length;return `<div class="card"><b>Внутренние направления</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' создано':'Нет'}</span></div>`})():'';
       const doctorChairMarkersLine=roleKey==='doctor'?(()=>{const n=Array.isArray(speechMarkersChair&&speechMarkersChair.markers)?speechMarkersChair.markers.length:0;return `<div class="card" data-atom="i112-speech-markers-chair"><b>Маркеры в кресле</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' · MC01–MC03':'Загрузка'}</span></div>`})():'';
       const handoffJournalLine=(roleKey==='doctor'||roleKey==='manager')?(()=>{const n=handoffJournalRows().length;const accepted=handoffJournalRows().filter(r=>r.status==='принято').length;return `<div class="card" data-atom="i113-handoff-journal"><b>Журнал передач</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' · принято '+accepted:'Пуст'}</span></div>`})():'';
+      const markerRouteLine=(roleKey==='admin'||roleKey==='doctor')
+        ?(state.selectedMarkerId
+          ?`<div class="card" data-atom="i114-marker-route"><b>Маркер → маршрут</b><br><span class="status-ok">${esc(state.selectedMarkerId)} → ${esc(currentPathRoute().title)}</span></div>`
+          :`<div class="card" data-atom="i114-marker-route"><b>Маркер → маршрут</b><br><span class="status-warn">Не выбран</span></div>`)
+        :'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }

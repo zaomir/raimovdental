@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const MARKERS_URL = '/assets/img/workspace/content/speech-markers-before.json?v=20260807-i111';
+  const MARKERS_URL = '/assets/img/workspace/content/speech-markers-before.json?v=20260808-i114';
   const $ = (id) => document.getElementById(id);
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -51,6 +51,26 @@
     return `Черновик фразы пуст · статус ${marker.phrase_status || 'draft_pending_clinic'}. До утверждения клиники используйте «слушать» и уточняющие вопросы из patient-path.`;
   }
 
+  function applyMarkerRouteToWorkspace(marker) {
+    const route = String(marker?.route || '');
+    if (!['veneers', 'implants', 'ortho'].includes(route)) return false;
+    try {
+      const raw = localStorage.getItem('ed-workspace-admin');
+      const state = raw ? JSON.parse(raw) : {};
+      state.pathRoute = route;
+      state.selectedMarkerId = marker.id;
+      state.markerNextStep = String(marker.next_step_draft || '').trim();
+      if (state.markerNextStep) {
+        state.demoPathNextAction = state.markerNextStep;
+        state.demoPathGateMsg = '';
+      }
+      localStorage.setItem('ed-workspace-admin', JSON.stringify(state));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   function renderDetail(marker) {
     const detail = $('markersDetail');
     const listView = $('markersListView');
@@ -75,7 +95,31 @@
       ${fieldBlock('Результат первого визита (канон пути)', marker.first_visit_result || '')}
       ${fieldBlock('Источник listen_for', marker.listen_for_source_ref || '')}
       ${fieldBlock('Статус контента', marker.phrase_status || payload?.status || 'draft_pending_clinic')}
+      <section class="markers-field" data-atom="i114-marker-route">
+        <h4>I11.4 · связка маркер → маршрут</h4>
+        <p>Выбор предлагает маршрут <b>${esc(marker.route_title || marker.route || '')}</b> (${esc(marker.route || '')}) и next step для экрана «Путь» (I4.2).</p>
+        <p style="margin-top:8px">${esc(marker.next_step_draft || 'Next step из маркера')}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <button id="applyMarkerRoute" class="secondary" type="button" data-apply-marker-route="${esc(marker.id)}">Применить маршрут</button>
+          <a class="secondary" href="/assets/img/workspace/admin/#path" style="text-decoration:none;display:inline-flex;align-items:center;padding:8px 12px">Открыть Путь</a>
+        </div>
+        <p id="applyMarkerRouteNote" class="markers-note" style="margin-top:10px;display:none"></p>
+      </section>
     `;
+
+    const applyBtn = $('applyMarkerRoute');
+    const note = $('applyMarkerRouteNote');
+    if (applyBtn) {
+      applyBtn.onclick = () => {
+        const ok = applyMarkerRouteToWorkspace(marker);
+        if (note) {
+          note.style.display = 'block';
+          note.textContent = ok
+            ? `Применено: ${marker.id} → ${marker.route_title || marker.route}. Откройте Путь администратора — маршрут и next step подставятся.`
+            : 'Не удалось записать в localStorage workspace admin.';
+        }
+      };
+    }
   }
 
   function backToList() {
@@ -236,5 +280,6 @@
     reload: loadMarkers,
     openDetail,
     openById,
+    applyRoute: applyMarkerRouteToWorkspace,
   };
 })();
