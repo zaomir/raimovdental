@@ -289,7 +289,7 @@
         `<div class="task"><span>Доктор Нурбеков</span><b class="status-ok">Свободен</b></div><div class="task"><span>Доктор Абдыкадырова</span><b class="status-warn">Тест просрочен</b></div>`;
       const notice=state.feedbackRetakeNotice?`<p class="status-ok" style="margin-top:12px">${esc(state.feedbackRetakeNotice)}</p>`:'';
       const pending=stats.total-stats.passed;
-      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${managerReferralControlHtml()}${managerInquiryAuditHtml()}`;
+      return `<div class="grid"><div class="card"><h3>Команда сегодня</h3>${teamRows}</div><div class="card" data-atom="i55-manager-feedback"><div class="eyebrow">Контроль · регламент отзывов</div><h3>Обучение администраторов</h3><div class="metric">${stats.pct}%</div><p class="muted">${stats.passed} из ${stats.total} администраторов прошли оба урока «Когда просить отзыв» и «QR и три площадки»</p>${pending?`<p class="status-warn">${pending} ожидают пересдачи</p>`:'<p class="status-ok">Все прошли уроки</p>'}${notice}<button id="assignFeedbackRetake" class="btn primary" style="margin-top:12px">Назначить пересдачу</button></div></div>${handoffJournalHtml()}${managerReferralControlHtml()}${managerInquiryAuditHtml()}`;
     }
     function bindManagerFeedback(){
       if($('assignFeedbackRetake'))$('assignFeedbackRetake').onclick=assignFeedbackRetake;
@@ -301,6 +301,90 @@
           const status=b.getAttribute('data-status');
           if(!id||!status)return;
           setManagerReferralStatus(id,status);
+          work();
+          renderRight();
+        };
+      });
+    }
+    const HANDOFF_JOURNAL_ROUTES={
+      veneers:{service:'Виниры',recipient:'Специалист по эстетической стоматологии / ортопед',reason:'Эстетический сигнал · запись в журнал внутренних передач'},
+      implants:{service:'Имплантация',recipient:'Хирург-имплантолог / ортопед',reason:'Восстановление отсутствующего зуба · запись в журнал внутренних передач'},
+      ortho:{service:'Ортодонтия',recipient:'Ортодонт / гнатолог',reason:'Прикус / положение зубов · запись в журнал внутренних передач'}
+    };
+    function handoffJournalRows(){
+      if(roleKey==='doctor'){
+        ensureInternalReferrals();
+        return (state.internalReferrals||[]).map(r=>({...r,source:r.source||'doctor'}));
+      }
+      return managerReferralRows();
+    }
+    function setHandoffAcceptanceStatus(id,status){
+      if(!['создано','принято','потеряно'].includes(status))return;
+      if(roleKey==='doctor'){
+        ensureInternalReferrals();
+        state.internalReferrals=state.internalReferrals.map(r=>r.id===id?{...r,status,acceptedAt:status==='принято'?new Date().toISOString():r.acceptedAt}:r);
+        save();
+        return;
+      }
+      setManagerReferralStatus(id,status);
+    }
+    function createHandoffJournalEntry(route){
+      if(!['veneers','implants','ortho'].includes(route))return null;
+      if(roleKey==='doctor')return createInternalReferral(route);
+      const meta=HANDOFF_JOURNAL_ROUTES[route];
+      if(!meta)return null;
+      const entry={
+        id:'jrn-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),
+        route,
+        service:meta.service,
+        reason:meta.reason,
+        nextStep:`Администратор предлагает консультацию «${meta.service}» и сопровождает запись.`,
+        recipient:meta.recipient,
+        fromRole:'manager',
+        fromRoleTitle:'Управляющий',
+        fromWho:'Управляющий',
+        toWhom:meta.recipient,
+        status:'создано',
+        createdAt:new Date().toISOString(),
+        source:'manager'
+      };
+      const live=readLiveDoctorReferrals();
+      live.unshift(entry);
+      writeLiveDoctorReferrals(live);
+      ensureManagerReferralDemo();
+      state.managerReferralDemo=state.managerReferralDemo.filter(r=>r.source!=='demo');
+      if(!state.managerReferralDemo.some(r=>r.id===entry.id))state.managerReferralDemo.unshift(entry);
+      save();
+      return entry;
+    }
+    function handoffJournalHtml(){
+      if(roleKey!=='doctor'&&roleKey!=='manager')return '';
+      const list=handoffJournalRows();
+      const createBtns=[['veneers','Виниры'],['implants','Имплантация'],['ortho','Ортодонтия']].map(([route,label])=>`<button type="button" class="btn secondary" data-handoff-create="${route}" data-atom="i113-handoff-journal">+ ${label}</button>`).join('');
+      const rows=list.length?list.map(r=>{
+        const fromWho=r.fromWho||r.fromRoleTitle||r.fromRole||'—';
+        const toWhom=r.toWhom||r.recipient||'—';
+        const st=r.status||'создано';
+        const cls=st==='принято'?'status-ok':st==='потеряно'?'status-danger':'status-warn';
+        return `<div class="task" data-handoff-id="${esc(r.id)}" style="flex-wrap:wrap;align-items:flex-start"><span style="flex:1;min-width:200px"><b>${esc(r.service||'—')}</b><br><span class="muted">От кого:</span> ${esc(fromWho)} <span class="muted">→ к кому:</span> ${esc(toWhom)}<br><span class="muted">Услуга:</span> ${esc(r.service||'—')}${r.reason?`<br><span class="muted">Контекст:</span> ${esc(r.reason)}`:''}</span><div style="text-align:right"><b class="${cls}" data-handoff-acceptance="${esc(st)}">${esc(st)}</b><div class="header-actions" style="margin-top:8px;justify-content:flex-end"><button type="button" class="btn secondary" data-handoff-status="${esc(r.id)}" data-status="создано">Создано</button><button type="button" class="btn secondary" data-handoff-status="${esc(r.id)}" data-status="принято">Принято</button><button type="button" class="btn secondary" data-handoff-status="${esc(r.id)}" data-status="потеряно">Потеряно</button></div></div></div>`;
+      }).join(''):`<div class="task"><span class="muted">Журнал пуст. Создайте запись кнопками ниже или через «Предложить консультацию узкого».</span><b>—</b></div>`;
+      return `<div class="card action-card" data-atom="i113-handoff-journal" style="margin-top:14px"><div class="eyebrow">I11.3 · журнал внутренних передач</div><h3>Журнал внутренних передач</h3><p class="muted">От кого → к кому → услуга → статус принятия. Видно врачу и управляющему. Без PHI · localStorage.</p><div class="header-actions" style="margin-top:12px">${createBtns}</div><div class="stack" style="margin-top:12px">${rows}</div><div class="metric" style="margin-top:12px">${list.length}</div><p class="muted">записей в журнале · ${roleKey==='doctor'?'роль врача':'роль управляющего'}</p></div>`;
+    }
+    function bindHandoffJournal(){
+      document.querySelectorAll('[data-handoff-create]').forEach(b=>{
+        b.onclick=()=>{
+          const route=b.getAttribute('data-handoff-create');
+          if(!createHandoffJournalEntry(route))return;
+          work();
+          renderRight();
+        };
+      });
+      document.querySelectorAll('[data-handoff-status]').forEach(b=>{
+        b.onclick=()=>{
+          const id=b.getAttribute('data-handoff-status');
+          const status=b.getAttribute('data-status');
+          if(!id||!status)return;
+          setHandoffAcceptanceStatus(id,status);
           work();
           renderRight();
         };
@@ -752,7 +836,7 @@
       const duty=cur.id==='hygienist'
         ?`<div class="grid" style="margin-top:14px"><div class="card"><h3>После профессиональной гигиены</h3><p>Зафиксировать эстетический / восстановительный / ортодонтический сигнал и передать администратору.</p><button type="button" class="btn secondary" disabled>Демо · без PHI</button></div><div class="card"><h3>Статус гигиениста</h3><p>Сейчас: свободен<br>Поток: существующие пациенты</p><button type="button" class="btn secondary" disabled>Принять слот гигиены</button></div></div>`
         :`<div class="grid" style="margin-top:14px"><div class="card"><h3>Запрос на принятие обращения</h3><p><b>Мария Ивановна</b><br>Вопрос после удаления зуба · боль 4–6 · отёк не растёт</p><button type="button" class="btn primary">Принять обращение</button></div><div class="card"><h3>Статус врача</h3><p>Сейчас: свободен<br>Дежурство: не принято</p><button type="button" class="btn primary">Принять дежурство</button></div></div>`;
-      return `<div class="card" data-atom="i102-doctor-tasks" data-doctor-clinic-role="${esc(cur.id)}" style="margin-top:14px"><div class="eyebrow">Рабочий набор · ${esc(cur.title)}</div><h3>Задачи внутреннего направления</h3><p class="muted">Три приоритетных маршрута: виниры · имплантация · ортодонтия. Тексты действий — draft_pending_clinic до утверждения клиники.</p>${loading}<div class="stack" style="margin-top:10px">${tasks}</div></div>${internalReferralsListHtml()}${duty}`;
+      return `<div class="card" data-atom="i102-doctor-tasks" data-doctor-clinic-role="${esc(cur.id)}" style="margin-top:14px"><div class="eyebrow">Рабочий набор · ${esc(cur.title)}</div><h3>Задачи внутреннего направления</h3><p class="muted">Три приоритетных маршрута: виниры · имплантация · ортодонтия. Тексты действий — draft_pending_clinic до утверждения клиники.</p>${loading}<div class="stack" style="margin-top:10px">${tasks}</div></div>${internalReferralsListHtml()}${handoffJournalHtml()}${duty}`;
     }
     function ensureInternalReferrals(){
       if(!Array.isArray(state.internalReferrals))state.internalReferrals=[];
@@ -765,17 +849,21 @@
       const item=(cur.when_to_refer||[]).find(t=>t.route===route);
       if(!item)return null;
       const service=item.route_title||item.route;
+      const recipient=item.recipient_role||'—';
       const referral={
         id:'ref-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),
         route:item.route,
         service,
         reason:item.signals_from_ssot||item.action_draft||'',
         nextStep:internalReferralNextStep(service),
-        recipient:item.recipient_role||'—',
+        recipient,
         fromRole:cur.id,
         fromRoleTitle:cur.title,
+        fromWho:cur.title,
+        toWhom:recipient,
         status:'создано',
-        createdAt:new Date().toISOString()
+        createdAt:new Date().toISOString(),
+        source:'doctor'
       };
       ensureInternalReferrals();
       state.internalReferrals.unshift(referral);
@@ -820,8 +908,8 @@
       const owner=`<div class="grid"><div class="card"><h3>Состояние клиники</h3><div class="metric">87%</div><p class="muted">Смены открыты · дежурный назначен · 1 просроченный допуск</p></div><div class="card"><h3>Контроль стандартов</h3><p>Обращения без владельца: 0<br>Срочные обращения: 1<br>Среднее время принятия: 3 мин</p><button class="btn primary">Открыть сводку</button></div></div>`;
       layout(roleKey==='admin'?'Обращения':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
-      if(roleKey==='doctor'){bindDoctorClinicRole();bindProposeConsult();syncDoctorClinicBadge();}
-      if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();bindManagerReferralMetrics();}
+      if(roleKey==='doctor'){bindDoctorClinicRole();bindProposeConsult();bindHandoffJournal();syncDoctorClinicBadge();}
+      if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();bindManagerReferralMetrics();bindHandoffJournal();}
     }
     function renderRight(){
       const g=gate();
@@ -836,8 +924,9 @@
       const doctorLessonLine=roleKey==='doctor'?`<div class="card"><b>Урок внутреннего направления</b><br><span class="${state.internalLessonRead?'status-ok':'status-warn'}">${state.internalLessonRead?'Прочитано':'Ожидает'}</span></div>`:'';
       const doctorReferralLine=roleKey==='doctor'?(()=>{ensureInternalReferrals();const n=state.internalReferrals.length;return `<div class="card"><b>Внутренние направления</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' создано':'Нет'}</span></div>`})():'';
       const doctorChairMarkersLine=roleKey==='doctor'?(()=>{const n=Array.isArray(speechMarkersChair&&speechMarkersChair.markers)?speechMarkersChair.markers.length:0;return `<div class="card" data-atom="i112-speech-markers-chair"><b>Маркеры в кресле</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' · MC01–MC03':'Загрузка'}</span></div>`})():'';
+      const handoffJournalLine=(roleKey==='doctor'||roleKey==='manager')?(()=>{const n=handoffJournalRows().length;const accepted=handoffJournalRows().filter(r=>r.status==='принято').length;return `<div class="card" data-atom="i113-handoff-journal"><b>Журнал передач</b><br><span class="${n?'status-ok':'status-warn'}">${n?n+' · принято '+accepted:'Пуст'}</span></div>`})():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }
