@@ -24,6 +24,7 @@ const required = [
   'content/internal-marketing.json',
   'content/speech-markers-before.json',
   'content/speech-markers-chair.json',
+  'content/sources.json',
   'content/gaps.md',
 ];
 
@@ -174,6 +175,13 @@ assert.match(app, /inboxStatuses/);
 assert.match(app, /bindInboxSla/);
 assert.match(app, /'новое','в работе','записан','упущен','передан врачу'/);
 assert.match(app, /i13-inquiry-card/);
+assert.match(app, /i82-source-gate/);
+assert.match(app, /sources\.json/);
+assert.match(app, /isSourceSet/);
+assert.match(app, /inqClose/);
+assert.match(app, /Нельзя закрыть контакт без источника/);
+assert.match(app, /sourceKey/);
+assert.match(app, /sourceCatalog/);
 assert.match(app, /inquiryCardHtml/);
 assert.match(app, /bindInquiryCard/);
 assert.match(app, /inboxCards/);
@@ -295,6 +303,13 @@ assert.equal(markersChair.markers.length, 3);
 assert.ok(markersChair.markers.every((m) => m.id && m.route && m.observe_for && m.chair_logic && m.when_not_to_speak_draft && m.phrase_status === 'draft_pending_clinic' && m.phrase_draft === ''));
 assert.deepEqual(markersChair.markers.map((m) => m.id), ['MC01', 'MC02', 'MC03']);
 assert.deepEqual(markersChair.priority_routes, ['veneers', 'implants', 'ortho']);
+const sources = JSON.parse(readFileSync(join(distRoot, 'content/sources.json'), 'utf8'));
+assert.equal(sources.atom, 'I8.1');
+assert.equal(sources.status, 'draft_pending_clinic');
+assert.ok(Array.isArray(sources.sources));
+assert.equal(sources.sources.length, 6);
+assert.deepEqual(sources.sources.map((s) => s.key), ['maps', 'site', 'instagram', 'whatsapp', 'referral', 'other']);
+assert.ok(sources.sources.every((s) => s.id && s.label && s.source_ref));
 const markersJs = readFileSync(join(process.cwd(), 'site-raimovdental', 'public', 'assets', 'img', 'admin', 'speech-markers-before.js'), 'utf8');
 assert.match(markersJs, /speech-markers-before\.json/);
 assert.match(markersJs, /openMarkers/);
