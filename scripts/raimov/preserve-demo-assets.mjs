@@ -54,6 +54,11 @@ assert.match(hub, /Как презентовать владельцу/);
 assert.match(hub, /Интерфейсы по ролям/);
 assert.match(hub, /presentation\//);
 assert.match(hub, /Презентация для Атабека/);
+assert.match(hub, /ip3-present-scenario/);
+assert.match(hub, /7 → 5 → 4 → 1 → 10 → 11 → 8/);
+assert.match(hub, /data-plan-point="7"/);
+assert.match(hub, /data-plan-point="8"/);
+assert.match(hub, /Пункт 7 · скрипты/);
 const presentation = readFileSync(join(target, 'presentation/index.html'), 'utf8');
 assert.match(presentation, /Что уже сделано для вашей клиники/);
 assert.match(presentation, /shots\/06-render-call\.png/);
@@ -179,4 +184,4 @@ const sourcesJson = JSON.parse(readFileSync(join(target, 'content/sources.json')
 assert.equal(sourcesJson.atom, 'I8.1');
 assert.equal(sourcesJson.sources.length, 6);
 
-console.log('raimov-demo-assets-preserved+ip2-presentation-map: PASS');
+console.log('raimov-demo-assets-preserved+ip3-present-scenario: PASS');

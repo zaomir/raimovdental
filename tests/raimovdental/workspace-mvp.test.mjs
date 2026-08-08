@@ -47,6 +47,17 @@ for (const token of [
   'Врач',
   'Управляющий',
   'Руководитель клиники',
+  'ip3-present-scenario',
+  '7 → 5 → 4 → 1 → 10 → 11 → 8',
+  'data-plan-point="7"',
+  'data-plan-point="5"',
+  'data-plan-point="4"',
+  'data-plan-point="1"',
+  'data-plan-point="10"',
+  'data-plan-point="11"',
+  'data-plan-point="8"',
+  'Пункт 7 · скрипты',
+  'Пункт 8 · источники',
 ]) assert.match(hub, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
 const presentation = readFileSync(join(distRoot, 'presentation/index.html'), 'utf8');
@@ -402,4 +413,4 @@ assert.ok(feedbackSop.sop_steps.every((step) => step.step && step.action && step
 assert.ok(feedbackSop.publication_disclaimer && feedbackSop.publication_disclaimer.text);
 assert.ok(feedbackSop.prohibitions.some((p) => /скидк|балл|подарок/i.test(p.text)));
 
-console.log('expert-dental-workspace-dist-preservation+passwordless-demo+ip2-presentation-map: PASS');
+console.log('expert-dental-workspace-dist-preservation+passwordless-demo+ip3-present-scenario: PASS');
