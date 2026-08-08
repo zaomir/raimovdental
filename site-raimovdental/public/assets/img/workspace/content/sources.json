@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "atom": "I8.1",
+  "status": "draft_pending_clinic",
+  "source_ref": "EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md § аналитика источников; EXPERT_DENTAL_WEBSITE_SSOT.md · фиксация источника; patient-path.json · P01/P02 channels; gaps.md пункт 8",
+  "goal": "Единый справочник источника обращения для карточки контакта, CRM и сводок по воронке. Стартовый список — каналы из канона; при расхождении с CRM клиники — правка после утверждения управляющим.",
+  "attribution_note": "Каждое обращение фиксирует источник при первом контакте. «Другое» — с обязательным комментарием в CRM (I8.2).",
+  "sources": [
+    {
+      "id": "SRC01",
+      "key": "maps",
+      "label": "Карты",
+      "description": "Google, Яндекс, 2ГИС — карточка клиники, отзывы, маршрут.",
+      "source_ref": "patient-path.json · steps[1] · channel · Google, Яндекс, 2ГИС"
+    },
+    {
+      "id": "SRC02",
+      "key": "site",
+      "label": "Сайт",
+      "description": "Главная, блог, страницы услуг, CTA на сайте.",
+      "source_ref": "patient-path.json · steps[3] · channel · Главная / блог / будущие страницы услуг"
+    },
+    {
+      "id": "SRC03",
+      "key": "instagram",
+      "label": "Instagram",
+      "description": "Профиль клиники, stories, direct, ссылка в bio.",
+      "source_ref": "patient-path.json · steps[0] · channel · Поиск, рекомендации, Instagram, карты"
+    },
+    {
+      "id": "SRC04",
+      "key": "whatsapp",
+      "label": "WhatsApp",
+      "description": "Прямое сообщение или звонок через WhatsApp / телефон.",
+      "source_ref": "patient-path.json · steps[4] · cta · Открыть WhatsApp с контекстом; recontact-9.json · channel WhatsApp"
+    },
+    {
+      "id": "SRC05",
+      "key": "referral",
+      "label": "Рекомендация",
+      "description": "Пациент, знакомый, партнёр или внутреннее направление из клиники.",
+      "source_ref": "patient-path.json · steps[0] · channel · рекомендации; EXPERT_DENTAL_RAIMOV_ELITE_STRATEGY.md · внутренние направления"
+    },
+    {
+      "id": "SRC06",
+      "key": "other",
+      "label": "Другое",
+      "description": "Источник вне справочника — указать в комментарии CRM.",
+      "source_ref": "gaps.md пункт 8 · кандидат + комментарий; утверждение управляющим при расхождении с CRM"
+    }
+  ]
+}

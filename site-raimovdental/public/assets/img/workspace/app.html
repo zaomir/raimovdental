@@ -66,6 +66,8 @@
     if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
     if(!state.inboxCards||typeof state.inboxCards!=='object')state.inboxCards={};
     if(typeof state.inboxSelectedId!=='string')state.inboxSelectedId='';
+    if(typeof state.inboxSourceGateMsg!=='string')state.inboxSourceGateMsg='';
+    if(!state.inboxClosed||typeof state.inboxClosed!=='object')state.inboxClosed={};
     if(roleKey==='doctor'&&!['therapist','hygienist'].includes(state.doctorClinicRole))state.doctorClinicRole='therapist';
     if(roleKey==='doctor'&&typeof state.internalLessonRead!=='boolean')state.internalLessonRead=false;
     if(roleKey==='doctor'&&!Array.isArray(state.internalReferrals))state.internalReferrals=[];
@@ -97,6 +99,9 @@
     const SPEECH_MARKERS_BEFORE_URL='content/speech-markers-before.json';
     let speechMarkersBefore=null;
     if(roleKey==='admin')fetch(SPEECH_MARKERS_BEFORE_URL).then(r=>r.json()).then(d=>{speechMarkersBefore=d;if(['learn','path'].includes(view))render()}).catch(()=>{});
+    const SOURCES_URL='content/sources.json';
+    let attributionSources=null;
+    if(roleKey==='admin')fetch(SOURCES_URL).then(r=>r.json()).then(d=>{attributionSources=d;if(['work','learn'].includes(view))render()}).catch(()=>{});
     function ensurePostVisitState(){
       if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
       const len=(feedbackSop&&feedbackSop.post_visit_checklist||[]).length||5;
@@ -773,13 +778,45 @@
     }
 
     const INBOX_SLA=['новое','в работе','записан','упущен','передан врачу'];
-    const INBOX_SOURCES=['Карты (заглушка до I8)','Сайт (заглушка до I8)','Instagram (заглушка до I8)','WhatsApp (заглушка до I8)','Рекомендация (заглушка до I8)','Другое (заглушка до I8)'];
+    const INBOX_SOURCE_FALLBACK=[
+      {key:'maps',label:'Карты'},
+      {key:'site',label:'Сайт'},
+      {key:'instagram',label:'Instagram'},
+      {key:'whatsapp',label:'WhatsApp'},
+      {key:'referral',label:'Рекомендация'},
+      {key:'other',label:'Другое'}
+    ];
     const INBOX_OWNERS=['Администратор','Старший администратор','Дежурный врач','Координатор'];
     const DEMO_INBOX=[
-      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор',defaultStatus:'новое',source:'Карты (заглушка до I8)',nextAction:'Перезвонить и предложить ближайшее окно'},
-      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор',defaultStatus:'в работе',source:'Instagram (заглушка до I8)',nextAction:'Уточнить ожидания по эстетике и предложить консультацию'},
-      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор',defaultStatus:'записан',source:'Сайт (заглушка до I8)',nextAction:'Подтвердить запись и напомнить про снимок'}
+      {id:'in-call-01',channel:'Звонок',channelKey:'call',patient:'Нурлан С.',need:'Острая боль · жевательный зуб',at:'Сегодня 09:12',owner:'Администратор',defaultStatus:'новое',sourceKey:'',nextAction:'Перезвонить и предложить ближайшее окно'},
+      {id:'in-wa-01',channel:'WhatsApp',channelKey:'whatsapp',patient:'Айгуль К.',need:'Передние зубы · эстетика / виниры',at:'Сегодня 10:05',owner:'Администратор',defaultStatus:'в работе',sourceKey:'instagram',nextAction:'Уточнить ожидания по эстетике и предложить консультацию'},
+      {id:'in-form-01',channel:'Форма',channelKey:'form',patient:'Сезим Б.',need:'Консультация по имплантации',at:'Вчера 18:40',owner:'Администратор',defaultStatus:'записан',sourceKey:'site',nextAction:'Подтвердить запись и напомнить про снимок'}
     ];
+    function sourceCatalog(){
+      const list=attributionSources&&Array.isArray(attributionSources.sources)?attributionSources.sources:[];
+      return list.length?list:INBOX_SOURCE_FALLBACK;
+    }
+    function sourceLabel(key){
+      const hit=sourceCatalog().find((s)=>s.key===key);
+      return hit?(hit.label||key):'';
+    }
+    function normalizeSourceKey(raw){
+      const value=String(raw||'').trim();
+      if(!value)return '';
+      if(sourceCatalog().some((s)=>s.key===value))return value;
+      const byLabel=sourceCatalog().find((s)=>String(s.label||'').toLowerCase()===value.toLowerCase());
+      if(byLabel)return byLabel.key;
+      const legacy={
+        'карты (заглушка до i8)':'maps','сайт (заглушка до i8)':'site','instagram (заглушка до i8)':'instagram',
+        'whatsapp (заглушка до i8)':'whatsapp','рекомендация (заглушка до i8)':'referral','другое (заглушка до i8)':'other',
+        'карты':'maps','сайт':'site','instagram':'instagram','whatsapp':'whatsapp','рекомендация':'referral','другое':'other'
+      };
+      return legacy[value.toLowerCase()]||'';
+    }
+    function isSourceSet(card){
+      const key=normalizeSourceKey(card&&(card.sourceKey||card.source));
+      return !!key&&sourceCatalog().some((s)=>s.key===key);
+    }
     function ensureInboxStatuses(){
       if(!state.inboxStatuses||typeof state.inboxStatuses!=='object')state.inboxStatuses={};
       DEMO_INBOX.forEach((item)=>{
@@ -788,12 +825,15 @@
     }
     function ensureInboxCards(){
       if(!state.inboxCards||typeof state.inboxCards!=='object')state.inboxCards={};
+      if(!state.inboxClosed||typeof state.inboxClosed!=='object')state.inboxClosed={};
       DEMO_INBOX.forEach((item)=>{
         const cur=state.inboxCards[item.id]||{};
+        const sourceKey=normalizeSourceKey(cur.sourceKey||cur.source||item.sourceKey||'');
         state.inboxCards[item.id]={
           channel:cur.channel||item.channel,
           need:cur.need||item.need,
-          source:cur.source||item.source||INBOX_SOURCES[0],
+          sourceKey,
+          source:sourceLabel(sourceKey)||cur.source||'',
           nextAction:cur.nextAction||item.nextAction||'',
           owner:cur.owner||item.owner||INBOX_OWNERS[0]
         };
@@ -812,27 +852,38 @@
       const item=DEMO_INBOX.find((x)=>x.id===state.inboxSelectedId)||DEMO_INBOX[0];
       const card=state.inboxCards[item.id];
       const status=state.inboxStatuses[item.id]||item.defaultStatus||'новое';
+      const closed=!!(state.inboxClosed&&state.inboxClosed[item.id]);
+      const sourceOk=isSourceSet(card);
       const channelOpts=['Звонок','WhatsApp','Форма'].map((c)=>`<option value="${esc(c)}"${c===card.channel?' selected':''}>${esc(c)}</option>`).join('');
-      const sourceOpts=INBOX_SOURCES.map((s)=>`<option value="${esc(s)}"${s===card.source?' selected':''}>${esc(s)}</option>`).join('');
+      const sourceOpts=`<option value="">— выберите источник —</option>`+sourceCatalog().map((s)=>`<option value="${esc(s.key)}"${s.key===card.sourceKey?' selected':''}>${esc(s.label||s.key)}</option>`).join('');
       const ownerOpts=INBOX_OWNERS.map((o)=>`<option value="${esc(o)}"${o===card.owner?' selected':''}>${esc(o)}</option>`).join('');
       const slaOpts=INBOX_SLA.map((s)=>`<option value="${esc(s)}"${s===status?' selected':''}>${esc(s)}</option>`).join('');
-      return `<div class="card action-card" data-atom="i13-inquiry-card" data-inbox-card="${esc(item.id)}" style="margin-top:14px"><div class="eyebrow">I1.3 · единая карточка</div><h3>${esc(item.patient)}</h3><p class="muted">${esc(item.at)} · SLA: <b class="${inboxStatusClass(status)}">${esc(status)}</b></p><p class="muted">Все ключевые поля на одной карточке. Источник — заглушка до I8.</p>
+      const sourceStatus=sourceOk
+        ?`<p class="status-ok" style="margin-top:8px">Источник: ${esc(sourceLabel(card.sourceKey)||card.sourceKey)}</p>`
+        :`<p class="status-danger" style="margin-top:8px">Источник не выбран — закрыть контакт нельзя (I8.2).</p>`;
+      const gateMsg=state.inboxSourceGateMsg||'Нельзя закрыть контакт без источника обращения.';
+      const closeBlock=closed
+        ?`<div class="notice" style="margin-top:12px" data-atom="i82-source-gate"><b>Контакт закрыт.</b> Источник: ${esc(sourceLabel(card.sourceKey)||card.sourceKey||'—')}</div><button id="inqReopen" type="button" class="btn secondary" style="margin-top:10px">Открыть снова (демо)</button>`
+        :`<div data-atom="i82-source-gate" style="margin-top:14px"><div class="eyebrow">I8.2 · gate</div><h3>Закрытие контакта</h3><p class="muted">Без источника из sources.json контакт нельзя закрыть. Справочник: maps · site · instagram · whatsapp · referral · other.</p><div class="header-actions" style="margin-top:10px"><button id="inqClose" type="button" class="btn primary">Закрыть контакт</button></div>${state.inboxSourceGateMsg?`<div class="card update critical" style="margin-top:10px" id="i82GateMessage"><b>Блокер</b><p>${esc(gateMsg)}</p></div>`:''}</div>`;
+      return `<div class="card action-card" data-atom="i13-inquiry-card" data-inbox-card="${esc(item.id)}" style="margin-top:14px"><div class="eyebrow">I1.3 · единая карточка</div><h3>${esc(item.patient)}</h3><p class="muted">${esc(item.at)} · SLA: <b class="${inboxStatusClass(status)}">${esc(status)}</b>${closed?' · <span class="status-ok">закрыт</span>':''}</p><p class="muted">Все ключевые поля на одной карточке. Источник — из sources.json (I8.1).</p>
         <div class="stack" style="margin-top:12px">
           <label class="muted" style="font-size:12px">Канал</label>
-          <select id="inqChannel" class="btn secondary" style="width:100%;text-align:left">${channelOpts}</select>
+          <select id="inqChannel" class="btn secondary" style="width:100%;text-align:left" ${closed?'disabled':''}>${channelOpts}</select>
           <label class="muted" style="font-size:12px">Потребность</label>
-          <textarea id="inqNeed" class="btn secondary" style="width:100%;min-height:72px;text-align:left;font-weight:500;resize:vertical">${esc(card.need)}</textarea>
-          <label class="muted" style="font-size:12px">Источник <span class="badge demo">до I8</span></label>
-          <select id="inqSource" class="btn secondary" style="width:100%;text-align:left">${sourceOpts}</select>
+          <textarea id="inqNeed" class="btn secondary" style="width:100%;min-height:72px;text-align:left;font-weight:500;resize:vertical" ${closed?'disabled':''}>${esc(card.need)}</textarea>
+          <label class="muted" style="font-size:12px">Источник *</label>
+          <select id="inqSource" class="btn secondary" style="width:100%;text-align:left" data-atom="i82-source-gate" ${closed?'disabled':''}>${sourceOpts}</select>
+          ${sourceStatus}
           <label class="muted" style="font-size:12px">Next action</label>
-          <textarea id="inqNext" class="btn secondary" style="width:100%;min-height:72px;text-align:left;font-weight:500;resize:vertical">${esc(card.nextAction)}</textarea>
+          <textarea id="inqNext" class="btn secondary" style="width:100%;min-height:72px;text-align:left;font-weight:500;resize:vertical" ${closed?'disabled':''}>${esc(card.nextAction)}</textarea>
           <label class="muted" style="font-size:12px">Владелец</label>
-          <select id="inqOwner" class="btn secondary" style="width:100%;text-align:left">${ownerOpts}</select>
+          <select id="inqOwner" class="btn secondary" style="width:100%;text-align:left" ${closed?'disabled':''}>${ownerOpts}</select>
           <label class="muted" style="font-size:12px">SLA-статус</label>
-          <select id="inqSla" class="btn secondary" style="width:100%;text-align:left">${slaOpts}</select>
+          <select id="inqSla" class="btn secondary" style="width:100%;text-align:left" ${closed?'disabled':''}>${slaOpts}</select>
         </div>
-        <div class="header-actions" style="margin-top:12px"><button id="inqSave" type="button" class="btn primary">Сохранить карточку</button><button id="inqOpenRender" type="button" class="btn secondary">В /render/</button></div>
-        <p class="muted" style="margin-top:10px">Поля: канал · потребность · источник · next action · владелец (+ SLA из I1.2).</p></div>`;
+        <div class="header-actions" style="margin-top:12px"><button id="inqSave" type="button" class="btn primary" ${closed?'disabled':''}>Сохранить карточку</button><button id="inqOpenRender" type="button" class="btn secondary">В /render/</button></div>
+        ${closeBlock}
+        <p class="muted" style="margin-top:10px">Поля: канал · потребность · источник · next action · владелец (+ SLA из I1.2). Gate I8.2: источник обязателен.</p></div>`;
     }
     function inboxListHtml(){
       ensureInboxStatuses();
@@ -861,29 +912,69 @@
         };
       });
     }
+    function readInquiryCardForm(id){
+      const sourceKey=normalizeSourceKey($('inqSource')&&$('inqSource').value);
+      return{
+        channel:($('inqChannel')&&$('inqChannel').value)||'Звонок',
+        need:($('inqNeed')&&$('inqNeed').value.trim())||'',
+        sourceKey,
+        source:sourceLabel(sourceKey),
+        nextAction:($('inqNext')&&$('inqNext').value.trim())||'',
+        owner:($('inqOwner')&&$('inqOwner').value)||INBOX_OWNERS[0]
+      };
+    }
     function bindInquiryCard(){
       document.querySelectorAll('[data-inbox-open]').forEach((btn)=>{
         btn.onclick=()=>{
           state.inboxSelectedId=btn.getAttribute('data-inbox-open')||'';
+          state.inboxSourceGateMsg='';
           save();
           work();
         };
       });
+      if($('inqSource'))$('inqSource').onchange=()=>{
+        state.inboxSourceGateMsg='';
+        save();
+      };
       if($('inqSave'))$('inqSave').onclick=()=>{
         const id=state.inboxSelectedId;
         if(!id)return;
         ensureInboxCards();
-        state.inboxCards[id]={
-          channel:($('inqChannel')&&$('inqChannel').value)||'Звонок',
-          need:($('inqNeed')&&$('inqNeed').value.trim())||'',
-          source:($('inqSource')&&$('inqSource').value)||INBOX_SOURCES[0],
-          nextAction:($('inqNext')&&$('inqNext').value.trim())||'',
-          owner:($('inqOwner')&&$('inqOwner').value)||INBOX_OWNERS[0]
-        };
+        state.inboxCards[id]=readInquiryCardForm(id);
         const sla=$('inqSla')&&$('inqSla').value;
         if(INBOX_SLA.includes(sla))state.inboxStatuses[id]=sla;
+        state.inboxSourceGateMsg='';
         save();
         work();
+      };
+      if($('inqClose'))$('inqClose').onclick=()=>{
+        const id=state.inboxSelectedId;
+        if(!id)return;
+        ensureInboxCards();
+        const draft=readInquiryCardForm(id);
+        state.inboxCards[id]=draft;
+        if(!isSourceSet(draft)){
+          state.inboxSourceGateMsg='Нельзя закрыть контакт без источника обращения. Выберите значение из sources.json (карты / сайт / Instagram / WhatsApp / рекомендация / другое).';
+          save();
+          work();
+          return;
+        }
+        if(!state.inboxClosed||typeof state.inboxClosed!=='object')state.inboxClosed={};
+        state.inboxClosed[id]=true;
+        state.inboxSourceGateMsg='';
+        save();
+        work();
+        renderRight();
+      };
+      if($('inqReopen'))$('inqReopen').onclick=()=>{
+        const id=state.inboxSelectedId;
+        if(!id)return;
+        if(!state.inboxClosed||typeof state.inboxClosed!=='object')state.inboxClosed={};
+        state.inboxClosed[id]=false;
+        state.inboxSourceGateMsg='';
+        save();
+        work();
+        renderRight();
       };
       if($('inqOpenRender'))$('inqOpenRender').onclick=()=>{location.href='/render/'};
     }
@@ -1012,8 +1103,18 @@
           ?`<div class="card" data-atom="i114-marker-route"><b>Маркер → маршрут</b><br><span class="status-ok">${esc(state.selectedMarkerId)} → ${esc(currentPathRoute().title)}</span></div>`
           :`<div class="card" data-atom="i114-marker-route"><b>Маркер → маршрут</b><br><span class="status-warn">Не выбран</span></div>`)
         :'';
+      const sourceGateLine=roleKey==='admin'?(()=>{
+        ensureInboxCards();
+        const id=state.inboxSelectedId||DEMO_INBOX[0].id;
+        const card=state.inboxCards[id]||{};
+        const closed=!!(state.inboxClosed&&state.inboxClosed[id]);
+        if(closed)return`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-ok">Закрыт · ${esc(sourceLabel(card.sourceKey)||card.sourceKey||'—')}</span></div>`;
+        return isSourceSet(card)
+          ?`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-ok">${esc(sourceLabel(card.sourceKey)||card.sourceKey)}</span></div>`
+          :`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-danger">Обязателен</span></div>`;
+      })():'';
       $('todayTitle').textContent=g.title;
-      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
+      $('todayList').innerHTML=`<div class="card"><b>Обновления</b><br><span class="${state.updateRead?'status-ok':'status-danger'}">${state.updateRead?'Пройдено':'Ожидает'}</span></div><div class="card"><b>Тест</b><br><span class="${state.testPassed?'status-ok':'status-danger'}">${state.testPassed?'Пройден '+state.score+'%':'Не пройден'}</span></div>${feedbackLine}${postVisitLine}${managerFeedbackLine}${managerAuditLine}${managerReferralLine}${doctorRoleLine}${doctorLessonLine}${doctorReferralLine}${doctorChairMarkersLine}${handoffJournalLine}${markerRouteLine}${sourceGateLine}<div class="card"><b>Смена</b><br>${state.shiftStarted?'В работе':state.handoffAccepted?'Готова к старту':'Не принята'}</div>`;
       $('shiftBadge').textContent=state.shiftStarted?'Смена активна':'Смена не начата';
       syncDoctorClinicBadge();
     }

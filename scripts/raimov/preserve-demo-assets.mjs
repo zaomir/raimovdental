@@ -29,6 +29,7 @@ const required = [
   'content/internal-marketing.json',
   'content/speech-markers-before.json',
   'content/speech-markers-chair.json',
+  'content/sources.json',
   'content/gaps.md',
 ];
 
@@ -87,6 +88,9 @@ assert.match(app, /i14-inquiry-audit/);
 assert.match(app, /i14-demo-violation/);
 assert.match(app, /Как проверять обработку заявок/);
 assert.match(app, /DEMO_INQUIRY_VIOLATION/);
+assert.match(app, /i82-source-gate/);
+assert.match(app, /sources\.json/);
+assert.match(app, /Нельзя закрыть контакт без источника/);
 assert.match(app, /i102-doctor-role/);
 assert.match(app, /i102-doctor-tasks/);
 assert.match(app, /i104-propose-consult/);
