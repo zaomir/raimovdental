@@ -2443,10 +2443,10 @@
         const id=state.inboxSelectedId||DEMO_INBOX[0].id;
         const card=state.inboxCards[id]||{};
         const closed=!!(state.inboxClosed&&state.inboxClosed[id]);
-        if(closed)return`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-ok">Закрыт · ${esc(sourceLabel(card.sourceKey)||card.sourceKey||'—')}</span></div>`;
+        if(closed)return`<div class="card" data-atom="i82-source-gate"><b>Источник обращения</b><br><span class="status-ok">Закрыт · ${esc(sourceLabel(card.sourceKey)||card.sourceKey||'—')}</span></div>`;
         return isSourceSet(card)
-          ?`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-ok">${esc(sourceLabel(card.sourceKey)||card.sourceKey)}</span></div>`
-          :`<div class="card" data-atom="i82-source-gate"><b>Источник · gate</b><br><span class="status-danger">Обязателен</span></div>`;
+          ?`<div class="card" data-atom="i82-source-gate"><b>Источник обращения</b><br><span class="status-ok">${esc(sourceLabel(card.sourceKey)||card.sourceKey)}</span></div>`
+          :`<div class="card" data-atom="i82-source-gate"><b>Источник обращения</b><br><span class="status-danger">Обязателен</span></div>`;
       })():'';
       $('todayTitle').textContent=g.title;
       const courseLine=roleKey==='admin'?`<div class="card"><b>Курс для нового сотрудника</b><br><span class="${(state.course&&state.course.passed)||allCourseTestsPassed()?'status-ok':courseReadCount()?'status-warn':'status-danger'}">${courseTileStatus()}</span></div>`:'';
