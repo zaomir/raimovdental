@@ -18,7 +18,9 @@
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.card{border:1px solid var(--line);border-radius:17px;padding:16px;background:#fff;transition:transform .18s ease,box-shadow .22s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(23,50,45,.08)}.card h3{margin:0 0 7px}.metric{font-size:26px;font-weight:850}.action-card{border:2px solid var(--brand);background:linear-gradient(180deg,#fff,var(--soft))}
     .stack{display:grid;gap:10px}.update{border-left:4px solid var(--brand)}.update.critical{border-left-color:#9f302a;background:var(--danger)}.update-state-unread{border-color:#d48a00;background:#fff5dc}.update-state-read{border-color:#6f91a8;background:#eef5f8}.update-state-passed{border-color:#2a8057;background:#e8f5ee}.tile-red{border-color:#c24b3a;background:#ffe9e6}.tile-yellow{border-color:#d4a017;background:#fff5dc}.tile-green{border-color:#2a8057;background:#e8f5ee}.learn-tile{cursor:pointer;text-align:left;width:100%}.learn-tile h3{margin:0 0 8px}.skip-box{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:14px}.skip-box input[type=password]{width:100%;margin:8px 0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit}.check{display:flex;align-items:flex-start;gap:10px}.check input{margin-top:3px}.quiz-option{width:100%;text-align:left;border:1px solid var(--line);background:#fff;margin:6px 0}.quiz-option.selected{background:var(--brand);color:#fff;border-color:var(--brand)}.quiz-option.is-correct,.check.quiz-choice.is-correct{background:var(--ok);color:#17643f;border:1px solid #2a8057}.quiz-option.is-wrong,.check.quiz-choice.is-wrong{background:var(--danger);color:#9f302a;border:1px solid #9f302a}.quiz-option.is-muted,.check.quiz-choice.is-muted{opacity:.55;background:#f5f6f5;color:var(--muted);border-color:var(--line)}.quiz-option.is-wrong,.quiz-option.is-muted,.quiz-option.is-correct:disabled{cursor:default;box-shadow:none;transform:none}.quiz-option.is-correct:not(:disabled){box-shadow:none;transform:none}.quiz-option:disabled{cursor:default}.check.quiz-choice{border:1px solid transparent;border-radius:12px;padding:10px;margin:6px 0;width:100%}.quiz-mark{display:inline-block;margin-left:8px;font-size:12px;font-weight:800;white-space:nowrap}.check.quiz-choice .quiz-mark{margin-left:auto}.quiz-feedback{margin-top:12px;font-weight:750}.quiz-feedback.ok{color:#17643f}.quiz-feedback.bad{color:#9f302a}
     .update-open{cursor:pointer;text-align:left;width:100%}.update-open:hover{border-color:var(--brand2)}.update-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}.update-detail-body p{line-height:1.55;margin:0 0 12px}.update-detail-body ul{margin:8px 0 12px;padding-left:20px;line-height:1.5}
-    .progress{height:8px;border-radius:999px;background:#e5e8e6;overflow:hidden}.progress span{display:block;height:100%;background:var(--brand);transition:width .35s ease}.task{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.status-ok{color:#17643f}.status-warn{color:#8b5a00}.status-danger{color:#9f302a}
+    .progress{height:8px;border-radius:999px;background:#e5e8e6;overflow:hidden}.progress span{display:block;height:100%;background:var(--brand);transition:width .35s ease}.task{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.task-btn{width:100%;text-align:left;background:transparent;border:0;border-radius:12px;padding:12px;margin:0;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.task-btn:hover{background:var(--soft)}.task-btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}.status-ok{color:#17643f}.status-warn{color:#8b5a00}.status-danger{color:#9f302a}
+    .handoff-only{max-width:640px;margin:8px auto 0}.workdesk{display:grid;grid-template-columns:minmax(280px,.95fr) minmax(0,1.35fr);gap:14px;margin-top:14px;align-items:stretch}.workdesk-calls{display:flex;flex-direction:column;min-height:640px}.workdesk-calls iframe{flex:1;width:100%;min-height:560px;border:1px solid var(--line);border-radius:14px;background:#f7f8f7}.detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.detail-actions textarea,.detail-actions input[type=text]{width:100%;min-height:72px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;resize:vertical;background:#fff}
+    @media(max-width:980px){.workdesk{grid-template-columns:1fr}.workdesk-calls iframe{min-height:480px}}
     .mobile-nav{display:none}.footer{padding:18px;color:var(--muted);font-size:12px;text-align:center}.notice{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--warn);color:#684900;font-size:13px}.back-link{white-space:nowrap}
     @media(max-width:1050px){.shell{grid-template-columns:210px minmax(0,1fr)}.right{display:none}}
     @media(max-width:780px){.top{padding:10px 12px;align-items:flex-start}.brand small{max-width:190px}.header-actions{justify-content:flex-end}.header-actions .demo{display:none}.shell{display:block;padding:10px 10px 84px}.side{display:none}.grid{grid-template-columns:1fr}.hero{display:block}.hero h1{font-size:23px}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);bottom:0;left:0;right:0;z-index:8;background:#fff;border-top:1px solid var(--line);padding:7px}.mobile-nav button{font-size:11px;padding:9px 4px;background:transparent}.panel{border-radius:16px;padding:15px}.btn{min-height:46px}.back-link{font-size:12px;padding:8px 10px}}
@@ -75,6 +77,8 @@
     if(!state.course.lessonPassed||typeof state.course.lessonPassed!=='object')state.course.lessonPassed={};
     if(!state.course.edits||typeof state.course.edits!=='object')state.course.edits={};
     if(typeof state.course.passed!=='boolean')state.course.passed=false;
+    if(typeof state.selectedHandoffId!=='string')state.selectedHandoffId='';
+    if(!Array.isArray(state.handoffTasks))state.handoffTasks=[];
     if(!state.feedbackLessons)state.feedbackLessons={whenToAsk:false,qrPlatforms:false};
     if(typeof state.feedbackLessons.qrPlatforms!=='boolean')state.feedbackLessons.qrPlatforms=false;
     if(!Array.isArray(state.postVisitChecklist))state.postVisitChecklist=[];
@@ -1406,7 +1410,7 @@
     let view=(()=>{
       const h=String(location.hash||'').replace(/^#/,'').toLowerCase();
       if(roleKey==='doctor'&&h==='path')return 'path';
-      if(roleKey==='admin'&&(h==='learn'||h==='history'||h==='shift'))return h;
+      if(roleKey==='admin'&&(h==='learn'||h==='history'||h==='shift'||h==='work'))return h;
       return 'today';
     })();
     function renderNav(){
@@ -1423,11 +1427,94 @@
       $('nav').innerHTML=$('mobileNav').innerHTML=items.map(([id,label])=>`<button class="btn ${view===id?'active':''}" data-view="${id}">${label}</button>`).join('');
       document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
     }
+    const DEMO_SHIFT_HANDOFF=[
+      {id:'ht-call-01',title:'Позвонить пациенту после удаления',when:'Вчера, 18:40',due:'Срочно · до 09:30',urgency:'danger',from:'Вечерняя смена · Айгуль',patient:'Пациент после удаления зуба',channel:'Звонок',detail:'Пациент просил перезвонить утром: беспокоит, нормально ли небольшое кровотечение. Нужно уточнить самочувствие, напомнить рекомендации после удаления и при тревожных признаках передать дежурному врачу.',nextHint:'Позвонить, записать результат и при необходимости передать врачу',status:'open',result:'',nextStep:''},
+      {id:'ht-impl-01',title:'Подтвердить консультацию по имплантации',when:'Вчера, 17:15',due:'До 10:00',urgency:'warn',from:'Вечерняя смена · Айгуль',patient:'Пациент на консультацию по имплантации',channel:'Звонок',detail:'Запись на консультацию по имплантации на сегодня. Нужно подтвердить визит, напомнить время и что взять с собой, а если пациент не может прийти — предложить другое окно.',nextHint:'Подтвердить визит или перенести на удобное время',status:'open',result:'',nextStep:''},
+      {id:'ht-brace-01',title:'Ответить по стоимости брекетов',when:'Вчера, 16:50',due:'Сегодня',urgency:'',from:'Вечерняя смена · Нурлан',patient:'Пациент интересуется брекетами',channel:'WhatsApp',detail:'Пациент спрашивал ориентир по стоимости брекетов и хочет понять, с чего начать. Не отправлять только прайс: коротко объяснить логику консультации и предложить запись к ортодонту.',nextHint:'Ответить в переписке и предложить консультацию ортодонта',status:'open',result:'',nextStep:''}
+    ];
+    function ensureHandoffTasks(){
+      if(roleKey!=='admin')return [];
+      if(!Array.isArray(state.handoffTasks)||!state.handoffTasks.length){
+        state.handoffTasks=DEMO_SHIFT_HANDOFF.map((t)=>({...t}));
+        save();
+      }
+      return state.handoffTasks;
+    }
+    function handoffTaskById(id){
+      return ensureHandoffTasks().find((t)=>t.id===id)||null;
+    }
+    function handoffUrgencyClass(task){
+      if(task&&task.urgency==='danger')return'status-danger';
+      if(task&&task.urgency==='warn')return'status-warn';
+      return'';
+    }
+    function handoffStatusLabel(task){
+      if(!task)return'';
+      if(task.status==='done')return'Выполнено';
+      if(task.status==='noted')return'Есть результат';
+      return'Открыта';
+    }
+    function handoffTaskRowsHtml(tasks,{interactive=true}={}){
+      return tasks.map((t)=>{
+        const dueCls=handoffUrgencyClass(t);
+        const statusCls=t.status==='done'?'status-ok':t.status==='noted'?'status-warn':'';
+        const body=`<span style="flex:1;min-width:0"><b>${esc(t.title)}</b><br><span class="muted">${esc(t.when)} · ${esc(t.channel||'Задача')}</span></span><b class="${dueCls||statusCls}">${esc(t.status==='open'?(t.due||'Открыта'):handoffStatusLabel(t))}</b>`;
+        if(!interactive)return`<div class="task">${body}</div>`;
+        return`<button type="button" class="task task-btn" data-handoff-open="${esc(t.id)}">${body}</button>`;
+      }).join('');
+    }
+    function handoffDetailHtml(task,{workMode=false}={}){
+      if(!task)return'';
+      const resultBlock=workMode?`<div class="detail-actions" data-atom="admin-handoff-work"><label class="muted" for="handoffResult">Результат</label><textarea id="handoffResult" placeholder="Что сделали и что ответил пациент">${esc(task.result||'')}</textarea><label class="muted" for="handoffNext">Следующий шаг</label><textarea id="handoffNext" placeholder="Кому передать или что сделать дальше">${esc(task.nextStep||task.nextHint||'')}</textarea><div class="header-actions"><button type="button" class="btn primary" id="handoffSaveResult">Сохранить результат</button><button type="button" class="btn secondary" id="handoffMarkDone" ${task.status==='done'?'disabled':''}>${task.status==='done'?'Закрыта':'Закрыть задачу'}</button></div></div>`
+        :`<p style="margin-top:12px"><b>Что сделать:</b> ${esc(task.nextHint||'—')}</p>`;
+      return`<div class="card action-card" data-atom="admin-handoff-detail" style="margin-top:14px"><div class="eyebrow">Задача из истории смены</div><h3>${esc(task.title)}</h3><p class="muted">${esc(task.when)} · ${esc(task.from||'Предыдущая смена')} · ${esc(task.channel||'')}</p><p style="margin-top:10px"><b>Пациент:</b> ${esc(task.patient||'—')}</p><p style="margin-top:10px">${esc(task.detail||'')}</p><p style="margin-top:10px"><b>Срок:</b> <span class="${handoffUrgencyClass(task)}">${esc(task.due||'—')}</span> · <b>Статус:</b> ${esc(handoffStatusLabel(task))}</p>${resultBlock}<div class="header-actions" style="margin-top:12px"><button type="button" class="btn secondary" id="handoffDetailBack">К списку задач</button></div></div>`;
+    }
+    function bindHandoffDetail({workMode=false,afterSave}={}){
+      const task=handoffTaskById(state.selectedHandoffId);
+      if($('handoffDetailBack'))$('handoffDetailBack').onclick=()=>{state.selectedHandoffId='';save();(afterSave||render)()};
+      if(!workMode||!task)return;
+      if($('handoffSaveResult'))$('handoffSaveResult').onclick=()=>{
+        task.result=(($('handoffResult')&&$('handoffResult').value)||'').trim();
+        task.nextStep=(($('handoffNext')&&$('handoffNext').value)||'').trim();
+        if(task.result||task.nextStep)task.status=task.status==='done'?'done':'noted';
+        save();
+        (afterSave||render)();
+      };
+      if($('handoffMarkDone'))$('handoffMarkDone').onclick=()=>{
+        task.result=(($('handoffResult')&&$('handoffResult').value)||task.result||'').trim();
+        task.nextStep=(($('handoffNext')&&$('handoffNext').value)||task.nextStep||task.nextHint||'').trim();
+        task.status='done';
+        save();
+        (afterSave||render)();
+      };
+    }
+    function bindHandoffOpeners(afterOpen){
+      document.querySelectorAll('[data-handoff-open]').forEach((btn)=>{
+        btn.onclick=()=>{state.selectedHandoffId=btn.getAttribute('data-handoff-open')||'';save();(afterOpen||render)()};
+      });
+    }
+    function adminHandoffCardHtml(){
+      const tasks=ensureHandoffTasks();
+      const selected=handoffTaskById(state.selectedHandoffId);
+      if(selected){
+        return`<div class="handoff-only" data-atom="admin-shift-handoff">${handoffDetailHtml(selected,{workMode:false})}<div class="header-actions" style="margin-top:14px"><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div></div>`;
+      }
+      return`<div class="card action-card handoff-only" data-atom="admin-shift-handoff"><div class="eyebrow">Передача с предыдущей смены</div><h3>Задачи предыдущей смены</h3><p class="muted">Просмотрите, что оставили коллеги, откройте подробности и примите смену.</p><div class="stack" style="margin-top:12px">${handoffTaskRowsHtml(tasks)}</div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" style="margin-top:14px" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div>`;
+    }
+    function adminWorkDeskHtml(){
+      const tasks=ensureHandoffTasks();
+      const openCount=tasks.filter((t)=>t.status==='open').length;
+      const selected=handoffTaskById(state.selectedHandoffId);
+      const tasksPane=selected
+        ?handoffDetailHtml(selected,{workMode:true})
+        :`<div class="card action-card" data-atom="admin-shift-tasks"><div class="eyebrow">Зона A</div><h3>Задачи с предыдущей смены</h3><p class="muted">Можно выполнить задачу, отметить результат и следующий шаг. Открыто: ${openCount} из ${tasks.length}.</p><div class="stack" style="margin-top:12px">${handoffTaskRowsHtml(tasks)}</div></div>`;
+      return`<div class="workdesk" data-atom="admin-shift-desk"><div>${tasksPane}</div><div class="card workdesk-calls" data-atom="admin-shift-calls"><div class="eyebrow">Зона B</div><h3>Приём звонков</h3><p class="muted">Основное окно входящих звонков. Контекст смены сохранён в рабочей системе.</p><div class="header-actions" style="margin:10px 0 12px"><a class="btn secondary" href="/render/" target="_blank" rel="noopener">Открыть в отдельной вкладке</a></div><iframe src="/render/" title="Приём входящих звонков" loading="eager"></iframe></div></div>${adminPostVisitCardHtml()}<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением у каждой открытой задачи должны быть результат и следующий шаг.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`;
+    }
     function gate(){
       if(roleKey==='admin')syncAdminUpdateGate();
       if(roleKey==='admin'){
-        if(!state.shiftStarted)return{title:'Начните работу',copy:'Откройте управление сменой: примите передачу, проверьте готовность и начните работу.',action:'Начать работу',view:'shift'};
-        return{title:'Смена активна',copy:'Можно вернуться к управлению сменой или открыть историю обращений.',action:'Управление сменой',view:'shift'};
+        if(!state.shiftStarted)return{title:'Начните работу',copy:'Откройте передачу с предыдущей смены, просмотрите задачи и примите смену.',action:'Начать работу',view:'shift'};
+        return{title:'Смена активна',copy:'Можно вернуться к задачам предыдущей смены и приёму звонков.',action:'Открыть рабочее окно',view:'work'};
       }
       if(roleKey!=='admin'){
         if(!state.handoffAccepted)return{title:'Примите смену',copy:'Непрочитанные обновления не ограничивают работу. Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
@@ -1447,7 +1534,7 @@
       const g=gate();
       if(roleKey==='admin'){
         layout('Сегодня',`<div class="card action-card" style="max-width:520px;margin-top:8px"><div class="eyebrow">Главное действие</div><h3>${esc(g.title)}</h3><p class="muted">${esc(g.copy)}</p><button id="mainAction" class="btn primary">${esc(g.action)}</button></div>`);
-        $('mainAction').onclick=()=>{view='shift';render()};
+        $('mainAction').onclick=()=>{view=g.view||'shift';render()};
         return;
       }
       const readCount=state.roleUpdatesRead.filter(Boolean).length;
@@ -1728,7 +1815,30 @@
       hubView();
     }
     function shift(){
-      layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()};bindPostVisitChecklist();
+      if(roleKey==='admin'){
+        if(state.shiftStarted&&state.handoffAccepted){
+          view='work';
+          work();
+          return;
+        }
+        layout('Передача смены',adminHandoffCardHtml());
+        bindHandoffOpeners(()=>shift());
+        bindHandoffDetail({workMode:false,afterSave:()=>shift()});
+        if($('acceptHandoff'))$('acceptHandoff').onclick=()=>{
+          state.handoffAccepted=true;
+          state.shiftStarted=true;
+          state.shiftClosed=false;
+          state.selectedHandoffId='';
+          save();
+          view='work';
+          render();
+        };
+        return;
+      }
+      layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);
+      $('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};
+      if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};
+      if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()};
     }
 
     const DEMO_PATH_CASE={patient:'Айгуль К.',channel:'WhatsApp',need:'Передние зубы · эстетика',stepId:'P08',owner:'Администратор'};
@@ -2409,16 +2519,51 @@
       });
     }
     function work(){
-      const admin=`<div class="grid">${inboxListHtml()}<div class="card"><h3>Сводка за период</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал обращений: можно вернуть в работу пропущенные контакты.</p></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}`;
+      if(roleKey==='admin'){
+        if(!state.shiftStarted||!state.handoffAccepted){
+          view='shift';
+          shift();
+          return;
+        }
+        layout('Рабочее окно',adminWorkDeskHtml());
+        bindHandoffOpeners(()=>work());
+        bindHandoffDetail({workMode:true,afterSave:()=>work()});
+        bindPostVisitChecklist();
+        if($('closeShift'))$('closeShift').onclick=()=>{
+          state.shiftStarted=false;
+          state.shiftClosed=true;
+          state.handoffAccepted=false;
+          state.selectedHandoffId='';
+          state.handoffTasks=DEMO_SHIFT_HANDOFF.map((t)=>({...t}));
+          save();
+          view='today';
+          render();
+        };
+        return;
+      }
       const doctor=`${doctorClinicRoleSwitcherHtml()}${doctorTaskSetHtml()}${doctorSpeechMarkersChairHtml()}`;
       const manager=managerTeamHtml();
       const owner=ownerClinicHealthHtml();
-      layout(roleKey==='admin'?'История':roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='admin'?admin:roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
-      if(roleKey==='admin'){bindPostVisitChecklist();bindInboxSla();bindInquiryCard();}
+      layout(roleKey==='doctor'?'Медицинские задачи':roleKey==='manager'?'Команда и контроль':'Сводка клиники',roleKey==='doctor'?doctor:roleKey==='manager'?manager:owner);
       if(roleKey==='doctor'){bindDoctorClinicRole();bindProposeConsult();bindHandoffJournal();syncDoctorClinicBadge();}
       if(roleKey==='manager'){bindManagerFeedback();bindInquiryAudit();bindManagerReferralMetrics();bindHandoffJournal();}
     }
-    function history(){work()}
+    function history(){
+      if(roleKey==='admin'){
+        const tasks=ensureHandoffTasks();
+        const selected=handoffTaskById(state.selectedHandoffId);
+        const journal=selected
+          ?handoffDetailHtml(selected,{workMode:false})
+          :`<div class="card action-card" data-atom="admin-history-journal"><div class="eyebrow">История смены</div><h3>Журнал задач предыдущей смены</h3><p class="muted">Откройте задачу, чтобы увидеть подробности так, как их оставили коллеги.</p><div class="stack" style="margin-top:12px">${handoffTaskRowsHtml(tasks)}</div></div>`;
+        layout('История',`${journal}<div class="grid" style="margin-top:14px">${inboxListHtml()}<div class="card"><h3>Сводка за период</h3><p>Пропущенные: 2<br>Обещанные звонки: 3<br>Без результата: 0</p><p class="muted" style="margin-top:10px">Журнал обращений: можно вернуть в работу пропущенные контакты.</p></div></div>`);
+        bindHandoffOpeners(()=>history());
+        bindHandoffDetail({workMode:false,afterSave:()=>history()});
+        bindInboxSla();
+        bindInquiryCard();
+        return;
+      }
+      work();
+    }
     function renderRight(){
       const g=gate();
       const feedbackLine='';

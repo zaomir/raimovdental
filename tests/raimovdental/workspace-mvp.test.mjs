@@ -496,6 +496,37 @@ for (const token of [
   'Тест пройден',
 ]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 
+// Admin shift flow: Today → handoff only → accept → work desk + /render/
+for (const token of [
+  'DEMO_SHIFT_HANDOFF',
+  'ensureHandoffTasks',
+  'adminHandoffCardHtml',
+  'adminWorkDeskHtml',
+  'admin-shift-handoff',
+  'admin-shift-desk',
+  'admin-shift-calls',
+  'admin-handoff-detail',
+  'admin-history-journal',
+  'Задачи предыдущей смены',
+  'Задачи с предыдущей смены',
+  'Приём звонков',
+  'Рабочее окно',
+  'Открыть рабочее окно',
+  'Позвонить пациенту после удаления',
+  'Подтвердить консультацию по имплантации',
+  'Ответить по стоимости брекетов',
+  'data-handoff-open',
+  'iframe src="/render/"',
+  'handoff-only',
+  'workdesk',
+]) assert.match(app, new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+
+assert.doesNotMatch(
+  app,
+  /roleKey==='admin'[\s\S]{0,400}Готовность рабочего места/,
+  'admin shift must not show workplace readiness card',
+);
+assert.match(app, /Готовность рабочего места/, 'non-admin shift readiness card remains');
 assert.match(app, /function ensureCourseState/);
 assert.match(app, /function passAllCourseTests/);
 assert.match(app, /function passAllUpdatesTests/);
