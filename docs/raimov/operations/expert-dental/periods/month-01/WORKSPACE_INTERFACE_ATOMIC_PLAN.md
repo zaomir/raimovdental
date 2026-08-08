@@ -62,7 +62,7 @@ canon:
 | I11.2 | 11 | ✅ | `speech-markers-chair.json` + UI врача · `i112-speech-markers-chair` · commit `0fd9f7942` · prod |
 | I11.3 | 11 | ✅ | журнал внутренних передач · `i113-handoff-journal` · от кого→к кому→услуга→статус · commit `ab8d3905e` · prod |
 | I11.4 | 11 | ✅ | связка маркер → маршрут · `i114-marker-route` · commit `27061c01c` · prod |
-| I11.5 | 11 | ⬜ | — |
+| I11.5 | 11 | ✅ | тест на маркеры · `i115-markers-quiz` · врач + админ · critical 100% · commit `e4f3645bb` · prod |
 | I8.1 | 8 | ⬜ | — |
 | I8.2 | 8 | ⬜ | — |
 | I8.3 | 8 | ⬜ | — |

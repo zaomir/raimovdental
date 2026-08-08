@@ -49,7 +49,7 @@
     const roleKey=Object.keys(roles).find(k=>path.includes('/'+k+'/'))||'admin';
     const role=roles[roleKey];
     const key='ed-workspace-'+roleKey;
-    const QUIZ_VERSION=roleKey==='admin'?'i54-feedback-quiz':'base-v1';
+    const QUIZ_VERSION=roleKey==='admin'||roleKey==='doctor'?'i115-markers-quiz':'base-v1';
     const FEEDBACK_SOP_URL='content/admin-feedback-sop.json';
     let feedbackSop=null;
     let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false,feedbackTeamDemo:{bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}},feedbackRetakeNotice:''};
@@ -424,11 +424,26 @@
     const updatesAdmin=[
       {title:'Каталог 25 скриптов администратора',critical:true,copy:'В модуле /render/ открывается каталог scripts-25.json: цель, текст, следующий шаг и «чего не говорить». Карточка скрипта обязательна при цене и страхах (S05, S08 и соседние).'},
       {title:'9 правил повторных касаний',critical:true,copy:'Экран «Повторные касания» показывает правила из recontact-9.json. Из правила создаётся демо-задача со сроком, каналом и владельцем; задача видна в передаче смены.'},
+      {title:'Маркеры до кресла и связка с маршрутом',critical:true,copy:'Банк speech-markers-before.json (MB01–MB03): слушать сигнал → виниры / импланты / орто. На экране «Путь» выбор маркера предлагает маршрут и next step (I11.4). В /render/ — «Применить маршрут». Не ставить диагноз и не обещать итог лечения.'},
       {title:'Возврат упущенных из журнала',critical:false,copy:'Фильтр «Пропущен / без результата» и кнопка «Вернуть в работу» создают задачу с дедлайном и владельцем в очереди смены.'}
+    ];
+    const updatesDoctor=[
+      {title:'Новая маршрутизация медицинского обращения',critical:true,copy:'Система сначала предлагает лечащего врача, затем свободного врача нужной специальности и дежурного. Ответственность передаётся только после принятия врачом.'},
+      {title:'Пошаговый опросник передачи врачу',critical:true,copy:'Каждый обязательный вопрос открывается отдельно. Выбор ответа сохраняется и автоматически переводит на следующий шаг.'},
+      {title:'Маркеры потребности в кресле',critical:true,copy:'Банк speech-markers-chair.json (MC01–MC03): заметить сигнал по винирам / имплантам / орто, блок «Когда не говорить», передать профильному специалисту. Не назначать аппарат или объём лечения с кресла терапевта/гигиениста.'},
+      {title:'Начало и сдача смены',critical:false,copy:'Перед началом работы нужно прочитать обновления, принять передачу и подтвердить готовность. В конце смены все незакрытые задачи получают владельца и срок.'}
     ];
     const quizBase=[
       {q:'Когда обращение считается переданным врачу?',a:['После отправки карточки','После нажатия врачом «Принять обращение»','После завершения звонка'],ok:1,critical:true},
       {q:'Кому направлять срочный вопрос с красными флагами?',a:['Только лечащему врачу','Первому доступному врачу экстренной группы или дежурному','Любому администратору'],ok:1,critical:true},
+      {q:'Что нужно сделать перед завершением смены?',a:['Закрыть браузер','Назначить владельца, следующий шаг и срок всем открытым задачам','Оставить заметку без срока'],ok:1,critical:false}
+    ];
+    const quizDoctor=[
+      {q:'Когда обращение считается переданным врачу?',a:['После отправки карточки','После нажатия врачом «Принять обращение»','После завершения звонка'],ok:1,critical:true},
+      {q:'Кому направлять срочный вопрос с красными флагами?',a:['Только лечащему врачу','Первому доступному врачу экстренной группы или дежурному','Любому администратору'],ok:1,critical:true},
+      {q:'В кресле пациент без зуба, нужна имплантация (MC02). Чего нельзя?',a:['Предложить консультацию имплантолога','Выбрать систему импланта и обещать бюджет без узкого специалиста','Зафиксировать внутреннее направление и передать администратору'],ok:1,critical:true,source:'speech-markers-chair.json · MC02 · when_not_to_speak'},
+      {q:'Маркер MC03 (неровные зубы, прикус, брекеты). К какому маршруту относится сигнал?',a:['Виниры','Имплантация','Ортодонтия / гнатология'],ok:2,critical:true,source:'speech-markers-chair.json · MC03 · route'},
+      {q:'Блок «Когда не говорить» в кресле — главное правило?',a:['Не ставить диагноз за профильного и не обещать план лечения с кресла','Не записывать пациента на консультацию','Не показывать patient-path.json'],ok:0,critical:true,source:'speech-markers-chair.json · when_not_to_speak'},
       {q:'Что нужно сделать перед завершением смены?',a:['Закрыть браузер','Назначить владельца, следующий шаг и срок всем открытым задачам','Оставить заметку без срока'],ok:1,critical:false}
     ];
     const quizAdmin=[
@@ -437,10 +452,13 @@
       {q:'Пациент получил ориентир цены и исчез (правило повторного касания). Какой лимит?',a:['Писать каждый день до ответа','Одно содержательное касание','Отправить весь прайс повторно'],ok:1,critical:true,source:'recontact-9.json · R03 · limit'},
       {q:'Где администратор открывает каталог скриптов и повторные касания?',a:['Только в бумажной папке ресепшена','В /render/: «Скрипты» и «Повторные касания»','В личном WhatsApp без фиксации'],ok:1,critical:false,source:'workspace UI · /render/'},
       {q:'Можно ли обещать скидку, подарок или баллы за публичный отзыв?',a:['Да, если пациент доволен','Нет — reward-for-review запрещён','Да, только за 5 звёзд'],ok:1,critical:true,source:'admin-feedback-sop.json · prohibitions · reward'},
-      {q:'Как относиться к площадкам Яндекс / 2ГИС / Google при просьбе об отзыве?',a:['Только Яндекс обязателен, остальные запрещены','Равный контур: не навязывать одну площадку как условие просьбы','Только Google, иначе отзыв не считается'],ok:1,critical:true,source:'admin-feedback-sop.json · platforms · I5.2'}
+      {q:'Как относиться к площадкам Яндекс / 2ГИС / Google при просьбе об отзыве?',a:['Только Яндекс обязателен, остальные запрещены','Равный контур: не навязывать одну площадку как условие просьбы','Только Google, иначе отзыв не считается'],ok:1,critical:true,source:'admin-feedback-sop.json · platforms · I5.2'},
+      {q:'Пациент недоволен цветом или формой улыбки, боится обточки (маркер MB01). К какому маршруту относится сигнал?',a:['Имплантация','Виниры','Ортодонтия'],ok:1,critical:true,source:'speech-markers-before.json · MB01 · route'},
+      {q:'На экране «Путь» выбор маркера (I11.4) что делает система?',a:['Автоматически ставит диагноз','Предлагает маршрут veneers/implants/ortho и next step','Отправляет прайс без консультации'],ok:1,critical:true,source:'I11.4 · i114-marker-route · patient-path.json'},
+      {q:'Чего нельзя делать администратору при маркере до кресла?',a:['Уточнять факты из patient-path','Ставить диагноз и обещать итог лечения','Записать на консультацию и зафиксировать next action'],ok:1,critical:true,source:'speech-markers-before.json · boundaries.dont'}
     ];
-    const updates=roleKey==='admin'?updatesAdmin:updatesBase;
-    const quiz=roleKey==='admin'?quizAdmin:quizBase;
+    const updates=roleKey==='admin'?updatesAdmin:roleKey==='doctor'?updatesDoctor:updatesBase;
+    const quiz=roleKey==='admin'?quizAdmin:roleKey==='doctor'?quizDoctor:quizBase;
     let view=(()=>{
       const h=String(location.hash||'').replace(/^#/,'').toLowerCase();
       if((roleKey==='admin'||roleKey==='doctor')&&h==='path')return 'path';
@@ -455,8 +473,8 @@
       document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;render()});
     }
     function gate(){
-      if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:roleKey==='admin'?'Обязательные материалы: скрипты, повторные касания и возврат упущенных.':'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
-      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='admin'?'Нужно подтвердить понимание скриптов, повторных касаний и регламента отзывов (в т.ч. запрет reward). Проходной балл 90%, критические ответы — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
+      if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:roleKey==='admin'?'Обязательные материалы: скрипты, маркеры до кресла, повторные касания и возврат упущенных.':roleKey==='doctor'?'Обязательные материалы: маршрутизация, передача врачу и маркеры в кресле.':'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
+      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='admin'?'Нужно подтвердить понимание скриптов, повторных касаний, маркеров до кресла и регламента отзывов (в т.ч. запрет reward). Проходной балл 90%, критические ответы — 100%.':roleKey==='doctor'?'Нужно подтвердить маршрутизацию, передачу ответственности и маркеры в кресле (MC01–MC03, «когда не говорить»). Проходной балл 90%, критические — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
       if(!state.handoffAccepted)return{title:'Примите смену',copy:'Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
       if(!state.shiftStarted)return{title:'Начните работу',copy:'Обновления пройдены, передача принята, рабочее место готово.',action:'Начать работу',view:'shift'};
       return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
@@ -466,7 +484,7 @@
       $('goLearn').onclick=()=>{view='learn';render()};
     }
     function layout(title,body){$('main').innerHTML=`<section class="panel"><div class="hero"><div><div class="eyebrow">${role.name}</div><h1>${title}</h1><p class="muted">${role.subtitle}</p></div><span class="badge">${state.shiftStarted&&!state.shiftClosed?'В работе':'Требуется действие'}</span></div>${body}</section>`}
-    function today(){const g=gate();layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Статус допуска</div><div class="metric">${state.testPassed?'Актуален':'Ограничен'}</div><p class="muted">Последний результат: ${state.score||0}% · проходной балл 90% · критические 100%</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${state.updateRead?'Все обязательные материалы прочитаны':(roleKey==='admin'?'3 материала по скриптам и повторным касаниям':'2 обязательных материала ожидают подтверждения')}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);$('mainAction').onclick=()=>{view=g.view;render()}}
+    function today(){const g=gate();layout('Сегодня',`<div class="grid"><div class="card action-card"><div class="eyebrow">Главное действие</div><h3>${g.title}</h3><p class="muted">${g.copy}</p><button id="mainAction" class="btn primary">${g.action}</button></div><div class="card"><div class="eyebrow">Статус допуска</div><div class="metric">${state.testPassed?'Актуален':'Ограничен'}</div><p class="muted">Последний результат: ${state.score||0}% · проходной балл 90% · критические 100%</p></div></div><div class="grid"><div class="card"><h3>Обновления</h3><p>${state.updateRead?'Все обязательные материалы прочитаны':(roleKey==='admin'?'4 материала по скриптам, маркерам и повторным касаниям':roleKey==='doctor'?'4 обязательных материала ожидают подтверждения':'2 обязательных материала ожидают подтверждения')}</p></div><div class="card"><h3>Передача смены</h3><p>${state.handoffAccepted?'Принята сотрудником':'3 открытые задачи ожидают принятия'}</p></div></div>`);$('mainAction').onclick=()=>{view=g.view;render()}}
     function renderFeedbackLessons(){
       if(roleKey!=='admin'||!feedbackSop)return;
       const wrap=$('feedbackLessons');
@@ -553,7 +571,7 @@
       }
       function quizView(){
         const q=quiz[qi];
-        body.innerHTML=`<div class="card"><div class="eyebrow">Вопрос ${qi+1} из ${quiz.length}${q.critical?' · критический':''}</div><h3>${q.q}</h3><div>${q.a.map((x,i)=>`<button class="btn quiz-option" data-answer="${i}">${x}</button>`).join('')}</div>${q.source?`<p class="muted" style="margin-top:12px">Источник: ${q.source}</p>`:''}</div>`;
+        body.innerHTML=`<div class="card" data-atom="i115-markers-quiz"><div class="eyebrow">Вопрос ${qi+1} из ${quiz.length}${q.critical?' · критический':''}</div><h3>${q.q}</h3><div>${q.a.map((x,i)=>`<button class="btn quiz-option" data-answer="${i}">${x}</button>`).join('')}</div>${q.source?`<p class="muted" style="margin-top:12px">Источник: ${q.source}</p>`:''}</div>`;
         body.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{
           answers[qi]=Number(b.dataset.answer);
           b.classList.add('selected');
@@ -571,7 +589,7 @@
         state.testPassed=state.score>=90&&criticalOk;
         state.quizVersion=QUIZ_VERSION;
         save();
-        body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Нужно ≥90% и 100% по критическим вопросам. Без pass доступ к работе ограничен.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;
+        body.innerHTML=`<div class="card ${state.testPassed?'':'update critical'}" data-atom="i115-markers-quiz"><h3>${state.testPassed?'Тест пройден':'Нужно повторить обучение'}</h3><div class="metric">${state.score}%</div><p>${state.testPassed?'Допуск обновлён. Можно принимать смену.':'Нужно ≥90% и 100% по критическим вопросам. Без pass доступ к работе ограничен.'}</p><button id="quizNext" class="btn primary">${state.testPassed?'К экрану «Сегодня»':'Повторить'}</button></div>`;
         $('quizNext').onclick=()=>{if(state.testPassed){view='today';render()}else{qi=0;answers=[];updatesView()}};
         renderSpeechMarkersBeforeCard();
         renderSpeechMarkersChairCard();
@@ -579,7 +597,7 @@
         renderInternalMarketingLesson();
       }
       function passedView(){
-        body.innerHTML=`<div class="card"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, повторным касаниям и регламенту отзывов.':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
+        body.innerHTML=`<div class="card" data-atom="i115-markers-quiz"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, маркерам до кресла, повторным касаниям и регламенту отзывов.':roleKey==='doctor'?'Вопросы по маршрутизации, передаче и маркерам в кресле (MC01–MC03).':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];quizView()};
         renderSpeechMarkersBeforeCard();
         renderFeedbackLessons();
@@ -590,7 +608,7 @@
       else updatesView();
     }
     function shift(){
-      if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Смена недоступна','Сначала пройдите тест допуска по скриптам и повторным касаниям.');
+      if(roleKey==='admin'&&!state.testPassed)return accessBlocked('Смена недоступна','Сначала пройдите тест допуска по скриптам, маркерам и повторным касаниям.');
       layout('Управление сменой',`<div class="grid"><div class="card"><h3>Передача предыдущей смены</h3><div class="task"><span>Обратный звонок пациенту после удаления</span><b class="status-danger">Срочно</b></div><div class="task"><span>Подтвердить консультацию по имплантации</span><b class="status-warn">До 10:00</b></div><div class="task"><span>Ответить по стоимости брекетов</span><b>Сегодня</b></div><button id="acceptHandoff" class="btn ${state.handoffAccepted?'secondary':'primary'}" ${state.handoffAccepted?'disabled':''}>${state.handoffAccepted?'Смена принята':'Принять смену'}</button></div><div class="card"><h3>Готовность рабочего места</h3>${['Телефония доступна','График врачей проверен','Дежурный врач определён','Открытые задачи просмотрены'].map(x=>`<label class="check"><input type="checkbox" checked><span>${x}</span></label>`).join('')}<button id="startShift" class="btn ${state.shiftStarted?'secondary':'primary'}" ${!state.handoffAccepted||state.shiftStarted?'disabled':''}>${state.shiftStarted?'Работа начата':'Начать работу'}</button></div></div>${state.shiftStarted?adminPostVisitCardHtml():''}${state.shiftStarted?`<div class="card" style="margin-top:14px"><h3>Сдать смену</h3><p>Перед завершением назначьте ответственного, следующий шаг и срок каждой незакрытой задаче.</p><button id="closeShift" class="btn danger">Передать смену и завершить работу</button></div>`:''}`);$('acceptHandoff').onclick=()=>{state.handoffAccepted=true;save();shift()};if($('startShift'))$('startShift').onclick=()=>{state.shiftStarted=true;state.shiftClosed=false;save();shift()};if($('closeShift'))$('closeShift').onclick=()=>{state.shiftStarted=false;state.shiftClosed=true;state.handoffAccepted=false;save();view='today';render()};bindPostVisitChecklist();
     }
 
