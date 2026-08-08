@@ -49,7 +49,7 @@
     const roleKey=Object.keys(roles).find(k=>path.includes('/'+k+'/'))||'admin';
     const role=roles[roleKey];
     const key='ed-workspace-'+roleKey;
-    const QUIZ_VERSION=roleKey==='admin'||roleKey==='doctor'?'i115-markers-quiz':'base-v1';
+    const QUIZ_VERSION=roleKey==='admin'?'i85-source-quiz':roleKey==='doctor'?'i115-markers-quiz':'base-v1';
     const FEEDBACK_SOP_URL='content/admin-feedback-sop.json';
     let feedbackSop=null;
     let state=JSON.parse(localStorage.getItem(key)||'null')||{updateRead:false,testPassed:false,shiftStarted:false,handoffAccepted:false,shiftClosed:false,score:0,quizVersion:'',feedbackLessons:{whenToAsk:false,qrPlatforms:false},postVisitChecklist:[],postVisitOpen:false,feedbackTeamDemo:{bermet:{whenToAsk:true,qrPlatforms:true},sezim:{whenToAsk:true,qrPlatforms:true},nurlan:{whenToAsk:true,qrPlatforms:true}},feedbackRetakeNotice:''};
@@ -456,6 +456,7 @@
       {q:'Пациент говорит о страхе боли (скрипт S08). Какая формулировка запрещена как гарантия?',a:['Спросить, что именно пугает: боль, анестезия, результат или процесс','Сказать «это совсем не больно» как гарантию','Предложить консультацию и следующий шаг'],ok:1,critical:true,source:'scripts-25.json · S08 · dont_say'},
       {q:'Пациент получил ориентир цены и исчез (правило повторного касания). Какой лимит?',a:['Писать каждый день до ответа','Одно содержательное касание','Отправить весь прайс повторно'],ok:1,critical:true,source:'recontact-9.json · R03 · limit'},
       {q:'Где администратор открывает каталог скриптов и повторные касания?',a:['Только в бумажной папке ресепшена','В /render/: «Скрипты» и «Повторные касания»','В личном WhatsApp без фиксации'],ok:1,critical:false,source:'workspace UI · /render/'},
+      {q:'Источник обращения обязателен (I8.2). Можно ли закрыть контакт без выбора источника из sources.json?',a:['Да, если канал уже известен','Нет — без источника контакт не закрывается','Да, если пациент записан на приём'],ok:1,critical:true,source:'sources.json · I8.2 · i82-source-gate',atom:'i85-source-quiz'},
       {q:'Можно ли обещать скидку, подарок или баллы за публичный отзыв?',a:['Да, если пациент доволен','Нет — reward-for-review запрещён','Да, только за 5 звёзд'],ok:1,critical:true,source:'admin-feedback-sop.json · prohibitions · reward'},
       {q:'Как относиться к площадкам Яндекс / 2ГИС / Google при просьбе об отзыве?',a:['Только Яндекс обязателен, остальные запрещены','Равный контур: не навязывать одну площадку как условие просьбы','Только Google, иначе отзыв не считается'],ok:1,critical:true,source:'admin-feedback-sop.json · platforms · I5.2'},
       {q:'Пациент недоволен цветом или формой улыбки, боится обточки (маркер MB01). К какому маршруту относится сигнал?',a:['Имплантация','Виниры','Ортодонтия'],ok:1,critical:true,source:'speech-markers-before.json · MB01 · route'},
@@ -479,7 +480,7 @@
     }
     function gate(){
       if(!state.updateRead)return{title:'Ознакомьтесь с обновлениями',copy:roleKey==='admin'?'Обязательные материалы: скрипты, маркеры до кресла, повторные касания и возврат упущенных.':roleKey==='doctor'?'Обязательные материалы: маршрутизация, передача врачу и маркеры в кресле.':'За время отсутствия опубликованы обязательные изменения.',action:'Открыть обновления',view:'learn'};
-      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='admin'?'Нужно подтвердить понимание скриптов, повторных касаний, маркеров до кресла и регламента отзывов (в т.ч. запрет reward). Проходной балл 90%, критические ответы — 100%.':roleKey==='doctor'?'Нужно подтвердить маршрутизацию, передачу ответственности и маркеры в кресле (MC01–MC03, «когда не говорить»). Проходной балл 90%, критические — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
+      if(!state.testPassed)return{title:'Пройдите обязательный тест',copy:roleKey==='admin'?'Нужно подтвердить понимание скриптов, повторных касаний, маркеров до кресла, регламента отзывов (в т.ч. запрет reward) и обязательной фиксации источника (I8.2). Проходной балл 90%, критические ответы — 100%.':roleKey==='doctor'?'Нужно подтвердить маршрутизацию, передачу ответственности и маркеры в кресле (MC01–MC03, «когда не говорить»). Проходной балл 90%, критические — 100%.':'Нужно подтвердить понимание новой маршрутизации и передачи ответственности.',action:'Пройти тест',view:'learn'};
       if(!state.handoffAccepted)return{title:'Примите смену',copy:'Проверьте открытые задачи и подтвердите принятие ответственности.',action:'Принять смену',view:'shift'};
       if(!state.shiftStarted)return{title:'Начните работу',copy:'Обновления пройдены, передача принята, рабочее место готово.',action:'Начать работу',view:'shift'};
       return{title:'Рабочее место готово',copy:'Смена активна. Все функции доступны.',action:'Открыть рабочие задачи',view:'work'};
@@ -576,7 +577,7 @@
       }
       function quizView(){
         const q=quiz[qi];
-        body.innerHTML=`<div class="card" data-atom="i115-markers-quiz"><div class="eyebrow">Вопрос ${qi+1} из ${quiz.length}${q.critical?' · критический':''}</div><h3>${q.q}</h3><div>${q.a.map((x,i)=>`<button class="btn quiz-option" data-answer="${i}">${x}</button>`).join('')}</div>${q.source?`<p class="muted" style="margin-top:12px">Источник: ${q.source}</p>`:''}</div>`;
+        body.innerHTML=`<div class="card" data-atom="${q.atom||'i115-markers-quiz'}"><div class="eyebrow">Вопрос ${qi+1} из ${quiz.length}${q.critical?' · критический':''}</div><h3>${q.q}</h3><div>${q.a.map((x,i)=>`<button class="btn quiz-option" data-answer="${i}">${x}</button>`).join('')}</div>${q.source?`<p class="muted" style="margin-top:12px">Источник: ${q.source}</p>`:''}</div>`;
         body.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{
           answers[qi]=Number(b.dataset.answer);
           b.classList.add('selected');
@@ -602,7 +603,7 @@
         renderInternalMarketingLesson();
       }
       function passedView(){
-        body.innerHTML=`<div class="card" data-atom="i115-markers-quiz"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, маркерам до кресла, повторным касаниям и регламенту отзывов.':roleKey==='doctor'?'Вопросы по маршрутизации, передаче и маркерам в кресле (MC01–MC03).':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
+        body.innerHTML=`<div class="card" data-atom="i115-markers-quiz"><h3>Допуск актуален</h3><div class="metric">${state.score}%</div><p class="muted">Версия теста: ${QUIZ_VERSION}. ${roleKey==='admin'?'Вопросы по скриптам, маркерам до кресла, повторным касаниям, регламенту отзывов и обязательному источнику (I8.2).':roleKey==='doctor'?'Вопросы по маршрутизации, передаче и маркерам в кресле (MC01–MC03).':''}</p><button id="retakeQuiz" class="btn secondary">Пересдать тест</button></div>`;
         $('retakeQuiz').onclick=()=>{state.testPassed=false;state.score=0;save();qi=0;answers=[];quizView()};
         renderSpeechMarkersBeforeCard();
         renderFeedbackLessons();

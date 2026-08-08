@@ -67,7 +67,7 @@ canon:
 | I8.2 | 8 | ✅ | обязательный источник · `i82-source-gate` · commit `c4704378f` · prod |
 | I8.3 | 8 | ✅ | сводка воронки · `i83-source-funnel` · manager · DEMO_SOURCE_FUNNEL |
 | I8.4 | 8 | ✅ | clinic health + источники · `i84-owner-sources` · `/ru/valeria/month-1/plan/` |
-| I8.5 | 8 | ⬜ | — |
+| I8.5 | 8 | ✅ | тест «источник обязателен» · `i85-source-quiz` · admin · critical 100% |
 | IP.1 | — | ⬜ | — |
 | IP.2 | — | ⬜ | — |
 | IP.3 | — | ⬜ | — |
