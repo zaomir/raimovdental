@@ -16,7 +16,7 @@
     .nav button{width:100%;text-align:left;margin:4px 0;background:transparent;color:var(--ink);box-shadow:none}.nav button.active{background:var(--soft);color:var(--brand)}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}
     .hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.hero h1{margin:6px 0 8px;font-size:28px}.hero p{max-width:720px}.muted{color:var(--muted)}
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.card{border:1px solid var(--line);border-radius:17px;padding:16px;background:#fff;transition:transform .18s ease,box-shadow .22s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(23,50,45,.08)}.card h3{margin:0 0 7px}.metric{font-size:26px;font-weight:850}.action-card{border:2px solid var(--brand);background:linear-gradient(180deg,#fff,var(--soft))}
-    .stack{display:grid;gap:10px}.update{border-left:4px solid var(--brand)}.update.critical{border-left-color:#9f302a;background:var(--danger)}.update-state-unread{border-color:#d48a00;background:#fff5dc}.update-state-read{border-color:#6f91a8;background:#eef5f8}.update-state-passed{border-color:#2a8057;background:#e8f5ee}.check{display:flex;align-items:flex-start;gap:10px}.check input{margin-top:3px}.quiz-option{width:100%;text-align:left;border:1px solid var(--line);background:#fff;margin:6px 0}.quiz-option.selected{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .stack{display:grid;gap:10px}.update{border-left:4px solid var(--brand)}.update.critical{border-left-color:#9f302a;background:var(--danger)}.update-state-unread{border-color:#d48a00;background:#fff5dc}.update-state-read{border-color:#6f91a8;background:#eef5f8}.update-state-passed{border-color:#2a8057;background:#e8f5ee}.check{display:flex;align-items:flex-start;gap:10px}.check input{margin-top:3px}.quiz-option{width:100%;text-align:left;border:1px solid var(--line);background:#fff;margin:6px 0}.quiz-option.selected{background:var(--brand);color:#fff;border-color:var(--brand)}.quiz-option.is-correct,.check.quiz-choice.is-correct{background:var(--ok);color:#17643f;border:1px solid #2a8057}.quiz-option.is-wrong,.check.quiz-choice.is-wrong{background:var(--danger);color:#9f302a;border:1px solid #9f302a}.quiz-option.is-muted,.check.quiz-choice.is-muted{opacity:.55;background:#f5f6f5;color:var(--muted);border-color:var(--line)}.quiz-option.is-correct,.quiz-option.is-wrong,.quiz-option.is-muted{cursor:default;box-shadow:none;transform:none}.quiz-option:disabled{cursor:default}.check.quiz-choice{border:1px solid transparent;border-radius:12px;padding:10px;margin:6px 0}.quiz-feedback{margin-top:12px;font-weight:750}.quiz-feedback.ok{color:#17643f}.quiz-feedback.bad{color:#9f302a}
     .update-open{cursor:pointer;text-align:left;width:100%}.update-open:hover{border-color:var(--brand2)}.update-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}.update-detail-body p{line-height:1.55;margin:0 0 12px}.update-detail-body ul{margin:8px 0 12px;padding-left:20px;line-height:1.5}
     .progress{height:8px;border-radius:999px;background:#e5e8e6;overflow:hidden}.progress span{display:block;height:100%;background:var(--brand);transition:width .35s ease}.task{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.status-ok{color:#17643f}.status-warn{color:#8b5a00}.status-danger{color:#9f302a}
     .mobile-nav{display:none}.footer{padding:18px;color:var(--muted);font-size:12px;text-align:center}.notice{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--warn);color:#684900;font-size:13px}.back-link{white-space:nowrap}
@@ -98,6 +98,30 @@
     }
     const save=()=>localStorage.setItem(key,JSON.stringify(state));
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    function paintQuizOptions(root,selected,correct){
+      if(!root)return false;
+      const options=[...root.querySelectorAll('.quiz-option,[data-quiz-choice]')];
+      options.forEach((el,i)=>{
+        el.classList.remove('selected','is-correct','is-wrong','is-muted');
+        if(i===correct)el.classList.add('is-correct');
+        else if(i===selected)el.classList.add('is-wrong');
+        else el.classList.add('is-muted');
+        if(el.tagName==='BUTTON')el.disabled=true;
+        const input=el.querySelector&&el.querySelector('input');
+        if(input)input.disabled=true;
+      });
+      let feedback=root.querySelector('.quiz-feedback');
+      if(!feedback){
+        feedback=document.createElement('p');
+        feedback.className='quiz-feedback';
+        root.appendChild(feedback);
+      }
+      const ok=selected===correct;
+      feedback.className='quiz-feedback '+(ok?'ok':'bad');
+      feedback.textContent=ok?'Верно':'Неверно';
+      feedback.hidden=false;
+      return ok;
+    }
     if(roleKey==='admin')fetch(FEEDBACK_SOP_URL).then(r=>r.json()).then(d=>{feedbackSop=d;if(['learn','shift','work'].includes(view))render()}).catch(()=>{});
     const PATIENT_PATH_URL='content/patient-path.json';
     let patientPath=null;
@@ -820,8 +844,15 @@
       }
       function adminUpdatesQuizView(){
         const q=testQuestions[qi];if(!q)return adminFinishUpdatesQuiz();
-        body.innerHTML=`<div class="card" data-atom="admin-updates-quiz"><div class="eyebrow">Вопрос ${qi+1} из ${testQuestions.length} · ${esc(q.updateTitle)}${q.critical?' · важный':''}</div><h3>${esc(q.q)}</h3><div>${q.a.map((x,i)=>`<button type="button" class="btn quiz-option" data-answer="${i}">${esc(x)}</button>`).join('')}</div></div>`;
-        body.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{answers[qi]=Number(b.dataset.answer);b.classList.add('selected');setTimeout(()=>{qi++;if(qi<testQuestions.length)adminUpdatesQuizView();else adminFinishUpdatesQuiz()},180)});
+        body.innerHTML=`<div class="card" data-atom="admin-updates-quiz"><div class="eyebrow">Вопрос ${qi+1} из ${testQuestions.length} · ${esc(q.updateTitle)}${q.critical?' · важный':''}</div><h3>${esc(q.q)}</h3><div class="quiz-options">${q.a.map((x,i)=>`<button type="button" class="btn quiz-option" data-answer="${i}">${esc(x)}</button>`).join('')}</div><p class="quiz-feedback" hidden></p></div>`;
+        const card=body.querySelector('[data-atom="admin-updates-quiz"]');
+        body.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{
+          if(b.disabled)return;
+          const selected=Number(b.dataset.answer);
+          answers[qi]=selected;
+          paintQuizOptions(card,selected,q.ok);
+          setTimeout(()=>{qi++;if(qi<testQuestions.length)adminUpdatesQuizView();else adminFinishUpdatesQuiz()},900);
+        });
         bindLearnSidecards();
       }
       function adminFinishUpdatesQuiz(){
@@ -1428,7 +1459,26 @@
       const availableDays=failedDays.length?failedDays:[day];
       layout('Мой план адаптации',`<div class="card action-card"><div class="eyebrow">День ${day} из 14</div><h3>${esc(item.title)}</h3><p>${esc(item.material)}</p><div class="progress"><span style="width:${progress}%"></span></div><p><b>Прогресс:</b> ${progress}% · <b>Наставник:</b> старший администратор · <b>Следующая проверка:</b> ${day<14?'в конце дня':'итоговая проверка'}</p><p><b>Условия допуска:</b> общий результат не ниже 90%, вопросы безопасности и границ роли — без ошибок, итог подтверждают наставник и управляющий.</p><p><b>Доступ сейчас:</b> ${onboardingAccess(day,approved)}</p></div><div class="card" style="margin-top:14px"><div class="eyebrow">Короткий материал</div><h3>${esc(item.title)}</h3><p>${esc(item.material)}</p><div class="notice"><b>Пример:</b> ${esc(item.example)}</div><label class="check card" style="margin-top:12px"><input id="onboardingRead" type="checkbox" ${o.read[day]?'checked':''}><span><b>Ознакомлен</b><br><span class="muted">Материал прочитан и понятен.</span></span></label><button id="onboardingTest" class="btn primary" ${o.read[day]?'':'disabled'}>${o.scores[day]?'Повторить проверку':'Пройти 3 вопроса'}</button><div id="onboardingQuiz" class="stack" style="margin-top:12px"></div></div>${failedDays.length?`<div class="card update critical" style="margin-top:14px"><h3>Повторить только непройденные материалы</h3><p>${failedDays.map(d=>`День ${d}: ${esc(ONBOARDING_DAYS[d-1].title)}`).join('<br>')}</p></div>`:''}${day===14?`<div class="card" style="margin-top:14px"><h3>Итоговое подтверждение</h3><p>Наставник: ${o.mentorApproved?'подтверждено':'ожидается'} · Управляющий: ${o.managerApproved?'подтверждено':'ожидается'}</p><button id="mentorApprove" class="btn secondary">Подтвердить наставником</button><p class="muted">Решение управляющего принимается в карточке сотрудника.</p></div>`:''}`);
       $('onboardingRead').onchange=e=>{o.read[day]=!!e.target.checked;save();onboarding()};
-      $('onboardingTest').onclick=()=>{const box=$('onboardingQuiz');box.innerHTML=item.questions.map((q,qi)=>`<div class="card"><b>${qi+1}. ${esc(q.q)}</b>${q.a.map((a,ai)=>`<label class="check"><input type="radio" name="oq${qi}" value="${ai}"><span>${esc(a)}</span></label>`).join('')}</div>`).join('')+'<button id="finishOnboardingTest" class="btn primary">Проверить ответы</button>';$('finishOnboardingTest').onclick=()=>{const answers=item.questions.map((_,qi)=>Number(document.querySelector(`input[name="oq${qi}"]:checked`)?.value));const correct=item.questions.filter((q,i)=>answers[i]===q.ok).length;const score=Math.round(correct/3*100);const safetyOk=!item.critical||correct===3;o.scores[day]=score;if(score>=90&&safetyOk){delete o.failed[day];if(day<14)o.day=day+1}else{o.failed[day]=true;o.status='Требуется повторное обучение'}save();onboarding()}};
+      $('onboardingTest').onclick=()=>{
+        const box=$('onboardingQuiz');
+        box.innerHTML=item.questions.map((q,qi)=>`<div class="card" data-onboarding-q="${qi}"><b>${qi+1}. ${esc(q.q)}</b><div class="quiz-options">${q.a.map((a,ai)=>`<label class="check quiz-choice" data-quiz-choice="${ai}"><input type="radio" name="oq${qi}" value="${ai}"><span>${esc(a)}</span></label>`).join('')}</div><p class="quiz-feedback" hidden></p></div>`).join('')+'<button id="finishOnboardingTest" class="btn primary">Проверить ответы</button>';
+        $('finishOnboardingTest').onclick=()=>{
+          const answers=item.questions.map((_,qi)=>Number(document.querySelector(`input[name="oq${qi}"]:checked`)?.value));
+          item.questions.forEach((q,qi)=>{
+            const card=box.querySelector(`[data-onboarding-q="${qi}"]`);
+            if(!Number.isNaN(answers[qi]))paintQuizOptions(card,answers[qi],q.ok);
+          });
+          const correct=item.questions.filter((q,i)=>answers[i]===q.ok).length;
+          const score=Math.round(correct/3*100);
+          const safetyOk=!item.critical||correct===3;
+          o.scores[day]=score;
+          if(score>=90&&safetyOk){delete o.failed[day];if(day<14)o.day=day+1}else{o.failed[day]=true;o.status='Требуется повторное обучение'}
+          const finish=$('finishOnboardingTest');
+          if(finish){finish.disabled=true;finish.textContent=score>=90&&safetyOk?'Готово':'Повторите материал'}
+          save();
+          setTimeout(()=>onboarding(),1100);
+        };
+      };
       if($('mentorApprove'))$('mentorApprove').onclick=()=>{o.mentorApproved=true;save();onboarding()};
     }
     function work(){
